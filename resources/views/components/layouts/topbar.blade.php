@@ -1,10 +1,3 @@
-@props([
-    'href' => '/product',
-    'title' => 'Introducing SUAVE CRM',
-    'subtitle' => ' — The Smarter Way to Manage Your Business.',
-    'icon' => '/images/rocket_icon.svg',
-])
-
 <div id="announcement-bar" class="site-topbar flex min-h-[30px] w-full items-center overflow-hidden bg-[#010062] py-1" role="region" aria-label="Announcements">
     <div class="site-container grid grid-cols-[1fr_auto] items-center gap-2 sm:grid-cols-[1fr_auto_1fr]">
         <span class="hidden sm:block" aria-hidden="true"></span>

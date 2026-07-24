@@ -1,8 +1,3 @@
-@props([
-    'href' => '/contact-us/#contact-id',
-    'label' => 'Start your Project',
-])
-
 <a href="{{ $href }}"
   class="faq-section__cta group inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
   {{ $label }}

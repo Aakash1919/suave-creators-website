@@ -1805,6 +1805,16 @@ body.mobile-nav-open {
   width: 100%;
 }
 
+.site-footer__brand-accent {
+  background-image: linear-gradient(to bottom, #2f69fb, #d078fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+
 .site-footer *,
 .site-footer *::before,
 .site-footer *::after {
@@ -3535,6 +3545,10 @@ body.mobile-nav-open {
 
 @media (min-width: 1280px) {
   .mobile-nav {
+    display: none !important;
+  }
+
+  .site-header__menu-btn {
     display: none !important;
   }
 }

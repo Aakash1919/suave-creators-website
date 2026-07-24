@@ -1,32 +1,3 @@
-@props([
-    'phone' => '+91 88949 00142',
-    'phoneHref' => 'tel:+918894900142',
-    'ctaHref' => '/contact-us/#contact-id',
-    'ctaLabel' => 'Talk to an expert',
-    'ctaLabelShort' => 'Talk to us',
-    'logo' => '/images/white_logo.svg',
-    'dropdowns' => null,
-])
-
-@php
-    $dropdowns ??= [
-        'Services' => [
-            ['href' => '/service/web-development-services', 'label' => 'Web Development Service', 'icon' => 'fa-solid fa-laptop-code'],
-            ['href' => '/service/custom-crm-development', 'label' => 'CRM Development Service', 'icon' => 'fa-solid fa-users'],
-            ['href' => '/service/enterprise-software-solutions', 'label' => 'Enterprise Software Solutions', 'icon' => 'fa-solid fa-building'],
-            ['href' => '/service/e-commerce-development', 'label' => 'E-commerce Development Service', 'icon' => 'fa-solid fa-cart-shopping'],
-        ],
-        'Industry' => [
-            ['href' => '/industries/healthcare', 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
-            ['href' => '/industries/it-software-solutions-for-startups', 'label' => 'IT & Software Solutions for Startups', 'icon' => 'fa-solid fa-rocket'],
-            ['href' => '/industries/finance-banking-software-development', 'label' => 'Finance & Banking', 'icon' => 'fa-solid fa-building-columns'],
-            ['href' => '/industries/retail-ecommerce-solutions', 'label' => 'Retail & E-commerce', 'icon' => 'fa-solid fa-store'],
-            ['href' => '/industries/logistics-supply-chain-apps', 'label' => 'Logistics & Supply Chain', 'icon' => 'fa-solid fa-truck'],
-            ['href' => '/industries/education-elearning-platforms', 'label' => 'Education & E-learning', 'icon' => 'fa-solid fa-graduation-cap'],
-        ],
-    ];
-@endphp
-
 <header {{ $attributes->merge(['class' => 'site-header relative z-20 w-full bg-transparent py-3']) }}>
     <div class="site-container flex items-center justify-between gap-3 sm:gap-4">
         <a href="{{ url('/') }}" class="site-header__logo inline-flex shrink-0" aria-label="Suave Creators home">

@@ -1,15 +1,3 @@
-@props([
-    'items' => [],
-    'eyebrow' => 'Blogs and Insights',
-    'title' => 'Latest Insights from Our Experts',
-    'subtitle' => 'We build digital experiences that help brands grow through design, development, branding, and marketing.',
-    'headingId' => 'articles-insights-title',
-    'moreHref' => '/blogs',
-    'moreLabel' => 'View More',
-    'sectionClass' => 'py-12 lg:py-18',
-    'initSwiper' => true,
-])
-
 @if (count($items) > 0)
 <!-- Articles Insights Section Start -->
 <section

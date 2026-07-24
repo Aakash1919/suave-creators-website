@@ -12,6 +12,39 @@ class HomeController extends Controller
         return view('frontend.home', [
             'faqCtaHref' => '/contact-us/#contact-id',
             'faqCtaLabel' => 'Start your Project',
+            'faqMedia' => '/images/faq-gif.gif',
+            'faqMediaType' => 'image',
+            'faqMediaAlt' => 'Business team collaborating around a table',
+            'faqs' => [
+                [
+                    'question' => 'What services do you offer?',
+                    'answer' => 'We offer the best web, software, CMS, CRM and custom development services in all the latest languages.',
+                ],
+                [
+                    'question' => 'How long does it take to build a website?',
+                    'answer' => 'Most website projects take 6–12 weeks, depending on complexity, integrations, and how quickly content and feedback are provided.',
+                ],
+                [
+                    'question' => 'Do you provide ongoing support?',
+                    'answer' => 'Yes. We offer maintenance, security updates, performance monitoring, and feature development after launch.',
+                ],
+                [
+                    'question' => 'Can you redesign my existing website?',
+                    'answer' => 'Yes. We can modernize the design, improve the user experience, migrate content, and preserve important SEO value.',
+                ],
+                [
+                    'question' => 'Will my website be mobile-friendly?',
+                    'answer' => 'Yes. Every website we build is responsive and tested across modern phones, tablets, and desktop browsers.',
+                ],
+                [
+                    'question' => 'Do you optimize websites for speed and SEO?',
+                    'answer' => 'Yes. Technical SEO, semantic markup, image optimization, caching, and performance testing are part of our delivery process.',
+                ],
+                [
+                    'question' => 'How can digital marketing help my business?',
+                    'answer' => 'A focused strategy can increase qualified traffic, improve conversions, and create measurable, repeatable customer acquisition.',
+                ],
+            ],
             'testimonials' => [
                 [
                     'quote' => 'Working with this team was one of the best business decisions we made. They understood our vision and delivered a website that performs exceptionally well.',

@@ -887,57 +887,14 @@ $digitalServicesMarqueeItems = [
 <!-- Technology Section End -->
 
 
-<!-- FAQ Section Start -->
-<section class="full-bleed faq-section" aria-labelledby="faq-heading">
-  <div class="faq-section__inner section-inner">
-    <div class="faq-section__intro">
-      <p class="faq-section__eyebrow flex items-center gap-2">
-        <span class="inline-block h-4 w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
-
-        <span class="bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent font-bold text-[14px]">
-          Have questions about our Web Services?
-        </span>
-      </p>
-      <h2 id="faq-heading">Frequently Ask Question</h2>
-      <p class="faq-section__description">Here are the most asked questions based on feedback from our users.</p>
-      <x-frontend.faq-cta-button :href="$faqCtaHref" :label="$faqCtaLabel" />
-      <img class="faq-section__image" src="/images/faq-gif.gif" alt="Business team collaborating around a table"
-        width="640" height="960" loading="lazy">
-    </div>
-
-    <?php
-    $faqs = [
-      ['What services do you offer?', 'We offer the best web, software, CMS, CRM and custom development services in all the latest languages.'],
-      ['How long does it take to build a website?', 'Most website projects take 6–12 weeks, depending on complexity, integrations, and how quickly content and feedback are provided.'],
-      ['Do you provide ongoing support?', 'Yes. We offer maintenance, security updates, performance monitoring, and feature development after launch.'],
-      ['Can you redesign my existing website?', 'Yes. We can modernize the design, improve the user experience, migrate content, and preserve important SEO value.'],
-      ['Will my website be mobile-friendly?', 'Yes. Every website we build is responsive and tested across modern phones, tablets, and desktop browsers.'],
-      ['Do you optimize websites for speed and SEO?', 'Yes. Technical SEO, semantic markup, image optimization, caching, and performance testing are part of our delivery process.'],
-      ['How can digital marketing help my business?', 'A focused strategy can increase qualified traffic, improve conversions, and create measurable, repeatable customer acquisition.'],
-    ];
-    ?>
-    <div class="faq-list">
-      <?php foreach ($faqs as $index => $faq): ?>
-        <?php $faqNumber = $index + 1; ?>
-        <div class="faq-item<?= $index === 0 ? ' is-open' : '' ?>">
-          <button type="button" class="faq-item__summary" aria-expanded="<?= $index === 0 ? 'true' : 'false' ?>"
-            aria-controls="faq-answer-<?= $faqNumber ?>" id="faq-question-<?= $faqNumber ?>">
-            <span><?= htmlspecialchars($faq[0]) ?></span>
-            <i class="fa-solid fa-chevron-down faq-item__chevron" aria-hidden="true"></i>
-          </button>
-          <div class="faq-item__answer" id="faq-answer-<?= $faqNumber ?>" role="region"
-            aria-labelledby="faq-question-<?= $faqNumber ?>" aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>">
-            <div class="faq-item__answer-inner">
-              <p><?= htmlspecialchars($faq[1]) ?></p>
-            </div>
-          </div>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-<!-- FAQ Section End -->
-
+<x-frontend.faq-section
+  :qa="$faqs"
+  :media="$faqMedia"
+  :media-type="$faqMediaType"
+  :media-alt="$faqMediaAlt"
+  :cta-href="$faqCtaHref"
+  :cta-label="$faqCtaLabel"
+/>
 
 <x-frontend.testimonials-section :items="$testimonials" />
 
@@ -1112,150 +1069,6 @@ $digitalServicesMarqueeItems = [
 
     }
 
-    const faqItems = document.querySelectorAll('.faq-list .faq-item');
-    const faqMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const faqAnimationTokens = new WeakMap();
-    const faqTransitionHandlers = new WeakMap();
-
-    function nextFaqAnimationToken(item) {
-      const token = (faqAnimationTokens.get(item) || 0) + 1;
-      faqAnimationTokens.set(item, token);
-      return token;
-    }
-
-    function clearFaqTransitionHandler(answer) {
-      const handler = faqTransitionHandlers.get(answer);
-
-      if (handler) {
-        answer.removeEventListener('transitionend', handler);
-        faqTransitionHandlers.delete(answer);
-      }
-    }
-
-    function setFaqAria(item, isOpen) {
-      const button = item.querySelector('.faq-item__summary');
-      const answer = item.querySelector('.faq-item__answer');
-
-      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      answer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    }
-
-    function openFaq(item) {
-      const answer = item.querySelector('.faq-item__answer');
-      const token = nextFaqAnimationToken(item);
-
-      clearFaqTransitionHandler(answer);
-      item.classList.add('is-open');
-      setFaqAria(item, true);
-
-      if (faqMotionQuery.matches) {
-        answer.style.height = 'auto';
-        return;
-      }
-
-      const startHeight = answer.getBoundingClientRect().height;
-      answer.style.height = startHeight + 'px';
-      answer.offsetHeight;
-
-      const onHeightEnd = function (event) {
-        if (
-          event.propertyName === 'height' &&
-          faqAnimationTokens.get(item) === token &&
-          item.classList.contains('is-open')
-        ) {
-          answer.style.height = 'auto';
-          clearFaqTransitionHandler(answer);
-        }
-      };
-
-      faqTransitionHandlers.set(answer, onHeightEnd);
-      answer.addEventListener('transitionend', onHeightEnd);
-
-      requestAnimationFrame(function () {
-        if (faqAnimationTokens.get(item) === token) {
-          answer.style.height = answer.scrollHeight + 'px';
-        }
-      });
-    }
-
-    function closeFaq(item) {
-      const answer = item.querySelector('.faq-item__answer');
-      const token = nextFaqAnimationToken(item);
-
-      clearFaqTransitionHandler(answer);
-
-      if (faqMotionQuery.matches) {
-        item.classList.remove('is-open');
-        setFaqAria(item, false);
-        answer.style.height = '0px';
-        return;
-      }
-
-      const startHeight = answer.style.height === 'auto'
-        ? answer.scrollHeight
-        : answer.getBoundingClientRect().height;
-
-      answer.style.height = startHeight + 'px';
-      answer.offsetHeight;
-      item.classList.remove('is-open');
-      setFaqAria(item, false);
-
-      const onHeightEnd = function (event) {
-        if (
-          event.propertyName === 'height' &&
-          faqAnimationTokens.get(item) === token &&
-          !item.classList.contains('is-open')
-        ) {
-          answer.style.height = '0px';
-          clearFaqTransitionHandler(answer);
-        }
-      };
-
-      faqTransitionHandlers.set(answer, onHeightEnd);
-      answer.addEventListener('transitionend', onHeightEnd);
-
-      requestAnimationFrame(function () {
-        if (faqAnimationTokens.get(item) === token) {
-          answer.style.height = '0px';
-        }
-      });
-    }
-
-    faqItems.forEach(function (item) {
-      const answer = item.querySelector('.faq-item__answer');
-      const isOpen = item.classList.contains('is-open');
-
-      answer.style.transition = 'none';
-      answer.style.height = isOpen ? 'auto' : '0px';
-      setFaqAria(item, isOpen);
-    });
-
-    if (faqItems.length) {
-      faqItems[0].offsetHeight;
-    }
-
-    faqItems.forEach(function (item) {
-      const button = item.querySelector('.faq-item__summary');
-      const answer = item.querySelector('.faq-item__answer');
-
-      answer.style.removeProperty('transition');
-
-      button.addEventListener('click', function () {
-        const shouldOpen = !item.classList.contains('is-open');
-
-        faqItems.forEach(function (sibling) {
-          if (sibling !== item && sibling.classList.contains('is-open')) {
-            closeFaq(sibling);
-          }
-        });
-
-        if (shouldOpen) {
-          openFaq(item);
-        } else {
-          closeFaq(item);
-        }
-      });
-    });
   });
 </script>
 @endpush
