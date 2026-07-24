@@ -358,73 +358,7 @@
 <!-- Smart Together CTA Section End -->
 
 <!-- Web Development Services Section Start -->
-<section class="full-bleed web-services bg-[url('/images/dev-bg.png')] bg-cover bg-top bg-no-repeat py-12 lg:py-20"
-  aria-labelledby="web-services-title">
-  <div class="web-services__inner section-inner">
-    <header class="web-services__header">
-      <div class="flex items-center gap-2 mb-4">
-        <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
-
-        <span
-          class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-          Web Development Services
-        </span>
-      </div>
-      <div class="web-services__intro">
-        <h2 id="web-services-title" class="font-semibold text-[24px] text-[#171717] leading-[100%] mb-4">
-          From Concept to Code, We Build Digital Excellence.
-        </h2>
-        <p class="text-[14px] text-[#4D4D4D] leading-[100%]">We build cost-effective and custom solutions which is
-          tailored to your business needs.</p>
-      </div>
-    </header>
-
-    <?php
-    $webDevelopmentServices = [
-      ['dev-icon-1.svg', '01 - Development', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'blue'],
-      ['dev-icon-2.svg', '02 - Enterprise Software', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'orange'],
-      ['dev-icon-3.svg', '03 - Design Service', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'cyan'],
-      ['dev-icon-4.svg', '04 - Custom CRM', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'mint'],
-      ['dev-icon-5.svg', '05 - E-commerce Development', 'E-commerce Development', 'Choosing e-commerce development with us is the best option for you. Try our best development services and get a reliable solution for your digital business needs.', 'rose'],
-      ['dev-icon-6.svg', '06 - AI Solutions', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'amber'],
-    ];
-    ?>
-
-    <div class="web-services__grid">
-      <?php foreach ($webDevelopmentServices as $service): ?>
-        <article class="web-service-card">
-          <span class="web-service-card__icon web-service-card__icon--<?= htmlspecialchars($service[4]) ?>">
-            <img src="images/<?= htmlspecialchars($service[0]) ?>" alt="<?= htmlspecialchars($service[2]) ?>" width="16"
-              height="16">
-          </span>
-
-          <div class="web-service-card__category">
-            <span
-              class="font-semibold text-[#4D4D4D] text-[10px] leading-[100%] uppercase"><?= htmlspecialchars($service[1]) ?></span>
-            <div class="flex items-center justify-between">
-
-              <h3 class="text-[#171717] text-[14px] leading-[100%] font-semibold mt-2">
-                <?= htmlspecialchars($service[2]) ?>
-              </h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-move-right-icon lucide-move-right">
-                <path d="M18 8L22 12L18 16" />
-                <path d="M2 12H22" />
-              </svg>
-            </div>
-          </div>
-
-          <p class="text-[14px] text-[#4D4D4D] mt-1"><?= htmlspecialchars($service[3]) ?></p>
-        </article>
-      <?php endforeach; ?>
-    </div>
-
-    <div class="web-services__footer">
-      <a href="/services/">See All Services</a>
-    </div>
-  </div>
-</section>
+<x-frontend.three-card-section />
 <!-- Web Development Services Section End -->
 
 <!-- Core Values Section Start -->
@@ -632,27 +566,14 @@
 <!-- Digital Marketing Services Section End -->
 
 <!-- Digital Services Marquee Section Start -->
-<?php
-$digitalServicesMarqueeItems = [
-  ['Web Development', 'outlined', 'filled'],
-  ['Promotion Marketing', 'filled', 'outlined'],
-  ['Advertising', 'outlined', 'filled'],
-  ['CRM Development', 'filled', 'outlined'],
-];
-?>
-<section class="full-bleed full-bleed--edge digital-services-marquee"
-  aria-label="Web Development, Promotion Marketing, Advertising, and CRM Development" tabindex="0">
-  <div class="digital-services-marquee__track">
-    <?php for ($group = 0; $group < 2; $group++): ?>
-      <div class="digital-services-marquee__group"<?= $group === 1 ? ' aria-hidden="true"' : '' ?>>
-        <?php foreach (array_merge($digitalServicesMarqueeItems, $digitalServicesMarqueeItems) as $item): ?>
-          <span class="digital-services-marquee__label digital-services-marquee__label--<?= htmlspecialchars($item[1]) ?>"><?= htmlspecialchars($item[0]) ?></span>
-          <span class="digital-services-marquee__separator digital-services-marquee__separator--<?= htmlspecialchars($item[2]) ?>" aria-hidden="true"></span>
-        <?php endforeach; ?>
-      </div>
-    <?php endfor; ?>
-  </div>
-</section>
+<x-frontend.marquee-section
+  type="text"
+  direction="left"
+  position="full"
+  :items="$servicesMarqueeItems"
+  aria-label="Web Development, Promotion Marketing, Advertising, and CRM Development"
+  :speed="30"
+/>
 <!-- Digital Services Marquee Section End -->
 
 <!-- Portfolio Showcase Section Start -->
@@ -825,65 +746,7 @@ $digitalServicesMarqueeItems = [
 </section>
 <!-- Industries We Serve Section End -->
 <!-- Technology Section Start -->
-<section class="full-bleed bg-[url('/images/web-bg.png')] bg-cover bg-top bg-no-repeat py-12 lg:py-20">
-  <div class="section-inner">
-    <div class="grid gap-2 md:gap-6 lg:grid-cols-[200px_1fr] lg:gap-12">
-      <div class="flex items-start gap-2 mb-4">
-        <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
-        <span
-          class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
-          Industries We Serve
-        </span>
-      </div>
-      <div class="max-w-[760px]">
-        <h2 class="text-2xl font-semibold leading-tight text-[#171717]">The Technology Behind Our Solutions</h2>
-        <p class="mt-2 sm:mt-5 text-sm leading-6 text-[#4D4D4D]">
-          We use modern development frameworks to create smart software solutions that are fast, flexible, and designed
-          for long-term growth. From AI to cloud computing, we integrate technologies that help businesses stay ahead of
-          the curve.
-        </p>
-      </div>
-    </div>
-
-    <?php
-    $technologies = [
-      ['Laravel', 'Laravel is ideal for high-performing, data-driven, enterprise-level web solutions.', 'fa-laravel', '#FF2D20'],
-      ['React', 'We create responsive user experiences for modern web and mobile applications.', 'fa-react', '#149ECA'],
-      ['Angular', 'We build dynamic, modular architectures with strong performance and security.', 'fa-angular', '#DD0031'],
-      ['Node.js', 'It powers real-time data processing and scalable server-side applications.', 'fa-node-js', '#68A063'],
-      ['Vue.js', 'We create flexible user interfaces and fast single-page applications.', 'fa-vuejs', '#42B883'],
-      ['WordPress', 'The popular CMS for websites, blogs, and e-commerce solutions.', 'fa-wordpress', '#21759B'],
-      ['Shopify', 'Secure payments and inventory management for high-converting online stores.', 'fa-shopify', '#7AB55C'],
-      ['Magento', 'Robust catalog management, multi-store setups, and personalized shopping.', 'fa-magento', '#F26322'],
-    ];
-    ?>
-    <div
-      class="mt-8 sm:mt-14 grid overflow-hidden border-l border-t border-[#ECECEC] grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-      <?php foreach ($technologies as $technology): ?>
-        <article class="technology-card group relative min-h-[190px] border-b border-r border-[#ECECEC] bg-white p-5"
-          style="--technology-color: <?= htmlspecialchars($technology[3]) ?>">
-          <span
-            class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background: radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--technology-color) 12%, transparent), transparent 58%);"></span>
-          <i class="fa-brands <?= htmlspecialchars($technology[2]) ?> relative text-[30px]"
-            style="color: <?= htmlspecialchars($technology[3]) ?>" aria-hidden="true"></i>
-          <h3 class="relative mt-3 text-base font-bold text-[#171717]"><?= htmlspecialchars($technology[0]) ?></h3>
-          <p class="relative mt-2 pr-5 text-sm leading-[22px] text-[#4D4D4D]"><?= htmlspecialchars($technology[1]) ?></p>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A4DFB"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-move-right-icon lucide-move-right absolute bottom-5 right-5 ">
-            <path d="M18 8L22 12L18 16"></path>
-            <path d="M2 12H22"></path>
-          </svg>
-        </article>
-      <?php endforeach; ?>
-    </div>
-    <div class="mt-8 flex justify-end">
-      <a href="/contact-us/#contact-id" class="border-b border-[#2A4DFB] text-sm font-semibold text-[#2A4DFB]">Book
-        a Consultation</a>
-    </div>
-  </div>
-</section>
+<x-frontend.four-card-section />
 <!-- Technology Section End -->
 
 
@@ -898,7 +761,7 @@ $digitalServicesMarqueeItems = [
 
 <x-frontend.testimonials-section :items="$testimonials" />
 
-<x-frontend.articles-insights
+<x-frontend.articles-insights-section
   :items="$articles"
   heading-id="articles-insights-title"
   more-href="/blogs"
@@ -965,28 +828,14 @@ $digitalServicesMarqueeItems = [
       Our Portfolio
     </p>
 
-    <?php
-    $partners = [
-      ['/images/client-logo-4.png', 'VerySoul'],
-      ['/images/client-logo-6.svg', 'RedSixity'],
-      ['/images/client-logo-7.png', 'DAJJ Logistics'],
-      ['/images/client-logo-8.png', 'Ematrics'],
-      ['/images/client-logo-1.png', 'BioAssay Systems'],
-    ];
-    ?>
-    <div class="partnership-marquee" tabindex="0">
-      <div class="partnership-marquee__track">
-        <?php for ($group = 0; $group < 2; $group++): ?>
-          <div class="partnership-marquee__group"<?= $group === 1 ? ' aria-hidden="true"' : '' ?>>
-            <?php foreach (array_merge($partners, $partners) as $partner): ?>
-              <div class="partnership-tile">
-                <img src="<?= htmlspecialchars($partner[0]) ?>" alt="<?= $group === 0 ? htmlspecialchars($partner[1]) . ' logo' : '' ?>"<?= $group === 0 ? ' loading="lazy"' : '' ?>>
-              </div>
-            <?php endforeach; ?>
-          </div>
-        <?php endfor; ?>
-      </div>
-    </div>
+    <x-frontend.marquee-section
+      type="image"
+      direction="left"
+      position="contained"
+      :items="$partnerMarqueeItems"
+      aria-label="Client logos"
+      :speed="28"
+    />
   </div>
 </section>
 <!-- Partnerships Section End -->

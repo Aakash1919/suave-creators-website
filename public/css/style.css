@@ -720,6 +720,10 @@ canvas {
   animation-play-state: paused;
 }
 
+.site-marquee__track--right {
+  animation-direction: reverse;
+}
+
 .portfolio-showcase__header {
   margin-inline: auto;
   max-width: 720px;

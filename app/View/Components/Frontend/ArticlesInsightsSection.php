@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ArticlesInsights extends Component
+class ArticlesInsightsSection extends Component
 {
     /**
      * @param  array<int, array{title?: string, excerpt?: string, image?: string, alt?: string, date?: string, datetime?: string, author?: string, url?: string}>  $items
@@ -25,6 +25,6 @@ class ArticlesInsights extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.frontend.articles-insights');
+        return view('components.frontend.articles-insights-section');
     }
 }
