@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers\Frontend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\View\View;
+
+class HomeController extends Controller
+{
+    public function index(): View
+    {
+        return view('frontend.home', [
+            'faqCtaHref' => '/contact-us/#contact-id',
+            'faqCtaLabel' => 'Start your Project',
+            'testimonials' => [
+                [
+                    'quote' => 'Working with this team was one of the best business decisions we made. They understood our vision and delivered a website that performs exceptionally well.',
+                    'name' => 'Saurabh Singh Shah',
+                    'role' => 'Founder, NorthRose Technologies',
+                    'initials' => 'SS',
+                    'avatar' => '/images/team-2.png',
+                ],
+                [
+                    'quote' => 'The communication was clear from the start, and every milestone arrived with thoughtful solutions. Our new platform is faster, easier to use, and ready to scale.',
+                    'name' => 'Ananya Mehta',
+                    'role' => 'Operations Director',
+                    'initials' => 'AM',
+                    'avatar' => '/images/team-5.png',
+                ],
+                [
+                    'quote' => 'They combined strong product thinking with excellent engineering. The result has improved our workflow and given our customers a much smoother experience.',
+                    'name' => 'Daniel Carter',
+                    'role' => 'Co-founder, Vertex Labs',
+                    'initials' => 'DC',
+                    'avatar' => '/images/team-3.png',
+                ],
+                [
+                    'quote' => 'From discovery to launch, the team felt like an extension of our own company. They challenged assumptions and kept the project focused on real business outcomes.',
+                    'name' => 'Priya Nair',
+                    'role' => 'Head of Digital',
+                    'initials' => 'PN',
+                    'avatar' => '/images/team-6.png',
+                ],
+            ],
+            'articles' => [
+                [
+                    'title' => 'How to Build a Digital Strategy That Creates Real Business Value',
+                    'excerpt' => 'A practical framework for connecting customer needs, technology decisions, and measurable growth.',
+                    'image' => '/images/blog-1.png',
+                    'alt' => 'Team collaborating on a digital strategy with colorful notes',
+                    'date' => 'Jun 24, 2026',
+                    'datetime' => '2026-06-24',
+                    'author' => 'Suave Creators',
+                    'url' => '/blogs',
+                ],
+                [
+                    'title' => 'Turning Product Data into Better Customer Experiences',
+                    'excerpt' => 'Learn how focused analytics can reveal friction, guide priorities, and improve every step of the user journey.',
+                    'image' => '/images/blog-2.png',
+                    'alt' => 'Designer mapping a digital product experience',
+                    'date' => 'Jun 12, 2026',
+                    'datetime' => '2026-06-12',
+                    'author' => 'Suave Creators',
+                    'url' => '/blogs',
+                ],
+                [
+                    'title' => 'Designing Digital Workflows Your Team Will Actually Use',
+                    'excerpt' => 'Simple principles for creating connected tools that reduce busywork and make collaboration easier.',
+                    'image' => '/images/blog-3.png',
+                    'alt' => 'Laptop displaying software development code',
+                    'date' => 'May 29, 2026',
+                    'datetime' => '2026-05-29',
+                    'author' => 'Suave Creators',
+                    'url' => '/blogs',
+                ],
+                [
+                    'title' => 'Designing Digital Workflows Your Team Will Actually Use',
+                    'excerpt' => 'Simple principles for creating connected tools that reduce busywork and make collaboration easier.',
+                    'image' => '/images/blog-3.png',
+                    'alt' => 'Laptop displaying software development code',
+                    'date' => 'May 29, 2026',
+                    'datetime' => '2026-05-29',
+                    'author' => 'Suave Creators',
+                    'url' => '/blogs',
+                ],
+            ],
+        ]);
+    }
+}
