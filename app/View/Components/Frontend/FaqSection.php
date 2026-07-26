@@ -2,12 +2,16 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\Concerns\NormalizesAssetPaths;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class FaqSection extends Component
 {
+    use NormalizesAssetPaths;
+
     public string $resolvedMediaType;
 
     /**
@@ -15,9 +19,9 @@ class FaqSection extends Component
      */
     public function __construct(
         public array $qa = [],
-        public ?string $media = '/images/faq-gif.gif',
+        public ?string $media = 'assets/media/faq-team-collaboration.gif',
         public ?string $mediaType = null,
-        public string $mediaAlt = 'Business team collaborating around a table',
+        public string $mediaAlt = 'Business team collaborating on a custom software project with Suave Creators',
         public string $eyebrow = 'Have questions about our Web Services?',
         public string $title = 'Frequently Ask Question',
         public string $description = 'Here are the most asked questions based on feedback from our users.',
@@ -26,15 +30,18 @@ class FaqSection extends Component
         public string $ctaLabel = 'Start your Project',
         public bool $showCta = true,
     ) {
+        $this->media = filled($this->media) ? $this->normalizeAssetPath($this->media) : null;
+
         $this->resolvedMediaType = $this->mediaType
             ?? $this->detectMediaType($this->media);
 
-        $this->qa = array_values(array_map(function (array $item): array {
+        $this->qa = array_values(array_map(function (array $item, int $index): array {
             return [
                 'question' => (string) ($item['question'] ?? $item[0] ?? ''),
                 'answer' => (string) ($item['answer'] ?? $item[1] ?? ''),
+                'number' => $index + 1,
             ];
-        }, $this->qa));
+        }, $this->qa, array_keys($this->qa)));
     }
 
     protected function detectMediaType(?string $media): string
@@ -43,7 +50,8 @@ class FaqSection extends Component
             return 'image';
         }
 
-        $extension = strtolower(pathinfo(parse_url($media, PHP_URL_PATH) ?: $media, PATHINFO_EXTENSION));
+        $path = (string) str($media)->before('?')->before('#');
+        $extension = Str::lower((string) str($path)->afterLast('.'));
 
         return in_array($extension, ['mp4', 'webm', 'ogg', 'ogv', 'mov'], true)
             ? 'video'

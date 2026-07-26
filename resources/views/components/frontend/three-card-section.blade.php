@@ -1,6 +1,6 @@
 <section
     {{ $attributes->merge(['class' => 'full-bleed web-services bg-cover bg-top bg-no-repeat py-12 lg:py-20']) }}
-    @if (filled($backgroundImage)) style="background-image: url('{{ $backgroundImage }}');" @endif
+    @if (filled($backgroundImage)) style="background-image: url('{{ asset($backgroundImage) }}');" @endif
     aria-labelledby="{{ $headingId }}">
     <div class="web-services__inner section-inner">
         <header class="web-services__header">
@@ -24,7 +24,7 @@
             @foreach ($items as $item)
                 <article class="web-service-card">
                     <span class="web-service-card__icon web-service-card__icon--{{ $item['tone'] }}">
-                        <img src="{{ $item['icon'] }}" alt="{{ $item['title'] }}" width="16" height="16">
+                        <img src="{{ asset($item['icon']) }}" alt="{{ $item['iconAlt'] }}" title="{{ $item['iconAlt'] }}" width="16" height="16" decoding="async" loading="lazy">
                     </span>
 
                     <div class="web-service-card__category">
@@ -49,7 +49,7 @@
 
         @if (filled($ctaHref) && filled($ctaLabel))
             <div class="web-services__footer">
-                <a href="{{ $ctaHref }}">{{ $ctaLabel }}</a>
+                <a href="{{ url($ctaHref) }}">{{ $ctaLabel }}</a>
             </div>
         @endif
     </div>

@@ -720,10 +720,6 @@ canvas {
   animation-play-state: paused;
 }
 
-.site-marquee__track--right {
-  animation-direction: reverse;
-}
-
 .portfolio-showcase__header {
   margin-inline: auto;
   max-width: 720px;
@@ -1187,7 +1183,7 @@ canvas {
 }
 
 .testimonial-card {
-  background-image: url("/images/testimonial-card-bg.png");
+  background-image: url("/assets/background/testimonial-card-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1637,11 +1633,6 @@ body.mobile-nav-open {
   overflow: hidden;
 }
 
-.site-header__menu-icon[hidden],
-.site-header__close-icon[hidden] {
-  display: none !important;
-}
-
 .mobile-nav {
   inset: 0;
   position: fixed;
@@ -1807,16 +1798,6 @@ body.mobile-nav-open {
   overflow-x: clip;
   position: relative;
   width: 100%;
-}
-
-.site-footer__brand-accent {
-  background-image: linear-gradient(to bottom, #2f69fb, #d078fe);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
-  font-weight: 800;
-  margin-top: 0.25rem;
 }
 
 .site-footer *,
@@ -3549,10 +3530,6 @@ body.mobile-nav-open {
 
 @media (min-width: 1280px) {
   .mobile-nav {
-    display: none !important;
-  }
-
-  .site-header__menu-btn {
     display: none !important;
   }
 }

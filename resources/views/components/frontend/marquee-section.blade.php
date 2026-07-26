@@ -24,8 +24,11 @@
                             @if ($type === 'image')
                                 <div class="partnership-tile">
                                     <img
-                                        src="{{ $item['src'] }}"
-                                        alt="{{ $group === 0 && filled($item['alt']) ? $item['alt'].' logo' : '' }}"
+                                        src="{{ asset($item['src']) }}"
+                                        alt="{{ $item['logoAlt'] }}" title="{{ $item['logoAlt'] }}"
+                                        width="120"
+                                        height="48"
+                                        decoding="async"
                                         @if ($group === 0) loading="lazy" @endif>
                                 </div>
                             @else
@@ -51,8 +54,11 @@
                             @if ($type === 'image')
                                 <div class="partnership-tile">
                                     <img
-                                        src="{{ $item['src'] }}"
-                                        alt="{{ $group === 0 && filled($item['alt']) ? $item['alt'].' logo' : '' }}"
+                                        src="{{ asset($item['src']) }}"
+                                        alt="{{ $item['logoAlt'] }}" title="{{ $item['logoAlt'] }}"
+                                        width="120"
+                                        height="48"
+                                        decoding="async"
                                         @if ($group === 0) loading="lazy" @endif>
                                 </div>
                             @else

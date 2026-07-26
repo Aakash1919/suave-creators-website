@@ -1,13 +1,14 @@
 @extends('layouts.frontend')
 
 @section('seo')
-    <title>Suave Creators | Web & Software Development Solutions</title>
-    <meta name="description" content="We are a trusted Custom Software Development Company that specializes in CRM Development, Web Application, & Enterprise Software Solutions to help businesses grow.">
-    <meta property="og:title" content="Suave Creators | Web & Software Development Solutions">
-    <meta property="og:description" content="Custom Software, CRM, Web Application & Enterprise Software Development Solutions.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <link rel="canonical" href="{{ url()->current() }}">
+  <x-layouts.seo
+    title="Suave Creators | Web & Software Development Solutions"
+    description="We are a trusted Custom Software Development Company that specializes in CRM Development, Web Application, & Enterprise Software Solutions to help businesses grow."
+    og-title="Suave Creators | Web & Software Development Solutions"
+    og-description="Custom Software, CRM, Web Application & Enterprise Software Development Solutions."
+    :canonical="url()->current()"
+    :og-url="url()->current()"
+  />
 @endsection
 
 @section('content')
@@ -53,18 +54,18 @@
     </div>
 
     <div class="relative z-10 flex w-full min-w-0 items-center justify-center lg:justify-end">
-      <div class="hero-media-grid" aria-hidden="true">
+      <div class="hero-media-grid">
         <div
           class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img src="/images/hero_gif1.gif" alt="" class="block h-full w-full max-w-none object-cover">
+          <img src="{{ asset('assets/hero/hero-motion-panel-1.gif') }}" alt="Custom software and web development work by Suave Creators" title="Custom software and web development work by Suave Creators" class="block h-full w-full max-w-none object-cover" decoding="async" loading="lazy">
         </div>
         <div
           class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img src="/images/hero_gif2.gif" alt="" class="block h-full w-full max-w-none object-cover">
+          <img src="{{ asset('assets/hero/hero-motion-panel-2.gif') }}" alt="Animated software interface for a custom web application" title="Animated software interface for a custom web application" class="block h-full w-full max-w-none object-cover" decoding="async" loading="lazy">
         </div>
         <div
           class="hero-media-grid__tile col-start-2 row-start-2 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img src="/images/hero_gif3.gif" alt="" class="block h-full w-full max-w-none object-cover">
+          <img src="{{ asset('assets/hero/hero-motion-panel-3.gif') }}" alt="Modern web application dashboard built by Suave Creators" title="Modern web application dashboard built by Suave Creators" class="block h-full w-full max-w-none object-cover" decoding="async" loading="lazy">
         </div>
       </div>
     </div>
@@ -74,31 +75,31 @@
 
 <!-- About Section Start -->
 <section
-  class="full-bleed bg-white bg-[url('/images/background_about.png')] bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20">
+  class="full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/about-section-bg.png') }}');">
   <div class="section-inner site-container ">
     <div class="about-stats">
-      <?php
-      $stats = [
-        ['50+', 'Brands trust us for AI', 'Successfully completed more than 50+ projects.', '/images/rocket.svg', '#4C24F4', '#F0EAFF'],
-        ['10+', 'Years of Experience', 'Years of Combined Experience.', '/images/experience.svg', '#1873E7', '#EAF5FC'],
-        ['$40M+', 'Funding Secured', 'Our creative work has helped clients secure more than $40M+ in funding.', '/images/funding.svg', '#0F968E', '#E8F8F6'],
-        ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', '/images/team.svg', '#FA6811 ', '#FFF0E7'],
-      ];
-      foreach ($stats as $stat):
-        ?>
+      @php
+        $stats = [
+          ['50+', 'Brands trust us for AI', 'Successfully completed more than 50+ projects.', 'assets/icons/brands-growth-rocket-icon.svg', '#4C24F4', '#F0EAFF', 'AI software growth icon for brands trusting Suave Creators'],
+          ['10+', 'Years of Experience', 'Years of Combined Experience.', 'assets/icons/years-experience-icon.svg', '#1873E7', '#EAF5FC', 'Years of experience icon for Suave Creators development team'],
+          ['$40M+', 'Funding Secured', 'Our creative work has helped clients secure more than $40M+ in funding.', 'assets/icons/funding-secured-icon.svg', '#0F968E', '#E8F8F6', 'Funding secured icon for startups built with Suave Creators'],
+          ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', 'assets/team/expert-team-icon.svg', '#FA6811 ', '#FFF0E7', 'Expert software development team icon at Suave Creators'],
+        ];
+      @endphp
+      @foreach ($stats as $stat)
         <article class="about-stat"
-          style="--stat-accent: <?= htmlspecialchars($stat[4]) ?>; --stat-tint: <?= htmlspecialchars($stat[5]) ?>;">
+          style="--stat-accent: {{ $stat[4] }}; --stat-tint: {{ $stat[5] }};">
           <span class="about-stat__icon">
-            <img src="<?= htmlspecialchars($stat[3]) ?>" alt="<?= htmlspecialchars($stat[1]) ?>"
-              class="about-stat__icon-image">
+            <img src="{{ asset($stat[3]) }}" alt="{{ $stat[6] }}" title="{{ $stat[6] }}"
+              class="about-stat__icon-image" width="40" height="40" decoding="async" loading="lazy">
           </span>
           <div class="about-stat__content">
-            <strong class="about-stat__value"><?= htmlspecialchars($stat[0]) ?></strong>
-            <h2 class="about-stat__label"><?= htmlspecialchars($stat[1]) ?></h2>
-            <p class="about-stat__description"><?= htmlspecialchars($stat[2]) ?></p>
+            <strong class="about-stat__value">{{ $stat[0] }}</strong>
+            <h2 class="about-stat__label">{{ $stat[1] }}</h2>
+            <p class="about-stat__description">{{ $stat[2] }}</p>
           </div>
         </article>
-      <?php endforeach; ?>
+      @endforeach
     </div>
 
     <div class="mt-16 grid grid-cols-1 items-start gap-14 lg:mt-20 lg:grid-cols-[1.1fr_0.9fr]">
@@ -129,7 +130,7 @@
         <div class="about-values mt-8">
           <div class="about-values__item">
             <span class="about-values__icon bg-[#E6DEFD] shadow-[0px_16px_50px_0px_#5C638029]">
-              <img src="/images/teams.svg" alt="Teamwork Icon" />
+              <img src="{{ asset('assets/team/teamwork-icon.svg') }}" alt="Teamwork icon for collaborative software development at Suave Creators" title="Teamwork icon for collaborative software development at Suave Creators" width="40" height="40" decoding="async" loading="lazy">
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
@@ -142,7 +143,7 @@
 
           <div class="about-values__item">
             <span class="about-values__icon bg-[#DFE4F8] shadow-[0px_16px_50px_0px_#5C638029]">
-              <img src="/images/client.svg" alt="Client Focused Icon" />
+              <img src="{{ asset('assets/icons/client-focus-icon.svg') }}" alt="Client focused delivery icon for custom software projects" title="Client focused delivery icon for custom software projects" width="40" height="40" decoding="async" loading="lazy">
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
@@ -155,7 +156,7 @@
 
           <div class="about-values__item">
             <span class="about-values__icon bg-[#EAF4E1] shadow-[0px_16px_50px_0px_#5C638029]">
-              <img src="/images/future.svg" alt="Future Ready Icon" />
+              <img src="{{ asset('assets/icons/future-ready-icon.svg') }}" alt="Future ready technology icon for scalable digital solutions" title="Future ready technology icon for scalable digital solutions" width="40" height="40" decoding="async" loading="lazy">
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
@@ -184,44 +185,44 @@
       <div class="about-collage">
         <div class="about-collage__column about-collage__column--left">
           <figure class="about-collage__tile about-collage__tile--team">
-            <img src="/images/team-1.png" alt="Team members collaborating around a table" width="640" height="960"
-              loading="lazy">
+            <img src="{{ asset('assets/team/metallic-s-logo-office-wall.png') }}" alt="Suave Creators brand mark on a modern software office wall" title="Suave Creators brand mark on a modern software office wall" width="640" height="960"
+              loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--portrait-tall">
-            <img src="/images/team-4.png" alt="Professional team member portrait" width="640" height="960"
-              loading="lazy">
+            <img src="{{ asset('assets/team/professional-team-member-portrait.png') }}" alt="Suave Creators software developer in a professional portrait" title="Suave Creators software developer in a professional portrait" width="640" height="960"
+              loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--office-small">
-            <img src="/images/team-8.png" alt="Bright creative office interior" width="640" height="427" loading="lazy">
+            <img src="{{ asset('assets/team/bright-creative-office-interior.png') }}" alt="Bright creative office for Suave Creators web development team" title="Bright creative office for Suave Creators web development team" width="640" height="427" loading="lazy" decoding="async">
           </figure>
         </div>
 
         <div class="about-collage__column about-collage__column--center">
           <figure class="about-collage__tile about-collage__tile--leader">
-            <img src="/images/team-2.png" alt="Company leader in a professional setting" width="640" height="960"
-              loading="lazy">
+            <img src="{{ asset('assets/team/professional-man-navy-blazer-portrait.png') }}" alt="Suave Creators technology leader in a professional setting" title="Suave Creators technology leader in a professional setting" width="640" height="960"
+              loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--portrait-main">
-            <img src="/images/team-5.png" alt="Professional woman on the product team" width="640" height="960"
-              loading="lazy">
+            <img src="{{ asset('assets/team/professional-woman-product-team-portrait.png') }}" alt="Suave Creators product team specialist in a studio portrait" title="Suave Creators product team specialist in a studio portrait" width="640" height="960"
+              loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--office-wide">
-            <img src="/images/team-9.png" alt="Team working in a modern office" width="800" height="534" loading="lazy">
+            <img src="{{ asset('assets/team/team-working-modern-office.png') }}" alt="Suave Creators developers collaborating in a modern office" title="Suave Creators developers collaborating in a modern office" width="800" height="534" loading="lazy" decoding="async">
           </figure>
         </div>
 
         <div class="about-collage__column about-collage__column--right">
           <figure class="about-collage__tile about-collage__tile--portrait-right">
-            <img src="/images/team-3.png" alt="Professional designer portrait" width="640" height="960" loading="lazy">
+            <img src="{{ asset('assets/team/professional-designer-portrait.png') }}" alt="Suave Creators UI UX designer professional portrait" title="Suave Creators UI UX designer professional portrait" width="640" height="960" loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--portrait-right">
-            <img src="/images/team-6.png" alt="Professional team lead portrait" width="640" height="959" loading="lazy">
+            <img src="{{ asset('assets/team/professional-team-lead-portrait.png') }}" alt="Suave Creators project team lead professional portrait" title="Suave Creators project team lead professional portrait" width="640" height="959" loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--meeting">
-            <img src="/images/team-7.png" alt="Open office meeting space" width="640" height="427" loading="lazy">
+            <img src="{{ asset('assets/team/open-office-meeting-space.png') }}" alt="Open office meeting space for Suave Creators client workshops" title="Open office meeting space for Suave Creators client workshops" width="640" height="427" loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--meeting-sm">
-            <img src="/images/team-10.png" alt="Open office meeting space" width="640" height="427" loading="lazy">
+            <img src="{{ asset('assets/team/open-office-collaboration-space.png') }}" alt="Collaboration space for Suave Creators agile software teams" title="Collaboration space for Suave Creators agile software teams" width="640" height="427" loading="lazy" decoding="async">
           </figure>
         </div>
       </div>
@@ -232,7 +233,7 @@
 
 <!-- Offerings Showcase Section Start -->
 <section
-  class="full-bleed  overflow-hidden bg-[#F9FAFC] bg-[url('/images/background_offerings.png')] bg-cover bg-top bg-no-repeat">
+  class="full-bleed  overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}');">
   <div class="section-inner relative z-10 py-12 sm:py-20 lg:py-[80px]">
     <div class="mx-auto max-w-[660px] text-center">
       <p
@@ -249,56 +250,56 @@
       </p>
     </div>
 
-    <?php
-    $offerings = [
+    @php
+$offerings = [
       [
         'Product Strategy with Intelligence Inside',
         'Our team helps define your vision, validate your idea.',
-        '/images/expert-1.png',
-        'Product strategy team collaborating around a presentation',
+        'assets/team/expert-portrait-1.png',
+        'Product strategy experts planning intelligent software solutions',
       ],
       [
         'Design that Defines Your Brand',
         'We merge creative design, intuitive UX/UI, and brand storytelling.',
-        '/images/expert-2.png',
-        'Designer planning a brand experience',
+        'assets/team/expert-portrait-2.png',
+        'UI UX designer planning a brand experience for digital products',
       ],
       [
         'Smart Development, Seamless Performance',
         'Our team crafts high-performance, scalable applications.',
-        '/images/expert-3.png',
-        'Development team building a scalable application',
+        'assets/team/expert-portrait-3.png',
+        'Software engineers building scalable web applications',
       ],
       [
         'Marketing that Fuels Growth',
         'We help your app grow, retain, and dominate its market space.',
-        '/images/expert-4.png',
-        'Marketing team presenting growth analytics',
+        'assets/team/expert-portrait-4.png',
+        'Digital marketing experts presenting app growth analytics',
       ],
       [
         'Continuous Support & Innovation',
         'We keep your product reliable, relevant, and ready to evolve with ongoing support and smart improvements.',
-        '/images/expert-1.png',
-        'Product team collaborating on continuous improvements',
+        'assets/team/expert-portrait-1.png',
+        'Product support team planning continuous software innovation',
       ],
     ];
-    ?>
+@endphp
     <div class="offeringsSwiper swiper mt-10 sm:mt-12 lg:mt-[54px]">
       <div class="swiper-wrapper">
-        <?php foreach ($offerings as $offering): ?>
+        @foreach ($offerings as $offering)
           <div class="swiper-slide h-auto">
             <article class="offerings-card h-full">
               <div class="offerings-card__image">
-                <img src="<?= htmlspecialchars($offering[2]) ?>" alt="<?= htmlspecialchars($offering[3]) ?>"
-                  loading="lazy">
+                <img src="{{ asset(str($offering[2])->ltrim('/')) }}" alt="{{ $offering[3] }}" title="{{ $offering[3] }}"
+                  loading="lazy" decoding="async">
               </div>
               <div class="pt-3">
-                <h3><?= htmlspecialchars($offering[0]) ?></h3>
-                <p><?= htmlspecialchars($offering[1]) ?></p>
+                <h3>{{ $offering[0] }}</h3>
+                <p>{{ $offering[1] }}</p>
               </div>
             </article>
           </div>
-        <?php endforeach; ?>
+        @endforeach
       </div>
     </div>
 
@@ -350,8 +351,8 @@
       </a>
     </div>
 
-    <span class="smart-together-cta__phone" aria-hidden="true">
-      <img src="/images/phone.gif" alt="" class="rounded-[10px]" />
+    <span class="smart-together-cta__phone">
+      <img src="{{ asset('assets/hero/mobile-app-phone-demo.gif') }}" alt="Mobile app demo for a custom CRM and software product" title="Mobile app demo for a custom CRM and software product" class="rounded-[10px]" decoding="async" loading="lazy">
     </span>
   </div>
 </section>
@@ -363,7 +364,7 @@
 
 <!-- Core Values Section Start -->
 <section
-  class="  full-bleed core-values bg-[url('/images/background_core_values.png')] bg-cover bg-top bg-no-repeat py-12 lg:py-20">
+  class=" full-bleed core-values bg-cover bg-top bg-no-repeat py-12 lg:py-20" style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
   <svg class="core-values__symbols" aria-hidden="true">
     <symbol id="core-value-innovation" viewBox="0 0 24 24">
       <path d="M9 18h6M10 21h4M8.3 14.7a7 7 0 1 1 7.4 0c-.9.6-1.4 1.5-1.5 2.3H9.8c-.1-.8-.6-1.7-1.5-2.3Z" />
@@ -399,29 +400,29 @@
       </div>
     </header>
 
-    <?php
-    $coreValues = [
-      ['innovation', 'Innovation', 'We work with future trends and the latest technologies.', '/images/portfolio-1.png', 'Modern timber-and-glass building exterior'],
-      ['quality', 'Quality', 'Delivering the best quality, ensuring our clients get nothing less than the best.', '/images/portfolio-2.png', 'Bright contemporary living room and kitchen'],
-      ['trust', 'Trust', 'We build trust by focusing on the exact client requirements.', '/images/portfolio-3.png', 'Warm modern lounge with plants and artwork'],
-      ['customer', 'Customer Focus', 'We put our clients at the heart of everything we build.', '/images/portfolio-4.png', 'Contemporary office with glass meeting rooms'],
+    @php
+$coreValues = [
+      ['innovation', 'Innovation', 'We work with future trends and the latest technologies.', 'assets/portfolio/modern-office-yellow-accent-lounge.png', 'Modern workspace reflecting innovative software development culture'],
+      ['quality', 'Quality', 'Delivering the best quality, ensuring our clients get nothing less than the best.', 'assets/portfolio/contemporary-living-room-kitchen.png', 'Contemporary interior design showcasing quality digital craftsmanship'],
+      ['trust', 'Trust', 'We build trust by focusing on the exact client requirements.', 'assets/portfolio/warm-lounge-plants-artwork.png', 'Warm collaborative lounge built for trusted client partnerships'],
+      ['customer', 'Customer Focus', 'We put our clients at the heart of everything we build.', 'assets/portfolio/office-glass-meeting-rooms.png', 'Glass meeting rooms for customer focused software consulting'],
     ];
-    ?>
+@endphp
     <div class="core-values__grid">
-      <?php foreach ($coreValues as $value): ?>
+      @foreach ($coreValues as $value)
         <article class="core-value-card">
           <div class="core-value-card__content">
             <svg class="core-value-card__icon" aria-hidden="true">
-              <use href="#core-value-<?= htmlspecialchars($value[0]) ?>"></use>
+              <use href="#core-value-{{ $value[0] }}"></use>
             </svg>
-            <h3><?= htmlspecialchars($value[1]) ?></h3>
-            <p><?= htmlspecialchars($value[2]) ?></p>
+            <h3>{{ $value[1] }}</h3>
+            <p>{{ $value[2] }}</p>
           </div>
           <div class="core-value-card__image">
-            <img src="<?= htmlspecialchars($value[3]) ?>" alt="<?= htmlspecialchars($value[4]) ?>" loading="lazy">
+            <img src="{{ asset(str($value[3])->ltrim('/')) }}" alt="{{ $value[4] }}" title="{{ $value[4] }}" loading="lazy" decoding="async">
           </div>
         </article>
-      <?php endforeach; ?>
+      @endforeach
     </div>
   </div>
 </section>
@@ -429,7 +430,7 @@
 
 <!-- Digital Marketing Services Section Start -->
 <section
-  class="full-bleed digital-marketing-services bg-[url('/images/market-bg.png')] py-12 lg:py-[80px] bg-cover bg-top bg-no-repeat "
+  class="full-bleed digital-marketing-services bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/digital-marketing-section-bg.png') }}');"
   aria-labelledby="digital-marketing-title">
   <div class="digital-marketing-services__inner section-inner">
     <header class="digital-marketing-services__header">
@@ -449,86 +450,93 @@
       </div>
     </header>
 
-    <?php
-    $digitalMarketingServices = [
+    @php
+$digitalMarketingServices = [
       [
-        '/images/market-icon-1.svg',
+        'assets/icons/seo-icon.svg',
         'Search Engine Optimization',
         'Boost Your Organic Visibility',
         'With our expertise, we enhance the online visibility of your professional website.',
-        '/images/market-1.png',
-        'Digital marketing analytics displayed on a laptop screen',
+        'assets/media/seo-infographic-on-imac.png',
+        'SEO analytics dashboard for search engine optimization services',
+        'Search engine optimization SEO service icon',
       ],
       [
-        '/images/market-icon-2.svg',
+        'assets/icons/ppc-advertising-icon.svg',
         'Pay-Per-Click Advertising',
         'Instant Reach, Tangible Results',
         'Reach high-intent audiences quickly with focused campaigns that maximise conversions and measurable ROI.',
-        '/images/market-2.png',
-        'Pay-per-click advertising campaign planning',
+        'assets/media/ppc-campaign-planning.png',
+        'PPC advertising campaign planning for higher conversions',
+        'Pay per click advertising PPC service icon',
       ],
       [
-        '/images/market-icon-3.svg',
+        'assets/icons/social-media-marketing-icon.svg',
         'Social Media Marketing',
         'Engage & Grow Your Community',
         'Build meaningful connections with relevant content that inspires engagement, loyalty, and lasting growth.',
-        '/images/market-3.png',
-        'Social media marketing content viewed on a mobile device',
+        'assets/media/social-media-marketing-mobile.png',
+        'Social media marketing content strategy on a mobile device',
+        'Social media marketing service icon',
       ],
       [
-        '/images/market-icon-4.svg',
+        'assets/icons/content-strategy-icon.svg',
         'Content Strategy & Planning',
         'Plan. Create. Convert.',
         'Turn ideas into purposeful content that strengthens your brand and guides customers to act.',
-        '/images/market-4.png',
-        'Creative team planning a digital content strategy',
+        'assets/media/content-strategy-team-planning.png',
+        'Content strategy team planning digital marketing campaigns',
+        'Content strategy and planning service icon',
       ],
       [
-        '/images/market-icon-5.svg',
+        'assets/icons/online-reputation-icon.svg',
         'Online Reputation Management',
         'Protect Trust. Build Credibility.',
         'Monitor brand conversations and strengthen the online reputation that shapes customer confidence.',
-        '/images/market-1.png',
-        'Marketing specialists reviewing online brand sentiment',
+        'assets/media/seo-infographic-on-imac.png',
+        'Online reputation management review of brand sentiment analytics',
+        'Online reputation management service icon',
       ],
       [
-        '/images/market-icon-6.svg',
+        'assets/icons/answer-engine-optimization-icon.svg',
         'Answer Engine Optimization',
         'Be the Answer Customers Find',
         'Structure authoritative content so voice assistants and answer engines can surface your expertise.',
-        '/images/market-2.png',
-        'Team shaping content for modern answer engines',
+        'assets/media/ppc-campaign-planning.png',
+        'Answer engine optimization content planning for AI search',
+        'Answer engine optimization AEO service icon',
       ],
       [
-        '/images/market-icon-7.svg',
+        'assets/icons/generative-engine-optimization-icon.svg',
         'Generative Engine Optimization',
         'Stay Visible in AI Search',
         'Position your brand for discovery across generative platforms with trusted content and clear signals.',
-        '/images/market-3.png',
-        'Digital team optimizing brand visibility for AI search',
+        'assets/media/social-media-marketing-mobile.png',
+        'Generative engine optimization for brand visibility in AI search',
+        'Generative engine optimization GEO service icon',
       ],
     ];
-    ?>
+@endphp
 
     <div class="digitalMarketingSwiper swiper">
       <div class="swiper-wrapper py-4">
-        <?php foreach ($digitalMarketingServices as $index => $service): ?>
+        @foreach ($digitalMarketingServices as $index => $service)
           <div class="swiper-slide">
             <article class="digital-marketing-card">
               <div class="digital-marketing-card__topline">
-                <img src="<?= htmlspecialchars($service[0]) ?>" alt="<?= htmlspecialchars($service[1]) ?>"
-                  class="digital-marketing-card__icon" aria-hidden="true">
+                <img src="{{ asset(str($service[0])->ltrim('/')) }}" alt="{{ $service[6] }}" title="{{ $service[6] }}"
+                  class="digital-marketing-card__icon" decoding="async" loading="lazy">
                 <span class="digital-marketing-card__number"
-                  aria-hidden="true"><?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span>
+                  aria-hidden="true">{{ str((string) ($index + 1))->padLeft(2, '0') }}</span>
               </div>
-              <p class="digital-marketing-card__service-title"><?= htmlspecialchars($service[1]) ?></p>
+              <p class="digital-marketing-card__service-title">{{ $service[1] }}</p>
               <figure class="digital-marketing-card__image">
-                <img src="<?= htmlspecialchars($service[4]) ?>" alt="<?= htmlspecialchars($service[5]) ?>" width="640"
-                  height="420" loading="lazy">
+                <img src="{{ asset(str($service[4])->ltrim('/')) }}" alt="{{ $service[5] }}" title="{{ $service[5] }}" width="640"
+                  height="420" loading="lazy" decoding="async">
               </figure>
               <div class="digital-marketing-card__content">
-                <h3><?= htmlspecialchars($service[2]) ?></h3>
-                <p><?= htmlspecialchars($service[3]) ?></p>
+                <h3>{{ $service[2] }}</h3>
+                <p>{{ $service[3] }}</p>
               </div>
               <span class="digital-marketing-card__arrow" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -540,7 +548,7 @@
               </span>
             </article>
           </div>
-        <?php endforeach; ?>
+        @endforeach
       </div>
     </div>
 
@@ -572,13 +580,12 @@
   position="full"
   :items="$servicesMarqueeItems"
   aria-label="Web Development, Promotion Marketing, Advertising, and CRM Development"
-  :speed="30"
 />
 <!-- Digital Services Marquee Section End -->
 
 <!-- Portfolio Showcase Section Start -->
 <section
-  class="full-bleed portfolio-showcase bg-[url('/images/portfolio-bg.png')] bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]"
+  class="full-bleed portfolio-showcase bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-bg.png') }}');"
   aria-labelledby="portfolio-showcase-title">
   <div class="portfolio-showcase__pattern" aria-hidden="true"></div>
   <div class="portfolio-showcase__container section-inner">
@@ -596,21 +603,21 @@
         industries.</p>
     </header>
 
-    <?php
-    $portfolioShowcaseProjects = [
-      ['/images/project-1.png', 'Modern timber-and-glass creative studio exterior'],
-      ['/images/project-2.png', 'Bright contemporary residence interior'],
-      ['/images/project-3.png', 'Warm modern lounge with plants and artwork'],
-      ['/images/project-1.png', 'Contemporary office with glass meeting rooms'],
+    @php
+$portfolioShowcaseProjects = [
+      ['assets/portfolio/timber-glass-creative-studio.png', 'Modern timber and glass creative studio for digital product teams'],
+      ['assets/portfolio/bright-contemporary-residence.png', 'Bright contemporary space reflecting premium digital design quality'],
+      ['assets/portfolio/warm-modern-lounge-interior.png', 'Warm modern lounge for collaborative software product workshops'],
+      ['assets/portfolio/timber-glass-creative-studio.png', 'Creative studio exterior showcasing Suave Creators portfolio quality'],
     ];
-    ?>
+@endphp
     <div class="swiper portfolioShowcaseSwiper">
       <div class="swiper-wrapper">
-        <?php foreach ($portfolioShowcaseProjects as $project): ?>
+        @foreach ($portfolioShowcaseProjects as $project)
           <div class="swiper-slide">
             <article class="portfolio-showcase__card">
               <div class="portfolio-showcase__image">
-                <img src="<?= htmlspecialchars($project[0]) ?>" alt="<?= htmlspecialchars($project[1]) ?>" loading="lazy" draggable="false">
+                <img src="{{ asset(str($project[0])->ltrim('/')) }}" alt="{{ $project[1] }}" title="{{ $project[1] }}" loading="lazy" draggable="false" decoding="async">
               </div>
               <div class="portfolio-showcase__copy">
                 <p
@@ -625,7 +632,7 @@
               </div>
             </article>
           </div>
-        <?php endforeach; ?>
+        @endforeach
       </div>
     </div>
 
@@ -651,7 +658,7 @@
 
 <!-- Industries We Serve Section Start -->
 <section
-  class="full-bleed industries-served bg-[url('/images/industry-bg.png')] bg-cover bg-top bg-no-repeat py-12 lg:py-[80px] "
+  class="full-bleed industries-served bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/industries-section-bg.png') }}');"
   aria-labelledby="industries-served-title">
   <div class="industries-served__inner section-inner">
     <header class="core-values__header">
@@ -669,8 +676,8 @@
       </div>
     </header>
 
-    <?php
-    $industriesServed = [
+    @php
+$industriesServed = [
       [
         'fa-solid fa-heart-pulse',
         'Custom Healthcare Software Development Services',
@@ -702,14 +709,14 @@
         'We deliver education and e-learning software for schools, colleges, training platforms, and online learning portals.',
       ],
     ];
-    ?>
+@endphp
 
     <div class="industries-served__grid">
-      <?php foreach ($industriesServed as $industry): ?>
+      @foreach ($industriesServed as $industry)
         <article class="industry-card">
-          <i class="industry-card__icon <?= htmlspecialchars($industry[0]) ?>" aria-hidden="true"></i>
-          <h3><?= htmlspecialchars($industry[1]) ?></h3>
-          <p><?= htmlspecialchars($industry[2]) ?></p>
+          <i class="industry-card__icon {{ $industry[0] }}" aria-hidden="true"></i>
+          <h3>{{ $industry[1] }}</h3>
+          <p>{{ $industry[2] }}</p>
 
           <span class="industry-card__arrow" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -719,7 +726,7 @@
             </svg>
           </span>
         </article>
-      <?php endforeach; ?>
+      @endforeach
     </div>
     <div class="industries-served__project">
       <a href="/contact-us/#contact-id" class="border-b border-white/70 text-sm font-semibold text-white">Discuss your
@@ -738,8 +745,8 @@
           </svg>
         </a>
       </div>
-      <div class="industries-support__illustration" aria-hidden="true">
-        <img src="/images/chat.png" alt="">
+      <div class="industries-support__illustration">
+        <img src="{{ asset('assets/brand/chat-widget-icon.png') }}" alt="Contact Suave Creators chat support for software consulting" title="Contact Suave Creators chat support for software consulting" width="56" height="56" decoding="async" loading="lazy">
       </div>
     </aside>
   </div>
@@ -759,6 +766,7 @@
   :cta-label="$faqCtaLabel"
 />
 
+
 <x-frontend.testimonials-section :items="$testimonials" />
 
 <x-frontend.articles-insights-section
@@ -771,7 +779,7 @@
 <!-- Consultation CTA Section Start -->
 <section id="consultation" class="full-bleed consultation-section">
   <div class="section-inner">
-    <div class="consultation-card bg-[url('/images/consultation-bg.png')] bg-cover bg-top bg-no-repeat">
+    <div class="consultation-card bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/consultation-section-bg.png') }}');">
       <div class="consultation-copy">
         <h2>Let's Build Your Next Digital<br class="hidden sm:block"> Solution with us!</h2>
         <p>
@@ -791,27 +799,27 @@
       <div class="consultation-people">
         <div class="consultation-people__column consultation-people__column--left">
           <figure class="consultation-person consultation-person--pink">
-            <img src="/images/consult-1.png" alt="Suave Creators team member" width="640" height="960" loading="lazy">
+            <img src="{{ asset('assets/team/consultation-team-member-1.png') }}" alt="Suave Creators consultant ready for a software discovery call" title="Suave Creators consultant ready for a software discovery call" width="640" height="960" loading="lazy" decoding="async">
           </figure>
           <figure class="consultation-person consultation-person--orange">
-            <img src="/images/consult-2.png" alt="Suave Creators team member" width="640" height="960" loading="lazy">
+            <img src="{{ asset('assets/team/consultation-team-member-2.png') }}" alt="Suave Creators developer available for project consultation" title="Suave Creators developer available for project consultation" width="640" height="960" loading="lazy" decoding="async">
           </figure>
         </div>
         <div class="consultation-people__column">
           <figure class="consultation-person consultation-person--yellow">
-            <img src="/images/consult-3.png" alt="Suave Creators team leader" width="640" height="960" loading="lazy">
+            <img src="{{ asset('assets/team/consultation-team-leader.png') }}" alt="Suave Creators team leader for web development consultation" title="Suave Creators team leader for web development consultation" width="640" height="960" loading="lazy" decoding="async">
           </figure>
           <figure class="consultation-person consultation-person--blue">
-            <img src="/images/consult-4.png" alt="Suave Creators designer" width="640" height="960" loading="lazy">
+            <img src="{{ asset('assets/team/consultation-designer.png') }}" alt="Suave Creators UI UX designer for product consultation" title="Suave Creators UI UX designer for product consultation" width="640" height="960" loading="lazy" decoding="async">
           </figure>
         </div>
         <div class="consultation-people__column consultation-people__column--right">
           <figure class="consultation-person consultation-person--coral">
-            <img src="/images/consult-5.png" alt="Suave Creators team lead" width="640" height="959" loading="lazy">
+            <img src="{{ asset('assets/team/consultation-team-lead.png') }}" alt="Suave Creators project lead for CRM and software consulting" title="Suave Creators project lead for CRM and software consulting" width="640" height="959" loading="lazy" decoding="async">
           </figure>
           <figure class="consultation-person consultation-person--cyan">
-            <img src="/images/consult-6.png" alt="Suave Creators team collaborating" width="640" height="960"
-              loading="lazy">
+            <img src="{{ asset('assets/team/consultation-team-collaborating.png') }}" alt="Suave Creators team collaborating on a client software project" title="Suave Creators team collaborating on a client software project" width="640" height="960"
+              loading="lazy" decoding="async">
           </figure>
         </div>
       </div>
@@ -828,101 +836,787 @@
       Our Portfolio
     </p>
 
-    <x-frontend.marquee-section
+    @php
+$partners = [
+      ['assets/clients/verysoul-logo.png', 'VerySoul'],
+      ['assets/clients/redsixity-logo.svg', 'RedSixity'],
+      ['assets/clients/dajj-logistics-logo.png', 'DAJJ Logistics'],
+      ['assets/clients/ematrics-logo.png', 'Ematrics'],
+      ['assets/clients/bioassay-systems-logo.png', 'BioAssay Systems'],
+    ];
+@endphp
+        <x-frontend.marquee-section
       type="image"
       direction="left"
       position="contained"
       :items="$partnerMarqueeItems"
       aria-label="Client logos"
       :speed="28"
-    />
-  </div>
+    /></div>
 </section>
 <!-- Partnerships Section End -->
+
+
+@endsection
+@push('custom-css')
+<style>
+.about-values {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.about-values__item {
+  align-items: center;
+  display: flex;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.about-values__icon {
+  align-items: center;
+  border-radius: 50%;
+  display: grid;
+  flex-shrink: 0;
+  height: 58px;
+  justify-items: center;
+  place-items: center;
+  width: 58px;
+}
+
+.hero-media-grid {
+  aspect-ratio: 670 / 512;
+  column-gap: calc(12 / 670 * 100%);
+  display: grid;
+  flex-shrink: 0;
+  grid-template-columns: 314fr 344fr;
+  grid-template-rows: 124fr 368fr;
+  max-width: 670px;
+  row-gap: calc(20 / 512 * 100%);
+  width: 100%;
+}
+
+.hero-media-grid__tile {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.about-collage {
+  --collage-gap: 12px;
+  --col-left: 190px;
+  --col-center: 180px;
+  --col-right: 154px;
+  align-items: start;
+  display: grid;
+  gap: var(--collage-gap);
+  grid-template-columns: var(--col-left) var(--col-center) var(--col-right);
+  justify-content: center;
+  margin-inline: auto;
+  max-width: 100%;
+  width: max-content;
+}
+
+.about-collage__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--collage-gap);
+  min-width: 0;
+}
+
+.about-collage__column--left {
+  padding-top: 60px;
+  width: var(--col-left);
+}
+
+.about-collage__column--center {
+  width: var(--col-center);
+}
+
+.about-collage__column--right {
+  padding-top: 74px;
+  width: var(--col-right);
+}
+
+.about-collage__tile {
+  background: #e9ebf2;
+  border-radius: 7.78px;
+  box-shadow: 0 5px 14px rgb(24 31 63 / 8%);
+  flex-shrink: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.about-collage__tile img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.about-collage__tile--team {
+  align-self: flex-end;
+  height: 90px;
+  width: 120px;
+}
+
+.about-collage__tile--portrait-tall {
+  height: 240px;
+  width: 190px;
+}
+
+.about-collage__tile--office-small {
+  align-self: flex-end;
+  height: 90px;
+  width: 120px;
+}
+
+.about-collage__tile--leader {
+  height: 140px;
+  width: 180px;
+}
+
+.about-collage__tile--portrait-main {
+  height: 280px;
+  width: 180px;
+}
+
+.about-collage__tile--office-wide {
+  height: 120px;
+  width: 180px;
+}
+
+.about-collage__tile--portrait-right {
+  height: 140px;
+  width: 154px;
+}
+
+.about-collage__tile--meeting {
+  height: 112px;
+  width: 154px;
+}
+
+.about-collage__tile--meeting-sm {
+  height: 94px;
+  width: 124px;
+}
+
+.about-collage__tile--portrait-tall img,
+.about-collage__tile--portrait-main img {
+  object-position: center top;
+}
+
+.offeringsSwiper {
+  overflow: hidden;
+}
+
+.offerings-card__image {
+  aspect-ratio: 1.3 / 1;
+  background: #eef0f6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.offerings-card__image img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+  width: 100%;
+}
+
+.offerings-card:hover .offerings-card__image img {
+  transform: scale(1.025);
+}
+
+.offerings-card h3 {
+  color: #171717;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 100%;
+}
+
+.offerings-card p {
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 4px;
+  max-width: 97%;
+  font-weight: 500;
+}
+
+.offerings-expert-link {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: linear-gradient(90deg, #2A4DFB 57.12%, #0026E3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.digital-marketing-services__header {
+  align-items: start;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(190px, 0.36fr) minmax(0, 1fr);
+}
+
+.digitalMarketingSwiper {
+  margin-top: 48px;
+  overflow: hidden;
+}
+
+.digital-marketing-card {
+  --digital-card-accent: #2a4dfb;
+  background: #fff;
+  border: none;
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 375px;
+  overflow: hidden;
+  padding: 16px;
+  position: relative;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.digital-marketing-card:hover {
+  box-shadow: 2px 5px 23px -2px #00003F24;
+  transform: translateY(-2px);
+}
+
+.digital-marketing-card__topline {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  min-height: 30px;
+  position: relative;
+}
+
+.digital-marketing-card__icon {
+  color: var(--digital-card-accent);
+  display: block;
+  flex: 0 0 22px;
+  font-size: 20px;
+  height: 22px;
+  object-fit: contain;
+  position: relative;
+  text-align: center;
+  width: 22px;
+  z-index: 1;
+}
+
+.digital-marketing-card__service-title {
+  color: #00003F;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.digital-marketing-card:hover .digital-marketing-card__service-title {
+  color: #2A4DFB;
+}
+
+.digital-marketing-card__number {
+  color: #F7F8F8;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.075em;
+  line-height: 1;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: -8px;
+  z-index: 0;
+}
+
+.digital-marketing-card__image {
+  background: transparent;
+  border-radius: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.digital-marketing-card__image img {
+  display: block;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  width: 100%;
+}
+
+.digital-marketing-card:hover .digital-marketing-card__image img {
+  transform: scale(1.025);
+}
+
+.digital-marketing-card__content {
+  padding-top: 14px;
+}
+
+.digital-marketing-card__content h3 {
+  color: #171717;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 100%;
+}
+
+.digital-marketing-card__content p {
+  color: #4D4D4D;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.digital-marketing-card__arrow {
+  align-items: center;
+  color: #2a4dfb;
+  display: inline-flex;
+  font-size: 12px;
+  justify-content: center;
+  margin-left: auto;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.digital-marketing-services__footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
+}
+
+.digital-marketing-services__controls {
+  display: flex;
+  gap: 7px;
+}
+
+.digital-marketing-control {
+  align-items: center;
+  background: #030343;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 8px;
+  height: 32px;
+  justify-content: center;
+  transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  width: 32px;
+}
+
+.digital-marketing-control:hover {
+  background: #2a4dfb;
+  transform: translateY(-1px);
+}
+
+.digital-marketing-control:focus-visible,
+.digital-marketing-services__more a:focus-visible {
+  outline: 2px solid #2a4dfb;
+  outline-offset: 3px;
+}
+
+.digital-marketing-services__more span {
+  color: #00003F;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: underline;
+}
+
+.digital-marketing-services__more a {
+  color: #2a4dfb;
+  margin-left: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.industries-support {
+  align-items: center;
+  background: linear-gradient(90deg, #2A4DFB 0%, #7A5FF8 100%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 13px;
+  box-shadow: 3px 6px 14px -2px #2A4DFB29;
+  display: flex;
+  justify-content: space-between;
+  margin: 39px auto 0;
+  max-width: 1180px;
+  min-height: 135px;
+  overflow: hidden;
+  padding: 18px 24px;
+  position: relative;
+}
+
+.industries-support::before {
+  background: linear-gradient(115deg, transparent 44%, rgb(255 255 255 / 7%) 45%, transparent 46%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.industries-support__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.industries-support__copy p {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.industries-support__copy a {
+  align-items: center;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 3px 7px 22px -6px #2A4DFB24;
+  color: #2A4DFB;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 7px;
+  margin-top: 12px;
+  min-height: 29px;
+  padding: 7px 16px;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.industries-support__copy a i {
+  color: #4258e9;
+  font-size: 7px;
+}
+
+.industries-support__copy a:hover {
+  box-shadow: 0 9px 22px rgb(27 25 107 / 30%);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 1024px) {
+  .about-values {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .about-values__item {
+    flex: 1 1 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .digital-marketing-services {
+    padding: 64px 0 58px;
+  }
+
+  .digital-marketing-services__header {
+    gap: 5px;
+    grid-template-columns: 1fr;
+  }
+
+  .digitalMarketingSwiper {
+    margin-top: 38px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-collage {
+    --collage-gap: 8px;
+    --col-left: 137px;
+    --col-center: 130px;
+    --col-right: 111px;
+    max-width: 100%;
+  }
+
+  .about-values {
+    flex-direction: column;
+    display: none;
+  }
+
+  .offerings-card {
+    padding: 10px !important;
+    background-color: white;
+    border-radius: 8px;
+  }
+
+  .about-collage__column--left {
+    padding-top: 43px;
+  }
+
+  .about-collage__column--right {
+    padding-top: 53px;
+  }
+
+  .about-collage__tile--team,
+  .about-collage__tile--office-small {
+    height: 65px;
+    width: 86px;
+  }
+
+  .about-collage__tile--portrait-tall {
+    height: 173px;
+    width: 137px;
+  }
+
+  .about-collage__tile--leader {
+    height: 101px;
+    width: 130px;
+  }
+
+  .about-collage__tile--portrait-main {
+    height: 202px;
+    width: 130px;
+  }
+
+  .about-collage__tile--office-wide {
+    height: 86px;
+    width: 130px;
+  }
+
+  .about-collage__tile--portrait-right {
+    height: 101px;
+    width: 111px;
+  }
+
+  .about-collage__tile--meeting {
+    height: 81px;
+    width: 111px;
+  }
+
+  .about-collage__tile--meeting-sm {
+    height: 68px;
+    width: 89px;
+  }
+
+  .about-collage__tile {
+    border-radius: 6px;
+  }
+
+  .offerings-controls,
+  .digital-marketing-services__controls {
+    display: none !important;
+  }
+
+  .offerings-footer,
+  .digital-marketing-services__footer {
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .digital-marketing-services__more-text {
+    display: none !important;
+  }
+
+  .digital-marketing-services {
+    padding: 52px 0 48px;
+  }
+
+  .digital-marketing-services__intro h2 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .digitalMarketingSwiper {
+    margin-top: 32px;
+  }
+
+  .digital-marketing-card {
+    min-height: 0;
+    padding: 12px;
+  }
+
+  .digital-marketing-card__image {
+    aspect-ratio: 16 / 10;
+    margin-top: 8px;
+  }
+
+  .digital-marketing-card__image img {
+    height: 100%;
+  }
+
+  .digital-marketing-card__content {
+    padding-top: 10px;
+  }
+
+  .digital-marketing-card__service-title {
+    font-size: 15px;
+  }
+
+  .digital-marketing-card__content h3 {
+    font-size: 14px;
+  }
+
+  .digital-marketing-card__content p {
+    font-size: 13px;
+    line-height: 19px;
+    margin-top: 6px;
+  }
+
+  .digital-marketing-card__arrow {
+    padding-top: 6px;
+  }
+
+  .digital-marketing-services__footer {
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 28px;
+  }
+
+  .digital-marketing-services__more a {
+    margin-left: 0;
+  }
+
+  .industries-support {
+    align-items: flex-start;
+    min-height: 150px;
+    padding: 22px 20px;
+  }
+
+  .industries-support__copy {
+    max-width: calc(100% - 64px);
+  }
+
+  .industries-support__copy p {
+    font-size: clamp(0.9375rem, 3.5vw, 1.125rem);
+  }
+
+  .industries-support__illustration {
+    margin: 0;
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    transform: scale(0.72);
+    transform-origin: top right;
+  }
+
+  .about-values__item {
+    flex: none;
+    width: 100%;
+  }
+
+  .about-values__icon {
+    height: 48px;
+    width: 48px;
+  }
+
+  .hero-media-grid {
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  .digital-marketing-card__number {
+    font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .digital-marketing-card,
+  .digital-marketing-card__image img {
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-values {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+  }
+
+  .about-values__item {
+    flex: 1 1 calc(50% - var(--space-3));
+  }
+
+  .about-collage {
+    max-width: 100%;
+  }
+
+  .hero-media-grid {
+    max-width: min(100%, 560px);
+  }
+
+  .digital-marketing-card {
+    min-height: 0;
+  }
+}
+</style>
+@endpush
+
 @push('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Swiper !== 'undefined') {
-      new Swiper('.offeringsSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 16,
-        speed: 650,
-        rewind: true,
-        watchOverflow: true,
-        navigation: { nextEl: '.offerings-next', prevEl: '.offerings-prev' },
-        pagination: {
-          el: '.offerings-pagination',
-          clickable: true
-        },
-        breakpoints: {
-          768: { slidesPerView: 2, spaceBetween: 18 },
-          1024: { slidesPerView: 3, spaceBetween: 20 },
-          1200: { slidesPerView: 4, spaceBetween: 20 }
-        }
-      });
+    if (typeof Swiper === 'undefined') return;
 
-      new Swiper('.digitalMarketingSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 16,
-        speed: 650,
-        watchOverflow: true,
-        navigation: {
-          nextEl: '.digital-marketing-next',
-          prevEl: '.digital-marketing-prev'
-        },
-        pagination: {
-          el: '.digital-marketing-pagination',
-          clickable: true
-        },
-        breakpoints: {
-          768: { slidesPerView: 2, spaceBetween: 18 },
-          1024: { slidesPerView: 3, spaceBetween: 18 },
-          1200: { slidesPerView: 4, spaceBetween: 20 }
-        }
-      });
+    new Swiper('.offeringsSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      speed: 650,
+      rewind: true,
+      watchOverflow: true,
+      navigation: { nextEl: '.offerings-next', prevEl: '.offerings-prev' },
+      pagination: {
+        el: '.offerings-pagination',
+        clickable: true
+      },
+      breakpoints: {
+        768: { slidesPerView: 2, spaceBetween: 18 },
+        1024: { slidesPerView: 3, spaceBetween: 20 },
+        1200: { slidesPerView: 4, spaceBetween: 20 }
+      }
+    });
 
-      new Swiper('.portfolioShowcaseSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 16,
-        speed: 650,
-        allowTouchMove: true,
-        simulateTouch: true,
-        grabCursor: true,
-        touchEventsTarget: 'container',
-        touchStartPreventDefault: false,
-        watchOverflow: true,
-        navigation: {
-          nextEl: '.portfolio-showcase-next',
-          prevEl: '.portfolio-showcase-prev'
-        },
-        breakpoints: {
-          768: { slidesPerView: 2, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 24 }
-        }
-      });
+    new Swiper('.digitalMarketingSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      speed: 650,
+      watchOverflow: true,
+      navigation: {
+        nextEl: '.digital-marketing-next',
+        prevEl: '.digital-marketing-prev'
+      },
+      pagination: {
+        el: '.digital-marketing-pagination',
+        clickable: true
+      },
+      breakpoints: {
+        768: { slidesPerView: 2, spaceBetween: 18 },
+        1024: { slidesPerView: 3, spaceBetween: 18 },
+        1200: { slidesPerView: 4, spaceBetween: 20 }
+      }
+    });
 
-      new Swiper('.testimonialSwiper', {
-        direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
-        slidesPerView: 1,
-        spaceBetween: 16,
-        loop: true,
-        speed: 700,
-        autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
-        navigation: { nextEl: '.testimonial-next', prevEl: '.testimonial-prev' },
-        pagination: {
-          el: '.testimonial-pagination',
-          clickable: true
-        },
-        breakpoints: { 1024: { slidesPerView: 2, spaceBetween: 24 } }
-      });
-
-    }
-
+    new Swiper('.portfolioShowcaseSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      speed: 650,
+      allowTouchMove: true,
+      simulateTouch: true,
+      grabCursor: true,
+      touchEventsTarget: 'container',
+      touchStartPreventDefault: false,
+      watchOverflow: true,
+      navigation: {
+        nextEl: '.portfolio-showcase-next',
+        prevEl: '.portfolio-showcase-prev'
+      },
+      breakpoints: {
+        768: { slidesPerView: 2, spaceBetween: 20 },
+        1024: { slidesPerView: 3, spaceBetween: 24 }
+      }
+    });
   });
 </script>
 @endpush
-
-@push('custom-css')
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}?v={{ filemtime(public_path('css/home.css')) }}">
-@endpush
-@endsection

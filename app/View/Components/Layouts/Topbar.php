@@ -12,7 +12,8 @@ class Topbar extends Component
         public string $href = '/product',
         public string $title = 'Introducing SUAVE CRM',
         public string $subtitle = ' — The Smarter Way to Manage Your Business.',
-        public string $icon = '/images/rocket_icon.svg',
+        public string $icon = 'assets/icons/announcement-rocket-icon.svg',
+        public string $iconAlt = 'Suave CRM product announcement icon',
     ) {}
 
     public function render(): View|Closure|string

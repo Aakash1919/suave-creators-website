@@ -2,13 +2,17 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\Concerns\NormalizesAssetPaths;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use InvalidArgumentException;
 
 class MarqueeSection extends Component
 {
+    use NormalizesAssetPaths;
+
     /**
      * @param  array<int, array<string, mixed>|array<int, mixed>>  $items
      */
@@ -21,9 +25,9 @@ class MarqueeSection extends Component
         public int $speed = 30,
         public int $repeat = 2,
     ) {
-        $this->type = strtolower($this->type);
-        $this->direction = strtolower($this->direction) === 'right' ? 'right' : 'left';
-        $this->position = strtolower($this->position) === 'contained' ? 'contained' : 'full';
+        $this->type = Str::lower($this->type);
+        $this->direction = Str::lower($this->direction) === 'right' ? 'right' : 'left';
+        $this->position = Str::lower($this->position) === 'contained' ? 'contained' : 'full';
 
         if (! in_array($this->type, ['text', 'image'], true)) {
             throw new InvalidArgumentException('Marquee type must be "text" or "image".');
@@ -35,7 +39,7 @@ class MarqueeSection extends Component
         ));
 
         if ($this->ariaLabel === '' && $this->type === 'text') {
-            $this->ariaLabel = implode(', ', array_column($this->items, 'label'));
+            $this->ariaLabel = collect($this->items)->pluck('label')->implode(', ');
         }
 
         if ($this->type === 'image' && $this->speed === 30) {
@@ -50,9 +54,15 @@ class MarqueeSection extends Component
     protected function normalizeItem(array $item): array
     {
         if ($this->type === 'image') {
+            $alt = (string) ($item['alt'] ?? $item['label'] ?? $item[1] ?? '');
+            if ($alt !== '' && ! Str::contains(Str::lower($alt), 'logo')) {
+                $alt .= ' logo';
+            }
+
             return [
-                'src' => (string) ($item['src'] ?? $item['image'] ?? $item[0] ?? ''),
-                'alt' => (string) ($item['alt'] ?? $item['label'] ?? $item[1] ?? ''),
+                'src' => $this->normalizeAssetPath((string) ($item['src'] ?? $item['image'] ?? $item[0] ?? '')),
+                'alt' => $alt,
+                'logoAlt' => $alt,
             ];
         }
 

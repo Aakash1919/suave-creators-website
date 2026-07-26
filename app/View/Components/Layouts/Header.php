@@ -4,6 +4,7 @@ namespace App\View\Components\Layouts;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Header extends Component
@@ -17,7 +18,6 @@ class Header extends Component
         public string $ctaHref = '/contact-us/#contact-id',
         public string $ctaLabel = 'Talk to an expert',
         public string $ctaLabelShort = 'Talk to us',
-        public string $logo = '/images/white_logo.svg',
         public ?array $dropdowns = null,
     ) {
         $this->dropdowns ??= [
@@ -36,6 +36,20 @@ class Header extends Component
                 ['href' => '/industries/education-elearning-platforms', 'label' => 'Education & E-learning', 'icon' => 'fa-solid fa-graduation-cap'],
             ],
         ];
+
+        $this->dropdowns = collect($this->dropdowns)
+            ->map(function (array $items, string $label): array {
+                $slug = Str::lower($label);
+
+                return [
+                    'label' => $label,
+                    'slug' => $slug,
+                    'id' => 'mobile-nav-'.$slug,
+                    'items' => array_values($items),
+                ];
+            })
+            ->values()
+            ->all();
     }
 
     public function render(): View|Closure|string

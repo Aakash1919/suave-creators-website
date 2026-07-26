@@ -2,12 +2,15 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\Concerns\NormalizesAssetPaths;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class ArticlesInsightsSection extends Component
 {
+    use NormalizesAssetPaths;
+
     /**
      * @param  array<int, array{title?: string, excerpt?: string, image?: string, alt?: string, date?: string, datetime?: string, author?: string, url?: string}>  $items
      */
@@ -21,7 +24,22 @@ class ArticlesInsightsSection extends Component
         public string $moreLabel = 'View More',
         public string $sectionClass = 'py-12 lg:py-18',
         public bool $initSwiper = true,
-    ) {}
+    ) {
+        $this->items = array_values(array_map(function (array $article): array {
+            $title = (string) ($article['title'] ?? '');
+
+            return [
+                'title' => $title,
+                'excerpt' => (string) ($article['excerpt'] ?? ''),
+                'image' => $this->normalizeAssetPath((string) ($article['image'] ?? 'assets/blog/digital-strategy-collaboration.png')),
+                'alt' => (string) ($article['alt'] ?? $title),
+                'date' => (string) ($article['date'] ?? ''),
+                'datetime' => (string) ($article['datetime'] ?? ''),
+                'author' => (string) ($article['author'] ?? 'Suave Creators'),
+                'url' => (string) ($article['url'] ?? '/blogs'),
+            ];
+        }, $this->items));
+    }
 
     public function render(): View|Closure|string
     {

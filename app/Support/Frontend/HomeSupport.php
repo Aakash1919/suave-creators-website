@@ -36,11 +36,11 @@ class HomeSupport
     public static function partnerMarqueeItems(): array
     {
         return [
-            ['src' => '/images/client-logo-4.png', 'alt' => 'VerySoul'],
-            ['src' => '/images/client-logo-6.svg', 'alt' => 'RedSixity'],
-            ['src' => '/images/client-logo-7.png', 'alt' => 'DAJJ Logistics'],
-            ['src' => '/images/client-logo-8.png', 'alt' => 'Ematrics'],
-            ['src' => '/images/client-logo-1.png', 'alt' => 'BioAssay Systems'],
+            ['src' => 'assets/clients/verysoul-logo.png', 'alt' => 'VerySoul logo partner of Suave Creators software development'],
+            ['src' => 'assets/clients/redsixity-logo.svg', 'alt' => 'RedSixity logo partner of Suave Creators digital solutions'],
+            ['src' => 'assets/clients/dajj-logistics-logo.png', 'alt' => 'DAJJ Logistics logo partner of Suave Creators web development'],
+            ['src' => 'assets/clients/ematrics-logo.png', 'alt' => 'Ematrics logo partner of Suave Creators custom software'],
+            ['src' => 'assets/clients/bioassay-systems-logo.png', 'alt' => 'BioAssay Systems logo partner of Suave Creators technology services'],
         ];
     }
 
@@ -52,9 +52,9 @@ class HomeSupport
         return [
             'faqCtaHref' => '/contact-us/#contact-id',
             'faqCtaLabel' => 'Start your Project',
-            'faqMedia' => '/images/faq-gif.gif',
+            'faqMedia' => 'assets/media/faq-team-collaboration.gif',
             'faqMediaType' => 'image',
-            'faqMediaAlt' => 'Business team collaborating around a table',
+            'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
             'faqs' => [
                 [
                     'question' => 'What services do you offer?',
@@ -100,28 +100,32 @@ class HomeSupport
                 'name' => 'Saurabh Singh Shah',
                 'role' => 'Founder, NorthRose Technologies',
                 'initials' => 'SS',
-                'avatar' => '/images/team-2.png',
+                'avatar' => 'assets/team/professional-man-navy-blazer-portrait.png',
+                'avatarAlt' => 'Saurabh Singh Shah client testimonial for Suave Creators web development',
             ],
             [
                 'quote' => 'The communication was clear from the start, and every milestone arrived with thoughtful solutions. Our new platform is faster, easier to use, and ready to scale.',
                 'name' => 'Ananya Mehta',
                 'role' => 'Operations Director',
                 'initials' => 'AM',
-                'avatar' => '/images/team-5.png',
+                'avatar' => 'assets/team/professional-woman-product-team-portrait.png',
+                'avatarAlt' => 'Ananya Mehta client testimonial for Suave Creators software platform',
             ],
             [
                 'quote' => 'They combined strong product thinking with excellent engineering. The result has improved our workflow and given our customers a much smoother experience.',
                 'name' => 'Daniel Carter',
                 'role' => 'Co-founder, Vertex Labs',
                 'initials' => 'DC',
-                'avatar' => '/images/team-3.png',
+                'avatar' => 'assets/team/professional-designer-portrait.png',
+                'avatarAlt' => 'Daniel Carter client testimonial for Suave Creators product engineering',
             ],
             [
                 'quote' => 'From discovery to launch, the team felt like an extension of our own company. They challenged assumptions and kept the project focused on real business outcomes.',
                 'name' => 'Priya Nair',
                 'role' => 'Head of Digital',
                 'initials' => 'PN',
-                'avatar' => '/images/team-6.png',
+                'avatar' => 'assets/team/professional-team-lead-portrait.png',
+                'avatarAlt' => 'Priya Nair client testimonial for Suave Creators digital delivery',
             ],
         ];
     }
@@ -135,8 +139,8 @@ class HomeSupport
             [
                 'title' => 'How to Build a Digital Strategy That Creates Real Business Value',
                 'excerpt' => 'A practical framework for connecting customer needs, technology decisions, and measurable growth.',
-                'image' => '/images/blog-1.png',
-                'alt' => 'Team collaborating on a digital strategy with colorful notes',
+                'image' => 'assets/blog/digital-strategy-collaboration.png',
+                'alt' => 'Team collaborating on a digital strategy plan for business growth',
                 'date' => 'Jun 24, 2026',
                 'datetime' => '2026-06-24',
                 'author' => 'Suave Creators',
@@ -145,8 +149,8 @@ class HomeSupport
             [
                 'title' => 'Turning Product Data into Better Customer Experiences',
                 'excerpt' => 'Learn how focused analytics can reveal friction, guide priorities, and improve every step of the user journey.',
-                'image' => '/images/blog-2.png',
-                'alt' => 'Designer mapping a digital product experience',
+                'image' => 'assets/blog/product-experience-mapping.png',
+                'alt' => 'Designer mapping a digital product experience for better UX',
                 'date' => 'Jun 12, 2026',
                 'datetime' => '2026-06-12',
                 'author' => 'Suave Creators',
@@ -155,8 +159,8 @@ class HomeSupport
             [
                 'title' => 'Designing Digital Workflows Your Team Will Actually Use',
                 'excerpt' => 'Simple principles for creating connected tools that reduce busywork and make collaboration easier.',
-                'image' => '/images/blog-3.png',
-                'alt' => 'Laptop displaying software development code',
+                'image' => 'assets/blog/software-development-laptop-code.png',
+                'alt' => 'Laptop with software development code for digital workflow tools',
                 'date' => 'May 29, 2026',
                 'datetime' => '2026-05-29',
                 'author' => 'Suave Creators',
@@ -165,8 +169,8 @@ class HomeSupport
             [
                 'title' => 'Designing Digital Workflows Your Team Will Actually Use',
                 'excerpt' => 'Simple principles for creating connected tools that reduce busywork and make collaboration easier.',
-                'image' => '/images/blog-3.png',
-                'alt' => 'Laptop displaying software development code',
+                'image' => 'assets/blog/software-development-laptop-code.png',
+                'alt' => 'Software engineering laptop screen showing application source code',
                 'date' => 'May 29, 2026',
                 'datetime' => '2026-05-29',
                 'author' => 'Suave Creators',

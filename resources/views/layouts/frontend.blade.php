@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str(app()->getLocale())->replace('_', '-') }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- SEO slot: title, meta description, og tags, canonical, etc. --}}
     @hasSection('seo')
         @yield('seo')
     @else
@@ -18,28 +17,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
-    @vite(['resources/css/app.css'])
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["PP Mori", "Roboto Flex", "ui-sans-serif", "system-ui", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
-    {{-- Shared layout styles for header, footer, and site chrome are in style.css --}}
-
-    {{-- Page-specific styles --}}
     @stack('custom-css')
 </head>
 @php
-    // Pages may override these via view data (e.g. from a controller).
     $bodyClass = $bodyClass ?? 'min-h-screen bg-white font-sans text-slate-900';
     $useHeroBackground = $useHeroBackground ?? true;
-    $heroBackgroundImage = $heroBackgroundImage ?? '/images/cover_banner.png';
+    $heroBackgroundImage = $heroBackgroundImage ?? 'assets/background/home-hero-cover-bg.png';
     $mainClass = $mainClass ?? 'site-main';
 @endphp
 <body class="{{ $bodyClass }}">
     <div class="relative w-full overflow-hidden {{ $useHeroBackground ? 'bg-[#00003f]' : 'bg-white' }}">
         @if ($useHeroBackground && $heroBackgroundImage)
             <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-                <img src="{{ $heroBackgroundImage }}" alt="" class="absolute inset-0 h-full w-full object-none object-top">
-                @if ($heroBackgroundImage === '/images/cover_banner.png')
-                    <img src="/images/hero_Pattern(left).svg" alt="" class="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-soft-light">
+                <img
+                    src="{{ asset($heroBackgroundImage) }}"
+                    alt="Suave Creators web and software development homepage hero background" title="Suave Creators web and software development homepage hero background"
+                    class="absolute inset-0 h-full w-full object-none object-top"
+                    width="1920"
+                    height="1080"
+                    decoding="async"
+                    fetchpriority="high"
+                >
+                @if ($heroBackgroundImage === 'assets/background/home-hero-cover-bg.png' || $heroBackgroundImage === '/assets/background/home-hero-cover-bg.png')
+                    <img
+                        src="{{ asset('assets/hero/hero-pattern-left.svg') }}"
+                        alt="Geometric pattern overlay on Suave Creators software development hero" title="Geometric pattern overlay on Suave Creators software development hero"
+                        class="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-soft-light"
+                        width="1920"
+                        height="1080"
+                        decoding="async"
+                    >
                 @endif
             </div>
         @endif
@@ -55,5 +76,6 @@
     </div>
 
     <x-layouts.footer />
+    @stack('scripts')
 </body>
 </html>

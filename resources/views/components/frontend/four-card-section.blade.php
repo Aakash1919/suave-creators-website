@@ -1,5 +1,5 @@
 <section {{ $attributes->merge(['class' => 'full-bleed bg-cover bg-top bg-no-repeat py-12 lg:py-20']) }}
-    @if (filled($backgroundImage)) style="background-image: url('{{ $backgroundImage }}');" @endif
+    @if (filled($backgroundImage)) style="background-image: url('{{ asset($backgroundImage) }}');" @endif
     aria-labelledby="{{ $headingId }}">
     <div class="section-inner">
         <div class="grid gap-2 md:gap-6 lg:grid-cols-[200px_1fr] lg:gap-12">
@@ -47,7 +47,7 @@
 
         @if (filled($ctaHref) && filled($ctaLabel))
             <div class="mt-8 flex justify-end">
-                <a href="{{ $ctaHref }}"
+                <a href="{{ url($ctaHref) }}"
                     class="border-b border-[#2A4DFB] text-sm font-semibold text-[#2A4DFB]">{{ $ctaLabel }}</a>
             </div>
         @endif

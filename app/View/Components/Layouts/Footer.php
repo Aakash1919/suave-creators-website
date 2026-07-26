@@ -2,20 +2,25 @@
 
 namespace App\View\Components\Layouts;
 
+use App\Support\Frontend\Concerns\NormalizesAssetPaths;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Footer extends Component
 {
+    use NormalizesAssetPaths;
+
+    public string $emailHref;
+
     /**
      * @param  array<string, array<int, array{href: string, label: string}>>|null  $columns
      * @param  array<int, array{href: string, label: string, icon: string}>|null  $socialLinks
      */
     public function __construct(
         public string $ctaText = "Got a project? Let's talk",
-        public string $logo = '/images/gradient-logo.svg',
-        public string $backgroundImage = '/images/footer-bg.png',
+        public string $backgroundImage = 'assets/background/footer-bg.png',
         public string $phone = '+91 97369 00142',
         public string $phoneHref = 'tel:+919736900142',
         public string $email = 'Info@suavecreators.com',
@@ -24,7 +29,9 @@ class Footer extends Component
         public ?array $columns = null,
         public ?array $socialLinks = null,
     ) {
-        $this->year ??= date('Y');
+        $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
+        $this->emailHref = Str::lower($this->email);
+        $this->year ??= (string) now()->year;
 
         $this->columns ??= [
             'Services' => [

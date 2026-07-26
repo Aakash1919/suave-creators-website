@@ -1,7 +1,8 @@
 @if (count($items) > 0)
 <!-- Articles Insights Section Start -->
 <section
-  {{ $attributes->merge(['class' => "full-bleed articles-insights bg-[url('/images/blog-bg.png')] bg-cover bg-top bg-no-repeat relative overflow-hidden {$sectionClass}"]) }}
+  {{ $attributes->merge(['class' => "full-bleed articles-insights bg-cover bg-top bg-no-repeat relative overflow-hidden {$sectionClass}"]) }}
+  style="background-image: url('{{ asset('assets/background/blog-section-bg.png') }}');"
   aria-labelledby="{{ $headingId }}">
   <div class="articles-insights__inner section-inner">
     <div class="articles-insights__content">
@@ -23,20 +24,10 @@
       <div class="articlesInsightsSwiper swiper">
         <div class="swiper-wrapper">
           @foreach ($items as $article)
-            @php
-              $articleTitle = (string) ($article['title'] ?? '');
-              $excerpt = (string) ($article['excerpt'] ?? '');
-              $image = (string) ($article['image'] ?? '/images/blog-1.png');
-              $alt = (string) ($article['alt'] ?? $articleTitle);
-              $date = (string) ($article['date'] ?? '');
-              $datetime = (string) ($article['datetime'] ?? '');
-              $author = (string) ($article['author'] ?? 'Suave Creators');
-              $url = (string) ($article['url'] ?? '/blogs');
-            @endphp
             <div class="swiper-slide">
               <article class="articles-card">
                 <figure class="articles-card__image">
-                  <img src="{{ $image }}" alt="{{ $alt }}" width="1024" height="683" loading="lazy">
+                  <img src="{{ asset($article['image']) }}" alt="{{ $article['alt'] }}" title="{{ $article['alt'] }}" width="1024" height="683" loading="lazy" decoding="async">
                 </figure>
                 <div class="articles-card__body">
                   <div class="articles-card__meta">
@@ -47,10 +38,10 @@
                         <circle cx="12" cy="8" r="5" />
                         <path d="M20 21a8 8 0 0 0-16 0" />
                       </svg>
-                      {{ $author }}
+                      {{ $article['author'] }}
                     </span>
-                    @if ($date !== '')
-                      <time datetime="{{ $datetime }}">
+                    @if (filled($article['date']))
+                      <time datetime="{{ $article['datetime'] }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none"
                           stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           aria-hidden="true">
@@ -59,14 +50,14 @@
                           <rect width="18" height="18" x="3" y="4" rx="2" />
                           <path d="M3 10h18" />
                         </svg>
-                        {{ $date }}
+                        {{ $article['date'] }}
                       </time>
                     @endif
                   </div>
-                  <h3>{{ $articleTitle }}</h3>
-                  <p>{{ $excerpt }}</p>
+                  <h3>{{ $article['title'] }}</h3>
+                  <p>{{ $article['excerpt'] }}</p>
                   <a class="articles-card__link underline mt-2 text-sm font-semibold text-[#2A4DFB]"
-                    href="{{ $url }}">Read More</a>
+                    href="{{ url($article['url']) }}">Read More</a>
                 </div>
               </article>
             </div>
@@ -80,7 +71,7 @@
           <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
         </button>
         <div class="articles-insights-pagination" aria-label="Articles pagination"></div>
-        <a class="articles-insights__more" href="{{ $moreHref }}">{{ $moreLabel }}</a>
+        <a class="articles-insights__more" href="{{ url($moreHref) }}">{{ $moreLabel }}</a>
         <button class="articles-insights-next articles-insights__control" type="button"
           aria-label="Next article">
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
@@ -92,6 +83,7 @@
 <!-- Articles Insights Section End -->
 
 @if ($initSwiper)
+@once
 @push('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -134,5 +126,6 @@
   });
 </script>
 @endpush
+@endonce
 @endif
 @endif

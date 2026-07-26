@@ -2,12 +2,15 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\Concerns\NormalizesAssetPaths;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class FourCardSection extends Component
 {
+    use NormalizesAssetPaths;
+
     /**
      * @param  array<int, array{0?: string, 1?: string, 2?: string, 3?: string, title?: string, description?: string, icon?: string, color?: string}>  $items
      */
@@ -17,10 +20,12 @@ class FourCardSection extends Component
         public string $subtitle = 'We use modern development frameworks to create smart software solutions that are fast, flexible, and designed for long-term growth. From AI to cloud computing, we integrate technologies that help businesses stay ahead of the curve.',
         public array $items = [],
         public string $headingId = 'four-card-title',
-        public string $backgroundImage = '/images/web-bg.png',
+        public string $backgroundImage = 'assets/background/technology-section-bg.png',
         public string $ctaHref = '/contact-us/#contact-id',
         public string $ctaLabel = 'Book a Consultation',
     ) {
+        $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
+
         if ($this->items === []) {
             $this->items = [
                 ['Laravel', 'Laravel is ideal for high-performing, data-driven, enterprise-level web solutions.', 'fa-laravel', '#FF2D20'],
