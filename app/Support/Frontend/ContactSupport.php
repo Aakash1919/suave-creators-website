@@ -11,12 +11,29 @@ class ContactSupport
     {
         return [
             'contactCards' => self::contactCards(),
+            'formServices' => self::formServices(),
             'techStack' => AboutSupport::techStack(),
             'faqs' => self::faqs(),
             'faqMedia' => 'assets/media/faq-team-collaboration.gif',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
             'faqCtaHref' => '#contact-id',
             'faqCtaLabel' => 'Send a Message',
+        ];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function formServices(): array
+    {
+        return [
+            'web-development' => 'Web Development',
+            'ai-solutions' => 'AI Solutions',
+            'ui-ux-design' => 'UI/UX Design',
+            'ecommerce' => 'E-commerce Development',
+            'custom-crm' => 'Custom CRM Development',
+            'enterprise-software' => 'Enterprise Software',
+            'other' => 'Other',
         ];
     }
 

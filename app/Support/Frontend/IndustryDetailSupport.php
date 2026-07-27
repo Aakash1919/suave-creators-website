@@ -57,14 +57,82 @@ class IndustryDetailSupport
             'seoTitle' => (string) ($industry['pageTitle'] ?? 'Industry Solutions | Suave Creators'),
             'seoDescription' => (string) ($industry['pageDescription'] ?? 'Suave Creators industry software development.'),
             'iconColors' => ['blue', 'orange', 'cyan', 'mint', 'rose', 'amber'],
-            'processData' => $industry['processData'] ?? self::defaultProcessData(),
-            'testimonials' => $industry['testimonialsData'] ?? self::defaultTestimonials(),
+            'processData' => $processData = $industry['processData'] ?? self::defaultProcessData(),
+            'agileTabs' => array_keys($processData),
+            'introStats' => ServiceSupport::introStats(),
+            'coreValuesItems' => self::mapCoreValuesItems($industry['processes'] ?? []),
+            'testimonialItems' => self::mapTestimonialItems($industry['testimonialsData'] ?? self::defaultTestimonials()),
             'marqueeLabels' => $industry['marqueeLabels'] ?? ['INNOVATION', 'SECURITY', 'SCALABILITY', 'AI POWERED', 'GROWTH', 'SUPPORT'],
             'techStack' => AboutSupport::techStack(),
             'articles' => self::sampleInsights(),
-            'ctaArrow' => ServiceSupport::ctaArrow(),
-            'btnPrimary' => ServiceSupport::btnPrimary(),
         ];
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $processes
+     * @return array<int, array{icon: string, title: string, desc: string, image: string, alt: string}>
+     */
+    protected static function mapCoreValuesItems(array $processes): array
+    {
+        $iconCycle = ['innovation', 'quality', 'trust', 'customer'];
+        $processImages = [
+            'assets/media/portfolio-1.png',
+            'assets/media/portfolio-2.png',
+            'assets/media/portfolio-3.png',
+            'assets/media/portfolio-4.png',
+            'assets/media/insight-digital-strategy.jpg',
+            'assets/media/retail-solutions-visual-5.webp',
+        ];
+        $processAlts = [
+            'Modern building exterior for industry software delivery',
+            'Contemporary living room for digital product design',
+            'Modern lounge with plants for software team collaboration',
+            'Contemporary office for enterprise software development',
+            'Startup team collaborating on digital strategy',
+            'Logistics software on tablet in a warehouse',
+        ];
+
+        $items = [];
+
+        foreach ($processes as $index => $process) {
+            $imgIndex = $index % count($processImages);
+            $items[] = [
+                'icon' => $iconCycle[$index % count($iconCycle)],
+                'title' => (string) ($process['title'] ?? ''),
+                'desc' => (string) ($process['desc'] ?? ''),
+                'image' => (string) ($process['image'] ?? $processImages[$imgIndex]),
+                'alt' => (string) ($process['alt'] ?? $processAlts[$imgIndex]),
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $testimonials
+     * @return array<int, array{quote: string, name: string, role: string, initials: string, avatar: string}>
+     */
+    protected static function mapTestimonialItems(array $testimonials): array
+    {
+        return array_values(array_map(static function (array $t): array {
+            $name = (string) ($t['name'] ?? '');
+            $parts = preg_split('/\s+/', trim($name)) ?: [];
+            $initials = '';
+
+            foreach (array_slice($parts, 0, 2) as $part) {
+                if ($part !== '') {
+                    $initials .= strtoupper(substr($part, 0, 1));
+                }
+            }
+
+            return [
+                'quote' => (string) ($t['quote'] ?? ''),
+                'name' => $name,
+                'role' => (string) ($t['role'] ?? ''),
+                'initials' => $initials !== '' ? $initials : 'SC',
+                'avatar' => (string) ($t['image'] ?? $t['avatar'] ?? 'assets/team/professional-man-navy-blazer-portrait.png'),
+            ];
+        }, $testimonials));
     }
 
     /**

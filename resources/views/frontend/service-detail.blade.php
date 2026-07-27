@@ -34,7 +34,9 @@
         </h1>
         <p class="mb-2 mt-2 text-sm leading-6 text-white">{{ $service['heroDescription'] ?? '' }}</p>
         <div class="mt-8 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3 sm:mb-0 sm:gap-7">
-          <a href="{{ route('contact-us') }}#contact-id" class="u-btn-cta group inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] font-bold whitespace-nowrap text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:px-5 sm:text-sm">{{ $service['primaryCta'] ?? "Let's Connect to Discuss" }}{{ $ctaArrow }}</a>
+          <x-frontend.cta-button class="shrink-0 whitespace-nowrap px-4 py-2 text-[13px] sm:px-5 sm:text-sm">
+            {{ $service['primaryCta'] ?? "Let's Connect to Discuss" }}
+          </x-frontend.cta-button>
           <a href="{{ route('contact-us') }}#contact-id" class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-[13px] font-semibold whitespace-nowrap text-white sm:text-sm">{{ $service['secondaryCta'] ?? 'Book a Call' }}</a>
         </div>
       </div>
@@ -79,16 +81,13 @@
         <h2 id="service-intro-heading" class="text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">{{ $service['introTitle'] ?? '' }}</h2>
         <p class="mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $service['introDescription'] ?? '' }}</p>
         <div class="mt-8">
-          <a href="{{ $service['introLinkUrl'] ?? '/services' }}" class="{{ $btnPrimary }}">{{ $service['introLinkText'] ?? 'Explore Services' }}{{ $ctaArrow }}</a>
+          <x-frontend.cta-button :href="$service['introLinkUrl'] ?? route('services')">
+            {{ $service['introLinkText'] ?? 'Explore Services' }}
+          </x-frontend.cta-button>
         </div>
       </div>
       <div class="grid grid-cols-1 gap-3.5 min-[480px]:grid-cols-2">
-        @foreach ([
-          ['50+', 'Projects Delivered', 'Successfully completed more than 50+ projects.', 'assets/media/rocket.svg', '#4C24F4'],
-          ['10+', 'Years Experience', 'Years of Combined Experience.', 'assets/media/experience.svg', '#1873E7'],
-          ['$40M+', 'Funding Secured', 'Helped clients secure more than $40M+ in funding.', 'assets/media/funding.svg', '#0F968E'],
-          ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', 'assets/media/team.svg', '#FA6811'],
-        ] as $stat)
+        @foreach ($introStats as $stat)
           <article class="flex min-w-0 items-start gap-3.5 rounded-[20px] border border-[rgb(31_38_68_/_3%)] bg-white p-4 shadow-[0_16px_36px_rgb(35_38_91_/_10%)]">
             <img src="{{ asset($stat[3]) }}" alt="{{ $stat[1] }} stat icon for Suave Creators software development" title="{{ $stat[1] }} stat icon for Suave Creators software development" width="26" height="26" class="h-[26px] w-[26px] shrink-0 object-contain" loading="lazy">
             <div class="min-w-0">
@@ -109,16 +108,8 @@
 @endif
 
 <!-- 4. Service Body (ServiceSection) Start -->
-@php
-$bodyImage = $service['bodyImage'] ?? '';
-$bodyBg = $service['bodyBg'] ?? '';
-$useBodyImageLayout = $bodyImage !== '';
-$bodySectionStyle = $useBodyImageLayout
-  ? "--service-body-image: url('" . e($bodyImage) . "');"
-  : ($bodyBg !== '' ? "background-image: url('" . e($bodyBg) . "');" : '');
-@endphp
 <section
-  class="full-bleed{{ $useBodyImageLayout ? ' full-bleed--edge service-body service-body--webdev' : ($bodyBg !== '' ? ' bg-cover bg-center bg-no-repeat py-16 lg:py-20' : ' bg-white py-16 lg:py-20') }}"
+  class="full-bleed{{ $useBodyImageLayout ? ' full-bleed--edge service-body service-body--webdev' : (($service['bodyBg'] ?? '') !== '' ? ' bg-cover bg-center bg-no-repeat py-16 lg:py-20' : ' bg-white py-16 lg:py-20') }}"
   @if ($bodySectionStyle !== '')style="{{ $bodySectionStyle }}"@endif
   aria-labelledby="service-body-heading">
   <div class="{{ $useBodyImageLayout ? 'service-body__inner' : 'section-inner' }}">
@@ -136,7 +127,9 @@ $bodySectionStyle = $useBodyImageLayout
         <p class="mt-4 text-[14px] leading-6 text-[#4D4D4D]">{{ $para }}</p>
       @endforeach
       <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-5{{ $useBodyImageLayout ? ' items-start sm:items-center' : ' items-center justify-center' }}">
-        <a href="{{ route('contact-us') }}#contact-id" class="{{ $btnPrimary }}">Let's Connect to Discuss{{ $ctaArrow }}</a>
+        <x-frontend.cta-button>
+          Let's Connect to Discuss
+        </x-frontend.cta-button>
         <a href="{{ route('contact-us') }}#contact-id" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">Let's Build Your Digital Future Together</a>
       </div>
     </div>
@@ -161,7 +154,7 @@ $bodySectionStyle = $useBodyImageLayout
 <!-- 5. Service Move Marquee Section End -->
 
 <!-- 6. Capabilities Section Start -->
-<section class="full-bleed web-services{{ $capabilitiesAsSlider ? ' web-services--capabilities-slider' : '' }} bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="service-capabilities-heading">
+<section class="full-bleed web-services{{ $capabilitiesAsSlider ? ' web-services--capabilities-slider' : '' }} bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="service-capabilities-heading">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
       <div class="mb-4 flex items-center gap-2">
@@ -280,16 +273,15 @@ $bodySectionStyle = $useBodyImageLayout
     </div>
     <div class="portfolio-hero-pagination"></div>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-5">
-      <a href="{{ route('contact-us') }}#contact-id" class="{{ $btnPrimary }}">
+      <x-frontend.cta-button>
         Start your Project
-        {{ $ctaArrow }}
-      </a>
+      </x-frontend.cta-button>
       <a href="{{ route('contact-us') }}#contact-id" class="border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book a Call</a>
     </div>
   </div>
 </section>
 @else
-<section class="full-bleed full-bleed--edge portfolio-showcase portfolio-hero-showcase service-portfolio-showcase overflow-hidden bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/portfolio-section-bg.png') }}')" aria-labelledby="service-portfolio-heading">
+<section class="full-bleed full-bleed--edge portfolio-showcase portfolio-hero-showcase service-portfolio-showcase overflow-hidden bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/portfolio-section-bg.png') }}')" aria-labelledby="service-portfolio-heading">
   <div class="section-inner">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-12">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['portfolioEyebrow'] ?? 'Our Projects' }}</p>
@@ -314,16 +306,8 @@ $bodySectionStyle = $useBodyImageLayout
 @endif
 <!-- 8. Portfolio Showcase Section End -->
 
-@php
-$serviceIndustryCards = collect($service['industries'] ?? [])->map(fn (array $ind): array => [
-  'image' => $ind['icon'] ?? '',
-  'title' => $ind['title'] ?? '',
-  'text' => $ind['desc'] ?? '',
-  'href' => $ind['link'] ?? '',
-])->all();
-@endphp
 <x-frontend.industries-section
-  :cards="$serviceIndustryCards"
+  :cards="$industryCards"
   :eyebrow="$service['industriesEyebrow'] ?? 'Industries We Offer'"
   :title="$service['industriesTitle'] ?? ''"
   :description="$service['industriesDescription'] ?? ''"
@@ -345,7 +329,7 @@ $serviceIndustryCards = collect($service['industries'] ?? [])->map(fn (array $in
 @endif
 
 <!-- 11. Why Choose Us Section Start -->
-<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')" aria-labelledby="service-why-heading">
+<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')" aria-labelledby="service-why-heading">
   <div class="section-inner">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-14">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['whyEyebrow'] ?? 'Suave Creators' }}</p>
@@ -420,7 +404,9 @@ $n = $index + 1;
       @endforeach
     </div>
     <div class="mt-10 flex justify-center">
-      <a href="{{ route('contact-us') }}#contact-id" class="{{ $btnPrimary }}">{{ $service['whyButtonText'] ?? "Let's Discuss Your Vision" }}{{ $ctaArrow }}</a>
+      <x-frontend.cta-button>
+        {{ $service['whyButtonText'] ?? "Let's Discuss Your Vision" }}
+      </x-frontend.cta-button>
     </div>
   </div>
 </section>
@@ -436,29 +422,16 @@ $n = $index + 1;
     </header>
     <div class="development-process-section__inner">
       <div class="development-process-section__steps">
-        @php
-          $defaultProcessIcons = [
-            'assets/media/industry-discovery-strategy.svg',
-            'assets/media/industry-design-development.svg',
-            'assets/media/industry-goals.svg',
-            'assets/media/industry-multi-channel-communication.svg',
-            'assets/media/industry-launch-growth.svg',
-          ];
-        @endphp
-        @foreach (($service['processSteps'] ?? []) as $index => $step)
-          @php
-            $stepNumber = $step['step'] ?? str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT);
-            $stepIcon = $step['icon'] ?? $defaultProcessIcons[$index % count($defaultProcessIcons)];
-          @endphp
+        @foreach ($processSteps as $index => $step)
           <article class="development-process-section__step">
             <div class="development-process-section__step-top">
               <span class="development-process-section__step-icon">
-                <img src="{{ asset($stepIcon) }}" alt="{{ $step['title'] ?? 'Development process step' }} icon for Suave Creators" title="{{ $step['title'] ?? 'Development process step' }} icon for Suave Creators" width="28" height="28" loading="lazy">
+                <img src="{{ asset($step['icon']) }}" alt="{{ $step['title'] !== '' ? $step['title'] : 'Development process step' }} icon for Suave Creators" title="{{ $step['title'] !== '' ? $step['title'] : 'Development process step' }} icon for Suave Creators" width="28" height="28" loading="lazy">
               </span>
-              <span class="development-process-section__step-number" aria-hidden="true">{{ $stepNumber }}</span>
+              <span class="development-process-section__step-number" aria-hidden="true">{{ $step['step'] }}</span>
             </div>
-            <h3 class="development-process-section__step-title">{{ $step['title'] ?? '' }}</h3>
-            <p class="development-process-section__step-text">{{ $step['desc'] ?? '' }}</p>
+            <h3 class="development-process-section__step-title">{{ $step['title'] }}</h3>
+            <p class="development-process-section__step-text">{{ $step['desc'] }}</p>
           </article>
         @endforeach
       </div>
@@ -467,14 +440,6 @@ $n = $index + 1;
 </section>
 <!-- 12. Development Process Section End -->
 
-@php
-$standoutCards = collect($service['standoutCards'] ?? [])->map(fn (array $card): array => [
-  'image' => $card['icon'] ?? '',
-  'title' => $card['title'] ?? '',
-  'text' => $card['desc'] ?? '',
-  'step' => $card['step'] ?? '',
-])->all();
-@endphp
 <x-frontend.industries-section
   :cards="$standoutCards"
   :eyebrow="$service['standoutEyebrow'] ?? 'Why Suave Creators Stands Out'"
@@ -520,16 +485,7 @@ $standoutCards = collect($service['standoutCards'] ?? [])->map(fn (array $card):
 />
 
 <x-frontend.articles-insights-section
-  :items="collect($latestPosts)->map(fn ($post) => [
-    'title' => $post['title'] ?? '',
-    'excerpt' => $post['short_description'] ?? '',
-    'image' => $post['image'] ?? '',
-    'alt' => $post['title'] ?? '',
-    'date' => $post['published_label'] ?? '',
-    'datetime' => $post['published_date'] ?? '',
-    'author' => $post['author_name'] ?? 'Suave Creators',
-    'url' => $post['url'] ?? route('blogs'),
-  ])->all()"
+  :items="$articles"
   heading-id="service-insights-title"
   title="Explore Our Insights"
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."

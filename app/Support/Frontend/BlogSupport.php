@@ -158,8 +158,30 @@ class BlogSupport
             ])),
             'titleLead' => $titleLead,
             'titleAccent' => $titleAccent,
+            'faqs' => ! empty($post['faqs']) && is_array($post['faqs']) ? $post['faqs'] : self::defaultFaqs(),
             'seoTitle' => ($post['title'] ?? 'Blog').' | Suave Creators',
             'seoDescription' => (string) ($post['short_description'] ?? 'Suave Creators blog article.'),
+        ];
+    }
+
+    /**
+     * @return array<int, array{question: string, answer: string}>
+     */
+    public static function defaultFaqs(): array
+    {
+        return [
+            [
+                'question' => 'How can Suave Creators help after reading this article?',
+                'answer' => 'Share your goals with our team and we will map a practical next step — from strategy and design through to build and launch.',
+            ],
+            [
+                'question' => 'Do you work with startups and established businesses?',
+                'answer' => 'Yes. We partner with early-stage teams and growing organisations that need reliable product, design, and engineering support.',
+            ],
+            [
+                'question' => 'How soon can we start a discovery conversation?',
+                'answer' => 'Most teams hear back within one business day. Book a free consultation and we will align on scope, timeline, and the best way to begin.',
+            ],
         ];
     }
 

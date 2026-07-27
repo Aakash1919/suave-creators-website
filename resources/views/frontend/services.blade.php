@@ -16,7 +16,7 @@
 
 <!-- 1. Hero Section (MainService) Start -->
 <section
-  class="full-bleed relative flex items-center bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/media/top-banner-visual.webp') }}')"
+  class="full-bleed relative flex items-center bg-cover bg-center bg-no-repeat py-10 md:py-12 lg:py-16" style="background-image: url('{{ asset('assets/media/top-banner-visual.webp') }}')"
   aria-labelledby="services-hero-title">
   <div class="section-inner relative z-[1]">
     <div class="relative max-w-[720px] pl-6 sm:pl-8 md:max-w-[66%] lg:pl-10">
@@ -38,10 +38,9 @@
         businesses of all sizes.
       </p>
       <div class="mt-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
-        <a href="{{ route('contact-us') }}#contact-id" class="{{ $btnPrimary }}">
+        <x-frontend.cta-button>
           Let&rsquo;s Discuss About Vision
-          {{ $ctaArrow }}
-        </a>
+        </x-frontend.cta-button>
         <a href="#core-services" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#111827]/70 text-sm font-semibold text-[#111827]">
           Explore Our Services
         </a>
@@ -78,7 +77,7 @@
 <!-- 2. Digital Solution Agency Section End -->
 
 <!-- 3. Expertise Section Start -->
-<section class="full-bleed bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/digital-marketing-section-bg.png') }}')" aria-labelledby="expertise-title">
+<section class="full-bleed bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/digital-marketing-section-bg.png') }}')" aria-labelledby="expertise-title">
   <div class="section-inner">
     <header class="mb-12 max-w-[960px] lg:mb-16">
       <p
@@ -90,14 +89,6 @@
       </h2>
     </header>
 
-    @php
-$expertiseItems = [
-      ['assets/media/project-analysis.png', 'Project analysis', 'Research and strategy', '#4C24F4', '#F0EAFF'],
-      ['assets/media/build-strategy-visual.png', 'Build strategy', 'Wireframe and design', '#1873E7', '#EAF5FC'],
-      ['assets/media/launch-live-visual.png', 'Launch and live', 'Development and scale', '#0F968E', '#E8F8F6'],
-      ['assets/media/maintenance-logo.png', 'Maintenance', 'Maintaining strong', '#FA6811', '#FFF0E7'],
-    ];
-@endphp
     <div class="about-stats">
       @foreach ($expertiseItems as $item)
         <article class="about-stat"
@@ -121,7 +112,7 @@ $expertiseItems = [
 <!-- 4. Technologies & Partnerships Marquee Section End -->
 
 <!-- 5. Core Services Section Start -->
-<section id="core-services" class="full-bleed web-services bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
+<section id="core-services" class="full-bleed web-services bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
   aria-labelledby="core-services-title">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
@@ -142,17 +133,6 @@ $expertiseItems = [
         </p>
       </div>
     </header>
-
-    @php
-$servicesData = [
-      ['assets/media/service-icon-1.svg', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'Explore Web Development', route('service.show', ['slug' => 'web-development-services']), 'blue'],
-      ['assets/media/service-icon-2.svg', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'Explore Enterprise Solutions', route('service.show', ['slug' => 'enterprise-software-solutions']), 'orange'],
-      ['assets/media/service-icon-3.svg', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'See UI/UX Services', route('services'), 'cyan'],
-      ['assets/media/service-icon-4.svg', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'Learn More About CRM', route('service.show', ['slug' => 'custom-crm-development']), 'mint'],
-      ['assets/media/service-icon-5.svg', 'E-commerce Development', 'Choosing e-commerce development with us is the best option for you. Try our best development services and get a reliable solution for your digital business needs.', 'Explore E-commerce Services', route('service.show', ['slug' => 'e-commerce-development']), 'rose'],
-      ['assets/media/service-icon-6.svg', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'Explore AI Services', route('services'), 'amber'],
-    ];
-@endphp
 
     <div class="web-services__grid">
       @foreach ($servicesData as $service)
@@ -189,14 +169,15 @@ $servicesData = [
 <!-- 5. Core Services Section End -->
 
 <x-frontend.connect-cta-section
-  eyebrow="Ready to Start Your Project?"
-  title="Are you Ready to Start Your Project?"
-  description="As the best development company, we help you to develop your next digital product. Get Innovative and advanced solutions with us and see the quick growth."
+  :eyebrow="$connectCta['eyebrow']"
+  :title="$connectCta['title']"
+  :description="$connectCta['description']"
+  :primary-label="$connectCta['primaryLabel']"
   title-id="services-cta-title"
 />
 
 <!-- 7. Offshore Services Section Start -->
-<section class="full-bleed bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')"
+<section class="full-bleed bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')"
   aria-labelledby="offshore-services-title">
   <div class="section-inner">
     <header class="mx-auto mb-12 max-w-[720px] text-center lg:mb-14">
@@ -214,34 +195,12 @@ $servicesData = [
       </p>
     </header>
 
-    @php
-$offshoreSlides = [
-      [
-        'assets/media/end-to-end-development-expertise.webp',
-        'End-to-End Development Expertise',
-        'With all of our projects, we always provide end-to-end development services. By leveraging our global young talent and systematic resource allocation, we provide the best and competitive pricing that helps you to get expert solutions and optimise your development budget.',
-        ['SEO', 'Mobile', 'First Performance'],
-      ],
-      [
-        'assets/media/SEO-Performance-Optimization.webp',
-        'SEO-Optimisation and Performance',
-        'SEO optimization and high performance are the needs of every website and application nowadays. All of our solutions perform better and follow Search engine algorithms so that they easily gain good visibility on Google soon.',
-        ['UI/UX', 'Research', 'Prototyping'],
-      ],
-      [
-        'assets/media/global-scalable-security.webp',
-        'Global and Scalable Security',
-        'Our solutions are built to grow with your business. Whether you&rsquo;re a startup expanding into new markets or an enterprise business managing high volumes, we design platforms that scale without performance issues.',
-        ['SEO', 'Mobile', 'First Performance'],
-      ],
-    ];
-@endphp
     <div class="grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-6">
       @foreach ($offshoreSlides as $slide)
         <article
           class="flex min-h-full flex-col gap-3 overflow-hidden rounded-[22px] border border-[rgba(42,77,251,0.08)] bg-white shadow-[0_18px_40px_rgba(36,36,84,0.06)]">
           <figure class="aspect-[16/10] overflow-hidden">
-            <img src="{{ $slide[0] }}" alt="{{ $slide[1] }}" title="{{ $slide[1] }}" class="h-full w-full object-cover" loading="lazy">
+            <img src="{{ asset($slide[0]) }}" alt="{{ $slide[1] }}" title="{{ $slide[1] }}" class="h-full w-full object-cover" loading="lazy">
           </figure>
           <div class="flex flex-1 flex-col gap-3 p-[22px]">
             <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $slide[1] }}</h3>
@@ -258,10 +217,9 @@ $offshoreSlides = [
     </div>
 
     <div class="mt-10 flex justify-center">
-      <a href="{{ route('contact-us') }}#contact-id" class="{{ $btnPrimary }}">
+      <x-frontend.cta-button>
         Request a Free Consultation
-        {{ $ctaArrow }}
-      </a>
+      </x-frontend.cta-button>
     </div>
   </div>
 </section>
@@ -282,23 +240,14 @@ $offshoreSlides = [
       </h2>
     </header>
 
-    @php
-$techData = [
-      ['assets/media/tech-icon-1.png', 'Shopify & WooCommerce', 'We suggest CRM according to the clients\' needs. We develop websites for Shopify and WooCommerce for your e-commerce websites.', '#7AB55C'],
-      ['assets/media/tech-icon-2.png', 'React & Angular', 'We built websites on React & Angular to deliver high performance and a strong security system.', '#149ECA'],
-      ['assets/media/tech-icon-3.png', 'Laravel & PHP', 'We specialize in building web applications using the PHP programming language and the Laravel framework.', '#FF2D20'],
-      ['assets/media/tech-icon-4.png', 'Node.js', 'We use Node.js to build real-time apps, high-performance results, robust and mobile solutions, etc.', '#68A063'],
-      ['assets/media/tech-icon-5.png', 'WordPress', 'A best and reliable easy-to-use CMS solution for all types of businesses with all SEO capabilities.', '#21759B'],
-    ];
-@endphp
     <div class="grid overflow-hidden border-l border-t border-[#ECECEC] grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
-      @foreach ($techData as $tech)
+      @foreach ($techCards as $tech)
         <article class="technology-card group relative min-h-[210px] border-b border-r border-[#ECECEC] bg-white p-5"
           style="--technology-color: {{ $tech[3] }}">
           <span
             class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             style="background: radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--technology-color) 12%, transparent), transparent 58%);"></span>
-          <img src="{{ $tech[0] }}" alt="{{ $tech[0]  }}" title="{{ $tech[0]  }}" class="relative h-10 w-10 object-contain" loading="lazy">
+          <img src="{{ asset($tech[0]) }}" alt="{{ $tech[1] }} technology icon for Suave Creators software development" title="{{ $tech[1] }} technology icon for Suave Creators software development" class="relative h-10 w-10 object-contain" loading="lazy">
           <h3 class="relative mt-3 text-base font-bold text-[#171717]">{{ $tech[1] }}</h3>
           <p class="relative mt-2 pr-5 text-sm leading-[22px] text-[#4D4D4D]">{{ $tech[2] }}</p>
           <a href="{{ route('services') }}"
@@ -317,13 +266,6 @@ $techData = [
 </section>
 <!-- 9. Tech Stack Section End -->
 
-@php
-$processCards = [
-  ['icon' => 'fa-solid fa-magnifying-glass-chart', 'title' => 'Discovery Phase', 'text' => 'Before starting anything, we do deep research and define the fundamental features of your future product.'],
-  ['icon' => 'fa-solid fa-route', 'title' => 'Strategy Development', 'text' => 'We craft a transparent roadmap for success. Our professional crew defines the project planning, sets deadlines, and chooses the right technologies to bring your vision to life.'],
-  ['icon' => 'fa-solid fa-code', 'title' => 'Implementation', 'text' => 'Our expert designers collaborate to transform strategy into a fully functional, high-performing product and deliver you the best possible solution.'],
-];
-@endphp
 <x-frontend.industries-section
   :cards="$processCards"
   eyebrow="Our Process"
@@ -331,18 +273,8 @@ $processCards = [
   description="We follow a clear, collaborative process that takes your idea from research to a fully functional, high-performing product."
   heading-id="services-process-title"
 />
-@php
-$servicesFaqs = [
-  ['question' => 'Do you work with international clients?', 'answer' => 'Yes, Suave Creators works with international clients, including the UK, USA, Canada, Australia, and all countries across the globe.'],
-  ['question' => 'How do you ensure SEO-friendly development in your services?', 'answer' => 'We have the best team of seo experts who sit with the developer and do a complete audit step-by-step, and it will cover all technical and on-page aspects.'],
-  ['question' => 'What industries do you serve?', 'answer' => 'We specialise in offering solutions for all types of industries, like healthcare, education, banking, e-commerce, and logistics. Each solution is tailored to the industry standards, compliance needs, and customer experience.'],
-  ['question' => 'What is the typical project timeline?', 'answer' => 'It totally depends on the project complexity. Sometimes it will take 3 months or sometimes more than 6 months to 1 year.'],
-  ['question' => 'Do you offer post-launch support and maintenance?', 'answer' => "Yes, of course, we always do post-launch support and maintenance as per the client's requirements."],
-  ['question' => 'Why should we choose Suave Creators for our digital projects?', 'answer' => 'Suave Creators is a team of young talent who always work under timelines and deliver the best possible results.'],
-];
-@endphp
 <x-frontend.faq-section
-  :qa="$servicesFaqs"
+  :qa="$faqs"
   heading-id="services-faq-heading"
   eyebrow="Have questions about our Web Services?"
   description="Here are the most asked questions about our offshore web, software and digital development services."
@@ -351,28 +283,21 @@ $servicesFaqs = [
 />
 
 <x-frontend.consultation-section
-  background-image="assets/background/work-with-us-bg.webp"
-  :solo="true"
-  :show-people="false"
-  title="Are you Ready to Start Your Project?"
-  description="As the best development company, we help you to develop your next digital product. Get Innovative and advanced solutions with us and see the quick growth."
-  cta-label="Let's Connect to Discuss"
+  :background-image="$consultation['backgroundImage']"
+  :eyebrow="$consultation['eyebrow']"
+  :solo="$consultation['solo']"
+  :show-people="$consultation['showPeople']"
+  :title="$consultation['title']"
+  :description="$consultation['description']"
+  :cta-label="$consultation['ctaLabel']"
+  card-position="center"
   :allow-html-title="false"
 />
 
 <x-frontend.testimonials-section heading-id="services-testimonials-title" />
 
 <x-frontend.articles-insights-section
-  :items="collect($latestPosts)->map(fn ($post) => [
-    'title' => $post['title'] ?? '',
-    'excerpt' => $post['short_description'] ?? '',
-    'image' => $post['image'] ?? '',
-    'alt' => $post['title'] ?? '',
-    'date' => $post['published_label'] ?? '',
-    'datetime' => $post['published_date'] ?? '',
-    'author' => $post['author_name'] ?? 'Suave Creators',
-    'url' => $post['url'] ?? route('blogs'),
-  ])->all()"
+  :items="$articles"
   heading-id="services-insights-title"
   title="Explore Our Latest Insights"
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."

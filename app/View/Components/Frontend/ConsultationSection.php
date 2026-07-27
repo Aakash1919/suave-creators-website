@@ -22,6 +22,8 @@ class ConsultationSection extends Component
         public string $secondaryCtaLabel = '',
         public string $secondaryCtaHref = '',
         public string $backgroundImage = 'assets/background/consultation-section-bg.png',
+        public string $eyebrow = '',
+        public string $cardPosition = 'top',
         public bool $showPeople = true,
         public bool $solo = false,
         public bool $allowHtmlTitle = true,

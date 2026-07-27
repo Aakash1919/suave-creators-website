@@ -100,6 +100,109 @@
 </section>
 <!-- Contact Hero End -->
 
+<!-- Contact Form Start -->
+<section id="contact-id"
+  class="full-bleed scroll-mt-6 overflow-hidden bg-cover bg-center py-12 sm:py-16 lg:py-20"
+  style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');"
+  aria-labelledby="contact-form-heading">
+  <div class="section-inner contact-form-section-inner">
+    <div class="contact-form-panel">
+      <aside class="contact-form-panel__info" aria-labelledby="contact-form-heading">
+        <p class="contact-form-panel__eyebrow">
+          <span class="contact-form-panel__eyebrow-bar" aria-hidden="true"></span>
+          Contact · 1-day reply
+        </p>
+        <h2 id="contact-form-heading" class="contact-form-panel__title">
+          Tell us what you&rsquo;re<br>
+          <span>trying to fix.</span>
+        </h2>
+        <p class="contact-form-panel__lead">
+          Prefer a call or email? We read every note ourselves and reply within one business day.
+        </p>
+
+        <div class="contact-form-panel__meta">
+          <a class="contact-form-panel__meta-card" href="tel:+919736900142">
+            <span class="contact-form-panel__meta-label">Phone</span>
+            <span class="contact-form-panel__meta-value">+91 97369 00142</span>
+            <span class="contact-form-panel__meta-note">Mon–Fri · 1:30PM–9:30PM</span>
+          </a>
+          <a class="contact-form-panel__meta-card" href="mailto:info@suavecreators.com">
+            <span class="contact-form-panel__meta-label">Email</span>
+            <span class="contact-form-panel__meta-value">info@suavecreators.com</span>
+            <span class="contact-form-panel__meta-note">Real person, not a queue</span>
+          </a>
+        </div>
+      </aside>
+
+      <div class="contact-form-panel__form-wrap">
+        <div class="contact-form-panel__form">
+          <header class="contact-form-panel__form-intro">
+            <p class="contact-form-panel__form-status">
+              <span aria-hidden="true"></span>
+              Live intake
+            </p>
+            <h3 class="contact-form-panel__form-title">Start the conversation</h3>
+          </header>
+
+          <form action="{{ route('contact-us') }}#contact-id" method="get" class="contact-form-panel__fields" data-contact-form>
+            <div class="contact-form-panel__row">
+              <label for="contact-name">
+                <span class="contact-form-panel__label-text">Full name</span>
+                <input id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Jane Cooper">
+              </label>
+              <label for="contact-email">
+                <span class="contact-form-panel__label-text">Email</span>
+                <input id="contact-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+              </label>
+            </div>
+
+            <div class="contact-form-panel__row">
+              <label for="contact-phone">
+                <span class="contact-form-panel__label-text">Phone</span>
+                <input id="contact-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91 90000 00000">
+              </label>
+              <label for="contact-service">
+                <span class="contact-form-panel__label-text">Service</span>
+                <select id="contact-service" name="service" required>
+                  <option value="" disabled selected>Select a service</option>
+                  @foreach ($formServices as $value => $label)
+                    <option value="{{ $value }}">{{ $label }}</option>
+                  @endforeach
+                </select>
+              </label>
+            </div>
+
+            <label for="contact-message" class="contact-form-panel__message">
+              <span class="contact-form-panel__label-text">What are you trying to fix?</span>
+              <textarea id="contact-message" name="message" rows="3" minlength="10" required
+                placeholder="A sentence or two about the problem is enough."></textarea>
+            </label>
+
+            <div class="contact-form-panel__actions">
+              <button type="submit" class="u-btn-cta contact-form-panel__submit">
+                Send inquiry
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="M18 8L22 12L18 16"></path>
+                  <path d="M2 12H22"></path>
+                </svg>
+              </button>
+              <a href="tel:+919736900142">or call +91 97369 00142</a>
+            </div>
+
+            <p class="contact-form-panel__disclaimer">
+              Reply within 1 business day.
+              <a href="{{ route('privacy-policy') }}">Privacy policy</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Form End -->
+
 <!-- Technologies & Partnerships Marquee Start -->
 <x-frontend.tech-partnerships-section
   :items="$techStack"
@@ -109,7 +212,7 @@
 <!-- Technologies & Partnerships Marquee End -->
 
 <!-- Contact Information Start -->
-<section id="contact-id" class="full-bleed bg-cover bg-center py-16 sm:py-20 lg:py-24"
+<section class="full-bleed bg-cover bg-center py-16 sm:py-20 lg:py-24"
   style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');"
   aria-labelledby="contact-details-heading">
   <div class="section-inner">

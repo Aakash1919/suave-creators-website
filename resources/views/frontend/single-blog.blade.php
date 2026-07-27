@@ -175,25 +175,8 @@
 </section>
 <!-- Single Blog Article Section End -->
 
-@php
-$blogFaqs = !empty($post['faqs']) ? $post['faqs'] : array(
-  array(
-    'question' => 'How can Suave Creators help after reading this article?',
-    'answer' => 'Share your goals with our team and we will map a practical next step — from strategy and design through to build and launch.',
-  ),
-  array(
-    'question' => 'Do you work with startups and established businesses?',
-    'answer' => 'Yes. We partner with early-stage teams and growing organisations that need reliable product, design, and engineering support.',
-  ),
-  array(
-    'question' => 'How soon can we start a discovery conversation?',
-    'answer' => 'Most teams hear back within one business day. Book a free consultation and we will align on scope, timeline, and the best way to begin.',
-  ),
-);
-@endphp
-
 <x-frontend.faq-section
-  :qa="$blogFaqs"
+  :qa="$faqs"
   heading-id="blog-faq-heading"
   eyebrow="Questions before you get started?"
   description="Here are the most asked questions based on feedback from our readers."

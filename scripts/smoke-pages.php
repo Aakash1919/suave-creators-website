@@ -15,6 +15,8 @@ $uris = [
     '/product',
     '/blogs',
     '/blog/digital-strategy-that-creates-value',
+    '/privacy-policy',
+    '/terms-and-conditions',
 ];
 
 foreach ($uris as $uri) {

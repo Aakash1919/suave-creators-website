@@ -78,25 +78,17 @@
   class="full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/about-section-bg.png') }}');">
   <div class="section-inner site-container ">
     <div class="about-stats">
-      @php
-        $stats = [
-          ['50+', 'Brands trust us for AI', 'Successfully completed more than 50+ projects.', 'assets/icons/brands-growth-rocket-icon.svg', '#4C24F4', '#F0EAFF', 'AI software growth icon for brands trusting Suave Creators'],
-          ['10+', 'Years of Experience', 'Years of Combined Experience.', 'assets/icons/years-experience-icon.svg', '#1873E7', '#EAF5FC', 'Years of experience icon for Suave Creators development team'],
-          ['$40M+', 'Funding Secured', 'Our creative work has helped clients secure more than $40M+ in funding.', 'assets/icons/funding-secured-icon.svg', '#0F968E', '#E8F8F6', 'Funding secured icon for startups built with Suave Creators'],
-          ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', 'assets/team/expert-team-icon.svg', '#FA6811 ', '#FFF0E7', 'Expert software development team icon at Suave Creators'],
-        ];
-      @endphp
       @foreach ($stats as $stat)
         <article class="about-stat"
-          style="--stat-accent: {{ $stat[4] }}; --stat-tint: {{ $stat[5] }};">
+          style="--stat-accent: {{ $stat['accent'] }}; --stat-tint: {{ $stat['tint'] }};">
           <span class="about-stat__icon">
-            <img src="{{ asset($stat[3]) }}" alt="{{ $stat[6] }}" title="{{ $stat[6] }}"
+            <img src="{{ asset($stat['icon']) }}" alt="{{ $stat['alt'] }}" title="{{ $stat['alt'] }}"
               class="about-stat__icon-image" width="40" height="40" decoding="async" loading="lazy">
           </span>
           <div class="about-stat__content">
-            <strong class="about-stat__value">{{ $stat[0] }}</strong>
-            <h2 class="about-stat__label">{{ $stat[1] }}</h2>
-            <p class="about-stat__description">{{ $stat[2] }}</p>
+            <strong class="about-stat__value">{{ $stat['value'] }}</strong>
+            <h2 class="about-stat__label">{{ $stat['label'] }}</h2>
+            <p class="about-stat__description">{{ $stat['description'] }}</p>
           </div>
         </article>
       @endforeach
@@ -250,52 +242,18 @@
       </p>
     </div>
 
-    @php
-$offerings = [
-      [
-        'Product Strategy with Intelligence Inside',
-        'Our team helps define your vision, validate your idea.',
-        'assets/team/expert-portrait-1.png',
-        'Product strategy experts planning intelligent software solutions',
-      ],
-      [
-        'Design that Defines Your Brand',
-        'We merge creative design, intuitive UX/UI, and brand storytelling.',
-        'assets/team/expert-portrait-2.png',
-        'UI UX designer planning a brand experience for digital products',
-      ],
-      [
-        'Smart Development, Seamless Performance',
-        'Our team crafts high-performance, scalable applications.',
-        'assets/team/expert-portrait-3.png',
-        'Software engineers building scalable web applications',
-      ],
-      [
-        'Marketing that Fuels Growth',
-        'We help your app grow, retain, and dominate its market space.',
-        'assets/team/expert-portrait-4.png',
-        'Digital marketing experts presenting app growth analytics',
-      ],
-      [
-        'Continuous Support & Innovation',
-        'We keep your product reliable, relevant, and ready to evolve with ongoing support and smart improvements.',
-        'assets/team/expert-portrait-1.png',
-        'Product support team planning continuous software innovation',
-      ],
-    ];
-@endphp
     <div class="offeringsSwiper swiper mt-10 sm:mt-12 lg:mt-[54px]">
       <div class="swiper-wrapper">
         @foreach ($offerings as $offering)
           <div class="swiper-slide h-auto">
             <article class="offerings-card h-full">
               <div class="offerings-card__image">
-                <img src="{{ asset(str($offering[2])->ltrim('/')) }}" alt="{{ $offering[3] }}" title="{{ $offering[3] }}"
+                <img src="{{ asset($offering['image']) }}" alt="{{ $offering['alt'] }}" title="{{ $offering['alt'] }}"
                   loading="lazy" decoding="async">
               </div>
               <div class="pt-3">
-                <h3>{{ $offering[0] }}</h3>
-                <p>{{ $offering[1] }}</p>
+                <h3>{{ $offering['title'] }}</h3>
+                <p>{{ $offering['description'] }}</p>
               </div>
             </article>
           </div>
@@ -363,26 +321,18 @@ $offerings = [
       </div>
     </header>
 
-    @php
-$coreValues = [
-      ['innovation', 'Innovation', 'We work with future trends and the latest technologies.', 'assetsportfolio/modern-office-yellow-accent-lounge.png', 'Modern workspace reflecting innovative software development culture'],
-      ['quality', 'Quality', 'Delivering the best quality, ensuring our clients get nothing less than the best.', 'assetsportfolio/contemporary-living-room-kitchen.png', 'Contemporary interior design showcasing quality digital craftsmanship'],
-      ['trust', 'Trust', 'We build trust by focusing on the exact client requirements.', 'assetsportfolio/warm-lounge-plants-artwork.png', 'Warm collaborative lounge built for trusted client partnerships'],
-      ['customer', 'Customer Focus', 'We put our clients at the heart of everything we build.', 'assetsportfolio/office-glass-meeting-rooms.png', 'Glass meeting rooms for customer focused software consulting'],
-    ];
-@endphp
     <div class="core-values__grid">
       @foreach ($coreValues as $value)
         <article class="core-value-card">
           <div class="core-value-card__content">
             <svg class="core-value-card__icon" aria-hidden="true">
-              <use href="#core-value-{{ $value[0] }}"></use>
+              <use href="#core-value-{{ $value['id'] }}"></use>
             </svg>
-            <h3>{{ $value[1] }}</h3>
-            <p>{{ $value[2] }}</p>
+            <h3>{{ $value['title'] }}</h3>
+            <p>{{ $value['description'] }}</p>
           </div>
           <div class="core-value-card__image">
-            <img src="{{ asset(str($value[3])->ltrim('/')) }}" alt="{{ $value[4] }}" title="{{ $value[4] }}" loading="lazy" decoding="async">
+            <img src="{{ asset($value['image']) }}" alt="{{ $value['alt'] }}" title="{{ $value['alt'] }}" loading="lazy" decoding="async">
           </div>
         </article>
       @endforeach
@@ -413,93 +363,25 @@ $coreValues = [
       </div>
     </header>
 
-    @php
-$digitalMarketingServices = [
-      [
-        'assets/icons/seo-icon.svg',
-        'Search Engine Optimization',
-        'Boost Your Organic Visibility',
-        'With our expertise, we enhance the online visibility of your professional website.',
-        'assets/media/seo-infographic-on-imac.png',
-        'SEO analytics dashboard for search engine optimization services',
-        'Search engine optimization SEO service icon',
-      ],
-      [
-        'assets/icons/ppc-advertising-icon.svg',
-        'Pay-Per-Click Advertising',
-        'Instant Reach, Tangible Results',
-        'Reach high-intent audiences quickly with focused campaigns that maximise conversions and measurable ROI.',
-        'assets/media/ppc-campaign-planning.png',
-        'PPC advertising campaign planning for higher conversions',
-        'Pay per click advertising PPC service icon',
-      ],
-      [
-        'assets/icons/social-media-marketing-icon.svg',
-        'Social Media Marketing',
-        'Engage & Grow Your Community',
-        'Build meaningful connections with relevant content that inspires engagement, loyalty, and lasting growth.',
-        'assets/media/social-media-marketing-mobile.png',
-        'Social media marketing content strategy on a mobile device',
-        'Social media marketing service icon',
-      ],
-      [
-        'assets/icons/content-strategy-icon.svg',
-        'Content Strategy & Planning',
-        'Plan. Create. Convert.',
-        'Turn ideas into purposeful content that strengthens your brand and guides customers to act.',
-        'assets/media/content-strategy-team-planning.png',
-        'Content strategy team planning digital marketing campaigns',
-        'Content strategy and planning service icon',
-      ],
-      [
-        'assets/icons/online-reputation-icon.svg',
-        'Online Reputation Management',
-        'Protect Trust. Build Credibility.',
-        'Monitor brand conversations and strengthen the online reputation that shapes customer confidence.',
-        'assets/media/seo-infographic-on-imac.png',
-        'Online reputation management review of brand sentiment analytics',
-        'Online reputation management service icon',
-      ],
-      [
-        'assets/icons/answer-engine-optimization-icon.svg',
-        'Answer Engine Optimization',
-        'Be the Answer Customers Find',
-        'Structure authoritative content so voice assistants and answer engines can surface your expertise.',
-        'assets/media/ppc-campaign-planning.png',
-        'Answer engine optimization content planning for AI search',
-        'Answer engine optimization AEO service icon',
-      ],
-      [
-        'assets/icons/generative-engine-optimization-icon.svg',
-        'Generative Engine Optimization',
-        'Stay Visible in AI Search',
-        'Position your brand for discovery across generative platforms with trusted content and clear signals.',
-        'assets/media/social-media-marketing-mobile.png',
-        'Generative engine optimization for brand visibility in AI search',
-        'Generative engine optimization GEO service icon',
-      ],
-    ];
-@endphp
-
     <div class="digitalMarketingSwiper swiper">
       <div class="swiper-wrapper py-4">
         @foreach ($digitalMarketingServices as $index => $service)
           <div class="swiper-slide">
             <article class="digital-marketing-card">
               <div class="digital-marketing-card__topline">
-                <img src="{{ asset(str($service[0])->ltrim('/')) }}" alt="{{ $service[6] }}" title="{{ $service[6] }}"
+                <img src="{{ asset($service['icon']) }}" alt="{{ $service['iconAlt'] }}" title="{{ $service['iconAlt'] }}"
                   class="digital-marketing-card__icon" decoding="async" loading="lazy">
                 <span class="digital-marketing-card__number"
                   aria-hidden="true">{{ str((string) ($index + 1))->padLeft(2, '0') }}</span>
               </div>
-              <p class="digital-marketing-card__service-title">{{ $service[1] }}</p>
+              <p class="digital-marketing-card__service-title">{{ $service['title'] }}</p>
               <figure class="digital-marketing-card__image">
-                <img src="{{ asset(str($service[4])->ltrim('/')) }}" alt="{{ $service[5] }}" title="{{ $service[5] }}" width="640"
+                <img src="{{ asset($service['image']) }}" alt="{{ $service['alt'] }}" title="{{ $service['alt'] }}" width="640"
                   height="420" loading="lazy" decoding="async">
               </figure>
               <div class="digital-marketing-card__content">
-                <h3>{{ $service[2] }}</h3>
-                <p>{{ $service[3] }}</p>
+                <h3>{{ $service['headline'] }}</h3>
+                <p>{{ $service['description'] }}</p>
               </div>
               <span class="digital-marketing-card__arrow" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -566,21 +448,13 @@ $digitalMarketingServices = [
         industries.</p>
     </header>
 
-    @php
-$portfolioShowcaseProjects = [
-      ['assetsportfolio/timber-glass-creative-studio.png', 'Modern timber and glass creative studio for digital product teams'],
-      ['assetsportfolio/bright-contemporary-residence.png', 'Bright contemporary space reflecting premium digital design quality'],
-      ['assetsportfolio/warm-modern-lounge-interior.png', 'Warm modern lounge for collaborative software product workshops'],
-      ['assetsportfolio/timber-glass-creative-studio.png', 'Creative studio exterior showcasing Suave Creators portfolio quality'],
-    ];
-@endphp
     <div class="swiper portfolioShowcaseSwiper">
       <div class="swiper-wrapper">
         @foreach ($portfolioShowcaseProjects as $project)
           <div class="swiper-slide">
             <article class="portfolio-showcase__card">
               <div class="portfolio-showcase__image">
-                <img src="{{ asset(str($project[0])->ltrim('/')) }}" alt="{{ $project[1] }}" title="{{ $project[1] }}" loading="lazy" draggable="false" decoding="async">
+                <img src="{{ asset($project['image']) }}" alt="{{ $project['alt'] }}" title="{{ $project['alt'] }}" loading="lazy" draggable="false" decoding="async">
               </div>
               <div class="portfolio-showcase__copy">
                 <p
@@ -657,16 +531,7 @@ $portfolioShowcaseProjects = [
       Our Portfolio
     </p>
 
-    @php
-$partners = [
-      ['assets/clients/verysoul-logo.png', 'VerySoul'],
-      ['assets/clients/redsixity-logo.svg', 'RedSixity'],
-      ['assets/clients/dajj-logistics-logo.png', 'DAJJ Logistics'],
-      ['assets/clients/ematrics-logo.png', 'Ematrics'],
-      ['assets/clients/bioassay-systems-logo.png', 'BioAssay Systems'],
-    ];
-@endphp
-        <x-frontend.marquee-section
+    <x-frontend.marquee-section
       type="image"
       direction="left"
       position="contained"

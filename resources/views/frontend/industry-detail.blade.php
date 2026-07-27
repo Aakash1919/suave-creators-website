@@ -15,11 +15,11 @@
 
 
 <!-- Hero Section Start -->
-<section class="relative z-10 w-full pb-12 pt-8 md:pb-16 md:pt-10 lg:min-h-[600px] lg:pb-20 lg:pt-[52px] site-container">
-  <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
-    <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[560px]">
-      <p class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-sm font-bold uppercase tracking-wide text-transparent">{{ $industry['eyebrow'] ?? 'Industry Solutions' }}</p>
-      <h1 class="mb-2 mt-2 flex flex-col text-[34px] font-semibold leading-none text-white min-[375px]:text-[40px] sm:text-5xl lg:text-[52px]">
+<section class="relative z-10 w-full overflow-x-clip pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[600px] lg:pb-20 lg:pt-[52px] site-container">
+  <div class="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
+    <div class="relative z-0 order-2 flex max-w-xl min-w-0 flex-col text-left lg:order-1 lg:max-w-[560px]">
+      <p class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold uppercase tracking-wide text-transparent sm:text-sm">{{ $industry['eyebrow'] ?? 'Industry Solutions' }}</p>
+      <h1 class="mb-2 mt-1 flex flex-col text-[28px] font-semibold leading-[1.05] text-white min-[375px]:text-[34px] sm:mt-2 sm:text-5xl lg:text-[52px] lg:leading-none">
         @foreach (($industry['heroTitle'] ?? []) as $i => $line)
           @if ($i === 0)
             <span class="inline-block bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text font-extrabold text-transparent">{{ $line }}</span>
@@ -28,66 +28,52 @@
           @endif
         @endforeach
       </h1>
-      <p class="mb-2 mt-2 text-sm leading-6 text-[#B1B9DF]">{{ $industry['heroDescription'] ?? '' }}</p>
-      <div class="mt-8 flex flex-nowrap items-center gap-3 sm:gap-7">
-        <a href="{{ route('contact-us') }}#contact-id" class="u-btn-cta group inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:px-5">
+      <p class="mb-2 mt-2 text-[13px] leading-6 text-[#B1B9DF] sm:text-sm">{{ $industry['heroDescription'] ?? '' }}</p>
+      <div class="mt-6 flex flex-col items-start gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-7">
+        <a href="{{ route('contact-us') }}#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
           Let's Connect to Discuss
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
         </a>
-        <a href="{{ route('contact-us') }}#contact-id" class="inline-flex shrink-0 items-center border-b border-white/70 text-sm font-semibold whitespace-nowrap text-white">Book a Call</a>
+        <a href="{{ route('contact-us') }}#contact-id" class="inline-flex w-fit items-center border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">Book a Call</a>
       </div>
     </div>
-    <div class="relative z-10 flex w-full min-w-0 items-center justify-center lg:justify-end">
-      <div class="mx-auto w-full max-w-[480px]">
-        @if (!empty($industry['heroImage']))
-          <img src="{{ $industry['heroImage'] }}" alt="{{ $industry['pageTitle'] ?? '' }}" title="{{ $industry['pageTitle'] ?? '' }}" width="560" height="560" class="block h-auto w-full rounded-[28px] object-cover shadow-[0_24px_60px_rgba(0,0,63,0.35)]" loading="eager">
-        @endif
-      </div>
+    <div class="relative z-10 order-1 mx-auto flex w-full max-w-[360px] min-w-0 items-center justify-center sm:max-w-[420px] lg:order-2 lg:mx-0 lg:max-w-[480px] lg:justify-end">
+      @if (!empty($industry['heroImage']))
+        <img src="{{ $industry['heroImage'] }}" alt="{{ $industry['pageTitle'] ?? '' }}" title="{{ $industry['pageTitle'] ?? '' }}" width="560" height="560" class="block h-auto w-full rounded-[20px] object-cover shadow-[0_24px_60px_rgba(0,0,63,0.35)] sm:rounded-[28px]" loading="eager">
+      @endif
     </div>
   </div>
 </section>
 <!-- Hero Section End -->
 
-<!-- Technologies & Partnerships Marquee Start -->
-<x-frontend.tech-partnerships-section
-  :items="$techStack"
-  section-class="full-bleed full-bleed--edge bg-white py-10 lg:py-14"
-/>
-<!-- Technologies & Partnerships Marquee End -->
-
 <!-- Intro + Stats Section Start -->
-<section class="full-bleed bg-white bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}')" aria-labelledby="industry-intro-heading">
+<section class="full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}')" aria-labelledby="industry-intro-heading">
   <div class="section-inner">
-    <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
-      <div>
-        <div class="mb-4 flex items-center gap-2">
+    <div class="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+      <div class="min-w-0">
+        <div class="mb-3 flex items-center gap-2 sm:mb-4">
           <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
-          <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $industry['introEyebrow'] ?? 'Professional Solutions' }}</span>
+          <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">{{ $industry['introEyebrow'] ?? 'Professional Solutions' }}</span>
         </div>
-        <h2 id="industry-intro-heading" class="text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">{{ $industry['introTitle'] ?? '' }}</h2>
-        <p class="mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $industry['introDescription'] ?? '' }}</p>
-        <div class="mt-8">
-          <a href="{{ route('services') }}" class="u-btn-cta group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
+        <h2 id="industry-intro-heading" class="text-[22px] font-bold leading-tight text-[#171717] sm:text-[clamp(1.75rem,4vw,2.75rem)]">{{ $industry['introTitle'] ?? '' }}</h2>
+        <p class="mt-3 max-w-[560px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px]">{{ $industry['introDescription'] ?? '' }}</p>
+        <div class="mt-6 sm:mt-8">
+          <a href="{{ route('services') }}" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
             Explore Services
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
           </a>
         </div>
       </div>
-      <div class="grid grid-cols-1 gap-3.5 min-[480px]:grid-cols-2">
-        @foreach ([
-          ['50+', 'Projects Delivered', 'Successfully completed more than 50+ projects.', 'assets/media/rocket.svg', '#4C24F4', '#F0EAFF'],
-          ['10+', 'Years Experience', 'Years of Combined Experience.', 'assets/media/experience.svg', '#1873E7', '#EAF5FC'],
-          ['$40M+', 'Funding Secured', 'Helped clients secure more than $40M+ in funding.', 'assets/media/funding.svg', '#0F968E', '#E8F8F6'],
-          ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', 'assets/media/team.svg', '#FA6811', '#FFF0E7'],
-        ] as $stat)
-          <article class="flex min-w-0 items-start gap-3.5 rounded-[20px] border border-[rgb(31_38_68_/_3%)] bg-white p-4 shadow-[0_16px_36px_rgb(35_38_91_/_10%)]">
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background: {{ $stat[5] }};">
-              <img src="{{ asset($stat[3]) }}" alt="{{ $stat[1] }} stat icon for Suave Creators software development" title="{{ $stat[1] }} stat icon for Suave Creators software development" class="h-5 w-5 object-contain">
+      <div class="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 sm:gap-3.5">
+        @foreach ($introStats as $stat)
+          <article class="flex min-w-0 items-start gap-3 rounded-[16px] border border-[rgb(31_38_68_/_3%)] bg-white p-3.5 shadow-[0_16px_36px_rgb(35_38_91_/_10%)] sm:gap-3.5 sm:rounded-[20px] sm:p-4">
+            <span class="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center sm:h-[52px] sm:w-[52px]">
+              <img src="{{ asset($stat[3]) }}" alt="{{ $stat[1] }} stat icon for Suave Creators software development" title="{{ $stat[1] }} stat icon for Suave Creators software development" width="52" height="52" class="h-[44px] w-[44px] object-contain sm:h-[52px] sm:w-[52px]">
             </span>
             <div class="min-w-0">
-              <strong class="block text-[28px] font-semibold leading-none tracking-tight" style="color: {{ $stat[4] }};">{{ $stat[0] }}</strong>
-              <h3 class="mt-1 text-[13px] font-semibold leading-none" style="color: {{ $stat[4] }};">{{ $stat[1] }}</h3>
-              <p class="mt-1 text-[13px] font-medium leading-4 text-[#171717]">{{ $stat[2] }}</p>
+              <strong class="block text-[24px] font-semibold leading-none tracking-tight sm:text-[28px]" style="color: {{ $stat[4] }};">{{ $stat[0] }}</strong>
+              <h3 class="mt-1 text-[12px] font-semibold leading-snug sm:text-[13px] sm:leading-none" style="color: {{ $stat[4] }};">{{ $stat[1] }}</h3>
+              <p class="mt-1 text-[12px] font-medium leading-4 text-[#171717] sm:text-[13px]">{{ $stat[2] }}</p>
             </div>
           </article>
         @endforeach
@@ -98,44 +84,41 @@
 <!-- Intro + Stats Section End -->
 
 <!-- Services Hub Section Start -->
-<section class="full-bleed web-services bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="industry-services-heading">
+<section class="full-bleed web-services industry-detail-services bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="industry-services-heading">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
-      <div class="mb-4 flex items-center gap-2">
+      <div class="mb-3 flex items-center gap-2 sm:mb-4">
         <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
-        <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $industry['servicesEyebrow'] ?? 'Services' }}</span>
+        <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">{{ $industry['servicesEyebrow'] ?? 'Services' }}</span>
       </div>
       <div class="web-services__intro">
-        <h2 id="industry-services-heading" class="mb-4 text-[24px] font-semibold text-[#171717]">{{ $industry['servicesTitle'] ?? '' }}</h2>
-        <p class="text-[14px] leading-[150%] text-[#4D4D4D]">{{ $industry['servicesDescription'] ?? '' }}</p>
+        <h2 id="industry-services-heading" class="mb-3 text-[20px] font-semibold leading-tight text-[#171717] sm:mb-4 sm:text-[22px] lg:text-[24px]">{{ $industry['servicesTitle'] ?? '' }}</h2>
+        <p class="text-[13px] leading-[150%] text-[#4D4D4D] sm:text-[14px]">{{ $industry['servicesDescription'] ?? '' }}</p>
       </div>
     </header>
     <div class="web-services__grid">
       @foreach (($industry['services'] ?? []) as $index => $service)
-        @php
-$color = $iconColors[$index % count($iconColors)];
-@endphp
         <article class="web-service-card">
-          <span class="web-service-card__icon web-service-card__icon--{{ $color }}">
-            <img src="{{ $service['icon'] ?? '' }}" alt="{{ $service['icon'] ?? ''  }}" title="{{ $service['icon'] ?? ''  }}" width="16" height="16">
+          <span class="web-service-card__icon">
+            <img src="{{ $service['icon'] ?? '' }}" alt="{{ $service['title'] ?? 'Industry service' }} icon for Suave Creators software development" title="{{ $service['title'] ?? 'Industry service' }} icon for Suave Creators software development" width="36" height="36">
           </span>
           <div class="web-service-card__category">
             <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Service' }}</span>
-            <div class="flex items-center justify-between gap-2">
-              <h3 class="mt-2 text-[14px] font-semibold leading-[130%] text-[#171717]">{{ $service['title'] ?? '' }}</h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="mt-2 min-w-0 text-[14px] font-semibold leading-[130%] text-[#171717]">{{ $service['title'] ?? '' }}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-2 shrink-0" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
             </div>
           </div>
-          <p class="mt-1 text-[14px] text-[#4D4D4D]">{{ $service['desc'] ?? '' }}</p>
+          <p class="mt-1 text-[13px] leading-relaxed text-[#4D4D4D] sm:text-[14px]">{{ $service['desc'] ?? '' }}</p>
           @if (!empty($service['img']))
-            <figure class="mt-3 aspect-video overflow-hidden rounded-[14px]"><img src="{{ $service['img'] }}" alt="{{ $service['title'] ?? '' }}" title="{{ $service['title'] ?? '' }}" width="640" height="360" class="h-full w-full object-cover" loading="lazy"></figure>
+            <figure class="mt-3 aspect-video overflow-hidden rounded-[12px] sm:rounded-[14px]"><img src="{{ $service['img'] }}" alt="{{ $service['title'] ?? '' }}" title="{{ $service['title'] ?? '' }}" width="640" height="360" class="h-full w-full object-cover" loading="lazy"></figure>
           @endif
         </article>
       @endforeach
     </div>
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-5">
-      <a href="{{ route('contact-us') }}#contact-id" class="u-btn-cta group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">Let's Connect to Discuss<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
-      <a href="{{ route('contact-us') }}#contact-id" class="inline-flex items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">Let's Build Your Digital Future Together</a>
+    <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-5">
+      <a href="{{ route('contact-us') }}#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+      <a href="{{ route('contact-us') }}#contact-id" class="inline-flex w-fit border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">Let's Build Your Digital Future Together</a>
     </div>
   </div>
 </section>
@@ -150,7 +133,7 @@ $color = $iconColors[$index % count($iconColors)];
 />
 
 <!-- Specialized Services Section Start -->
-<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')" aria-labelledby="industry-specialized-heading">
+<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')" aria-labelledby="industry-specialized-heading">
   <div class="section-inner">
     <div class="mx-auto mb-10 max-w-[720px] text-center lg:mb-14">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $industry['specializedEyebrow'] ?? 'Specialized Services' }}</p>
@@ -190,12 +173,13 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
 <!-- Marquee Section End -->
 
 <!-- Why Choose Section Start -->
-<section class="full-bleed bg-white py-16 lg:py-20" aria-labelledby="industry-why-heading">
-  <div class="section-inner">
+<section class="full-bleed industry-why-section relative overflow-hidden bg-[#F8FAFC] py-10 sm:py-14 lg:py-20" aria-labelledby="industry-why-heading">
+  <div class="industry-why-section__bg" aria-hidden="true"></div>
+  <div class="section-inner relative z-10">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-14">
       <div class="mb-4 flex items-center justify-center gap-2">
         <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
-        <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $industry['whyEyebrow'] ?? 'Why Us' }}</span>
+        <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">{{ $industry['whyEyebrow'] ?? 'Why Us' }}</span>
       </div>
       <h2 id="industry-why-heading" class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight text-[#171717]">{{ $industry['whyTitle'] ?? '' }}</h2>
       <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $industry['whyDescription'] ?? '' }}</p>
@@ -203,7 +187,7 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
       @foreach (($industry['whyCards'] ?? []) as $card)
         <article class="flex min-h-full flex-col gap-3 rounded-[22px] border border-[rgba(42,77,251,0.08)] bg-white p-[22px] shadow-[0_18px_40px_rgba(36,36,84,0.06)]">
-          @if (!empty($card['icon']))<span class="inline-flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-[#EEF1FF]"><img src="{{ $card['icon'] }}" alt="{{ $card['icon']  }}" title="{{ $card['icon']  }}" width="26" height="26" class="h-[26px] w-[26px] object-contain" loading="lazy"></span>@endif
+          @if (!empty($card['icon']))<span class="inline-flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-[#EEF1FF]"><img src="{{ $card['icon'] }}" alt="{{ $card['title'] ?? 'Why choose Suave Creators' }} icon" title="{{ $card['title'] ?? 'Why choose Suave Creators' }} icon" width="26" height="26" class="h-[26px] w-[26px] object-contain" loading="lazy"></span>@endif
           <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $card['title'] ?? '' }}</h3>
           <p class="flex-1 text-sm leading-relaxed text-[#4D4D4D]">{{ $card['text'] ?? '' }}</p>
           <a href="{{ route('contact-us') }}#contact-id" class="mt-1 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB] no-underline hover:underline">Get Started <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
@@ -215,16 +199,13 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
 <!-- Why Choose Section End -->
 
 <!-- Agile Process Section Start -->
-<section class="full-bleed bg-white py-16 lg:py-20" aria-labelledby="agile-process-title" data-agile-process>
+<section class="full-bleed bg-white py-10 sm:py-14 lg:py-20" aria-labelledby="agile-process-title" data-agile-process>
   <div class="section-inner">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-12">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">Need it simpler and faster? We have a solution for you!</p>
       <h2 id="agile-process-title" class="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">{{ $industry['agileTitle'] ?? 'Our Agile Development Process' }}</h2>
       <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $industry['agileSubtitle'] ?? 'Let’s connect with our experienced developers for expert guidance and tailored solutions.' }}</p>
     </header>
-    @php
-$agileTabs = array_keys($processData);
-@endphp
     <div class="agile-process-tabs swiper mb-10" data-agile-tabs>
       <div class="swiper-wrapper agile-process-tabs__list" role="tablist" aria-label="Agile process phases">
         @foreach ($agileTabs as $ti => $tab)
@@ -261,36 +242,6 @@ $agileTabs = array_keys($processData);
 <!-- Agile Process Section End -->
 
 <!-- Industries Delivered Section Start -->
-@php
-  $iconCycle = ['innovation', 'quality', 'trust', 'customer'];
-  $processImages = [
-    'assets/media/portfolio-1.png',
-    'assets/media/portfolio-2.png',
-    'assets/media/portfolio-3.png',
-    'assets/media/portfolio-4.png',
-    'assets/media/insight-digital-strategy.jpg',
-    'assets/media/retail-solutions-visual-5.webp',
-  ];
-  $processAlts = [
-    'Modern building exterior for industry software delivery',
-    'Contemporary living room for digital product design',
-    'Modern lounge with plants for software team collaboration',
-    'Contemporary office for enterprise software development',
-    'Startup team collaborating on digital strategy',
-    'Logistics software on tablet in a warehouse',
-  ];
-  $coreValuesItems = [];
-  foreach (($industry['processes'] ?? []) as $index => $process) {
-    $imgIndex = $index % count($processImages);
-    $coreValuesItems[] = [
-      'icon' => $iconCycle[$index % count($iconCycle)],
-      'title' => $process['title'] ?? '',
-      'desc' => $process['desc'] ?? '',
-      'image' => $process['image'] ?? $processImages[$imgIndex],
-      'alt' => $process['alt'] ?? $processAlts[$imgIndex],
-    ];
-  }
-@endphp
 <x-frontend.core-values-section
   :eyebrow="$industry['processEyebrow'] ?? 'Our Process'"
   :title="$industry['processTitle'] ?? ''"
@@ -319,28 +270,8 @@ $agileTabs = array_keys($processData);
   :allow-html-title="false"
 />
 
-@php
-$industryTestimonialItems = collect($testimonials)->map(function (array $t): array {
-  $name = (string) ($t['name'] ?? '');
-  $parts = preg_split('/\s+/', trim($name)) ?: [];
-  $initials = '';
-  foreach (array_slice($parts, 0, 2) as $part) {
-    if ($part !== '') {
-      $initials .= strtoupper(substr($part, 0, 1));
-    }
-  }
-
-  return [
-    'quote' => $t['quote'] ?? '',
-    'name' => $name,
-    'role' => $t['role'] ?? '',
-    'initials' => $initials !== '' ? $initials : 'SC',
-    'avatar' => $t['image'] ?? $t['avatar'] ?? 'assets/team/professional-man-navy-blazer-portrait.png',
-  ];
-})->all();
-@endphp
 <x-frontend.testimonials-section
-  :items="$industryTestimonialItems"
+  :items="$testimonialItems"
   eyebrow="Client Testimonials"
   title="What Our Clients Say"
   subtitle=""

@@ -22,11 +22,145 @@ class ServiceSupport
     public static function indexData(): array
     {
         return [
-            'latestPosts' => array_slice(BlogSupport::posts(), 0, 3),
-            'btnPrimary' => self::btnPrimary(),
-            'ctaArrow' => self::ctaArrow(),
             'techStack' => AboutSupport::techStack(),
+            'expertiseItems' => self::expertiseItems(),
+            'servicesData' => self::servicesData(),
+            'offshoreSlides' => self::offshoreSlides(),
+            'techCards' => self::techCards(),
+            'processCards' => self::processCards(),
+            'faqs' => self::faqs(),
+            'articles' => self::articles(),
+            'connectCta' => [
+                'eyebrow' => 'Ready to Start Your Project?',
+                'title' => 'Are you Ready to Start Your Project?',
+                'description' => 'As the best development company, we help you to develop your next digital product. Get Innovative and advanced solutions with us and see the quick growth.',
+                'primaryLabel' => "Let's Connect to Discuss",
+            ],
+            'consultation' => [
+                'backgroundImage' => 'assets/background/work-with-us-bg.webp',
+                'eyebrow' => 'Ready to Start Your Project?',
+                'title' => 'Are you Ready to Start Your Project?',
+                'description' => 'As the best development company, we help you to develop your next digital product. Get Innovative and advanced solutions with us and see the quick growth.',
+                'ctaLabel' => "Let's Connect to Discuss",
+                'solo' => false,
+                'showPeople' => false,
+            ],
         ];
+    }
+
+    /**
+     * @return array<int, array{0: string, 1: string, 2: string, 3: string, 4: string}>
+     */
+    public static function expertiseItems(): array
+    {
+        return [
+            ['assets/portfolio/project-analysis-dashboard.png', 'Project analysis', 'Research and strategy', '#4C24F4', '#F0EAFF'],
+            ['assets/media/build-strategy-visual.png', 'Build strategy', 'Wireframe and design', '#1873E7', '#EAF5FC'],
+            ['assets/media/launch-live-visual.png', 'Launch and live', 'Development and scale', '#0F968E', '#E8F8F6'],
+            ['assets/brand/maintenance-mark-logo.png', 'Maintenance', 'Maintaining strong', '#FA6811', '#FFF0E7'],
+        ];
+    }
+
+    /**
+     * @return array<int, array{0: string, 1: string, 2: string, 3: string, 4: string, 5: string}>
+     */
+    public static function servicesData(): array
+    {
+        return [
+            ['assets/icons/service-icon-1.svg', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'Explore Web Development', route('service.show', ['slug' => 'web-development-services']), 'blue'],
+            ['assets/icons/service-icon-2.svg', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'Explore Enterprise Solutions', route('service.show', ['slug' => 'enterprise-software-solutions']), 'orange'],
+            ['assets/icons/service-icon-3.svg', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'See UI/UX Services', route('services'), 'cyan'],
+            ['assets/icons/service-icon-4.svg', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'Learn More About CRM', route('service.show', ['slug' => 'custom-crm-development']), 'mint'],
+            ['assets/icons/service-icon-5.svg', 'E-commerce Development', 'Choosing e-commerce development with us is the best option for you. Try our best development services and get a reliable solution for your digital business needs.', 'Explore E-commerce Services', route('service.show', ['slug' => 'e-commerce-development']), 'rose'],
+            ['assets/icons/service-icon-6.svg', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'Explore AI Services', route('services'), 'amber'],
+        ];
+    }
+
+    /**
+     * @return array<int, array{0: string, 1: string, 2: string, 3: array<int, string>}>
+     */
+    public static function offshoreSlides(): array
+    {
+        return [
+            [
+                'assets/media/end-to-end-development-expertise.webp',
+                'End-to-End Development Expertise',
+                'With all of our projects, we always provide end-to-end development services. By leveraging our global young talent and systematic resource allocation, we provide the best and competitive pricing that helps you to get expert solutions and optimise your development budget.',
+                ['SEO', 'Mobile', 'First Performance'],
+            ],
+            [
+                'assets/media/SEO-Performance-Optimization.webp',
+                'SEO-Optimisation and Performance',
+                'SEO optimization and high performance are the needs of every website and application nowadays. All of our solutions perform better and follow Search engine algorithms so that they easily gain good visibility on Google soon.',
+                ['UI/UX', 'Research', 'Prototyping'],
+            ],
+            [
+                'assets/media/global-scalable-security.webp',
+                'Global and Scalable Security',
+                'Our solutions are built to grow with your business. Whether you&rsquo;re a startup expanding into new markets or an enterprise business managing high volumes, we design platforms that scale without performance issues.',
+                ['SEO', 'Mobile', 'First Performance'],
+            ],
+        ];
+    }
+
+    /**
+     * @return array<int, array{0: string, 1: string, 2: string, 3: string}>
+     */
+    public static function techCards(): array
+    {
+        return [
+            ['assets/icons/tech/shopify-technology-icon.png', 'Shopify & WooCommerce', 'We suggest CRM according to the clients\' needs. We develop websites for Shopify and WooCommerce for your e-commerce websites.', '#7AB55C'],
+            ['assets/icons/tech/react-technology-icon.png', 'React & Angular', 'We built websites on React & Angular to deliver high performance and a strong security system.', '#149ECA'],
+            ['assets/icons/tech/php-technology-icon.png', 'Laravel & PHP', 'We specialize in building web applications using the PHP programming language and the Laravel framework.', '#FF2D20'],
+            ['assets/icons/tech/nodejs-technology-icon.png', 'Node.js', 'We use Node.js to build real-time apps, high-performance results, robust and mobile solutions, etc.', '#68A063'],
+            ['assets/icons/tech/wordpress-technology-icon.png', 'WordPress', 'A best and reliable easy-to-use CMS solution for all types of businesses with all SEO capabilities.', '#21759B'],
+        ];
+    }
+
+    /**
+     * @return array<int, array{icon: string, title: string, text: string}>
+     */
+    public static function processCards(): array
+    {
+        return [
+            ['icon' => 'fa-solid fa-magnifying-glass-chart', 'title' => 'Discovery Phase', 'text' => 'Before starting anything, we do deep research and define the fundamental features of your future product.'],
+            ['icon' => 'fa-solid fa-route', 'title' => 'Strategy Development', 'text' => 'We craft a transparent roadmap for success. Our professional crew defines the project planning, sets deadlines, and chooses the right technologies to bring your vision to life.'],
+            ['icon' => 'fa-solid fa-code', 'title' => 'Implementation', 'text' => 'Our expert designers collaborate to transform strategy into a fully functional, high-performing product and deliver you the best possible solution.'],
+        ];
+    }
+
+    /**
+     * @return array<int, array{question: string, answer: string}>
+     */
+    public static function faqs(): array
+    {
+        return [
+            ['question' => 'Do you work with international clients?', 'answer' => 'Yes, Suave Creators works with international clients, including the UK, USA, Canada, Australia, and all countries across the globe.'],
+            ['question' => 'How do you ensure SEO-friendly development in your services?', 'answer' => 'We have the best team of seo experts who sit with the developer and do a complete audit step-by-step, and it will cover all technical and on-page aspects.'],
+            ['question' => 'What industries do you serve?', 'answer' => 'We specialise in offering solutions for all types of industries, like healthcare, education, banking, e-commerce, and logistics. Each solution is tailored to the industry standards, compliance needs, and customer experience.'],
+            ['question' => 'What is the typical project timeline?', 'answer' => 'It totally depends on the project complexity. Sometimes it will take 3 months or sometimes more than 6 months to 1 year.'],
+            ['question' => 'Do you offer post-launch support and maintenance?', 'answer' => "Yes, of course, we always do post-launch support and maintenance as per the client's requirements."],
+            ['question' => 'Why should we choose Suave Creators for our digital projects?', 'answer' => 'Suave Creators is a team of young talent who always work under timelines and deliver the best possible results.'],
+        ];
+    }
+
+    /**
+     * @return array<int, array{title: string, excerpt: string, image: string, alt: string, date: string, datetime: string, author: string, url: string}>
+     */
+    public static function articles(): array
+    {
+        return array_map(static function (array $post): array {
+            return [
+                'title' => $post['title'] ?? '',
+                'excerpt' => $post['short_description'] ?? '',
+                'image' => $post['image'] ?? '',
+                'alt' => $post['title'] ?? '',
+                'date' => $post['published_label'] ?? '',
+                'datetime' => $post['published_date'] ?? '',
+                'author' => $post['author_name'] ?? 'Suave Creators',
+                'url' => $post['url'] ?? route('blogs'),
+            ];
+        }, array_slice(BlogSupport::posts(), 0, 3));
     }
 
     /**
@@ -62,6 +196,9 @@ class ServiceSupport
         }
 
         $posts = BlogSupport::posts();
+        $bodyImage = (string) ($service['bodyImage'] ?? '');
+        $bodyBg = (string) ($service['bodyBg'] ?? '');
+        $useBodyImageLayout = $bodyImage !== '';
 
         return [
             'service' => $service,
@@ -79,15 +216,110 @@ class ServiceSupport
                 fn (mixed $image): string => asset(is_string($image) ? self::mapDesignPath($image) : ''),
                 $service['portfolioImages'] ?? self::defaultPortfolioImages(),
             ),
-            'latestPosts' => array_slice($posts, 0, 3),
+            'introStats' => self::introStats(),
+            'industryCards' => self::mapIndustryCards($service['industries'] ?? []),
+            'standoutCards' => self::mapStandoutCards($service['standoutCards'] ?? []),
+            'processSteps' => self::mapProcessSteps($service['processSteps'] ?? []),
+            'articles' => self::mapArticles(array_slice($posts, 0, 3)),
             'techStack' => AboutSupport::techStack(),
             'webDevLayoutSlugs' => self::SLUGS,
             'isWebDevelopmentService' => in_array($slug, self::SLUGS, true),
             'capabilitiesAsSlider' => ! empty($service['capabilitiesAsSlider']),
             'capabilitiesGridColumns' => (int) ($service['capabilitiesGridColumns'] ?? 3),
-            'ctaArrow' => self::ctaArrow(),
-            'btnPrimary' => self::btnPrimary(),
+            'useBodyImageLayout' => $useBodyImageLayout,
+            'bodySectionStyle' => $useBodyImageLayout
+                ? "--service-body-image: url('".e($bodyImage)."');"
+                : ($bodyBg !== '' ? "background-image: url('".e($bodyBg)."');" : ''),
         ];
+    }
+
+    /**
+     * @return array<int, array{0: string, 1: string, 2: string, 3: string, 4: string}>
+     */
+    public static function introStats(): array
+    {
+        return [
+            ['50+', 'Projects Delivered', 'Successfully completed more than 50+ projects.', 'assets/icons/projects-delivered-stat-icon.svg', '#4C24F4'],
+            ['10+', 'Years Experience', 'Years of Combined Experience.', 'assets/icons/years-experience-stat-icon.svg', '#1873E7'],
+            ['$40M+', 'Funding Secured', 'Helped clients secure more than $40M+ in funding.', 'assets/icons/funding-secured-stat-icon.svg', '#0F968E'],
+            ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', 'assets/icons/expert-team-stat-icon.svg', '#FA6811'],
+        ];
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $industries
+     * @return array<int, array{image: string, title: string, text: string, href: string}>
+     */
+    protected static function mapIndustryCards(array $industries): array
+    {
+        return array_values(array_map(static function (array $ind): array {
+            return [
+                'image' => (string) ($ind['icon'] ?? ''),
+                'title' => (string) ($ind['title'] ?? ''),
+                'text' => (string) ($ind['desc'] ?? ''),
+                'href' => (string) ($ind['link'] ?? ''),
+            ];
+        }, $industries));
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $cards
+     * @return array<int, array{image: string, title: string, text: string, step: string}>
+     */
+    protected static function mapStandoutCards(array $cards): array
+    {
+        return array_values(array_map(static function (array $card): array {
+            return [
+                'image' => (string) ($card['icon'] ?? ''),
+                'title' => (string) ($card['title'] ?? ''),
+                'text' => (string) ($card['desc'] ?? ''),
+                'step' => (string) ($card['step'] ?? ''),
+            ];
+        }, $cards));
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $steps
+     * @return array<int, array{step: string, icon: string, title: string, desc: string}>
+     */
+    protected static function mapProcessSteps(array $steps): array
+    {
+        $defaultIcons = [
+            'assets/media/industry-discovery-strategy.svg',
+            'assets/media/industry-design-development.svg',
+            'assets/media/industry-goals.svg',
+            'assets/media/industry-multi-channel-communication.svg',
+            'assets/media/industry-launch-growth.svg',
+        ];
+
+        return array_values(array_map(static function (array $step, int $index) use ($defaultIcons): array {
+            return [
+                'step' => (string) ($step['step'] ?? str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)),
+                'icon' => (string) ($step['icon'] ?? $defaultIcons[$index % count($defaultIcons)]),
+                'title' => (string) ($step['title'] ?? ''),
+                'desc' => (string) ($step['desc'] ?? ''),
+            ];
+        }, $steps, array_keys($steps)));
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $posts
+     * @return array<int, array<string, string>>
+     */
+    protected static function mapArticles(array $posts): array
+    {
+        return array_values(array_map(static function (array $post): array {
+            return [
+                'title' => (string) ($post['title'] ?? ''),
+                'excerpt' => (string) ($post['short_description'] ?? ''),
+                'image' => (string) ($post['image'] ?? ''),
+                'alt' => (string) ($post['title'] ?? ''),
+                'date' => (string) ($post['published_label'] ?? ''),
+                'datetime' => (string) ($post['published_date'] ?? ''),
+                'author' => (string) ($post['author_name'] ?? 'Suave Creators'),
+                'url' => (string) ($post['url'] ?? route('blogs')),
+            ];
+        }, $posts));
     }
 
     /**
@@ -120,15 +352,5 @@ class ServiceSupport
             '/assets/portfolio/portfolio-showcase-5.webp',
             '/assets/portfolio/portfolio-showcase-6.webp',
         ];
-    }
-
-    public static function ctaArrow(): string
-    {
-        return '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>';
-    }
-
-    public static function btnPrimary(): string
-    {
-        return 'u-btn-cta group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110';
     }
 }

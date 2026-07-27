@@ -21,7 +21,7 @@
     <div class="relative z-0 order-2 flex max-w-xl min-w-0 flex-col text-left lg:order-1 lg:max-w-[560px]">
       <p
         class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold uppercase tracking-wide text-transparent pragati-narrow-regular sm:text-sm">
-        Finance ΓÇó Healthcare ΓÇó Retail ΓÇó Education ΓÇó Logistics
+        Finance • Healthcare • Retail • Education • Logistics
       </p>
       <h1
         class="mb-2 mt-1 flex flex-col text-[28px] font-semibold leading-[1.05] text-white min-[375px]:text-[34px] sm:mt-2 sm:text-5xl lg:text-[56px] lg:leading-[100%]">
@@ -73,16 +73,6 @@
 <!-- 1. Hero Section End -->
 
 <!-- 2. Portfolio Showcase Marquee Section Start -->
-@php
-$portfolioHeroImages = [
-  'assets/media/portfolioimg1.webp',
-  'assets/media/portfolioimg2.webp',
-  'assets/media/portfolioimg3.webp',
-  'assets/media/portfolioimg4.webp',
-  'assets/media/portfolioimg5.webp',
-  'assets/media/portfolioimg6.webp',
-];
-@endphp
 <section class="full-bleed full-bleed--edge portfolio-showcase portfolio-hero-showcase overflow-hidden bg-[linear-gradient(180deg,#F8FAFF_0%,#FFFFFF_100%)] !py-8 sm:!py-10 md:!py-14" aria-label="Our recent work">
   <div class="industry-portfolio-marquee" tabindex="0">
     <div class="industry-portfolio-marquee__track">
@@ -116,7 +106,7 @@ $portfolioHeroImages = [
 <!-- 2. Portfolio Showcase Marquee Section End -->
 
 <!-- 3. Intro CTA Section Start -->
-<section class="full-bleed bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/core-section-bg.png') }}')" aria-labelledby="industry-intro-title">
+<section class="full-bleed bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/core-section-bg.png') }}')" aria-labelledby="industry-intro-title">
   <div class="section-inner text-center">
     <div class="mx-auto flex max-w-[1000px] flex-col items-center px-1">
       <div class="mb-3 flex items-center justify-center gap-2 sm:mb-4">
@@ -157,12 +147,12 @@ $portfolioHeroImages = [
 <!-- 3. Intro CTA Section End -->
  
 <x-frontend.connect-cta-section
-  eyebrow="Ready to Start Your Project?"
-  title="Kickstart Your Dream Project With Us"
-  description="With our best industry solution development services, we take ownership of your solution and process, so you never feel alone on your journey. Let's collaborate with us for your next software solution."
-  title-id="industry-cta-title"
-  primary-label="Turn Your Vision Into Reality"
-  section-class="full-bleed smart-together-cta py-4 sm:py-6"
+  :eyebrow="$connectCta['eyebrow']"
+  :title="$connectCta['title']"
+  :description="$connectCta['description']"
+  :title-id="$connectCta['titleId']"
+  :primary-label="$connectCta['primaryLabel']"
+  :section-class="$connectCta['sectionClass']"
 />
 
 <!-- 5. AI Solutions Section Start -->
@@ -177,60 +167,13 @@ $portfolioHeroImages = [
       </p>
       <h2 id="ai-solutions-title"
         class="mt-3 text-[20px] font-semibold leading-tight tracking-[-0.025em] text-[#171717] sm:mt-4 sm:text-[22px] lg:text-[24px]">
-        Our Core Services ΓÇö Smart Tech Solutions for the AI Revolution
+        Our Core Services — Smart Tech Solutions for the AI Revolution
       </h2>
       <p class="mx-auto mt-3 max-w-[605px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-[24px]">
         As a top-tier company, we offer industry-specific software solutions with a proven track record of delivering the
         latest future trends and innovative solutions.
       </p>
     </div>
-
-    @php
-      $aiSolutions = [
-        [
-          'IT & Software Solutions for Startups',
-          'Suave Creators collaborate with IT startups worldwide, providing IT solutions & services to build, boost, and scale products across industries.',
-          'assets/media/ai-service-visual-1.webp',
-          ['AI Web design', 'UX Research', 'AI Figma Design', 'AI Visual Design'],
-          route('industry.show', ['slug' => 'it-software-solutions-for-startups']),
-        ],
-        [
-          'Healthcare Software Development',
-          'Our Healthcare Software Development Services cover designing and developing software for better hospital management and improved efficiency.',
-          'assets/media/ai-service-visual-2.webp',
-          ['AI Web design', 'UX Research', 'AI Figma Design', 'AI Visual Design'],
-          route('industry.show', ['slug' => 'healthcare']),
-        ],
-        [
-          'Education & E-learning Platforms',
-          'We create end-to-end custom e-learning platforms with digital resources and tools that make education systems easier to manage.',
-          'assets/media/ai-service-visual-3.webp',
-          ['AI Web design', 'UX Research', 'AI Figma Design', 'AI Visual Design'],
-          route('industry.show', ['slug' => 'education-elearning-platforms']),
-        ],
-        [
-          'Retail & E-commerce Solutions',
-          'We offer end-to-end retail & e-commerce software solutions with expert knowledge across all stages of the business cycle.',
-          'assets/media/ai-service-visual-4.webp',
-          ['AI Web design', 'UX Research', 'AI Figma Design', 'AI Visual Design'],
-          route('industry.show', ['slug' => 'retail-ecommerce-solutions']),
-        ],
-        [
-          'Finance & Banking Software Development',
-          'We provide software development for the financial and banking sector, focusing on custom web and mobile apps for startups and enterprises.',
-          'assets/media/ai-service-visual-5.webp',
-          ['AI Web design', 'UX Research', 'AI Figma Design', 'AI Visual Design'],
-          route('industry.show', ['slug' => 'finance-banking-software-development']),
-        ],
-        [
-          'Logistics & Supply Chain Apps',
-          'We specialise in logistics and transportation management applications that enhance overall operational efficiency.',
-          'assets/media/ai-service-visual-6.webp',
-          ['AI Web design', 'UX Research', 'AI Figma Design', 'AI Visual Design'],
-          route('industry.show', ['slug' => 'logistics-supply-chain-apps']),
-        ],
-      ];
-    @endphp
 
     <div class="industryCoreServicesSwiper swiper mt-10 sm:mt-12 lg:mt-[54px]">
       <div class="swiper-wrapper">
@@ -287,59 +230,6 @@ $portfolioHeroImages = [
 
 
 <!-- 7. Industry Expertise Section Start -->
-@php
-$expertiseIndustries = [
-  [
-    'Finance',
-    'We Develop Smart Finance Solutions',
-    'Get a smart AI solution with us; we develop smart Finance and Banking solutions for all smart or large organisations. We have the solution for you.',
-    ['Fintech Design', 'App Development', 'Banking UX', 'Wealth Branding'],
-    'assets/media/finance-banner.webp',
-    'fa-solid fa-building-columns',
-  ],
-  [
-    'Education',
-    'Empowering Learning Through Digital Innovation',
-    'We transform traditional education into AI tech and digital experience. From e-Learning to virtual classrooms, we create smart solutions for all educational institutions and organisations.',
-    ['E-learning', 'Portal Design', 'Course Branding', 'LMS Integration'],
-    'assets/media/education-banner.webp',
-    'fa-solid fa-graduation-cap',
-  ],
-  [
-    'Real Estate',
-    'Building Digital Foundations for Real Estate Success',
-    'Let\'s drive more sales and strong visibility with smart websites and property management software. Our software connects buyers with their dream home.',
-    ['RE Branding', 'CRE Branding', 'RE Website Design', 'RE Fund Luxury Branding', 'RE Development', 'RE Agent Solutions'],
-    'assets/media/insight-future-work.jpg',
-    'fa-solid fa-house',
-  ],
-  [
-    'Healthcare',
-    'Transform hospital care with smart AI Solutions',
-    'A smart solution is served for the hospital and healthcare institutions. With our software, you streamline operations, refine patient experience, and secure telehealth platforms.',
-    ['Clinic Branding', 'Telemedicine', 'Healthcare UX', 'SEO for Doctors'],
-    'assets/media/industry-healthcare-visual.jpg',
-    'fa-solid fa-heart-pulse',
-  ],
-  [
-    'E-commerce',
-    'Enjoy the best Shopping experience',
-    'Our professional, skilled team provides custom eCommerce solutions that integrate seamlessly with existing systems and offer valuable data for optimisation.',
-    ['UI/UX', 'Shopify', 'SEO', 'Performance Marketing'],
-    'assets/media/ecommerce-banner.webp',
-    'fa-solid fa-cart-shopping',
-  ],
-  [
-    'Technology & Startups',
-    'Reliable and Scalable solution for Technology',
-    'We deliver scalable tech solutions to build smart, robust and future-ready custom smart solutions. We develop digital products for your business or organisation.',
-    ['MVP Design', 'Brand Identity', 'Pitch Deck Design', 'Product Strategy'],
-    'assets/media/it-solutions-banner.webp',
-    'fa-solid fa-rocket',
-  ],
-];
-$expertiseDefault = 0;
-@endphp
 <section id="industry-expertise"
   class="full-bleed expertise-showcase-section relative overflow-hidden bg-[#070B1F] py-10 sm:py-14 lg:py-24"
   aria-labelledby="industry-expertise-title">
@@ -432,12 +322,8 @@ $expertiseDefault = 0;
 </section>
 <!-- 7. Industry Expertise Section End -->
 
-<!-- 8. Technologies & Partnerships Marquee Section Start -->
-<x-frontend.tech-partnerships-section :items="$techStack" />
-<!-- 8. Technologies & Partnerships Marquee Section End -->
-
 <!-- 9. Why Suave Creators (Core Services) Section Start -->
-<section class="full-bleed web-services bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
+<section class="full-bleed web-services bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
   aria-labelledby="why-suave-title">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
@@ -457,17 +343,6 @@ $expertiseDefault = 0;
         </p>
       </div>
     </header>
-
-    @php
-$whySuaveServices = [
-      ['industry-goals.svg', '01 - Goals', 'Industry Goals', 'All businesses, whether small or large, have unique challenges; that\'s why we begin by working deep into your industry-specific objectives. Our mission is to build strong software solutions that reflect your individuality and growth ambitions.', 'blue'],
-      ['industry-specific-solutions.svg', '02 - Solutions', 'Industry-Specific Solutions', 'We believe in delivering industry-specific solutions in today\'s fast-changing landscape. We work on global technology and groundbreaking innovations to provide future-ready blends for all types of industries.', 'orange'],
-      ['industry-user-centric-design.svg', '03 - Design', 'User-Centric Design', 'Our software design ideology revolves around creating the best software that is visually appealing, intuitive, and easy to manage. You will enjoy a smooth workflow and a great user experience.', 'cyan'],
-      ['evaluating-industry-software.svg', '04 - Build', 'Constructing Industry Softwares', 'With our professional team, we meticulously design and implement each part of your solution with unmatched precision. Our testing phase gives you a guarantee for a seamless, scalable and effective software system.', 'mint'],
-      ['customer-support-ticketing.svg', '05 - Support', 'Customer Support & Ticketing', 'Our professional support team will track support tickets and help you to organize everything and be on time. With this, our team can provide reliable and professional support at all times.', 'rose'],
-      ['industry-multi-channel-communication.svg', '06 - Connect', 'Multi-Channel Communication', 'Our team will give you support through your preferred channels, including social media, live chat support, or email. Giving communication options is one of the best options ever.', 'amber'],
-    ];
-@endphp
 
     <div class="web-services__grid industry-why-services">
       @foreach ($whySuaveServices as $service)
@@ -512,68 +387,39 @@ $whySuaveServices = [
   description="We follow a collaborative and step by step process to built your ideas into digital product."
   title-id="industry-process-title"
   grid-class="core-values__grid--3"
-  :items="[
-    ['icon' => 'discovery', 'title' => 'Discovery & Strategy', 'desc' => 'We understand your goals and challenges and then work on the discovery and strategy stage. By understanding your goals we make a clear product roadmap.', 'image' => 'assets/media/portfolio-1.png', 'alt' => 'Discovery and strategy planning session for Suave Creators industry solutions'],
-    ['icon' => 'design', 'title' => 'Design & Development', 'desc' => 'Our skilled team understands the roadmap and works on the design and development stage. We turn your ideas into robust functionalities.', 'image' => 'assets/media/portfolio-2.png', 'alt' => 'Design and development workspace for industry software'],
-    ['icon' => 'launch', 'title' => 'Launch & Growth', 'desc' => 'Once your product is live, we continue to optimize, scale, and enhance it. A long term growth is provided from our end.', 'image' => 'assets/media/portfolio-3.png', 'alt' => 'Product launch and growth metrics for industry platforms'],
-  ]"
+  :items="$processItems"
 />
 <!-- 10. Process Section End -->
 
 
 
-@php
-$industriesFaqs = [
-  ['question' => 'What is the key driver of the global software market?', 'answer' => "The software development industry's growth complicates the task of operating a business in changing winds. At the same time, however, a zest for serving the audience's needs in a new and better way is the key driver of new projects' appearance."],
-  ['question' => 'How big is the software development industry these days?', 'answer' => 'According to the latest updates, the global developer market shows a balanced increase from 26.5 million to 28.7 million specialists.'],
-  ['question' => 'What is the biggest software market for the time being?', 'answer' => 'Enterprise software is the one that owns the largest share of the overall software market projects. Translating this statement into numbers, in 2021, it made over $200bn in revenue, despite COVID-19 and economic fluctuations.'],
-  ['question' => 'Why is the industry of software development so important worldwide?', 'answer' => 'Software development is important globally because of its scalability. The new and upgraded software increases productivity and reduces labour costs at once.'],
-  ['question' => 'Do you offer post-launch support and maintenance?', 'answer' => "Yes, of course, we always do post-launch support and maintenance as per the client's requirements."],
-  ['question' => 'Why should we choose Suave Creators for our digital projects?', 'answer' => 'Suave Creators is a team of young talent who always work under timelines and deliver the best possible results.'],
-];
-@endphp
 <x-frontend.faq-section
-  :qa="$industriesFaqs"
+  :qa="$faqs"
   heading-id="industry-faq-heading"
-  eyebrow="Have questions about our Industry Solutions?"
-  description="Here are the most asked questions about industry software and digital solutions."
+  :eyebrow="$faq['eyebrow']"
+  :description="$faq['description']"
+  :cta-label="$faq['ctaLabel']"
   class="faq-section--align faq-section--desktop-media"
 />
- <!-- 11. Marquee (Logo Shape) Section Start -->
-<section class="full-bleed full-bleed--edge digital-services-marquee" aria-label="Suave Creators brand mark">
-  <div class="digital-services-marquee__track">
-    @for ($g = 0; $g < 2; $g++)
-      <div class="digital-services-marquee__group" {{ $g === 1 ? 'aria-hidden="true"' : '' }}>
-        @for ($i = 0; $i < 8; $i++)
-          <span class="digital-services-marquee__icon"><img src="{{ asset('assets/brand/logo-mark-shape.svg') }}" alt="Logo Mark Shape for Suave Creators software development" title="Logo Mark Shape for Suave Creators software development" loading="lazy" width="32" height="32"></span>
-        @endfor
-      </div>
-    @endfor
-  </div>
-</section>
-<!-- 11. Marquee (Logo Shape) Section End -->
 
 <x-frontend.consultation-section
-  :solo="true"
-  :show-people="false"
-  title="Get the Best Solution for your<br class=&quot;hidden sm:block&quot;> Organisation with us"
-  description="We are always happy to serve you the best and smart industry solution. With Suave Creators, we bring the latest technology and benefit from experts who are eager to share their knowledge."
-  cta-label="Get a Free Quote"
+  :solo="$consultation['solo']"
+  :show-people="$consultation['showPeople']"
+  :title="$consultation['title']"
+  :description="$consultation['description']"
+  :cta-label="$consultation['ctaLabel']"
 />
 
 <!-- 14. Testimonials Section Start -->
-<x-frontend.testimonials-section :items="\App\Support\Frontend\HomeSupport::testimonials()" />
+<x-frontend.testimonials-section :items="$testimonials" />
 <!-- 14. Testimonials Section End -->
 
 <x-frontend.articles-insights-section
   :items="$articles"
   heading-id="industry-insights-title"
-  title="Explore Our Latest Insights"
-  subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
-  section-class="py-16 lg:py-18"
+  section-class="py-10 sm:py-12 lg:py-18"
   more-href="blogs"
   more-label="View More"
-  :init-swiper="false"
 />
 
 
@@ -1383,33 +1229,6 @@ $industriesFaqs = [
           breakpoints: {
             768: { slidesPerView: 2, spaceBetween: 18 },
             1024: { slidesPerView: 3, spaceBetween: 24 }
-          }
-        });
-      }
-
-      if (document.querySelector('.articlesInsightsSwiper')) {
-        new Swiper('.articlesInsightsSwiper', {
-          slidesPerView: 1,
-          spaceBetween: 16,
-          speed: 500,
-          loop: false,
-          watchOverflow: true,
-          keyboard: { enabled: true, onlyInViewport: true },
-          a11y: {
-            prevSlideMessage: 'Previous article',
-            nextSlideMessage: 'Next article'
-          },
-          navigation: {
-            nextEl: '.articles-insights-next',
-            prevEl: '.articles-insights-prev'
-          },
-          pagination: {
-            el: '.articles-insights-pagination',
-            clickable: true
-          },
-          breakpoints: {
-            768: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 26 }
           }
         });
       }

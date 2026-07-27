@@ -1,6 +1,6 @@
 <!-- Testimonial Section Start -->
 <section
-  {{ $attributes->merge(['class' => 'full-bleed testimonial-section bg-cover bg-top bg-no-repeat relative overflow-hidden py-12 lg:py-24']) }}
+  {{ $attributes->merge(['class' => 'full-bleed testimonial-section bg-cover bg-top bg-no-repeat relative overflow-hidden py-20 lg:py-24']) }}
   style="background-image: url('{{ asset('assets/background/testimonials-section-bg.png') }}');"
   aria-labelledby="{{ $headingId }}">
   <div class="testimonial-layout section-inner relative z-10">

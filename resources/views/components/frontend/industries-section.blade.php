@@ -1,5 +1,5 @@
 <section
-  {{ $attributes->merge(['class' => 'full-bleed industries-served bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]']) }}
+  {{ $attributes->merge(['class' => 'full-bleed industries-served bg-cover bg-top bg-no-repeat py-[80px]']) }}
   style="background-image: url('{{ asset($backgroundImage) }}');"
   aria-labelledby="{{ $headingId }}">
   <div class="industries-served__inner section-inner">

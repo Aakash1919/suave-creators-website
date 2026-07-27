@@ -76,9 +76,9 @@
   <div class="site-footer__legal site-container relative z-10 flex !px-5 flex-col gap-2 py-4 text-[11px] font-medium text-[#B1B9DF] sm:!px-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-5 sm:text-[13px] lg:!px-8">
     <p class="leading-5">&copy; {{ $year }} Suave Creators. All Rights Reserved.</p>
     <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
-      <a href="{{ url('/privacy-policy') }}" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">Privacy Policy</a>
+      <a href="{{ route('privacy-policy') }}" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">Privacy Policy</a>
       <span class="text-white/30" aria-hidden="true">|</span>
-      <a href="{{ url('/terms-and-conditions') }}" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">Terms &amp; Conditions</a>
+      <a href="{{ route('terms-and-conditions') }}" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">Terms &amp; Conditions</a>
     </p>
   </div>
   <x-layouts.suave-agent />

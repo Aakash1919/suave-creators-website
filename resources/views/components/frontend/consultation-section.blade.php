@@ -1,9 +1,12 @@
 <section id="consultation" {{ $attributes->merge(['class' => 'full-bleed consultation-section']) }}>
   <div class="section-inner">
     <div
-      class="consultation-card bg-cover bg-top bg-no-repeat{{ $solo ? ' consultation-card--solo' : '' }}"
+      class="consultation-card bg-cover bg-no-repeat{{ $cardPosition === 'center' ? ' bg-center' : ' bg-top' }}{{ $solo ? ' consultation-card--solo' : '' }}"
       style="background-image: url('{{ asset($backgroundImage) }}');">
       <div class="consultation-copy">
+        @if ($eyebrow !== '')
+          <span class="mb-2 inline-block text-sm font-semibold text-white/80">{{ $eyebrow }}</span>
+        @endif
         <h2>
           @if ($allowHtmlTitle)
             {!! $title !!}
@@ -15,12 +18,7 @@
         <div class="flex flex-wrap gap-4">
           <a href="{{ $ctaHref }}" class="consultation-cta">
             {{ $ctaLabel }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-              <path d="M18 8L22 12L18 16"></path>
-              <path d="M2 12H22"></path>
-            </svg>
+            <x-frontend.cta-arrow />
           </a>
           @if ($secondaryCtaLabel !== '')
             <a href="{{ $secondaryCtaHref }}" class="consultation-cta consultation-cta--secondary">
