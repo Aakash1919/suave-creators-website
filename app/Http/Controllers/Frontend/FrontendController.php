@@ -23,6 +23,8 @@ abstract class FrontendController extends Controller
             $overrides = array_filter([
                 'title' => $data['seoTitle'] ?? null,
                 'description' => $data['seoDescription'] ?? null,
+                'og_title' => $data['seoOgTitle'] ?? null,
+                'og_description' => $data['seoOgDescription'] ?? null,
                 'image' => $data['seoImage'] ?? null,
                 'faqs' => $data['seoFaqs'] ?? null,
             ], static fn (mixed $value): bool => $value !== null && $value !== '');

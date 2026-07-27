@@ -2,7 +2,9 @@
 return array(
   'slug' => 'custom-crm-development',
   'pageTitle' => 'Custom CRM Development Services | Suave Creators',
-  'pageDescription' => 'Grab our Custom CRM Development services to streamline your customer management, deliver measurable results, and achieve flawless business growth.',
+  'pageDescription' => 'Get scalable, secure, & custom CRM development services designed for startups & enterprises. Streamline operations, boost productivity, & enhance customer relationships.',
+  'ogTitle' => 'Custom CRM Development Services | Suave Creators',
+  'ogDescription' => 'Build a scalable, secure, and fully custom CRM tailored to your business needs. Suave Creators helps startups & enterprises streamline operations and improve customer experience.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',
   'heroTitle' =>
   array(

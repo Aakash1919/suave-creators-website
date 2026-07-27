@@ -136,12 +136,13 @@ class SeoGenerateService
         $logoUrl = $this->resolveAssetUrl($site['logo'] ?? null) ?? $imageUrl;
         $email = strtolower((string) ($org['email'] ?? ''));
         $telephone = (string) ($org['telephone_schema'] ?? $org['telephone'] ?? '');
+        $pageUrl = rtrim($canonical, '/');
         $webPageId = $routeName === 'home'
             ? $baseUrl.'/#homepage'
-            : $canonical.'#webpage';
+            : $pageUrl.'/#webpage';
         $breadcrumbId = $routeName === 'home'
             ? $baseUrl.'/#breadcrumb'
-            : $canonical.'#breadcrumb';
+            : $pageUrl.'/#breadcrumb';
 
         $organization = [
             '@type' => 'Organization',
@@ -180,6 +181,7 @@ class SeoGenerateService
                 '@id' => $baseUrl.'/#website',
                 'url' => $baseUrl.'/',
                 'name' => (string) ($site['name'] ?? 'Suave Creators'),
+                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'publisher' => [
                     '@id' => $baseUrl.'/#organization',
                 ],
@@ -195,6 +197,7 @@ class SeoGenerateService
                 'url' => $canonical,
                 'name' => $title,
                 'description' => $description,
+                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'isPartOf' => [
                     '@id' => $baseUrl.'/#website',
                 ],

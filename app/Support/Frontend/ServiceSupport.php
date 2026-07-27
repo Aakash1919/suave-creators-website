@@ -211,6 +211,8 @@ class ServiceSupport
             'service' => $service,
             'seoTitle' => (string) ($service['pageTitle'] ?? 'Service | Suave Creators'),
             'seoDescription' => (string) ($service['pageDescription'] ?? 'Suave Creators service details.'),
+            'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
+            'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
             'bannerBg' => asset(self::mapDesignPath((string) ($service['bannerBg'] ?? '/assets/background/service-banner-bg.webp'))),
             'introBg' => asset(self::mapDesignPath('/assets/background/technology-section-bg.png')),
             'collabBackground' => asset(self::mapDesignPath((string) ($service['collabBackground'] ?? '/assets/media/collaboration-back-visual.png'))),

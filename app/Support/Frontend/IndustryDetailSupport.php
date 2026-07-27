@@ -56,6 +56,8 @@ class IndustryDetailSupport
             'industry' => $industry,
             'seoTitle' => (string) ($industry['pageTitle'] ?? 'Industry Solutions | Suave Creators'),
             'seoDescription' => (string) ($industry['pageDescription'] ?? 'Suave Creators industry software development.'),
+            'seoOgTitle' => (string) ($industry['ogTitle'] ?? $industry['pageTitle'] ?? ''),
+            'seoOgDescription' => (string) ($industry['ogDescription'] ?? $industry['pageDescription'] ?? ''),
             'iconColors' => ['blue', 'orange', 'cyan', 'mint', 'rose', 'amber'],
             'processData' => $processData = $industry['processData'] ?? self::defaultProcessData(),
             'agileTabs' => array_keys($processData),

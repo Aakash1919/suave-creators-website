@@ -1,8 +1,10 @@
 <?php
 return array(
   'slug' => 'enterprise-software-solutions',
-  'pageTitle' => 'Custom Enterprise Software Solutions | Suave Creators',
-  'pageDescription' => 'Let’s upgrade your organisation with Custom-made enterprise software solutions that are designed to optimise workload, boost productivity, and enhance reliability.',
+  'pageTitle' => 'Enterprise Software Development Services | Suave Creators',
+  'pageDescription' => 'Get scalable, secure enterprise software development services tailored for growing businesses. Automate workflows, boost efficiency, & modernize operations with Suave Creators.',
+  'ogTitle' => 'Enterprise Software Development Services | Suave Creators',
+  'ogDescription' => 'Build scalable and secure enterprise software solutions with Suave Creators. Automate workflows, enhance productivity, and accelerate business growth.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',
   'heroTitle' =>
   array(

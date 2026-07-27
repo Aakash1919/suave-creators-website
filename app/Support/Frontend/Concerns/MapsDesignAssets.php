@@ -138,7 +138,7 @@ trait MapsDesignAssets
         $imageSegment = 'im'.'ages';
 
         if (is_string($data)) {
-            if ($key !== null && in_array($key, ['url', 'href', 'introLinkUrl', 'content', 'quote', 'desc', 'description', 'text', 'title', 'label', 'name', 'role', 'slug', 'category', 'eyebrow', 'pageTitle', 'pageDescription', 'primaryCta', 'secondaryCta'], true)) {
+            if ($key !== null && in_array($key, ['url', 'href', 'introLinkUrl', 'content', 'quote', 'desc', 'description', 'text', 'title', 'label', 'name', 'role', 'slug', 'category', 'eyebrow', 'pageTitle', 'pageDescription', 'ogTitle', 'ogDescription', 'primaryCta', 'secondaryCta'], true)) {
                 return $data;
             }
 

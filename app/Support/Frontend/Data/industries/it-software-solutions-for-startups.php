@@ -1,8 +1,10 @@
 <?php
 return array (
   'slug' => 'it-software-solutions-for-startups',
-  'pageTitle' => 'IT & Software Solutions for Startups | Suave Creators',
-  'pageDescription' => 'Tailored IT services and software development solutions that empower startups to innovate, grow, and compete.',
+  'pageTitle' => 'IT & Software Solutions for Startups | Scalable & Custom Solutions',
+  'pageDescription' => 'Startup-focused IT & software services delivering scalable CRM, ERP, and AI-powered solutions to help startups grow with secure, cost-effective custom software.',
+  'ogTitle' => 'IT & Software Solutions for Startups | Scalable & Custom Solutions',
+  'ogDescription' => 'Startup-focused IT & software services delivering scalable CRM, ERP, and AI-powered solutions to help startups grow with secure, cost-effective custom software.',
   'eyebrow' => 'We believe in developing advance solutions',
   'heroTitle' => 
   array (

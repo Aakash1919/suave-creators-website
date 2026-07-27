@@ -1,8 +1,10 @@
 <?php
 return array (
   'slug' => 'education-elearning-platforms',
-  'pageTitle' => 'Education & E-learning Platforms | Suave Creators',
-  'pageDescription' => 'Custom e-learning software — LMS, school management, virtual classrooms, mobile learning, and proctoring apps.',
+  'pageTitle' => 'E-Learning Software Development Services | Suave Creators',
+  'pageDescription' => 'Custom e-learning software development including LMS platforms, mobile learning apps, virtual classrooms, AI-powered education solutions, and secure digital learning systems.',
+  'ogTitle' => 'E-Learning Software Development Services | Suave Creators',
+  'ogDescription' => 'Custom e-learning software development including LMS platforms, virtual classrooms, mobile learning apps, and AI-powered education solutions.',
   'eyebrow' => 'We build smart E-learning Platforms',
   'heroTitle' => 
   array (

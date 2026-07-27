@@ -40,10 +40,10 @@ class AboutSupport
                 'description' => 'Successfully completed more than 50+ digital products and platforms.',
             ],
             [
-                'end' => 500,
+                'end' => '40M',
                 'suffix' => '+',
-                'label' => 'Happy Clients',
-                'description' => 'Trusted partnerships built on transparency, quality, and long-term support.',
+                'label' => 'Funding Secured',
+                'description' => 'Helped clients secure more than $40M+ in funding.',
             ],
             [
                 'end' => 15,
