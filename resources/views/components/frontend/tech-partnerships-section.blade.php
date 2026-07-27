@@ -10,8 +10,8 @@
   </div>
   <div class="about-tech-marquee overflow-hidden">
     <div class="about-tech-marquee__track">
-      @for ($g = 0; $g < 2; $g++)
-        <div class="about-tech-marquee__group" @if ($g === 1) aria-hidden="true" @endif>
+      @for ($g = 0; $g < 4; $g++)
+        <div class="about-tech-marquee__group" @if ($g > 0) aria-hidden="true" @endif>
           @foreach ($items as $tech)
             <article class="about-tech-card">
               <img src="{{ asset($tech['src']) }}" alt="{{ $tech['alt'] }}" title="{{ $tech['alt'] }}" width="48"

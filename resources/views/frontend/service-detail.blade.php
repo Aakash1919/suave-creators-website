@@ -43,7 +43,7 @@
       <div class="relative z-10 hidden w-full min-w-0 items-center justify-center lg:flex lg:justify-end">
         <div class="relative mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center">
           @if (!empty($service['heroImage1']))
-            <img src="{{ $service['heroImage1'] }}" alt="Decorative graphic for Suave Creators website" title="Decorative graphic for Suave Creators website" width="480" height="480" class="service-banner__orbit absolute inset-0 z-[1] h-full w-full object-contain" loading="eager" aria-hidden="true">
+            <img src="{{ $service['heroImage1'] }}" alt="Decorative orbit graphic for Suave Creators service banner" title="Decorative orbit graphic for Suave Creators service banner" width="480" height="480" class="service-banner__orbit absolute inset-0 z-[1] h-full w-full object-contain" loading="eager" aria-hidden="true">
           @endif
           @if (!empty($service['heroImage2']))
             <img src="{{ $service['heroImage2'] }}" alt="{{ $service['pageTitle'] ?? '' }}" title="{{ $service['pageTitle'] ?? '' }}" width="160" height="160" class="relative z-[2] w-[32%] max-w-[140px] object-contain drop-shadow-xl" loading="eager">
@@ -144,7 +144,7 @@
     @for ($g = 0; $g < 2; $g++)
       <div class="digital-services-marquee__group" {{ $g === 1 ? 'aria-hidden="true"' : '' }}>
         @foreach ($marqueeIcons as $icon)
-          <span class="digital-services-marquee__icon"><img src="{{ $icon }}" alt="{{ $icon  }}" title="{{ $icon  }}" loading="lazy" width="40" height="40"></span>
+          <span class="digital-services-marquee__icon"><img src="{{ $icon }}" alt="Service capability icon for Suave Creators software development" title="Service capability icon for Suave Creators software development" loading="lazy" width="40" height="40"></span>
         @endforeach
       </div>
     @endfor
@@ -173,7 +173,7 @@
             @foreach (($service['capabilities'] ?? []) as $index => $cap)
               <div class="swiper-slide h-auto">
                 <article class="web-service-card">
-                  <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ $cap['image'] ?? ''  }}" title="{{ $cap['image'] ?? ''  }}" width="80" height="64">
+                  <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
                   <div class="web-service-card__category">
                     <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
                     <h3 class="mt-2 text-[14px] font-semibold leading-[130%] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
@@ -204,7 +204,7 @@
       <div class="web-services__grid{{ $capabilitiesGridColumns === 2 ? ' web-services__grid--cols-2' : '' }}">
         @foreach (($service['capabilities'] ?? []) as $index => $cap)
           <article class="web-service-card">
-            <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ $cap['image'] ?? ''  }}" title="{{ $cap['image'] ?? ''  }}" width="80" height="64">
+            <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
             <div class="web-service-card__category">
               <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
               <h3 class="mt-2 text-[14px] font-semibold leading-[130%] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
@@ -241,7 +241,7 @@
     </div>
     @if ($collabImage !== '')
       <div class="collab-section__media">
-        <img src="{{ $collabImage }}" alt="{{ $collabImage  }}" title="{{ $collabImage  }}" width="500" height="360" class="collab-section__image" loading="lazy">
+        <img src="{{ $collabImage }}" alt="Suave Creators collaboration visual for custom software development" title="Suave Creators collaboration visual for custom software development" width="500" height="360" class="collab-section__image" loading="lazy">
       </div>
     @endif
   </div>
@@ -312,6 +312,7 @@
   :title="$service['industriesTitle'] ?? ''"
   :description="$service['industriesDescription'] ?? ''"
   heading-id="service-industries-heading"
+  class="py-[80px]"
 />
 
 <!-- 9. Technologies & Partnerships Marquee Section Start -->
@@ -372,7 +373,7 @@ $n = $index + 1;
             <div class="why-choose-item__panel-inner">
               @if (!empty($card['image']))
                 <figure class="why-choose-item__image">
-                  <img src="{{ $card['image'] }}" alt="{{ $card['image']  }}" title="{{ $card['image']  }}" class="h-full w-full object-cover" width="640" height="400" loading="{{ $isOpen ? 'eager' : 'lazy' }}">
+                  <img src="{{ $card['image'] }}" alt="{{ ($card['title'] ?? 'Service').' benefit visual for Suave Creators software services' }}" title="{{ ($card['title'] ?? 'Service').' benefit visual for Suave Creators software services' }}" class="h-full w-full object-cover" width="640" height="400" loading="{{ $isOpen ? 'eager' : 'lazy' }}">
                 </figure>
               @endif
               @if (!empty($card['text']))
@@ -394,7 +395,7 @@ $n = $index + 1;
       @foreach (($service['whyCards'] ?? []) as $card)
         <article class="flex min-h-full flex-col gap-3 overflow-hidden rounded-[22px] border border-[rgba(42,77,251,0.08)] bg-white shadow-[0_18px_40px_rgba(36,36,84,0.06)]">
           @if (!empty($card['image']))
-            <figure class="aspect-[16/10] overflow-hidden"><img src="{{ $card['image'] }}" alt="{{ $card['image']  }}" title="{{ $card['image']  }}" class="h-full w-full object-cover" loading="lazy"></figure>
+            <figure class="aspect-[16/10] overflow-hidden"><img src="{{ $card['image'] }}" alt="{{ ($card['title'] ?? 'Service').' benefit visual for Suave Creators software services' }}" title="{{ ($card['title'] ?? 'Service').' benefit visual for Suave Creators software services' }}" class="h-full w-full object-cover" loading="lazy"></figure>
           @endif
           <div class="flex flex-1 flex-col gap-3 p-[22px]">
             <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $card['title'] ?? '' }}</h3>
@@ -476,11 +477,13 @@ $n = $index + 1;
 
 <x-frontend.consultation-section
   :background-image="$service['finalBg'] ?? ($service['bannerBg'] ?? 'assets/media/webservice-bg.webp')"
+  :eyebrow="$service['finalEyebrow'] ?? 'Your Digital Future Together'"
   :title="$service['finalTitle'] ?? 'Let\'s Build Your Business Website Together'"
   :description="$service['finalDescription'] ?? ''"
   :cta-label="$service['finalPrimaryCta'] ?? 'Get a Free Quote'"
   :secondary-cta-label="$service['finalSecondaryCta'] ?? 'Contact us Today'"
   :show-people="($service['showFinalPeople'] ?? true) !== false"
+  :hide-bg-below-desktop="($service['hideFinalBgBelowDesktop'] ?? false) === true"
   :allow-html-title="false"
 />
 
@@ -490,7 +493,7 @@ $n = $index + 1;
   title="Explore Our Insights"
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
   section-class="py-16 lg:py-18"
-  more-href="blogs"
+  more-href="{{ route('blogs') }}"
   more-label="View More"
 />
 
@@ -1168,7 +1171,7 @@ $n = $index + 1;
   }
 
   .development-process-section__inner {
-    background-image: url("assets/media/development-vector-visual.png");
+    background-image: url("/assets/media/development-vector-visual.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

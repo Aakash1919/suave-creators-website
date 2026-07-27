@@ -18,6 +18,10 @@ trait NormalizesAssetPaths
 
         $path = (string) Str::of($path)->ltrim('/');
 
+        if (Str::startsWith($path, 'assetsicons/')) {
+            $path = 'assets/icons/'.(string) Str::of($path)->after('assetsicons/');
+        }
+
         // Legacy flat images/ paths are no longer used; leave assets/ paths intact.
         return $path;
     }

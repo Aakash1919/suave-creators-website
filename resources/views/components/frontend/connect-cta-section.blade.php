@@ -20,14 +20,14 @@
       </x-frontend.cta-button>
       @if ($secondaryLabel !== '')
         <a href="{{ $secondaryHref }}"
-          class="inline-flex items-end border-b border-white/70 pb-0.5 text-sm font-semibold text-white max-lg:min-h-[44px]">
+          class="inline-flex cursor-pointer items-end border-b border-white/70 pb-0.5 text-sm font-semibold text-white max-lg:min-h-[44px]">
           {{ $secondaryLabel }}
         </a>
       @endif
     </div>
 
     @if ($showPhone)
-      <span class="smart-together-cta__phone">
+      <span class="smart-together-cta__phone" aria-hidden="true">
         <img src="{{ asset($phoneImage) }}" alt="{{ $phoneAlt }}" title="{{ $phoneAlt }}" class="rounded-[10px]"
           decoding="async" loading="lazy">
       </span>

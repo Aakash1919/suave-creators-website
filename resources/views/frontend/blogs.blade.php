@@ -2,9 +2,9 @@
 
 @section('seo')
   <x-layouts.seo
-    title="Blog | Suave Creators Insights on Software & Digital Growth"
+    title="Blogs & Insights | Suave Creators"
     description="Articles and insights from Suave Creators on software development, digital strategy, and product design."
-    og-title="Blog | Suave Creators Insights on Software & Digital Growth"
+    og-title="Blogs & Insights | Suave Creators"
     og-description="Articles and insights from Suave Creators on software development, digital strategy, and product design."
     :canonical="url()->current()"
     :og-url="url()->current()"

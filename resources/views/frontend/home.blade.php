@@ -54,7 +54,7 @@
     </div>
 
     <div class="relative z-10 flex w-full min-w-0 items-center justify-center lg:justify-end">
-      <div class="hero-media-grid">
+      <div class="hero-media-grid" aria-hidden="true">
         <div
           class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
           <img src="{{ asset('assets/hero/hero-motion-panel-1.gif') }}" alt="Custom software and web development work by Suave Creators" title="Custom software and web development work by Suave Creators" class="block h-full w-full max-w-none object-cover" decoding="async" loading="lazy">
@@ -135,7 +135,7 @@
 
           <div class="about-values__item">
             <span class="about-values__icon bg-[#DFE4F8] shadow-[0px_16px_50px_0px_#5C638029]">
-              <img src="{{ asset('assetsicons/client-focus-icon.svg') }}" alt="Client focused delivery icon for custom software projects" title="Client focused delivery icon for custom software projects" width="40" height="40" decoding="async" loading="lazy">
+              <img src="{{ asset('assets/icons/client-focus-icon.svg') }}" alt="Client focused delivery icon for custom software projects" title="Client focused delivery icon for custom software projects" width="40" height="40" decoding="async" loading="lazy">
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
@@ -927,68 +927,6 @@
   font-weight: 600;
 }
 
-.industries-support {
-  align-items: center;
-  background: linear-gradient(90deg, #2A4DFB 0%, #7A5FF8 100%);
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 13px;
-  box-shadow: 3px 6px 14px -2px #2A4DFB29;
-  display: flex;
-  justify-content: space-between;
-  margin: 39px auto 0;
-  max-width: 1180px;
-  min-height: 135px;
-  overflow: hidden;
-  padding: 18px 24px;
-  position: relative;
-}
-
-.industries-support::before {
-  background: linear-gradient(115deg, transparent 44%, rgb(255 255 255 / 7%) 45%, transparent 46%);
-  content: "";
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-}
-
-.industries-support__copy {
-  position: relative;
-  z-index: 1;
-}
-
-.industries-support__copy p {
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.35;
-}
-
-.industries-support__copy a {
-  align-items: center;
-  background: #fff;
-  border-radius: 999px;
-  box-shadow: 3px 7px 22px -6px #2A4DFB24;
-  color: #2A4DFB;
-  display: inline-flex;
-  font-size: 14px;
-  font-weight: 700;
-  gap: 7px;
-  margin-top: 12px;
-  min-height: 29px;
-  padding: 7px 16px;
-  transition: box-shadow 180ms ease, transform 180ms ease;
-}
-
-.industries-support__copy a i {
-  color: #4258e9;
-  font-size: 7px;
-}
-
-.industries-support__copy a:hover {
-  box-shadow: 0 9px 22px rgb(27 25 107 / 30%);
-  transform: translateY(-1px);
-}
-
 @media (min-width: 1024px) {
   .about-values {
     flex-direction: row;
@@ -1163,29 +1101,6 @@
 
   .digital-marketing-services__more a {
     margin-left: 0;
-  }
-
-  .industries-support {
-    align-items: flex-start;
-    min-height: 150px;
-    padding: 22px 20px;
-  }
-
-  .industries-support__copy {
-    max-width: calc(100% - 64px);
-  }
-
-  .industries-support__copy p {
-    font-size: clamp(0.9375rem, 3.5vw, 1.125rem);
-  }
-
-  .industries-support__illustration {
-    margin: 0;
-    position: absolute;
-    right: 10px;
-    top: 60px;
-    transform: scale(0.72);
-    transform-origin: top right;
   }
 
   .about-values__item {

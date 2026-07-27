@@ -1,5 +1,5 @@
 <section
-  {{ $attributes->merge(['class' => 'full-bleed industries-served bg-cover bg-top bg-no-repeat py-[80px]']) }}
+  {{ $attributes->merge(['class' => 'full-bleed industries-served bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]']) }}
   style="background-image: url('{{ asset($backgroundImage) }}');"
   aria-labelledby="{{ $headingId }}">
   <div class="industries-served__inner section-inner">
@@ -25,28 +25,51 @@
         @php
           $tag = $card['href'] !== '' ? 'a' : 'article';
           $cardClass = 'industry-card'.($variant === 'standout' ? ' industry-card--standout' : '');
+          $hasStep = $card['step'] !== '';
+          $hasImage = $card['image'] !== '';
+          $hasIcon = $card['icon'] !== '';
         @endphp
         <{{ $tag }}
           @if ($card['href'] !== '') href="{{ $card['href'] }}" @endif
           class="{{ $cardClass }}">
-          @if ($card['step'] !== '')
-            <span class="industry-card__step">{{ $card['step'] }}</span>
-          @endif
-          @if ($card['image'] !== '')
-            <img src="{{ asset($card['image']) }}" alt="{{ $card['title'] }}" title="{{ $card['title'] }}"
-              class="industry-card__image" loading="lazy" decoding="async">
-          @elseif ($card['icon'] !== '')
-            <i class="industry-card__icon {{ $card['icon'] }}" aria-hidden="true"></i>
+          @if ($variant === 'standout' && ($hasImage || $hasIcon || $hasStep))
+            <div class="industry-card__top">
+              @if ($hasImage)
+                <span class="industry-card__icon inline-flex">
+                  <img src="{{ str_starts_with($card['image'], 'http') || str_starts_with($card['image'], '/') ? $card['image'] : asset($card['image']) }}"
+                    alt="{{ $card['title'] }} industry icon for Suave Creators software services"
+                    title="{{ $card['title'] }} industry icon for Suave Creators software services"
+                    width="28" height="28" class="h-7 w-7 object-contain" loading="lazy" decoding="async">
+                </span>
+              @elseif ($hasIcon)
+                <i class="industry-card__icon {{ $card['icon'] }}" aria-hidden="true"></i>
+              @endif
+              @if ($hasStep)
+                <span class="industry-card__step" aria-hidden="true">{{ $card['step'] }}</span>
+              @endif
+            </div>
+          @else
+            @if ($hasImage)
+              <span class="industry-card__icon inline-flex">
+                <img src="{{ str_starts_with($card['image'], 'http') || str_starts_with($card['image'], '/') ? $card['image'] : asset($card['image']) }}"
+                  alt="{{ $card['title'] }} industry icon for Suave Creators software services"
+                  title="{{ $card['title'] }} industry icon for Suave Creators software services"
+                  width="26" height="26" class="h-[26px] w-[26px] object-contain" loading="lazy" decoding="async">
+              </span>
+            @elseif ($hasIcon)
+              <i class="industry-card__icon {{ $card['icon'] }}" aria-hidden="true"></i>
+            @endif
+            @if ($hasStep)
+              <span class="industry-card__step" aria-hidden="true">{{ $card['step'] }}</span>
+            @endif
           @endif
           <h3>{{ $card['title'] }}</h3>
           <p>{{ $card['text'] }}</p>
-          <span class="industry-card__arrow" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 8L22 12L18 16"></path>
-              <path d="M2 12H22"></path>
-            </svg>
-          </span>
+          @if (! $hasStep)
+            <span class="industry-card__arrow" aria-hidden="true">
+              <x-frontend.cta-arrow />
+            </span>
+          @endif
         </{{ $tag }}>
       @endforeach
     </div>
@@ -63,14 +86,15 @@
           <p>{{ $supportText }}</p>
           <a href="{{ $supportHref }}">
             {{ $supportLabel }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-              <path d="M18 8L22 12L18 16"></path>
-              <path d="M2 12H22"></path>
-            </svg>
+            <x-frontend.cta-arrow />
           </a>
         </div>
+        @if ($supportImage !== '')
+          <div class="industries-support__illustration" aria-hidden="true">
+            <img src="{{ asset($supportImage) }}" alt="{{ $supportImageAlt }}" title="{{ $supportImageAlt }}"
+              loading="lazy" decoding="async">
+          </div>
+        @endif
       </aside>
     @endif
   </div>

@@ -54,10 +54,10 @@ class ServiceSupport
     public static function expertiseItems(): array
     {
         return [
-            ['assets/portfolio/project-analysis-dashboard.png', 'Project analysis', 'Research and strategy', '#4C24F4', '#F0EAFF'],
-            ['assets/media/build-strategy-visual.png', 'Build strategy', 'Wireframe and design', '#1873E7', '#EAF5FC'],
-            ['assets/media/launch-live-visual.png', 'Launch and live', 'Development and scale', '#0F968E', '#E8F8F6'],
-            ['assets/brand/maintenance-mark-logo.png', 'Maintenance', 'Maintaining strong', '#FA6811', '#FFF0E7'],
+            ['assets/portfolio/project-analysis-dashboard.png', 'Project analysis', 'Research and strategy', '#4C24F4', '#F0EAFF', 'Project analysis dashboard for Suave Creators web development services'],
+            ['assets/media/build-strategy-visual.png', 'Build strategy', 'Wireframe and design', '#1873E7', '#EAF5FC', 'Build strategy visual for Suave Creators software design process'],
+            ['assets/media/launch-live-visual.png', 'Launch and live', 'Development and scale', '#0F968E', '#E8F8F6', 'Launch and live product visual for Suave Creators development services'],
+            ['assets/brand/maintenance-mark-logo.png', 'Maintenance', 'Maintaining strong', '#FA6811', '#FFF0E7', 'Maintenance support mark for Suave Creators software services'],
         ];
     }
 
@@ -97,7 +97,7 @@ class ServiceSupport
             [
                 'assets/media/global-scalable-security.webp',
                 'Global and Scalable Security',
-                'Our solutions are built to grow with your business. Whether you&rsquo;re a startup expanding into new markets or an enterprise business managing high volumes, we design platforms that scale without performance issues.',
+                'Our solutions are built to grow with your business. Whether you\'re a startup expanding into new markets or an enterprise business managing high volumes, we design platforms that scale without performance issues.',
                 ['SEO', 'Mobile', 'First Performance'],
             ],
         ];
@@ -199,6 +199,13 @@ class ServiceSupport
         $bodyImage = (string) ($service['bodyImage'] ?? '');
         $bodyBg = (string) ($service['bodyBg'] ?? '');
         $useBodyImageLayout = $bodyImage !== '';
+        $introLinkUrl = (string) ($service['introLinkUrl'] ?? '');
+
+        if ($introLinkUrl === '' || $introLinkUrl === '/services' || $introLinkUrl === '/services/') {
+            $service['introLinkUrl'] = route('services');
+        } else {
+            $service['introLinkUrl'] = self::resolveInternalHref($introLinkUrl);
+        }
 
         return [
             'service' => $service,
@@ -257,7 +264,7 @@ class ServiceSupport
                 'image' => (string) ($ind['icon'] ?? ''),
                 'title' => (string) ($ind['title'] ?? ''),
                 'text' => (string) ($ind['desc'] ?? ''),
-                'href' => (string) ($ind['link'] ?? ''),
+                'href' => self::resolveInternalHref((string) ($ind['link'] ?? '')),
             ];
         }, $industries));
     }
@@ -276,6 +283,30 @@ class ServiceSupport
                 'step' => (string) ($card['step'] ?? ''),
             ];
         }, $cards));
+    }
+
+    protected static function resolveInternalHref(string $href): string
+    {
+        $href = trim($href);
+
+        if ($href === '' || $href === '#') {
+            return $href;
+        }
+
+        if (str_starts_with($href, 'http://') || str_starts_with($href, 'https://') || str_starts_with($href, 'mailto:') || str_starts_with($href, 'tel:')) {
+            return $href;
+        }
+
+        $path = (string) str($href)->before('#')->trim('/');
+
+        return match (true) {
+            $path === 'services' => route('services'),
+            $path === 'contact-us' => route('contact-us').(str_contains($href, '#') ? '#'.(string) str($href)->after('#') : ''),
+            $path === 'blogs' => route('blogs'),
+            str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),
+            str_starts_with($path, 'service/') => route('service.show', ['slug' => (string) str($path)->after('service/')]),
+            default => $href,
+        };
     }
 
     /**

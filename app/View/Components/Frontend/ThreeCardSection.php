@@ -21,10 +21,14 @@ class ThreeCardSection extends Component
         public array $items = [],
         public string $headingId = 'three-card-title',
         public string $backgroundImage = 'assets/background/web-services-section-bg.png',
-        public string $ctaHref = '/services/',
+        public string $ctaHref = '',
         public string $ctaLabel = 'See All Services',
     ) {
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
+
+        if ($this->ctaHref === '') {
+            $this->ctaHref = route('services');
+        }
 
         if ($this->items === []) {
             $this->items = [

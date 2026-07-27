@@ -18,7 +18,7 @@ class Topbar extends Component
 
     public function href(): string
     {
-        return route($this->hrefRoute);
+        return route($this->hrefRoute ?? 'product');
     }
 
     public function render(): View|Closure|string

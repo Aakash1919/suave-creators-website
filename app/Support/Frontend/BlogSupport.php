@@ -93,9 +93,9 @@ class BlogSupport
         return [
             ['src' => asset('assets/blog/blogs-hero/01-team.jpg'), 'alt' => 'Suave Creators team workspace for software development blogs', 'size' => 'sm'],
             ['src' => asset('assets/blog/blogs-hero/02-laptop.jpg'), 'alt' => 'Laptop with code for web development insights blog', 'size' => 'md'],
-            ['src' => asset('assets/blog/blogs-hero/03-meeting.jpg'), 'alt' => 'Team meeting for digital strategy blog articles', 'size' => 'lg'],
-            ['src' => asset('assets/blog/blogs-hero/04-office.jpg'), 'alt' => 'Modern office for Suave Creators engineering insights', 'size' => 'md'],
-            ['src' => asset('assets/blog/blogs-hero/05-desk.jpg'), 'alt' => 'Developer desk for software engineering blog posts', 'size' => 'sm'],
+            ['src' => asset('assets/blog/blogs-hero/03-creative.jpg'), 'alt' => 'Creative team collaboration for digital strategy blog articles', 'size' => 'lg'],
+            ['src' => asset('assets/blog/blogs-hero/04-desk.jpg'), 'alt' => 'Modern desk setup for Suave Creators engineering insights', 'size' => 'md'],
+            ['src' => asset('assets/blog/blogs-hero/05-notebook.jpg'), 'alt' => 'Notebook and workspace for software engineering blog posts', 'size' => 'sm'],
         ];
     }
 
@@ -139,11 +139,18 @@ class BlogSupport
 
         $articleContent = self::prepareArticleContent($post);
 
-        $titleWords = preg_split('/\s+/', trim((string) ($post['title'] ?? '')), -1, PREG_SPLIT_NO_EMPTY);
+        $titleWords = preg_split('/\s+/', trim((string) ($post['title'] ?? '')), -1, PREG_SPLIT_NO_EMPTY) ?: [];
         $titleWordCount = count($titleWords);
-        $accentStart = max(0, (int) floor($titleWordCount * 0.55));
-        $titleLead = implode(' ', array_slice($titleWords, 0, $accentStart));
-        $titleAccent = implode(' ', array_slice($titleWords, $accentStart));
+
+        if ($titleWordCount <= 2) {
+            $titleLead = '';
+            $titleAccent = implode(' ', $titleWords);
+        } else {
+            $accentCount = (int) ceil(($titleWordCount + 1) / 2);
+            $accentCount = max(2, min($accentCount, $titleWordCount - 2));
+            $titleLead = implode(' ', array_slice($titleWords, 0, -$accentCount));
+            $titleAccent = implode(' ', array_slice($titleWords, -$accentCount));
+        }
 
         return [
             'post' => $post,
@@ -159,7 +166,7 @@ class BlogSupport
             'titleLead' => $titleLead,
             'titleAccent' => $titleAccent,
             'faqs' => ! empty($post['faqs']) && is_array($post['faqs']) ? $post['faqs'] : self::defaultFaqs(),
-            'seoTitle' => ($post['title'] ?? 'Blog').' | Suave Creators',
+            'seoTitle' => ($post['title'] ?? 'Blog').' | Suave Creators Blog',
             'seoDescription' => (string) ($post['short_description'] ?? 'Suave Creators blog article.'),
         ];
     }

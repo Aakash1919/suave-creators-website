@@ -76,11 +76,11 @@ class IndustryDetailSupport
     {
         $iconCycle = ['innovation', 'quality', 'trust', 'customer'];
         $processImages = [
-            'assets/media/portfolio-1.png',
-            'assets/media/portfolio-2.png',
-            'assets/media/portfolio-3.png',
-            'assets/media/portfolio-4.png',
-            'assets/media/insight-digital-strategy.jpg',
+            'assets/portfolio/modern-office-yellow-accent-lounge.png',
+            'assets/portfolio/contemporary-living-room-kitchen.png',
+            'assets/portfolio/warm-lounge-plants-artwork.png',
+            'assets/portfolio/office-glass-meeting-rooms.png',
+            'assets/blog/insight-digital-strategy.jpg',
             'assets/media/retail-solutions-visual-5.webp',
         ];
         $processAlts = [
@@ -141,18 +141,56 @@ class IndustryDetailSupport
     protected static function defaultProcessData(): array
     {
         $icons = [
-            'assets/icons/agile-icon-1.svg',
-            'assets/icons/agile-icon-2.svg',
-            'assets/icons/agile-icon-3.svg',
-            'assets/icons/agile-icon-4.svg',
+            asset('assets/icons/agile-icon-1.svg'),
+            asset('assets/icons/agile-icon-2.svg'),
+            asset('assets/icons/agile-icon-3.svg'),
+            asset('assets/icons/agile-icon-4.svg'),
         ];
+
+        $card = static function (int $iconIndex, string $title, string $desc) use ($icons): array {
+            return [
+                'icon' => $icons[$iconIndex],
+                'title' => $title,
+                'desc' => $desc,
+            ];
+        };
 
         return [
             'Planning & Consultation' => [
-                ['icon' => $icons[0], 'title' => 'Vision and Goals Discussion', 'desc' => 'Define digital transformation goals and align stakeholders on outcomes.'],
-                ['icon' => $icons[1], 'title' => 'Resource Allocation', 'desc' => 'Assign dedicated developers, analysts, and designers for secure delivery.'],
-                ['icon' => $icons[2], 'title' => 'Project Roadmap Creation', 'desc' => 'Outline timeline, integrations, and milestones from prototype to launch.'],
-                ['icon' => $icons[3], 'title' => 'Scope Definition', 'desc' => 'Define technical requirements, roles, and compliance frameworks.'],
+                $card(0, 'Vision and Goals Discussion', 'Define digital transformation goals and align stakeholders on outcomes.'),
+                $card(1, 'Resource Allocation', 'Assign dedicated developers, analysts, and designers for secure delivery.'),
+                $card(2, 'Project Roadmap Creation', 'Outline timeline, integrations, and milestones from prototype to launch.'),
+                $card(3, 'Scope Definition', 'Define technical requirements, roles, and compliance frameworks.'),
+            ],
+            'Design' => [
+                $card(0, 'User Journey Mapping', 'Map journeys for every role to design intuitive interfaces.'),
+                $card(1, 'UI/UX Design', 'Create dashboards and mobile-first layouts tailored to the industry.'),
+                $card(2, 'Wireframes & Prototypes', 'Build wireframes focused on accessibility and key workflows.'),
+                $card(3, 'Design Finalisation', 'Finalise visuals, content flow, and interactive patterns.'),
+            ],
+            'Development' => [
+                $card(0, 'Secure Build', 'Translate goals into secure, scalable software modules.'),
+                $card(1, 'Engineering Team', 'Assign Laravel, React, and API specialists for robust systems.'),
+                $card(2, 'Sprint Delivery', 'Structured sprints for backend APIs, front-end, and integrations.'),
+                $card(3, 'Stack & Security', 'Define stack, third-party integrations, and security layers.'),
+            ],
+            'Testing' => [
+                $card(0, 'Test Objectives', 'Verify accuracy, privacy, and performance before go-live.'),
+                $card(1, 'QA Specialists', 'Domain QA for validation, workflow simulation, and load handling.'),
+                $card(2, 'Test Cycles', 'Unit, integration, UAT, and security audits across releases.'),
+                $card(3, 'Quality Benchmarks', 'Define coverage criteria and automated testing tools.'),
+            ],
+            'Deployment' => [
+                $card(0, 'Deployment Goals', 'Seamless integration with existing systems and cloud infra.'),
+                $card(1, 'DevOps Support', 'Server configs, API connections, and compliance checks.'),
+                $card(2, 'Migration Plan', 'Step-by-step migration, onboarding, and backup strategies.'),
+                $card(3, 'Go-Live Readiness', 'Environments, rollback procedures, and monitoring metrics.'),
+            ],
+            'Maintenance' => [
+                $card(0, 'Long-term Goals', 'Sustainability, uptime, and data integrity after launch.'),
+                $card(1, 'Support Team', 'Patches, performance optimisation, and major updates.'),
+                $card(2, 'Update Roadmap', 'Periodic updates aligned with new tech and regulations.'),
+                $card(3, 'SLA & Monitoring', 'Monitoring tools, reporting, and service-level commitments.'),
             ],
         ];
     }

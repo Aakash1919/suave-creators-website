@@ -2,10 +2,10 @@
 
 @section('seo')
   <x-layouts.seo
-    title="Product Suave Creators | Run your entire organization with AI AT THE CORE"
-    description="Suave CRM unifies people, projects, finance, communication, and growth into one secure AI-powered platform."
-    og-title="Product Suave Creators | Run your entire organization with AI AT THE CORE"
-    og-description="Suave CRM unifies people, projects, finance, communication, and growth into one secure AI-powered platform."
+    title="Product | AI-Powered Business Platform | Suave Creators"
+    description="Run your organization with Suave Creators product suite - AI at the core, unified modules, enterprise security, and a single workspace for your team."
+    og-title="Product | AI-Powered Business Platform | Suave Creators"
+    og-description="Run your organization with Suave Creators product suite - AI at the core, unified modules, and enterprise security."
     :canonical="url()->current()"
     :og-url="url()->current()"
   />
@@ -129,7 +129,7 @@
         </ul>
       </div>
       <div class="product-workspace__image">
-        <img src="{{ asset('assets/media/product/Image%20(1).jpg') }}" alt="Team working in modern office" title="Team working in modern office">
+        <img src="{{ asset('assets/product/workspace-team-photo.jpg') }}" alt="Team collaborating in modern office for Suave CRM workspace" title="Team collaborating in modern office for Suave CRM workspace">
       </div>
     </div>
   </section>
@@ -268,23 +268,23 @@
 
       <div class="product-productivity__grid">
         <img
-          src="{{ asset('assets/media/product/7439febd7801d8c2544d0779e2f71779a0ebcb23.gif') }}"
-          alt="Team collaboration overview" title="Team collaboration overview"
+          src="{{ asset('assets/product/product-animation-7439febd.gif') }}"
+          alt="Team collaboration overview for Suave CRM productivity" title="Team collaboration overview for Suave CRM productivity"
           class="product-productivity__shot product-productivity__shot--config"
         >
         <img
-          src="{{ asset('assets/media/product/productivity-3.gif') }}"
-          alt="Dashboard overview" title="Dashboard overview"
+          src="{{ asset('assets/product/productivity-3.gif') }}"
+          alt="Dashboard overview for Suave CRM productivity platform" title="Dashboard overview for Suave CRM productivity platform"
           class="product-productivity__shot product-productivity__shot--dashboard"
         >
         <img
-          src="{{ asset('assets/media/product/productivity-2.gif') }}"
-          alt="Attendance dashboard overview" title="Attendance dashboard overview"
+          src="{{ asset('assets/product/productivity-2.gif') }}"
+          alt="Attendance dashboard overview for Suave CRM" title="Attendance dashboard overview for Suave CRM"
           class="product-productivity__shot product-productivity__shot--projects"
         >
         <img
-          src="{{ asset('assets/media/product/ae57327cb88003a8cb87e2ac6ff87f652bcec9ce.gif') }}"
-          alt="Invoice document view" title="Invoice document view"
+          src="{{ asset('assets/product/product-animation-ae57327c.gif') }}"
+          alt="Invoice document view for Suave CRM billing module" title="Invoice document view for Suave CRM billing module"
           class="product-productivity__shot product-productivity__shot--invoice"
         >
       </div>
@@ -348,7 +348,7 @@
       <div class="product-partner-cards">
         @foreach ($partnerCards as $card)
           <div class="product-partner-card">
-            <img src="{{ $card['image'] }}" alt="{{ $card['title'] }}" title="{{ $card['title'] }}">
+            <img src="{{ $card['image'] }}" alt="{{ $card['alt'] }}" title="{{ $card['alt'] }}">
             <h3>{{ $card['title'] }}</h3>
             <p>{{ $card['description'] }}</p>
             <a href="{{ $card['href'] }}" class="product-partner-card__link">Learn More</a>
@@ -364,10 +364,10 @@
     <div class="container">
       <div class="product-cta__card">
         <div class="product-cta__decor product-cta__decor--left" aria-hidden="true">
-          <img src="{{ asset('assets/media/product/cta-pulse.gif') }}" alt="Cta Pulse for Suave Creators software development" title="Cta Pulse for Suave Creators software development" class="product-cta__pulse">
+          <img src="{{ asset('assets/product/cta-pulse.gif') }}" alt="Decorative pulse animation for Suave CRM call to action" title="Decorative pulse animation for Suave CRM call to action" class="product-cta__pulse">
         </div>
         <div class="product-cta__decor product-cta__decor--right" aria-hidden="true">
-          <img src="{{ asset('assets/media/product/cta-pulse.gif') }}" alt="Cta Pulse for Suave Creators software development" title="Cta Pulse for Suave Creators software development" class="product-cta__pulse">
+          <img src="{{ asset('assets/product/cta-pulse.gif') }}" alt="Decorative pulse animation for Suave CRM call to action" title="Decorative pulse animation for Suave CRM call to action" class="product-cta__pulse">
         </div>
 
         <div class="product-cta__content">
@@ -425,10 +425,13 @@
 
     if (panelImage) {
       panelImage.src = image;
-      panelImage.alt = name;
+      panelImage.alt = name + ' screenshot for Suave CRM software platform';
+      panelImage.title = name + ' screenshot for Suave CRM software platform';
     }
     if (panelIcon) {
       panelIcon.src = icon;
+      panelIcon.alt = name + ' module icon for Suave CRM software platform';
+      panelIcon.title = name + ' module icon for Suave CRM software platform';
     }
     if (panelTitle) {
       panelTitle.textContent = name;

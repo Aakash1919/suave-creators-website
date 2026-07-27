@@ -16,7 +16,7 @@ class ContactSupport
             'faqs' => self::faqs(),
             'faqMedia' => 'assets/media/faq-team-collaboration.gif',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
-            'faqCtaHref' => '#contact-id',
+            'faqCtaHref' => route('contact-us').'#contact-id',
             'faqCtaLabel' => 'Send a Message',
         ];
     }

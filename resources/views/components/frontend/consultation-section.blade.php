@@ -1,8 +1,13 @@
 <section id="consultation" {{ $attributes->merge(['class' => 'full-bleed consultation-section']) }}>
   <div class="section-inner">
     <div
-      class="consultation-card bg-cover bg-no-repeat{{ $cardPosition === 'center' ? ' bg-center' : ' bg-top' }}{{ $solo ? ' consultation-card--solo' : '' }}"
-      style="background-image: url('{{ asset($backgroundImage) }}');">
+      class="consultation-card bg-cover bg-no-repeat{{ $cardPosition === 'center' ? ' bg-center' : ' bg-top' }}{{ $solo ? ' consultation-card--solo' : '' }}{{ $hideBgBelowDesktop ? ' consultation-card--hide-bg-below-desktop' : '' }}"
+      @if ($hideBgBelowDesktop)
+        style="--consultation-bg: url('{{ asset($backgroundImage) }}');"
+      @else
+        style="background-image: url('{{ asset($backgroundImage) }}');"
+      @endif
+    >
       <div class="consultation-copy">
         @if ($eyebrow !== '')
           <span class="mb-2 inline-block text-sm font-semibold text-white/80">{{ $eyebrow }}</span>
@@ -15,17 +20,23 @@
           @endif
         </h2>
         <p>{{ $description }}</p>
-        <div class="flex flex-wrap gap-4">
-          <a href="{{ $ctaHref }}" class="consultation-cta">
+        @if ($secondaryCtaLabel !== '')
+          <div class="flex flex-wrap gap-4">
+            <a href="{{ $ctaHref }}" class="group consultation-cta cursor-pointer">
+              {{ $ctaLabel }}
+              <x-frontend.cta-arrow />
+            </a>
+            <a href="{{ $secondaryCtaHref }}"
+              class="consultation-secondary-link inline-flex cursor-pointer items-end border-b border-white/70 pb-0.5 text-sm font-semibold text-white">
+              {{ $secondaryCtaLabel }}
+            </a>
+          </div>
+        @else
+          <a href="{{ $ctaHref }}" class="group consultation-cta cursor-pointer">
             {{ $ctaLabel }}
             <x-frontend.cta-arrow />
           </a>
-          @if ($secondaryCtaLabel !== '')
-            <a href="{{ $secondaryCtaHref }}" class="consultation-cta consultation-cta--secondary">
-              {{ $secondaryCtaLabel }}
-            </a>
-          @endif
-        </div>
+        @endif
       </div>
 
       @if ($showPeople && count($people) > 0)

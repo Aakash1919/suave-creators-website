@@ -130,20 +130,21 @@
   :description="$industry['ctaDescription'] ?? ''"
   title-id="industry-cta-heading"
   primary-label="Let's Connect to Discuss"
+  section-class="full-bleed smart-together-cta py-5 sm:py-6"
 />
 
 <!-- Specialized Services Section Start -->
 <section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')" aria-labelledby="industry-specialized-heading">
   <div class="section-inner">
-    <div class="mx-auto mb-10 max-w-[720px] text-center lg:mb-14">
-      <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $industry['specializedEyebrow'] ?? 'Specialized Services' }}</p>
-      <h2 id="industry-specialized-heading" class="mt-4 text-[20px] font-semibold leading-[36px] text-[#171717] lg:text-[24px]">{{ $industry['specializedTitle'] ?? '' }}</h2>
-      <p class="mx-auto mt-4 max-w-[605px] text-[14px] leading-[24px] text-[#4D4D4D]">{{ $industry['specializedDescription'] ?? '' }}</p>
+    <div class="mx-auto mb-8 max-w-[720px] text-center sm:mb-10 lg:mb-14">
+      <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">{{ $industry['specializedEyebrow'] ?? 'Specialized Services' }}</p>
+      <h2 id="industry-specialized-heading" class="mt-3 text-[20px] font-semibold leading-[1.3] text-[#171717] sm:mt-4 lg:text-[24px] lg:leading-[36px]">{{ $industry['specializedTitle'] ?? '' }}</h2>
+      <p class="mx-auto mt-3 max-w-[605px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-[24px]">{{ $industry['specializedDescription'] ?? '' }}</p>
     </div>
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
       @foreach (($industry['specialized'] ?? []) as $item)
         <article class="flex min-h-full flex-col gap-3 rounded-[22px] border border-[rgba(42,77,251,0.08)] bg-white p-[22px] shadow-[0_18px_40px_rgba(36,36,84,0.06)]">
-          @if (!empty($item['icon']))<span class="inline-flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-[#EEF1FF]"><img src="{{ $item['icon'] }}" alt="{{ $item['icon']  }}" title="{{ $item['icon']  }}" width="26" height="26" class="h-[26px] w-[26px] object-contain" loading="lazy"></span>@endif
+          @if (!empty($item['icon']))<span class="inline-flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-[#EEF1FF]"><img src="{{ $item['icon'] }}" alt="{{ ($item['title'] ?? 'Specialized service').' icon for Suave Creators industry solutions' }}" title="{{ ($item['title'] ?? 'Specialized service').' icon for Suave Creators industry solutions' }}" width="26" height="26" class="h-[26px] w-[26px] object-contain" loading="lazy"></span>@endif
           <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $item['title'] ?? '' }}</h3>
           <p class="flex-1 text-sm leading-relaxed text-[#4D4D4D]">{{ $item['desc'] ?? '' }}</p>
         </article>
@@ -176,13 +177,13 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
 <section class="full-bleed industry-why-section relative overflow-hidden bg-[#F8FAFC] py-10 sm:py-14 lg:py-20" aria-labelledby="industry-why-heading">
   <div class="industry-why-section__bg" aria-hidden="true"></div>
   <div class="section-inner relative z-10">
-    <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-14">
+    <header class="mx-auto mb-8 max-w-[720px] text-center sm:mb-10 lg:mb-14">
       <div class="mb-4 flex items-center justify-center gap-2">
         <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
         <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">{{ $industry['whyEyebrow'] ?? 'Why Us' }}</span>
       </div>
       <h2 id="industry-why-heading" class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight text-[#171717]">{{ $industry['whyTitle'] ?? '' }}</h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $industry['whyDescription'] ?? '' }}</p>
+      <p class="mx-auto mt-3 max-w-[560px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px]">{{ $industry['whyDescription'] ?? '' }}</p>
     </header>
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
       @foreach (($industry['whyCards'] ?? []) as $card)
@@ -201,12 +202,12 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
 <!-- Agile Process Section Start -->
 <section class="full-bleed bg-white py-10 sm:py-14 lg:py-20" aria-labelledby="agile-process-title" data-agile-process>
   <div class="section-inner">
-    <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-12">
-      <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">Need it simpler and faster? We have a solution for you!</p>
-      <h2 id="agile-process-title" class="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">{{ $industry['agileTitle'] ?? 'Our Agile Development Process' }}</h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $industry['agileSubtitle'] ?? 'Let’s connect with our experienced developers for expert guidance and tailored solutions.' }}</p>
+    <header class="mx-auto mb-8 max-w-[720px] text-center sm:mb-10 lg:mb-12">
+      <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">Need it simpler and faster? We have a solution for you!</p>
+      <h2 id="agile-process-title" class="mt-3 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717] sm:mt-4">{{ $industry['agileTitle'] ?? 'Our Agile Development Process' }}</h2>
+      <p class="mx-auto mt-3 max-w-[560px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px]">{{ $industry['agileSubtitle'] ?? 'Let’s connect with our experienced developers for expert guidance and tailored solutions.' }}</p>
     </header>
-    <div class="agile-process-tabs swiper mb-10" data-agile-tabs>
+    <div class="agile-process-tabs swiper mb-8 sm:mb-10" data-agile-tabs>
       <div class="swiper-wrapper agile-process-tabs__list" role="tablist" aria-label="Agile process phases">
         @foreach ($agileTabs as $ti => $tab)
           <div class="swiper-slide agile-process-tabs__slide">
@@ -225,7 +226,7 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           @foreach ($processData[$tab] as $item)
             <article class="flex min-h-full flex-col gap-3 rounded-[20px] border border-[rgba(42,77,251,0.08)] bg-white p-[22px] shadow-[0_18px_40px_rgba(36,36,84,0.06)] transition hover:-translate-y-1 hover:shadow-[0_22px_48px_rgba(36,36,84,0.1)]">
-              <span class="inline-flex h-12 w-12 items-center justify-center rounded-[14px] bg-[#EEF1FF]"><img src="{{ $item['icon'] ?? 'assets/icons/agile-icon-1.svg' }}" alt="{{ $item['icon'] ?? 'assets/icons/agile-icon-1.svg'  }}" title="{{ $item['icon'] ?? 'assets/icons/agile-icon-1.svg'  }}" width="24" height="24" class="h-6 w-6 object-contain" loading="lazy"></span>
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-[14px] bg-[#EEF1FF]"><img src="{{ $item['icon'] ?? asset('assets/icons/agile-icon-1.svg') }}" alt="{{ ($item['title'] ?? 'Agile process').' icon for Suave Creators industry development' }}" title="{{ ($item['title'] ?? 'Agile process').' icon for Suave Creators industry development' }}" width="24" height="24" class="h-6 w-6 object-contain" loading="lazy"></span>
               <h3 class="text-[15px] font-bold text-[#171717]">{{ $item['title'] ?? '' }}</h3>
               <p class="text-[13px] leading-relaxed text-[#4D4D4D]">{{ $item['desc'] ?? '' }}</p>
             </article>
@@ -257,16 +258,18 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
   heading-id="industry-faq-heading"
   eyebrow="Have questions about our Industry Solutions?"
   description="Here are the most asked questions for this industry."
-  class="faq-section--align"
+  class="faq-section--align !py-10 sm:!py-14 lg:!py-[76px]"
 />
 
 <x-frontend.consultation-section
-  :background-image="$industry['finalBg'] ?? 'assets/media/consultation-bg.png'"
+  :background-image="$industry['finalBg'] ?? 'assets/background/consultation-section-bg.png'"
+  :eyebrow="$industry['finalEyebrow'] ?? 'Your Digital Future Together'"
   :title="$industry['finalTitle'] ?? 'Let\'s Build Your Next Digital Solution with us!'"
   :description="$industry['finalDescription'] ?? ''"
   cta-label="Get a Free Quote"
   secondary-cta-label="Contact us Today"
   :show-people="false"
+  :hide-bg-below-desktop="($industry['hideFinalBgBelowDesktop'] ?? false) === true"
   :allow-html-title="false"
 />
 
@@ -283,81 +286,12 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
   heading-id="industry-insights-title"
   title="Explore Our Insights"
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
-  section-class="py-16 lg:py-18"
-  more-href="blogs"
-  more-label="View More"
+  section-class="py-10 sm:py-14 lg:py-18"
+  more-href="{{ route('blogs') }}"
+  more-label="View All Blogs"
 />
 
 @endsection
-@push('custom-css')
-<style>
-.agile-process-tabs {
-  margin-bottom: 2.5rem;
-  overflow: hidden;
-  width: 100%;
-}
-
-.agile-process-tabs__list {
-  align-items: center;
-}
-
-.agile-process-tabs__slide {
-  height: auto;
-  width: auto;
-}
-
-.agile-process-tabs__tab {
-  white-space: nowrap;
-}
-
-.agile-process-tabs__pagination {
-  align-items: center;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 14px;
-}
-
-.agile-process-tabs__pagination .swiper-pagination-bullet {
-  background: transparent;
-  border: 1.5px solid #00003f;
-  border-radius: 999px;
-  height: 8px;
-  margin: 0 !important;
-  opacity: 1;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-  width: 8px;
-}
-
-.agile-process-tabs__pagination .swiper-pagination-bullet-active {
-  background: #00003f;
-  border-color: #00003f;
-}
-
-@media (min-width: 768px) {
-  .agile-process-tabs {
-    overflow: visible;
-  }
-
-  .agile-process-tabs__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    transform: none !important;
-  }
-
-  .agile-process-tabs__slide {
-    margin: 0 !important;
-    width: auto !important;
-  }
-
-  .agile-process-tabs__pagination {
-    display: none !important;
-  }
-}
-</style>
-@endpush
 
 @push('scripts')
 <script>

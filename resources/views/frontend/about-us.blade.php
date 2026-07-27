@@ -317,8 +317,9 @@
 <x-frontend.articles-insights-section
   :items="$articles"
   heading-id="about-insights-title"
-  more-href="blogs"
+  more-href="{{ route('blogs') }}"
   more-label="View More"
+  section-class="py-10 sm:py-12 lg:py-18"
 />
 
 <x-frontend.consultation-section />

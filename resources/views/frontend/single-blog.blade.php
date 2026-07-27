@@ -51,7 +51,7 @@
     <div class="single-blog-layout">
       <article class="single-blog-main">
         <div class="single-blog-content">
-          {{ $articleContent }}
+          {!! $articleContent !!}
         </div>
 
         <div class="single-blog-footer">

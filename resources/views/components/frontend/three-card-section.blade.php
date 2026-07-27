@@ -49,7 +49,7 @@
 
         @if (filled($ctaHref) && filled($ctaLabel))
             <div class="web-services__footer">
-                <a href="{{ url($ctaHref) }}">{{ $ctaLabel }}</a>
+                <a href="{{ $ctaHref }}">{{ $ctaLabel }}</a>
             </div>
         @endif
     </div>

@@ -18,7 +18,6 @@ class AboutSupport
             'techStack' => self::techStack(),
             'articles' => array_slice(HomeSupport::articles(), 0, 3),
             'partnerMarqueeItems' => HomeSupport::partnerMarqueeItems(),
-            'ctaHref' => 'contact-us',
         ];
     }
 

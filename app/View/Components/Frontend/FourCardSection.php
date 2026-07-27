@@ -21,10 +21,14 @@ class FourCardSection extends Component
         public array $items = [],
         public string $headingId = 'four-card-title',
         public string $backgroundImage = 'assets/background/technology-section-bg.png',
-        public string $ctaHref = '/contact-us/#contact-id',
+        public string $ctaHref = '',
         public string $ctaLabel = 'Book a Consultation',
     ) {
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
+
+        if ($this->ctaHref === '') {
+            $this->ctaHref = route('contact-us').'#contact-id';
+        }
 
         if ($this->items === []) {
             $this->items = [

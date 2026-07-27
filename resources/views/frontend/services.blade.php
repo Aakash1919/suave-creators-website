@@ -94,7 +94,7 @@
         <article class="about-stat"
           style="--stat-accent: {{ $item[3] }}; --stat-tint: {{ $item[4] }};">
           <span class="about-stat__icon">
-            <img src="{{ asset($item[0]) }}" alt="{{ $item[1] }}" title="{{ $item[1] }}" class="about-stat__icon-image" loading="lazy">
+            <img src="{{ asset($item[0]) }}" alt="{{ $item[5] ?? $item[1] }}" title="{{ $item[5] ?? $item[1] }}" class="about-stat__icon-image" loading="lazy">
           </span>
           <div class="about-stat__content">
             <strong class="about-stat__value about-stat__value--title">{{ $item[1] }}</strong>
@@ -272,6 +272,7 @@
   title="Our process guides you step by step towards achieving success"
   description="We follow a clear, collaborative process that takes your idea from research to a fully functional, high-performing product."
   heading-id="services-process-title"
+  class="py-[80px]"
 />
 <x-frontend.faq-section
   :qa="$faqs"
@@ -294,7 +295,7 @@
   :allow-html-title="false"
 />
 
-<x-frontend.testimonials-section heading-id="services-testimonials-title" />
+<x-frontend.testimonials-section heading-id="services-testimonials-title" class="py-20 lg:py-24" />
 
 <x-frontend.articles-insights-section
   :items="$articles"
@@ -302,7 +303,7 @@
   title="Explore Our Latest Insights"
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
   section-class="py-16 lg:py-18"
-  more-href="blogs"
+  more-href="{{ route('blogs') }}"
   more-label="View More"
 />
 
@@ -310,220 +311,4 @@
 
 
 @endsection
-@push('custom-css')
-<style>
-.about-stat__value--title {
-  font-size: 16px;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-.digital-solution-section {
-  background-color: #f7f8fc;
-  padding: 40px 0;
-}
-
-.digital-solution-section__row {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-}
-
-.digital-solution-section__badge {
-  align-items: center;
-  display: none;
-  flex-shrink: 0;
-  height: 120px;
-  justify-content: center;
-  position: relative;
-  width: 120px;
-}
-
-.digital-solution-section__ring {
-  animation: digital-solution-spin 10s linear infinite;
-  display: block;
-  height: 120px;
-  width: 120px;
-}
-
-.digital-solution-section__icon {
-  height: 40px;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-}
-
-.digital-solution-section__content {
-  align-items: baseline;
-  column-gap: 14px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas:
-  "top"
-  "agency"
-  "copy";
-  row-gap: 0;
-  width: 100%;
-}
-
-.digital-solution-section__title {
-  color: #0b1b3f;
-  display: contents;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.digital-solution-section__title-top,
-.digital-solution-section__title-agency {
-  font-family: "PP Mori", "Roboto Flex", ui-sans-serif, system-ui, sans-serif;
-  font-style: normal;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 0.95;
-}
-
-.digital-solution-section__title-top {
-  font-size: clamp(2rem, 8vw, 3.5rem);
-  grid-area: top;
-}
-
-.digital-solution-section__title-agency {
-  font-size: clamp(2rem, 8vw, 3.5rem);
-  grid-area: agency;
-  white-space: nowrap;
-}
-
-.digital-solution-section__copy {
-  align-self: center;
-  color: #4d4d4d;
-  font-size: 14px;
-  grid-area: copy;
-  line-height: 24px;
-  margin: 16px 0 0;
-  max-width: 560px;
-  min-width: 0;
-}
-
-@keyframes digital-solution-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (min-width: 768px) {
-  .digital-solution-section {
-    padding: 120px 0 40px;
-  }
-
-  .digital-solution-section__row {
-    gap: 28px;
-    margin-inline: auto;
-    max-width: 860px;
-  }
-
-  .digital-solution-section__content {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-    "top"
-    "agency"
-    "copy";
-    justify-items: center;
-    margin-inline: auto;
-    row-gap: 0;
-    text-align: center;
-  }
-
-  .digital-solution-section__title-top,
-  .digital-solution-section__title-agency {
-    font-size: clamp(2.75rem, 6vw, 4.5rem);
-    text-align: center;
-  }
-
-  .digital-solution-section__copy {
-    margin-top: 16px;
-    max-width: 780px;
-    text-align: center;
-  }
-}
-
-@media (min-width: 1024px) {
-  .digital-solution-section {
-    padding: 160px 0 40px;
-  }
-
-  .digital-solution-section__row {
-    gap: 32px;
-    margin-inline: auto;
-    max-width: 1040px;
-    padding-left: 160px;
-    position: relative;
-  }
-
-  .digital-solution-section__badge {
-    bottom: auto;
-    display: flex;
-    height: 120px;
-    left: 0;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 120px;
-    z-index: 1;
-  }
-
-  .digital-solution-section__content {
-    column-gap: 28px;
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-areas:
-    "top top"
-    "agency copy";
-    justify-content: start;
-    justify-items: start;
-    margin-inline: 0;
-    text-align: left;
-    width: 100%;
-  }
-
-  .digital-solution-section__title-top,
-  .digital-solution-section__title-agency {
-    font-size: clamp(3.5rem, 5vw, 5.5rem);
-    text-align: left;
-  }
-
-  .digital-solution-section__copy {
-    font-size: 14px;
-    line-height: 24px;
-    margin-top: 0;
-    max-width: 520px;
-    text-align: left;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .digital-solution-section__ring {
-    animation: none;
-  }
-}
-
-@media (min-width: 1280px) {
-  .digital-solution-section__row {
-    max-width: 1180px;
-    padding-left: 180px;
-  }
-
-  .digital-solution-section__title-top,
-  .digital-solution-section__title-agency {
-    font-size: 5.75rem;
-  }
-
-  .digital-solution-section__copy {
-    max-width: 560px;
-  }
-}
-</style>
-@endpush
 

@@ -20,11 +20,15 @@ class ArticlesInsightsSection extends Component
         public string $title = 'Latest Insights from Our Experts',
         public string $subtitle = 'We build digital experiences that help brands grow through design, development, branding, and marketing.',
         public string $headingId = 'articles-insights-title',
-        public string $moreHref = '/blogs',
+        public string $moreHref = '',
         public string $moreLabel = 'View More',
         public string $sectionClass = 'py-12 lg:py-18',
         public bool $initSwiper = true,
     ) {
+        if ($this->moreHref === '') {
+            $this->moreHref = route('blogs');
+        }
+
         $this->items = array_values(array_map(function (array $article): array {
             $title = (string) ($article['title'] ?? '');
 
@@ -36,7 +40,7 @@ class ArticlesInsightsSection extends Component
                 'date' => (string) ($article['date'] ?? ''),
                 'datetime' => (string) ($article['datetime'] ?? ''),
                 'author' => (string) ($article['author'] ?? 'Suave Creators'),
-                'url' => (string) ($article['url'] ?? '/blogs'),
+                'url' => (string) ($article['url'] ?? route('blogs')),
             ];
         }, $this->items));
     }

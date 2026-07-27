@@ -19,7 +19,7 @@ return array(
     2 => array('src' => '/assets/icons/tech/python-logo.svg', 'alt' => 'Client Logo 3'),
     3 => array('src' => '/assets/icons/tech/react-color-logo.svg', 'alt' => 'Client Logo 4'),
     4 => array('src' => '/assets/icons/tech/laravel-color-logo.svg', 'alt' => 'Client Logo 5'),
-    5 => array('src' => '/assetsicons/tech/php-logo.svg', 'alt' => 'Client Logo 6'),
+    5 => array('src' => '/assets/icons/tech/php-logo.svg', 'alt' => 'PHP logo for Suave Creators web development'),
   ),
   'bannerBg' => '/assets/background/service-banner-bg.webp',
   'primaryCta' => 'Let’s Connect to Discuss',

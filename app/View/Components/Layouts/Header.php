@@ -71,6 +71,25 @@ class Header extends Component
         return route($this->ctaRoute).'#'.$this->ctaFragment;
     }
 
+    public function isNavActive(string ...$patterns): bool
+    {
+        return request()->routeIs(...$patterns);
+    }
+
+    public function isDropdownActive(array $dropdown): bool
+    {
+        return $dropdown['hubRoute'] === 'services'
+            ? $this->isNavActive('services', 'service.show')
+            : $this->isNavActive('industries', 'industry.show');
+    }
+
+    public function isNavHrefActive(string $href): bool
+    {
+        $path = parse_url($href, PHP_URL_PATH) ?: '/';
+
+        return request()->is(ltrim($path, '/'));
+    }
+
     public function render(): View|Closure|string
     {
         return view('components.layouts.header');

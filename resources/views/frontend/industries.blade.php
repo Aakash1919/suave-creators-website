@@ -282,8 +282,8 @@
             data-expertise-panel="{{ $index }}">
             <figure class="expertise-showcase__media">
               <img
-                src="{{ $industry[4] }}"
-                alt="{{ $industry[0] }} industry expertise" title="{{ $industry[0] }} industry expertise"
+                src="{{ asset($industry[4]) }}"
+                alt="{{ $industry[0] }} industry expertise for Suave Creators software development" title="{{ $industry[0] }} industry expertise for Suave Creators software development"
                 width="960"
                 height="640"
                 loading="lazy"
@@ -418,7 +418,7 @@
   :items="$articles"
   heading-id="industry-insights-title"
   section-class="py-10 sm:py-12 lg:py-18"
-  more-href="blogs"
+  more-href="{{ route('blogs') }}"
   more-label="View More"
 />
 

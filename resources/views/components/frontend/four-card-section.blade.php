@@ -47,7 +47,7 @@
 
         @if (filled($ctaHref) && filled($ctaLabel))
             <div class="mt-8 flex justify-end">
-                <a href="{{ url($ctaHref) }}"
+                <a href="{{ $ctaHref }}"
                     class="border-b border-[#2A4DFB] text-sm font-semibold text-[#2A4DFB]">{{ $ctaLabel }}</a>
             </div>
         @endif

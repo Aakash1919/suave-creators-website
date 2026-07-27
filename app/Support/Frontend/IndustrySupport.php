@@ -44,12 +44,12 @@ class IndustrySupport
     public static function portfolioHeroImages(): array
     {
         return [
-            'assets/media/portfolioimg1.webp',
-            'assets/media/portfolioimg2.webp',
-            'assets/media/portfolioimg3.webp',
-            'assets/media/portfolioimg4.webp',
-            'assets/media/portfolioimg5.webp',
-            'assets/media/portfolioimg6.webp',
+            'assets/portfolio/portfolio-showcase-1.webp',
+            'assets/portfolio/portfolio-showcase-2.webp',
+            'assets/portfolio/portfolio-showcase-3.webp',
+            'assets/portfolio/portfolio-showcase-4.webp',
+            'assets/portfolio/portfolio-showcase-5.webp',
+            'assets/portfolio/portfolio-showcase-6.webp',
         ];
     }
 
@@ -131,7 +131,7 @@ class IndustrySupport
                 'Building Digital Foundations for Real Estate Success',
                 'Let\'s drive more sales and strong visibility with smart websites and property management software. Our software connects buyers with their dream home.',
                 ['RE Branding', 'CRE Branding', 'RE Website Design', 'RE Fund Luxury Branding', 'RE Development', 'RE Agent Solutions'],
-                'assets/media/insight-future-work.jpg',
+                'assets/blog/insight-future-of-work.jpg',
                 'fa-solid fa-house',
             ],
             [
@@ -186,21 +186,21 @@ class IndustrySupport
                 'icon' => 'discovery',
                 'title' => 'Discovery & Strategy',
                 'desc' => 'We understand your goals and challenges and then work on the discovery and strategy stage. By understanding your goals we make a clear product roadmap.',
-                'image' => 'assets/media/portfolio-1.png',
+                'image' => 'assets/portfolio/modern-office-yellow-accent-lounge.png',
                 'alt' => 'Discovery and strategy planning session for Suave Creators industry solutions',
             ],
             [
                 'icon' => 'design',
                 'title' => 'Design & Development',
                 'desc' => 'Our skilled team understands the roadmap and works on the design and development stage. We turn your ideas into robust functionalities.',
-                'image' => 'assets/media/portfolio-2.png',
+                'image' => 'assets/portfolio/contemporary-living-room-kitchen.png',
                 'alt' => 'Design and development workspace for industry software',
             ],
             [
                 'icon' => 'launch',
                 'title' => 'Launch & Growth',
                 'desc' => 'Once your product is live, we continue to optimize, scale, and enhance it. A long term growth is provided from our end.',
-                'image' => 'assets/media/portfolio-3.png',
+                'image' => 'assets/portfolio/warm-lounge-plants-artwork.png',
                 'alt' => 'Product launch and growth metrics for industry platforms',
             ],
         ];

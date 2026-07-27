@@ -142,8 +142,18 @@ trait MapsDesignAssets
                 return $data;
             }
 
-            if (str_starts_with($data, 'http://') || str_starts_with($data, 'https://') || str_starts_with($data, '//') || str_starts_with($data, 'data:') || str_starts_with($data, 'assets/')) {
-                return str_starts_with($data, 'assets/') ? asset($data) : $data;
+            if (str_starts_with($data, 'http://') || str_starts_with($data, 'https://') || str_starts_with($data, '//') || str_starts_with($data, 'data:')) {
+                return $data;
+            }
+
+            $trimmed = (string) str($data)->ltrim('/');
+
+            if (str_starts_with($trimmed, 'assets/')) {
+                return asset($trimmed);
+            }
+
+            if (str_starts_with($trimmed, 'assetsicons/')) {
+                return asset('assets/icons/'.(string) str($trimmed)->after('assetsicons/'));
             }
 
             if (str_contains($data, '/'.$imageSegment.'/') || str_starts_with($data, $imageSegment.'/')) {

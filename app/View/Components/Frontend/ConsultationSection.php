@@ -27,6 +27,7 @@ class ConsultationSection extends Component
         public bool $showPeople = true,
         public bool $solo = false,
         public bool $allowHtmlTitle = true,
+        public bool $hideBgBelowDesktop = false,
         public ?array $people = null,
     ) {
         if ($this->ctaHref === '') {

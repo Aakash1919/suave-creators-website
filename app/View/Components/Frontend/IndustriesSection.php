@@ -28,8 +28,11 @@ class IndustriesSection extends Component
         public string $supportText = 'The Services and Supports You Need for Online Platforms in Suave Creators',
         public string $supportHref = '',
         public string $supportLabel = 'Talk to an Expert',
+        public string $supportImage = 'assets/brand/chat-widget-icon.png',
+        public string $supportImageAlt = 'Chat support widget for Suave Creators software development services',
     ) {
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
+        $this->supportImage = $this->normalizeAssetPath($this->supportImage);
 
         if ($this->footerHref === '' && $this->footerLabel !== '') {
             $this->footerHref = route('contact-us').'#contact-id';
