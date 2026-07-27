@@ -33,9 +33,6 @@
 @foreach ($hreflang as $locale => $href)
 <link rel="alternate" href="{{ $href }}" hreflang="{{ $locale }}">
 @endforeach
-@if (! empty($seo['verification']))
-<meta name="google-site-verification" content="{{ $seo['verification'] }}">
-@endif
 @if (! empty($jsonLd))
 <script type="application/ld+json">{!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) !!}</script>
 @endif

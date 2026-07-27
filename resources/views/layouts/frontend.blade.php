@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @if ($googleSiteVerification = config('seo.site.google_site_verification'))
+        <meta name="google-site-verification" content="{{ $googleSiteVerification }}">
+    @endif
+
+    @if ($googleAnalyticsId = config('seo.site.google_analytics_id'))
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAnalyticsId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', @json($googleAnalyticsId));
+        </script>
+    @endif
+
+    @if ($googleTagManagerId = config('seo.site.google_tag_manager_id'))
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer',@json($googleTagManagerId));
+        </script>
+        <!-- End Google Tag Manager -->
+    @endif
+
     @if ($withSeo ?? true)
         <x-layouts.seo :seo="$seo ?? []" />
     @endif
@@ -37,6 +64,13 @@
     $mainClass = $mainClass ?? 'site-main';
 @endphp
 <body class="{{ $bodyClass }}">
+    @if ($googleTagManagerId = config('seo.site.google_tag_manager_id'))
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id={{ $googleTagManagerId }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    @endif
     <div class="relative w-full overflow-hidden {{ $useHeroBackground ? 'bg-[#00003f]' : 'bg-white' }}">
         @if ($useHeroBackground && $heroBackgroundImage)
             <div class="pointer-events-none absolute inset-x-0 top-0 z-0 h-[min(100%,920px)] lg:inset-0 lg:h-auto" aria-hidden="true">
