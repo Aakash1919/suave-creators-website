@@ -10,11 +10,17 @@ use Stringable;
 
 class LookupServices implements Tool
 {
+    /**
+     * Describe when the model should look up services.
+     */
     public function description(): Stringable|string
     {
         return 'Look up Suave Creators software and digital services. Omit slug for the full catalog, or pass a service slug for details.';
     }
 
+    /**
+     * Return the services catalog or a single service detail as JSON.
+     */
     public function handle(Request $request): Stringable|string
     {
         $slug = trim((string) ($request['slug'] ?? ''));
@@ -37,6 +43,11 @@ class LookupServices implements Tool
         return json_encode(['service' => $detail], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '{}';
     }
 
+    /**
+     * Optional service slug argument schema.
+     *
+     * @return array<string, mixed>
+     */
     public function schema(JsonSchema $schema): array
     {
         return [

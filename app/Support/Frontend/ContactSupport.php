@@ -22,6 +22,8 @@ class ContactSupport
     }
 
     /**
+     * Dual offices from SEO config (Sheridan WY + Palampur), with legacy address fallbacks.
+     *
      * @return array<int, array{label: string, display: string, lines: array<int, string>}>
      */
     public static function offices(): array

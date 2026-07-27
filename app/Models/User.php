@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Concerns\HasRoles;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -16,11 +16,9 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
-     * Get the attributes that should be cast.
-     *
      * @return array<string, string>
      */
     protected function casts(): array
@@ -31,8 +29,19 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Blog posts authored by this user.
+     */
     public function blogs(): HasMany
     {
         return $this->hasMany(Blog::class, 'created_by_id');
+    }
+
+    /**
+     * Whether the user may enter the admin panel (roles gate features inside).
+     */
+    public function canAccessAdmin(): bool
+    {
+        return true;
     }
 }

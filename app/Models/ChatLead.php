@@ -31,6 +31,9 @@ class ChatLead extends Model
         ];
     }
 
+    /**
+     * Assign a UUID when creating a lead if one was not provided.
+     */
     protected static function booted(): void
     {
         static::creating(function (ChatLead $lead): void {
@@ -40,11 +43,17 @@ class ChatLead extends Model
         });
     }
 
+    /**
+     * Resolve ChatLead routes by public UUID instead of numeric id.
+     */
     public function getRouteKeyName(): string
     {
         return 'uuid';
     }
 
+    /**
+     * Mark the lead as escalated to human sales (idempotent).
+     */
     public function markEscalated(): void
     {
         if ($this->escalated_at === null) {
@@ -52,11 +61,17 @@ class ChatLead extends Model
         }
     }
 
+    /**
+     * Compare a plain session token to the stored SHA-256 hash.
+     */
     public function plainSessionTokenMatches(string $plainToken): bool
     {
         return hash_equals($this->session_token, hash('sha256', $plainToken));
     }
 
+    /**
+     * Hash a plain session token for storage.
+     */
     public static function hashSessionToken(string $plainToken): string
     {
         return hash('sha256', $plainToken);

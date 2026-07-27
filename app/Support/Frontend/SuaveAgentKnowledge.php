@@ -5,6 +5,8 @@ namespace App\Support\Frontend;
 class SuaveAgentKnowledge
 {
     /**
+     * Authoritative company email, phones, and dual offices for the agent and tools.
+     *
      * @return array{
      *     company: string,
      *     email: string,
@@ -29,6 +31,8 @@ class SuaveAgentKnowledge
     }
 
     /**
+     * Compact services list derived from ServiceSupport for agent catalog tools.
+     *
      * @return array<int, array{slug: string|null, title: string, summary: string, url: string|null}>
      */
     public static function servicesCatalog(): array
@@ -50,6 +54,8 @@ class SuaveAgentKnowledge
     }
 
     /**
+     * Trimmed service detail payload for a slug, without heavy media fields.
+     *
      * @return array<string, mixed>|null
      */
     public static function serviceDetail(string $slug): ?array
@@ -81,6 +87,8 @@ class SuaveAgentKnowledge
     }
 
     /**
+     * Compact industries list for agent catalog tools.
+     *
      * @return array<int, array{slug: string, title: string, summary: string}>
      */
     public static function industriesCatalog(): array
@@ -121,6 +129,8 @@ class SuaveAgentKnowledge
     }
 
     /**
+     * Trimmed industry detail payload for a slug, without heavy media fields.
+     *
      * @return array<string, mixed>|null
      */
     public static function industryDetail(string $slug): ?array
@@ -151,6 +161,8 @@ class SuaveAgentKnowledge
     }
 
     /**
+     * Keep only selected keys and strip media/asset noise from nested values.
+     *
      * @param  array<string, mixed>  $payload
      * @param  list<string>  $keys
      * @return array<string, mixed>
@@ -170,6 +182,9 @@ class SuaveAgentKnowledge
         return $trimmed;
     }
 
+    /**
+     * Recursively drop image/icon/url noise keys while keeping service/industry hrefs.
+     */
     protected static function stripMediaNoise(mixed $value): mixed
     {
         if (is_array($value)) {
@@ -192,6 +207,9 @@ class SuaveAgentKnowledge
         return $value;
     }
 
+    /**
+     * Extract an industry slug from a marketing route URL.
+     */
     protected static function slugFromRouteUrl(string $url): string
     {
         if (preg_match('#/industries/([^/?#]+)#', $url, $matches) === 1) {

@@ -7783,7 +7783,6 @@ body.mobile-nav-open {
   border-radius: 14px;
   font-size: 13px;
   line-height: 1.45;
-  white-space: pre-wrap;
   word-break: break-word;
 }
 
@@ -7792,6 +7791,50 @@ body.mobile-nav-open {
   background: rgba(255, 255, 255, 0.08);
   color: #eef1ff;
   border-bottom-left-radius: 4px;
+  white-space: normal;
+}
+
+.suave-agent__bubble--assistant p {
+  margin: 0 0 0.55em;
+}
+
+.suave-agent__bubble--assistant p:last-child {
+  margin-bottom: 0;
+}
+
+.suave-agent__bubble--assistant ul,
+.suave-agent__bubble--assistant ol {
+  margin: 0.35em 0 0.55em;
+  padding-left: 1.2em;
+}
+
+.suave-agent__bubble--assistant a {
+  color: #9db4ff;
+  text-decoration: underline;
+}
+
+.suave-agent__bubble--assistant code {
+  font-size: 0.92em;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+.suave-agent__bubble--assistant pre {
+  overflow-x: auto;
+  margin: 0.45em 0;
+  padding: 0.65em 0.75em;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.suave-agent__bubble--assistant pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.suave-agent__bubble--assistant strong {
+  font-weight: 700;
 }
 
 .suave-agent__bubble--user {
@@ -7799,6 +7842,7 @@ body.mobile-nav-open {
   background: linear-gradient(135deg, var(--suave-agent-blue), #7158f5);
   color: #fff;
   border-bottom-right-radius: 4px;
+  white-space: pre-wrap;
 }
 
 .suave-agent__status {

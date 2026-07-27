@@ -12,11 +12,17 @@ class EscalateToSales implements Tool
 {
     public function __construct(public ChatLead $lead) {}
 
+    /**
+     * Describe when the model should hand off to a human sales representative.
+     */
     public function description(): Stringable|string
     {
         return 'Escalate the conversation to a human sales representative when the request is beyond the AI agent scope (custom quotes needing discovery, legal/financial guarantees, complaints, or unrelated topics).';
     }
 
+    /**
+     * Mark the lead escalated and return the polite handoff payload for the model.
+     */
     public function handle(Request $request): Stringable|string
     {
         $this->lead->markEscalated();
@@ -32,6 +38,11 @@ class EscalateToSales implements Tool
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '{"escalated":true}';
     }
 
+    /**
+     * Required escalation reason argument schema.
+     *
+     * @return array<string, mixed>
+     */
     public function schema(JsonSchema $schema): array
     {
         return [

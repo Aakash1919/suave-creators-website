@@ -13,6 +13,9 @@ use Laravel\Ai\Responses\StreamableAgentResponse;
 
 class SuaveAgentController extends FrontendController
 {
+    /**
+     * Create a ChatLead, run the greeting prompt, and return session credentials.
+     */
     public function start(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -51,6 +54,9 @@ class SuaveAgentController extends FrontendController
         ]);
     }
 
+    /**
+     * Stream an assistant reply for an authenticated lead conversation.
+     */
     public function chat(Request $request): StreamableAgentResponse
     {
         $validated = $request->validate([
@@ -68,6 +74,9 @@ class SuaveAgentController extends FrontendController
             ->stream($validated['message']);
     }
 
+    /**
+     * Return persisted messages for a lead session (hides the internal greeting prompt).
+     */
     public function history(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -122,6 +131,11 @@ class SuaveAgentController extends FrontendController
         ]);
     }
 
+    /**
+     * Resolve a ChatLead only when the plain session token matches the stored hash.
+     *
+     * @throws ValidationException
+     */
     protected function authorizeLead(string $uuid, string $sessionToken): ChatLead
     {
         $lead = ChatLead::query()->where('uuid', $uuid)->first();
@@ -135,6 +149,11 @@ class SuaveAgentController extends FrontendController
         return $lead;
     }
 
+    /**
+     * Ensure the conversation belongs to the given ChatLead participant.
+     *
+     * @throws ValidationException
+     */
     protected function authorizeConversation(string $conversationId, ChatLead $lead): Conversation
     {
         $conversation = Conversation::query()->find($conversationId);

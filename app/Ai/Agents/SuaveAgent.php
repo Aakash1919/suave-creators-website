@@ -25,6 +25,9 @@ class SuaveAgent implements Agent, HasTools, RemembersConversationsContract
 
     public function __construct(public ChatLead $lead) {}
 
+    /**
+     * Build the sales-persona system prompt with lead identity and company contacts.
+     */
     public function instructions(): Stringable|string
     {
         $contacts = SuaveAgentKnowledge::companyContacts();
@@ -55,10 +58,16 @@ Offices:
 {$offices}
 
 When helpful, invite them to continue on the website contact page or call one of the listed numbers.
+
+Formatting:
+- Prefer concise Markdown in replies (short paragraphs, **bold** for emphasis, bullet lists, and links when sharing contact or pages).
+- Do not wrap the entire reply in a code fence.
 PROMPT;
     }
 
     /**
+     * Tools the agent may call for services, industries, contacts, and escalation.
+     *
      * @return Tool[]
      */
     public function tools(): iterable

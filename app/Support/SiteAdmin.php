@@ -11,17 +11,35 @@ class SiteAdmin
 
     public const NAME = 'Suave Creators';
 
+    /**
+     * Ensure the seeded site admin user exists and has the admin role when possible.
+     */
     public static function ensure(): User
     {
-        return User::query()->firstOrCreate(
+        $user = User::query()->firstOrCreate(
             ['email' => self::EMAIL],
             [
                 'name' => self::NAME,
                 'password' => 'password',
             ]
         );
+
+        if (method_exists($user, 'assignRole') && ! $user->hasRole('admin')) {
+            try {
+                $user->assignRole('admin');
+            } catch (\Throwable) {
+                // Roles may not be seeded yet.
+            }
+        }
+
+        return $user->fresh(['roles']) ?? $user;
     }
 
+    /**
+     * Resolve the site admin user, or the first user as a fallback.
+     *
+     * @throws RuntimeException When no users exist yet.
+     */
     public static function resolve(): User
     {
         $admin = User::query()->where('email', self::EMAIL)->first();
@@ -39,8 +57,15 @@ class SiteAdmin
         return $fallback;
     }
 
+    /**
+     * Whether the user is the site admin by role or canonical email.
+     */
     public static function isAdmin(User $user): bool
     {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
         return strcasecmp((string) $user->email, self::EMAIL) === 0;
     }
 }

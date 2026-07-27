@@ -85,6 +85,7 @@
 
 @once
   @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
     <script>
       (function () {
         var root = document.querySelector('[data-suave-agent]');
@@ -109,6 +110,23 @@
         var streaming = false;
         var historyLoaded = false;
 
+        if (window.marked && typeof window.marked.setOptions === 'function') {
+          window.marked.setOptions({ breaks: true, gfm: true });
+        }
+
+        function renderMarkdown(text) {
+          if (!text) return '';
+          if (window.marked && typeof window.marked.parse === 'function') {
+            return window.marked.parse(text);
+          }
+          return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function setAssistantHtml(bubble, markdownText) {
+          bubble.dataset.raw = markdownText || '';
+          bubble.innerHTML = renderMarkdown(markdownText || '');
+        }
+
         function saveSession() {
           if (!session) {
             localStorage.removeItem(STORAGE_KEY);
@@ -132,7 +150,7 @@
           saveSession();
           messageInput.disabled = false;
           messageInput.value = '';
-          if (typeof resizeComposer === 'function') resizeComposer();
+          resizeComposer();
           showLead();
         }
 
@@ -152,10 +170,14 @@
           statusEl.textContent = text;
         }
 
-        function appendMessage(role, content) {
+        function appendMessage(role, content, asMarkdown) {
           var bubble = document.createElement('div');
           bubble.className = 'suave-agent__bubble suave-agent__bubble--' + role;
-          bubble.textContent = content;
+          if (role === 'assistant' && asMarkdown !== false) {
+            setAssistantHtml(bubble, content || '');
+          } else {
+            bubble.textContent = content || '';
+          }
           messagesEl.appendChild(bubble);
           messagesEl.scrollTop = messagesEl.scrollHeight;
           return bubble;
@@ -176,7 +198,7 @@
           messagesEl.innerHTML = '';
           (data.messages || []).forEach(function (msg) {
             if (msg.role === 'user' || msg.role === 'assistant') {
-              appendMessage(msg.role, msg.content);
+              appendMessage(msg.role, msg.content, msg.role === 'assistant');
             }
           });
           messageInput.disabled = !!data.escalated;
@@ -279,7 +301,7 @@
             saveSession();
             showChat();
             messagesEl.innerHTML = '';
-            if (data.greeting) appendMessage('assistant', data.greeting);
+            if (data.greeting) appendMessage('assistant', data.greeting, true);
             historyLoaded = true;
             messageInput.disabled = false;
             setStatus('');
@@ -326,8 +348,9 @@
           streaming = true;
           messageInput.value = '';
           resizeComposer();
-          appendMessage('user', text);
-          var assistantBubble = appendMessage('assistant', '');
+          appendMessage('user', text, false);
+          var assistantBubble = appendMessage('assistant', '', false);
+          var rawAssistant = '';
           setStatus('Reviewing your request…');
 
           try {
@@ -359,7 +382,8 @@
               }
               if (event.type === 'text_delta' && typeof event.delta === 'string') {
                 setStatus('');
-                assistantBubble.textContent += event.delta;
+                rawAssistant += event.delta;
+                assistantBubble.textContent = rawAssistant;
                 messagesEl.scrollTop = messagesEl.scrollHeight;
               }
               if (event.tool_name === 'EscalateToSales' || (event.type === 'tool_call' && event.tool_name === 'EscalateToSales')) {
@@ -367,9 +391,10 @@
               }
             });
 
-            if (!assistantBubble.textContent.trim()) {
-              assistantBubble.textContent = 'Thanks — a teammate will follow up shortly if needed.';
+            if (!rawAssistant.trim()) {
+              rawAssistant = 'Thanks — a teammate will follow up shortly if needed.';
             }
+            setAssistantHtml(assistantBubble, rawAssistant);
             setStatus('');
           } catch (err) {
             assistantBubble.textContent = err.message || 'Something went wrong. Please try again.';

@@ -11,11 +11,17 @@ use Stringable;
 
 class LookupIndustries implements Tool
 {
+    /**
+     * Describe when the model should look up industries.
+     */
     public function description(): Stringable|string
     {
         return 'Look up Suave Creators industry solutions. Omit slug for the catalog, or pass an industry slug for details.';
     }
 
+    /**
+     * Return the industries catalog or a single industry detail as JSON.
+     */
     public function handle(Request $request): Stringable|string
     {
         $slug = trim((string) ($request['slug'] ?? ''));
@@ -39,6 +45,11 @@ class LookupIndustries implements Tool
         return json_encode(['industry' => $detail], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '{}';
     }
 
+    /**
+     * Optional industry slug argument schema.
+     *
+     * @return array<string, mixed>
+     */
     public function schema(JsonSchema $schema): array
     {
         return [
