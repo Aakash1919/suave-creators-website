@@ -40,13 +40,25 @@ class ConsultationSection extends Component
 
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
 
+        // Toggle people images: comment one block and uncomment the other.
+        // Stock consultation portraits (colored backgrounds):
+        // $this->people ??= [
+        //     ['src' => 'assets/team/consultation-team-member-1.png', 'alt' => 'Suave Creators consultant ready for a software discovery call', 'tone' => 'pink', 'column' => 'left'],
+        //     ['src' => 'assets/team/consultation-team-member-2.png', 'alt' => 'Suave Creators developer available for project consultation', 'tone' => 'orange', 'column' => 'left'],
+        //     ['src' => 'assets/team/consultation-team-leader.png', 'alt' => 'Suave Creators team leader for web development consultation', 'tone' => 'yellow', 'column' => 'center'],
+        //     ['src' => 'assets/team/consultation-designer.png', 'alt' => 'Suave Creators UI UX designer for product consultation', 'tone' => 'blue', 'column' => 'center'],
+        //     ['src' => 'assets/team/consultation-team-lead.png', 'alt' => 'Suave Creators project lead for CRM and software consulting', 'tone' => 'coral', 'column' => 'right'],
+        //     ['src' => 'assets/team/consultation-team-collaborating.png', 'alt' => 'Suave Creators team collaborating on a client software project', 'tone' => 'cyan', 'column' => 'right'],
+        // ];
+
+        // About-collage team portraits (active):
         $this->people ??= [
-            ['src' => 'assets/team/consultation-team-member-1.png', 'alt' => 'Suave Creators consultant ready for a software discovery call', 'tone' => 'pink', 'column' => 'left'],
-            ['src' => 'assets/team/consultation-team-member-2.png', 'alt' => 'Suave Creators developer available for project consultation', 'tone' => 'orange', 'column' => 'left'],
-            ['src' => 'assets/team/consultation-team-leader.png', 'alt' => 'Suave Creators team leader for web development consultation', 'tone' => 'yellow', 'column' => 'center'],
-            ['src' => 'assets/team/consultation-designer.png', 'alt' => 'Suave Creators UI UX designer for product consultation', 'tone' => 'blue', 'column' => 'center'],
-            ['src' => 'assets/team/consultation-team-lead.png', 'alt' => 'Suave Creators project lead for CRM and software consulting', 'tone' => 'coral', 'column' => 'right'],
-            ['src' => 'assets/team/consultation-team-collaborating.png', 'alt' => 'Suave Creators team collaborating on a client software project', 'tone' => 'cyan', 'column' => 'right'],
+            ['src' => 'assets/team/professional-team-member-portrait.png', 'alt' => 'Suave Creators software developer ready for a project consultation', 'tone' => 'pink', 'column' => 'left'],
+            ['src' => 'assets/team/professional-woman-product-team-portrait.png', 'alt' => 'Suave Creators product specialist available for consultation', 'tone' => 'orange', 'column' => 'left'],
+            ['src' => 'assets/team/professional-man-navy-blazer-portrait.png', 'alt' => 'Suave Creators technology leader for web development consultation', 'tone' => 'yellow', 'column' => 'center'],
+            ['src' => 'assets/team/professional-designer-portrait.png', 'alt' => 'Suave Creators UI UX designer for product consultation', 'tone' => 'blue', 'column' => 'center'],
+            ['src' => 'assets/team/professional-team-lead-portrait.png', 'alt' => 'Suave Creators project lead for CRM and software consulting', 'tone' => 'coral', 'column' => 'right'],
+            ['src' => 'assets/team/team-working-modern-office.png', 'alt' => 'Suave Creators developers collaborating in a modern office consultation', 'tone' => 'cyan', 'column' => 'right'],
         ];
 
         $this->people = array_values(array_map(function (array $person): array {
