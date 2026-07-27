@@ -6912,6 +6912,10 @@ body.mobile-nav-open {
   line-height: 1.45;
 }
 
+.contact-form-panel__flash[hidden]{
+  display: none !important;
+}
+
 .contact-form-panel__errors{
   margin: 0 0 14px;
   padding: 12px 14px;
@@ -6925,6 +6929,31 @@ body.mobile-nav-open {
 .contact-form-panel__errors ul{
   margin: 0;
   padding-left: 1.1rem;
+}
+
+.contact-form-panel__field-error{
+  display: block;
+  margin-top: 6px;
+  color: #b91c1c;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.contact-form-panel__field-error[hidden]{
+  display: none !important;
+}
+
+.contact-form-panel__fields input.is-invalid,
+.contact-form-panel__fields select.is-invalid,
+.contact-form-panel__fields textarea.is-invalid{
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.contact-form-panel__submit.is-loading,
+.contact-form-panel__submit:disabled{
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 @media (max-width: 1023px) {

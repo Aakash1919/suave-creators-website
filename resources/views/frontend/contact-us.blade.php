@@ -133,23 +133,16 @@
             <h3 class="contact-form-panel__form-title">Start the conversation</h3>
           </header>
 
-          @if (session('status'))
-            <p class="contact-form-panel__flash" role="status">{{ session('status') }}</p>
-          @endif
+          <p class="contact-form-panel__flash" data-contact-success role="status" hidden></p>
 
-          @if ($errors->any())
-            <div class="contact-form-panel__errors" role="alert">
-              <ul>
-                @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
-              </ul>
-            </div>
-          @endif
-
-          <form action="{{ route('contact-us.store') }}" method="post" class="contact-form-panel__fields" data-contact-form>
+          <form action="{{ route('contact-us.store') }}"
+            method="post"
+            class="contact-form-panel__fields"
+            data-contact-form
+            novalidate>
             @csrf
-            <input type="hidden" name="form_started_at" value="{{ old('form_started_at', $formStartedAt ?? time()) }}">
+            <input type="hidden" name="_ajax" value="1">
+            <input type="hidden" name="form_started_at" data-contact-started value="{{ $formStartedAt ?? time() }}">
             <div class="contact-form-honeypot" aria-hidden="true">
               <label for="contact-website">Website</label>
               <input id="contact-website" type="text" name="website" value="" tabindex="-1" autocomplete="off">
@@ -158,38 +151,43 @@
             <div class="contact-form-panel__row">
               <label for="contact-name">
                 <span class="contact-form-panel__label-text">Full name</span>
-                <input id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Jane Cooper" value="{{ old('name') }}">
+                <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Jane Cooper">
+                <span class="contact-form-panel__field-error" data-error-for="name" hidden></span>
               </label>
               <label for="contact-email">
                 <span class="contact-form-panel__label-text">Email</span>
-                <input id="contact-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com" value="{{ old('email') }}">
+                <input id="contact-email" name="email" type="text" inputmode="email" autocomplete="email" placeholder="you@company.com">
+                <span class="contact-form-panel__field-error" data-error-for="email" hidden></span>
               </label>
             </div>
 
             <div class="contact-form-panel__row">
               <label for="contact-phone">
                 <span class="contact-form-panel__label-text">Phone</span>
-                <input id="contact-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91 90000 00000" value="{{ old('phone') }}">
+                <input id="contact-phone" name="phone" type="text" inputmode="tel" autocomplete="tel" placeholder="+91 90000 00000">
+                <span class="contact-form-panel__field-error" data-error-for="phone" hidden></span>
               </label>
               <label for="contact-service">
                 <span class="contact-form-panel__label-text">Service</span>
-                <select id="contact-service" name="service" required>
-                  <option value="" disabled @selected(old('service') === null || old('service') === '')>Select a service</option>
+                <select id="contact-service" name="service">
+                  <option value="" disabled selected>Select a service</option>
                   @foreach ($formServices as $value => $label)
-                    <option value="{{ $value }}" @selected(old('service') === $value)>{{ $label }}</option>
+                    <option value="{{ $value }}">{{ $label }}</option>
                   @endforeach
                 </select>
+                <span class="contact-form-panel__field-error" data-error-for="service" hidden></span>
               </label>
             </div>
 
             <label for="contact-message" class="contact-form-panel__message">
               <span class="contact-form-panel__label-text">What are you trying to fix?</span>
-              <textarea id="contact-message" name="message" rows="3" minlength="10" required
-                placeholder="A sentence or two about the problem is enough.">{{ old('message') }}</textarea>
+              <textarea id="contact-message" name="message" rows="3"
+                placeholder="A sentence or two about the problem is enough."></textarea>
+              <span class="contact-form-panel__field-error" data-error-for="message" hidden></span>
             </label>
 
             <div class="contact-form-panel__actions">
-              <button type="submit" class="u-btn-cta contact-form-panel__submit">
+              <button type="submit" class="u-btn-cta contact-form-panel__submit" data-contact-submit>
                 Send inquiry
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -280,3 +278,208 @@
   :cta-label="$faqCtaLabel"
 />
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+  const form = document.querySelector('[data-contact-form]');
+  if (!form) {
+    return;
+  }
+
+  const successEl = document.querySelector('[data-contact-success]');
+  const submitBtn = form.querySelector('[data-contact-submit]');
+  const startedInput = form.querySelector('[data-contact-started]');
+  const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function field(name) {
+    return form.querySelector('[name="' + name + '"]');
+  }
+
+  function clearErrors() {
+    form.querySelectorAll('.is-invalid').forEach(function (el) {
+      el.classList.remove('is-invalid');
+    });
+    form.querySelectorAll('[data-error-for]').forEach(function (el) {
+      el.hidden = true;
+      el.textContent = '';
+    });
+  }
+
+  function showError(name, message) {
+    const input = field(name);
+    const error = form.querySelector('[data-error-for="' + name + '"]');
+    if (input) {
+      input.classList.add('is-invalid');
+    }
+    if (error) {
+      error.textContent = message;
+      error.hidden = false;
+    }
+  }
+
+  function showServerErrors(errors) {
+    clearErrors();
+    Object.keys(errors || {}).forEach(function (name) {
+      const messages = errors[name];
+      const message = Array.isArray(messages) ? messages[0] : messages;
+      if (message) {
+        showError(name, message);
+      }
+    });
+  }
+
+  function validate() {
+    clearErrors();
+    let ok = true;
+
+    const name = (field('name')?.value || '').trim();
+    const email = (field('email')?.value || '').trim();
+    const phone = (field('phone')?.value || '').trim();
+    const service = field('service')?.value || '';
+    const message = (field('message')?.value || '').trim();
+
+    if (!name) {
+      showError('name', 'Please enter your full name.');
+      ok = false;
+    } else if (name.length > 120) {
+      showError('name', 'Full name may not be longer than 120 characters.');
+      ok = false;
+    }
+
+    if (!email) {
+      showError('email', 'Please enter your email address.');
+      ok = false;
+    } else if (!emailPattern.test(email)) {
+      showError('email', 'Please enter a valid email address.');
+      ok = false;
+    }
+
+    if (!phone) {
+      showError('phone', 'Please enter your phone number.');
+      ok = false;
+    }
+
+    if (!service) {
+      showError('service', 'Please select a service.');
+      ok = false;
+    }
+
+    if (!message) {
+      showError('message', 'Please tell us what you are trying to fix.');
+      ok = false;
+    } else if (message.length < 10) {
+      showError('message', 'Please write at least 10 characters about your request.');
+      ok = false;
+    }
+
+    return ok;
+  }
+
+  function setSubmitting(isSubmitting) {
+    if (!submitBtn) {
+      return;
+    }
+    submitBtn.disabled = isSubmitting;
+    submitBtn.classList.toggle('is-loading', isSubmitting);
+  }
+
+  function showSuccess(message) {
+    if (!successEl) {
+      return;
+    }
+    successEl.textContent = message || 'The request has been sent successfully.';
+    successEl.hidden = false;
+    successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetForm() {
+    form.reset();
+    const service = field('service');
+    if (service) {
+      service.selectedIndex = 0;
+    }
+    if (startedInput) {
+      startedInput.value = String(Math.floor(Date.now() / 1000));
+    }
+    clearErrors();
+  }
+
+  ['name', 'email', 'phone', 'service', 'message'].forEach(function (name) {
+    const input = field(name);
+    if (!input) {
+      return;
+    }
+    input.addEventListener('input', function () {
+      input.classList.remove('is-invalid');
+      const error = form.querySelector('[data-error-for="' + name + '"]');
+      if (error) {
+        error.hidden = true;
+        error.textContent = '';
+      }
+      if (successEl) {
+        successEl.hidden = true;
+      }
+    });
+    input.addEventListener('change', function () {
+      input.dispatchEvent(new Event('input'));
+    });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    if (successEl) {
+      successEl.hidden = true;
+    }
+
+    if (!validate()) {
+      const firstInvalid = form.querySelector('.is-invalid');
+      firstInvalid?.focus();
+      return;
+    }
+
+    setSubmitting(true);
+
+    const body = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': csrf,
+      },
+      body: body,
+      credentials: 'same-origin',
+    })
+      .then(async function (response) {
+        const data = await response.json().catch(function () {
+          return {};
+        });
+
+        if (response.status === 422) {
+          showServerErrors(data.errors || {});
+          return;
+        }
+
+        if (!response.ok || data.success === false) {
+          showError('message', data.message || 'Unable to send your request. Please try again.');
+          return;
+        }
+
+        resetForm();
+        showSuccess(data.message || 'The request has been sent successfully.');
+      })
+      .catch(function () {
+        showError('message', 'Unable to send your request. Please try again.');
+      })
+      .finally(function () {
+        setSubmitting(false);
+      });
+  });
+})();
+</script>
+@endpush
