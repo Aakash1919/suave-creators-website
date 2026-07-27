@@ -135,15 +135,15 @@ return [
             'description' => 'Industry-specific web design, software, and AI solutions for finance, healthcare, education, retail, logistics, and more.',
         ],
         'product' => [
-            'title' => 'Product | AI-Powered Business Platform | Suave Creators',
+            'title' => 'Product - AI-Powered Business Platform | Suave Creators',
             'description' => 'Run your organization with Suave Creators product suite — AI at the core, unified modules, enterprise security, and a single workspace for your team.',
-            'og_title' => 'Product | AI-Powered Business Platform | Suave Creators',
+            'og_title' => 'Product - AI-Powered Business Platform | Suave Creators',
             'og_description' => 'Run your organization with Suave Creators product suite — AI at the core, unified modules, and enterprise security.',
         ],
         'blogs' => [
-            'title' => 'Blog | Software Development Insights | Suave Creators',
+            'title' => 'Blog - Software Development Insights | Suave Creators',
             'description' => 'Explore Suave Creators blogs on custom software, web development, CRM, AI, and digital transformation. Practical insights for startups and enterprises.',
-            'og_title' => 'Blog | Software Development Insights | Suave Creators',
+            'og_title' => 'Blog - Software Development Insights | Suave Creators',
             'og_description' => 'Explore Suave Creators blogs on custom software, web development, CRM, AI, and digital transformation.',
         ],
         'privacy-policy' => [
