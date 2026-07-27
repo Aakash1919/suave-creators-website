@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" href="{{ asset('assets/brand/favicon-32.png') }}?v=3" type="image/png" sizes="32x32">
+    <link rel="icon" href="{{ asset('assets/brand/favicon-16.png') }}?v=3" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{ asset('assets/brand/favicon-192.png') }}?v=3" type="image/png" sizes="192x192">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=3">
+    <link rel="apple-touch-icon" href="{{ asset('assets/brand/favicon-192.png') }}?v=3" sizes="192x192">
+
     @if ($googleSiteVerification = config('seo.site.google_site_verification'))
         <meta name="google-site-verification" content="{{ $googleSiteVerification }}">
     @endif

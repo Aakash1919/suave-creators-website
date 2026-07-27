@@ -22,6 +22,7 @@ return [
         'default_og_image_height' => 630,
         'default_og_image_alt' => 'Suave Creators - Custom Software & Web Development Company',
         'logo' => 'assets/brand/logo.svg',
+        'favicon' => 'assets/brand/favicon-192.png',
         'robots' => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
         'google_site_verification' => '8gnHTv-hWNxTIE6HmJwKSMZH5v_ryZuDVQRbAinOpAQ',
         'google_analytics_id' => 'G-NFN8FD2B2D',
