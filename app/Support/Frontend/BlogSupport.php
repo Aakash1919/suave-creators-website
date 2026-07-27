@@ -3,33 +3,25 @@
 namespace App\Support\Frontend;
 
 use App\Models\Blog;
-use App\Support\Frontend\Concerns\MapsDesignAssets;
+use App\Models\BlogCategory;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class BlogSupport
 {
-    use MapsDesignAssets;
+    public const PER_PAGE = 9;
 
     /**
-     * @return array<int, array<string, mixed>>
+     * @return Collection<int, array<string, mixed>>
      */
-    public static function posts(): array
+    public static function posts(?string $categorySlug = null): Collection
     {
-        static $posts = null;
-
-        if ($posts !== null) {
-            return $posts;
-        }
-
-        $posts = Blog::query()
-            ->published()
+        return self::publishedQuery($categorySlug)
             ->with(['category', 'createdBy'])
             ->orderByDesc('published_at')
             ->get()
-            ->map(fn (Blog $blog): array => self::mapBlog($blog))
-            ->all();
-
-        return $posts;
+            ->map(fn (Blog $blog): array => self::mapBlog($blog));
     }
 
     /**
@@ -49,11 +41,49 @@ class BlogSupport
     /**
      * @return array<string, mixed>
      */
-    public static function indexData(): array
+    public static function indexData(?string $categorySlug = null, int $page = 1, ?string $search = null): array
     {
+        $category = null;
+        $search = trim((string) $search);
+
+        if ($categorySlug !== null && $categorySlug !== '') {
+            $category = BlogCategory::query()->where('slug', $categorySlug)->first();
+
+            if ($category === null) {
+                abort(404);
+            }
+        }
+
+        /** @var LengthAwarePaginator<int, Blog> $paginator */
+        $paginator = self::publishedQuery($category?->slug, $search !== '' ? $search : null)
+            ->with(['category', 'createdBy'])
+            ->orderByDesc('published_at')
+            ->paginate(self::PER_PAGE, ['*'], 'page', max(1, $page))
+            ->withQueryString();
+
+        $posts = $paginator->getCollection()
+            ->map(fn (Blog $blog): array => self::mapBlog($blog))
+            ->values()
+            ->all();
+
+        $categories = self::categoryNavItems($category?->slug);
+
         return [
-            'posts' => self::posts(),
+            'posts' => $posts,
+            'paginator' => $paginator,
             'heroImages' => self::heroImages(),
+            'categories' => $categories,
+            'search' => $search,
+            'activeCategory' => $category !== null ? [
+                'name' => $category->name,
+                'slug' => $category->slug,
+            ] : null,
+            'seoTitle' => $category !== null
+                ? $category->name.' - Blog Insights | Suave Creators'
+                : null,
+            'seoDescription' => $category !== null
+                ? 'Read Suave Creators articles in '.$category->name.' — practical insights on software, product, and digital growth.'
+                : null,
         ];
     }
 
@@ -82,20 +112,12 @@ class BlogSupport
             abort(404);
         }
 
-        $posts = self::posts();
-        $categories = [];
-
-        foreach ($posts as $candidate) {
-            $cat = trim((string) ($candidate['category'] ?? ''));
-
-            if ($cat !== '' && ! in_array($cat, $categories, true)) {
-                $categories[] = $cat;
-            }
-        }
+        $allPosts = self::posts()->all();
+        $categories = self::topCategories(5, $post['category_slug'] ?? null);
 
         $sliderPosts = [];
 
-        foreach ($posts as $candidate) {
+        foreach ($allPosts as $candidate) {
             if (($candidate['slug'] ?? '') === $slug) {
                 continue;
             }
@@ -104,7 +126,7 @@ class BlogSupport
         }
 
         if (count($sliderPosts) < 2) {
-            $sliderPosts = $posts;
+            $sliderPosts = $allPosts;
         }
 
         $sliderPosts = array_slice($sliderPosts, 0, 6);
@@ -136,9 +158,9 @@ class BlogSupport
 
         return [
             'post' => $post,
-            'posts' => $posts,
+            'posts' => $allPosts,
             'categories' => $categories,
-            'topPosts' => array_slice($posts, 0, 5),
+            'topPosts' => array_slice($allPosts, 0, 5),
             'sliderPosts' => $sliderPosts,
             'articleContent' => $articleContent,
             'tags' => array_values(array_filter([
@@ -153,6 +175,31 @@ class BlogSupport
             'seoOgTitle' => trim((string) ($post['og_title'] ?? '')) ?: null,
             'seoOgDescription' => trim((string) ($post['og_description'] ?? '')) ?: null,
         ];
+    }
+
+    /**
+     * Latest posts shaped for articles/insights cards across the site.
+     *
+     * @return array<int, array{title: string, excerpt: string, image: string, alt: string, date: string, datetime: string, author: string, url: string}>
+     */
+    public static function articleCards(int $limit = 4): array
+    {
+        return self::posts()
+            ->take($limit)
+            ->map(static function (array $post): array {
+                return [
+                    'title' => (string) ($post['title'] ?? ''),
+                    'excerpt' => (string) ($post['short_description'] ?? ''),
+                    'image' => (string) ($post['image'] ?? ''),
+                    'alt' => (string) ($post['title'] ?? 'Suave Creators blog article'),
+                    'date' => (string) ($post['published_label'] ?? ''),
+                    'datetime' => (string) ($post['published_date'] ?? ''),
+                    'author' => (string) ($post['author_name'] ?? 'Suave Creators'),
+                    'url' => (string) ($post['url'] ?? route('blogs')),
+                ];
+            })
+            ->values()
+            ->all();
     }
 
     /**
@@ -177,6 +224,87 @@ class BlogSupport
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Builder<Blog>
+     */
+    protected static function publishedQuery(?string $categorySlug = null, ?string $search = null)
+    {
+        $query = Blog::query()->published();
+
+        if ($categorySlug !== null && $categorySlug !== '') {
+            $query->whereHas('category', static function ($categoryQuery) use ($categorySlug): void {
+                $categoryQuery->where('slug', $categorySlug);
+            });
+        }
+
+        if ($search !== null && $search !== '') {
+            $query->where('title', 'like', '%'.$search.'%');
+        }
+
+        return $query;
+    }
+
+    /**
+     * @return array<int, array{name: string, slug: string, url: string, active: bool, count: int}>
+     */
+    public static function categoryNavItems(?string $activeSlug = null): array
+    {
+        return BlogCategory::query()
+            ->whereHas('blogs', static function ($query): void {
+                $query->published();
+            })
+            ->withCount(['blogs as published_blogs_count' => static function ($query): void {
+                $query->published();
+            }])
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->map(static function (BlogCategory $category) use ($activeSlug): array {
+                return self::mapCategoryNavItem($category, $activeSlug);
+            })
+            ->values()
+            ->all();
+    }
+
+    /**
+     * Categories with the most published blogs (for single-blog sidebar).
+     *
+     * @return array<int, array{name: string, slug: string, url: string, active: bool, count: int}>
+     */
+    public static function topCategories(int $limit = 5, ?string $activeSlug = null): array
+    {
+        return BlogCategory::query()
+            ->whereHas('blogs', static function ($query): void {
+                $query->published();
+            })
+            ->withCount(['blogs as published_blogs_count' => static function ($query): void {
+                $query->published();
+            }])
+            ->orderByDesc('published_blogs_count')
+            ->orderBy('name')
+            ->limit(max(1, $limit))
+            ->get()
+            ->map(static function (BlogCategory $category) use ($activeSlug): array {
+                return self::mapCategoryNavItem($category, $activeSlug);
+            })
+            ->values()
+            ->all();
+    }
+
+    /**
+     * @return array{name: string, slug: string, url: string, active: bool, count: int}
+     */
+    protected static function mapCategoryNavItem(BlogCategory $category, ?string $activeSlug = null): array
+    {
+        return [
+            'name' => (string) $category->name,
+            'slug' => (string) $category->slug,
+            'url' => route('blogs.category', ['slug' => $category->slug]),
+            'active' => $activeSlug !== null && $activeSlug === $category->slug,
+            'count' => (int) ($category->published_blogs_count ?? 0),
+        ];
+    }
+
+    /**
      * @return array<string, mixed>
      */
     protected static function mapBlog(Blog $blog): array
@@ -186,6 +314,8 @@ class BlogSupport
             : ($blog->published_at !== null ? Carbon::parse($blog->published_at) : null);
 
         $slug = (string) $blog->slug;
+        $categoryName = (string) ($blog->category?->name ?? '');
+        $categorySlug = (string) ($blog->category?->slug ?? '');
 
         return [
             'id' => $blog->id,
@@ -193,9 +323,11 @@ class BlogSupport
             'title' => (string) $blog->title,
             'image' => $blog->featuredImageUrl() ?? '',
             'short_description' => (string) ($blog->short_description ?? ''),
-            'content' => (string) ($blog->content ?? ''),
+            'content' => self::normalizeStorageUrls((string) ($blog->content ?? '')),
             'author_name' => (string) ($blog->createdBy?->name ?? 'Suave Creators'),
-            'category' => (string) ($blog->category?->name ?? ''),
+            'category' => $categoryName,
+            'category_slug' => $categorySlug,
+            'category_url' => $categorySlug !== '' ? route('blogs.category', ['slug' => $categorySlug]) : route('blogs'),
             'published_date' => $publishedAt?->toDateString() ?? '',
             'published_label' => $publishedAt?->format('M j, Y') ?? '',
             'updated_date' => $blog->updated_at?->toDateString() ?? '',
@@ -248,5 +380,22 @@ class BlogSupport
         }
 
         return $featureImageHtml.$content;
+    }
+
+    /**
+     * Rewrite absolute APP_URL storage links to root-relative paths so images
+     * keep working when the app is served on a different host or port.
+     */
+    protected static function normalizeStorageUrls(string $html): string
+    {
+        if ($html === '' || ! str_contains($html, '/storage/')) {
+            return $html;
+        }
+
+        return (string) preg_replace(
+            '#https?://[^/"\'\s]+(/storage/[^"\'\s]+)#i',
+            '$1',
+            $html
+        );
     }
 }

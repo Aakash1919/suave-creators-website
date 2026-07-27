@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
 
 class Blog extends Model
 {
@@ -83,6 +81,13 @@ class Blog extends Model
             return null;
         }
 
-        return Storage::disk('public')->url($this->featured_image);
+        $path = ltrim(str_replace('\\', '/', $this->featured_image), '/');
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        // Relative public URL so images work regardless of APP_URL host/port.
+        return '/storage/'.$path;
     }
 }

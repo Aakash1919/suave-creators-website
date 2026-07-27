@@ -217,17 +217,6 @@ class IndustryDetailSupport
      */
     protected static function sampleInsights(): array
     {
-        return array_map(static function (array $post): array {
-            return [
-                'title' => $post['title'],
-                'excerpt' => $post['short_description'],
-                'image' => $post['image'],
-                'alt' => $post['title'],
-                'date' => $post['published_label'],
-                'datetime' => $post['published_date'],
-                'author' => $post['author_name'],
-                'url' => route('blog.show', ['slug' => $post['slug']]),
-            ];
-        }, array_slice(BlogSupport::posts(), 0, 3));
+        return BlogSupport::articleCards(3);
     }
 }

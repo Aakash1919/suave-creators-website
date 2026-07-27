@@ -27,7 +27,7 @@
             <div class="swiper-slide">
               <article class="articles-card">
                 <figure class="articles-card__image">
-                  <img src="{{ asset($article['image']) }}" alt="{{ $article['alt'] }}" title="{{ $article['alt'] }}" width="1024" height="683" loading="lazy" decoding="async">
+                  <img src="{{ str_starts_with((string) $article['image'], 'http') || str_starts_with((string) $article['image'], '/') ? $article['image'] : asset($article['image']) }}" alt="{{ $article['alt'] }}" title="{{ $article['alt'] }}" width="1024" height="683" loading="lazy" decoding="async">
                 </figure>
                 <div class="articles-card__body">
                   <div class="articles-card__meta">
@@ -55,9 +55,12 @@
                     @endif
                   </div>
                   <h3>{{ $article['title'] }}</h3>
-                  <p>{{ $article['excerpt'] }}</p>
-                  <a class="articles-card__link underline mt-2 text-sm font-semibold text-[#2A4DFB]"
-                    href="{{ str_starts_with($article['url'], 'http') ? $article['url'] : (str_starts_with($article['url'], '/') ? $article['url'] : route($article['url'])) }}">Read More</a>
+                  <p title="{{ $article['excerpt'] }}">{{ $article['excerpt'] }}</p>
+                  <a class="articles-card__link group"
+                    href="{{ str_starts_with($article['url'], 'http') ? $article['url'] : (str_starts_with($article['url'], '/') ? $article['url'] : route($article['url'])) }}">
+                    Read More
+                    <x-frontend.cta-arrow />
+                  </a>
                 </div>
               </article>
             </div>

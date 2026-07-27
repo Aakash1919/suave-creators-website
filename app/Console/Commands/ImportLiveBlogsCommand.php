@@ -424,7 +424,7 @@ class ImportLiveBlogsCommand extends Command
                     return $m[0];
                 }
 
-                $url = Storage::disk('public')->url($path);
+                $url = '/storage/'.ltrim(str_replace('\\', '/', $path), '/');
 
                 return (string) preg_replace('/src=["\'][^"\']+["\']/', 'src="'.e($url).'"', $m[0], 1);
             },

@@ -25,4 +25,6 @@ Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('ind
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');
+Route::get('/blogs/category/{slug}', [BlogController::class, 'category'])->name('blogs.category');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');

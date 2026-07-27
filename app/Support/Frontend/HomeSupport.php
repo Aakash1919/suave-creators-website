@@ -358,47 +358,6 @@ class HomeSupport
      */
     public static function articles(): array
     {
-        return [
-            [
-                'title' => 'How to Build a Digital Strategy That Creates Real Business Value',
-                'excerpt' => 'A practical framework for connecting customer needs, technology decisions, and measurable growth.',
-                'image' => 'assets/blog/digital-strategy-collaboration.png',
-                'alt' => 'Team collaborating on a digital strategy plan for business growth',
-                'date' => 'Jun 24, 2026',
-                'datetime' => '2026-06-24',
-                'author' => 'Suave Creators',
-                'url' => route('blog.show', ['slug' => 'digital-strategy-that-creates-value']),
-            ],
-            [
-                'title' => 'Turning Product Data into Better Customer Experiences',
-                'excerpt' => 'Learn how focused analytics can reveal friction, guide priorities, and improve every step of the user journey.',
-                'image' => 'assets/blog/product-experience-mapping.png',
-                'alt' => 'Designer mapping a digital product experience for better UX',
-                'date' => 'Jun 12, 2026',
-                'datetime' => '2026-06-12',
-                'author' => 'Suave Creators',
-                'url' => route('blog.show', ['slug' => 'product-data-customer-experiences']),
-            ],
-            [
-                'title' => 'Designing Digital Workflows Your Team Will Actually Use',
-                'excerpt' => 'Simple principles for creating connected tools that reduce busywork and make collaboration easier.',
-                'image' => 'assets/blog/software-development-laptop-code.png',
-                'alt' => 'Laptop with software development code for digital workflow tools',
-                'date' => 'May 29, 2026',
-                'datetime' => '2026-05-29',
-                'author' => 'Suave Creators',
-                'url' => route('blog.show', ['slug' => 'digital-workflows-teams-use']),
-            ],
-            [
-                'title' => 'Designing Digital Workflows Your Team Will Actually Use',
-                'excerpt' => 'Simple principles for creating connected tools that reduce busywork and make collaboration easier.',
-                'image' => 'assets/blog/software-development-laptop-code.png',
-                'alt' => 'Software engineering laptop screen showing application source code',
-                'date' => 'May 29, 2026',
-                'datetime' => '2026-05-29',
-                'author' => 'Suave Creators',
-                'url' => route('blog.show', ['slug' => 'digital-workflows-teams-use']),
-            ],
-        ];
+        return BlogSupport::articleCards(4);
     }
 }

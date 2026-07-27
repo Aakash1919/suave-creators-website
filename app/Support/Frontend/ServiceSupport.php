@@ -149,18 +149,7 @@ class ServiceSupport
      */
     public static function articles(): array
     {
-        return array_map(static function (array $post): array {
-            return [
-                'title' => $post['title'] ?? '',
-                'excerpt' => $post['short_description'] ?? '',
-                'image' => $post['image'] ?? '',
-                'alt' => $post['title'] ?? '',
-                'date' => $post['published_label'] ?? '',
-                'datetime' => $post['published_date'] ?? '',
-                'author' => $post['author_name'] ?? 'Suave Creators',
-                'url' => $post['url'] ?? route('blogs'),
-            ];
-        }, array_slice(BlogSupport::posts(), 0, 3));
+        return BlogSupport::articleCards(3);
     }
 
     /**
@@ -195,7 +184,7 @@ class ServiceSupport
             abort(404);
         }
 
-        $posts = BlogSupport::posts();
+        $posts = BlogSupport::posts()->take(3)->values()->all();
         $bodyImage = (string) ($service['bodyImage'] ?? '');
         $bodyBg = (string) ($service['bodyBg'] ?? '');
         $useBodyImageLayout = $bodyImage !== '';
@@ -229,7 +218,7 @@ class ServiceSupport
             'industryCards' => self::mapIndustryCards($service['industries'] ?? []),
             'standoutCards' => self::mapStandoutCards($service['standoutCards'] ?? []),
             'processSteps' => self::mapProcessSteps($service['processSteps'] ?? []),
-            'articles' => self::mapArticles(array_slice($posts, 0, 3)),
+            'articles' => self::mapArticles($posts),
             'techStack' => AboutSupport::techStack(),
             'webDevLayoutSlugs' => self::SLUGS,
             'isWebDevelopmentService' => in_array($slug, self::SLUGS, true),

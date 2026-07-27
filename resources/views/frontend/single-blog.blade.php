@@ -29,7 +29,13 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
       <time datetime="{{ $post['published_date'] }}">{{ $post['published_label'] }}</time>
     </span>
-    <span class="single-blog-main__category">{{ $post['category'] }}</span>
+    <span class="single-blog-main__category">
+      @if (! empty($post['category_url']))
+        <a href="{{ $post['category_url'] }}">{{ $post['category'] }}</a>
+      @else
+        {{ $post['category'] }}
+      @endif
+    </span>
   </p>
 </section>
 <!-- Single Blog Hero Section End -->
@@ -92,7 +98,10 @@
             <ul class="blog-widget__list">
               @foreach ($categories as $category)
                 <li>
-                  <a href="{{ route('blogs') }}">{{ $category }}</a>
+                  <a href="{{ $category['url'] ?? route('blogs') }}" @class(['is-active' => ! empty($category['active'])])>
+                    <span>{{ $category['name'] ?? '' }}</span>
+                    <span class="blog-widget__count">{{ (int) ($category['count'] ?? 0) }}</span>
+                  </a>
                 </li>
               @endforeach
             </ul>
@@ -148,7 +157,10 @@
                         </div>
                         <h3>{{ $item['title'] }}</h3>
                         <p>{{ $item['short_description'] }}</p>
-                        <a class="articles-card__link underline mt-2 text-sm font-semibold text-[#2A4DFB]" href="{{ $item['url'] ?? route('blog.show', $item['slug']) }}">Read More</a>
+                        <a class="articles-card__link group" href="{{ $item['url'] ?? route('blog.show', $item['slug']) }}">
+                          Read More
+                          <x-frontend.cta-arrow />
+                        </a>
                       </div>
                     </article>
                   </div>
@@ -574,19 +586,36 @@
 }
 
 .blog-widget__list a {
-  display: block;
-  padding: 12px 0 12px 12px;
+  align-items: center;
   border-left: 2px solid transparent;
-  font-size: 13px;
-  line-height: 1.5;
   color: var(--color-muted);
+  display: flex;
+  font-size: 13px;
+  gap: 12px;
+  justify-content: space-between;
+  line-height: 1.5;
+  padding: 12px 0 12px 12px;
   text-decoration: none;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.blog-widget__list a:hover {
+.blog-widget__list a:hover,
+.blog-widget__list a.is-active {
   border-color: rgba(42, 77, 251, 0.4);
   color: var(--color-brand-start);
+}
+
+.blog-widget__count {
+  background: rgba(42, 77, 251, 0.08);
+  border-radius: 999px;
+  color: inherit;
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 1.75rem;
+  padding: 5px 8px;
+  text-align: center;
 }
 
 .blog-search {
