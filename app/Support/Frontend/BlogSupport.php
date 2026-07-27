@@ -2,7 +2,9 @@
 
 namespace App\Support\Frontend;
 
+use App\Models\Blog;
 use App\Support\Frontend\Concerns\MapsDesignAssets;
+use Illuminate\Support\Carbon;
 
 class BlogSupport
 {
@@ -19,28 +21,13 @@ class BlogSupport
             return $posts;
         }
 
-        $path = self::dataPath('blogs/posts.php');
-
-        if (! is_file($path)) {
-            return $posts = [];
-        }
-
-        /** @var array<int, array<string, mixed>> $raw */
-        $raw = include $path;
-        $posts = [];
-
-        foreach ($raw as $post) {
-            $mapped = self::mapDesignData($post);
-            $slug = (string) ($mapped['slug'] ?? '');
-
-            if ($slug !== '') {
-                $mapped['route'] = 'blog.show';
-                $mapped['url'] = route('blog.show', ['slug' => $slug]);
-            }
-
-            $mapped['image'] = asset((string) ($mapped['image'] ?? ''));
-            $posts[] = $mapped;
-        }
+        $posts = Blog::query()
+            ->published()
+            ->with(['category', 'createdBy'])
+            ->orderByDesc('published_at')
+            ->get()
+            ->map(fn (Blog $blog): array => self::mapBlog($blog))
+            ->all();
 
         return $posts;
     }
@@ -50,13 +37,13 @@ class BlogSupport
      */
     public static function post(string $slug): ?array
     {
-        foreach (self::posts() as $post) {
-            if (($post['slug'] ?? '') === $slug) {
-                return $post;
-            }
-        }
+        $blog = Blog::query()
+            ->published()
+            ->with(['category', 'createdBy'])
+            ->where('slug', $slug)
+            ->first();
 
-        return null;
+        return $blog !== null ? self::mapBlog($blog) : null;
     }
 
     /**
@@ -137,6 +124,16 @@ class BlogSupport
             $titleAccent = implode(' ', array_slice($titleWords, -$accentCount));
         }
 
+        $seoTitle = trim((string) ($post['meta_title'] ?? ''));
+        if ($seoTitle === '') {
+            $seoTitle = ($post['title'] ?? 'Blog').' | Suave Creators Blog';
+        }
+
+        $seoDescription = trim((string) ($post['meta_description'] ?? ''));
+        if ($seoDescription === '') {
+            $seoDescription = (string) ($post['short_description'] ?? 'Suave Creators blog article.');
+        }
+
         return [
             'post' => $post,
             'posts' => $posts,
@@ -151,8 +148,10 @@ class BlogSupport
             'titleLead' => $titleLead,
             'titleAccent' => $titleAccent,
             'faqs' => ! empty($post['faqs']) && is_array($post['faqs']) ? $post['faqs'] : self::defaultFaqs(),
-            'seoTitle' => ($post['title'] ?? 'Blog').' | Suave Creators Blog',
-            'seoDescription' => (string) ($post['short_description'] ?? 'Suave Creators blog article.'),
+            'seoTitle' => $seoTitle,
+            'seoDescription' => $seoDescription,
+            'seoOgTitle' => trim((string) ($post['og_title'] ?? '')) ?: null,
+            'seoOgDescription' => trim((string) ($post['og_description'] ?? '')) ?: null,
         ];
     }
 
@@ -178,6 +177,40 @@ class BlogSupport
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    protected static function mapBlog(Blog $blog): array
+    {
+        $publishedAt = $blog->published_at instanceof Carbon
+            ? $blog->published_at
+            : ($blog->published_at !== null ? Carbon::parse($blog->published_at) : null);
+
+        $slug = (string) $blog->slug;
+
+        return [
+            'id' => $blog->id,
+            'slug' => $slug,
+            'title' => (string) $blog->title,
+            'image' => $blog->featuredImageUrl() ?? '',
+            'short_description' => (string) ($blog->short_description ?? ''),
+            'content' => (string) ($blog->content ?? ''),
+            'author_name' => (string) ($blog->createdBy?->name ?? 'Suave Creators'),
+            'category' => (string) ($blog->category?->name ?? ''),
+            'published_date' => $publishedAt?->toDateString() ?? '',
+            'published_label' => $publishedAt?->format('M j, Y') ?? '',
+            'updated_date' => $blog->updated_at?->toDateString() ?? '',
+            'toc' => is_array($blog->toc) ? $blog->toc : [],
+            'faqs' => is_array($blog->faqs) ? $blog->faqs : [],
+            'meta_title' => (string) ($blog->meta_title ?? ''),
+            'meta_description' => (string) ($blog->meta_description ?? ''),
+            'og_title' => (string) ($blog->og_title ?? ''),
+            'og_description' => (string) ($blog->og_description ?? ''),
+            'route' => 'blog.show',
+            'url' => $slug !== '' ? route('blog.show', ['slug' => $slug]) : '',
+        ];
+    }
+
+    /**
      * @param  array<string, mixed>  $post
      */
     protected static function prepareArticleContent(array $post): string
@@ -187,9 +220,11 @@ class BlogSupport
         $image = (string) ($post['image'] ?? '');
         $pullQuote = trim((string) ($post['short_description'] ?? ''));
 
-        $featureImageHtml = '<figure class="single-blog-main__image single-blog-main__image--inline">'
-            .'<img src="'.e($image).'" alt="'.e($title).'" title="'.e($title).'" width="1200" height="640" loading="eager">'
-            .'</figure>';
+        $featureImageHtml = $image !== ''
+            ? '<figure class="single-blog-main__image single-blog-main__image--inline">'
+                .'<img src="'.e($image).'" alt="'.e($title).'" title="'.e($title).'" width="1200" height="640" loading="eager">'
+                .'</figure>'
+            : '';
 
         if ($pullQuote !== '' && stripos($content, '<blockquote') === false) {
             $quoteHtml = '<blockquote><p>'.e($pullQuote).'</p></blockquote>';
