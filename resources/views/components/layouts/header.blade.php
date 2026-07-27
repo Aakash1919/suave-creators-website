@@ -1,16 +1,16 @@
 <header {{ $attributes->merge(['class' => 'site-header relative z-20 w-full bg-transparent py-3']) }}>
     <div class="site-container flex items-center justify-between gap-3 sm:gap-4">
-        <a href="{{ url('/') }}" class="site-header__logo inline-flex shrink-0 items-center" aria-label="Suave Creators home">
+        <a href="{{ route('home') }}" class="site-header__logo inline-flex shrink-0 items-center" aria-label="Suave Creators home">
             <x-layouts.logo variant="header" />
         </a>
 
         <nav class="site-header__nav hidden items-center gap-10 xl:flex" aria-label="Main navigation">
-            <a href="{{ url('/about-us') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">About</a>
-            <a href="{{ url('/product') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">Product</a>
+            <a href="{{ route('about-us') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">About</a>
+            <a href="{{ route('product') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">Product</a>
 
             @foreach ($dropdowns as $dropdown)
                 <div class="group relative">
-                    <a href="{{ url('/' . $dropdown['slug']) }}"
+                    <a href="{{ route($dropdown['hubRoute']) }}"
                         class="inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-medium text-white transition group-hover:font-semibold group-hover:text-[#8EB6FF]">
                         {{ $dropdown['label'] }}
                         <i class="fa-solid fa-chevron-down text-[10px] transition duration-200 group-hover:rotate-180" aria-hidden="true"></i>
@@ -21,7 +21,7 @@
                             <ul class="list-none p-0">
                                 @foreach ($dropdown['items'] as $index => $item)
                                     <li class="{{ $index > 0 ? 'border-t border-[#EEF1F8]' : '' }}">
-                                        <a href="{{ url($item['href']) }}"
+                                        <a href="{{ $item['href'] }}"
                                             class="group/item relative flex items-center gap-3 px-3 py-2 text-[13px] font-semibold text-[#0F172A] transition-colors hover:bg-[#F3F6FF]">
                                             <span class="absolute inset-y-0 left-0 w-[3px] origin-left scale-y-0 bg-[#2A4DFB] transition-transform duration-200 group-hover/item:scale-y-100" aria-hidden="true"></span>
                                             <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EAF0FF] text-[#2A4DFB]">
@@ -38,15 +38,15 @@
                 </div>
             @endforeach
 
-            <a href="{{ url('/blogs') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">Blog</a>
-            <a href="{{ url('/contact-us') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">Contact</a>
+            <a href="{{ route('blogs') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">Blog</a>
+            <a href="{{ route('contact-us') }}" class="whitespace-nowrap text-[13px] font-medium text-white transition hover:font-bold">Contact</a>
         </nav>
 
         <div class="site-header__actions flex items-center justify-end gap-2 sm:gap-4 xl:gap-5">
             <a href="{{ $phoneHref }}" class="hidden shrink-0 whitespace-nowrap text-sm font-medium text-white hover:font-bold xl:inline">
                 {{ $phone }}
             </a>
-            <a href="{{ url($ctaHref) }}" class="site-header__cta u-btn-cta hidden shrink-0 items-center gap-1 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-[14px] py-[8px] text-sm font-bold text-white transition hover:brightness-110 md:inline-flex md:px-[18px]">
+            <a href="{{ $ctaHref() }}" class="site-header__cta u-btn-cta hidden shrink-0 items-center gap-1 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-[14px] py-[8px] text-sm font-bold text-white transition hover:brightness-110 md:inline-flex md:px-[18px]">
                 <span class="hidden lg:inline">{{ $ctaLabel }}</span>
                 <span class="lg:hidden">{{ $ctaLabelShort }}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -66,8 +66,8 @@
         <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
             <div class="mobile-nav__scroll">
                 <nav class="mobile-nav__links" aria-label="Mobile navigation">
-                    <a class="mobile-nav__link" href="{{ url('/about-us') }}">About</a>
-                    <a class="mobile-nav__link" href="{{ url('/product') }}">Product</a>
+                    <a class="mobile-nav__link" href="{{ route('about-us') }}">About</a>
+                    <a class="mobile-nav__link" href="{{ route('product') }}">Product</a>
 
                     @foreach ($dropdowns as $dropdown)
                         <div class="mobile-nav__group">
@@ -77,19 +77,19 @@
                             </button>
                             <div id="{{ $dropdown['id'] }}" class="mobile-nav__submenu" role="region" aria-labelledby="{{ $dropdown['id'] }}-btn" hidden>
                                 @foreach ($dropdown['items'] as $item)
-                                    <a class="mobile-nav__sublink" href="{{ url($item['href']) }}">{{ $item['label'] }}</a>
+                                    <a class="mobile-nav__sublink" href="{{ $item['href'] }}">{{ $item['label'] }}</a>
                                 @endforeach
                             </div>
                         </div>
                     @endforeach
 
-                    <a class="mobile-nav__link" href="{{ url('/blogs') }}">Blog</a>
-                    <a class="mobile-nav__link" href="{{ url('/contact-us') }}">Contact</a>
+                    <a class="mobile-nav__link" href="{{ route('blogs') }}">Blog</a>
+                    <a class="mobile-nav__link" href="{{ route('contact-us') }}">Contact</a>
                 </nav>
 
                 <div class="mobile-nav__footer">
                     <a href="{{ $phoneHref }}" class="mobile-nav__phone">{{ $phone }}</a>
-                    <a href="{{ url($ctaHref) }}" class="mobile-nav__cta u-btn-cta !h-[34px] !min-h-[34px] !py-0 text-[13px]">
+                    <a href="{{ $ctaHref() }}" class="mobile-nav__cta u-btn-cta !h-[34px] !min-h-[34px] !py-0 text-[13px]">
                         {{ $ctaLabel }}
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M18 8L22 12L18 16" />

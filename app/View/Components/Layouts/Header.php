@@ -10,46 +10,65 @@ use Illuminate\View\Component;
 class Header extends Component
 {
     /**
-     * @param  array<string, array<int, array{href: string, label: string, icon: string}>>|null  $dropdowns
+     * @var array<int, array{label: string, slug: string, hubRoute: string, id: string, items: array<int, array<string, mixed>>}>
+     */
+    public array $dropdowns;
+
+    /**
+     * @param  array<string, array<int, array{href?: string, label: string, icon: string, route?: string, params?: array<string, string>}>>|null  $dropdowns
      */
     public function __construct(
         public string $phone = '+91 88949 00142',
         public string $phoneHref = 'tel:+918894900142',
-        public string $ctaHref = '/contact-us/#contact-id',
+        public string $ctaRoute = 'contact-us',
+        public string $ctaFragment = 'contact-id',
         public string $ctaLabel = 'Talk to an expert',
         public string $ctaLabelShort = 'Talk to us',
-        public ?array $dropdowns = null,
+        ?array $dropdowns = null,
     ) {
-        $this->dropdowns ??= [
+        $dropdowns ??= [
             'Services' => [
-                ['href' => '/service/web-development-services', 'label' => 'Web Development Service', 'icon' => 'fa-solid fa-laptop-code'],
-                ['href' => '/service/custom-crm-development', 'label' => 'CRM Development Service', 'icon' => 'fa-solid fa-users'],
-                ['href' => '/service/enterprise-software-solutions', 'label' => 'Enterprise Software Solutions', 'icon' => 'fa-solid fa-building'],
-                ['href' => '/service/e-commerce-development', 'label' => 'E-commerce Development Service', 'icon' => 'fa-solid fa-cart-shopping'],
+                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development Service', 'icon' => 'fa-solid fa-laptop-code'],
+                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development Service', 'icon' => 'fa-solid fa-users'],
+                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software Solutions', 'icon' => 'fa-solid fa-building'],
+                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Development Service', 'icon' => 'fa-solid fa-cart-shopping'],
             ],
             'Industry' => [
-                ['href' => '/industries/healthcare', 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
-                ['href' => '/industries/it-software-solutions-for-startups', 'label' => 'IT & Software Solutions for Startups', 'icon' => 'fa-solid fa-rocket'],
-                ['href' => '/industries/finance-banking-software-development', 'label' => 'Finance & Banking', 'icon' => 'fa-solid fa-building-columns'],
-                ['href' => '/industries/retail-ecommerce-solutions', 'label' => 'Retail & E-commerce', 'icon' => 'fa-solid fa-store'],
-                ['href' => '/industries/logistics-supply-chain-apps', 'label' => 'Logistics & Supply Chain', 'icon' => 'fa-solid fa-truck'],
-                ['href' => '/industries/education-elearning-platforms', 'label' => 'Education & E-learning', 'icon' => 'fa-solid fa-graduation-cap'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'IT & Software Solutions for Startups', 'icon' => 'fa-solid fa-rocket'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Finance & Banking', 'icon' => 'fa-solid fa-building-columns'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'Retail & E-commerce', 'icon' => 'fa-solid fa-store'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'logistics-supply-chain-apps'], 'label' => 'Logistics & Supply Chain', 'icon' => 'fa-solid fa-truck'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'education-elearning-platforms'], 'label' => 'Education & E-learning', 'icon' => 'fa-solid fa-graduation-cap'],
             ],
         ];
 
-        $this->dropdowns = collect($this->dropdowns)
+        $this->dropdowns = collect($dropdowns)
             ->map(function (array $items, string $label): array {
                 $slug = Str::lower($label);
+                $hubRoute = $slug === 'services' ? 'services' : 'industries';
 
                 return [
                     'label' => $label,
                     'slug' => $slug,
+                    'hubRoute' => $hubRoute,
                     'id' => 'mobile-nav-'.$slug,
-                    'items' => array_values($items),
+                    'items' => array_values(array_map(function (array $item): array {
+                        $item['href'] = isset($item['route'])
+                            ? route($item['route'], $item['params'] ?? [])
+                            : route($item['route'] ?? 'home');
+
+                        return $item;
+                    }, $items)),
                 ];
             })
             ->values()
             ->all();
+    }
+
+    public function ctaHref(): string
+    {
+        return route($this->ctaRoute).'#'.$this->ctaFragment;
     }
 
     public function render(): View|Closure|string

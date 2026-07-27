@@ -26,11 +26,15 @@ class FaqSection extends Component
         public string $title = 'Frequently Ask Question',
         public string $description = 'Here are the most asked questions based on feedback from our users.',
         public string $headingId = 'faq-heading',
-        public string $ctaHref = '/contact-us/#contact-id',
+        public string $ctaHref = '',
         public string $ctaLabel = 'Start your Project',
         public bool $showCta = true,
     ) {
         $this->media = filled($this->media) ? $this->normalizeAssetPath($this->media) : null;
+
+        if ($this->ctaHref === '') {
+            $this->ctaHref = route('contact-us').'#contact-id';
+        }
 
         $this->resolvedMediaType = $this->mediaType
             ?? $this->detectMediaType($this->media);

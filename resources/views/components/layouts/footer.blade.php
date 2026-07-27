@@ -18,7 +18,7 @@
   <div class="site-container relative z-10 !px-5 sm:!px-6 lg:!px-8">
     <div class="site-footer__main grid grid-cols-1 gap-7 py-7 sm:gap-10 sm:py-10 lg:grid-cols-12 lg:gap-12">
       <div class="site-footer__brand min-w-0 lg:col-span-3">
-        <a href="{{ url('/') }}" class="inline-flex max-w-full" aria-label="Suave Creators home">
+        <a href="{{ route('home') }}" class="inline-flex max-w-full" aria-label="Suave Creators home">
           <x-layouts.logo variant="footer" />
         </a>
         <p class="mt-3 text-[13px] font-medium leading-5 text-[#B1B9DF] sm:mt-5 sm:text-base">
@@ -49,7 +49,7 @@
               <ul class="mt-3 space-y-1.5 sm:mt-5 sm:space-y-3">
                 @foreach ($links as $link)
                   <li>
-                    <a href="{{ url($link['href']) }}"
+                    <a href="{{ $link['href'] }}"
                       class="group flex !min-h-0 items-start gap-1.5 py-0.5 text-[11px] leading-4 text-[#B1B9DF] transition hover:text-white sm:gap-2 sm:py-0 sm:text-[13px]">
                       <i class="fa-solid fa-chevron-right mt-0.5 shrink-0 text-[8px] text-[#B1B9DF] transition-transform group-hover:translate-x-0.5 sm:text-[9px]"
                         aria-hidden="true"></i>
@@ -60,7 +60,7 @@
               </ul>
 
               @if ($title === 'Product')
-                <a href="{{ url('/product') }}"
+                <a href="{{ route('product') }}"
                   class="mt-2 inline-flex !min-h-0 items-center text-[12px] font-semibold text-white underline underline-offset-4 sm:mt-4 sm:text-[13px]">
                   More
                 </a>

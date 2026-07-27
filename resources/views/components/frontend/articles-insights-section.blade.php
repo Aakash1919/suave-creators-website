@@ -57,7 +57,7 @@
                   <h3>{{ $article['title'] }}</h3>
                   <p>{{ $article['excerpt'] }}</p>
                   <a class="articles-card__link underline mt-2 text-sm font-semibold text-[#2A4DFB]"
-                    href="{{ url($article['url']) }}">Read More</a>
+                    href="{{ str_starts_with($article['url'], 'http') ? $article['url'] : (str_starts_with($article['url'], '/') ? $article['url'] : route($article['url'])) }}">Read More</a>
                 </div>
               </article>
             </div>
@@ -71,7 +71,7 @@
           <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
         </button>
         <div class="articles-insights-pagination" aria-label="Articles pagination"></div>
-        <a class="articles-insights__more" href="{{ url($moreHref) }}">{{ $moreLabel }}</a>
+        <a class="articles-insights__more" href="{{ str_starts_with($moreHref, 'http') || str_starts_with($moreHref, '/') ? $moreHref : route($moreHref) }}">{{ $moreLabel }}</a>
         <button class="articles-insights-next articles-insights__control" type="button"
           aria-label="Next article">
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>

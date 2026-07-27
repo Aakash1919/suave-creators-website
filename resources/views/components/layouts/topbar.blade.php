@@ -10,7 +10,7 @@
                 height="14"
                 decoding="async"
             >
-            <a href="{{ url($href) }}" class="site-topbar__text min-w-0 no-underline hover:opacity-90">
+            <a href="{{ $href() }}" class="site-topbar__text min-w-0 no-underline hover:opacity-90">
                 <span class="bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold leading-[1.35] text-transparent sm:text-xs">{{ $title }}</span>
                 <span class="hidden text-[11px] font-semibold leading-[1.35] text-white min-[480px]:inline sm:text-xs">{{ $subtitle }}</span>
             </a>

@@ -35,7 +35,7 @@
         Enterprise Software Solutions to help businesses grow.
       </p>
       <div class="mt-8 flex items-center gap-4 sm:gap-7">
-        <a href="/contact-us/#contact-id"
+        <a href="{{ route('contact-us') }}#contact-id"
           class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
           Start your Project
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
@@ -46,7 +46,7 @@
           </svg>
         </a>
 
-        <a href="/contact-us/#contact-id"
+        <a href="{{ route('contact-us') }}#contact-id"
           class="inline-flex items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
           Schedule a discovery call
         </a>
@@ -143,7 +143,7 @@
 
           <div class="about-values__item">
             <span class="about-values__icon bg-[#DFE4F8] shadow-[0px_16px_50px_0px_#5C638029]">
-              <img src="{{ asset('assets/icons/client-focus-icon.svg') }}" alt="Client focused delivery icon for custom software projects" title="Client focused delivery icon for custom software projects" width="40" height="40" decoding="async" loading="lazy">
+              <img src="{{ asset('assetsicons/client-focus-icon.svg') }}" alt="Client focused delivery icon for custom software projects" title="Client focused delivery icon for custom software projects" width="40" height="40" decoding="async" loading="lazy">
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
@@ -168,7 +168,7 @@
           </div>
         </div>
         <div class=" mt-10 flex flex-wrap items-center gap-5">
-          <a href="/about-us"
+          <a href="{{ route('about-us') }}"
             class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
             <span>Learn more About Us</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
@@ -178,7 +178,7 @@
               <path d="M2 12H22"></path>
             </svg>
           </a>
-          <a href="/product" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
+          <a href="{{ route('product') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
         </div>
       </div>
 
@@ -313,50 +313,13 @@ $offerings = [
         </button>
       </div>
       <div class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></div>
-      <a class="offerings-expert-link" href="/contact-us/#contact-id">Talk to an Expert</a>
+      <a class="offerings-expert-link" href="{{ route('contact-us') }}#contact-id">Talk to an Expert</a>
     </div>
   </div>
 </section>
 <!-- Offerings Showcase Section End -->
 
-<!-- Smart Together CTA Section Start -->
-<section class="full-bleed smart-together-cta py-6" aria-labelledby="smart-together-title">
-  <div class="smart-together-cta__inner section-inner">
-    <div class="smart-together-cta__eyebrow mb-4 flex items-center gap-2">
-      <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
-      <span
-        class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-        Connect with us
-      </span>
-    </div>
-
-    <div class="smart-together-cta__copy">
-      <h2 id="smart-together-title">Let’s Build Something Smart Together</h2>
-      <p>Ready to transform your ideas into reality with Suave Creators?</p>
-    </div>
-
-    <div class="smart-together-cta__actions flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
-      <a href="/contact-us/#contact-id"
-        class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
-        Get Started
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="transition-transform duration-300 group-hover:translate-x-1">
-          <path d="M18 8L22 12L18 16"></path>
-          <path d="M2 12H22"></path>
-        </svg>
-      </a>
-      <a href="/contact-us/#contact-id" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-white/70 text-sm font-semibold text-white">
-        Discuss your Vision
-      </a>
-    </div>
-
-    <span class="smart-together-cta__phone">
-      <img src="{{ asset('assets/hero/mobile-app-phone-demo.gif') }}" alt="Mobile app demo for a custom CRM and software product" title="Mobile app demo for a custom CRM and software product" class="rounded-[10px]" decoding="async" loading="lazy">
-    </span>
-  </div>
-</section>
-<!-- Smart Together CTA Section End -->
+<x-frontend.connect-cta-section />
 
 <!-- Web Development Services Section Start -->
 <x-frontend.three-card-section />
@@ -402,10 +365,10 @@ $offerings = [
 
     @php
 $coreValues = [
-      ['innovation', 'Innovation', 'We work with future trends and the latest technologies.', 'assets/portfolio/modern-office-yellow-accent-lounge.png', 'Modern workspace reflecting innovative software development culture'],
-      ['quality', 'Quality', 'Delivering the best quality, ensuring our clients get nothing less than the best.', 'assets/portfolio/contemporary-living-room-kitchen.png', 'Contemporary interior design showcasing quality digital craftsmanship'],
-      ['trust', 'Trust', 'We build trust by focusing on the exact client requirements.', 'assets/portfolio/warm-lounge-plants-artwork.png', 'Warm collaborative lounge built for trusted client partnerships'],
-      ['customer', 'Customer Focus', 'We put our clients at the heart of everything we build.', 'assets/portfolio/office-glass-meeting-rooms.png', 'Glass meeting rooms for customer focused software consulting'],
+      ['innovation', 'Innovation', 'We work with future trends and the latest technologies.', 'assetsportfolio/modern-office-yellow-accent-lounge.png', 'Modern workspace reflecting innovative software development culture'],
+      ['quality', 'Quality', 'Delivering the best quality, ensuring our clients get nothing less than the best.', 'assetsportfolio/contemporary-living-room-kitchen.png', 'Contemporary interior design showcasing quality digital craftsmanship'],
+      ['trust', 'Trust', 'We build trust by focusing on the exact client requirements.', 'assetsportfolio/warm-lounge-plants-artwork.png', 'Warm collaborative lounge built for trusted client partnerships'],
+      ['customer', 'Customer Focus', 'We put our clients at the heart of everything we build.', 'assetsportfolio/office-glass-meeting-rooms.png', 'Glass meeting rooms for customer focused software consulting'],
     ];
 @endphp
     <div class="core-values__grid">
@@ -566,7 +529,7 @@ $digitalMarketingServices = [
       <div class="digital-marketing-pagination flex md:hidden" aria-label="Digital marketing pagination"></div>
       <p class="digital-marketing-services__more">
         <span class="digital-marketing-services__more-text">Need more services based on your demand?</span>
-        <a href="/services">See All Services</a>
+        <a href="{{ route('services') }}">See All Services</a>
       </p>
     </div>
   </div>
@@ -605,10 +568,10 @@ $digitalMarketingServices = [
 
     @php
 $portfolioShowcaseProjects = [
-      ['assets/portfolio/timber-glass-creative-studio.png', 'Modern timber and glass creative studio for digital product teams'],
-      ['assets/portfolio/bright-contemporary-residence.png', 'Bright contemporary space reflecting premium digital design quality'],
-      ['assets/portfolio/warm-modern-lounge-interior.png', 'Warm modern lounge for collaborative software product workshops'],
-      ['assets/portfolio/timber-glass-creative-studio.png', 'Creative studio exterior showcasing Suave Creators portfolio quality'],
+      ['assetsportfolio/timber-glass-creative-studio.png', 'Modern timber and glass creative studio for digital product teams'],
+      ['assetsportfolio/bright-contemporary-residence.png', 'Bright contemporary space reflecting premium digital design quality'],
+      ['assetsportfolio/warm-modern-lounge-interior.png', 'Warm modern lounge for collaborative software product workshops'],
+      ['assetsportfolio/timber-glass-creative-studio.png', 'Creative studio exterior showcasing Suave Creators portfolio quality'],
     ];
 @endphp
     <div class="swiper portfolioShowcaseSwiper">
@@ -649,109 +612,17 @@ $portfolioShowcaseProjects = [
       </div>
       <p class="digital-marketing-services__more">
         <span>Discuss your project</span>
-        <a href="/services">Discuss your Vision</a>
+        <a href="{{ route('services') }}">Discuss your Vision</a>
       </p>
     </div>
   </div>
 </section>
 <!-- Portfolio Showcase Section End -->
 
-<!-- Industries We Serve Section Start -->
-<section
-  class="full-bleed industries-served bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/industries-section-bg.png') }}');"
-  aria-labelledby="industries-served-title">
-  <div class="industries-served__inner section-inner">
-    <header class="core-values__header">
-      <div class="flex items-start gap-2 mb-4">
-        <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
-        <span
-          class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
-          Industries We Serve
-        </span>
-      </div>
-      <div class="core-values__heading">
-        <h2>Industries We Serve</h2>
-        <p>Empowering multiple industries with tailored digital and smart solutions designed to drive growth,
-          innovation, and long-lasting impact.</p>
-      </div>
-    </header>
-
-    @php
-$industriesServed = [
-      [
-        'fa-solid fa-heart-pulse',
-        'Custom Healthcare Software Development Services',
-        'By leveraging our deep industry expertise and top-level technologies, such as AI and chatbots, we develop innovative healthcare software solutions designed to improve care and efficiency.',
-      ],
-      [
-        'fa-solid fa-gears',
-        'IT Services for Startups with Innovative Technology',
-        'Get tailored IT services and software development solutions that empower startups to innovate, grow, and compete in a fast-paced digital economy.',
-      ],
-      [
-        'fa-solid fa-landmark',
-        'We develop Smart Financial Software',
-        'We help you create secure banking and financial solutions, from mobile banking experiences to comprehensive software for financial institutions.',
-      ],
-      [
-        'fa-solid fa-cart-shopping',
-        'Elevating E-Commerce With AI-Powered Solutions',
-        'We develop next-generation, reliable, and feature-rich e-commerce solutions that empower businesses, delight customers, and improve sales performance.',
-      ],
-      [
-        'fa-solid fa-truck-fast',
-        'We develop Logistics & Supply Chain Apps',
-        'We build logistics software that helps supply chains move faster with greater speed, reliability, visibility, and cost efficiency.',
-      ],
-      [
-        'fa-solid fa-laptop-file',
-        'E-Learning Software Development Services',
-        'We deliver education and e-learning software for schools, colleges, training platforms, and online learning portals.',
-      ],
-    ];
-@endphp
-
-    <div class="industries-served__grid">
-      @foreach ($industriesServed as $industry)
-        <article class="industry-card">
-          <i class="industry-card__icon {{ $industry[0] }}" aria-hidden="true"></i>
-          <h3>{{ $industry[1] }}</h3>
-          <p>{{ $industry[2] }}</p>
-
-          <span class="industry-card__arrow" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 8L22 12L18 16"></path>
-              <path d="M2 12H22"></path>
-            </svg>
-          </span>
-        </article>
-      @endforeach
-    </div>
-    <div class="industries-served__project">
-      <a href="/contact-us/#contact-id" class="border-b border-white/70 text-sm font-semibold text-white">Discuss your
-        Project</a>
-    </div>
-
-    <aside class="industries-support" aria-label="Online platform services support">
-      <div class="industries-support__copy">
-        <p>The Services and Supports You Need for Online Platforms in Suave Creators</p>
-        <a href="/contact-us/#contact-id">
-          Talk to an Expert <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1">
-            <path d="M18 8L22 12L18 16"></path>
-            <path d="M2 12H22"></path>
-          </svg>
-        </a>
-      </div>
-      <div class="industries-support__illustration">
-        <img src="{{ asset('assets/brand/chat-widget-icon.png') }}" alt="Contact Suave Creators chat support for software consulting" title="Contact Suave Creators chat support for software consulting" width="56" height="56" decoding="async" loading="lazy">
-      </div>
-    </aside>
-  </div>
-</section>
-<!-- Industries We Serve Section End -->
+<x-frontend.industries-section
+  footer-label="Discuss your Project"
+  :show-support-aside="true"
+/>
 <!-- Technology Section Start -->
 <x-frontend.four-card-section />
 <!-- Technology Section End -->
@@ -772,61 +643,11 @@ $industriesServed = [
 <x-frontend.articles-insights-section
   :items="$articles"
   heading-id="articles-insights-title"
-  more-href="/blogs"
+  more-href="{{ route('blogs') }}"
   more-label="View More"
 />
 
-<!-- Consultation CTA Section Start -->
-<section id="consultation" class="full-bleed consultation-section">
-  <div class="section-inner">
-    <div class="consultation-card bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/consultation-section-bg.png') }}');">
-      <div class="consultation-copy">
-        <h2>Let's Build Your Next Digital<br class="hidden sm:block"> Solution with us!</h2>
-        <p>
-          Book a consultation for your next digital project. Suave Creators delivers quality work, stays ahead of
-          trends, and is here to help.
-        </p>
-        <a href="/contact-us/#contact-id" class="consultation-cta">
-          Book a Free Consultation <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1">
-            <path d="M18 8L22 12L18 16"></path>
-            <path d="M2 12H22"></path>
-          </svg>
-        </a>
-      </div>
-
-      <div class="consultation-people">
-        <div class="consultation-people__column consultation-people__column--left">
-          <figure class="consultation-person consultation-person--pink">
-            <img src="{{ asset('assets/team/consultation-team-member-1.png') }}" alt="Suave Creators consultant ready for a software discovery call" title="Suave Creators consultant ready for a software discovery call" width="640" height="960" loading="lazy" decoding="async">
-          </figure>
-          <figure class="consultation-person consultation-person--orange">
-            <img src="{{ asset('assets/team/consultation-team-member-2.png') }}" alt="Suave Creators developer available for project consultation" title="Suave Creators developer available for project consultation" width="640" height="960" loading="lazy" decoding="async">
-          </figure>
-        </div>
-        <div class="consultation-people__column">
-          <figure class="consultation-person consultation-person--yellow">
-            <img src="{{ asset('assets/team/consultation-team-leader.png') }}" alt="Suave Creators team leader for web development consultation" title="Suave Creators team leader for web development consultation" width="640" height="960" loading="lazy" decoding="async">
-          </figure>
-          <figure class="consultation-person consultation-person--blue">
-            <img src="{{ asset('assets/team/consultation-designer.png') }}" alt="Suave Creators UI UX designer for product consultation" title="Suave Creators UI UX designer for product consultation" width="640" height="960" loading="lazy" decoding="async">
-          </figure>
-        </div>
-        <div class="consultation-people__column consultation-people__column--right">
-          <figure class="consultation-person consultation-person--coral">
-            <img src="{{ asset('assets/team/consultation-team-lead.png') }}" alt="Suave Creators project lead for CRM and software consulting" title="Suave Creators project lead for CRM and software consulting" width="640" height="959" loading="lazy" decoding="async">
-          </figure>
-          <figure class="consultation-person consultation-person--cyan">
-            <img src="{{ asset('assets/team/consultation-team-collaborating.png') }}" alt="Suave Creators team collaborating on a client software project" title="Suave Creators team collaborating on a client software project" width="640" height="960"
-              loading="lazy" decoding="async">
-          </figure>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Consultation CTA Section End -->
+<x-frontend.consultation-section />
 
 <!-- Partnerships Section Start -->
 <section class="full-bleed partnership-section" aria-label="Client logos">

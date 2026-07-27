@@ -1,5 +1,5 @@
 <a
-    href="{{ url($href) }}"
+    href="{{ $href() }}"
     {{ $attributes->merge(['class' => 'floating-chat']) }}
     aria-label="{{ $ariaLabel }}"
 >

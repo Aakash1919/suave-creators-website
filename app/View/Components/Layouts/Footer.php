@@ -14,8 +14,20 @@ class Footer extends Component
 
     public string $emailHref;
 
+    public string $year;
+
     /**
-     * @param  array<string, array<int, array{href: string, label: string}>>|null  $columns
+     * @var array<string, array<int, array{route: string, params?: array<string, string>, label: string, href: string}>>
+     */
+    public array $columns;
+
+    /**
+     * @var array<int, array{href: string, label: string, icon: string}>
+     */
+    public array $socialLinks;
+
+    /**
+     * @param  array<string, array<int, array{route: string, params?: array<string, string>, label: string}>>|null  $columns
      * @param  array<int, array{href: string, label: string, icon: string}>|null  $socialLinks
      */
     public function __construct(
@@ -25,46 +37,54 @@ class Footer extends Component
         public string $phoneHref = 'tel:+919736900142',
         public string $email = 'Info@suavecreators.com',
         public string $address = '30 N Gould St, STE R Sheridan, WY 82801, USA',
-        public ?string $year = null,
-        public ?array $columns = null,
-        public ?array $socialLinks = null,
+        ?string $year = null,
+        ?array $columns = null,
+        ?array $socialLinks = null,
     ) {
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
         $this->emailHref = Str::lower($this->email);
         $this->year ??= (string) now()->year;
 
-        $this->columns ??= [
+        $columns ??= [
             'Services' => [
-                ['href' => '/service/web-development-services', 'label' => 'Web Development'],
-                ['href' => '/service/custom-crm-development', 'label' => 'CRM Development'],
-                ['href' => '/service/enterprise-software-solutions', 'label' => 'Enterprise Software'],
-                ['href' => '/service/e-commerce-development', 'label' => 'E-commerce Software'],
+                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development'],
+                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development'],
+                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software'],
+                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Software'],
             ],
             'Industry' => [
-                ['href' => '/industries/healthcare', 'label' => 'Healthcare'],
-                ['href' => '/industries/it-software-solutions-for-startups', 'label' => 'IT Solutions'],
-                ['href' => '/industries/finance-banking-software-development', 'label' => 'Banking'],
-                ['href' => '/industries/retail-ecommerce-solutions', 'label' => 'E-commerce'],
-                ['href' => '/industries/logistics-supply-chain-apps', 'label' => 'Logistics'],
-                ['href' => '/industries/education-elearning-platforms', 'label' => 'Education'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'IT Solutions'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Banking'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'E-commerce'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'logistics-supply-chain-apps'], 'label' => 'Logistics'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'education-elearning-platforms'], 'label' => 'Education'],
             ],
             'Product' => [
-                ['href' => '/product', 'label' => 'HR Module'],
-                ['href' => '/product', 'label' => 'Attendance & Holiday'],
-                ['href' => '/product', 'label' => 'Messenger & AI Chat'],
-                ['href' => '/product', 'label' => 'Daily Work Record'],
-                ['href' => '/product', 'label' => 'Comments'],
-                ['href' => '/product', 'label' => 'Attachment & Documents'],
+                ['route' => 'product', 'label' => 'HR Module'],
+                ['route' => 'product', 'label' => 'Attendance & Holiday'],
+                ['route' => 'product', 'label' => 'Messenger & AI Chat'],
+                ['route' => 'product', 'label' => 'Daily Work Record'],
+                ['route' => 'product', 'label' => 'Comments'],
+                ['route' => 'product', 'label' => 'Attachment & Documents'],
             ],
             'Site Links' => [
-                ['href' => '/', 'label' => 'Home'],
-                ['href' => '/about-us', 'label' => 'About Us'],
-                ['href' => '/services', 'label' => 'Services'],
-                ['href' => '/product', 'label' => 'Product'],
-                ['href' => '/blogs', 'label' => 'Blog'],
-                ['href' => '/contact-us', 'label' => 'Contact Us'],
+                ['route' => 'home', 'label' => 'Home'],
+                ['route' => 'about-us', 'label' => 'About Us'],
+                ['route' => 'services', 'label' => 'Services'],
+                ['route' => 'product', 'label' => 'Product'],
+                ['route' => 'blogs', 'label' => 'Blog'],
+                ['route' => 'contact-us', 'label' => 'Contact Us'],
             ],
         ];
+
+        $this->columns = collect($columns)
+            ->map(fn (array $items): array => array_values(array_map(function (array $item): array {
+                $item['href'] = route($item['route'], $item['params'] ?? []);
+
+                return $item;
+            }, $items)))
+            ->all();
 
         $this->socialLinks ??= [
             ['href' => 'https://www.facebook.com/share/1Zt4fotyAa/', 'label' => 'Facebook', 'icon' => 'fa-brands fa-facebook-f'],
