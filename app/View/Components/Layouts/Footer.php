@@ -3,6 +3,7 @@
 namespace App\View\Components\Layouts;
 
 use App\Support\Frontend\Concerns\NormalizesAssetPaths;
+use App\Support\Frontend\ContactSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -18,7 +19,8 @@ class Footer extends Component
 
     public string $email;
 
-    public string $address;
+    /** @var array<int, array{label: string, display: string, lines: array<int, string>}> */
+    public array $offices;
 
     public string $emailHref;
 
@@ -44,7 +46,6 @@ class Footer extends Component
         ?string $phone = null,
         ?string $phoneHref = null,
         ?string $email = null,
-        ?string $address = null,
         ?string $year = null,
         ?array $columns = null,
         ?array $socialLinks = null,
@@ -54,7 +55,7 @@ class Footer extends Component
         $this->phone = $phone ?? (string) ($org['telephone'] ?? '+91 97369 00142');
         $this->phoneHref = $phoneHref ?? (string) ($org['telephone_href'] ?? 'tel:+919736900142');
         $this->email = $email ?? (string) ($org['email'] ?? 'Info@suavecreators.com');
-        $this->address = $address ?? (string) ($org['address_display'] ?? '30 N Gould St, STE R Sheridan, WY 82801, USA');
+        $this->offices = ContactSupport::offices();
 
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
         $this->emailHref = Str::lower($this->email);

@@ -43,13 +43,40 @@ return [
             'telephone_schema' => '+91-9736900142',
             'area_served' => 'Worldwide',
             'available_language' => ['en', 'en-IN', 'en-US'],
-            'address_display' => '30 N Gould St, STE R Sheridan, WY 82801, USA',
+            'address_display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',
+            'address_secondary_display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, Himachal Pradesh 176102',
+            'offices' => [
+                [
+                    'label' => 'First office',
+                    'display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',
+                    'lines' => [
+                        '30 N Gould St, STE R,',
+                        'Sheridan, WY 82801, USA',
+                    ],
+                ],
+                [
+                    'label' => 'Second office',
+                    'display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, Himachal Pradesh 176102',
+                    'lines' => [
+                        '3M Plaza, Second Floor,',
+                        'Maranda, Kasoti, Palampur,',
+                        'Himachal Pradesh 176102',
+                    ],
+                ],
+            ],
             'address' => [
                 'streetAddress' => '30 N Gould St, STE R',
                 'addressLocality' => 'Sheridan',
                 'addressRegion' => 'WY',
                 'postalCode' => '82801',
                 'addressCountry' => 'US',
+            ],
+            'address_secondary' => [
+                'streetAddress' => '3M Plaza, Second Floor, Maranda, Kasoti',
+                'addressLocality' => 'Palampur',
+                'addressRegion' => 'Himachal Pradesh',
+                'postalCode' => '176102',
+                'addressCountry' => 'IN',
             ],
             'sameAs' => [
                 'https://www.linkedin.com/company/suave-creators/',

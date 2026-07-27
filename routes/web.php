@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\IndustryController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ServiceController;
+use App\Http\Controllers\Frontend\SuaveAgentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -28,3 +29,15 @@ Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');
 Route::get('/blogs/category/{slug}', [BlogController::class, 'category'])->name('blogs.category');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+Route::prefix('suave-agent')->name('suave-agent.')->group(function () {
+    Route::post('/start', [SuaveAgentController::class, 'start'])
+        ->middleware('throttle:10,1')
+        ->name('start');
+    Route::post('/chat', [SuaveAgentController::class, 'chat'])
+        ->middleware('throttle:30,1')
+        ->name('chat');
+    Route::get('/history', [SuaveAgentController::class, 'history'])
+        ->middleware('throttle:30,1')
+        ->name('history');
+});

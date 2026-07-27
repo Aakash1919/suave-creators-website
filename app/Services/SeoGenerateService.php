@@ -161,10 +161,7 @@ class SeoGenerateService
                 'areaServed' => (string) ($org['area_served'] ?? 'Worldwide'),
                 'availableLanguage' => array_values((array) ($org['available_language'] ?? ['en'])),
             ],
-            'address' => array_merge(
-                ['@type' => 'PostalAddress'],
-                (array) ($org['address'] ?? [])
-            ),
+            'address' => self::postalAddresses($org),
             'sameAs' => array_values((array) ($org['sameAs'] ?? [])),
             'knowsAbout' => array_values((array) ($org['knowsAbout'] ?? [])),
         ];
@@ -298,5 +295,30 @@ class SeoGenerateService
         }
 
         return asset(ltrim($path, '/'));
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<int, array<string, mixed>>|array<string, mixed>|null
+     */
+    protected function postalAddresses(array $org): array|null
+    {
+        $addresses = [];
+
+        $primary = (array) ($org['address'] ?? []);
+        if ($primary !== []) {
+            $addresses[] = array_merge(['@type' => 'PostalAddress'], $primary);
+        }
+
+        $secondary = (array) ($org['address_secondary'] ?? []);
+        if ($secondary !== []) {
+            $addresses[] = array_merge(['@type' => 'PostalAddress'], $secondary);
+        }
+
+        if ($addresses === []) {
+            return null;
+        }
+
+        return count($addresses) === 1 ? $addresses[0] : $addresses;
     }
 }

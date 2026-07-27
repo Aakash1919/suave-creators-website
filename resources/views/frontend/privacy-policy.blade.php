@@ -150,8 +150,13 @@
         <h2>14. Contact Us</h2>
         <p>
           <strong>Suave Creators</strong><br>
-          30 N Gould St, STE R<br>
-          Sheridan, WY 82801, USA
+          @foreach (\App\Support\Frontend\ContactSupport::offices() as $office)
+            <span class="block mt-2"><strong>{{ $office['label'] }}:</strong><br>
+              @foreach ($office['lines'] as $line)
+                {{ $line }}@if (! $loop->last)<br>@endif
+              @endforeach
+            </span>
+          @endforeach
         </p>
         <ul class="legal-page__contact">
           <li><a href="mailto:info@suavecreators.com">info@suavecreators.com</a></li>

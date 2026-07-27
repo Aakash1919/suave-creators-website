@@ -7542,3 +7542,334 @@ body.mobile-nav-open {
 }
 /* ===== SERVICES LISTING END ===== */
 
+/* ===== SUAVE AGENT CHAT START ===== */
+.suave-agent {
+  --suave-agent-blue: #2a4dfb;
+  --suave-agent-navy: #00003f;
+  --suave-agent-panel: #0b1030;
+  --suave-agent-muted: #b1b9df;
+}
+
+.suave-agent__toggle {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.suave-agent__toggle img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.suave-agent__panel {
+  position: fixed;
+  right: 24px;
+  bottom: 100px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  width: min(380px, calc(100vw - 32px));
+  height: min(560px, calc(100vh - 140px));
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, #12183f 0%, var(--suave-agent-panel) 100%);
+  box-shadow: 0 24px 60px rgba(0, 0, 40, 0.45);
+  color: #fff;
+}
+
+.suave-agent__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(90deg, rgba(42, 77, 251, 0.35), rgba(125, 88, 255, 0.2));
+}
+
+.suave-agent__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.suave-agent__brand-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.suave-agent__brand-text {
+  min-width: 0;
+}
+
+.suave-agent__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.suave-agent__online {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9dffb0;
+}
+
+.suave-agent__online-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+  animation: suave-agent-online-pulse 1.8s ease-out infinite;
+}
+
+@keyframes suave-agent-online-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.suave-agent__close {
+  appearance: none;
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.suave-agent__body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.suave-agent__lead,
+.suave-agent__chat {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.suave-agent__intro {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--suave-agent-muted);
+}
+
+.suave-agent__label {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.suave-agent__lead input,
+.suave-agent__composer textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.suave-agent__lead input {
+  margin-bottom: 12px;
+}
+
+.suave-agent__lead input::placeholder,
+.suave-agent__composer textarea::placeholder {
+  color: rgba(177, 185, 223, 0.7);
+}
+
+.suave-agent__primary,
+.suave-agent__send {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--suave-agent-blue), #0026e3);
+  color: #fff;
+  font-weight: 700;
+}
+
+.suave-agent__primary {
+  margin-top: 4px;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.suave-agent__primary:disabled,
+.suave-agent__send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.suave-agent__error {
+  margin: 10px 0 0;
+  color: #ffb4b4;
+  font-size: 13px;
+}
+
+.suave-agent__messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 6px;
+  margin-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(133, 152, 248, 0.55) transparent;
+}
+
+.suave-agent__messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.suave-agent__messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.suave-agent__messages::-webkit-scrollbar-thumb {
+  background: rgba(133, 152, 248, 0.55);
+  border-radius: 999px;
+}
+
+.suave-agent__messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(133, 152, 248, 0.85);
+}
+
+.suave-agent__messages::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.suave-agent__bubble {
+  max-width: 90%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.suave-agent__bubble--assistant {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef1ff;
+  border-bottom-left-radius: 4px;
+}
+
+.suave-agent__bubble--user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--suave-agent-blue), #7158f5);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.suave-agent__status {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8598f8;
+}
+
+.suave-agent__composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.suave-agent__composer textarea {
+  resize: none;
+  min-height: 44px;
+  max-height: calc(12px + 12px + (1.45em * 3));
+  line-height: 1.45;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  field-sizing: content;
+}
+
+.suave-agent__composer textarea::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.suave-agent__send {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.suave-agent .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1023px) {
+  .suave-agent__panel {
+    right: 16px;
+    bottom: 88px;
+  }
+}
+
+@media (max-width: 767px) {
+  .suave-agent__panel {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(80px + env(safe-area-inset-bottom));
+    width: calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right));
+    height: min(70vh, calc(100vh - 120px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suave-agent__online-dot {
+    animation: none;
+  }
+}
+/* ===== SUAVE AGENT CHAT END ===== */
+

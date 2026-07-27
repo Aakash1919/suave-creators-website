@@ -33,7 +33,14 @@
             <a href="mailto:{{ $emailHref }}" class="inline-flex !min-h-0 max-w-full items-center break-all py-1 hover:text-white sm:py-0">{{ $email }}</a>
           </li>
           <li class="leading-5">
-            <span class="inline-block max-w-[280px] sm:max-w-none">{{ $address }}</span>
+            <div class="inline-block max-w-[280px] space-y-2 sm:max-w-none">
+              @foreach ($offices as $office)
+                <p>
+                  <span class="block text-[10px] font-semibold uppercase tracking-wide text-white/70 sm:text-[11px]">{{ $office['label'] }}</span>
+                  <span>{{ $office['display'] }}</span>
+                </p>
+              @endforeach
+            </div>
           </li>
         </ul>
       </div>

@@ -22,6 +22,49 @@ class ContactSupport
     }
 
     /**
+     * @return array<int, array{label: string, display: string, lines: array<int, string>}>
+     */
+    public static function offices(): array
+    {
+        $org = (array) config('seo.site.organization', []);
+        $offices = (array) ($org['offices'] ?? []);
+
+        if ($offices !== []) {
+            return array_values(array_map(static function (array $office): array {
+                return [
+                    'label' => (string) ($office['label'] ?? 'Office'),
+                    'display' => (string) ($office['display'] ?? ''),
+                    'lines' => array_values(array_filter(
+                        (array) ($office['lines'] ?? []),
+                        static fn (mixed $line): bool => is_string($line) && $line !== ''
+                    )),
+                ];
+            }, $offices));
+        }
+
+        $primary = (string) ($org['address_display'] ?? '30 N Gould St, STE R, Sheridan, WY 82801, USA');
+        $secondary = (string) ($org['address_secondary_display'] ?? '');
+
+        $result = [
+            [
+                'label' => 'First office',
+                'display' => $primary,
+                'lines' => array_values(array_filter(array_map('trim', explode(',', $primary)))),
+            ],
+        ];
+
+        if ($secondary !== '') {
+            $result[] = [
+                'label' => 'Second office',
+                'display' => $secondary,
+                'lines' => array_values(array_filter(array_map('trim', explode(',', $secondary)))),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function formServices(): array
@@ -42,12 +85,28 @@ class ContactSupport
      */
     public static function contactCards(): array
     {
+        $addressLines = [];
+        foreach (self::offices() as $office) {
+            $addressLines[] = $office['label'].':';
+            foreach ($office['lines'] as $line) {
+                $addressLines[] = $line;
+            }
+            $addressLines[] = '';
+        }
+
+        while ($addressLines !== [] && end($addressLines) === '') {
+            array_pop($addressLines);
+        }
+
+        $org = (array) config('seo.site.organization', []);
+        $email = strtolower((string) ($org['email'] ?? 'info@suavecreators.com'));
+
         return [
             [
                 'icon' => 'fa-solid fa-location-dot',
                 'label' => 'Visit our office',
                 'title' => 'Address',
-                'lines' => ['30 N Gould St, STE R,', 'Sheridan, WY 82801, USA'],
+                'lines' => $addressLines,
                 'links' => [],
             ],
             [
@@ -56,7 +115,7 @@ class ContactSupport
                 'title' => 'Mail Support',
                 'lines' => [],
                 'links' => [
-                    ['href' => 'mailto:info@suavecreators.com', 'text' => 'info@suavecreators.com'],
+                    ['href' => 'mailto:'.$email, 'text' => $email],
                 ],
             ],
             [
@@ -67,6 +126,10 @@ class ContactSupport
                 'links' => [
                     ['href' => 'tel:+918894900142', 'text' => '+91 88949 00142'],
                     ['href' => 'tel:+911894455019', 'text' => '+91 18944 55019'],
+                    [
+                        'href' => (string) ($org['telephone_href'] ?? 'tel:+919736900142'),
+                        'text' => (string) ($org['telephone'] ?? '+91 97369 00142'),
+                    ],
                 ],
             ],
         ];
