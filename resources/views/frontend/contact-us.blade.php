@@ -133,29 +133,50 @@
             <h3 class="contact-form-panel__form-title">Start the conversation</h3>
           </header>
 
-          <form action="{{ route('contact-us') }}#contact-id" method="get" class="contact-form-panel__fields" data-contact-form>
+          @if (session('status'))
+            <p class="contact-form-panel__flash" role="status">{{ session('status') }}</p>
+          @endif
+
+          @if ($errors->any())
+            <div class="contact-form-panel__errors" role="alert">
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+          <form action="{{ route('contact-us.store') }}" method="post" class="contact-form-panel__fields" data-contact-form>
+            @csrf
+            <input type="hidden" name="form_started_at" value="{{ old('form_started_at', $formStartedAt ?? time()) }}">
+            <div class="contact-form-honeypot" aria-hidden="true">
+              <label for="contact-website">Website</label>
+              <input id="contact-website" type="text" name="website" value="" tabindex="-1" autocomplete="off">
+            </div>
+
             <div class="contact-form-panel__row">
               <label for="contact-name">
                 <span class="contact-form-panel__label-text">Full name</span>
-                <input id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Jane Cooper">
+                <input id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Jane Cooper" value="{{ old('name') }}">
               </label>
               <label for="contact-email">
                 <span class="contact-form-panel__label-text">Email</span>
-                <input id="contact-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+                <input id="contact-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com" value="{{ old('email') }}">
               </label>
             </div>
 
             <div class="contact-form-panel__row">
               <label for="contact-phone">
                 <span class="contact-form-panel__label-text">Phone</span>
-                <input id="contact-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91 90000 00000">
+                <input id="contact-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91 90000 00000" value="{{ old('phone') }}">
               </label>
               <label for="contact-service">
                 <span class="contact-form-panel__label-text">Service</span>
                 <select id="contact-service" name="service" required>
-                  <option value="" disabled selected>Select a service</option>
+                  <option value="" disabled @selected(old('service') === null || old('service') === '')>Select a service</option>
                   @foreach ($formServices as $value => $label)
-                    <option value="{{ $value }}">{{ $label }}</option>
+                    <option value="{{ $value }}" @selected(old('service') === $value)>{{ $label }}</option>
                   @endforeach
                 </select>
               </label>
@@ -164,7 +185,7 @@
             <label for="contact-message" class="contact-form-panel__message">
               <span class="contact-form-panel__label-text">What are you trying to fix?</span>
               <textarea id="contact-message" name="message" rows="3" minlength="10" required
-                placeholder="A sentence or two about the problem is enough."></textarea>
+                placeholder="A sentence or two about the problem is enough.">{{ old('message') }}</textarea>
             </label>
 
             <div class="contact-form-panel__actions">

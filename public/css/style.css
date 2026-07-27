@@ -6893,6 +6893,40 @@ body.mobile-nav-open {
   color: var(--cfp-blue);
 }
 
+.contact-form-honeypot{
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-form-panel__flash{
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(34, 197, 94, 0.12);
+  color: #166534;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.contact-form-panel__errors{
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #991b1b;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.contact-form-panel__errors ul{
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
 @media (max-width: 1023px) {
 .contact-form-panel__submit.u-btn-cta{
     height: 34px;

@@ -20,6 +20,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'blogs.update' => 'Update blogs',
             'blogs.delete' => 'Delete blogs',
             'conversations.view' => 'View AI conversations',
+            'contacts.view' => 'View contact requests',
             'users.view' => 'View users',
             'users.manage' => 'Manage users and roles',
             'profile.update' => 'Update own profile',
@@ -52,6 +53,7 @@ class RolesAndPermissionsSeeder extends Seeder
                     'blogs.update',
                     'profile.update',
                     'conversations.view',
+                    'contacts.view',
                 ])
                 ->pluck('id')
         );

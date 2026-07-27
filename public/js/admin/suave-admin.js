@@ -146,6 +146,114 @@
   const richTextEditors = {};
 
   /**
+   * Read HTML from a RichTextEditor instance across API variants.
+   */
+  function readRichTextHtml(editor) {
+    if (!editor) {
+      return '';
+    }
+
+    const getters = ['getHTMLCode', 'getHtmlCode', 'getHTMLContent', 'getHTML', 'getHtml', 'getContent'];
+    for (let i = 0; i < getters.length; i += 1) {
+      const method = getters[i];
+      if (typeof editor[method] === 'function') {
+        try {
+          const html = editor[method]();
+          if (typeof html === 'string') {
+            return html;
+          }
+        } catch (e) {
+          /* try next */
+        }
+      }
+    }
+
+    if (typeof editor.getDocument === 'function') {
+      try {
+        const doc = editor.getDocument();
+        if (doc?.body?.innerHTML) {
+          return doc.body.innerHTML;
+        }
+      } catch (e) {
+        /* ignore */
+      }
+    }
+
+    const root = editor.iframe || editor.contentWindow || editor.editor || null;
+    try {
+      if (root?.contentDocument?.body?.innerHTML) {
+        return root.contentDocument.body.innerHTML;
+      }
+      if (root?.document?.body?.innerHTML) {
+        return root.document.body.innerHTML;
+      }
+      if (typeof root?.innerHTML === 'string') {
+        return root.innerHTML;
+      }
+    } catch (e) {
+      /* ignore */
+    }
+
+    return '';
+  }
+
+  /**
+   * Write HTML into a RichTextEditor instance across API variants.
+   */
+  function writeRichTextHtml(editor, html) {
+    if (!editor || html == null) {
+      return false;
+    }
+
+    const setters = ['setHTMLCode', 'setHtmlCode', 'setHTML', 'setHtml', 'setContent'];
+    for (let i = 0; i < setters.length; i += 1) {
+      const method = setters[i];
+      if (typeof editor[method] === 'function') {
+        try {
+          editor[method](html);
+          return true;
+        } catch (e) {
+          /* try next */
+        }
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Keep the underlying textarea value in sync with the editor.
+   */
+  function bindRichTextTextareaSync(editor, el) {
+    const sync = function () {
+      const html = readRichTextHtml(editor);
+      if (typeof html === 'string') {
+        el.value = html;
+      }
+    };
+
+    const events = ['change', 'contentchanged', 'selectionchanged', 'exec_command', 'paste'];
+    events.forEach(function (name) {
+      if (typeof editor.attachEvent === 'function') {
+        try {
+          editor.attachEvent(name, sync);
+        } catch (e) {
+          /* ignore */
+        }
+      }
+      if (typeof editor.on === 'function') {
+        try {
+          editor.on(name, sync);
+        } catch (e) {
+          /* ignore */
+        }
+      }
+    });
+
+    window.setInterval(sync, 1500);
+  }
+
+  /**
    * Initialize RichTextEditor on a textarea/div (self-hosted under /richtexteditor).
    * @see https://richtexteditor.com/
    */
@@ -161,9 +269,11 @@
       return null;
     }
 
+    const initialHtml = typeof el.value === 'string' ? el.value : (el.innerHTML || '');
+
     const cfg = Object.assign(
       {
-        height: 420,
+        height: 560,
         toolbar: 'blog',
       },
       options
@@ -178,6 +288,26 @@
     $(el).attr('data-richtext-editor', '1').data('rte-instance', editor);
     $(el).data('rte-selector', selector);
 
+    const seed = function () {
+      if (initialHtml && initialHtml.trim() !== '') {
+        const current = readRichTextHtml(editor);
+        const looksEmpty =
+          !current ||
+          current.trim() === '' ||
+          current.trim() === '<p></p>' ||
+          current.trim() === '<br>' ||
+          current.trim() === '<p><br></p>';
+        if (looksEmpty) {
+          writeRichTextHtml(editor, initialHtml);
+        }
+        el.value = initialHtml;
+      }
+      bindRichTextTextareaSync(editor, el);
+    };
+
+    window.setTimeout(seed, 0);
+    window.setTimeout(seed, 150);
+
     return editor;
   }
 
@@ -191,15 +321,30 @@
 
   /** Copy editor HTML back into underlying textareas before FormData / submit. */
   function syncRichTextEditors(root = document) {
+    Object.keys(richTextEditors).forEach(function (selector) {
+      const editor = richTextEditors[selector];
+      const el = document.querySelector(selector);
+      if (!editor || !el) {
+        return;
+      }
+      const html = readRichTextHtml(editor);
+      if (typeof html === 'string') {
+        el.value = html;
+      }
+    });
+
     $(root)
       .find('[data-richtext-editor]')
       .addBack('[data-richtext-editor]')
       .each(function () {
-        const editor = $(this).data('rte-instance');
-        if (!editor || typeof editor.getHTMLCode !== 'function') {
+        const editor = $(this).data('rte-instance') || richTextEditors[$(this).data('rte-selector')];
+        if (!editor) {
           return;
         }
-        this.value = editor.getHTMLCode();
+        const html = readRichTextHtml(editor);
+        if (typeof html === 'string') {
+          this.value = html;
+        }
       });
   }
 

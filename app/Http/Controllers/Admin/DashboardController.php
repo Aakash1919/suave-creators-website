@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\ChatLead;
+use App\Models\ContactRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,6 +21,7 @@ class DashboardController extends Controller
 
         $canBlogs = $user->hasPermission('blogs.view');
         $canConversations = $user->hasPermission('conversations.view');
+        $canContacts = $user->hasPermission('contacts.view');
         $canUsers = $user->hasPermission('users.view');
         $canProfile = $user->hasPermission('profile.update');
 
@@ -43,6 +45,17 @@ class DashboardController extends Controller
                 'tone' => 'emerald',
                 'route' => 'admin.conversations.index',
                 'show' => $canConversations,
+            ],
+            [
+                'label' => 'Contact requests',
+                'value' => $canContacts ? ContactRequest::query()->count() : null,
+                'hint' => $canContacts
+                    ? ContactRequest::query()->where('status', ContactRequest::STATUS_NEW)->count().' new'
+                    : null,
+                'icon' => 'fa-envelope-open-text',
+                'tone' => 'amber',
+                'route' => 'admin.contacts.index',
+                'show' => $canContacts,
             ],
             [
                 'label' => 'Users',
@@ -81,6 +94,13 @@ class DashboardController extends Controller
                     'icon' => 'fa-comments',
                     'route' => 'admin.conversations.index',
                     'show' => $canConversations,
+                ],
+                [
+                    'label' => 'Contacts',
+                    'description' => 'Review contact form inquiries',
+                    'icon' => 'fa-envelope-open-text',
+                    'route' => 'admin.contacts.index',
+                    'show' => $canContacts,
                 ],
                 [
                     'label' => 'Users',

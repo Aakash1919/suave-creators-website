@@ -42,6 +42,14 @@
         <span>AI Conversations</span>
       </a>
     @endif
+    @if ($user->hasPermission('contacts.view'))
+      <a href="{{ route('admin.contacts.index') }}"
+        class="admin-nav-link {{ request()->routeIs('admin.contacts.*') ? 'is-active' : '' }}"
+        title="Contact requests">
+        <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+        <span>Contacts</span>
+      </a>
+    @endif
 
     <p class="admin-nav-label">System</p>
     @if ($user->hasPermission('users.view'))

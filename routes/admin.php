@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\ConversationController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -44,6 +45,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::middleware('permission:conversations.view')->group(function () {
         Route::get('/conversations', [ConversationController::class, 'index'])->name('conversations.index');
         Route::get('/conversations/{lead}', [ConversationController::class, 'show'])->name('conversations.show');
+    });
+
+    Route::middleware('permission:contacts.view')->group(function () {
+        Route::get('/contacts', [ContactRequestController::class, 'index'])->name('contacts.index');
+        Route::get('/contacts/{contact}', [ContactRequestController::class, 'show'])->name('contacts.show');
+        Route::patch('/contacts/{contact}/archive', [ContactRequestController::class, 'archive'])->name('contacts.archive');
     });
 
     Route::middleware('permission:users.view')->group(function () {

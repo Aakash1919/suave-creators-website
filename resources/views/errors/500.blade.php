@@ -8,5 +8,5 @@
 @endsection
 
 @section('art')
-  <img src="{{ asset('assets/errors/error-500.svg') }}" alt="500" width="672" height="500">
+  <img src="{{ asset('assets/errors/error-500.svg') }}" alt="500" title="500" width="672" height="500">
 @endsection
