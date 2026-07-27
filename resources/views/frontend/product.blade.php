@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="Product | AI-Powered Business Platform | Suave Creators"
-    description="Run your organization with Suave Creators product suite - AI at the core, unified modules, enterprise security, and a single workspace for your team."
-    og-title="Product | AI-Powered Business Platform | Suave Creators"
-    og-description="Run your organization with Suave Creators product suite - AI at the core, unified modules, and enterprise security."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 
 

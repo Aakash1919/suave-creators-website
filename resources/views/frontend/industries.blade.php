@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="Industry Solutions | Suave Creators"
-    description="Industry-specific software development solutions from Suave Creators."
-    og-title="Industry Solutions | Suave Creators"
-    og-description="Industry-specific software development solutions from Suave Creators."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 
 

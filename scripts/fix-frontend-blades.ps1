@@ -21,21 +21,21 @@ $routeMap = [ordered]@{
   'href="/industries/retail-ecommerce-solutions"' = 'href="{{ route(''industries.retail-ecommerce-solutions'') }}"'
   'href="/industries/logistics-supply-chain-apps"' = 'href="{{ route(''industries.logistics-supply-chain-apps'') }}"'
   'href="/industries/education-elearning-platforms"' = 'href="{{ route(''industries.education-elearning-platforms'') }}"'
-  'href="/blog/digital-strategy-that-creates-value"' = 'href="{{ route(''blog.digital-strategy-that-creates-value'') }}"'
-  'href="/blog/product-data-customer-experiences"' = 'href="{{ route(''blog.product-data-customer-experiences'') }}"'
-  'href="/blog/digital-workflows-teams-use"' = 'href="{{ route(''blog.digital-workflows-teams-use'') }}"'
-  'href="/blog/ai-powered-software-development-2026"' = 'href="{{ route(''blog.ai-powered-software-development-2026'') }}"'
-  'href="/blog/choosing-the-right-tech-stack"' = 'href="{{ route(''blog.choosing-the-right-tech-stack'') }}"'
-  'href="/blog/ux-principles-that-drive-conversions"' = 'href="{{ route(''blog.ux-principles-that-drive-conversions'') }}"'
+  'href="/blog/digital-strategy-that-creates-value"' = 'href="{{ route(''blog.show'', ''digital-strategy-that-creates-value'') }}"'
+  'href="/blog/product-data-customer-experiences"' = 'href="{{ route(''blog.show'', ''product-data-customer-experiences'') }}"'
+  'href="/blog/digital-workflows-teams-use"' = 'href="{{ route(''blog.show'', ''digital-workflows-teams-use'') }}"'
+  'href="/blog/ai-powered-software-development-2026"' = 'href="{{ route(''blog.show'', ''ai-powered-software-development-2026'') }}"'
+  'href="/blog/choosing-the-right-tech-stack"' = 'href="{{ route(''blog.show'', ''choosing-the-right-tech-stack'') }}"'
+  'href="/blog/ux-principles-that-drive-conversions"' = 'href="{{ route(''blog.show'', ''ux-principles-that-drive-conversions'') }}"'
 }
 
 $blogRoutePatterns = @{
-  'href="/blog/digital-strategy-that-creates-value"' = 'blog.digital-strategy-that-creates-value'
-  'href="/blog/product-data-customer-experiences"' = 'blog.product-data-customer-experiences'
-  'href="/blog/digital-workflows-teams-use"' = 'blog.digital-workflows-teams-use'
-  'href="/blog/ai-powered-software-development-2026"' = 'blog.ai-powered-software-development-2026'
-  'href="/blog/choosing-the-right-tech-stack"' = 'blog.choosing-the-right-tech-stack'
-  'href="/blog/ux-principles-that-drive-conversions"' = 'blog.ux-principles-that-drive-conversions'
+  'href="/blog/digital-strategy-that-creates-value"' = 'blog.show'
+  'href="/blog/product-data-customer-experiences"' = 'blog.show'
+  'href="/blog/digital-workflows-teams-use"' = 'blog.show'
+  'href="/blog/ai-powered-software-development-2026"' = 'blog.show'
+  'href="/blog/choosing-the-right-tech-stack"' = 'blog.show'
+  'href="/blog/ux-principles-that-drive-conversions"' = 'blog.show'
 }
 
 $files = Get-ChildItem -Path $viewsDir -Recurse -Include *.blade.php -File

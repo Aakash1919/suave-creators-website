@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    :title="$seoTitle"
-    :description="$seoDescription"
-    :og-title="$seoTitle"
-    :og-description="$seoDescription"
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 
 
@@ -118,7 +107,7 @@
                 <li>
                   <span class="blog-top-posts__num" aria-hidden="true">{{ $rank + 1 }}</span>
                   <div class="blog-top-posts__body">
-                    <a href="{{ route('blog.' . $item['slug']) }}">{{ $item['title'] }}</a>
+                    <a href="{{ $item['url'] ?? route('blog.show', $item['slug']) }}">{{ $item['title'] }}</a>
                     <p>{{ $item['short_description'] }}</p>
                   </div>
                 </li>
@@ -159,7 +148,7 @@
                         </div>
                         <h3>{{ $item['title'] }}</h3>
                         <p>{{ $item['short_description'] }}</p>
-                        <a class="articles-card__link underline mt-2 text-sm font-semibold text-[#2A4DFB]" href="{{ route('blog.' . $item['slug']) }}">Read More</a>
+                        <a class="articles-card__link underline mt-2 text-sm font-semibold text-[#2A4DFB]" href="{{ $item['url'] ?? route('blog.show', $item['slug']) }}">Read More</a>
                       </div>
                     </article>
                   </div>

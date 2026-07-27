@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="Blogs & Insights | Suave Creators"
-    description="Articles and insights from Suave Creators on software development, digital strategy, and product design."
-    og-title="Blogs & Insights | Suave Creators"
-    og-description="Articles and insights from Suave Creators on software development, digital strategy, and product design."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 <section class="blogs-hero relative z-10 w-full pb-8 pt-6 md:pb-10 md:pt-8 lg:pb-12 lg:pt-10 site-container">
   <div class="mx-auto max-w-[900px] text-center">

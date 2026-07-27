@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="About Suave Creators | Leading IT Company with Web Design & Development"
-    description="Suave Creators is a leading IT company offering budget-friendly web design, development, and digital solutions for startups, SMBs, and enterprise businesses."
-    og-title="About Suave Creators | Leading IT Company with Web Design & Development"
-    og-description="Suave Creators is a leading IT company offering budget-friendly web design, development, and digital solutions for startups, SMBs, and enterprise businesses."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 
 <!-- 1. About Banner Section Start -->

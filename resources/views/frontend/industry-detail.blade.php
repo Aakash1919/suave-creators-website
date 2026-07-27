@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    :title="$seoTitle"
-    :description="$seoDescription"
-    :og-title="$seoTitle"
-    :og-description="$seoDescription"
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 
 

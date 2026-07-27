@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class PageController extends Controller
+class PageController extends FrontendController
 {
     public function privacyPolicy(): View
     {
-        return view('frontend.privacy-policy');
+        return $this->view('frontend.privacy-policy');
     }
 
     public function termsAndConditions(): View
     {
-        return view('frontend.terms-and-conditions');
+        return $this->view('frontend.terms-and-conditions');
     }
 }

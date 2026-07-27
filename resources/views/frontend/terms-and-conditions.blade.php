@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="Terms & Conditions | Suave Creators"
-    description="Read the terms and conditions for using the Suave Creators website and services at suavecreators.com."
-    og-title="Terms & Conditions | Suave Creators"
-    og-description="Read the terms and conditions for using the Suave Creators website and services at suavecreators.com."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 <!-- Terms & Conditions Hero Start -->
 <section class="legal-hero relative z-10 w-full pb-10 pt-8 md:pb-12 md:pt-10 lg:pb-14 lg:pt-[52px] site-container">

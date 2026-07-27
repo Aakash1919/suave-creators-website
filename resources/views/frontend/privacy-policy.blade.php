@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="Privacy Policy | Suave Creators"
-    description="Learn how Suave Creators collects, uses, and protects your personal information when you visit our website or contact our team."
-    og-title="Privacy Policy | Suave Creators"
-    og-description="Learn how Suave Creators collects, uses, and protects your personal information when you visit our website or contact our team."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 <!-- Privacy Policy Hero Start -->
 <section class="legal-hero relative z-10 w-full pb-10 pt-8 md:pb-12 md:pt-10 lg:pb-14 lg:pt-[52px] site-container">

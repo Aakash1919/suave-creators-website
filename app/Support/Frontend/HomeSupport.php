@@ -367,7 +367,7 @@ class HomeSupport
                 'date' => 'Jun 24, 2026',
                 'datetime' => '2026-06-24',
                 'author' => 'Suave Creators',
-                'url' => route('blog.digital-strategy-that-creates-value'),
+                'url' => route('blog.show', ['slug' => 'digital-strategy-that-creates-value']),
             ],
             [
                 'title' => 'Turning Product Data into Better Customer Experiences',
@@ -377,7 +377,7 @@ class HomeSupport
                 'date' => 'Jun 12, 2026',
                 'datetime' => '2026-06-12',
                 'author' => 'Suave Creators',
-                'url' => route('blog.product-data-customer-experiences'),
+                'url' => route('blog.show', ['slug' => 'product-data-customer-experiences']),
             ],
             [
                 'title' => 'Designing Digital Workflows Your Team Will Actually Use',
@@ -387,7 +387,7 @@ class HomeSupport
                 'date' => 'May 29, 2026',
                 'datetime' => '2026-05-29',
                 'author' => 'Suave Creators',
-                'url' => route('blog.digital-workflows-teams-use'),
+                'url' => route('blog.show', ['slug' => 'digital-workflows-teams-use']),
             ],
             [
                 'title' => 'Designing Digital Workflows Your Team Will Actually Use',
@@ -397,7 +397,7 @@ class HomeSupport
                 'date' => 'May 29, 2026',
                 'datetime' => '2026-05-29',
                 'author' => 'Suave Creators',
-                'url' => route('blog.digital-workflows-teams-use'),
+                'url' => route('blog.show', ['slug' => 'digital-workflows-teams-use']),
             ],
         ];
     }

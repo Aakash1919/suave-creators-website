@@ -224,7 +224,7 @@ class IndustryDetailSupport
                 'date' => $post['published_label'],
                 'datetime' => $post['published_date'],
                 'author' => $post['author_name'],
-                'url' => route(BlogSupport::routeNameForSlug($post['slug'])),
+                'url' => route('blog.show', ['slug' => $post['slug']]),
             ];
         }, array_slice(BlogSupport::posts(), 0, 3));
     }

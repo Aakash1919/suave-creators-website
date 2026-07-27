@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="Suave Creators | Web & Software Development Solutions"
-    description="We are a trusted Custom Software Development Company that specializes in CRM Development, Web Application, & Enterprise Software Solutions to help businesses grow."
-    og-title="Suave Creators | Web & Software Development Solutions"
-    og-description="Custom Software, CRM, Web Application & Enterprise Software Development Solutions."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 <!-- Hero Section Start -->
 <section

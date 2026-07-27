@@ -12,6 +12,14 @@ class Footer extends Component
 {
     use NormalizesAssetPaths;
 
+    public string $phone;
+
+    public string $phoneHref;
+
+    public string $email;
+
+    public string $address;
+
     public string $emailHref;
 
     public string $year;
@@ -33,14 +41,21 @@ class Footer extends Component
     public function __construct(
         public string $ctaText = "Got a project? Let's talk",
         public string $backgroundImage = 'assets/background/footer-bg.png',
-        public string $phone = '+91 97369 00142',
-        public string $phoneHref = 'tel:+919736900142',
-        public string $email = 'Info@suavecreators.com',
-        public string $address = '30 N Gould St, STE R Sheridan, WY 82801, USA',
+        ?string $phone = null,
+        ?string $phoneHref = null,
+        ?string $email = null,
+        ?string $address = null,
         ?string $year = null,
         ?array $columns = null,
         ?array $socialLinks = null,
     ) {
+        $org = (array) config('seo.site.organization', []);
+
+        $this->phone = $phone ?? (string) ($org['telephone'] ?? '+91 97369 00142');
+        $this->phoneHref = $phoneHref ?? (string) ($org['telephone_href'] ?? 'tel:+919736900142');
+        $this->email = $email ?? (string) ($org['email'] ?? 'Info@suavecreators.com');
+        $this->address = $address ?? (string) ($org['address_display'] ?? '30 N Gould St, STE R Sheridan, WY 82801, USA');
+
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
         $this->emailHref = Str::lower($this->email);
         $this->year ??= (string) now()->year;

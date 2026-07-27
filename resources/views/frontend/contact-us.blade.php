@@ -1,16 +1,5 @@
 @extends('layouts.frontend')
 
-@section('seo')
-  <x-layouts.seo
-    title="Contact Suave Creators | Have a Project in Mind? Let's Discuss"
-    description="Tell Suave Creators about your website, app, or custom software project. Our team usually responds within 12 business hours."
-    og-title="Contact Suave Creators | Have a Project in Mind? Let's Discuss"
-    og-description="Tell Suave Creators about your website, app, or custom software project. Our team usually responds within 12 business hours."
-    :canonical="url()->current()"
-    :og-url="url()->current()"
-  />
-@endsection
-
 @section('content')
 <!-- Contact Hero Start -->
 <section class="relative z-10 w-full overflow-hidden pb-12 pt-8 sm:pb-16 sm:pt-10 lg:min-h-[580px] lg:pb-20 lg:pt-[52px] site-container">

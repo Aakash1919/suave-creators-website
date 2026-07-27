@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use App\Support\Frontend\BlogSupport;
 use Illuminate\View\View;
 
-class BlogController extends Controller
+class BlogController extends FrontendController
 {
-    /**
-     * Display the blogs listing page.
-     */
     public function index(): View
     {
-        return view('frontend.blogs', BlogSupport::indexData());
+        return $this->view('frontend.blogs', BlogSupport::indexData());
+    }
+
+    public function show(string $slug): View
+    {
+        return $this->view('frontend.single-blog', BlogSupport::showData($slug));
     }
 }

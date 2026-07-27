@@ -8,16 +8,6 @@ class BlogSupport
 {
     use MapsDesignAssets;
 
-    /** @var array<string, string> */
-    public const SLUG_ROUTE_NAMES = [
-        'digital-strategy-that-creates-value' => 'blog.digital-strategy-that-creates-value',
-        'product-data-customer-experiences' => 'blog.product-data-customer-experiences',
-        'digital-workflows-teams-use' => 'blog.digital-workflows-teams-use',
-        'ai-powered-software-development-2026' => 'blog.ai-powered-software-development-2026',
-        'choosing-the-right-tech-stack' => 'blog.choosing-the-right-tech-stack',
-        'ux-principles-that-drive-conversions' => 'blog.ux-principles-that-drive-conversions',
-    ];
-
     /**
      * @return array<int, array<string, mixed>>
      */
@@ -43,9 +33,9 @@ class BlogSupport
             $mapped = self::mapDesignData($post);
             $slug = (string) ($mapped['slug'] ?? '');
 
-            if (isset(self::SLUG_ROUTE_NAMES[$slug])) {
-                $mapped['route'] = self::SLUG_ROUTE_NAMES[$slug];
-                $mapped['url'] = route(self::SLUG_ROUTE_NAMES[$slug]);
+            if ($slug !== '') {
+                $mapped['route'] = 'blog.show';
+                $mapped['url'] = route('blog.show', ['slug' => $slug]);
             }
 
             $mapped['image'] = asset((string) ($mapped['image'] ?? ''));
@@ -53,11 +43,6 @@ class BlogSupport
         }
 
         return $posts;
-    }
-
-    public static function routeNameForSlug(string $slug): string
-    {
-        return self::SLUG_ROUTE_NAMES[$slug] ?? 'blogs';
     }
 
     /**

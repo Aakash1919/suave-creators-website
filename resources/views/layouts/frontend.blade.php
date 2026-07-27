@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @hasSection('seo')
-        @yield('seo')
-    @else
-        <title>{{ config('app.name', 'Suave Creators') }}</title>
-        <meta name="description" content="{{ config('app.name', 'Suave Creators') }}">
+    @if ($withSeo ?? true)
+        <x-layouts.seo :seo="$seo ?? []" />
     @endif
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

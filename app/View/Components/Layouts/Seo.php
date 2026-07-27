@@ -8,20 +8,12 @@ use Illuminate\View\Component;
 
 class Seo extends Component
 {
+    /**
+     * @param  array<string, mixed>  $seo
+     */
     public function __construct(
-        public string $title = 'Suave Creators',
-        public string $description = 'Suave Creators',
-        public ?string $ogTitle = null,
-        public ?string $ogDescription = null,
-        public string $ogType = 'website',
-        public ?string $ogUrl = null,
-        public ?string $canonical = null,
-    ) {
-        $this->ogTitle ??= $this->title;
-        $this->ogDescription ??= $this->description;
-        $this->ogUrl ??= url()->current();
-        $this->canonical ??= url()->current();
-    }
+        public array $seo = [],
+    ) {}
 
     public function render(): View|Closure|string
     {
