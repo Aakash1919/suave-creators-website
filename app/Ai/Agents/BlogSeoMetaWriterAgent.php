@@ -46,10 +46,10 @@ Rules:
 - Output ONLY the four SEO fields requested — no blog body, no FAQs.
 - Match the post’s topic and tone; second person when natural.
 - Do not invent fake statistics, client names, pricing, or SLAs.
-- meta_title: clear primary keywords + brand; prefer ending with "| Suave Creators Blog" (trim to stay useful within ~50–60 visible characters when possible; hard max 120).
-- meta_description: 140–160 characters ideal (hard max 320); benefit-led summary that encourages the click.
-- og_title: social-friendly title — usually the post title or a slightly tighter variant (max 120). Do not force the "| Suave Creators Blog" suffix on OG title.
-- og_description: similar to meta_description; may be slightly punchier for social (max 300).
+- meta_title: clear primary keywords; 50–60 characters (hard max 60). Do not append "| Suave Creators Blog".
+- meta_description: 140–160 characters ideal (hard max 160); benefit-led summary that encourages the click.
+- og_title: social-friendly title — usually match meta_title or a slightly tighter variant (max 60).
+- og_description: similar to meta_description; may be slightly punchier for social (max 160).
 - Avoid keyword stuffing and duplicate filler.
 PROMPT;
     }
@@ -62,10 +62,10 @@ PROMPT;
     public function schema(JsonSchema $schema): array
     {
         return [
-            'meta_title' => $schema->string()->min(20)->max(120)->required(),
-            'meta_description' => $schema->string()->min(80)->max(320)->required(),
-            'og_title' => $schema->string()->min(10)->max(120)->required(),
-            'og_description' => $schema->string()->min(80)->max(300)->required(),
+            'meta_title' => $schema->string()->min(30)->max(60)->required(),
+            'meta_description' => $schema->string()->min(70)->max(160)->required(),
+            'og_title' => $schema->string()->min(30)->max(60)->required(),
+            'og_description' => $schema->string()->min(70)->max(160)->required(),
         ];
     }
 }

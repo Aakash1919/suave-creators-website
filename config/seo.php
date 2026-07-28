@@ -140,7 +140,7 @@ return [
             'json_ld_description' => 'Suave Creators offers custom web development, CRM solutions, e-commerce development, enterprise software, mobile apps, digital marketing and SEO services.',
         ],
         'about-us' => [
-            'title' => 'About Suave Creators | Leading IT Company for Digital Solutions',
+            'title' => 'About Suave Creators | Leading IT Company, Digital Solutions',
             'description' => 'Learn about Suave Creators, a trusted IT company delivering innovative web development, AI-driven solutions, and digital growth services for global businesses.',
             'og_title' => 'About Suave Creators | Innovation-Driven IT Company',
             'og_description' => 'Learn about Suave Creators, a trusted IT company delivering innovative web development, AI solutions, and digital growth services for businesses worldwide.',
@@ -153,7 +153,7 @@ return [
         ],
         'services' => [
             'title' => 'Offshore Web & Software Development Company | Suave Creators',
-            'description' => 'Get offshore web, software, CRM, & AI development services from Suave Creators. We build scalable, secure, and high-performance digital solutions for global businesses.',
+            'description' => 'Get offshore web, software, CRM & AI development from Suave Creators. We build scalable, secure digital solutions for global businesses.',
             'og_title' => 'Offshore Web & Software Development Company | Suave Creators',
             'og_description' => 'We provide offshore web development, software development, CRM, enterprise solutions, UI/UX, e-commerce, and AI services for startups & enterprises globally.',
         ],

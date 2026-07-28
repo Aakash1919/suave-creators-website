@@ -632,8 +632,8 @@ require __DIR__ . '/partials/core-values-section.php';
   <div class="section-inner">
     <div class="consultation-card consultation-card--solo">
       <div class="consultation-copy">
-        <h2 class="text-[#171717]">Get the Best Solution for your<br class="hidden sm:block"> Organisation with us</h2>
-        <p class="text-[#171717]">
+        <h2>Get the Best Solution for your<br class="hidden sm:block"> Organisation with us</h2>
+        <p>
           We are always happy to serve you the best and smart industry solution. With Suave Creators, we bring the latest
           technology and benefit from experts who are eager to share their knowledge.
         </p>
