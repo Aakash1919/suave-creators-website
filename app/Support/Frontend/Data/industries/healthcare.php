@@ -1,9 +1,9 @@
 <?php
 return array (
   'slug' => 'healthcare',
-  'pageTitle' => 'Custom Healthcare Software Development Services | Suave Creators',
+  'pageTitle' => 'Healthcare Software Development | Suave Creators',
   'pageDescription' => 'Custom healthcare software development, EHR/EMR integration, hospital management systems, AI-powered apps and secure portals for healthcare organisations.',
-  'ogTitle' => 'Custom Healthcare Software Development Services | Suave Creators',
+  'ogTitle' => 'Healthcare Software Development | Suave Creators',
   'ogDescription' => 'Custom healthcare software development, EHR/EMR integration, hospital management systems, AI-powered healthcare apps, and secure patient portals.',
   'eyebrow' => 'Serving more than 100+ health organisations',
   'heroTitle' => 

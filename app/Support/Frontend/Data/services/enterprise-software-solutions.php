@@ -2,7 +2,7 @@
 return array(
   'slug' => 'enterprise-software-solutions',
   'pageTitle' => 'Enterprise Software Development Services | Suave Creators',
-  'pageDescription' => 'Get scalable, secure enterprise software development services tailored for growing businesses. Automate workflows, boost efficiency, & modernize operations with Suave Creators.',
+  'pageDescription' => 'Get scalable, secure enterprise software tailored for growing businesses. Automate workflows, boost efficiency, and modernize operations with Suave Creators.',
   'ogTitle' => 'Enterprise Software Development Services | Suave Creators',
   'ogDescription' => 'Build scalable and secure enterprise software solutions with Suave Creators. Automate workflows, enhance productivity, and accelerate business growth.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',

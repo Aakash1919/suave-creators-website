@@ -244,11 +244,12 @@ class IndustrySupport
     }
 
     /**
-     * @return array{solo: bool, showPeople: bool, title: string, description: string, ctaLabel: string}
+     * @return array{backgroundImage: string, solo: bool, showPeople: bool, title: string, description: string, ctaLabel: string}
      */
     public static function consultation(): array
     {
         return [
+            'backgroundImage' => 'assets/background/industry-future-bg.webp',
             'solo' => true,
             'showPeople' => false,
             'title' => 'Get the Best Solution for your<br class="hidden sm:block"> Organisation with us',
