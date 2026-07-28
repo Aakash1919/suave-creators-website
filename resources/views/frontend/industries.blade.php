@@ -410,7 +410,7 @@
   heading-id="industry-insights-title"
   section-class="py-10 sm:py-12 lg:py-18"
   more-href="{{ route('blogs') }}"
-  more-label="View More"
+  more-label="View all blog articles"
 />
 
 

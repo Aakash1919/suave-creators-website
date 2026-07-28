@@ -307,7 +307,7 @@
   :items="$articles"
   heading-id="about-insights-title"
   more-href="{{ route('blogs') }}"
-  more-label="View More"
+  more-label="View all blog articles"
   section-class="py-10 sm:py-12 lg:py-18"
 />
 

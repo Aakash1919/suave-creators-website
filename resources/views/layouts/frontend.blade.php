@@ -80,11 +80,11 @@
     @endif
     <div class="relative w-full overflow-hidden {{ $heroShellClass }}">
         @if ($useHeroBackground && $heroBackgroundImage)
-            <div class="pointer-events-none absolute inset-x-0 top-0 z-0 h-[min(100%,920px)] lg:inset-0 lg:h-auto" aria-hidden="true">
+            <div class="site-hero-bg" aria-hidden="true">
                 <img
                     src="{{ asset($heroBackgroundImage) }}"
                     alt="Suave Creators web and software development homepage hero background" title="Suave Creators web and software development homepage hero background"
-                    class="absolute inset-0 h-full w-full object-cover object-top"
+                    class="site-hero-bg__image"
                     width="1920"
                     height="1080"
                     decoding="async"
@@ -94,7 +94,7 @@
                     <img
                         src="{{ asset('assets/hero/hero-pattern-left.svg') }}"
                         alt="Geometric pattern overlay on Suave Creators software development hero" title="Geometric pattern overlay on Suave Creators software development hero"
-                        class="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-soft-light"
+                        class="site-hero-bg__pattern"
                         width="1920"
                         height="1080"
                         decoding="async"

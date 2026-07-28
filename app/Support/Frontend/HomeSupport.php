@@ -277,7 +277,7 @@ class HomeSupport
         return [
             'faqCtaHref' => route('contact-us').'#contact-id',
             'faqCtaLabel' => 'Start your Project',
-            'faqMedia' => 'assets/media/faq-team-collaboration.gif',
+            'faqMedia' => 'assets/media/faq-team-collaboration.webp',
             'faqMediaType' => 'image',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
             'faqs' => [

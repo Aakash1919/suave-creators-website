@@ -277,7 +277,7 @@ $style = $i % 2 === 0 ? 'filled' : 'outlined';
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
   section-class="py-10 sm:py-14 lg:py-18"
   more-href="{{ route('blogs') }}"
-  more-label="View All Blogs"
+  more-label="View all blog articles"
 />
 
 @endsection

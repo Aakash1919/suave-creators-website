@@ -40,6 +40,42 @@
   --control-size-touch: 44px;
 }
 
+/* ===== SITE HERO BACKGROUND START ===== */
+.site-hero-bg {
+  background-color: var(--color-navy);
+  height: min(100%, 920px);
+  inset-inline: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+}
+
+.site-hero-bg__image {
+  height: 100%;
+  left: 50%;
+  max-width: none;
+  object-fit: cover;
+  object-position: top center;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: max(100%, 1920px);
+}
+
+.site-hero-bg__pattern {
+  height: 100%;
+  inset: 0;
+  mix-blend-mode: soft-light;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.2;
+  position: absolute;
+  width: 100%;
+}
+/* ===== SITE HERO BACKGROUND END ===== */
+
 html{
   overflow-x: clip;
 }
