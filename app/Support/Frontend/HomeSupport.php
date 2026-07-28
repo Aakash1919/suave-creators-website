@@ -10,6 +10,8 @@ class HomeSupport
     public static function data(): array
     {
         return array_merge(self::faqData(), [
+            'heroShellClass' => 'home-page-shell',
+            'heroBackgroundImage' => '',
             'stats' => self::stats(),
             'offerings' => self::offerings(),
             'coreValues' => self::coreValues(),

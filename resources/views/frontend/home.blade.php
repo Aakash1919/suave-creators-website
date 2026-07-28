@@ -214,7 +214,7 @@
 
 <!-- Offerings Showcase Section Start -->
 <section
-  class="full-bleed  overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}');">
+  class="full-bleed overflow-hidden bg-[#F9FAFC] bg-repeat" style="background-image: url('{{ asset('assets/background/what-we-do-section-pattern-bg.png') }}');">
   <div class="section-inner relative z-10 py-12 sm:py-20 lg:py-[80px]">
     <div class="mx-auto max-w-[660px] text-center">
       <p
@@ -332,7 +332,7 @@
 
 <!-- Digital Marketing Services Section Start -->
 <section
-  class="full-bleed digital-marketing-services bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/digital-marketing-section-bg.png') }}');"
+  class="full-bleed digital-marketing-services bg-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/digital-marketing-section-pattern-bg.png') }}');"
   aria-labelledby="digital-marketing-title">
   <div class="digital-marketing-services__inner section-inner">
     <header class="digital-marketing-services__header">
@@ -419,7 +419,7 @@
 
 <!-- Portfolio Showcase Section Start -->
 <section
-  class="full-bleed portfolio-showcase bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-bg.png') }}');"
+  class="full-bleed portfolio-showcase bg-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-pattern-bg.png') }}');"
   aria-labelledby="portfolio-showcase-title">
   <div class="portfolio-showcase__pattern" aria-hidden="true"></div>
   <div class="portfolio-showcase__container section-inner">
@@ -487,7 +487,7 @@
   :show-support-aside="true"
 />
 <!-- Technology Section Start -->
-<x-frontend.four-card-section />
+<x-frontend.four-card-section background-image="assets/background/technology-section-bg.png" />
 <!-- Technology Section End -->
 
 
