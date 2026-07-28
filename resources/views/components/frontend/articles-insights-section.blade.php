@@ -58,7 +58,7 @@
                   <p title="{{ $article['excerpt'] }}">{{ $article['excerpt'] }}</p>
                   <a class="articles-card__link group"
                     href="{{ str_starts_with($article['url'], 'http') ? $article['url'] : (str_starts_with($article['url'], '/') ? $article['url'] : route($article['url'])) }}">
-                    Read More
+                    Read more<span class="sr-only"> about {{ $article['title'] }}</span>
                     <x-frontend.cta-arrow />
                   </a>
                 </div>

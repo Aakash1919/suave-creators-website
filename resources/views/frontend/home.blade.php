@@ -507,7 +507,7 @@
   :items="$articles"
   heading-id="articles-insights-title"
   more-href="{{ route('blogs') }}"
-  more-label="View More"
+  more-label="View all blog articles"
 />
 
 <x-frontend.consultation-section />
