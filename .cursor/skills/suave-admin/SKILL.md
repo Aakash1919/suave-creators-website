@@ -36,7 +36,9 @@ description: >-
 
 | Service | Responsibility |
 |---------|----------------|
-| `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it) |
+| `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads |
+| `BlogDraftGenerationService` | AI trend draft generation via `BlogTrendWriterAgent` → saves `status=draft` |
+| `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `BlogSeoMetaWriterAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `UserService` | User create/update, password hash, `syncRoles` |
 | `ProfileService` | Own profile + password change |
 | `ContactRequestService` | Public contact store + spam checks; admin mark read / archive |
@@ -212,6 +214,28 @@ php artisan db:seed --class=BlogSeeder
 ```
 
 `DatabaseSeeder` calls `BlogSeeder` after ensuring the site admin exists.
+
+## AI trend drafts (scheduled)
+
+Console command generates trend-based posts with Laravel AI and always saves them as **drafts** (never auto-publishes):
+
+```bash
+php artisan blogs:generate-trend-drafts
+php artisan blogs:generate-trend-drafts --count=2
+php artisan blogs:generate-trend-drafts --force   # ignore BLOG_TREND_DRAFTS_ENABLED=false
+```
+
+Schedule (`routes/console.php`): Tuesdays + Fridays at `BLOG_TREND_DRAFTS_TIME` (default `09:00`, app timezone). Requires server cron: `* * * * * php artisan schedule:run`.
+
+Config: `config/blogs.php` + `.env` (`BLOG_TREND_DRAFTS_*`, `OPENAI_API_KEY`). Agent: `App\Ai\Agents\BlogTrendWriterAgent`.
+
+Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + sample FAQ) and instructs the model to match that craft: long benefit-led titles, second-person voice, `<h2>`/`<h3>` + `<ul><li><p>` HTML, 5–8 FAQs, `meta_title` ending with `| Suave Creators Blog`, always `status=draft`.
+
+## Edit-form SEO meta (manual save)
+
+On **Edit blog**, “Generate SEO meta” (`POST admin/blogs/{blog}/generate-seo`, permission `blogs.update`) calls `BlogSeoMetaGenerationService` + `BlogSeoMetaWriterAgent` with the current form title / short description / content. It returns `meta_title`, `meta_description`, `og_title`, `og_description` as JSON and the client fills only those inputs — **no DB write** until the editor clicks Save.
+
+Config: `config/blogs.php` → `seo_meta.model` (`BLOG_SEO_META_MODEL`).
 
 ## Permissions catalog
 

@@ -66,6 +66,7 @@
                     <path d="M2 12H22" />
                 </svg>
             </a>
+            <x-layouts.the-suave-star-pearl class="site-header__logo-emblem" />
             <button type="button" id="mobile-nav-toggle" class="site-header__menu-btn u-touch-target inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition hover:bg-white/10 xl:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
                 <i class="fa-solid fa-bars text-xl site-header__menu-icon" aria-hidden="true"></i>
                 <i class="fa-solid fa-xmark text-xl site-header__close-icon hidden" aria-hidden="true"></i>

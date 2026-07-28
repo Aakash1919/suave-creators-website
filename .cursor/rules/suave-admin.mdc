@@ -13,7 +13,8 @@ Before editing the custom admin panel, RBAC, or admin conversation review:
 3. Gate routes with `admin` + `permission:{name}`; gate nav with `hasPermission`
 4. Put CRUD / domain logic in `App\Services\*Service`; keep Admin controllers thin (HTTP + flash/JSON only)
 5. AI transcripts use Laravel AI SDK conversation tables via `ChatLead` — do not invent a parallel messages schema
-6. UI: white admin theme (`#7539FF` primary, light sidebar) + Toastr/DataTables/Flatpickr/RichTextEditor; keep editor assets in `public/richtexteditor/`
-7. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
-8. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha)
-9. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`
+6. Trend blog drafts: `blogs:generate-trend-drafts` + Tue/Fri schedule in `routes/console.php` (always `draft`; see suave-admin skill). Edit-form “Generate SEO meta” fills meta/OG inputs only — editor must save
+7. UI: white admin theme (`#7539FF` primary, light sidebar) + Toastr/DataTables/Flatpickr/RichTextEditor; keep editor assets in `public/richtexteditor/`
+8. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
+9. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha)
+10. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`

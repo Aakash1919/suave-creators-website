@@ -191,4 +191,26 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Weekly SEO audit report
+    |--------------------------------------------------------------------------
+    |
+    | Scheduled artisan command seo:audit-report crawls every public sitemap
+    | URL (APP_URL), builds an on-page SEO report, and emails it. Runs Monday
+    | morning by default via schedule:run. Localhost / 127.0.0.1 URLs are
+    | rendered in-process (avoids php artisan serve self-request deadlocks).
+    |
+    */
+
+    'audit_report' => [
+        'enabled' => (bool) env('SEO_AUDIT_REPORT_ENABLED', true),
+        'time' => env('SEO_AUDIT_REPORT_TIME', '09:00'),
+        'to' => env('SEO_AUDIT_REPORT_TO', 'info@suavecreators.com'),
+        // Use "log" until real SMTP is ready; set SEO_AUDIT_REPORT_MAILER=smtp (or default) to send.
+        'mailer' => env('SEO_AUDIT_REPORT_MAILER', 'log'),
+        'timeout' => (int) env('SEO_AUDIT_REPORT_TIMEOUT', 15),
+        'delay_ms' => (int) env('SEO_AUDIT_REPORT_DELAY_MS', 150),
+    ],
+
 ];

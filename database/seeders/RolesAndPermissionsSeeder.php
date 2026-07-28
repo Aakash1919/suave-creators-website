@@ -24,6 +24,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'users.view' => 'View users',
             'users.manage' => 'Manage users and roles',
             'profile.update' => 'Update own profile',
+            'seo.audit' => 'Generate SEO audit reports',
         ];
 
         foreach ($permissions as $name => $label) {

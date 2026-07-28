@@ -349,8 +349,40 @@
   }
 
   /**
+   * Toggle submit-button loading UI (spinner + label) for AJAX forms.
+   */
+  function setSubmitLoading($buttons, loading) {
+    $buttons.each(function () {
+      const $btn = $(this);
+      if (loading) {
+        if ($btn.data('original-html') == null) {
+          $btn.data('original-html', $btn.html());
+        }
+        const loadingText =
+          $btn.data('loading-text') ||
+          $btn.closest('form').data('loading-text') ||
+          'Please wait…';
+        $btn
+          .addClass('is-loading')
+          .prop('disabled', true)
+          .attr('aria-busy', 'true')
+          .html('<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> ' + loadingText);
+        return;
+      }
+
+      const original = $btn.data('original-html');
+      if (original != null) {
+        $btn.html(original);
+        $btn.removeData('original-html');
+      }
+      $btn.removeClass('is-loading').prop('disabled', false).removeAttr('aria-busy');
+    });
+  }
+
+  /**
    * Submit a form via AJAX (supports multipart / file uploads).
-   * Form may use data-ajax-form, data-success-message, data-reload-table.
+   * Form may use data-ajax-form, data-success-message, data-reload-table,
+   * data-loading-text (or on the submit button).
    */
   function submitForm($form, options = {}) {
     const form = $form instanceof $ ? $form : $($form);
@@ -376,7 +408,8 @@
       formData.append('_ajax', '1');
     }
 
-    const $submit = form.find('[type="submit"]').prop('disabled', true);
+    const $submit = form.find('[type="submit"]');
+    setSubmitLoading($submit, true);
 
     return ajax({
       url,
@@ -411,7 +444,7 @@
         }
       })
       .always(function () {
-        $submit.prop('disabled', false);
+        setSubmitLoading($submit, false);
       });
   }
 

@@ -14,14 +14,7 @@
     aria-expanded="false"
     aria-controls="suave-agent-panel"
   >
-    <img
-      src="{{ asset($icon) }}"
-      alt="{{ $alt }}"
-      title="{{ $alt }}"
-      width="56"
-      height="56"
-      decoding="async"
-    >
+    <x-layouts.chat-widget-icon :alt="$alt" :width="56" :height="56" />
   </button>
 
   <div
@@ -35,15 +28,12 @@
   >
     <header class="suave-agent__header">
       <div class="suave-agent__brand">
-        <img
+        <x-layouts.chat-widget-icon
           class="suave-agent__brand-icon"
-          src="{{ asset($icon) }}"
-          alt="{{ $alt }}"
-          title="{{ $alt }}"
-          width="40"
-          height="40"
-          decoding="async"
-        >
+          :alt="$alt"
+          :width="40"
+          :height="40"
+        />
         <div class="suave-agent__brand-text">
           <h2 id="suave-agent-title" class="suave-agent__title">Suave Creators</h2>
           <p class="suave-agent__online">

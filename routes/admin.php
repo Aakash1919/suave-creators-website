@@ -20,6 +20,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    Route::middleware('permission:seo.audit')->group(function () {
+        Route::post('/seo-audit-report', [DashboardController::class, 'generateSeoReport'])
+            ->name('seo-audit-report.generate');
+    });
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
@@ -36,6 +41,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::middleware('permission:blogs.update')->group(function () {
         Route::get('/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
         Route::put('/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+        Route::post('/blogs/{blog}/generate-seo', [BlogController::class, 'generateSeoMeta'])
+            ->name('blogs.generate-seo');
     });
 
     Route::middleware('permission:blogs.delete')->group(function () {
