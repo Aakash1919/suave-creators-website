@@ -123,9 +123,7 @@ PROMPT;
     {
         $metaTitle = trim((string) ($payload['meta_title'] ?? ''));
         if ($metaTitle === '') {
-            $metaTitle = $title.' | Suave Creators Blog';
-        } elseif (! str_contains(Str::lower($metaTitle), 'suave creators')) {
-            $metaTitle = rtrim($metaTitle, " \t|-").' | Suave Creators Blog';
+            $metaTitle = $title;
         }
 
         $metaDescription = trim((string) ($payload['meta_description'] ?? ''));
@@ -135,7 +133,7 @@ PROMPT;
 
         $ogTitle = trim((string) ($payload['og_title'] ?? ''));
         if ($ogTitle === '') {
-            $ogTitle = $title;
+            $ogTitle = $metaTitle !== '' ? $metaTitle : $title;
         }
 
         $ogDescription = trim((string) ($payload['og_description'] ?? ''));
@@ -148,10 +146,10 @@ PROMPT;
         }
 
         return [
-            'meta_title' => Str::limit($metaTitle, 120, ''),
-            'meta_description' => Str::limit($metaDescription, 320, ''),
-            'og_title' => Str::limit($ogTitle, 120, ''),
-            'og_description' => Str::limit($ogDescription, 300, ''),
+            'meta_title' => Str::limit($metaTitle, 60, ''),
+            'meta_description' => Str::limit($metaDescription, 160, ''),
+            'og_title' => Str::limit($ogTitle, 60, ''),
+            'og_description' => Str::limit($ogDescription, 160, ''),
         ];
     }
 }

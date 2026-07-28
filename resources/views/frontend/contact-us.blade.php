@@ -220,44 +220,109 @@
 <!-- Technologies & Partnerships Marquee End -->
 
 <!-- Contact Information Start -->
-<section class="full-bleed bg-cover bg-center py-16 sm:py-20 lg:py-24"
-  style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');"
-  aria-labelledby="contact-details-heading">
+@php
+  $mapOffices = $offices ?? [];
+  $activeOffice = $mapOffices[0] ?? null;
+@endphp
+<section class="full-bleed contact-reach-section py-16 sm:py-20 lg:py-24"
+  style="background-image: url('{{ asset('assets/background/about-section-bg.png') }}');"
+  aria-labelledby="contact-details-heading"
+  data-contact-reach>
   <div class="section-inner">
-    <header class="mx-auto max-w-[680px] text-center">
-      <p
-        class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
+    <header class="contact-reach__header">
+      <p class="contact-reach__eyebrow">
+        <span class="contact-reach__eyebrow-bar" aria-hidden="true"></span>
         Prefer another way to reach us?
       </p>
-      <h2 id="contact-details-heading" class="mt-4 text-2xl font-semibold text-[#171717]">
+      <h2 id="contact-details-heading" class="contact-reach__title">
         We’re always within reach
       </h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-sm leading-6 text-[#4D4D4D]">
+      <p class="contact-reach__lead">
         Visit, email, or call us. Choose whichever way works best for you.
       </p>
     </header>
 
-    <div class="mt-10 grid gap-5 md:grid-cols-3 lg:mt-14">
-      @foreach ($contactCards as $index => $card)
-        <article class="group relative overflow-hidden rounded-[24px] border border-[#E5E8F5] bg-white p-7 shadow-[0_16px_40px_rgba(31,34,88,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(31,34,88,0.11)] sm:p-8">
-          <span class="absolute right-5 top-3 text-[64px] font-extrabold leading-none text-[#F2F4FD]" aria-hidden="true">0{{ $index + 1 }}</span>
-          <span class="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#EEF1FF] to-[#E7E8FF] text-xl text-[#2A4DFB] transition group-hover:from-[#2A4DFB] group-hover:to-[#7158F5] group-hover:text-white">
-            <i class="{{ $card['icon'] }}" aria-hidden="true"></i>
-          </span>
-          <p class="relative mt-7 text-xs font-bold uppercase tracking-[0.12em] text-[#858899]">{{ $card['label'] }}</p>
-          <h3 class="relative mt-2 text-xl font-semibold text-[#171717]">{{ $card['title'] }}</h3>
-          <div class="relative mt-5 border-t border-[#ECEEF7] pt-5 text-sm leading-6 text-[#4D4D4D]">
-            @foreach ($card['lines'] as $line)
-              <p>{{ $line }}</p>
-            @endforeach
-            @foreach ($card['links'] as $link)
-              <a href="{{ $link['href'] }}" class="block min-h-8 font-semibold text-[#303241] transition hover:text-[#2A4DFB]">
-                {{ $link['text'] }}
-              </a>
-            @endforeach
+    <div class="contact-reach">
+      <div class="contact-reach__map">
+        <iframe
+          data-contact-map
+          title="{{ ($activeOffice['display'] ?? 'Office location').' map' }}"
+          src="{{ $activeOffice['map_embed'] ?? '' }}"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+
+      <div class="contact-reach__details" role="list">
+        <div class="contact-reach__panel-head">
+          <h3 class="contact-reach__panel-title">Contact</h3>
+        </div>
+
+        @foreach ($contactCards as $card)
+          <div class="contact-reach__item" role="listitem">
+            <span class="contact-reach__item-icon" aria-hidden="true">
+              <i class="{{ $card['icon'] }}"></i>
+            </span>
+
+            <div class="contact-reach__item-content">
+              <p class="contact-reach__item-label">{{ $card['label'] }}</p>
+              <h3 class="contact-reach__item-title">{{ $card['title'] }}</h3>
+
+              <div class="contact-reach__item-body">
+                @if (! empty($card['offices']))
+                  @foreach ($card['offices'] as $officeIndex => $office)
+                    <button
+                      type="button"
+                      class="contact-reach__office{{ $officeIndex === 0 ? ' is-active' : '' }}"
+                      data-contact-office
+                      data-map-src="{{ $office['map_embed'] }}"
+                      data-map-title="{{ $office['display'] }} map"
+                      aria-pressed="{{ $officeIndex === 0 ? 'true' : 'false' }}">
+                      <span class="contact-reach__flag" aria-hidden="true">
+                        @if (($office['flag'] ?? 'us') === 'in')
+                          <svg viewBox="0 0 24 16" width="24" height="16" focusable="false">
+                            <rect width="24" height="5.33" y="0" fill="#FF9933"/>
+                            <rect width="24" height="5.34" y="5.33" fill="#FFFFFF"/>
+                            <rect width="24" height="5.33" y="10.67" fill="#138808"/>
+                            <circle cx="12" cy="8" r="2.1" fill="none" stroke="#000080" stroke-width="0.7"/>
+                            <circle cx="12" cy="8" r="0.45" fill="#000080"/>
+                          </svg>
+                        @else
+                          <svg viewBox="0 0 24 16" width="24" height="16" focusable="false">
+                            <rect width="24" height="16" fill="#B22234"/>
+                            <rect y="1.23" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="3.69" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="6.15" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="8.62" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="11.08" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="13.54" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect width="9.6" height="8.62" fill="#3C3B6E"/>
+                          </svg>
+                        @endif
+                      </span>
+                      <span class="contact-reach__office-lines">
+                        @foreach ($office['lines'] as $line)
+                          <span class="contact-reach__office-line">{{ $line }}</span>
+                        @endforeach
+                      </span>
+                    </button>
+                  @endforeach
+                @endif
+
+                @if (! empty($card['links']))
+                  <div class="contact-reach__links">
+                    @foreach ($card['links'] as $link)
+                      <a href="{{ $link['href'] }}" class="contact-reach__link">
+                        {{ $link['text'] }}
+                      </a>
+                    @endforeach
+                  </div>
+                @endif
+              </div>
+            </div>
           </div>
-        </article>
-      @endforeach
+        @endforeach
+      </div>
     </div>
   </div>
 </section>
@@ -281,6 +346,43 @@
 
 @push('scripts')
 <script>
+(function () {
+  const root = document.querySelector('[data-contact-reach]');
+  if (!root) {
+    return;
+  }
+
+  const map = root.querySelector('[data-contact-map]');
+  const offices = root.querySelectorAll('[data-contact-office]');
+  if (!map || !offices.length) {
+    return;
+  }
+
+  offices.forEach(function (button) {
+    button.addEventListener('click', function () {
+      const src = button.getAttribute('data-map-src');
+      const title = button.getAttribute('data-map-title') || 'Office location map';
+      if (!src || map.getAttribute('src') === src) {
+        offices.forEach(function (item) {
+          const active = item === button;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        return;
+      }
+
+      map.setAttribute('src', src);
+      map.setAttribute('title', title);
+
+      offices.forEach(function (item) {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    });
+  });
+})();
+
 (function () {
   const form = document.querySelector('[data-contact-form]');
   if (!form) {

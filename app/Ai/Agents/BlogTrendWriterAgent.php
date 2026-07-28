@@ -99,10 +99,10 @@ faqs:
 - Answers: plain text, concrete, 2–5 sentences.
 
 SEO:
-- meta_title: "{title} | Suave Creators Blog" (trim if needed; keep useful keywords).
-- meta_description: usually mirrors / tightens the short_description.
-- og_title: same as the post title (or a slightly shorter variant).
-- og_description: same idea as meta_description.
+- meta_title: concise keyword-led title, 50–60 characters (hard max 60). Do not append "| Suave Creators Blog".
+- meta_description: 140–160 characters; usually mirrors / tightens the short_description.
+- og_title: same as meta_title (or a slightly shorter variant, max 60).
+- og_description: same idea as meta_description (max 160).
 
 {$examples}
 PROMPT;
@@ -120,10 +120,10 @@ PROMPT;
             'short_description' => $schema->string()->min(120)->max(450)->required(),
             'category' => $schema->string()->required(),
             'content' => $schema->string()->min(2000)->required(),
-            'meta_title' => $schema->string()->max(120)->required(),
-            'meta_description' => $schema->string()->max(320)->required(),
-            'og_title' => $schema->string()->max(120)->required(),
-            'og_description' => $schema->string()->max(300)->required(),
+            'meta_title' => $schema->string()->min(30)->max(60)->required(),
+            'meta_description' => $schema->string()->min(70)->max(160)->required(),
+            'og_title' => $schema->string()->min(30)->max(60)->required(),
+            'og_description' => $schema->string()->min(70)->max(160)->required(),
             'trend_angle' => $schema->string()->description('One-sentence reason this topic is timely.')->required(),
             'faqs' => $schema->array()->min(5)->max(8)->items(
                 $schema->object([

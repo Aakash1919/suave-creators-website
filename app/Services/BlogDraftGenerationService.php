@@ -177,7 +177,7 @@ class BlogDraftGenerationService
             'title' => (string) $blog->title,
             'category' => (string) ($blog->category?->name ?? 'Uncategorized'),
             'short_description' => Str::limit(trim((string) $blog->short_description), 420, ''),
-            'meta_title' => Str::limit(trim((string) $blog->meta_title), 120, ''),
+            'meta_title' => Str::limit(trim((string) $blog->meta_title), 60, ''),
             'headings' => $headings,
             'opening_html' => $opening,
             'sample_faq_question' => Str::limit(trim((string) ($firstFaq['question'] ?? '')), 500, ''),
@@ -235,14 +235,12 @@ class BlogDraftGenerationService
 
         $metaTitle = trim((string) ($payload['meta_title'] ?? ''));
         if ($metaTitle === '') {
-            $metaTitle = $title.' | Suave Creators Blog';
-        } elseif (! str_contains(Str::lower($metaTitle), 'suave creators')) {
-            $metaTitle = rtrim($metaTitle, " \t|-").' | Suave Creators Blog';
+            $metaTitle = $title;
         }
 
         $ogTitle = trim((string) ($payload['og_title'] ?? ''));
         if ($ogTitle === '') {
-            $ogTitle = $title;
+            $ogTitle = $metaTitle !== '' ? $metaTitle : $title;
         }
 
         $ogDescription = trim((string) ($payload['og_description'] ?? ''));
@@ -260,10 +258,10 @@ class BlogDraftGenerationService
             'status' => Blog::STATUS_DRAFT,
             'published_at' => null,
             'faqs' => $faqs,
-            'meta_title' => $this->nullableLimit($metaTitle, 120),
-            'meta_description' => $this->nullableLimit($metaDescription, 320),
-            'og_title' => $this->nullableLimit($ogTitle, 120),
-            'og_description' => $this->nullableLimit($ogDescription, 300),
+            'meta_title' => $this->nullableLimit($metaTitle, 60),
+            'meta_description' => $this->nullableLimit($metaDescription, 160),
+            'og_title' => $this->nullableLimit($ogTitle, 60),
+            'og_description' => $this->nullableLimit($ogDescription, 160),
         ]);
     }
 

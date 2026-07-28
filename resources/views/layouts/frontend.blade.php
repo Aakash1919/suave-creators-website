@@ -83,7 +83,7 @@
                 <img
                     src="{{ asset($heroBackgroundImage) }}"
                     alt="Suave Creators web and software development homepage hero background" title="Suave Creators web and software development homepage hero background"
-                    class="absolute inset-0 h-full w-full object-cover object-top lg:object-none lg:object-top"
+                    class="absolute inset-0 h-full w-full object-cover object-top"
                     width="1920"
                     height="1080"
                     decoding="async"
