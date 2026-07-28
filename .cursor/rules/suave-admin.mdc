@@ -1,0 +1,19 @@
+---
+description: Suave Creators custom admin panel — read suave-admin skill (not Filament/Spatie)
+globs: routes/admin.php,app/Http/Controllers/Admin/**,app/Http/Middleware/EnsureAdminUser.php,app/Http/Middleware/EnsurePermission.php,app/Models/Role.php,app/Models/Permission.php,app/Models/Concerns/HasRoles.php,app/Models/ChatLead.php,app/Models/ContactRequest.php,app/Support/SiteAdmin.php,app/Support/helpers.php,app/Support/Admin/**,app/Services/BlogService.php,app/Services/UserService.php,app/Services/ProfileService.php,app/Services/ContactRequestService.php,app/Services/ConversationService.php,app/DataTables/Admin/**,resources/views/admin/**,resources/views/layouts/admin.blade.php,resources/views/layouts/admin/**,resources/views/errors/**,public/css/admin.css,public/js/admin/suave-admin.js,database/seeders/RolesAndPermissionsSeeder.php,.cursor/skills/suave-admin/**
+alwaysApply: false
+---
+
+# Suave admin
+
+Before editing the custom admin panel, RBAC, or admin conversation review:
+
+1. **Read and follow** `.cursor/skills/suave-admin/SKILL.md`
+2. Keep first-party roles/permissions — do not add Filament, Breeze, or Spatie Permission
+3. Gate routes with `admin` + `permission:{name}`; gate nav with `hasPermission`
+4. Put CRUD / domain logic in `App\Services\*Service`; keep Admin controllers thin (HTTP + flash/JSON only)
+5. AI transcripts use Laravel AI SDK conversation tables via `ChatLead` — do not invent a parallel messages schema
+6. UI: white admin theme (`#7539FF` primary, light sidebar) + Toastr/DataTables/Flatpickr/RichTextEditor; keep editor assets in `public/richtexteditor/`
+7. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
+8. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha)
+9. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`

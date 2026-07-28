@@ -6,7 +6,12 @@
 .phpactor.json
 .phpunit.result.cache
 /.codex
-/.cursor/
+# Keep project skills/rules in git; ignore other Cursor local state if added later
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
+!.cursor/rules/
+!.cursor/rules/**
 /design/.cursor/
 /.idea
 /.nova

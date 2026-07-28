@@ -1,0 +1,21 @@
+---
+description: Suave Creators marketing frontend — read suave-frontend skill and verify after changes
+globs: public/assets/**,resources/views/**,app/View/Components/**,app/Support/Frontend/**,public/css/**,scripts/**,.cursor/skills/**
+alwaysApply: false
+---
+
+# Suave frontend
+
+Before editing marketing views, View Components, frontend support, `public/assets`, or `public/css`:
+
+1. **Read and follow** `.cursor/skills/suave-frontend/SKILL.md` (and `reference.md` rename catalog)
+2. Use categorized `asset('assets/...')` paths — never reintroduce flat `public/images/`
+3. Tech logos → `assets/icons/tech/`; company logos → `assets/clients/`; content-based filenames only (no `black-logo-N` / `tech-dev-N`)
+4. Keep path sanitization in PHP components; component JS uses `@once` + `@push('scripts')`
+5. Controllers: singular names under `App\Http\Controllers\Frontend\`; dedicated per page (services: one `ServiceController` with `index`/`show`; industries: one `IndustryController` with `index`/`show`; blogs: one `BlogController` with `index`/`show`)
+6. Page links: `route()` only — never `url('/path')` for internal marketing pages
+7. SuaveAgent floating icon opens the chat panel (not contact-us); contacts/offices stay aligned with ContactSupport + SEO
+8. After the change set, display: **The changes are being verified and unwanted file functions are being removed**
+9. Run `scripts/verify-frontend-conventions.ps1` and remove anything it flags
+
+Do **not** use or recreate `.cursor/skills/frontend-css-organization` or `.cursor/skills/frontend-section-components` — those are merged into `suave-frontend`. Admin work uses `suave-admin`.
