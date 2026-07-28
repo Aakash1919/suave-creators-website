@@ -8,6 +8,17 @@
       <h1 class="admin-page-title">Welcome back, {{ $user->name }}</h1>
       <p class="admin-page-desc">Here’s what’s happening across your Suave Creators admin panel.</p>
     </div>
+    @if ($canSeoAudit)
+      <div class="admin-page-head__actions">
+        <form method="POST" action="{{ route('admin.seo-audit-report.generate') }}" data-ajax-form data-loading-text="Generating report…">
+          @csrf
+          <button type="submit" class="admin-btn admin-btn--primary" data-loading-text="Generating report…" title="Crawl all public pages and deliver the SEO report (currently via {{ $seoReportMailer }}) to {{ $seoReportTo }}">
+            <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+            Generate SEO report
+          </button>
+        </form>
+      </div>
+    @endif
   </div>
 
   @if ($stats->isNotEmpty())

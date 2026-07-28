@@ -55,6 +55,23 @@ class BlogService
     }
 
     /**
+     * Persist a draft from a trusted internal payload (e.g. AI generation).
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public function createDraft(array $data): Blog
+    {
+        $data['status'] = Blog::STATUS_DRAFT;
+        $data['published_at'] = null;
+
+        if (empty($data['slug']) && ! empty($data['title'])) {
+            $data['slug'] = $this->uniqueSlug((string) $data['title']);
+        }
+
+        return Blog::query()->create($data);
+    }
+
+    /**
      * Update a blog post from an admin form request.
      *
      * @throws ValidationException
@@ -191,7 +208,6 @@ class BlogService
     /**
      * Normalize TOC repeater rows into [{anchor_id, label}, …].
      *
-     * @param  mixed  $items
      * @return list<array{anchor_id: string, label: string}>|null
      */
     public function normalizeTocItems(mixed $items): ?array
@@ -221,7 +237,6 @@ class BlogService
     /**
      * Normalize FAQ repeater rows into [{question, answer}, …].
      *
-     * @param  mixed  $items
      * @return list<array{question: string, answer: string}>|null
      */
     public function normalizeFaqItems(mixed $items): ?array

@@ -7,10 +7,13 @@ use App\Http\Controllers\Admin\Concerns\RespondsToAdminAjax;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Services\BlogService;
+use App\Services\BlogSeoMetaGenerationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use RuntimeException;
+use Throwable;
 
 class BlogController extends Controller
 {
@@ -18,6 +21,7 @@ class BlogController extends Controller
 
     public function __construct(
         private readonly BlogService $blogs,
+        private readonly BlogSeoMetaGenerationService $seoMeta,
     ) {}
 
     /**
@@ -99,5 +103,39 @@ class BlogController extends Controller
         $this->blogs->delete($blog);
 
         return $this->adminSuccess($request, 'Blog', 'deleted', 'admin.blogs.index');
+    }
+
+    /**
+     * Generate SEO / OG field suggestions for the edit form (does not save).
+     */
+    public function generateSeoMeta(Request $request, Blog $blog): JsonResponse|RedirectResponse
+    {
+        $blog->loadMissing('category');
+
+        try {
+            $seo = $this->seoMeta->generate($blog, $request->only([
+                'title',
+                'short_description',
+                'content',
+            ]));
+        } catch (RuntimeException $e) {
+            return $this->adminError($request, $e->getMessage());
+        } catch (Throwable $e) {
+            report($e);
+
+            return $this->adminError($request, 'Unable to generate SEO meta right now. Please try again.');
+        }
+
+        $message = 'SEO meta generated. Review the fields and save when ready.';
+
+        if ($this->wantsAdminJson($request)) {
+            return response()->json([
+                'success' => true,
+                'message' => $message,
+                'seo' => $seo,
+            ]);
+        }
+
+        return back()->with('status', $message)->withInput(array_merge($request->all(), $seo));
     }
 }

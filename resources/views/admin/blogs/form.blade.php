@@ -64,6 +64,17 @@
                         <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </summary>
                     <div class="admin-card__body space-y-5">
+                        @if ($blog->exists)
+                            <div class="admin-blog-form__seo-toolbar">
+                                <p class="admin-blog-form__seo-hint">Generate suggestions from the current title, short description, and content. Nothing is saved until you click Save changes.</p>
+                                <button type="button" id="blog-generate-seo" class="admin-btn admin-btn--secondary admin-btn--sm"
+                                    data-url="{{ route('admin.blogs.generate-seo', $blog) }}"
+                                    data-loading-text="Generating…">
+                                    <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                                    Generate SEO meta
+                                </button>
+                            </div>
+                        @endif
                         <div class="admin-form-grid admin-form-grid--2">
                             <div>
                                 <label class="admin-label" for="blog-meta-title">Meta title</label>
@@ -334,6 +345,74 @@
                     imageLabel.insertBefore(img, this);
                 }
                 img.src = url;
+            });
+
+            const generateSeoBtn = document.getElementById('blog-generate-seo');
+            generateSeoBtn?.addEventListener('click', function() {
+                const btn = this;
+                const url = btn.getAttribute('data-url');
+                if (!url || btn.classList.contains('is-loading')) {
+                    return;
+                }
+
+                const form = document.querySelector('.admin-blog-form');
+                if (form && window.SuaveAdmin?.syncRichTextEditors) {
+                    SuaveAdmin.syncRichTextEditors(form);
+                }
+
+                const title = document.getElementById('blog-title')?.value?.trim() || '';
+                if (!title) {
+                    SuaveAdmin.createFlashMessage('error', 'Add a blog title before generating SEO meta.');
+                    return;
+                }
+
+                const originalHtml = btn.innerHTML;
+                const loadingText = btn.getAttribute('data-loading-text') || 'Generating…';
+                btn.classList.add('is-loading');
+                btn.disabled = true;
+                btn.setAttribute('aria-busy', 'true');
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> ' + loadingText;
+
+                SuaveAdmin.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            _token: document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ||
+                                form?.querySelector('input[name="_token"]')?.value,
+                            _ajax: 1,
+                            title: title,
+                            short_description: document.getElementById('blog-short-description')?.value || '',
+                            content: document.getElementById('blog-content')?.value || '',
+                        },
+                    })
+                    .done(function(response) {
+                        const seo = response?.seo || {};
+                        const fields = {
+                            'blog-meta-title': seo.meta_title,
+                            'blog-meta-description': seo.meta_description,
+                            'blog-og-title': seo.og_title,
+                            'blog-og-description': seo.og_description,
+                        };
+                        Object.keys(fields).forEach(function(id) {
+                            const el = document.getElementById(id);
+                            if (el && fields[id] != null) {
+                                el.value = fields[id];
+                            }
+                        });
+                        SuaveAdmin.createFlashMessage(
+                            'success',
+                            response?.message || 'SEO meta generated. Review the fields and save when ready.'
+                        );
+                    })
+                    .fail(function(xhr) {
+                        SuaveAdmin.toast.validation(xhr, 'Unable to generate SEO meta.');
+                    })
+                    .always(function() {
+                        btn.classList.remove('is-loading');
+                        btn.disabled = false;
+                        btn.removeAttribute('aria-busy');
+                        btn.innerHTML = originalHtml;
+                    });
             });
         });
     </script>
