@@ -12,13 +12,13 @@ Artisan::command('inspire', function () {
 Schedule::command('blogs:generate-trend-drafts')
     ->days([ScheduleDefinition::TUESDAY, ScheduleDefinition::FRIDAY])
     ->at((string) config('blogs.trend_drafts.time', '09:00'))
-    ->timezone((string) config('app.timezone', 'UTC'))
+    ->timezone((string) config('app.timezone', 'Asia/Kolkata'))
     ->when(fn (): bool => (bool) config('blogs.trend_drafts.enabled', true))
     ->withoutOverlapping();
 
 Schedule::command('seo:audit-report')
     ->days([ScheduleDefinition::MONDAY])
     ->at((string) config('seo.audit_report.time', '09:00'))
-    ->timezone((string) config('app.timezone', 'UTC'))
+    ->timezone((string) config('app.timezone', 'Asia/Kolkata'))
     ->when(fn (): bool => (bool) config('seo.audit_report.enabled', true))
     ->withoutOverlapping();
