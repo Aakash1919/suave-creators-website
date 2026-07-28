@@ -419,7 +419,7 @@
 
 <!-- Portfolio Showcase Section Start -->
 <section
-  class="full-bleed portfolio-showcase bg-repeat py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-pattern-bg.png') }}');"
+  class="full-bleed portfolio-showcase !hidden bg-repeat py-12 md:!grid lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-pattern-bg.png') }}');"
   aria-labelledby="portfolio-showcase-title">
   <div class="portfolio-showcase__pattern" aria-hidden="true"></div>
   <div class="portfolio-showcase__container section-inner">
@@ -487,7 +487,7 @@
   :show-support-aside="true"
 />
 <!-- Technology Section Start -->
-<x-frontend.four-card-section background-image="assets/background/technology-section-bg.png" />
+<x-frontend.four-card-section class="!hidden md:!grid" background-image="assets/background/technology-section-bg.png" />
 <!-- Technology Section End -->
 
 
