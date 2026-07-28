@@ -90,7 +90,7 @@ Site-wide sales chat widget — **not** a contact-page link.
 - Knowledge/contacts: `SuaveAgentKnowledge` (offices via `ContactSupport::offices()`, SEO org email/phone)
 - Persistence: `ChatLead` + Laravel AI SDK conversation tables only; resume via `localStorage` key `suave_agent_session_v1`
 - Assistant replies: Markdown (CDN `marked` in the widget; admin review uses `Str::markdown()` — see suave-admin)
-- UX: greet + collect name/email; streaming “Reviewing…” / “Processing…”; escalate politely via `EscalateToSales`
+- UX: greet + collect name/email (start is instant canned greeting; chat streams “Reviewing…” / “Processing…”); escalate politely via `EscalateToSales`
 - Do not point the floating icon at `contact-us`; it opens the chat panel
 
 ## TheSuaveStarPearl (brand emblem)
@@ -129,7 +129,7 @@ Keep contact details consistent across SEO, footer, contact page, privacy, and S
 - Root: `public/assets/{brand,team,clients,background,hero,blog,portfolio,icons,media,product}/`
 - Nested: `blog/blogs-hero`, `icons/tech`
 - Files: `asset('assets/...')`; pages: `route()` only
-- Logos: `assets/brand/logo-white.svg` (header), `assets/brand/logo.svg` (footer)
+- Logos: `assets/brand/logo-white.png` (header/footer), `assets/brand/logo.png` (light surfaces)
 - **Placement rule:** dedicated folder when it fits; otherwise **`media`**.
 - **`clients/`** = real client/partner **company** logos only (e.g. VerySoul, Bioassay). Not tech brands.
 - **`icons/tech/`** = tech stack logos/wordmarks (Node.js, React, WordPress, Angular, Vue, PHP, Python, Shopify marks, etc.).
@@ -138,7 +138,7 @@ Keep contact details consistent across SEO, footer, contact page, privacy, and S
 - After imports: `scripts/reclassify-assets.ps1` if anything is in the wrong folder.
 - After bulk renames: `scripts/rename-assets-by-content.ps1` + `scripts/asset-rename-map.json`.
 - **`public/images` must not exist.**
-- Do not keep `white_logo.svg` / `gradient-logo.svg` (use `logo-white.svg` / `logo.svg`).
+- Do not keep `white_logo.svg` / `gradient-logo.svg` / `logo-white.svg` / `logo.svg` (use `logo-white.png` / `logo.png`).
 
 ### Content naming (required)
 

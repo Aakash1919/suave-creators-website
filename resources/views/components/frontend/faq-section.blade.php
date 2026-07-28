@@ -45,8 +45,8 @@
             class="faq-section__image"
             src="{{ asset($media) }}"
             alt="{{ $mediaAlt }}" title="{{ $mediaAlt }}"
-            width="640"
-            height="960"
+            width="900"
+            height="570"
             loading="lazy"
             decoding="async">
         @endif

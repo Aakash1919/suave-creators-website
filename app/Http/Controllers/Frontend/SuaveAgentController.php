@@ -6,15 +6,17 @@ use App\Ai\Agents\SuaveAgent;
 use App\Models\ChatLead;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Laravel\Ai\Models\Conversation;
+use Laravel\Ai\Models\ConversationMessage;
 use Laravel\Ai\Responses\StreamableAgentResponse;
 
 class SuaveAgentController extends FrontendController
 {
     /**
-     * Create a ChatLead, run the greeting prompt, and return session credentials.
+     * Create a ChatLead + conversation with an instant greeting (no LLM wait).
      */
     public function start(Request $request): JsonResponse
     {
@@ -24,29 +26,49 @@ class SuaveAgentController extends FrontendController
         ]);
 
         $plainToken = Str::random(48);
+        $greeting = $this->instantGreeting($validated['name']);
 
-        $lead = ChatLead::query()->create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'session_token' => ChatLead::hashSessionToken($plainToken),
-        ]);
+        [$lead, $conversationId] = DB::transaction(function () use ($validated, $plainToken, $greeting): array {
+            $lead = ChatLead::query()->create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'session_token' => ChatLead::hashSessionToken($plainToken),
+            ]);
 
-        $agent = (new SuaveAgent($lead))->forParticipant($lead);
+            $conversationId = (string) Str::uuid7();
 
-        $prompt = sprintf(
-            'Hello. My name is %s and my email is %s. Please greet me warmly as a Suave Creators sales representative, invite me to discuss my project, and briefly mention that you can share details about the services and industries Suave Creators serves.',
-            $lead->name,
-            $lead->email,
-        );
+            Conversation::query()->create([
+                'id' => $conversationId,
+                'participant_type' => $lead->getMorphClass(),
+                'participant_id' => $lead->getKey(),
+                'title' => 'Chat with '.$lead->name,
+            ]);
 
-        $response = $agent->prompt($prompt);
+            ConversationMessage::query()->create([
+                'id' => (string) Str::uuid7(),
+                'conversation_id' => $conversationId,
+                'participant_type' => $lead->getMorphClass(),
+                'participant_id' => $lead->getKey(),
+                'agent' => SuaveAgent::class,
+                'role' => 'assistant',
+                'content' => $greeting,
+                'attachments' => [],
+                'tool_calls' => [],
+                'tool_results' => [],
+                'usage' => [],
+                'meta' => [],
+                'approval_state' => null,
+            ]);
+
+            return [$lead, $conversationId];
+        });
 
         return response()->json([
             'lead_uuid' => $lead->uuid,
             'session_token' => $plainToken,
-            'conversation_id' => $response->conversationId ?? $agent->currentConversation(),
-            'greeting' => $response->text,
-            'escalated' => $lead->fresh()?->escalated_at !== null,
+            'conversation_id' => $conversationId,
+            'greeting' => $greeting,
+            'escalated' => false,
             'lead' => [
                 'name' => $lead->name,
                 'email' => $lead->email,
@@ -75,7 +97,7 @@ class SuaveAgentController extends FrontendController
     }
 
     /**
-     * Return persisted messages for a lead session (hides the internal greeting prompt).
+     * Return persisted messages for a lead session (hides the legacy internal greeting prompt).
      */
     public function history(Request $request): JsonResponse
     {
@@ -129,6 +151,16 @@ class SuaveAgentController extends FrontendController
                 'email' => $lead->email,
             ],
         ]);
+    }
+
+    /**
+     * Instant first reply shown after name/email — no model round-trip.
+     */
+    protected function instantGreeting(string $name): string
+    {
+        $firstName = trim(Str::before($name, ' ')) ?: $name;
+
+        return "Hi **{$firstName}**! I’m SuaveAgent from Suave Creators sales. Tell me about the project you’re planning — goals, challenges, or timeline — and I can share how our services and industries fit. What are you looking to build?";
     }
 
     /**

@@ -34,9 +34,14 @@
           </li>
           <li class="leading-5">
             <div class="inline-block max-w-[280px] space-y-1 sm:max-w-none">
-              @foreach ($offices as $office)
+              @foreach ($offices as $key => $office)
+                @php
+                  if($key >= 1){
+                    continue;
+                  }
+                @endphp
                 <p class="m-0">
-                  <span class="block text-[10px] font-semibold uppercase tracking-wide text-white/70 sm:text-[11px]">{{ $office['label'] }}</span>
+                  {{-- <span class="block text-[10px] font-semibold uppercase tracking-wide text-white/70 sm:text-[11px]">{{ $office['label'] }}</span> --}}
                   <span>{{ $office['display'] }}</span>
                 </p>
               @endforeach

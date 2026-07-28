@@ -33,8 +33,8 @@ if (Test-Path $imagesDir) {
 # Remove unused legacy brand duplicates when canonical logos exist
 $brandDir = Join-Path $root 'public\assets\brand'
 $legacyBrand = @{
-    'white_logo.svg'    = 'logo-white.svg'
-    'gradient-logo.svg' = 'logo.svg'
+    'white_logo.svg'    = 'logo-white.png'
+    'gradient-logo.svg' = 'logo.png'
 }
 foreach ($entry in $legacyBrand.GetEnumerator()) {
     $legacyPath = Join-Path $brandDir $entry.Name
@@ -65,7 +65,7 @@ foreach ($file in $codeFiles) {
     }
 
     if ($text -match 'white_logo\.svg' -or $text -match 'gradient-logo\.svg') {
-        Add-Fail "$rel references legacy logo filename (use assets/brand/logo-white.svg or logo.svg)"
+        Add-Fail "$rel references legacy logo filename (use assets/brand/logo-white.png or logo.png)"
     }
 }
 

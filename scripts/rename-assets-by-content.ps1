@@ -24,7 +24,7 @@ $explicit = [ordered]@{
     'clients/client-logo-8.png' = 'clients/ematrics-logo.png'
     'clients/client.svg' = 'icons/client-focus-icon.svg'
 
-    # Brand (canonical names already good for logo.svg / logo-white.svg)
+    # Brand (canonical names: logo.png / logo-white.png)
     'brand/chat.png' = 'brand/chat-widget-icon.png'
     'brand/chat.svg' = 'brand/chat-widget-icon.svg'
     'brand/maintenance-logo.png' = 'brand/maintenance-mark-logo.png'

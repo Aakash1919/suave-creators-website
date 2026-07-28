@@ -31,8 +31,8 @@
 
     <div class="order-1 mx-auto w-full overflow-hidden rounded-xl border-[6px] border-white sm:order-2 sm:mt-8 sm:rounded-2xl sm:border-[10px]">
       <img src="{{ asset('assets/media/about-banner-visual.png') }}"
-        alt="Suave Creators team collaborating on web design and development"
-        title="Suave Creators team collaborating on web design and development"
+        alt="Suave Creators software development team portrait collage"
+        title="Suave Creators software development team portrait collage"
         class="block h-auto w-full rounded-lg object-cover sm:rounded-[12px]" loading="eager" decoding="async">
     </div>
   </div>
