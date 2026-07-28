@@ -213,7 +213,7 @@ Alts must be **SEO-friendly**: natural language that describes the image **and**
 | Blade | `resources/views/components/frontend/{name}-section.blade.php` |
 | Tag | `<x-frontend.{name}-section />` |
 
-Shared multi-page blocks must be Section components (not `resources/views/frontend/partials/`). Examples: `tech-partnerships-section`, `core-values-section`, `faq-section`, `testimonials-section`, `articles-insights-section`, `marquee-section`, `consultation-section`, `connect-cta-section`, `industries-section`.
+Shared multi-page blocks must be Section components (not `resources/views/frontend/partials/`). Examples: `tech-partnerships-section`, `partnerships-section`, `core-values-section`, `faq-section`, `testimonials-section`, `articles-insights-section`, `marquee-section`, `consultation-section`, `connect-cta-section`, `industries-section`.
 
 Shared CTA chrome: `UiHelper::btnPrimary()` / `UiHelper::ctaArrow()` in `app/Support/Frontend/UiHelper.php`; Blade tags `<x-frontend.cta-button>` and `<x-frontend.cta-arrow />` (do not pass `$btnPrimary` / `$ctaArrow` from controllers).
 

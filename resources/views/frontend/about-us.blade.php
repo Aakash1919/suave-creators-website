@@ -31,8 +31,8 @@
 
     <div class="order-1 mx-auto w-full overflow-hidden rounded-xl border-[6px] border-white sm:order-2 sm:mt-8 sm:rounded-2xl sm:border-[10px]">
       <img src="{{ asset('assets/media/about-banner-visual.png') }}"
-        alt="Suave Creators team collaborating on web design and development"
-        title="Suave Creators team collaborating on web design and development"
+        alt="Suave Creators IT company team portraits for web design and development"
+        title="Suave Creators IT company team portraits for web design and development"
         class="block h-auto w-full rounded-lg object-cover sm:rounded-[12px]" loading="eager" decoding="async">
     </div>
   </div>
@@ -314,23 +314,7 @@
 <x-frontend.consultation-section />
 
 <!-- 11. Partnerships Section Start -->
-<section class="full-bleed partnership-section" aria-label="Client logos">
-  <div class="partnership-inner section-inner text-center">
-    <p
-      class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%] mb-6">
-      Our Portfolio
-    </p>
-
-    <x-frontend.marquee-section
-      type="image"
-      direction="left"
-      position="contained"
-      :items="$partnerMarqueeItems"
-      aria-label="Client logos"
-      :speed="28"
-    />
-  </div>
-</section>
+<x-frontend.partnerships-section :items="$partnerMarqueeItems" />
 <!-- 11. Partnerships Section End -->
 @endsection
 

@@ -513,22 +513,7 @@
 <x-frontend.consultation-section />
 
 <!-- Partnerships Section Start -->
-<section class="full-bleed partnership-section" aria-label="Client logos">
-  <div class="partnership-inner section-inner text-center">
-    <p
-      class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%] mb-6">
-      Our Portfolio
-    </p>
-
-    <x-frontend.marquee-section
-      type="image"
-      direction="left"
-      position="contained"
-      :items="$partnerMarqueeItems"
-      aria-label="Client logos"
-      :speed="28"
-    /></div>
-</section>
+<x-frontend.partnerships-section :items="$partnerMarqueeItems" />
 <!-- Partnerships Section End -->
 
 

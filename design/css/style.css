@@ -1773,7 +1773,7 @@ img, video, canvas{
   outline-offset: 3px;
 }
 
-.consultation-section, .partnership-section{
+.consultation-section{
   background-color: #f9fbfc;
   background-image: radial-gradient(circle at 5% 82%, rgb(99 102 241 / 2.5%) 0 24px, transparent 25px),
      radial-gradient(circle at 26% 98%, rgb(99 102 241 / 2%) 0 18px, transparent 19px),
@@ -1849,14 +1849,25 @@ img, video, canvas{
 }
 
 .partnership-section{
+  background-color: #f7f8fb;
   overflow: hidden;
-  padding: 20px 0 72px;
+  padding: 48px 0 72px;
   position: relative;
 }
 
 .partnership-inner{
   position: relative;
   z-index: 1;
+}
+
+.partnership-grid{
+  display: grid;
+  gap: clamp(12px, 1.6vw, 20px);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .partnership-marquee{
@@ -1891,14 +1902,23 @@ img, video, canvas{
 
 .partnership-tile{
   align-items: center;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid #EFF1F6;
-  border-radius: 3px;
-  box-shadow: 3px 6px 14px -5px #00003F0D;
+  background: #fff;
+  border: 1px solid #eef1f6;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px -10px rgb(0 0 63 / 10%);
   display: flex;
   height: 94px;
   justify-content: center;
-  padding: 14px 28px;
+  min-width: 0;
+  padding: 14px 18px;
+  width: 100%;
+}
+
+.partnership-grid .partnership-tile{
+  flex: initial;
+}
+
+.partnership-marquee .partnership-tile{
   flex: 0 0 auto;
   min-width: 180px;
   width: clamp(160px, 18vw, 220px);
@@ -1906,7 +1926,7 @@ img, video, canvas{
 
 .partnership-tile img{
   display: block;
-  max-height: 38px;
+  max-height: 42px;
   max-width: 100%;
   object-fit: contain;
   width: auto;
