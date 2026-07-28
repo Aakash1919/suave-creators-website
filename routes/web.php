@@ -8,8 +8,14 @@ use App\Http\Controllers\Frontend\IndustryController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ServiceController;
+use App\Http\Controllers\Frontend\SitemapController;
 use App\Http\Controllers\Frontend\SuaveAgentController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap');
+Route::get('/llm.txt', [SitemapController::class, 'llmTxt'])->name('llm.txt');
+Route::get('/llms.txt', [SitemapController::class, 'llmTxt'])->name('llms.txt');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');

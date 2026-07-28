@@ -7,6 +7,7 @@ use App\Support\Admin\DataTableActions;
 use App\Support\Admin\DateRangeFilter;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class ConversationDataTable
@@ -16,10 +17,23 @@ class ConversationDataTable
      */
     public function ajax(Request $request): mixed
     {
+        $conversationsTable = config('ai.conversations.tables.conversations', 'agent_conversations');
+        $messagesTable = config('ai.conversations.tables.messages', 'agent_conversation_messages');
+        $participantType = (new ChatLead)->getMorphClass();
+
         /** @var EloquentBuilder<ChatLead> $query */
         $query = ChatLead::query()
-            ->withCount('conversations')
-            ->select('chat_leads.*');
+            ->select('chat_leads.*')
+            ->addSelect([
+                'messages_count' => DB::table($messagesTable.' as acm')
+                    ->join($conversationsTable.' as ac', 'ac.id', '=', 'acm.conversation_id')
+                    ->whereColumn('ac.participant_id', 'chat_leads.id')
+                    ->where('ac.participant_type', $participantType)
+                    ->whereIn('acm.role', ['user', 'assistant'])
+                    ->where('acm.content', '!=', '')
+                    ->where('acm.content', 'not like', 'Hello. My name is%')
+                    ->selectRaw('count(*)'),
+            ]);
 
         return DataTables::eloquent($query)
             ->editColumn('name', function (ChatLead $lead): string {
@@ -31,7 +45,7 @@ class ConversationDataTable
                     .'</div>'
                     .'</div>';
             })
-            ->addColumn('conversations_count', fn (ChatLead $lead): int => (int) ($lead->conversations_count ?? 0))
+            ->editColumn('messages_count', fn (ChatLead $lead): int => (int) ($lead->messages_count ?? 0))
             ->addColumn('escalated', function (ChatLead $lead): string {
                 if ($lead->escalated_at) {
                     return '<span class="admin-badge admin-badge--danger">Yes</span>';
@@ -55,7 +69,7 @@ class ConversationDataTable
 
                 DateRangeFilter::apply($query, $request, 'chat_leads.updated_at');
             }, true)
-            ->orderColumn('conversations_count', 'conversations_count $1')
+            ->orderColumn('messages_count', 'messages_count $1')
             ->orderColumn('escalated', 'escalated_at $1')
             ->orderColumn('actions', false)
             ->rawColumns(['name', 'escalated', 'actions'])
@@ -69,7 +83,7 @@ class ConversationDataTable
     {
         return [
             ['data' => 'name', 'name' => 'name', 'title' => 'Lead'],
-            ['data' => 'conversations_count', 'name' => 'conversations_count', 'title' => 'Conversations', 'searchable' => false, 'defaultContent' => '0'],
+            ['data' => 'messages_count', 'name' => 'messages_count', 'title' => 'Messages', 'searchable' => false, 'defaultContent' => '0'],
             ['data' => 'escalated', 'name' => 'escalated_at', 'title' => 'Escalated'],
             ['data' => 'updated_at', 'name' => 'updated_at', 'title' => 'Updated'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'orderable' => false, 'searchable' => false, 'className' => 'admin-table__actions'],

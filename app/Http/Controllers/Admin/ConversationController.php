@@ -38,9 +38,12 @@ class ConversationController extends Controller
      */
     public function show(ChatLead $lead): View
     {
+        $threads = $this->conversations->threadsForLead($lead);
+
         return view('admin.conversations.show', [
             'lead' => $lead,
-            'threads' => $this->conversations->threadsForLead($lead),
+            'threads' => $threads,
+            'leadInitials' => $this->conversations->initialsFor($lead->name),
         ]);
     }
 }

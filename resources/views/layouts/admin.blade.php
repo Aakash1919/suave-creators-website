@@ -27,6 +27,7 @@
       },
     };
   </script>
+  @include('layouts.admin.partials.vendor-styles')
   <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v={{ file_exists(public_path('css/admin.css')) ? filemtime(public_path('css/admin.css')) : 1 }}">
   @include('layouts.admin.partials.toastr')
   @stack('styles')

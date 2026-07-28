@@ -11,7 +11,7 @@ class ConversationService
     /**
      * Build display threads for a chat lead (Markdown for assistant, escaped user text).
      *
-     * @return Collection<int, array{id: mixed, title: mixed, updated_at: mixed, messages: Collection<int, array<string, mixed>>}>
+     * @return Collection<int, array{id: mixed, title: string, updated_at: mixed, preview: string, message_count: int, messages: Collection<int, array<string, mixed>>}>
      */
     public function threadsForLead(ChatLead $lead): Collection
     {
@@ -44,12 +44,33 @@ class ConversationService
                     ];
                 });
 
+            $last = $messages->last();
+            $preview = $last
+                ? Str::limit(preg_replace('/\s+/', ' ', strip_tags((string) $last['content'])) ?: '', 72)
+                : 'No messages yet';
+
             return [
                 'id' => $conversation->id,
-                'title' => $conversation->title,
+                'title' => filled($conversation->title) ? (string) $conversation->title : 'Conversation',
                 'updated_at' => $conversation->updated_at,
+                'preview' => $preview,
+                'message_count' => $messages->count(),
                 'messages' => $messages,
             ];
         });
+    }
+
+    /**
+     * Initials for messenger avatars.
+     */
+    public function initialsFor(string $name): string
+    {
+        $parts = preg_split('/\s+/', trim($name) ?: 'SC') ?: ['SC'];
+
+        return collect($parts)
+            ->filter()
+            ->take(2)
+            ->map(fn ($part) => mb_strtoupper(mb_substr((string) $part, 0, 1)))
+            ->implode('') ?: 'SC';
     }
 }

@@ -83,7 +83,8 @@ class BlogService
     }
 
     /**
-     * Validate blog form input and normalize TOC/FAQ JSON fields.
+     * Validate blog form input and normalize FAQ repeater fields.
+     * TOC admin UI is disabled for now (unused on frontend single-blog) — existing `toc` is left unchanged.
      *
      * @return array<string, mixed>
      *
@@ -91,6 +92,14 @@ class BlogService
      */
     public function validated(Request $request, ?Blog $blog = null): array
     {
+        $requiredText = static function (string $message): \Closure {
+            return static function (string $attribute, mixed $value, \Closure $fail) use ($message): void {
+                if (trim((string) $value) === '') {
+                    $fail($message);
+                }
+            };
+        };
+
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:160', Rule::unique('blogs', 'slug')->ignore($blog?->id)],
@@ -104,13 +113,24 @@ class BlogService
             'meta_description' => ['nullable', 'string', 'max:320'],
             'og_title' => ['nullable', 'string', 'max:95'],
             'og_description' => ['nullable', 'string', 'max:300'],
-            'toc_json' => ['nullable', 'string'],
-            'faqs_json' => ['nullable', 'string'],
+            // TOC disabled until frontend single-blog uses it:
+            // 'toc' => ['nullable', 'array'],
+            // 'toc.*.label' => ['required', 'string', 'max:255', $requiredText('Each TOC item needs a label.')],
+            // 'toc.*.anchor_id' => ['required', 'string', 'max:160', $requiredText('Each TOC item needs an anchor ID.'), 'regex:/^[A-Za-z0-9_-]+$/'],
+            'faqs' => ['nullable', 'array'],
+            'faqs.*.question' => ['required', 'string', 'max:500', $requiredText('Each FAQ needs a question.')],
+            'faqs.*.answer' => ['required', 'string', 'max:5000', $requiredText('Each FAQ needs an answer.')],
+        ], [
+            // 'toc.*.label.required' => 'Each TOC item needs a label.',
+            // 'toc.*.anchor_id.required' => 'Each TOC item needs an anchor ID.',
+            // 'toc.*.anchor_id.regex' => 'TOC anchor IDs may only contain letters, numbers, hyphens, and underscores.',
+            'faqs.*.question.required' => 'Each FAQ needs a question.',
+            'faqs.*.answer.required' => 'Each FAQ needs an answer.',
         ]);
 
-        $data['toc'] = $this->decodeJsonList($data['toc_json'] ?? null);
-        $data['faqs'] = $this->decodeJsonList($data['faqs_json'] ?? null);
-        unset($data['toc_json'], $data['faqs_json'], $data['featured_image']);
+        // $data['toc'] = $this->normalizeTocItems($data['toc'] ?? null);
+        $data['faqs'] = $this->normalizeFaqItems($data['faqs'] ?? null);
+        unset($data['featured_image']);
 
         if (($data['status'] ?? null) === Blog::STATUS_PUBLISHED && empty($data['published_at'])) {
             $data['published_at'] = now();
@@ -169,18 +189,59 @@ class BlogService
     }
 
     /**
-     * Decode a JSON array string from the form, or null when empty/invalid.
+     * Normalize TOC repeater rows into [{anchor_id, label}, …].
      *
-     * @return array<int, mixed>|null
+     * @param  mixed  $items
+     * @return list<array{anchor_id: string, label: string}>|null
      */
-    public function decodeJsonList(?string $json): ?array
+    public function normalizeTocItems(mixed $items): ?array
     {
-        if ($json === null || trim($json) === '') {
+        if (! is_array($items) || $items === []) {
             return null;
         }
 
-        $decoded = json_decode($json, true);
+        $out = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
 
-        return is_array($decoded) ? $decoded : null;
+            $label = trim((string) ($item['label'] ?? ''));
+            $anchor = trim((string) ($item['anchor_id'] ?? $item['id'] ?? ''));
+
+            $out[] = [
+                'anchor_id' => $anchor,
+                'label' => $label,
+            ];
+        }
+
+        return $out === [] ? null : array_values($out);
+    }
+
+    /**
+     * Normalize FAQ repeater rows into [{question, answer}, …].
+     *
+     * @param  mixed  $items
+     * @return list<array{question: string, answer: string}>|null
+     */
+    public function normalizeFaqItems(mixed $items): ?array
+    {
+        if (! is_array($items) || $items === []) {
+            return null;
+        }
+
+        $out = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $out[] = [
+                'question' => trim((string) ($item['question'] ?? '')),
+                'answer' => trim((string) ($item['answer'] ?? '')),
+            ];
+        }
+
+        return $out === [] ? null : array_values($out);
     }
 }
