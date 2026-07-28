@@ -30,7 +30,8 @@
   </div>
 </section>
 
-<section class="full-bleed bg-white py-16 lg:py-20" aria-label="All blog posts"
+<section class="full-bleed bg-white bg-cover bg-top bg-no-repeat py-16 lg:py-20" aria-label="All blog posts"
+  style="background-image: url('{{ asset('assets/background/blog-section-bg.png') }}');"
   data-blog-listing
   data-filter-url="{{ route('blogs.filter') }}"
   data-blogs-url="{{ route('blogs') }}">

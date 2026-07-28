@@ -15,7 +15,7 @@ class ContactSupport
             'formServices' => self::formServices(),
             'techStack' => AboutSupport::techStack(),
             'faqs' => self::faqs(),
-            'faqMedia' => 'assets/media/faq-team-collaboration.gif',
+            'faqMedia' => 'assets/media/faq-team-collaboration.webp',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
             'faqCtaHref' => route('contact-us').'#contact-id',
             'faqCtaLabel' => 'Send a Message',

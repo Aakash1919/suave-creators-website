@@ -10,10 +10,10 @@ class Topbar extends Component
 {
     public function __construct(
         public string $hrefRoute = 'product',
-        public string $title = 'Introducing SUAVE CRM',
-        public string $subtitle = ' — The Smarter Way to Manage Your Business.',
+        public string $title = 'Introducing Sales Outreach',
+        public string $subtitle = ' — Discover prospects and run AI-assisted outreach.',
         public string $icon = 'assets/icons/announcement-rocket-icon.svg',
-        public string $iconAlt = 'Suave CRM product announcement icon',
+        public string $iconAlt = 'Sales Outreach announcement icon for Suave Creators',
     ) {}
 
     public function href(): string
