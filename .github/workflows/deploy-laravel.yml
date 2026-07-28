@@ -42,8 +42,8 @@ jobs:
 
       - name: Upload only necessary files
         run: |
-          sshpass -p "${{ secrets.STAGING_PASSWORD }}" rsync -avz --delete \
-            -e "ssh -p ${{ secrets.STAGING_SSH_PORT }} -o StrictHostKeyChecking=no" \
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             --exclude=".git/" \
             --exclude="node_modules/" \
             --exclude="package.json" \
@@ -58,14 +58,14 @@ jobs:
             --exclude="storage/" \
             --exclude="storage/framework/cache/data" \
             ./ \
-            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}:${{ secrets.STAGING_APP_DIR }}/
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.STAGING_DIRECTORY }}/
 
       - name: Run server optimization commands
         run: |
-          sshpass -p "${{ secrets.STAGING_PASSWORD }}" ssh -p ${{ secrets.STAGING_SSH_PORT }} \
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -p ${{ secrets.SSH_PORT }} \
           -o StrictHostKeyChecking=no \
-          ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} << 'EOF'
-            cd ${{ secrets.STAGING_APP_DIR }}
+          ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd ${{ secrets.STAGING_DIRECTORY }}
 
             mkdir -p storage/app/public
             mkdir -p storage/framework/cache
@@ -112,8 +112,8 @@ jobs:
 
       - name: Upload only necessary files
         run: |
-          sshpass -p "${{ secrets.STAGING_PASSWORD }}" rsync -avz --delete \
-            -e "ssh -p ${{ secrets.STAGING_SSH_PORT }} -o StrictHostKeyChecking=no" \
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             --exclude=".git/" \
             --exclude="node_modules/" \
             --exclude="package.json" \
@@ -129,14 +129,14 @@ jobs:
             --exclude="storage/" \
             --exclude="storage/framework/cache/data" \
             ./ \
-            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}:${{ secrets.PRODUCTION_APP_DIR }}/
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.PRODUCTION_DIRECTORY }}/
 
       - name: Run server optimization commands
         run: |
-          sshpass -p "${{ secrets.STAGING_PASSWORD }}" ssh -p ${{ secrets.STAGING_SSH_PORT }} \
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -p ${{ secrets.SSH_PORT }} \
           -o StrictHostKeyChecking=no \
-          ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} << 'EOF'
-            cd ${{ secrets.PRODUCTION_APP_DIR }}
+          ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd ${{ secrets.PRODUCTION_DIRECTORY }}
 
             mkdir -p storage/app/public
             mkdir -p storage/framework/cache
