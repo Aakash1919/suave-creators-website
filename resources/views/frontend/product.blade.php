@@ -340,7 +340,7 @@
             <img src="{{ $card['image'] }}" alt="{{ $card['alt'] }}" title="{{ $card['alt'] }}">
             <h3>{{ $card['title'] }}</h3>
             <p>{{ $card['description'] }}</p>
-            <a href="{{ $card['href'] }}" class="product-partner-card__link">Learn More</a>
+            <a href="{{ $card['href'] }}" class="product-partner-card__link">Learn more<span class="sr-only"> about {{ $card['title'] }}</span></a>
           </div>
         @endforeach
       </div>

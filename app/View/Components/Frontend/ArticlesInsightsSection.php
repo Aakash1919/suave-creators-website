@@ -21,7 +21,7 @@ class ArticlesInsightsSection extends Component
         public string $subtitle = 'We build digital experiences that help brands grow through design, development, branding, and marketing.',
         public string $headingId = 'articles-insights-title',
         public string $moreHref = '',
-        public string $moreLabel = 'View More',
+        public string $moreLabel = 'View all blog articles',
         public string $sectionClass = 'py-12 lg:py-18',
         public bool $initSwiper = true,
     ) {

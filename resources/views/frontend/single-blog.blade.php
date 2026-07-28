@@ -164,7 +164,7 @@
                         <h3>{{ $item['title'] }}</h3>
                         <p>{{ $item['short_description'] }}</p>
                         <a class="articles-card__link group" href="{{ $item['url'] ?? route('blog.show', $item['slug']) }}">
-                          Read More
+                          Read more<span class="sr-only"> about {{ $item['title'] }}</span>
                           <x-frontend.cta-arrow />
                         </a>
                       </div>

@@ -39,7 +39,7 @@
               <span></span>
             @endif
             <a class="articles-card__link group" href="{{ $post['url'] }}">
-              Read More
+              Read more<span class="sr-only"> about {{ $post['title'] }}</span>
               <x-frontend.cta-arrow />
             </a>
           </div>

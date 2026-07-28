@@ -63,7 +63,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - **Industries exception:** one `IndustryController` — `index` for `/industries`, `show(string $slug)` for all `/industries/{slug}` details (no per-industry controllers; abort 404 for unknown slugs)
 - **Blogs:** one `BlogController` — `index` for `/blogs`, `show(string $slug)` for `/blog/{slug}` (abort 404 for unknown slugs; shared single-blog Blade)
 - **Contact:** `ContactController` — `index` for `/contact-us`, `store` for `POST /contact-us` (`contact-us.store`, throttled) via `ContactRequestService`
-- **SEO discovery:** `SitemapController` + `App\Services\SitemapService` — `/sitemap.xml`, `/llm.txt` (+ `/llms.txt`), dynamic `/robots.txt` (do not put a static `public/robots.txt` in front of the route)
+- **SEO discovery:** `SitemapController` + `App\Services\SitemapService` — `/sitemap.xml`, `/llm.txt` (+ `/llms.txt`), dynamic `/robots.txt` (do not put a static `public/robots.txt` in front of the route; point to llm.txt via a `#` comment only — never an `LLM:` directive)
 - Full controller map: [reference.md](reference.md)
 
 ## Routing / links

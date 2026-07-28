@@ -224,7 +224,7 @@ class SitemapService
             'Disallow: /suave-agent',
             '',
             'Sitemap: '.url('/sitemap.xml'),
-            'LLM: '.url('/llm.txt'),
+            '# LLM discovery: '.url('/llm.txt'),
             '',
         ]);
     }

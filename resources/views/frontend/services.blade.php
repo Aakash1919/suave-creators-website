@@ -293,7 +293,7 @@
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
   section-class="py-16 lg:py-18"
   more-href="{{ route('blogs') }}"
-  more-label="View More"
+  more-label="View all blog articles"
 />
 
 
