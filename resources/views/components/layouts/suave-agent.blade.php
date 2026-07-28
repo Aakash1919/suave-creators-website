@@ -258,7 +258,7 @@
           var formData = new FormData(leadForm);
           var submitBtn = leadForm.querySelector('button[type="submit"]');
           submitBtn.disabled = true;
-          setStatus('Reviewing your request…');
+          setStatus('');
 
           try {
             var res = await fetch(startUrl, {

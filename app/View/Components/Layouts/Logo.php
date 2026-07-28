@@ -29,11 +29,7 @@ class Logo extends Component
         }
 
         $this->resolvedSrc = $this->normalizeAssetPath(
-            $this->src ?? (
-                $this->variant === 'footer'
-                    ? 'assets/brand/logo.svg'
-                    : 'assets/brand/logo-white.svg'
-            )
+            $this->src ?? 'assets/brand/logo-white.png'
         );
 
         $this->imgClass = $this->variant === 'footer'

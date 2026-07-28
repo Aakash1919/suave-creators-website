@@ -1825,14 +1825,35 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .site-topbar__text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: inline;
+  line-height: 1.35;
+  overflow: visible;
+  text-wrap: balance;
+  white-space: normal;
+}
+
+@media (min-width: 640px) {
+  .site-topbar__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: unset;
+    white-space: nowrap;
+  }
 }
 
 .site-topbar__dismiss {
-  min-height: 30px;
-  min-width: 30px;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 28px;
+  min-width: 28px;
+}
+
+@media (min-width: 640px) {
+  .site-topbar__dismiss {
+    min-height: 30px;
+    min-width: 30px;
+  }
 }
 
 /* ===== SITE HEADER NAV ACTIVE START ===== */
@@ -3442,11 +3463,6 @@ body.mobile-nav-open {
 
   .site-header {
     padding-block: 0.65rem;
-  }
-
-  .site-topbar__dismiss {
-    min-height: var(--touch-min);
-    min-width: var(--touch-min);
   }
 
   .core-values__grid--3 {

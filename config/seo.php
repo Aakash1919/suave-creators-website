@@ -34,7 +34,7 @@ return [
         'default_og_image_width' => 1200,
         'default_og_image_height' => 630,
         'default_og_image_alt' => 'Suave Creators - Custom Software & Web Development Company',
-        'logo' => 'assets/brand/logo.svg',
+        'logo' => 'assets/brand/logo.png',
         'favicon' => 'assets/brand/favicon-192.png',
         'in_language' => 'en-US',
         'robots' => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',

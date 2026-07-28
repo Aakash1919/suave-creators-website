@@ -12,7 +12,7 @@
 <aside class="admin-sidebar" data-admin-sidebar>
   <div class="admin-sidebar__brand">
     <a href="{{ route('admin.dashboard') }}" class="admin-sidebar__brand-link" aria-label="Suave Creators Admin">
-      <img src="{{ asset('assets/brand/logo.svg') }}" alt="Suave Creators" title="Suave Creators">
+      <img src="{{ asset('assets/brand/logo.png') }}" alt="Suave Creators" title="Suave Creators">
     </a>
   </div>
 

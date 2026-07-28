@@ -2,7 +2,7 @@
     {{ $attributes->merge(['class' => $imgClass]) }}
     src="{{ asset($resolvedSrc) }}"
     alt="{{ $alt }}" title="{{ $alt }}"
-    width="180"
-    height="48"
+    width="220"
+    height="99"
     decoding="async"
 >

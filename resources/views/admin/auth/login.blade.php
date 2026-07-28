@@ -6,7 +6,7 @@
   <div class="admin-login-shell">
     <div class="admin-login-card">
       <div class="admin-login-card__brand">
-        <img src="{{ asset('assets/brand/logo.svg') }}" alt="Suave Creators" title="Suave Creators">
+        <img src="{{ asset('assets/brand/logo.png') }}" alt="Suave Creators" title="Suave Creators">
       </div>
       <h1>Sign in to Admin</h1>
       <p>Manage blogs, users, and SuaveAgent conversations.</p>
