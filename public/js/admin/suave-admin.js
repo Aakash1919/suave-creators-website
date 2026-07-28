@@ -431,6 +431,11 @@
           reloadDataTable(opts.reloadTable);
         }
 
+        const closeModalSel = form.attr('data-close-modal') || form.data('close-modal');
+        if (closeModalSel) {
+          closeAdminModal(closeModalSel);
+        }
+
         if (opts.redirect !== false && response?.redirect) {
           window.setTimeout(function () {
             window.location.href = response.redirect;
@@ -473,7 +478,7 @@
       lengthMenu: [10, 25, 50, 100],
       order: [[0, 'desc']],
       language: {
-        processing: 'Loading…',
+        processing: '<div class="admin-dt-loader"><i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i><span>Loading…</span></div>',
         emptyTable: 'No records found.',
         zeroRecords: 'No matching records.',
         lengthMenu: '_MENU_',
@@ -1208,6 +1213,60 @@
     (scope || document).querySelectorAll('[data-admin-repeater]').forEach(bindRepeater);
   }
 
+  function openAdminModal(selector) {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) {
+      return null;
+    }
+
+    el.hidden = false;
+    document.body.classList.add('admin-modal-open');
+
+    const focusable = el.querySelector('input, textarea, select, button:not([data-admin-modal-close])');
+    if (focusable) {
+      window.setTimeout(function () {
+        focusable.focus();
+      }, 30);
+    }
+
+    return el;
+  }
+
+  function closeAdminModal(selector) {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) {
+      return;
+    }
+
+    el.hidden = true;
+    if (!document.querySelector('.admin-modal:not([hidden])')) {
+      document.body.classList.remove('admin-modal-open');
+    }
+  }
+
+  function bindAdminModals(root = document) {
+    $(root)
+      .off('click.suaveAdminModalClose', '[data-admin-modal-close]')
+      .on('click.suaveAdminModalClose', '[data-admin-modal-close]', function () {
+        const modal = this.closest('.admin-modal');
+        if (modal) {
+          closeAdminModal(modal);
+        }
+      });
+
+    $(root)
+      .off('keydown.suaveAdminModalEsc')
+      .on('keydown.suaveAdminModalEsc', function (event) {
+        if (event.key !== 'Escape') {
+          return;
+        }
+        const open = document.querySelector('.admin-modal:not([hidden])');
+        if (open) {
+          closeAdminModal(open);
+        }
+      });
+  }
+
   function boot(flash = {}) {
     configureToastr();
     toast.fromFlash(flash);
@@ -1216,6 +1275,7 @@
     bindFlatpickrs();
     bindDetailsOutsideClose();
     bindRepeaters();
+    bindAdminModals();
   }
 
   window.SuaveAdmin = {
@@ -1238,6 +1298,9 @@
     bindFlatpickrs,
     initDateRangeFilter,
     bindRepeaters,
+    openAdminModal,
+    closeAdminModal,
+    bindAdminModals,
     boot,
   };
 })(window, window.jQuery);

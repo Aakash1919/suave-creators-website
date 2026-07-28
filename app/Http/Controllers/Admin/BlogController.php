@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\Admin\BlogDataTable;
 use App\Http\Controllers\Admin\Concerns\RespondsToAdminAjax;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BlogStoreRequest;
+use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Services\BlogService;
 use App\Services\BlogSeoMetaGenerationService;
@@ -53,7 +55,7 @@ class BlogController extends Controller
     /**
      * Persist a new blog post and optional featured image.
      */
-    public function store(Request $request): JsonResponse|RedirectResponse
+    public function store(BlogStoreRequest $request): JsonResponse|RedirectResponse
     {
         $blog = $this->blogs->create($request);
 
@@ -81,7 +83,7 @@ class BlogController extends Controller
     /**
      * Update a blog post and replace the featured image when uploaded.
      */
-    public function update(Request $request, Blog $blog): JsonResponse|RedirectResponse
+    public function update(BlogUpdateRequest $request, Blog $blog): JsonResponse|RedirectResponse
     {
         $blog = $this->blogs->update($request, $blog);
 

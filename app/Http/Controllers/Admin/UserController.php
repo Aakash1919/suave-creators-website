@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\Admin\UserDataTable;
 use App\Http\Controllers\Admin\Concerns\RespondsToAdminAjax;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserStoreRequest;
+use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
@@ -43,14 +45,14 @@ class UserController extends Controller
         return view('admin.users.form', [
             'user' => $this->users->newUser(),
             'roles' => $this->users->roles(),
-            'selectedRoles' => [],
+            'selectedRole' => null,
         ]);
     }
 
     /**
      * Create a user and sync their roles.
      */
-    public function store(Request $request): JsonResponse|RedirectResponse
+    public function store(UserStoreRequest $request): JsonResponse|RedirectResponse
     {
         $user = $this->users->create($request);
 
@@ -74,14 +76,14 @@ class UserController extends Controller
         return view('admin.users.form', [
             'user' => $user,
             'roles' => $this->users->roles(),
-            'selectedRoles' => $user->roles->pluck('name')->all(),
+            'selectedRole' => $user->roles->first()?->name,
         ]);
     }
 
     /**
      * Update a user's profile fields, optional password, and roles.
      */
-    public function update(Request $request, User $user): JsonResponse|RedirectResponse
+    public function update(UserUpdateRequest $request, User $user): JsonResponse|RedirectResponse
     {
         $user = $this->users->update($request, $user);
 

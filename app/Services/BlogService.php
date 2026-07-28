@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Admin\BlogStoreRequest;
+use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 
 class BlogService
 {
@@ -38,12 +38,10 @@ class BlogService
 
     /**
      * Create a blog post from an admin form request.
-     *
-     * @throws ValidationException
      */
-    public function create(Request $request): Blog
+    public function create(BlogStoreRequest $request): Blog
     {
-        $data = $this->validated($request);
+        $data = $this->attributesFromValidated($request->validated());
         $data['created_by_id'] = $request->user()?->id;
         $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title']);
 
@@ -73,12 +71,10 @@ class BlogService
 
     /**
      * Update a blog post from an admin form request.
-     *
-     * @throws ValidationException
      */
-    public function update(Request $request, Blog $blog): Blog
+    public function update(BlogUpdateRequest $request, Blog $blog): Blog
     {
-        $data = $this->validated($request, $blog);
+        $data = $this->attributesFromValidated($request->validated());
         $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title'], $blog->id);
 
         if ($request->hasFile('featured_image')) {
@@ -100,52 +96,13 @@ class BlogService
     }
 
     /**
-     * Validate blog form input and normalize FAQ repeater fields.
-     * TOC admin UI is disabled for now (unused on frontend single-blog) — existing `toc` is left unchanged.
+     * Normalize validated blog form data for persistence.
      *
+     * @param  array<string, mixed>  $data
      * @return array<string, mixed>
-     *
-     * @throws ValidationException
      */
-    public function validated(Request $request, ?Blog $blog = null): array
+    public function attributesFromValidated(array $data): array
     {
-        $requiredText = static function (string $message): \Closure {
-            return static function (string $attribute, mixed $value, \Closure $fail) use ($message): void {
-                if (trim((string) $value) === '') {
-                    $fail($message);
-                }
-            };
-        };
-
-        $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'slug' => ['nullable', 'string', 'max:160', Rule::unique('blogs', 'slug')->ignore($blog?->id)],
-            'short_description' => ['nullable', 'string'],
-            'content' => ['nullable', 'string'],
-            'blog_category_id' => ['nullable', 'exists:blog_categories,id'],
-            'status' => ['required', Rule::in([Blog::STATUS_DRAFT, Blog::STATUS_PUBLISHED])],
-            'published_at' => ['nullable', 'date'],
-            'featured_image' => ['nullable', 'image', 'max:5120'],
-            'meta_title' => ['nullable', 'string', 'max:60'],
-            'meta_description' => ['nullable', 'string', 'max:160'],
-            'og_title' => ['nullable', 'string', 'max:60'],
-            'og_description' => ['nullable', 'string', 'max:160'],
-            // TOC disabled until frontend single-blog uses it:
-            // 'toc' => ['nullable', 'array'],
-            // 'toc.*.label' => ['required', 'string', 'max:255', $requiredText('Each TOC item needs a label.')],
-            // 'toc.*.anchor_id' => ['required', 'string', 'max:160', $requiredText('Each TOC item needs an anchor ID.'), 'regex:/^[A-Za-z0-9_-]+$/'],
-            'faqs' => ['nullable', 'array'],
-            'faqs.*.question' => ['required', 'string', 'max:500', $requiredText('Each FAQ needs a question.')],
-            'faqs.*.answer' => ['required', 'string', 'max:5000', $requiredText('Each FAQ needs an answer.')],
-        ], [
-            // 'toc.*.label.required' => 'Each TOC item needs a label.',
-            // 'toc.*.anchor_id.required' => 'Each TOC item needs an anchor ID.',
-            // 'toc.*.anchor_id.regex' => 'TOC anchor IDs may only contain letters, numbers, hyphens, and underscores.',
-            'faqs.*.question.required' => 'Each FAQ needs a question.',
-            'faqs.*.answer.required' => 'Each FAQ needs an answer.',
-        ]);
-
-        // $data['toc'] = $this->normalizeTocItems($data['toc'] ?? null);
         $data['faqs'] = $this->normalizeFaqItems($data['faqs'] ?? null);
         unset($data['featured_image']);
 

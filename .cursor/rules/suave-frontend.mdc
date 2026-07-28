@@ -1,6 +1,6 @@
 ---
 description: Suave Creators marketing frontend — read suave-frontend skill and verify after changes
-globs: public/assets/**,resources/views/**,app/View/Components/**,app/Support/Frontend/**,public/css/**,scripts/**,.cursor/skills/**
+globs: public/assets/**,public/css/style.css,resources/views/frontend/**,resources/views/components/frontend/**,resources/views/components/layouts/**,app/View/Components/**,app/Support/Frontend/**,app/Http/Controllers/Frontend/**,app/Http/Requests/Frontend/**,scripts/verify-frontend-conventions.ps1,design/**,.cursor/skills/suave-frontend/**
 alwaysApply: false
 ---
 

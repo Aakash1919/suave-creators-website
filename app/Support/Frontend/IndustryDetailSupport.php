@@ -63,7 +63,7 @@ class IndustryDetailSupport
             'agileTabs' => array_keys($processData),
             'introStats' => ServiceSupport::introStats(),
             'coreValuesItems' => self::mapCoreValuesItems($industry['processes'] ?? []),
-            'testimonialItems' => self::mapTestimonialItems($industry['testimonialsData'] ?? self::defaultTestimonials()),
+            'testimonialItems' => HomeSupport::testimonials(),
             'marqueeLabels' => $industry['marqueeLabels'] ?? ['INNOVATION', 'SECURITY', 'SCALABILITY', 'AI POWERED', 'GROWTH', 'SUPPORT'],
             'techStack' => AboutSupport::techStack(),
             'articles' => self::sampleInsights(),
@@ -108,33 +108,6 @@ class IndustryDetailSupport
         }
 
         return $items;
-    }
-
-    /**
-     * @param  array<int, array<string, mixed>>  $testimonials
-     * @return array<int, array{quote: string, name: string, role: string, initials: string, avatar: string}>
-     */
-    protected static function mapTestimonialItems(array $testimonials): array
-    {
-        return array_values(array_map(static function (array $t): array {
-            $name = (string) ($t['name'] ?? '');
-            $parts = preg_split('/\s+/', trim($name)) ?: [];
-            $initials = '';
-
-            foreach (array_slice($parts, 0, 2) as $part) {
-                if ($part !== '') {
-                    $initials .= strtoupper(substr($part, 0, 1));
-                }
-            }
-
-            return [
-                'quote' => (string) ($t['quote'] ?? ''),
-                'name' => $name,
-                'role' => (string) ($t['role'] ?? ''),
-                'initials' => $initials !== '' ? $initials : 'SC',
-                'avatar' => (string) ($t['image'] ?? $t['avatar'] ?? 'assets/team/professional-man-navy-blazer-portrait.png'),
-            ];
-        }, $testimonials));
     }
 
     /**
@@ -193,21 +166,6 @@ class IndustryDetailSupport
                 $card(1, 'Support Team', 'Patches, performance optimisation, and major updates.'),
                 $card(2, 'Update Roadmap', 'Periodic updates aligned with new tech and regulations.'),
                 $card(3, 'SLA & Monitoring', 'Monitoring tools, reporting, and service-level commitments.'),
-            ],
-        ];
-    }
-
-    /**
-     * @return array<int, array<string, string>>
-     */
-    protected static function defaultTestimonials(): array
-    {
-        return [
-            [
-                'quote' => 'They took the time to understand our complex business needs and turned them into an elegant digital solution.',
-                'name' => 'Steve',
-                'role' => 'Director, Red3Sixty',
-                'image' => 'assets/media/testimonial-portrait-1.webp',
             ],
         ];
     }

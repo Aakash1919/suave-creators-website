@@ -1,15 +1,13 @@
 ---
 name: suave-frontend
 description: >-
-  Suave Creators marketing frontend: import pages from the local `design/`
-  folder (repo at `suave-creators/design`, branch `crm`) into Blade,
-  categorized public/assets paths, Section components, CDN Tailwind layout,
-  CSS in public/css/style.css, and mandatory post-change verification that
-  removes unwanted files/functions. Use when importing or editing homepage or
-  other frontend pages, Blade views, View Components, HomeSupport, public/assets,
-  public/css/style.css, design imports, logos, team/client/background media,
-  or when the user asks to verify/cleanup frontend changes. For the custom
-  admin panel / RBAC, use suave-admin instead.
+  Suave Creators marketing frontend and design-to-Blade imports. Use whenever
+  the user mentions homepage, landing page, Blade views, View Components,
+  testimonials section, HomeSupport, ContactSupport, design/ folder import,
+  public/assets, public/css/style.css, logos, hero images, SuaveAgent chat
+  widget, or verify-frontend-conventions. Requires categorized asset paths and
+  post-change verification. For admin panel / RBAC / Form Requests use
+  suave-admin instead. Read this skill before any frontend change.
 ---
 
 # Suave Frontend

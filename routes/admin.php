@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\ConversationController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +62,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::patch('/contacts/{contact}/archive', [ContactRequestController::class, 'archive'])->name('contacts.archive');
     });
 
+    Route::middleware('permission:testimonials.view')->group(function () {
+        Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+    });
+
+    Route::middleware('permission:testimonials.manage')->group(function () {
+        Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create');
+        Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
+        Route::get('/testimonials/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
+        Route::put('/testimonials/{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
+        Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+    });
+
     Route::middleware('permission:users.view')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
     });
@@ -69,5 +83,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
         Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    });
+
+    Route::middleware('permission:roles.view')->group(function () {
+        Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    });
+
+    Route::middleware('permission:roles.manage')->group(function () {
+        Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+        Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+        Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+        Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+        Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
     });
 });

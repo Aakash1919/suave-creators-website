@@ -1,23 +1,23 @@
 @extends('layouts.admin')
 
-@section('title', 'Users')
+@section('title', 'Roles')
 
 @section('content')
   <x-admin.datatable
-    title="Users"
-    description="Manage admin users and role assignment."
+    title="Roles"
+    description="Create roles and assign permissions for the admin panel."
     :columns="$columns"
     :sort-options="[
-      ['label' => 'Name A-Z', 'column' => 0, 'dir' => 'asc'],
-      ['label' => 'Name Z-A', 'column' => 0, 'dir' => 'desc'],
-      ['label' => 'Email A-Z', 'column' => 1, 'dir' => 'asc'],
+      ['label' => 'Role A-Z', 'column' => 0, 'dir' => 'asc'],
+      ['label' => 'Role Z-A', 'column' => 0, 'dir' => 'desc'],
+      ['label' => 'Most permissions', 'column' => 1, 'dir' => 'desc'],
     ]"
   >
     <x-slot:actions>
       @if ($canManage)
-        <a href="{{ route('admin.users.create') }}" class="admin-btn admin-btn--primary">
+        <a href="{{ route('admin.roles.create') }}" class="admin-btn admin-btn--primary">
           <i class="fa-solid fa-plus" aria-hidden="true"></i>
-          New user
+          New role
         </a>
       @endif
     </x-slot:actions>
@@ -29,7 +29,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     SuaveAdmin.initDataTable('#admin-datatable', {
       ajax: {
-        url: @json(route('admin.users.index')),
+        url: @json(route('admin.roles.index')),
       },
       columns: @json($columns),
       order: [[0, 'asc']],

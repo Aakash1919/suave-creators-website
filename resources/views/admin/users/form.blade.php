@@ -19,7 +19,6 @@
   <form method="POST"
     action="{{ $user->exists ? route('admin.users.update', $user) : route('admin.users.store') }}"
     class="admin-card"
-    style="max-width:40rem"
     data-ajax-form
     data-success-message="{{ $user->exists ? 'User has been updated successfully.' : 'User has been created successfully.' }}">
     @csrf
@@ -30,7 +29,7 @@
     <div class="admin-card__header">
       <div>
         <h2 class="admin-card__title">User details</h2>
-        <p>Name, email, password, and roles.</p>
+        <p>Name, email, password, and role.</p>
       </div>
     </div>
 
@@ -48,19 +47,15 @@
         <input type="password" name="password" @required(! $user->exists) class="admin-input" autocomplete="new-password">
       </div>
       <div>
-        <p class="admin-label">Roles</p>
-        <div class="space-y-2 rounded-[0.55rem] border border-[var(--admin-border-strong)] p-3">
+        <label class="admin-label" for="user-role">Role</label>
+        <select id="user-role" name="role" class="admin-select">
+          <option value="">Select a role</option>
           @foreach ($roles as $role)
-            <label class="admin-check">
-              <input type="checkbox" name="roles[]" value="{{ $role->name }}"
-                @checked(in_array($role->name, old('roles', $selectedRoles), true))>
-              <span>
-                <strong class="text-[var(--admin-text)]">{{ $role->label }}</strong>
-                <span class="text-[var(--admin-muted)]">({{ $role->name }})</span>
-              </span>
-            </label>
+            <option value="{{ $role->name }}" @selected(old('role', $selectedRole) === $role->name)>
+              {{ $role->label }} ({{ $role->name }})
+            </option>
           @endforeach
-        </div>
+        </select>
       </div>
       <div class="admin-form-actions">
         <button type="submit" class="admin-btn admin-btn--primary">

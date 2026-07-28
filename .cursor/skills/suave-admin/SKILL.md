@@ -1,13 +1,14 @@
 ---
 name: suave-admin
 description: >-
-  Suave Creators custom Blade admin panel: auth, first-party RBAC (roles/
-  permissions), blogs CRUD, profile, users, SuaveAgent conversation review,
-  App\Services\*Service for every CRUD, createFlashMessage (PHP + JS), Toastr,
-  DataTables, and AJAX forms. Use when editing admin routes/controllers/
-  services/views, helpers.php, suave-admin.js, EnsureAdminUser /
-  EnsurePermission, Role/Permission/HasRoles, SiteAdmin, ChatLead admin UI, or
-  RolesAndPermissionsSeeder — not Filament, Breeze, or Spatie.
+  Suave Creators custom Blade admin panel and first-party RBAC. Use whenever the
+  user mentions admin, /admin, roles, permissions, Form Request, testimonials
+  CRUD, blogs CRUD, users, contacts inbox, AI conversations review, DataTables,
+  Toastr, createFlashMessage, EnsurePermission, SiteAdmin, or files under
+  routes/admin.php, app/Http/Controllers/Admin, app/Http/Requests/Admin,
+  app/Services, app/DataTables/Admin, resources/views/admin. Requires
+  App\Services\*Service + Form Requests for mutations — not Filament, Breeze,
+  or Spatie Permission. Read this skill before any admin change.
 ---
 
 # Suave Admin
@@ -19,16 +20,19 @@ description: >-
 - Custom Blade admin under `resources/views/admin/` + `resources/views/layouts/admin.blade.php`
 - Routes: `routes/admin.php` (prefix `/admin`, name prefix `admin.`), registered from `bootstrap/app.php`
 - Middleware aliases: `admin` → `EnsureAdminUser`, `permission:{name}` → `EnsurePermission`
-- **Services required for CRUD** — `App\Services\{Feature}Service` holds validation + persistence; controllers stay thin
+- **Services required for CRUD** — `App\Services\{Feature}Service` holds persistence + domain transforms; controllers stay thin
+- **Form Requests required for mutations** — `App\Http\Requests\Admin\*` (and `Frontend\*` for public forms); no `$request->validate()` in controllers/services
 - **First-party RBAC only** — tables `roles`, `permissions`, `role_permission`, `user_role`; models `Role`, `Permission`; trait `HasRoles` on `User`
 - Do **not** install Filament, Breeze, Jetstream, or Spatie Permission for this panel
 
 ## Access model
 
 - Any authenticated user may enter admin (`User::canAccessAdmin()` returns `true`)
-- Roles/permissions gate nav and routes (`blogs.*`, `conversations.view`, `contacts.view`, `users.*`, `profile.update`)
+- Roles/permissions gate nav and routes (`blogs.*`, `conversations.view`, `contacts.view`, `testimonials.*`, `users.*`, `roles.*`, `profile.update`)
 - Seeded site admin: `SiteAdmin::EMAIL` (`admin@suavecreators.com`) / default password `password` via `SiteAdmin::ensure()` + `RolesAndPermissionsSeeder`
-- Roles: `admin` (all permissions), `editor` (blogs view/create/update, profile, conversations.view, contacts.view)
+- Roles: `admin` (all permissions), `editor` (blogs view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
+- Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
+- Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
 
 ## Services (required)
 
@@ -40,16 +44,42 @@ description: >-
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogTrendWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `BlogSeoMetaWriterAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `UserService` | User create/update, password hash, `syncRoles` |
+| `RoleService` | Role create/update/delete, permission sync; protects `admin` role key/delete |
+| `TestimonialService` | Testimonial CRUD, avatar upload, forever frontend cache (`frontend.testimonials`) invalidated on write |
 | `ProfileService` | Own profile + password change |
 | `ContactRequestService` | Public contact store + spam checks; admin mark read / archive |
 | `ConversationService` | Chat lead thread build + Markdown rendering |
 
 Rules:
 
-1. New admin CRUD → add `App\Services\{Name}Service` in the **same** change as the controller
-2. Inject the service in the controller constructor; call `$this->{feature}->create|update|delete|…`
-3. Controllers only: authorize via middleware, call the service, return `adminSuccess` / `adminError` / a view
-4. Exceptions: `AuthController` (login/logout) and `DashboardController` (stats links) may stay without a service
+1. New admin CRUD → add `App\Services\{Name}Service` **and** `App\Http\Requests\Admin\{Name}StoreRequest` / `{Name}UpdateRequest` in the **same** change as the controller
+2. Inject the service in the controller constructor; type-hint Form Requests on store/update; call `$this->{feature}->create|update|delete|…`
+3. Controllers only: authorize via middleware (+ Form Request `authorize()`), call the service, return `adminSuccess` / `adminError` / a view
+4. Exceptions: `AuthController` logout and `DashboardController` (stats/links) may stay without a service; login still uses `AdminLoginRequest`
+5. Services must **not** call `$request->validate()` — they receive an already-validated Form Request (or a trusted array for internal drafts)
+
+## Form Requests
+
+Namespace: `App\Http\Requests\Admin\` (admin) and `App\Http\Requests\Frontend\` (public marketing forms).
+
+**Naming (required):** `{Resource}{Action}Request` — resource first, then action. Examples: `BlogStoreRequest`, `BlogUpdateRequest`. Never `StoreBlogRequest` / `UpdateBlogRequest`.
+
+| Action | Request |
+|--------|---------|
+| Admin login | `AdminLoginRequest` |
+| Blog create/update | `BlogStoreRequest` / `BlogUpdateRequest` (`Concerns\ValidatesBlogFields`) |
+| User create/update | `UserStoreRequest` / `UserUpdateRequest` |
+| Role create/update | `RoleStoreRequest` / `RoleUpdateRequest` |
+| Testimonial create/update | `TestimonialStoreRequest` / `TestimonialUpdateRequest` (`Concerns\ValidatesTestimonialFields`) |
+| Profile | `ProfileUpdateRequest` / `ProfilePasswordUpdateRequest` |
+| Contact form | `Frontend\ContactStoreRequest` (bot submissions use relaxed rules so silent success still works) |
+
+Conventions:
+
+- One Request per write action (`{Resource}StoreRequest` / `{Resource}UpdateRequest`)
+- `authorize()` checks the matching permission (or authenticated user for profile); route `permission:` middleware remains
+- Shared field rules live in `App\Http\Requests\Admin\Concerns\*`
+- Domain normalization after validation (FAQ arrays, slug uniqueness, image storage) stays in the Service
 
 ## Controllers
 
@@ -57,12 +87,14 @@ Namespace: `App\Http\Controllers\Admin\`
 
 | Area | Controller | Service |
 |------|------------|---------|
-| Auth | `AuthController` | — (login/logout only) |
+| Auth | `AuthController` | — (`AdminLoginRequest` for login) |
 | Home | `DashboardController` | — (stats/links) |
 | Blogs | `BlogController` | `App\Services\BlogService` |
-| Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store) |
+| Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store via `ContactStoreRequest`) |
 | Profile | `ProfileController` | `App\Services\ProfileService` |
 | Users | `UserController` | `App\Services\UserService` |
+| Roles | `RoleController` | `App\Services\RoleService` |
+| Testimonials | `TestimonialController` | `App\Services\TestimonialService` |
 | AI chats | `ConversationController` | `App\Services\ConversationService` |
 
 Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC helpers stay on `HasRoles` / `SiteAdmin`.
@@ -82,19 +114,21 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
   - `alerts.blade.php` — optional inline alerts (prefer Toastr)
 - Styles: `public/css/admin.css` — white theme tokens (`--admin-primary`, `--admin-light`, `--admin-surface`); mini width `--admin-sidebar-collapsed-w: 72px` via `.admin-app.is-sidebar-collapsed`
 - Reuse CSS helpers: `.admin-card`, `.admin-table`, `.admin-btn--primary`, `.admin-badge-*`, `.admin-stat`, `.admin-toolbar`
+- **Admin forms are full width by default** — do not add `max-width` / narrow card constraints on create/edit forms unless the user explicitly asks for a constrained layout
+- **Page vs modal (required before building UI):** When adding or changing create / edit / other mutation UX, **ask the user** whether they want a **full page** or a **modal** (unless they already specified). Do not assume. Testimonials use modal create/edit on the index page (`admin/testimonials/partials/form-modal.blade.php` + `.admin-modal*` in `admin.css` + `SuaveAdmin.openAdminModal` / `closeAdminModal`). Page forms stay under `admin/{feature}/form.blade.php`.
 - **List pages:** use `<x-admin.datatable>` (`App\View\Components\Admin\Datatable`) for the table shell — page head + Tailwind toolbar (search + always-visible `filters` slot / `<details>` sort & column menus) + table + rows-per-page footer. Slots: `actions`, `filters`. Pass `:columns`, optional `:sort-options`
 - Row kebab menus: `App\Support\Admin\DataTableActions::menu([...])` — native `<details>` + Tailwind (no dropdown JS)
 - `SuaveAdmin.initDataTable` only wires search/sort/column visibility to Yajra; open/close is CSS/native
 - Gate sidebar links with `$user->hasPermission(...)`
 - Auth view: `admin.auth.login` (white card on light surface)
 - Error pages: `resources/views/errors/{403,404,500}.blade.php` + `errors/layout.blade.php` (centered white card, illustration, primary CTA)
-- Feature views: `admin/blogs`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/profile`, `admin/dashboard`
+- Feature views: `admin/blogs`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
 - Do **not** dump admin styles into marketing `public/css/style.css`
 
 ## DataTables + AJAX
 
 - Package: `yajra/laravel-datatables-oracle`
-- Server classes: `app/DataTables/Admin/{Blog,User,Conversation}DataTable.php`
+- Server classes: `app/DataTables/Admin/{Blog,User,Role,Testimonial,Conversation}DataTable.php`
 - Index controllers return Yajra JSON when `$request->ajax()` / `wantsAdminJson()`; otherwise the Blade list view
 - Mutations use `RespondsToAdminAjax` (`adminSuccess` / `adminError`) so store/update/destroy return JSON for AJAX or flash redirects otherwise
 - Client helpers in `public/js/admin/suave-admin.js` (`window.SuaveAdmin`):
@@ -244,18 +278,23 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 - `blogs.view|create|update|delete`
 - `conversations.view`
 - `contacts.view`
+- `testimonials.view|manage`
 - `users.view|manage`
+- `roles.view|manage`
 - `profile.update`
+- `seo.audit`
 
 ## Conventions when changing admin
 
 1. New feature routes go in `routes/admin.php` behind `auth` + `admin` (+ `permission:` as needed)
 2. **Always** add/update `App\Services\{Feature}Service` for create/update/delete (and heavy reads); never leave that logic in the controller
-3. Add PHPDoc on public/protected methods
-4. Seed new permissions/roles in `RolesAndPermissionsSeeder` (idempotent `updateOrCreate`)
-5. Keep UI in the white-theme admin shell (`admin.css` helpers); do not couple to marketing Tailwind layout patterns unless sharing a deliberate component
-6. User feedback: `createFlashMessage` (PHP session or JS Toastr) — never raw `toastr.*` / ad-hoc `Session::flash('status')` in new code
-7. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
+3. **Always** add/update Form Requests under `App\Http\Requests\Admin\` named `{Resource}StoreRequest` / `{Resource}UpdateRequest` (e.g. `BlogStoreRequest`) — no inline `$request->validate()` in controllers or services
+4. **Ask the user** whether create / edit / other operations should use a **page** or a **modal** before building the UI (unless they already said which)
+5. Add PHPDoc on public/protected methods
+6. Seed new permissions/roles in `RolesAndPermissionsSeeder` (idempotent `updateOrCreate`)
+7. Keep UI in the white-theme admin shell (`admin.css` helpers); do not couple to marketing Tailwind layout patterns unless sharing a deliberate component
+8. User feedback: `createFlashMessage` (PHP session or JS Toastr) — never raw `toastr.*` / ad-hoc `Session::flash('status')` in new code
+9. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
 
 ## Related
 
