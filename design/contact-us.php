@@ -10,12 +10,29 @@ $contactCards = [
     'icon' => 'fa-solid fa-location-dot',
     'label' => 'Visit our office',
     'title' => 'Address',
-    'lines' => ['30 N Gould St, STE R,', 'Sheridan, WY 82801, USA'],
+    'offices' => [
+      [
+        'flag' => 'us',
+        'display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',
+        'lines' => ['30 N Gould St, STE R,', 'Sheridan, WY 82801, USA'],
+        'map_embed' => 'https://maps.google.com/maps?q=' . rawurlencode('30 N Gould St, STE R, Sheridan, WY 82801, USA') . '&z=16&output=embed',
+      ],
+      [
+        'flag' => 'in',
+        'display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, Himachal Pradesh 176102',
+        'lines' => ['3M Plaza, Second Floor,', 'Maranda, Kasoti, Palampur,', 'Himachal Pradesh 176102'],
+        'map_embed' => 'https://maps.google.com/maps?q=' . rawurlencode('3M Plaza, Maranda, Kasoti, Palampur, Himachal Pradesh 176102') . '&z=16&output=embed',
+      ],
+    ],
+    'lines' => [],
+    'links' => [],
   ],
   [
     'icon' => 'fa-regular fa-envelope',
     'label' => 'Write to our team',
     'title' => 'Mail Support',
+    'offices' => [],
+    'lines' => [],
     'links' => [
       ['href' => 'mailto:info@suavecreators.com', 'text' => 'info@suavecreators.com'],
     ],
@@ -24,12 +41,17 @@ $contactCards = [
     'icon' => 'fa-solid fa-phone',
     'label' => 'Speak with an expert',
     'title' => 'Phone',
+    'offices' => [],
+    'lines' => [],
     'links' => [
       ['href' => 'tel:+918894900142', 'text' => '+91 88949 00142'],
       ['href' => 'tel:+911894455019', 'text' => '+91 18944 55019'],
+      ['href' => 'tel:+919736900142', 'text' => '+91 97369 00142'],
     ],
   ],
 ];
+
+$offices = $contactCards[0]['offices'];
 
 $faqs = [
   [
@@ -255,43 +277,109 @@ require __DIR__ . '/partials/tech-partnerships-marquee.php';
 <!-- Technologies & Partnerships Marquee End -->
 
 <!-- Contact Information Start -->
-<section class="full-bleed bg-[url('/images/web-bg.png')] bg-cover bg-center py-16 sm:py-20 lg:py-24"
-  aria-labelledby="contact-details-heading">
+<?php
+  $mapOffices = $offices ?? [];
+  $activeOffice = $mapOffices[0] ?? null;
+?>
+<section class="full-bleed contact-reach-section py-16 sm:py-20 lg:py-24"
+  style="background-image: url('/images/about-section-bg.png');"
+  aria-labelledby="contact-details-heading"
+  data-contact-reach>
   <div class="section-inner">
-    <header class="mx-auto max-w-[680px] text-center">
-      <p
-        class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
+    <header class="contact-reach__header">
+      <p class="contact-reach__eyebrow">
+        <span class="contact-reach__eyebrow-bar" aria-hidden="true"></span>
         Prefer another way to reach us?
       </p>
-      <h2 id="contact-details-heading" class="mt-4 text-2xl font-semibold text-[#171717]">
+      <h2 id="contact-details-heading" class="contact-reach__title">
         We’re always within reach
       </h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-sm leading-6 text-[#4D4D4D]">
+      <p class="contact-reach__lead">
         Visit, email, or call us. Choose whichever way works best for you.
       </p>
     </header>
 
-    <div class="mt-10 grid gap-5 md:grid-cols-3 lg:mt-14">
-      <?php foreach ($contactCards as $index => $card): ?>
-        <article class="group relative overflow-hidden rounded-[24px] border border-[#E5E8F5] bg-white p-7 shadow-[0_16px_40px_rgba(31,34,88,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(31,34,88,0.11)] sm:p-8">
-          <span class="absolute right-5 top-3 text-[64px] font-extrabold leading-none text-[#F2F4FD]" aria-hidden="true">0<?= $index + 1 ?></span>
-          <span class="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#EEF1FF] to-[#E7E8FF] text-xl text-[#2A4DFB] transition group-hover:from-[#2A4DFB] group-hover:to-[#7158F5] group-hover:text-white">
-            <i class="<?= htmlspecialchars($card['icon']) ?>" aria-hidden="true"></i>
-          </span>
-          <p class="relative mt-7 text-xs font-bold uppercase tracking-[0.12em] text-[#858899]"><?= htmlspecialchars($card['label']) ?></p>
-          <h3 class="relative mt-2 text-xl font-semibold text-[#171717]"><?= htmlspecialchars($card['title']) ?></h3>
-          <div class="relative mt-5 border-t border-[#ECEEF7] pt-5 text-sm leading-6 text-[#4D4D4D]">
-            <?php foreach ($card['lines'] ?? [] as $line): ?>
-              <p><?= htmlspecialchars($line) ?></p>
-            <?php endforeach; ?>
-            <?php foreach ($card['links'] ?? [] as $link): ?>
-              <a href="<?= htmlspecialchars($link['href']) ?>" class="block min-h-8 font-semibold text-[#303241] transition hover:text-[#2A4DFB]">
-                <?= htmlspecialchars($link['text']) ?>
-              </a>
-            <?php endforeach; ?>
+    <div class="contact-reach">
+      <div class="contact-reach__map">
+        <iframe
+          data-contact-map
+          title="<?= htmlspecialchars(($activeOffice['display'] ?? 'Office location') . ' map') ?>"
+          src="<?= htmlspecialchars($activeOffice['map_embed'] ?? '') ?>"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+
+      <div class="contact-reach__details" role="list">
+        <div class="contact-reach__panel-head">
+          <h3 class="contact-reach__panel-title">Contact</h3>
+        </div>
+
+        <?php foreach ($contactCards as $card): ?>
+          <div class="contact-reach__item" role="listitem">
+            <span class="contact-reach__item-icon" aria-hidden="true">
+              <i class="<?= htmlspecialchars($card['icon']) ?>"></i>
+            </span>
+
+            <div class="contact-reach__item-content">
+              <p class="contact-reach__item-label"><?= htmlspecialchars($card['label']) ?></p>
+              <h3 class="contact-reach__item-title"><?= htmlspecialchars($card['title']) ?></h3>
+
+              <div class="contact-reach__item-body">
+                <?php if (! empty($card['offices'])): ?>
+                  <?php foreach ($card['offices'] as $officeIndex => $office): ?>
+                    <button
+                      type="button"
+                      class="contact-reach__office<?= $officeIndex === 0 ? ' is-active' : '' ?>"
+                      data-contact-office
+                      data-map-src="<?= htmlspecialchars($office['map_embed']) ?>"
+                      data-map-title="<?= htmlspecialchars(($office['display'] ?? 'Office location') . ' map') ?>"
+                      aria-pressed="<?= $officeIndex === 0 ? 'true' : 'false' ?>">
+                      <span class="contact-reach__flag" aria-hidden="true">
+                        <?php if (($office['flag'] ?? 'us') === 'in'): ?>
+                          <svg viewBox="0 0 24 16" width="24" height="16" focusable="false">
+                            <rect width="24" height="5.33" y="0" fill="#FF9933"/>
+                            <rect width="24" height="5.34" y="5.33" fill="#FFFFFF"/>
+                            <rect width="24" height="5.33" y="10.67" fill="#138808"/>
+                            <circle cx="12" cy="8" r="2.1" fill="none" stroke="#000080" stroke-width="0.7"/>
+                            <circle cx="12" cy="8" r="0.45" fill="#000080"/>
+                          </svg>
+                        <?php else: ?>
+                          <svg viewBox="0 0 24 16" width="24" height="16" focusable="false">
+                            <rect width="24" height="16" fill="#B22234"/>
+                            <rect y="1.23" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="3.69" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="6.15" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="8.62" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="11.08" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect y="13.54" width="24" height="1.23" fill="#FFFFFF"/>
+                            <rect width="9.6" height="8.62" fill="#3C3B6E"/>
+                          </svg>
+                        <?php endif; ?>
+                      </span>
+                      <span class="contact-reach__office-lines">
+                        <?php foreach ($office['lines'] as $line): ?>
+                          <span class="contact-reach__office-line"><?= htmlspecialchars($line) ?></span>
+                        <?php endforeach; ?>
+                      </span>
+                    </button>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php if (! empty($card['links'])): ?>
+                  <div class="contact-reach__links">
+                    <?php foreach ($card['links'] as $link): ?>
+                      <a href="<?= htmlspecialchars($link['href']) ?>" class="contact-reach__link">
+                        <?= htmlspecialchars($link['text']) ?>
+                      </a>
+                    <?php endforeach; ?>
+                  </div>
+                <?php endif; ?>
+              </div>
+            </div>
           </div>
-        </article>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 </section>
@@ -343,6 +431,29 @@ require __DIR__ . '/partials/tech-partnerships-marquee.php';
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  var root = document.querySelector('[data-contact-reach]');
+  if (root) {
+    var map = root.querySelector('[data-contact-map]');
+    var offices = root.querySelectorAll('[data-contact-office]');
+    if (map && offices.length) {
+      offices.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var src = button.getAttribute('data-map-src');
+          var title = button.getAttribute('data-map-title') || 'Office location map';
+          if (src && map.getAttribute('src') !== src) {
+            map.setAttribute('src', src);
+            map.setAttribute('title', title);
+          }
+          offices.forEach(function (item) {
+            var active = item === button;
+            item.classList.toggle('is-active', active);
+            item.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+        });
+      });
+    }
+  }
+
   var faqItems = document.querySelectorAll('.faq-list .faq-item');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   function setAria(item, open) {
@@ -401,12 +512,15 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 .contact-form-panel{
+  background-color: #0b1228;
   background-image: url("/images/blur-contact.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   border-radius: 28px;
   display: grid;
+  max-width: 100%;
+  overflow: hidden;
   width: 100%;
   padding: 20px;
 }
@@ -512,6 +626,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 .contact-form-panel__form-wrap{
+  min-width: 0;
   padding: 0 20px 28px;
   position: relative;
   z-index: 1;
@@ -520,8 +635,11 @@ document.addEventListener('DOMContentLoaded', function () {
 .contact-form-panel__form{
   background: #ffffff;
   border-radius: 22px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  min-width: 0;
   padding: 28px 22px 24px;
   position: relative;
 }
@@ -727,6 +845,22 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 @media (max-width: 1023px) {
+.contact-form-panel{
+    padding: 14px;
+  }
+
+.contact-form-panel__info{
+    padding: 28px 18px 24px;
+  }
+
+.contact-form-panel__form-wrap{
+    padding: 0 10px 20px;
+  }
+
+.contact-form-panel__form{
+    padding: 24px 18px 20px;
+  }
+
 .contact-form-panel__submit.u-btn-cta{
     height: 34px;
     min-height: 34px;
@@ -736,7 +870,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 @media (min-width: 640px) {
 .contact-form-panel__info{
-    padding: 40px 36px 32px;
+    padding: 40px 28px 32px;
   }
 
 .contact-form-panel__meta{
@@ -744,11 +878,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 .contact-form-panel__form-wrap{
-    padding: 0 36px 40px;
+    padding: 0 16px 32px;
   }
 
 .contact-form-panel__form{
-    padding: 36px 36px 32px;
+    padding: 32px 28px 28px;
   }
 
 .contact-form-panel__row{
@@ -758,6 +892,7 @@ document.addEventListener('DOMContentLoaded', function () {
 .contact-form-panel__actions{
     align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
   }
 
@@ -774,9 +909,9 @@ document.addEventListener('DOMContentLoaded', function () {
 @media (min-width: 1024px) {
 .contact-form-panel{
     align-items: stretch;
-    background-size: 100% 100%;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     min-height: 640px;
+    padding: 20px;
   }
 
 .contact-form-panel__submit{
@@ -801,6 +936,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 .contact-form-panel__form{
+    padding: 36px 36px 32px;
     width: 100%;
   }
 }

@@ -7,6 +7,7 @@ use App\Models\BlogCategory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class BlogSupport
 {
@@ -158,12 +159,16 @@ class BlogSupport
 
         $seoTitle = trim((string) ($post['meta_title'] ?? ''));
         if ($seoTitle === '') {
-            $seoTitle = ($post['title'] ?? 'Blog').' | Suave Creators Blog';
+            $seoTitle = Str::limit((string) ($post['title'] ?? 'Blog'), 60, '');
         }
 
         $seoDescription = trim((string) ($post['meta_description'] ?? ''));
         if ($seoDescription === '') {
-            $seoDescription = (string) ($post['short_description'] ?? 'Suave Creators blog article.');
+            $seoDescription = Str::limit(
+                (string) ($post['short_description'] ?? 'Suave Creators blog article.'),
+                160,
+                ''
+            );
         }
 
         return [
@@ -345,6 +350,8 @@ class BlogSupport
         $image = (string) ($post['image'] ?? '');
         $pullQuote = trim((string) ($post['short_description'] ?? ''));
 
+        $content = self::normalizeArticleMarkup($content, $title);
+
         $featureImageHtml = $image !== ''
             ? '<figure class="single-blog-main__image single-blog-main__image--inline">'
                 .'<img src="'.e($image).'" alt="'.e($title).'" title="'.e($title).'" width="1200" height="640" loading="eager">'
@@ -373,6 +380,31 @@ class BlogSupport
         }
 
         return $featureImageHtml.$content;
+    }
+
+    /**
+     * Keep a single page H1 and ensure article images expose alt text for SEO audits.
+     */
+    protected static function normalizeArticleMarkup(string $content, string $title): string
+    {
+        if ($content === '') {
+            return $content;
+        }
+
+        $content = (string) preg_replace('/<h1(\b[^>]*)>/i', '<h2$1>', $content);
+        $content = (string) preg_replace('/<\/h1>/i', '</h2>', $content);
+
+        $fallbackAlt = $title !== '' ? $title : 'Suave Creators blog article';
+
+        return (string) preg_replace_callback('/<img\b([^>]*)>/i', static function (array $matches) use ($fallbackAlt): string {
+            $attrs = $matches[1];
+
+            if (preg_match('/\balt\s*=/i', $attrs)) {
+                return $matches[0];
+            }
+
+            return '<img alt="'.e($fallbackAlt).'"'.$attrs.'>';
+        }, $content);
     }
 
     /**

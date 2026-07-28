@@ -2,7 +2,7 @@
 return array(
   'slug' => 'e-commerce-development',
   'pageTitle' => 'Custom E-commerce Development Services | Suave Creators',
-  'pageDescription' => 'Get secure, scalable custom e-commerce development with Shopify, WooCommerce, Magento, and custom solutions. Boost conversions, performance, and long-term growth.',
+  'pageDescription' => 'Get secure, scalable e-commerce development with Shopify, WooCommerce, Magento & custom solutions. Boost conversions, performance, and long-term growth.',
   'ogTitle' => 'Custom E-commerce Development Services | Suave Creators',
   'ogDescription' => 'Build a secure, scalable online store with Shopify, WooCommerce, Magento, or custom e-commerce solutions. Boost performance, conversions, and business growth.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',

@@ -52,7 +52,7 @@ $mainClass = $mainClass ?? 'site-main';
   <div class="relative w-full overflow-hidden <?= $useHeroBackground ? 'bg-[#00003f]' : 'bg-white' ?>">
     <?php if ($useHeroBackground && $heroBackgroundImage): ?>
       <div class="pointer-events-none absolute inset-x-0 top-0 z-0 h-[min(100%,920px)] lg:inset-0 lg:h-auto" aria-hidden="true">
-        <img src="<?= htmlspecialchars((string) $heroBackgroundImage) ?>" alt="" class="absolute inset-0 h-full w-full object-cover object-top lg:object-none lg:object-top">
+        <img src="<?= htmlspecialchars((string) $heroBackgroundImage) ?>" alt="" class="absolute inset-0 h-full w-full object-cover object-top">
         <?php if ($heroBackgroundImage === '/images/cover_banner.png'): ?>
           <img src="/images/hero_Pattern(left).svg" alt="" class="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-soft-light">
         <?php endif; ?>

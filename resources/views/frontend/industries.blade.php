@@ -392,11 +392,13 @@
 />
 
 <x-frontend.consultation-section
+  :background-image="$consultation['backgroundImage']"
   :solo="$consultation['solo']"
   :show-people="$consultation['showPeople']"
   :title="$consultation['title']"
   :description="$consultation['description']"
   :cta-label="$consultation['ctaLabel']"
+  :hide-bg-below-desktop="true"
 />
 
 <!-- 14. Testimonials Section Start -->
@@ -418,10 +420,6 @@
 <style>
 .consultation-card--solo {
   justify-content: flex-start;
-  background-image: url('{{ asset('assets/background/industry-future-bg.webp') }}');
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
 }
 
 .industry-hero-visual {
@@ -533,19 +531,7 @@
   }
 }
 
-@media (max-width: 1023px) {
-  .consultation-card--solo {
-    background-image: none;
-    background-color: #eef1f8;
-  }
-}
-
 @media (max-width: 767px) {
-  .consultation-card--solo {
-    background-image: none;
-    background-color: #eef1f8;
-  }
-
   .industry-hero-visual {
     margin-inline: auto;
   }
