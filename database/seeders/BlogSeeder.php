@@ -85,7 +85,7 @@ class BlogSeeder extends Seeder
                 'status' => (string) ($payload['status'] ?? Blog::STATUS_PUBLISHED),
                 'published_at' => $payload['published_at'] ?? now(),
                 'toc' => $this->normalizeToc($payload['toc'] ?? []),
-                'faqs' => is_array($payload['faqs'] ?? null) ? $payload['faqs'] : [],
+                'faqs' => $this->normalizeFaqs($payload['faqs'] ?? null),
                 'meta_title' => $payload['meta_title'] ?? null,
                 'meta_description' => $payload['meta_description'] ?? null,
                 'og_title' => $payload['og_title'] ?? null,
@@ -210,6 +210,37 @@ class BlogSeeder extends Seeder
             $out[] = [
                 'anchor_id' => (string) ($item['anchor_id'] ?? $item['id'] ?? ''),
                 'label' => (string) ($item['label'] ?? ''),
+            ];
+        }
+
+        return $out;
+    }
+
+    /**
+     * Keep exact FAQ pairs from blogs.json (no generated fallbacks).
+     *
+     * @param  mixed  $faqs
+     * @return list<array{question: string, answer: string}>
+     */
+    protected function normalizeFaqs(mixed $faqs): array
+    {
+        if (! is_array($faqs)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($faqs as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            $question = trim((string) ($item['question'] ?? ''));
+            $answer = trim((string) ($item['answer'] ?? ''));
+            if ($question === '' || $answer === '') {
+                continue;
+            }
+            $out[] = [
+                'question' => $question,
+                'answer' => $answer,
             ];
         }
 

@@ -29,11 +29,21 @@ class BlogSupport
      */
     public static function post(string $slug): ?array
     {
-        $blog = Blog::query()
-            ->published()
+        $query = Blog::query()
             ->with(['category', 'createdBy'])
-            ->where('slug', $slug)
-            ->first();
+            ->where('slug', $slug);
+
+        if (auth()->check()) {
+            // Logged-in users may preview drafts on the single-blog page.
+            $query->where(function ($q): void {
+                $q->published()
+                    ->orWhere('status', Blog::STATUS_DRAFT);
+            });
+        } else {
+            $query->published();
+        }
+
+        $blog = $query->first();
 
         return $blog !== null ? self::mapBlog($blog) : null;
     }
@@ -169,11 +179,13 @@ class BlogSupport
             ])),
             'titleLead' => $titleLead,
             'titleAccent' => $titleAccent,
-            'faqs' => ! empty($post['faqs']) && is_array($post['faqs']) ? $post['faqs'] : self::defaultFaqs(),
+            'faqs' => ! empty($post['faqs']) && is_array($post['faqs']) ? $post['faqs'] : [],
             'seoTitle' => $seoTitle,
             'seoDescription' => $seoDescription,
             'seoOgTitle' => trim((string) ($post['og_title'] ?? '')) ?: null,
             'seoOgDescription' => trim((string) ($post['og_description'] ?? '')) ?: null,
+            'seoRobots' => ! empty($post['is_draft']) ? 'noindex, nofollow' : null,
+            'isDraft' => ! empty($post['is_draft']),
         ];
     }
 
@@ -200,27 +212,6 @@ class BlogSupport
             })
             ->values()
             ->all();
-    }
-
-    /**
-     * @return array<int, array{question: string, answer: string}>
-     */
-    public static function defaultFaqs(): array
-    {
-        return [
-            [
-                'question' => 'How can Suave Creators help after reading this article?',
-                'answer' => 'Share your goals with our team and we will map a practical next step — from strategy and design through to build and launch.',
-            ],
-            [
-                'question' => 'Do you work with startups and established businesses?',
-                'answer' => 'Yes. We partner with early-stage teams and growing organisations that need reliable product, design, and engineering support.',
-            ],
-            [
-                'question' => 'How soon can we start a discovery conversation?',
-                'answer' => 'Most teams hear back within one business day. Book a free consultation and we will align on scope, timeline, and the best way to begin.',
-            ],
-        ];
     }
 
     /**
@@ -321,6 +312,8 @@ class BlogSupport
             'id' => $blog->id,
             'slug' => $slug,
             'title' => (string) $blog->title,
+            'status' => (string) $blog->status,
+            'is_draft' => $blog->status === Blog::STATUS_DRAFT,
             'image' => $blog->featuredImageUrl() ?? '',
             'short_description' => (string) ($blog->short_description ?? ''),
             'content' => self::normalizeStorageUrls((string) ($blog->content ?? '')),
@@ -329,7 +322,7 @@ class BlogSupport
             'category_slug' => $categorySlug,
             'category_url' => $categorySlug !== '' ? route('blogs.category', ['slug' => $categorySlug]) : route('blogs'),
             'published_date' => $publishedAt?->toDateString() ?? '',
-            'published_label' => $publishedAt?->format('M j, Y') ?? '',
+            'published_label' => $publishedAt?->format('M j, Y') ?? ($blog->status === Blog::STATUS_DRAFT ? 'Draft' : ''),
             'updated_date' => $blog->updated_at?->toDateString() ?? '',
             'toc' => is_array($blog->toc) ? $blog->toc : [],
             'faqs' => is_array($blog->faqs) ? $blog->faqs : [],

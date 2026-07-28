@@ -13,6 +13,12 @@
     <span aria-current="page">{{ $post['title'] }}</span>
   </nav>
 
+  @if (! empty($isDraft) || ! empty($post['is_draft']))
+    <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-semibold text-amber-800" role="status">
+      Draft preview — only visible while logged in
+    </p>
+  @endif
+
   <h1 class="single-blog-main__title">
     @if ($titleLead !== '')
       {{ $titleLead }}
@@ -176,6 +182,7 @@
 </section>
 <!-- Single Blog Article Section End -->
 
+@if (! empty($faqs))
 <x-frontend.faq-section
   :qa="$faqs"
   heading-id="blog-faq-heading"
@@ -185,6 +192,7 @@
   class="faq-section--align faq-section--contact bg-cover bg-top bg-no-repeat"
   style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}')"
 />
+@endif
 
 <x-frontend.consultation-section />
 

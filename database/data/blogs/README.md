@@ -15,3 +15,5 @@ php artisan db:seed --class=BlogSeeder
 ```
 
 Do not scrape the live site — keep this package committed and seed from it.
+
+Posts without FAQs are filled during seed (`BlogSeeder::normalizeFaqs`) with article-specific defaults so every blog has FAQ data in the admin and frontend.
