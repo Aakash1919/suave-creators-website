@@ -31,8 +31,6 @@
               </div>
               <div class="mt-6 flex items-center gap-4">
                 <span class="testimonial-card__initials grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#2A4DFB] to-[#7A5FF8] text-sm font-bold text-white">{{ $testimonial['initials'] }}</span>
-                <img class="testimonial-card__avatar" src="{{ asset($testimonial['avatar']) }}"
-                  alt="{{ $testimonial['avatarAlt'] ?? ('Portrait of '.$testimonial['name']) }}" title="{{ $testimonial['avatarAlt'] ?? ('Portrait of '.$testimonial['name']) }}" width="56" height="56" loading="lazy" decoding="async">
                 <div>
                   <h3 class="font-semibold text-white">{{ $testimonial['name'] }}</h3>
                   <p class="mt-1 text-[13px] text-[#B1B9DF]">{{ $testimonial['role'] }}</p>

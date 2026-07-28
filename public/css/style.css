@@ -1308,15 +1308,6 @@ main button.rounded-full.bg-gradient-to-r {
   min-width: 0;
 }
 
-.testimonial-card__avatar {
-  border-radius: 50%;
-  display: none;
-  flex: 0 0 auto;
-  height: 56px;
-  object-fit: cover;
-  width: 56px;
-}
-
 .testimonial-navigation {
   align-items: center;
   display: flex;
@@ -3692,16 +3683,6 @@ body.mobile-nav-open {
     border-color: rgb(108 61 160 / 38%) !important;
     border-radius: 8px;
     padding: 22px !important;
-  }
-
-  .testimonial-card__initials {
-    display: none;
-  }
-
-  .testimonial-card__avatar {
-    display: block;
-    height: 48px;
-    width: 48px;
   }
 
   .testimonial-card h3 {

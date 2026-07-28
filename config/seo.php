@@ -4,6 +4,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Block search indexing (staging / non-public hosts)
+    |--------------------------------------------------------------------------
+    |
+    | When true, every page emits robots noindex/nofollow and /robots.txt
+    | disallows all crawlers. Set SEO_NOINDEX=true on staging .env.
+    | Defaults to true when APP_ENV=staging.
+    |
+    */
+
+    'noindex' => (bool) env('SEO_NOINDEX', env('APP_ENV') === 'staging'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Site-wide SEO defaults
     |--------------------------------------------------------------------------
     |
