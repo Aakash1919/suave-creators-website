@@ -144,7 +144,7 @@ jobs:
             mkdir -p storage/framework/views
             mkdir -p storage/logs
 
-            # Prefer dynamic /robots.txt route (remove any static file from prior deploys)
+            # Prefer dynamic /robots.txt route
             rm -f public/robots.txt
 
             php artisan optimize:clear
