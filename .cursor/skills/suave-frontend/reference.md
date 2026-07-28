@@ -6,7 +6,7 @@
 | `team/` | Team photos, consultation portraits, team icons | `assets/team/professional-man-navy-blazer-portrait.png` |
 | `clients/` | Real client / partner **company** logos only | `assets/clients/verysoul-logo.png` |
 | `background/` | Section backgrounds | `assets/background/about-section-bg.png` |
-| `hero/` | Homepage hero motion / pattern assets | `assets/hero/hero-motion-panel-1.gif` |
+| `hero/` | Homepage hero stills / pattern assets | `assets/hero/hero-team-brainstorm-overhead.webp` |
 | `blog/` | Blog cards, insights | `assets/blog/digital-strategy-collaboration.png` |
 | `blog/blogs-hero/` | Blog hero photos | `assets/blog/blogs-hero/01-team.jpg` |
 | `portfolio/` | Portfolio / project shots | `assets/portfolio/modern-office-yellow-accent-lounge.png` |
