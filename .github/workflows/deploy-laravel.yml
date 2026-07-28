@@ -1,0 +1,158 @@
+name: Deploy Laravel App to Hostinger via SSH
+
+on:
+  push:
+    branches:
+      - staging
+      - main
+
+jobs:
+  deploy-to-staging:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, curl, zip, pdo, bcmath, gd
+          coverage: none
+
+      - name: Set robots.txt for STAGING
+        run: |
+          echo "User-agent: *
+          Disallow: /
+          Disallow: /sitemap.xml" > public/robots.txt
+
+      - name: Cache Composer
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
+      - name: Install Composer Dependencies Locally
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync sshpass
+
+      - name: Upload only necessary files
+        run: |
+          sshpass -p "${{ secrets.STAGING_PASSWORD }}" rsync -avz --delete \
+            -e "ssh -p ${{ secrets.STAGING_SSH_PORT }} -o StrictHostKeyChecking=no" \
+            --exclude=".git/" \
+            --exclude="node_modules/" \
+            --exclude="package.json" \
+            --exclude="package-lock.json" \
+            --exclude="vite.config.js" \
+            --exclude="tests/" \
+            --exclude=".github/" \
+            --exclude=".cursor/" \
+            --exclude="design/" \
+            --exclude=".env" \
+            --exclude=".htaccess" \
+            --exclude="storage/" \
+            --exclude="storage/framework/cache/data" \
+            ./ \
+            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}:${{ secrets.STAGING_APP_DIR }}/
+
+      - name: Run server optimization commands
+        run: |
+          sshpass -p "${{ secrets.STAGING_PASSWORD }}" ssh -p ${{ secrets.STAGING_SSH_PORT }} \
+          -o StrictHostKeyChecking=no \
+          ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} << 'EOF'
+            cd ${{ secrets.STAGING_APP_DIR }}
+
+            mkdir -p storage/app/public
+            mkdir -p storage/framework/cache
+            mkdir -p storage/framework/sessions
+            mkdir -p storage/framework/views
+            mkdir -p storage/logs
+
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan migrate --force
+            php artisan db:seed --force
+            php artisan storage:link
+
+            echo "Staging deployment completed"
+          EOF
+
+  deploy-to-production:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, curl, zip, pdo, bcmath, gd
+          coverage: none
+
+      - name: Cache Composer
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
+      - name: Install Composer Dependencies Locally
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync sshpass
+
+      - name: Upload only necessary files
+        run: |
+          sshpass -p "${{ secrets.STAGING_PASSWORD }}" rsync -avz --delete \
+            -e "ssh -p ${{ secrets.STAGING_SSH_PORT }} -o StrictHostKeyChecking=no" \
+            --exclude=".git/" \
+            --exclude="node_modules/" \
+            --exclude="package.json" \
+            --exclude="package-lock.json" \
+            --exclude="vite.config.js" \
+            --exclude="tests/" \
+            --exclude=".github/" \
+            --exclude=".cursor/" \
+            --exclude="design/" \
+            --exclude=".env" \
+            --exclude=".htaccess" \
+            --exclude="public/.htaccess" \
+            --exclude="storage/" \
+            --exclude="storage/framework/cache/data" \
+            ./ \
+            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}:${{ secrets.PRODUCTION_APP_DIR }}/
+
+      - name: Run server optimization commands
+        run: |
+          sshpass -p "${{ secrets.STAGING_PASSWORD }}" ssh -p ${{ secrets.STAGING_SSH_PORT }} \
+          -o StrictHostKeyChecking=no \
+          ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} << 'EOF'
+            cd ${{ secrets.PRODUCTION_APP_DIR }}
+
+            mkdir -p storage/app/public
+            mkdir -p storage/framework/cache
+            mkdir -p storage/framework/sessions
+            mkdir -p storage/framework/views
+            mkdir -p storage/logs
+
+            # Prefer dynamic /robots.txt route (remove any static file from prior deploys)
+            rm -f public/robots.txt
+
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan migrate --force
+            php artisan db:seed --force
+            php artisan storage:link
+
+            echo "Production deployment completed"
+          EOF

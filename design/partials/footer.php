@@ -59,12 +59,12 @@ $footerColumns = [
           Web &amp; Software Development<br>
           <span class="mt-1 inline-block bg-gradient-to-b from-[#2F69FB] to-[#D078FE] bg-clip-text font-extrabold text-transparent">Solutions</span>
         </p>
-        <ul class="site-footer__contact mt-4 space-y-1.5 text-[12px] font-medium text-[#B1B9DF] sm:mt-6 sm:space-y-3 sm:text-[13px]">
+        <ul class="site-footer__contact mt-3 space-y-1 text-[12px] font-medium text-[#B1B9DF] sm:text-[13px]">
           <li>
-            <a href="tel:+919736900142" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">+91 97369 00142</a>
+            <a href="tel:+919736900142" class="inline-flex !min-h-0 items-center hover:text-white">+91 97369 00142</a>
           </li>
           <li>
-            <a href="mailto:info@suavecreators.com" class="inline-flex !min-h-0 max-w-full items-center break-all py-1 hover:text-white sm:py-0">Info@suavecreators.com</a>
+            <a href="mailto:info@suavecreators.com" class="inline-flex !min-h-0 max-w-full items-center break-all hover:text-white">Info@suavecreators.com</a>
           </li>
           <li class="leading-5">
             <span class="inline-block max-w-[280px] sm:max-w-none">30 N Gould St, STE R Sheridan, WY 82801, USA</span>

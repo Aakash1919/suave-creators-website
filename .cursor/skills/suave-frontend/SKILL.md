@@ -32,7 +32,7 @@ After importing a page or editing frontend code/assets/CSS:
    - Core PHP string helpers in components/views when Laravel `str()` / `Str` / `NormalizesAssetPaths` should be used
    - Page JS that belongs in a component (`@once` + `@push('scripts')`)
    - Flat `public/images/` files (must live under `public/assets/...`)
-   - Vite / star-pearl wiring on marketing layout unless explicitly requested
+   - Vite wiring on marketing layout unless explicitly requested; star-pearl only via `<x-layouts.the-suave-star-pearl />` (never directly in `layouts/frontend.blade.php`)
 5. Summarize what was verified and what was removed
 
 ## Page import workflow (future pages)
@@ -83,6 +83,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 Site-wide sales chat widget — **not** a contact-page link.
 
 - Layout component: `App\View\Components\Layouts\SuaveAgent` → `resources/views/components/layouts/suave-agent.blade.php` (`<x-layouts.suave-agent />`)
+- Toggle + panel brand mark: `<x-layouts.chat-widget-icon />` (classic circular chat SVG)
 - CSS: `public/css/style.css` under `/* ===== SUAVE AGENT CHAT ===== */`
 - API: `SuaveAgentController` routes `/suave-agent/start|chat|history` in `routes/web.php`
 - Agent: `app/Ai/Agents/SuaveAgent.php` (`gpt-4o-mini`) + tools in `app/Ai/Tools/`
@@ -91,6 +92,27 @@ Site-wide sales chat widget — **not** a contact-page link.
 - Assistant replies: Markdown (CDN `marked` in the widget; admin review uses `Str::markdown()` — see suave-admin)
 - UX: greet + collect name/email; streaming “Reviewing…” / “Processing…”; escalate politely via `EscalateToSales`
 - Do not point the floating icon at `contact-us`; it opens the chat panel
+
+## TheSuaveStarPearl (brand emblem)
+
+Animated silver star + pearl mark from the drop-in kit.
+
+- Layout component: `App\View\Components\Layouts\TheSuaveStarPearl` → `resources/views/components/layouts/the-suave-star-pearl.blade.php` (`<x-layouts.the-suave-star-pearl />`)
+- Assets: `public/assets/brand/the-suave-metallic-star.png`, `the-suave-white-pearl.png`
+- JS: `public/js/the-suave-star-pearl.js` (loaded once via `@once` + `@push('scripts')` on the component)
+- CSS: `public/css/style.css` under `/* ===== THE SUAVE STAR PEARL ===== */`
+- Props: `size`, `decorative`, `ariaLabel`, `starAlt`, `pearlAlt`, `width`/`height`
+- Used in Header logo mark
+- Do **not** wire star-pearl into `layouts/frontend.blade.php` directly — only via this component
+
+## ChatWidgetIcon (floating chat mark)
+
+Classic circular chat brand mark (dark disc + gradient ring SVG).
+
+- Layout component: `App\View\Components\Layouts\ChatWidgetIcon` → `resources/views/components/layouts/chat-widget-icon.blade.php` (`<x-layouts.chat-widget-icon />`)
+- Asset: `public/assets/brand/chat-widget-icon.svg` (PNG variant also available)
+- Props: `alt`, `width`, `height`, `src`
+- Used by SuaveAgent toggle and panel brand icon
 
 ## Company contacts / dual offices
 
@@ -199,12 +221,13 @@ Name components by **purpose / pattern**, not marketing headline copy (e.g. `con
 
 If the same section markup appears on **more than two pages**, extract a `*Section` component instead of copying Blade.
 
-Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`) does **not** use `Section`.
+Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSuaveStarPearl`, `ChatWidgetIcon`) does **not** use `Section`.
 
 ## Layout / CSS
 
 - Marketing layout: Tailwind CDN + Swiper CDN + Font Awesome + `asset('css/style.css')`
-- No Vite and no the-suave-star-pearl on marketing pages unless explicitly requested
+- No Vite on marketing pages
+- Star-pearl emblem only via `<x-layouts.the-suave-star-pearl />` (not wired into `layouts/frontend.blade.php`)
 - Do not set `display` on `.u-touch-target` in CSS (breaks responsive utilities)
 
 ## Skill maintenance
