@@ -27,9 +27,9 @@ return new class extends Migration
             $table->json('toc')->nullable();
             $table->json('faqs')->nullable();
             $table->string('meta_title')->nullable();
-            $table->string('meta_description')->nullable();
+            $table->text('meta_description')->nullable();
             $table->string('og_title')->nullable();
-            $table->string('og_description')->nullable();
+            $table->text('og_description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
