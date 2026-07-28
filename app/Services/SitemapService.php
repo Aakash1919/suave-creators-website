@@ -18,6 +18,10 @@ class SitemapService
      */
     public function entries(): array
     {
+        if (config('seo.noindex')) {
+            return [];
+        }
+
         $entries = [];
 
         foreach ($this->staticPages() as $page) {
@@ -205,6 +209,14 @@ class SitemapService
 
     public function robotsTxt(): string
     {
+        if (config('seo.noindex')) {
+            return implode("\n", [
+                'User-agent: *',
+                'Disallow: /',
+                '',
+            ]);
+        }
+
         return implode("\n", [
             'User-agent: *',
             'Allow: /',

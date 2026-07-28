@@ -80,12 +80,17 @@ class SeoGenerateService
         }
 
         $faqs = is_array($merged['faqs'] ?? null) ? $merged['faqs'] : null;
+        $robots = (string) ($merged['robots'] ?? 'index, follow');
+
+        if (config('seo.noindex')) {
+            $robots = 'noindex, nofollow';
+        }
 
         return [
             'title' => $title,
             'description' => $description,
             'canonical' => $canonical,
-            'robots' => (string) ($merged['robots'] ?? 'index, follow'),
+            'robots' => $robots,
             'verification' => (string) ($site['google_site_verification'] ?? ''),
             'hreflang' => $hreflang,
             'og' => [

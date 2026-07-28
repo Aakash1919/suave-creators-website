@@ -22,12 +22,6 @@ jobs:
           extensions: mbstring, xml, curl, zip, pdo, bcmath, gd
           coverage: none
 
-      - name: Set robots.txt for STAGING
-        run: |
-          echo "User-agent: *
-          Disallow: /
-          Disallow: /sitemap.xml" > public/robots.txt
-
       - name: Cache Composer
         uses: actions/cache@v3
         with:
@@ -72,6 +66,9 @@ jobs:
             mkdir -p storage/framework/sessions
             mkdir -p storage/framework/views
             mkdir -p storage/logs
+
+            # Prefer dynamic /robots.txt (SEO_NOINDEX / APP_ENV=staging)
+            rm -f public/robots.txt
 
             php artisan optimize:clear
             php artisan config:cache
