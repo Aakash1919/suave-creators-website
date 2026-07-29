@@ -26,7 +26,6 @@ class Blog extends Model
         'short_description',
         'content',
         'featured_image',
-        'small_thumb_image',
         'medium_thumb_image',
         'status',
         'published_at',
@@ -80,14 +79,6 @@ class Blog extends Model
     public function featuredImageUrl(): ?string
     {
         return $this->publicStorageUrl($this->featured_image);
-    }
-
-    /**
-     * Small thumbnail URL; falls back to the original when missing (legacy rows).
-     */
-    public function smallThumbImageUrl(): ?string
-    {
-        return $this->publicStorageUrl($this->small_thumb_image) ?? $this->featuredImageUrl();
     }
 
     /**

@@ -57,7 +57,6 @@ class BlogSeeder extends Seeder
             $category = $this->upsertCategory((string) ($payload['category'] ?? 'Insights'));
 
             $featuredPath = null;
-            $smallThumbPath = null;
             $mediumThumbPath = null;
             $featuredRel = ltrim(str_replace('\\', '/', (string) ($payload['featured_image'] ?? '')), '/');
             if ($featuredRel !== '') {
@@ -71,7 +70,6 @@ class BlogSeeder extends Seeder
                 } else {
                     $featuredPath = $stored;
                     $thumbs = app(ImageVariantService::class)->generateThumbnails($source, $stored);
-                    $smallThumbPath = $thumbs['small'];
                     $mediumThumbPath = $thumbs['medium'];
                 }
             }
@@ -86,7 +84,6 @@ class BlogSeeder extends Seeder
                 'short_description' => (string) ($payload['short_description'] ?? ''),
                 'content' => $content,
                 'featured_image' => $featuredPath,
-                'small_thumb_image' => $smallThumbPath,
                 'medium_thumb_image' => $mediumThumbPath,
                 'blog_category_id' => $category->id,
                 'created_by_id' => $admin->id,
@@ -137,7 +134,7 @@ class BlogSeeder extends Seeder
         }
 
         if (empty($data['featured_image']) && filled($blog->featured_image)) {
-            unset($data['featured_image'], $data['small_thumb_image'], $data['medium_thumb_image']);
+            unset($data['featured_image'], $data['medium_thumb_image']);
         }
 
         $blog->fill($data);

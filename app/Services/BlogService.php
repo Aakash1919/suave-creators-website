@@ -139,7 +139,7 @@ class BlogService
     }
 
     /**
-     * Store original + small/medium thumbs under blogs/{slug}*.{ext}.
+     * Store original + medium thumb under blogs/{slug}*.{ext}.
      *
      * @param  array<string, mixed>  $data
      */
@@ -152,7 +152,6 @@ class BlogService
         );
 
         $data['featured_image'] = $variants['original'];
-        $data['small_thumb_image'] = $variants['small'];
         $data['medium_thumb_image'] = $variants['medium'];
     }
 
@@ -163,9 +162,33 @@ class BlogService
     {
         $this->images->deletePaths(
             $blog->featured_image,
-            $blog->small_thumb_image,
             $blog->medium_thumb_image,
+            $this->images->legacySmallThumbPath($blog->featured_image),
         );
+    }
+
+    /**
+     * Generate (or refresh) the medium thumb for an existing featured image.
+     *
+     * @throws \RuntimeException
+     */
+    public function regenerateMediumThumb(Blog $blog): string
+    {
+        $original = is_string($blog->featured_image) ? $blog->featured_image : '';
+
+        if ($original === '') {
+            throw new \RuntimeException('Blog has no featured image.');
+        }
+
+        $this->images->deletePaths(
+            $blog->medium_thumb_image,
+            $this->images->legacySmallThumbPath($original),
+        );
+
+        $medium = $this->images->generateMediumFromStored($original);
+        $blog->forceFill(['medium_thumb_image' => $medium])->save();
+
+        return $medium;
     }
 
     /**

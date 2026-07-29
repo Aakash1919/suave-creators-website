@@ -6,13 +6,14 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use RuntimeException;
 
 class ImageVariantService
 {
     /**
-     * Store the original on the public disk and generate small + medium thumbs.
+     * Store the original on the public disk and generate a medium thumb.
      *
-     * @return array{original: string, small: string, medium: string}
+     * @return array{original: string, medium: string}
      */
     public function storeWithVariants(UploadedFile $file, string $directory, string $basename): array
     {
@@ -25,15 +26,42 @@ class ImageVariantService
 
         return [
             'original' => $originalPath,
-            'small' => $thumbs['small'],
             'medium' => $thumbs['medium'],
         ];
     }
 
     /**
-     * Generate small and medium thumbnails beside the original path.
+     * Generate a medium thumbnail from an already-stored public-disk original.
      *
-     * @return array{small: string, medium: string}
+     * @throws RuntimeException
+     */
+    public function generateMediumFromStored(string $originalPath): string
+    {
+        $normalized = ltrim(str_replace('\\', '/', $originalPath), '/');
+
+        if (
+            $normalized === ''
+            || str_starts_with($normalized, 'http://')
+            || str_starts_with($normalized, 'https://')
+        ) {
+            throw new RuntimeException('Cannot generate a medium thumb from a remote or empty image path.');
+        }
+
+        $absolute = storage_path('app/public/'.$normalized);
+
+        if (! is_file($absolute)) {
+            throw new RuntimeException("Original image not found on disk: {$normalized}");
+        }
+
+        $thumbs = $this->generateThumbnails($absolute, $normalized);
+
+        return $thumbs['medium'];
+    }
+
+    /**
+     * Generate medium thumbnail beside the original path.
+     *
+     * @return array{medium: string}
      */
     public function generateThumbnails(string $sourceAbsolutePath, string $originalPath): array
     {
@@ -43,21 +71,25 @@ class ImageVariantService
         $directory = $pathInfo['dirname'];
 
         $manager = new ImageManager(new Driver());
-        $image = $manager->read($sourceAbsolutePath);
         $thumbnailPaths = [];
         $thumbnailConfig = config('image.thumbnails', []);
         $quality = (int) config('image.quality', 85);
 
         foreach ($thumbnailConfig as $size => $config) {
-            $thumb = clone $image;
+            // Re-read per size so we never keep multiple full-resolution clones in memory.
+            $thumb = $manager->read($sourceAbsolutePath);
             $thumb->cover((int) $config['width'], (int) $config['height']);
             $thumbPath = $directory.'/'.$filename.$config['suffix'].'.'.$extension;
             $thumb->save(storage_path('app/public/'.$thumbPath), $quality);
             $thumbnailPaths[$size] = $thumbPath;
+            unset($thumb);
+        }
+
+        if (! isset($thumbnailPaths['medium'])) {
+            throw new RuntimeException('Medium thumbnail config is missing (config/image.php).');
         }
 
         return [
-            'small' => $thumbnailPaths['small'],
             'medium' => $thumbnailPaths['medium'],
         ];
     }
@@ -87,5 +119,37 @@ class ImageVariantService
 
             $disk->delete($normalized);
         }
+    }
+
+    /**
+     * Guess a legacy `_small` sibling path for a stored original (if any).
+     */
+    public function legacySmallThumbPath(?string $originalPath): ?string
+    {
+        if (! is_string($originalPath) || $originalPath === '') {
+            return null;
+        }
+
+        $normalized = ltrim(str_replace('\\', '/', $originalPath), '/');
+
+        if (
+            str_starts_with($normalized, 'http://')
+            || str_starts_with($normalized, 'https://')
+        ) {
+            return null;
+        }
+
+        $pathInfo = pathinfo($normalized);
+        $directory = $pathInfo['dirname'] ?? '';
+        $filename = $pathInfo['filename'] ?? '';
+        $extension = $pathInfo['extension'] ?? '';
+
+        if ($filename === '' || $extension === '') {
+            return null;
+        }
+
+        $prefix = ($directory === '.' || $directory === '') ? '' : $directory.'/';
+
+        return $prefix.$filename.'_small.'.$extension;
     }
 }

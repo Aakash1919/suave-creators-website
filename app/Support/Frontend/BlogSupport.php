@@ -301,7 +301,7 @@ class BlogSupport
     }
 
     /**
-     * @param  'original'|'medium'|'small'  $imageVariant
+     * @param  'original'|'medium'  $imageVariant
      * @return array<string, mixed>
      */
     protected static function mapBlog(Blog $blog, string $imageVariant = 'medium'): array
@@ -316,7 +316,6 @@ class BlogSupport
 
         $image = match ($imageVariant) {
             'original' => $blog->featuredImageUrl() ?? '',
-            'small' => $blog->smallThumbImageUrl() ?? '',
             default => $blog->mediumThumbImageUrl() ?? '',
         };
 
