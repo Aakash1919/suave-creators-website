@@ -67,8 +67,9 @@
     const submitLabel = form.querySelector('[data-testimonial-submit-label]');
     const avatarPreview = document.getElementById('testimonial-avatar-preview');
     const avatarImg = document.getElementById('testimonial-avatar-img');
-    const removeAvatarWrap = document.getElementById('testimonial-remove-avatar-wrap');
-    const removeAvatar = form.querySelector('input[name="remove_avatar"]');
+    const galleryIdInput = form.querySelector('[data-gallery-id-input]');
+    const removeAvatar = form.querySelector('[data-gallery-remove-input]');
+    const clearBtn = form.querySelector('[data-gallery-clear]');
 
     function setField(name, value) {
       const checkbox = form.querySelector('input[name="' + name + '"][type="checkbox"]');
@@ -82,18 +83,17 @@
     }
 
     function resetAvatarUi(url) {
-      if (removeAvatar) removeAvatar.checked = false;
-      const file = form.querySelector('input[name="avatar"]');
-      if (file) file.value = '';
+      if (galleryIdInput) galleryIdInput.value = '';
+      if (removeAvatar) removeAvatar.value = '0';
 
       if (url) {
         avatarImg.src = url;
         avatarPreview.hidden = false;
-        removeAvatarWrap.hidden = false;
+        if (clearBtn) clearBtn.hidden = false;
       } else {
         avatarImg.removeAttribute('src');
         avatarPreview.hidden = true;
-        removeAvatarWrap.hidden = true;
+        if (clearBtn) clearBtn.hidden = true;
       }
     }
 

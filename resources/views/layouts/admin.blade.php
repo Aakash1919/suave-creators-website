@@ -63,6 +63,7 @@
     </div>
 
     @include('layouts.admin.partials.confirm-dialog')
+    @include('admin.partials.gallery-picker')
     @include('layouts.admin.partials.scripts')
     @include('layouts.admin.partials.assets')
   @else

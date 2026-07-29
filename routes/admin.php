@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\ConversationController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TestimonialController;
@@ -72,6 +73,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/testimonials/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
         Route::put('/testimonials/{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
         Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+    });
+
+    Route::middleware('permission:gallery.view')->group(function () {
+        Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+        Route::get('/gallery/browse', [GalleryController::class, 'browse'])->name('gallery.browse');
+    });
+
+    Route::middleware('permission:gallery.manage')->group(function () {
+        Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+        Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+        Route::get('/gallery/{image}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
+        Route::put('/gallery/{image}', [GalleryController::class, 'update'])->name('gallery.update');
+        Route::delete('/gallery/{image}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
     });
 
     Route::middleware('permission:users.view')->group(function () {

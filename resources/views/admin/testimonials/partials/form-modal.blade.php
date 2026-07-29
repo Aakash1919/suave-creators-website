@@ -17,7 +17,6 @@
     <form id="testimonial-form"
       method="POST"
       action="{{ $storeUrl }}"
-      enctype="multipart/form-data"
       data-ajax-form
       data-redirect="false"
       data-reload-table="#admin-datatable"
@@ -49,18 +48,26 @@
         </div>
 
         <div>
-          <label class="admin-label" for="testimonial-avatar">Avatar image</label>
-          <div id="testimonial-avatar-preview" class="mb-2" hidden>
-            <img id="testimonial-avatar-img" src="" alt="" class="h-14 w-14 rounded-full object-cover border border-[var(--admin-border)]">
+          <label class="admin-label">Avatar image</label>
+          <div data-gallery-field data-gallery-preview-size="small">
+            <input type="hidden" name="gallery_image_id" value="" data-gallery-id-input>
+            <input type="hidden" name="remove_avatar" value="0" data-gallery-remove-input>
+
+            <div id="testimonial-avatar-preview" class="admin-gallery-field__preview" data-gallery-preview hidden>
+              <img id="testimonial-avatar-img" data-gallery-preview-img src="" alt="" class="is-avatar">
+            </div>
+
+            <div class="admin-gallery-field__actions">
+              <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-gallery-choose>
+                <i class="fa-solid fa-images" aria-hidden="true"></i>
+                Choose from gallery
+              </button>
+              <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-gallery-clear hidden>
+                Remove
+              </button>
+            </div>
+            <p class="mt-1 text-xs text-[var(--admin-muted)]">Optional. Upload images in Gallery first.</p>
           </div>
-          <div id="testimonial-remove-avatar-wrap" class="mb-2" hidden>
-            <label class="admin-check">
-              <input type="checkbox" name="remove_avatar" value="1">
-              <span>Remove current avatar</span>
-            </label>
-          </div>
-          <input type="file" id="testimonial-avatar" name="avatar" accept="image/*" class="admin-input">
-          <p class="mt-1 text-xs text-[var(--admin-muted)]">Optional. Max 2MB. Leave blank to keep the current image.</p>
         </div>
 
         <div>
