@@ -472,7 +472,9 @@
     const defaults = {
       processing: true,
       serverSide: true,
-      responsive: true,
+      // Horizontal scroll inside the table card — do not expand the page content area.
+      scrollX: true,
+      responsive: false,
       autoWidth: false,
       pageLength: 10,
       lengthMenu: [10, 25, 50, 100],
@@ -511,6 +513,13 @@
     });
 
     enhanceAdminDataTable(table, $table, shell);
+
+    // Keep wide tables scrolling inside the card; remeasure after layout settles.
+    window.setTimeout(function () {
+      if (table && typeof table.columns === 'function') {
+        table.columns.adjust();
+      }
+    }, 50);
 
     return table;
   }

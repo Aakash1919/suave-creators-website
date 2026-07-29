@@ -294,6 +294,22 @@ php artisan db:seed --class=BlogSeeder
 
 `DatabaseSeeder` calls `BlogSeeder` after ensuring the site admin exists.
 
+## Run-once commands
+
+One-off maintenance commands live under `app/Console/Commands/RunOnce/` with signature prefix `run-once:…`.
+
+| Command | Purpose |
+|---------|---------|
+| `run-once:sanitize-blog` | Sanitize blog `content`: extract `data:image/…;base64,…` to `storage/app/public/blogs/content/{slug}-{n}.{ext}`, set `img` `alt` to the blog title, remove empty tags (`<p></p>`, `<span>&nbsp;</span>`, `<h2><br></h2>`, nested empties, etc.), and print a table of sanitized blog URLs |
+
+```bash
+php artisan run-once:sanitize-blog --dry-run
+php artisan run-once:sanitize-blog
+php artisan run-once:sanitize-blog --blog=my-post-slug
+```
+
+Ensure `php artisan storage:link` exists so `/storage/…` URLs resolve. Safe to re-run.
+
 ## AI trend drafts (scheduled)
 
 Console command generates trend-based posts with Laravel AI and always saves them as **drafts** (never auto-publishes):
