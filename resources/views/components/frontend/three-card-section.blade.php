@@ -33,12 +33,7 @@
                             <h3 class="mt-2 text-[14px] font-semibold leading-[100%] text-[#171717]">
                                 {{ $item['title'] }}
                             </h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
-                                <path d="M18 8L22 12L18 16" />
-                                <path d="M2 12H22" />
-                            </svg>
+                            <img src="{{ asset('assets/media/soft-blue-right-arrow.png') }}" alt="Soft blue right arrow for Suave Creators web development services" title="Soft blue right arrow for Suave Creators web development services" width="18" height="5" decoding="async" loading="lazy" aria-hidden="true">
                         </div>
                     </div>
 

@@ -19,7 +19,7 @@ class FaqSection extends Component
      */
     public function __construct(
         public array $qa = [],
-        public ?string $media = 'assets/media/faq-team-collaboration.webp',
+        public ?string $media = 'assets/media/diverse-team-data-meeting.webp',
         public ?string $mediaType = null,
         public string $mediaAlt = 'Business team collaborating on a custom software project with Suave Creators',
         public string $eyebrow = 'Have questions about our Web Services?',

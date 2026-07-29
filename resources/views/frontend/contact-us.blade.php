@@ -110,9 +110,9 @@
         </p>
 
         <div class="contact-form-panel__meta">
-          <a class="contact-form-panel__meta-card" href="tel:+919736900142">
+          <a class="contact-form-panel__meta-card" href="tel:+918894900142">
             <span class="contact-form-panel__meta-label">Phone</span>
-            <span class="contact-form-panel__meta-value">+91 97369 00142</span>
+            <span class="contact-form-panel__meta-value">+91 88949 00142</span>
             <span class="contact-form-panel__meta-note">Mon–Fri · 1:30PM–9:30PM</span>
           </a>
           <a class="contact-form-panel__meta-card" href="mailto:info@suavecreators.com">
@@ -196,7 +196,7 @@
                   <path d="M2 12H22"></path>
                 </svg>
               </button>
-              <a href="tel:+919736900142">or call +91 97369 00142</a>
+              <a href="tel:+918894900142">or call +91 88949 00142</a>
             </div>
 
             <p class="contact-form-panel__disclaimer">

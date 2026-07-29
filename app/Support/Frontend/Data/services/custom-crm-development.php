@@ -100,12 +100,12 @@ return array(
   'portfolioDescription' => 'Check out our outstanding portfolio. A smart digital solution is waiting for you.',
   'portfolioImages' =>
   array(
-    0 => '/assets/portfolio/portfolio-showcase-1.webp',
-    1 => '/assets/portfolio/portfolio-showcase-2.webp',
-    2 => '/assets/portfolio/portfolio-showcase-3.webp',
-    3 => '/assets/portfolio/portfolio-showcase-4.webp',
-    4 => '/assets/portfolio/portfolio-showcase-5.webp',
-    5 => '/assets/portfolio/portfolio-showcase-6.webp',
+    0 => '/assets/portfolio/swastik-culture-hub-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
+    3 => '/assets/portfolio/hubops-software-company-website.webp',
+    4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
   ),
   'industriesEyebrow' => 'Industries We Offer',
   'industriesTitle' => 'Industries We Serve',
@@ -170,17 +170,17 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/assets/media/crm-development-visual-1.webp',
+      'image' => '/assets/media/developers-collaborating-code-review.webp',
       'title' => 'Expertise in Custom Solutions',
       'text' => 'We can proudly say that we have a team of expert custom CRM developers who will listen to your needs and give you a smart solution during the development phase. Let’s reach out to our smart team for your next digital product.',
     ),
     1 => array(
-      'image' => '/assets/media/crm-development-visual-2.webp',
+      'image' => '/assets/media/financial-dashboard-laptop-collaboration.webp',
       'title' => 'Scalable & Secure',
       'text' => 'All of our CRM solutions are scalable and secure to fulfill the clients\' requirements and give them the best possible results with the highest security system.',
     ),
     2 => array(
-      'image' => '/assets/media/crm-development-visual-3.webp',
+      'image' => '/assets/media/conference-table-analytics-whiteboard.webp',
       'title' => 'Seamless Integration ',
       'text' => 'We will always integrate tools and API’s as per the client\'s needs and make a complete automated platform so that users can easily manage it.',
     ),

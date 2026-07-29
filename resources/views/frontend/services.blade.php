@@ -189,7 +189,7 @@
         <article
           class="flex min-h-full flex-col gap-3 overflow-hidden rounded-[22px] border border-[rgba(42,77,251,0.08)] bg-white shadow-[0_18px_40px_rgba(36,36,84,0.06)]">
           <figure class="aspect-[16/10] overflow-hidden">
-            <img src="{{ asset($slide[0]) }}" alt="{{ $slide[1] }}" title="{{ $slide[1] }}" class="h-full w-full object-cover" loading="lazy">
+            <img src="{{ asset($slide[0]) }}" alt="{{ $slide[4] }}" title="{{ $slide[4] }}" class="h-full w-full object-cover" loading="lazy">
           </figure>
           <div class="flex flex-1 flex-col gap-3 p-[22px]">
             <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $slide[1] }}</h3>

@@ -100,7 +100,10 @@
           </div>
           <p class="mt-1 text-[13px] leading-relaxed text-[#4D4D4D] sm:text-[14px]">{{ $service['desc'] ?? '' }}</p>
           @if (!empty($service['img']))
-            <figure class="mt-3 aspect-video overflow-hidden rounded-[12px] sm:rounded-[14px]"><img src="{{ $service['img'] }}" alt="{{ $service['title'] ?? '' }}" title="{{ $service['title'] ?? '' }}" width="640" height="360" class="h-full w-full object-cover" loading="lazy"></figure>
+            @php
+              $serviceImageAlt = trim(($service['title'] ?? 'Custom software') . ' service by Suave Creators software development team');
+            @endphp
+            <figure class="mt-3 aspect-video overflow-hidden rounded-[12px] sm:rounded-[14px]"><img src="{{ $service['img'] }}" alt="{{ $serviceImageAlt }}" title="{{ $serviceImageAlt }}" width="640" height="360" class="h-full w-full object-cover" loading="lazy"></figure>
           @endif
         </article>
       @endforeach

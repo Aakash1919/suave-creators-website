@@ -61,7 +61,7 @@ $footerColumns = [
         </p>
         <ul class="site-footer__contact mt-3 space-y-1 text-[12px] font-medium text-[#B1B9DF] sm:text-[13px]">
           <li>
-            <a href="tel:+919736900142" class="inline-flex !min-h-0 items-center hover:text-white">+91 97369 00142</a>
+            <a href="tel:+918894900142" class="inline-flex !min-h-0 items-center hover:text-white">+91 88949 00142</a>
           </li>
           <li>
             <a href="mailto:info@suavecreators.com" class="inline-flex !min-h-0 max-w-full items-center break-all hover:text-white">Info@suavecreators.com</a>

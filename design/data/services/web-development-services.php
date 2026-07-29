@@ -168,21 +168,21 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/images/business-1.webp',
+      'image' => '/images/startup-mvp-wireframe-planning-session.webp',
       'title' => 'Tailored Solutions for Startups',
       'tags' => array('ERP', 'MVP', 'SaaS'),
       'text' => 'We know every startup has new challenges and business goals. That’s why we build ERP and digital software solutions that are designed to match your unique business goals. If you require an MVP for testing your idea, a reliable app, or a full-fledged platform, our solutions align with your vision while keeping scalability and cost-efficiency in mind.',
       'features' => array('ERP Development', 'MVP Development', 'Cloud Deployment'),
     ),
     1 => array(
-      'image' => '/images/business-2.webp',
+      'image' => '/images/dev-team-collaborative-coding-session.webp',
       'title' => 'Scalable & Responsive Development',
       'tags' => array('Cloud', 'API', 'Architecture'),
       'text' => 'Every startup needs the ability and flexibility to adapt things quickly. Our complete web development process makes sure that your web or applications are reliable and scalable, so that your users enjoy a flawless experience. From website applications to flexible platforms, we help you develop products that are ready to grow with your customer base.',
       'features' => array('Cloud Infrastructure', 'API Integration', 'Scalable Architecture'),
     ),
     2 => array(
-      'image' => '/images/business-3.webp',
+      'image' => '/images/web-performance-analytics-dashboard.webp',
       'title' => 'Growth-Focused Optimization',
       'tags' => array('SEO', 'Analytics', 'Performance'),
       'text' => 'We don’t just build software or websites; we optimise them for long-term growth as well. By performance tuning and SEO-driven website development to integrate analytics and cloud solutions, we always ensure that your startup gains maximum visibility and efficiency. Our approach helps you to attract more users, improve engagement, and accelerate your path to success.',

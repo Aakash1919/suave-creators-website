@@ -50,7 +50,7 @@
               </figure>
             @endforeach
           </div>
-          <div class="consultation-people__column">
+          <div class="consultation-people__column consultation-people__column--center">
             @foreach ($columns['center'] as $person)
               <figure class="consultation-person consultation-person--{{ $person['tone'] }}">
                 <img src="{{ asset($person['src']) }}" alt="{{ $person['alt'] }}" title="{{ $person['alt'] }}"

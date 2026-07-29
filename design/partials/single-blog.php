@@ -324,12 +324,12 @@ $blogFaqs = !empty($post['faqs']) ? $post['faqs'] : array(
           <figure class="consultation-person consultation-person--pink"><img src="/images/consult-1.png" alt="" width="640" height="960" loading="lazy"></figure>
           <figure class="consultation-person consultation-person--orange"><img src="/images/consult-2.png" alt="" width="640" height="960" loading="lazy"></figure>
         </div>
-        <div class="consultation-people__column">
+        <div class="consultation-people__column consultation-people__column--center">
           <figure class="consultation-person consultation-person--yellow"><img src="/images/consult-3.png" alt="" width="640" height="960" loading="lazy"></figure>
-          <figure class="consultation-person consultation-person--blue"><img src="/images/consult-4.png" alt="" width="640" height="960" loading="lazy"></figure>
+          <figure class="consultation-person consultation-person--blue"><img src="/images/consult-5.png" alt="" width="640" height="959" loading="lazy"></figure>
         </div>
         <div class="consultation-people__column consultation-people__column--right">
-          <figure class="consultation-person consultation-person--coral"><img src="/images/consult-5.png" alt="" width="640" height="959" loading="lazy"></figure>
+          <figure class="consultation-person consultation-person--coral"><img src="/images/consult-4.png" alt="" width="640" height="960" loading="lazy"></figure>
           <figure class="consultation-person consultation-person--cyan"><img src="/images/consult-6.png" alt="" width="640" height="960" loading="lazy"></figure>
         </div>
       </div>

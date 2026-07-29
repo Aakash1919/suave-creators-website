@@ -14,13 +14,13 @@
       <p>{{ $description }}</p>
     </div>
 
-    <div class="smart-together-cta__actions flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <div class="smart-together-cta__actions flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
       <x-frontend.cta-button :href="$primaryHref">
         {{ $primaryLabel }}
       </x-frontend.cta-button>
       @if ($secondaryLabel !== '')
         <a href="{{ $secondaryHref }}"
-          class="inline-flex cursor-pointer items-end border-b border-white/70 pb-0.5 text-sm font-semibold text-white max-lg:min-h-[44px]">
+          class="inline-flex shrink-0 cursor-pointer items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
           {{ $secondaryLabel }}
         </a>
       @endif

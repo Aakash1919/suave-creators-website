@@ -52,8 +52,8 @@ class Footer extends Component
     ) {
         $org = (array) config('seo.site.organization', []);
 
-        $this->phone = $phone ?? (string) ($org['telephone'] ?? '+91 97369 00142');
-        $this->phoneHref = $phoneHref ?? (string) ($org['telephone_href'] ?? 'tel:+919736900142');
+        $this->phone = $phone ?? (string) ($org['telephone'] ?? '+91 88949 00142');
+        $this->phoneHref = $phoneHref ?? (string) ($org['telephone_href'] ?? 'tel:+918894900142');
         $this->email = $email ?? (string) ($org['email'] ?? 'Info@suavecreators.com');
         $this->offices = ContactSupport::offices();
 

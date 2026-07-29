@@ -28,19 +28,19 @@ $coreValues = [
 
 $aboutShoreSlides = [
   [
-    '/images/about-shore-1.webp',
+    '/images/answer-engine-inspiration-mindmap.webp',
     'Innovative & Engaging Process',
     'We believe in bringing engagement through the creative efforts at our workplace. Our strategies are uniquely delivered to the clients, which keeps them at bay to converge businesses into better opportunities.',
     ['SEO', 'Mobile', 'First Performance'],
   ],
   [
-    '/images/about-shore-2.webp',
+    '/images/conference-table-analytics-whiteboard.webp',
     'Research driven results',
     'Suave creators always focus on research before proceeding with any project. This helps us in preparing our comprehensive strategy, which results in the brand\'s success with relentless growth.',
     ['SEO', 'Mobile', 'First Performance'],
   ],
   [
-    '/images/about-shore-3.webp',
+    '/images/generative-engine-dev-team-coding.webp',
     'Optimal Delivery',
     'We don\'t just deliver the services, but ensure that our clients are happy with what we are delivering to them. Our approach and strategies mark the excellence in our efforts to provide them with better deliverables.',
     ['SEO', 'Mobile', 'First Performance'],
@@ -51,17 +51,17 @@ $growthFeatures = [
   [
     'Data-Driven Approach',
     'Our data-driven approach utilizes analytics and insights to optimize strategies, enhance user experiences, and drive growth by making informed decisions based on real-time data and trends.',
-    '/images/market-1.png',
+    '/images/financial-dashboard-laptop-collaboration.webp',
   ],
   [
     'Competitive Pricing',
     'We offer competitive pricing without compromising quality, ensuring cost-effective solutions tailored to your needs. Get premium digital services that maximize value while staying within your budget.',
-    '/images/market-2.png',
+    '/images/competitive-pricing-strategy-cash.webp',
   ],
   [
     'Ethical Business Practices',
     'We prioritize ethical business practices, ensuring transparency, integrity, and fairness in all our dealings. Our commitment to honesty fosters trust, long-term partnerships, and sustainable business growth.',
-    '/images/market-3.png',
+    '/images/diverse-team-data-meeting.webp',
   ],
 ];
 
@@ -167,7 +167,7 @@ $partners = [
     </div>
 
     <div class="order-1 mx-auto w-full overflow-hidden rounded-xl border-[6px] border-white sm:order-2 sm:mt-8 sm:rounded-2xl sm:border-[10px]">
-      <img src="/images/about-banner-image.png" alt="Suave Creators IT company team portraits for web design and development" title="Suave Creators IT company team portraits for web design and development"
+      <img src="/images/about-team-grayscale-portrait-banner.webp" alt="Suave Creators IT company team portraits for web design and development" title="Suave Creators IT company team portraits for web design and development"
         class="block h-auto w-full rounded-lg object-cover sm:rounded-[12px]" loading="eager">
     </div>
   </div>
@@ -475,17 +475,17 @@ require __DIR__ . '/partials/articles-insights.php';
             <img src="/images/consult-2.png" alt="Suave Creators team member" width="640" height="960" loading="lazy">
           </figure>
         </div>
-        <div class="consultation-people__column">
+        <div class="consultation-people__column consultation-people__column--center">
           <figure class="consultation-person consultation-person--yellow">
             <img src="/images/consult-3.png" alt="Suave Creators team leader" width="640" height="960" loading="lazy">
           </figure>
           <figure class="consultation-person consultation-person--blue">
-            <img src="/images/consult-4.png" alt="Suave Creators designer" width="640" height="960" loading="lazy">
+            <img src="/images/consult-5.png" alt="Suave Creators team lead" width="640" height="959" loading="lazy">
           </figure>
         </div>
         <div class="consultation-people__column consultation-people__column--right">
           <figure class="consultation-person consultation-person--coral">
-            <img src="/images/consult-5.png" alt="Suave Creators team lead" width="640" height="959" loading="lazy">
+            <img src="/images/consult-4.png" alt="Suave Creators designer" width="640" height="960" loading="lazy">
           </figure>
           <figure class="consultation-person consultation-person--cyan">
             <img src="/images/consult-6.png" alt="Suave Creators team collaborating" width="640" height="960"

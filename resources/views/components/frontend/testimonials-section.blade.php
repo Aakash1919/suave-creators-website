@@ -23,16 +23,16 @@
       <div class="swiper-wrapper">
         @foreach ($items as $testimonial)
           <div class="swiper-slide">
-            <article class="testimonial-card flex h-full flex-col justify-between rounded-lg border border-white/10 p-6">
+            <article class="testimonial-card flex h-full flex-col justify-between rounded-lg p-6">
               <div>
                 <span class="text-sm font-bold text-[#2A4DFB]">/{{ $testimonial['number'] }}</span>
                 <div class="mt-2 tracking-[3px] text-[#FFC107] text-[20px]" aria-label="5 out of 5 stars">★★★★★</div>
-                <p class="mt-4 text-sm font-medium leading-6 text-[#FAFBFA]">{{ $testimonial['quote'] }}</p>
+                <p class="mt-4 text-[13px] text-[#FAFBFA]">{{ $testimonial['quote'] }}</p>
               </div>
               <div class="mt-6 flex items-center gap-4">
                 <span class="testimonial-card__initials grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#2A4DFB] to-[#7A5FF8] text-sm font-bold text-white">{{ $testimonial['initials'] }}</span>
                 <div>
-                  <h3 class="font-semibold text-white">{{ $testimonial['name'] }}</h3>
+                  <h3 class="text-white">{{ $testimonial['name'] }}</h3>
                   <p class="mt-1 text-[13px] text-[#B1B9DF]">{{ $testimonial['role'] }}</p>
                 </div>
               </div>
@@ -68,7 +68,7 @@
       new Swiper(el, {
         direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
         slidesPerView: 1,
-        spaceBetween: 16,
+        spaceBetween: 24,
         loop: true,
         speed: 700,
         autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
@@ -80,7 +80,10 @@
           el: root.querySelector('.testimonial-pagination'),
           clickable: true
         },
-        breakpoints: { 1024: { slidesPerView: 2, spaceBetween: 24 } }
+        breakpoints: {
+          768: { spaceBetween: 16 },
+          1024: { slidesPerView: 2, spaceBetween: 24 }
+        }
       });
     });
   });

@@ -196,7 +196,7 @@ $sampleInsights = [
       <h2 id="industry-cta-heading" class="text-lg font-semibold leading-tight text-white sm:text-xl md:text-2xl md:leading-none"><?= $h($industry['ctaTitle'] ?? '') ?></h2>
       <p class="mt-2 text-[12px] font-semibold leading-normal text-[#B1B9DF] sm:text-sm"><?= $h($industry['ctaDescription'] ?? '') ?></p>
     </div>
-    <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <div class="flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
       <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
       <a href="/contact-us/#contact-id" class="inline-flex w-fit items-center border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">Discuss your Vision</a>
     </div>
@@ -422,7 +422,7 @@ require __DIR__ . '/core-values-section.php';
               <div>
                 <span class="text-sm font-bold text-[#2A4DFB]">/<?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span>
                 <div class="mt-2 text-[18px] tracking-[3px] text-[#FFC107] sm:text-[20px]" aria-label="5 out of 5 stars">★★★★★</div>
-                <p class="mt-3 text-[13px] font-medium leading-6 text-[#FAFBFA] sm:mt-4 sm:text-sm"><?= $h($t['quote'] ?? '') ?></p>
+                <p class="mt-3 text-[13px] font-medium leading-6 text-[#FAFBFA] sm:mt-4"><?= $h($t['quote'] ?? '') ?></p>
               </div>
               <div class="mt-5 flex items-center gap-3 sm:mt-6 sm:gap-4">
                 <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#2A4DFB] to-[#7A5FF8] text-sm font-bold text-white sm:h-14 sm:w-14"><?= $h($initials) ?></span>
