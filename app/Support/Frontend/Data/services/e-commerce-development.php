@@ -88,12 +88,12 @@ return array(
   'portfolioDescription' => 'Explore what we do.',
   'portfolioImages' =>
   array(
-    0 => '/assets/portfolio/portfolio-showcase-1.webp',
-    1 => '/assets/portfolio/portfolio-showcase-2.webp',
-    2 => '/assets/portfolio/portfolio-showcase-3.webp',
-    3 => '/assets/portfolio/portfolio-showcase-4.webp',
-    4 => '/assets/portfolio/portfolio-showcase-5.webp',
-    5 => '/assets/portfolio/portfolio-showcase-6.webp',
+    0 => '/assets/portfolio/swastik-culture-hub-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
+    3 => '/assets/portfolio/hubops-software-company-website.webp',
+    4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
   ),
   'industriesEyebrow' => 'Industries We Serve',
   'industriesTitle' => 'Industries We Serve',
@@ -158,17 +158,17 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/assets/media/business-visual-1.webp',
+      'image' => '/assets/media/content-strategy-team-planning.webp',
       'title' => 'Tailored eCommerce Solutions',
       'text' => 'We help you to cover a custom e-commerce solution because every business and its needs are different. We will try to make your online store stand out and deliver quality results.',
     ),
     1 => array(
-      'image' => '/assets/media/business-visual-2.webp',
+      'image' => '/assets/media/dev-team-collaborative-coding-session.webp',
       'title' => 'Cutting-Edge Technology',
       'text' => 'We provide scalable and cutting-edge software solutions to all of our customers by using the latest technology, new frameworks, and tools. Our advanced technology ensures your online store performs smoothly on all devices and adapts to future trends.',
     ),
     2 => array(
-      'image' => '/assets/media/business-visual-3.webp',
+      'image' => '/assets/media/startup-mvp-wireframe-planning-session.webp',
       'title' => 'User-Friendly Designs',
       'text' => 'User-friendly designs are the need of this AI and advanced world. We develop user-friendly web design so that you can compete with your competitors on search engines easily and market trends.',
     ),

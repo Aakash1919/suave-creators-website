@@ -33,12 +33,12 @@ $testimonials = [
       <div class="swiper-wrapper">
         <?php foreach ($testimonials as $index => $testimonial): ?>
           <div class="swiper-slide">
-            <article class="testimonial-card flex h-full flex-col justify-between rounded-lg border border-white/10 p-6">
+            <article class="testimonial-card flex h-full flex-col justify-between rounded-lg p-6">
               <div>
                 <span
                   class="text-sm font-bold text-[#2A4DFB]">/<?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span>
                 <div class="mt-2 tracking-[3px] text-[#FFC107] text-[20px]" aria-label="5 out of 5 stars">★★★★★</div>
-                <p class="mt-4 text-sm font-medium leading-6 text-[#FAFBFA]"><?= htmlspecialchars($testimonial[0]) ?></p>
+                <p class="mt-4 text-[13px] text-[#FAFBFA]"><?= htmlspecialchars($testimonial[0]) ?></p>
               </div>
               <div class="mt-6 flex items-center gap-4">
                 <span
@@ -46,7 +46,7 @@ $testimonials = [
                 <img class="testimonial-card__avatar" src="<?= htmlspecialchars($testimonial[4]) ?>"
                   alt="<?= htmlspecialchars($testimonial[1]) ?>" width="56" height="56" loading="lazy">
                 <div>
-                  <h3 class="font-semibold text-white"><?= htmlspecialchars($testimonial[1]) ?></h3>
+                  <h3 class="text-white"><?= htmlspecialchars($testimonial[1]) ?></h3>
                   <p class="mt-1 text-[13px] text-[#B1B9DF]"><?= htmlspecialchars($testimonial[2]) ?></p>
                 </div>
               </div>

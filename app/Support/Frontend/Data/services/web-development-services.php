@@ -100,12 +100,12 @@ return array(
   'portfolioDescription' => 'We built a smart solution. Check out our portfolio and understand our skills, creativity and approach. ',
   'portfolioImages' =>
   array(
-    0 => '/assets/portfolio/portfolio-showcase-1.webp',
-    1 => '/assets/portfolio/portfolio-showcase-2.webp',
-    2 => '/assets/portfolio/portfolio-showcase-3.webp',
-    3 => '/assets/portfolio/portfolio-showcase-4.webp',
-    4 => '/assets/portfolio/portfolio-showcase-5.webp',
-    5 => '/assets/portfolio/portfolio-showcase-6.webp',
+    0 => '/assets/portfolio/swastik-culture-hub-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
+    3 => '/assets/portfolio/hubops-software-company-website.webp',
+    4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
   ),
   'industriesEyebrow' => 'Industries We Offer',
   'industriesTitle' => 'Industries We Serve',
@@ -170,21 +170,21 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/assets/media/business-visual-1.webp',
+      'image' => '/assets/media/startup-mvp-wireframe-planning-session.webp',
       'title' => 'Tailored Solutions for Startups',
       'tags' => array('ERP', 'MVP', 'SaaS'),
       'text' => 'We know every startup has new challenges and business goals. That’s why we build ERP and digital software solutions that are designed to match your unique business goals. If you require an MVP for testing your idea, a reliable app, or a full-fledged platform, our solutions align with your vision while keeping scalability and cost-efficiency in mind.',
       'features' => array('ERP Development', 'MVP Development', 'Cloud Deployment'),
     ),
     1 => array(
-      'image' => '/assets/media/business-visual-2.webp',
+      'image' => '/assets/media/dev-team-collaborative-coding-session.webp',
       'title' => 'Scalable & Responsive Development',
       'tags' => array('Cloud', 'API', 'Architecture'),
       'text' => 'Every startup needs the ability and flexibility to adapt things quickly. Our complete web development process makes sure that your web or applications are reliable and scalable, so that your users enjoy a flawless experience. From website applications to flexible platforms, we help you develop products that are ready to grow with your customer base.',
       'features' => array('Cloud Infrastructure', 'API Integration', 'Scalable Architecture'),
     ),
     2 => array(
-      'image' => '/assets/media/business-visual-3.webp',
+      'image' => '/assets/media/web-performance-analytics-dashboard.webp',
       'title' => 'Growth-Focused Optimization',
       'tags' => array('SEO', 'Analytics', 'Performance'),
       'text' => 'We don’t just build software or websites; we optimise them for long-term growth as well. By performance tuning and SEO-driven website development to integrate analytics and cloud solutions, we always ensure that your startup gains maximum visibility and efficiency. Our approach helps you to attract more users, improve engagement, and accelerate your path to success.',

@@ -77,28 +77,31 @@ class ServiceSupport
     }
 
     /**
-     * @return array<int, array{0: string, 1: string, 2: string, 3: array<int, string>}>
+     * @return array<int, array{0: string, 1: string, 2: string, 3: array<int, string>, 4: string}>
      */
     public static function offshoreSlides(): array
     {
         return [
             [
-                'assets/media/end-to-end-development-expertise.webp',
+                'assets/media/developers-collaborating-code-review.webp',
                 'End-to-End Development Expertise',
                 'With all of our projects, we always provide end-to-end development services. By leveraging our global young talent and systematic resource allocation, we provide the best and competitive pricing that helps you to get expert solutions and optimise your development budget.',
                 ['SEO', 'Mobile', 'First Performance'],
+                'Offshore development team reviewing custom software code together',
             ],
             [
-                'assets/media/SEO-Performance-Optimization.webp',
+                'assets/media/seo-infographic-on-imac.webp',
                 'SEO-Optimisation and Performance',
                 'SEO optimization and high performance are the needs of every website and application nowadays. All of our solutions perform better and follow Search engine algorithms so that they easily gain good visibility on Google soon.',
                 ['UI/UX', 'Research', 'Prototyping'],
+                'SEO optimisation strategy on screen for high performance websites',
             ],
             [
-                'assets/media/global-scalable-security.webp',
+                'assets/media/financial-dashboard-laptop-collaboration.webp',
                 'Global and Scalable Security',
                 'Our solutions are built to grow with your business. Whether you\'re a startup expanding into new markets or an enterprise business managing high volumes, we design platforms that scale without performance issues.',
                 ['SEO', 'Mobile', 'First Performance'],
+                'Secure scalable analytics dashboard monitored by an enterprise software team',
             ],
         ];
     }
@@ -367,12 +370,12 @@ class ServiceSupport
     protected static function defaultPortfolioImages(): array
     {
         return [
-            '/assets/portfolio/portfolio-showcase-1.webp',
-            '/assets/portfolio/portfolio-showcase-2.webp',
-            '/assets/portfolio/portfolio-showcase-3.webp',
-            '/assets/portfolio/portfolio-showcase-4.webp',
-            '/assets/portfolio/portfolio-showcase-5.webp',
-            '/assets/portfolio/portfolio-showcase-6.webp',
+            '/assets/portfolio/swastik-culture-hub-website.webp',
+            '/assets/portfolio/mavan-growth-agency-website.webp',
+            '/assets/portfolio/sales-automation-project-dashboard.webp',
+            '/assets/portfolio/hubops-software-company-website.webp',
+            '/assets/portfolio/suave-outreach-crm-laptop.webp',
+            '/assets/portfolio/ematrics-ai-sales-website.webp',
         ];
     }
 }

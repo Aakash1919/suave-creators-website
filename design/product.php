@@ -235,13 +235,13 @@ $principles = [
 
 $partnerCards = [
   [
-    'image' => '/images/product/Shape.jpg',
+    'image' => '/images/product/analytics-dashboard-performance-metrics.jpg',
     'title' => 'The company you can trust',
     'description' => 'Suave Creator\'s is built for security, reliability, and transparency, meeting leading compliance standards.',
     'href' => '/about-us',
   ],
   [
-    'image' => '/images/product/Shape%20(1).jpg',
+    'image' => '/images/product/partner-support-card.jpg',
     'title' => 'Expert support, at every stage',
     'description' => 'Suave Creator\'s Success and Services teams give you direct access to the experts behind the product.',
     'href' => '/contact-us',

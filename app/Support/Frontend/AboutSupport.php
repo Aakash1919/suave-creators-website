@@ -61,25 +61,25 @@ class AboutSupport
     {
         return [
             [
-                'image' => 'assets/media/about-shore-visual-1.webp',
+                'image' => 'assets/media/answer-engine-inspiration-mindmap.webp',
                 'title' => 'Innovative & Engaging Process',
                 'text' => 'We believe in bringing engagement through the creative efforts at our workplace. Our strategies are uniquely delivered to the clients, which keeps them at bay to converge businesses into better opportunities.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],
-                'alt' => 'Innovative web development process at Suave Creators IT company',
+                'alt' => 'Creative mindmap shaping an innovative web design and development process',
             ],
             [
-                'image' => 'assets/media/about-shore-visual-2.webp',
+                'image' => 'assets/media/conference-table-analytics-whiteboard.webp',
                 'title' => 'Research driven results',
                 'text' => 'Suave creators always focus on research before proceeding with any project. This helps us in preparing our comprehensive strategy, which results in the brand\'s success with relentless growth.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],
-                'alt' => 'Research driven digital strategy results for Suave Creators clients',
+                'alt' => 'Research charts and analytics guiding data driven digital strategy',
             ],
             [
-                'image' => 'assets/media/about-shore-visual-3.webp',
+                'image' => 'assets/media/generative-engine-dev-team-coding.webp',
                 'title' => 'Optimal Delivery',
                 'text' => 'We don\'t just deliver the services, but ensure that our clients are happy with what we are delivering to them. Our approach and strategies mark the excellence in our efforts to provide them with better deliverables.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],
-                'alt' => 'Optimal software delivery and web development by Suave Creators',
+                'alt' => 'Software engineers delivering optimised custom development projects on time',
             ],
         ];
     }
@@ -135,19 +135,19 @@ class AboutSupport
             [
                 'title' => 'Data-Driven Approach',
                 'text' => 'Our data-driven approach utilizes analytics and insights to optimize strategies, enhance user experiences, and drive growth by making informed decisions based on real-time data and trends.',
-                'image' => 'assets/media/seo-infographic-on-imac.png',
-                'alt' => 'Data-driven SEO analytics approach for digital growth by Suave Creators',
+                'image' => 'assets/media/financial-dashboard-laptop-collaboration.webp',
+                'alt' => 'Data-driven analytics approach for digital growth by Suave Creators',
             ],
             [
                 'title' => 'Competitive Pricing',
                 'text' => 'We offer competitive pricing without compromising quality, ensuring cost-effective solutions tailored to your needs. Get premium digital services that maximize value while staying within your budget.',
-                'image' => 'assets/media/ppc-campaign-planning.png',
+                'image' => 'assets/media/competitive-pricing-strategy-cash.webp',
                 'alt' => 'Competitive pricing for web development and digital services',
             ],
             [
                 'title' => 'Ethical Business Practices',
                 'text' => 'We prioritize ethical business practices, ensuring transparency, integrity, and fairness in all our dealings. Our commitment to honesty fosters trust, long-term partnerships, and sustainable business growth.',
-                'image' => 'assets/media/social-media-marketing-mobile.png',
+                'image' => 'assets/media/diverse-team-data-meeting.webp',
                 'alt' => 'Ethical business practices in software development partnerships',
             ],
         ];

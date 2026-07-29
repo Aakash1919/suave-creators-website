@@ -23,42 +23,42 @@ return array (
     0 => 
     array (
       'icon' => '/images/it-icon-1.svg',
-      'img' => '/images/it-image-1.webp',
+      'img' => '/images/mobile-app-development-screens-review.webp',
       'title' => 'Mobile App Development',
       'desc' => 'Innovative mobile app development services for IT startups using the latest technology.',
     ),
     1 => 
     array (
       'icon' => '/images/it-icon-2.svg',
-      'img' => '/images/it-image-2.webp',
+      'img' => '/images/fintech-dashboard-financial-analytics.webp',
       'title' => 'Fintech Solutions',
       'desc' => 'AI-powered financial platforms that support digital transformation and data-backed decisions.',
     ),
     2 => 
     array (
       'icon' => '/images/it-icon-3.svg',
-      'img' => '/images/it-image-3.webp',
+      'img' => '/images/ecommerce-storefront-laptop-checkout.webp',
       'title' => 'E-commerce development',
       'desc' => 'Expert e-commerce websites and software for startups and growing businesses.',
     ),
     3 => 
     array (
       'icon' => '/images/it-icon-4.svg',
-      'img' => '/images/it-image-4.webp',
+      'img' => '/images/elearning-platform-online-classroom.webp',
       'title' => 'Educational Softwares',
       'desc' => 'User-ready, AI-powered software for schools, colleges, and educational institutes.',
     ),
     4 => 
     array (
       'icon' => '/images/it-icon-5.svg',
-      'img' => '/images/it-image-5.webp',
+      'img' => '/images/real-estate-property-listing-app.webp',
       'title' => 'Real Estate',
       'desc' => 'Customised IT services for real estate startups designed to help you launch and scale.',
     ),
     5 => 
     array (
       'icon' => '/images/it-icon-6.svg',
-      'img' => '/images/it-image-6.webp',
+      'img' => '/images/custom-software-engineering-team-review.webp',
       'title' => 'Custom Software development',
       'desc' => 'Scalable, secure, high-performance software that streamlines operations and drives growth.',
     ),

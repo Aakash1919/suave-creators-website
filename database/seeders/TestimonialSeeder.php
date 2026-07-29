@@ -10,49 +10,45 @@ use Illuminate\Support\Facades\Cache;
 class TestimonialSeeder extends Seeder
 {
     /**
-     * Seed the marketing testimonials used on home/services (idempotent by name).
+     * Replace marketing testimonials with the current client set.
      */
     public function run(): void
     {
+        Testimonial::query()->delete();
+
         $items = [
             [
-                'quote' => 'Working with this team was one of the best business decisions we made. They understood our vision and delivered a website that performs exceptionally well.',
-                'name' => 'Saurabh Singh Shah',
-                'role' => 'Founder, NorthRose Technologies',
-                'avatar' => 'assets/team/professional-man-navy-blazer-portrait.png',
+                'quote' => 'Aakash and his team was fantastic to work with. They understood the project requirements clearly, communicated well throughout the process, and delivered high-quality work on time. I would definitely recommend them for any web development project.',
+                'name' => 'Amit Rana',
+                'role' => 'Founder - Turbo Trans Corp',
                 'sort_order' => 1,
             ],
             [
-                'quote' => 'The communication was clear from the start, and every milestone arrived with thoughtful solutions. Our new platform is faster, easier to use, and ready to scale.',
-                'name' => 'Ananya Mehta',
-                'role' => 'Operations Director',
-                'avatar' => 'assets/team/professional-woman-product-team-portrait.png',
+                'quote' => 'Aakash and his team were quick to address our frontend tasks. They understood our needs clearly, were transparent with communication, and completed the tasks on time.',
+                'name' => 'Rajesh',
+                'role' => 'Director - ZiveAI',
                 'sort_order' => 2,
             ],
             [
-                'quote' => 'They combined strong product thinking with excellent engineering. The result has improved our workflow and given our customers a much smoother experience.',
-                'name' => 'Daniel Carter',
-                'role' => 'Co-founder, Vertex Labs',
-                'avatar' => 'assets/team/professional-designer-portrait.png',
+                'quote' => 'The Suave Creator team has been a pleasure to work with. Aakash is an exceptionally talented programmer who consistently brings a positive attitude, writes clean and reliable code, and communicates clearly throughout the project. We’ve truly valued the opportunity to collaborate with him and appreciate the quality he brings to every engagement.',
+                'name' => 'Mark Shelton',
+                'role' => 'DBS Interactive',
                 'sort_order' => 3,
             ],
             [
-                'quote' => 'From discovery to launch, the team felt like an extension of our own company. They challenged assumptions and kept the project focused on real business outcomes.',
-                'name' => 'Priya Nair',
-                'role' => 'Head of Digital',
-                'avatar' => 'assets/team/professional-team-lead-portrait.png',
+                'quote' => 'Great Working with Suave Creators, very well executed projects. Keep up the good work',
+                'name' => 'Adnyesh',
+                'role' => 'CTO Ergode Inc',
                 'sort_order' => 4,
             ],
         ];
 
         foreach ($items as $item) {
-            Testimonial::query()->updateOrCreate(
-                ['name' => $item['name']],
-                [
-                    ...$item,
-                    'is_published' => true,
-                ]
-            );
+            Testimonial::query()->create([
+                ...$item,
+                'avatar' => null,
+                'is_published' => true,
+            ]);
         }
 
         Cache::forget(TestimonialService::CACHE_KEY);

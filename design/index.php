@@ -13,7 +13,7 @@ require __DIR__ . '/layout/start.php';
 ?>
 <!-- Hero Section Start -->
 <section
-  class="relative z-10 w-full pb-12 pt-8 md:min-h-[440px] md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container">
+  class="relative z-10 w-full pb-12 pt-8 md:min-h-[440px] md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container bg">
   <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
     <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[520px]">
       <p
@@ -56,7 +56,7 @@ require __DIR__ . '/layout/start.php';
       <div class="hero-media-grid" aria-hidden="true">
         <div
           class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img src="/images/hero_gif1.gif" alt="" class="block h-full w-full max-w-none object-cover">
+          <img src="/images/strategy-meeting-documents-overhead.png" alt="Team brainstorming software strategy documents with Suave Creators" title="Team brainstorming software strategy documents with Suave Creators" class="block h-full w-full max-w-none object-cover">
         </div>
         <div
           class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
@@ -72,9 +72,9 @@ require __DIR__ . '/layout/start.php';
 </section>
 <!-- Hero Section End -->
 
-<!-- About Section Start -->
+<!-- About Section Start / Who We Are -->
 <section
-  class="full-bleed bg-white bg-[url('/images/background_about.png')] bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20">
+  class="who-we-are full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="--who-we-are-bg: url('/images/background_about.png'); background-image: var(--who-we-are-bg);">
   <div class="section-inner site-container ">
     <div class="about-stats">
       <?php
@@ -101,31 +101,31 @@ require __DIR__ . '/layout/start.php';
       <?php endforeach; ?>
     </div>
 
-    <div class="mt-16 grid grid-cols-1 items-start gap-14 lg:mt-20 lg:grid-cols-[1.1fr_0.9fr]">
+    <div class="who-we-are__intro mt-16 grid grid-cols-1 items-start gap-x-14 gap-y-8 lg:mt-20 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
 
-          <span
-            class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-            Have questions about our Web Services?
-          </span>
-        </div>
-        <h2 class="mt-4 text-[clamp(2.2rem,5vw,3rem)] font-bold leading-[110%] text-[#171717] lg:text-[48px]">
-          We Build Digital Experiences That
-          <span
-            class="inline-block bg-[linear-gradient(180deg,_#2F69FB_12%,_#C56BFF_100%)] bg-clip-text text-transparent">
-            Drive Growth
-          </span>
-        </h2>
-        <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
-          We develop user-friendly web and mobile applications that enhance your overall growth and user experience.
-        </p>
-        <p class="mt-4 hidden text-[14px] leading-[24px] text-[#4D4D4D] max-w-[520px] md:block">
-          We are a group of young talent who believe in teamwork and, with our expertise, deliver the best industry
-          solution according to the client's requirements. Being one of the most valued software development companies,
-          we design a range of AI-integrated smart software for this faster developing world.
-        </p>
+            <span
+              class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
+              Have questions about our Web Services?
+            </span>
+          </div>
+          <h2 class="mt-4 text-[clamp(2.2rem,5vw,3rem)] font-bold leading-[110%] text-[#171717] lg:text-[48px]">
+            We Build Digital Experiences That
+            <span
+              class="inline-block bg-[linear-gradient(180deg,_#2F69FB_49.52%,_#D078FE_100%)] bg-clip-text text-transparent">
+              Drive Growth
+            </span>
+          </h2>
+          <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
+            We develop user-friendly web and mobile applications that enhance your overall growth and user experience.
+          </p>
+          <p class="mt-4 hidden text-[14px] leading-[24px] text-[#4D4D4D] max-w-[520px] md:block">
+            We are a group of young talent who believe in teamwork and, with our expertise, deliver the best industry
+            solution according to the client's requirements. Being one of the most valued software development companies,
+            we design a range of AI-integrated smart software for this faster developing world.
+          </p>
         <div class="about-values mt-8">
           <div class="about-values__item">
             <span class="about-values__icon bg-[#E6DEFD] shadow-[0px_16px_50px_0px_#5C638029]">
@@ -166,22 +166,9 @@ require __DIR__ . '/layout/start.php';
             </div>
           </div>
         </div>
-        <div class=" mt-10 flex flex-wrap items-center gap-5">
-          <a href="/about-us"
-            class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
-            <span>Learn more About Us</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="transition-transform duration-300 group-hover:translate-x-1">
-              <path d="M18 8L22 12L18 16"></path>
-              <path d="M2 12H22"></path>
-            </svg>
-          </a>
-          <a href="/product" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
-        </div>
       </div>
 
-      <div class="about-collage">
+      <div class="about-collage lg:row-span-2">
         <div class="about-collage__column about-collage__column--left">
           <figure class="about-collage__tile about-collage__tile--team">
             <img src="/images/team-1.png" alt="Team members collaborating around a table" width="640" height="960"
@@ -225,6 +212,20 @@ require __DIR__ . '/layout/start.php';
           </figure>
         </div>
       </div>
+
+      <div class="mt-0 flex flex-wrap items-center gap-5">
+        <a href="/about-us"
+          class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
+          <span>Learn more About Us</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="transition-transform duration-300 group-hover:translate-x-1">
+            <path d="M18 8L22 12L18 16"></path>
+            <path d="M2 12H22"></path>
+          </svg>
+        </a>
+        <a href="/product" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
+      </div>
     </div>
   </div>
 </section>
@@ -232,8 +233,8 @@ require __DIR__ . '/layout/start.php';
 
 <!-- Offerings Showcase Section Start -->
 <section
-  class="full-bleed  overflow-hidden bg-[#F9FAFC] bg-[url('/images/background_offerings.png')] bg-cover bg-top bg-no-repeat">
-  <div class="section-inner relative z-10 py-12 sm:py-20 lg:py-[80px]">
+  class="offerings-showcase full-bleed overflow-hidden bg-[#F9FAFC] bg-[url('/images/background_offerings.png')] bg-cover bg-top bg-no-repeat">
+  <div class="section-inner relative z-10 pt-0 pb-12 sm:py-20 lg:py-[80px]">
     <div class="mx-auto max-w-[660px] text-center">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
@@ -334,7 +335,7 @@ require __DIR__ . '/layout/start.php';
       <p>Ready to transform your ideas into reality with Suave Creators?</p>
     </div>
 
-    <div class="smart-together-cta__actions flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <div class="smart-together-cta__actions flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
       <a href="/contact-us/#contact-id"
         class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
         Get Started
@@ -345,7 +346,7 @@ require __DIR__ . '/layout/start.php';
           <path d="M2 12H22"></path>
         </svg>
       </a>
-      <a href="/contact-us/#contact-id" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-white/70 text-sm font-semibold text-white">
+      <a href="/contact-us/#contact-id" class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
         Discuss your Vision
       </a>
     </div>
@@ -406,12 +407,7 @@ require __DIR__ . '/layout/start.php';
               <h3 class="text-[#171717] text-[14px] leading-[100%] font-semibold mt-2">
                 <?= htmlspecialchars($service[2]) ?>
               </h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-move-right-icon lucide-move-right">
-                <path d="M18 8L22 12L18 16" />
-                <path d="M2 12H22" />
-              </svg>
+              <img src="/images/soft-blue-right-arrow.png" alt="Soft blue right arrow for Suave Creators web development services" title="Soft blue right arrow for Suave Creators web development services" width="18" height="5" aria-hidden="true" decoding="async">
             </div>
           </div>
 
@@ -467,10 +463,10 @@ require __DIR__ . '/layout/start.php';
 
     <?php
     $coreValues = [
-      ['innovation', 'Innovation', 'We work with future trends and the latest technologies.', '/images/portfolio-1.png', 'Modern timber-and-glass building exterior'],
-      ['quality', 'Quality', 'Delivering the best quality, ensuring our clients get nothing less than the best.', '/images/portfolio-2.png', 'Bright contemporary living room and kitchen'],
-      ['trust', 'Trust', 'We build trust by focusing on the exact client requirements.', '/images/portfolio-3.png', 'Warm modern lounge with plants and artwork'],
-      ['customer', 'Customer Focus', 'We put our clients at the heart of everything we build.', '/images/portfolio-4.png', 'Contemporary office with glass meeting rooms'],
+      ['innovation', 'Innovation', 'We work with future trends and the latest technologies.', '/images/conference-table-analytics-whiteboard.webp', 'Innovation-focused software team reviewing analytics on a conference table'],
+      ['quality', 'Quality', 'Delivering the best quality, ensuring our clients get nothing less than the best.', '/images/financial-dashboard-laptop-collaboration.webp', 'Quality-driven financial dashboard collaboration for software excellence'],
+      ['trust', 'Trust', 'We build trust by focusing on the exact client requirements.', '/images/diverse-team-data-meeting.webp', 'Trusted diverse team aligning on client requirements with data insights'],
+      ['customer', 'Customer Focus', 'We put our clients at the heart of everything we build.', '/images/summary-report-team-meeting.webp', 'Customer focused team reviewing a summary report in a client meeting'],
     ];
     ?>
     <div class="core-values__grid">
@@ -480,11 +476,13 @@ require __DIR__ . '/layout/start.php';
             <svg class="core-value-card__icon" aria-hidden="true">
               <use href="#core-value-<?= htmlspecialchars($value[0]) ?>"></use>
             </svg>
-            <h3><?= htmlspecialchars($value[1]) ?></h3>
-            <p><?= htmlspecialchars($value[2]) ?></p>
+            <div class="core-value-card__text">
+              <h3><?= htmlspecialchars($value[1]) ?></h3>
+              <p><?= htmlspecialchars($value[2]) ?></p>
+            </div>
           </div>
           <div class="core-value-card__image">
-            <img src="<?= htmlspecialchars($value[3]) ?>" alt="<?= htmlspecialchars($value[4]) ?>" loading="lazy">
+            <img src="<?= htmlspecialchars($value[3]) ?>" alt="<?= htmlspecialchars($value[4]) ?>" title="<?= htmlspecialchars($value[4]) ?>" loading="lazy">
           </div>
         </article>
       <?php endforeach; ?>
@@ -522,56 +520,56 @@ require __DIR__ . '/layout/start.php';
         'Search Engine Optimization',
         'Boost Your Organic Visibility',
         'With our expertise, we enhance the online visibility of your professional website.',
-        '/images/market-1.png',
-        'Digital marketing analytics displayed on a laptop screen',
+        '/images/seo-infographic-on-imac.webp',
+        'SEO analytics dashboard for search engine optimization services',
       ],
       [
         '/images/market-icon-2.svg',
         'Pay-Per-Click Advertising',
         'Instant Reach, Tangible Results',
         'Reach high-intent audiences quickly with focused campaigns that maximise conversions and measurable ROI.',
-        '/images/market-2.png',
-        'Pay-per-click advertising campaign planning',
+        '/images/ppc-campaign-planning.webp',
+        'PPC advertising campaign planning for higher conversions',
       ],
       [
         '/images/market-icon-3.svg',
         'Social Media Marketing',
         'Engage & Grow Your Community',
         'Build meaningful connections with relevant content that inspires engagement, loyalty, and lasting growth.',
-        '/images/market-3.png',
-        'Social media marketing content viewed on a mobile device',
+        '/images/social-media-marketing-mobile.webp',
+        'Social media marketing content strategy on a mobile device',
       ],
       [
         '/images/market-icon-4.svg',
         'Content Strategy & Planning',
         'Plan. Create. Convert.',
         'Turn ideas into purposeful content that strengthens your brand and guides customers to act.',
-        '/images/market-4.png',
-        'Creative team planning a digital content strategy',
+        '/images/content-strategy-team-planning.webp',
+        'Content strategy team planning digital marketing campaigns',
       ],
       [
         '/images/market-icon-5.svg',
         'Online Reputation Management',
         'Protect Trust. Build Credibility.',
         'Monitor brand conversations and strengthen the online reputation that shapes customer confidence.',
-        '/images/market-1.png',
-        'Marketing specialists reviewing online brand sentiment',
+        '/images/online-reputation-admin-dashboard.webp',
+        'Online reputation management review of brand sentiment analytics',
       ],
       [
         '/images/market-icon-6.svg',
         'Answer Engine Optimization',
         'Be the Answer Customers Find',
         'Structure authoritative content so voice assistants and answer engines can surface your expertise.',
-        '/images/market-2.png',
-        'Team shaping content for modern answer engines',
+        '/images/answer-engine-inspiration-mindmap.webp',
+        'Answer engine optimization content planning for AI search',
       ],
       [
         '/images/market-icon-7.svg',
         'Generative Engine Optimization',
         'Stay Visible in AI Search',
         'Position your brand for discovery across generative platforms with trusted content and clear signals.',
-        '/images/market-3.png',
-        'Digital team optimizing brand visibility for AI search',
+        '/images/generative-engine-dev-team-coding.webp',
+        'Generative engine optimization for brand visibility in AI search',
       ],
     ];
     ?>
@@ -677,10 +675,48 @@ $digitalServicesMarqueeItems = [
 
     <?php
     $portfolioShowcaseProjects = [
-      ['/images/project-1.png', 'Modern timber-and-glass creative studio exterior'],
-      ['/images/project-2.png', 'Bright contemporary residence interior'],
-      ['/images/project-3.png', 'Warm modern lounge with plants and artwork'],
-      ['/images/project-1.png', 'Contemporary office with glass meeting rooms'],
+      [
+        'category' => 'CRM Development',
+        'title' => 'Suave Outreach CRM Platform',
+        'description' => 'An AI-assisted outreach CRM for discovering leads, enriching business context, and sending personalized emails.',
+        'image' => '/images/suave-outreach-crm-laptop.webp',
+        'alt' => 'Suave Creators outreach CRM platform on a laptop display',
+      ],
+      [
+        'category' => 'Custom Software',
+        'title' => 'Sales Automation Project Dashboard',
+        'description' => 'A project workspace for tracking sales automation rollouts, task priorities, and team progress in one place.',
+        'image' => '/images/sales-automation-project-dashboard.webp',
+        'alt' => 'Sales automation project dashboard software by Suave Creators',
+      ],
+      [
+        'category' => 'Web Development',
+        'title' => 'MAVAN Growth Agency Website',
+        'description' => 'A conversion-focused site for a growth agency that embeds elite talent to solve complex scaling problems.',
+        'image' => '/images/mavan-growth-agency-website.webp',
+        'alt' => 'MAVAN growth agency website built by Suave Creators',
+      ],
+      [
+        'category' => 'Web Design',
+        'title' => 'HubOps Software Company Website',
+        'description' => 'A high-impact marketing site for a custom software company focused on SaaS, APIs, and industry solutions.',
+        'image' => '/images/hubops-software-company-website.webp',
+        'alt' => 'HubOps custom software company website by Suave Creators',
+      ],
+      [
+        'category' => 'Web Design',
+        'title' => 'Swastik Culture Hub Website',
+        'description' => 'A digital hub for Indian history, art, and culture with curated libraries and original series.',
+        'image' => '/images/swastik-culture-hub-website.webp',
+        'alt' => 'Swastik culture hub website for history art and culture content',
+      ],
+      [
+        'category' => 'AI Product',
+        'title' => 'Ematrics AI Sales Website',
+        'description' => 'A product site for an AI sales catalyst that trains reps, assists live calls, and delivers post-call analytics.',
+        'image' => '/images/ematrics-ai-sales-website.webp',
+        'alt' => 'Ematrics AI sales catalyst website built by Suave Creators',
+      ],
     ];
     ?>
     <div class="swiper portfolioShowcaseSwiper">
@@ -689,18 +725,15 @@ $digitalServicesMarqueeItems = [
           <div class="swiper-slide">
             <article class="portfolio-showcase__card">
               <div class="portfolio-showcase__image">
-                <img src="<?= htmlspecialchars($project[0]) ?>" alt="<?= htmlspecialchars($project[1]) ?>" loading="lazy" draggable="false">
+                <img src="<?= htmlspecialchars($project['image']) ?>" alt="<?= htmlspecialchars($project['alt']) ?>" title="<?= htmlspecialchars($project['alt']) ?>" loading="lazy" draggable="false">
               </div>
               <div class="portfolio-showcase__copy">
                 <p
-                  class="inline-block text-[12px] font-bold text-transparent bg-clip-text bg-[linear-gradient(90deg,_#2A4DFB_0%,_#7A5FF8_100%)] mb-2">
-                  TEXT GOES HERE
+                  class="inline-block text-[12px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent mb-2">
+                  <?= htmlspecialchars($project['category']) ?>
                 </p>
-                <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2">Experience the
-                  difference with our results-driven approach.</h3>
-                <p class=" text-[14px] text-[#4D4D4D] max-w-[360px] ">A meta-registry unifying the world’s carbon-credit
-                  registries
-                  into one source of truth</p>
+                <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2"><?= htmlspecialchars($project['title']) ?></h3>
+                <p class=" text-[14px] text-[#4D4D4D] max-w-[360px] "><?= htmlspecialchars($project['description']) ?></p>
               </div>
             </article>
           </div>
@@ -791,11 +824,7 @@ $digitalServicesMarqueeItems = [
           <p><?= htmlspecialchars($industry[2]) ?></p>
 
           <span class="industry-card__arrow" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 8L22 12L18 16"></path>
-              <path d="M2 12H22"></path>
-            </svg>
+            <img src="/images/soft-white-right-arrow.png" alt="Soft white right arrow for Suave Creators industry navigation" title="Soft white right arrow for Suave Creators industry navigation" width="18" height="5" aria-hidden="true" decoding="async">
           </span>
         </article>
       <?php endforeach; ?>
@@ -1024,12 +1053,12 @@ require __DIR__ . '/partials/articles-insights.php';
             <img src="/images/consult-3.png" alt="Suave Creators team leader" width="640" height="960" loading="lazy">
           </figure>
           <figure class="consultation-person consultation-person--blue">
-            <img src="/images/consult-4.png" alt="Suave Creators designer" width="640" height="960" loading="lazy">
+            <img src="/images/consult-5.png" alt="Suave Creators team lead" width="640" height="959" loading="lazy">
           </figure>
         </div>
         <div class="consultation-people__column consultation-people__column--right">
           <figure class="consultation-person consultation-person--coral">
-            <img src="/images/consult-5.png" alt="Suave Creators team lead" width="640" height="959" loading="lazy">
+            <img src="/images/consult-4.png" alt="Suave Creators designer" width="640" height="960" loading="lazy">
           </figure>
           <figure class="consultation-person consultation-person--cyan">
             <img src="/images/consult-6.png" alt="Suave Creators team collaborating" width="640" height="960"
@@ -1144,7 +1173,7 @@ require __DIR__ . '/partials/articles-insights.php';
       new Swiper('.testimonialSwiper', {
         direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
         slidesPerView: 1,
-        spaceBetween: 16,
+        spaceBetween: 24,
         loop: true,
         speed: 700,
         autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
@@ -1153,7 +1182,10 @@ require __DIR__ . '/partials/articles-insights.php';
           el: '.testimonial-pagination',
           clickable: true
         },
-        breakpoints: { 1024: { slidesPerView: 2, spaceBetween: 24 } }
+        breakpoints: {
+          768: { spaceBetween: 16 },
+          1024: { slidesPerView: 2, spaceBetween: 24 }
+        }
       });
 
       if (document.querySelector('.articlesInsightsSwiper')) {
@@ -1579,6 +1611,7 @@ require __DIR__ . '/partials/articles-insights.php';
   object-fit: contain;
   position: relative;
   text-align: center;
+  transition: filter 0.2s ease;
   width: 22px;
   z-index: 1;
 }
@@ -1590,6 +1623,7 @@ require __DIR__ . '/partials/articles-insights.php';
   line-height: 1.25;
   margin-top: 5px;
   position: relative;
+  transition: color 0.2s ease;
   z-index: 1;
 }
 
@@ -1597,20 +1631,27 @@ require __DIR__ . '/partials/articles-insights.php';
   color: #2A4DFB;
 }
 
+.digital-marketing-card:hover .digital-marketing-card__icon {
+  filter: brightness(0) saturate(100%) invert(32%) sepia(90%) saturate(2500%) hue-rotate(222deg) brightness(98%) contrast(101%);
+}
+
 .digital-marketing-card__number {
   color: #F7F8F8;
+  font-family: "Roboto Flex", "PP Mori", ui-sans-serif, system-ui, sans-serif;
   font-size: 34px;
   font-weight: 800;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.02em;
   line-height: 1;
   pointer-events: none;
   position: absolute;
   right: 0;
+  text-align: right;
   top: -8px;
   z-index: 0;
 }
 
 .digital-marketing-card__image {
+  aspect-ratio: 16 / 10;
   background: transparent;
   border-radius: 8px;
   margin-top: 10px;
@@ -1619,7 +1660,7 @@ require __DIR__ . '/partials/articles-insights.php';
 
 .digital-marketing-card__image img {
   display: block;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
   width: 100%;
@@ -1803,12 +1844,47 @@ require __DIR__ . '/partials/articles-insights.php';
 }
 
 @media (max-width: 767px) {
-  .about-collage {
+  /* BG wraps full intro+collage+CTAs block so content stays inside */
+  .who-we-are {
+    background-image: none !important;
+  }
+
+  .who-we-are__intro {
+    background-image: var(--who-we-are-bg);
+    background-position: 65% 100%;
+    background-repeat: no-repeat;
+    background-size: 220% auto;
+    box-sizing: border-box;
+    margin-inline: calc(50% - 50vw);
+    padding-block: 24px 32px;
+    padding-inline: max(16px, calc(50vw - 186.5px));
+    width: 100vw;
+  }
+
+  .who-we-are__intro > .mt-0 {
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-main > .who-we-are.full-bleed > .section-inner,
+  .who-we-are > .section-inner {
+    box-sizing: border-box;
+    grid-column: full;
+    justify-self: center;
+    margin-inline: auto;
+    max-width: 373px;
+    padding-inline: 0;
+    width: 100%;
+  }
+
+  .who-we-are .about-collage {
     --collage-gap: 8px;
-    --col-left: 137px;
-    --col-center: 130px;
-    --col-right: 111px;
+    --col-left: 129px;
+    --col-center: 123px;
+    --col-right: 105px;
     max-width: 100%;
+    width: 100%;
   }
 
   .about-values {
@@ -1816,59 +1892,70 @@ require __DIR__ . '/partials/articles-insights.php';
     display: none;
   }
 
+  .offerings-showcase {
+    overflow: visible;
+  }
+
+  .offeringsSwiper.swiper {
+    overflow: visible !important;
+    padding: 8px 6px 20px;
+    margin-inline: -6px;
+  }
+
   .offerings-card {
     padding: 10px !important;
-    background-color: white;
+    background-color: #fff;
     border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(17, 24, 39, 0.08), 0 12px 28px rgba(17, 24, 39, 0.12);
   }
 
   .about-collage__column--left {
-    padding-top: 43px;
+    padding-top: 40px;
   }
 
   .about-collage__column--right {
-    padding-top: 53px;
+    padding-top: 50px;
   }
 
   .about-collage__tile--team,
   .about-collage__tile--office-small {
-    height: 65px;
-    width: 86px;
+    height: 61px;
+    width: 81px;
   }
 
   .about-collage__tile--portrait-tall {
-    height: 173px;
-    width: 137px;
+    height: 163px;
+    width: 129px;
   }
 
   .about-collage__tile--leader {
-    height: 101px;
-    width: 130px;
+    height: 95px;
+    width: 123px;
   }
 
   .about-collage__tile--portrait-main {
-    height: 202px;
-    width: 130px;
+    height: 190px;
+    width: 123px;
   }
 
   .about-collage__tile--office-wide {
-    height: 86px;
-    width: 130px;
+    height: 81px;
+    width: 123px;
   }
 
   .about-collage__tile--portrait-right {
-    height: 101px;
-    width: 111px;
+    height: 95px;
+    width: 105px;
   }
 
   .about-collage__tile--meeting {
-    height: 81px;
-    width: 111px;
+    height: 76px;
+    width: 105px;
   }
 
   .about-collage__tile--meeting-sm {
-    height: 68px;
-    width: 89px;
+    height: 64px;
+    width: 84px;
   }
 
   .about-collage__tile {
@@ -1892,7 +1979,7 @@ require __DIR__ . '/partials/articles-insights.php';
   }
 
   .digital-marketing-services {
-    padding: 52px 0 48px;
+    padding: 52px 0 28px;
   }
 
   .digital-marketing-services__intro h2 {
@@ -1905,8 +1992,13 @@ require __DIR__ . '/partials/articles-insights.php';
   }
 
   .digital-marketing-card {
-    min-height: 0;
+    border: 1px solid #e6e9ef;
+    border-radius: 11px;
+    height: 312px;
+    min-height: 312px;
+    max-width: 100%;
     padding: 12px;
+    width: 373px;
   }
 
   .digital-marketing-card__image {
@@ -1944,7 +2036,7 @@ require __DIR__ . '/partials/articles-insights.php';
     align-items: center;
     flex-direction: row;
     gap: 1rem;
-    margin-top: 28px;
+    margin-top: 14px;
   }
 
   .digital-marketing-services__more a {
@@ -1958,18 +2050,21 @@ require __DIR__ . '/partials/articles-insights.php';
   }
 
   .industries-support__copy {
-    max-width: calc(100% - 64px);
+    max-width: calc(100% - 40px);
   }
 
   .industries-support__copy p {
-    font-size: clamp(0.9375rem, 3.5vw, 1.125rem);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0;
   }
 
   .industries-support__illustration {
     margin: 0;
     position: absolute;
     right: 10px;
-    top: 60px;
+    top: 78px;
     transform: scale(0.72);
     transform-origin: top right;
   }
@@ -1990,7 +2085,9 @@ require __DIR__ . '/partials/articles-insights.php';
   }
 
   .digital-marketing-card__number {
-    font-size: 28px;
+    font-size: 34px;
+    height: 24px;
+    width: 38px;
   }
 }
 

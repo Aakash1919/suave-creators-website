@@ -51,9 +51,9 @@ return [
         'organization' => [
             'legal_name' => 'Suave Creators',
             'email' => 'Info@suavecreators.com',
-            'telephone' => '+91 97369 00142',
-            'telephone_href' => 'tel:+919736900142',
-            'telephone_schema' => '+91-9736900142',
+            'telephone' => '+91 88949 00142',
+            'telephone_href' => 'tel:+918894900142',
+            'telephone_schema' => '+91-8894900142',
             'area_served' => 'Worldwide',
             'available_language' => ['en', 'en-IN', 'en-US'],
             'address_display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',

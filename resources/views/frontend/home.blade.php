@@ -62,9 +62,9 @@
 </section>
 <!-- Hero Section End -->
 
-<!-- About Section Start -->
+<!-- About Section Start / Who We Are -->
 <section
-  class="full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/about-section-bg.png') }}');">
+  class="who-we-are full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="--who-we-are-bg: url('{{ asset('assets/background/about-section-bg.png') }}'); background-image: var(--who-we-are-bg);">
   <div class="section-inner site-container ">
     <div class="about-stats">
       @foreach ($stats as $stat)
@@ -83,31 +83,31 @@
       @endforeach
     </div>
 
-    <div class="mt-16 grid grid-cols-1 items-start gap-14 lg:mt-20 lg:grid-cols-[1.1fr_0.9fr]">
+    <div class="who-we-are__intro mt-16 grid grid-cols-1 items-start gap-x-14 gap-y-8 lg:mt-20 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
 
-          <span
-            class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-            Have questions about our Web Services?
-          </span>
-        </div>
-        <h2 class="mt-4 text-[clamp(2.2rem,5vw,3rem)] font-bold leading-[110%] text-[#171717] lg:text-[48px]">
-          We Build Digital Experiences That
-          <span
-            class="inline-block bg-[linear-gradient(180deg,_#2F69FB_12%,_#C56BFF_100%)] bg-clip-text text-transparent">
-            Drive Growth
-          </span>
-        </h2>
-        <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
-          We develop user-friendly web and mobile applications that enhance your overall growth and user experience.
-        </p>
-        <p class="mt-4 hidden text-[14px] leading-[24px] text-[#4D4D4D] max-w-[520px] md:block">
-          We are a group of young talent who believe in teamwork and, with our expertise, deliver the best industry
-          solution according to the client's requirements. Being one of the most valued software development companies,
-          we design a range of AI-integrated smart software for this faster developing world.
-        </p>
+            <span
+              class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
+              Have questions about our Web Services?
+            </span>
+          </div>
+          <h2 class="mt-4 text-[clamp(2.2rem,5vw,3rem)] font-bold leading-[110%] text-[#171717] lg:text-[48px]">
+            We Build Digital Experiences That
+            <span
+              class="inline-block bg-[linear-gradient(180deg,_#2F69FB_49.52%,_#D078FE_100%)] bg-clip-text text-transparent">
+              Drive Growth
+            </span>
+          </h2>
+          <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
+            We develop user-friendly web and mobile applications that enhance your overall growth and user experience.
+          </p>
+          <p class="mt-4 hidden text-[14px] leading-[24px] text-[#4D4D4D] max-w-[520px] md:block">
+            We are a group of young talent who believe in teamwork and, with our expertise, deliver the best industry
+            solution according to the client's requirements. Being one of the most valued software development companies,
+            we design a range of AI-integrated smart software for this faster developing world.
+          </p>
         <div class="about-values mt-8">
           <div class="about-values__item">
             <span class="about-values__icon bg-[#E6DEFD] shadow-[0px_16px_50px_0px_#5C638029]">
@@ -148,22 +148,9 @@
             </div>
           </div>
         </div>
-        <div class=" mt-10 flex flex-wrap items-center gap-5">
-          <a href="{{ route('about-us') }}"
-            class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
-            <span>Learn more About Us</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="transition-transform duration-300 group-hover:translate-x-1">
-              <path d="M18 8L22 12L18 16"></path>
-              <path d="M2 12H22"></path>
-            </svg>
-          </a>
-          <a href="{{ route('product') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
-        </div>
       </div>
 
-      <div class="about-collage">
+      <div class="about-collage lg:row-span-2">
         <div class="about-collage__column about-collage__column--left">
           <figure class="about-collage__tile about-collage__tile--team">
             <img src="{{ asset('assets/team/metallic-s-logo-office-wall.png') }}" alt="Suave Creators brand mark on a modern software office wall" title="Suave Creators brand mark on a modern software office wall" width="640" height="960"
@@ -207,6 +194,20 @@
           </figure>
         </div>
       </div>
+
+      <div class="mt-0 flex flex-wrap items-center gap-5">
+        <a href="{{ route('about-us') }}"
+          class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
+          <span>Learn more About Us</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="transition-transform duration-300 group-hover:translate-x-1">
+            <path d="M18 8L22 12L18 16"></path>
+            <path d="M2 12H22"></path>
+          </svg>
+        </a>
+        <a href="{{ route('product') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
+      </div>
     </div>
   </div>
 </section>
@@ -214,8 +215,8 @@
 
 <!-- Offerings Showcase Section Start -->
 <section
-  class="full-bleed overflow-hidden bg-[#F9FAFC] bg-repeat" style="background-image: url('{{ asset('assets/background/what-we-do-section-pattern-bg.png') }}');">
-  <div class="section-inner relative z-10 py-12 sm:py-20 lg:py-[80px]">
+  class="offerings-showcase full-bleed overflow-hidden bg-[#F9FAFC] bg-repeat" style="background-image: url('{{ asset('assets/background/what-we-do-section-pattern-bg.png') }}');">
+  <div class="section-inner relative z-10 pt-0 pb-12 sm:py-20 lg:py-[80px]">
     <div class="mx-auto max-w-[660px] text-center">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
@@ -317,8 +318,10 @@
             <svg class="core-value-card__icon" aria-hidden="true">
               <use href="#core-value-{{ $value['id'] }}"></use>
             </svg>
-            <h3>{{ $value['title'] }}</h3>
-            <p>{{ $value['description'] }}</p>
+            <div class="core-value-card__text">
+              <h3>{{ $value['title'] }}</h3>
+              <p>{{ $value['description'] }}</p>
+            </div>
           </div>
           <div class="core-value-card__image">
             <img src="{{ asset($value['image']) }}" alt="{{ $value['alt'] }}" title="{{ $value['alt'] }}" loading="lazy" decoding="async">
@@ -373,12 +376,10 @@
                 <p>{{ $service['description'] }}</p>
               </div>
               <span class="digital-marketing-card__arrow" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                  stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-move-right-icon lucide-move-right">
-                  <path d="M18 8L22 12L18 16"></path>
-                  <path d="M2 12H22"></path>
-                </svg>
+                <img src="{{ asset('assets/media/soft-blue-right-arrow.png') }}"
+                  alt="Soft blue right arrow for Suave Creators digital marketing services"
+                  title="Soft blue right arrow for Suave Creators digital marketing services"
+                  width="18" height="5" decoding="async" loading="lazy">
               </span>
             </article>
           </div>
@@ -447,14 +448,11 @@
               </div>
               <div class="portfolio-showcase__copy">
                 <p
-                  class="inline-block text-[12px] font-bold text-transparent bg-clip-text bg-[linear-gradient(90deg,_#2A4DFB_0%,_#7A5FF8_100%)] mb-2">
-                  TEXT GOES HERE
+                  class="inline-block text-[12px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent mb-2">
+                  {{ $project['category'] }}
                 </p>
-                <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2">Experience the
-                  difference with our results-driven approach.</h3>
-                <p class=" text-[14px] text-[#4D4D4D] max-w-[360px] ">A meta-registry unifying the world’s carbon-credit
-                  registries
-                  into one source of truth</p>
+                <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2">{{ $project['title'] }}</h3>
+                <p class=" text-[14px] text-[#4D4D4D] max-w-[360px] ">{{ $project['description'] }}</p>
               </div>
             </article>
           </div>
@@ -767,6 +765,7 @@
   object-fit: contain;
   position: relative;
   text-align: center;
+  transition: filter 0.2s ease;
   width: 22px;
   z-index: 1;
 }
@@ -778,6 +777,7 @@
   line-height: 1.25;
   margin-top: 5px;
   position: relative;
+  transition: color 0.2s ease;
   z-index: 1;
 }
 
@@ -785,20 +785,27 @@
   color: #2A4DFB;
 }
 
+.digital-marketing-card:hover .digital-marketing-card__icon {
+  filter: brightness(0) saturate(100%) invert(32%) sepia(90%) saturate(2500%) hue-rotate(222deg) brightness(98%) contrast(101%);
+}
+
 .digital-marketing-card__number {
   color: #F7F8F8;
+  font-family: "Roboto Flex", "PP Mori", ui-sans-serif, system-ui, sans-serif;
   font-size: 34px;
   font-weight: 800;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.02em;
   line-height: 1;
   pointer-events: none;
   position: absolute;
   right: 0;
+  text-align: right;
   top: -8px;
   z-index: 0;
 }
 
 .digital-marketing-card__image {
+  aspect-ratio: 16 / 10;
   background: transparent;
   border-radius: 8px;
   margin-top: 10px;
@@ -807,7 +814,7 @@
 
 .digital-marketing-card__image img {
   display: block;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
   width: 100%;
@@ -929,12 +936,47 @@
 }
 
 @media (max-width: 767px) {
-  .about-collage {
+  /* BG wraps full intro+collage+CTAs block so content stays inside */
+  .who-we-are {
+    background-image: none !important;
+  }
+
+  .who-we-are__intro {
+    background-image: var(--who-we-are-bg);
+    background-position: 65% 100%;
+    background-repeat: no-repeat;
+    background-size: 220% auto;
+    box-sizing: border-box;
+    margin-inline: calc(50% - 50vw);
+    padding-block: 24px 32px;
+    padding-inline: max(16px, calc(50vw - 186.5px));
+    width: 100vw;
+  }
+
+  .who-we-are__intro > .mt-0 {
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-main > .who-we-are.full-bleed > .section-inner,
+  .who-we-are > .section-inner {
+    box-sizing: border-box;
+    grid-column: full;
+    justify-self: center;
+    margin-inline: auto;
+    max-width: 373px;
+    padding-inline: 0;
+    width: 100%;
+  }
+
+  .who-we-are .about-collage {
     --collage-gap: 8px;
-    --col-left: 137px;
-    --col-center: 130px;
-    --col-right: 111px;
+    --col-left: 129px;
+    --col-center: 123px;
+    --col-right: 105px;
     max-width: 100%;
+    width: 100%;
   }
 
   .about-values {
@@ -942,59 +984,70 @@
     display: none;
   }
 
+  .offerings-showcase {
+    overflow: visible;
+  }
+
+  .offeringsSwiper.swiper {
+    overflow: visible !important;
+    padding: 8px 6px 20px;
+    margin-inline: -6px;
+  }
+
   .offerings-card {
     padding: 10px !important;
-    background-color: white;
+    background-color: #fff;
     border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(17, 24, 39, 0.08), 0 12px 28px rgba(17, 24, 39, 0.12);
   }
 
   .about-collage__column--left {
-    padding-top: 43px;
+    padding-top: 40px;
   }
 
   .about-collage__column--right {
-    padding-top: 53px;
+    padding-top: 50px;
   }
 
   .about-collage__tile--team,
   .about-collage__tile--office-small {
-    height: 65px;
-    width: 86px;
+    height: 61px;
+    width: 81px;
   }
 
   .about-collage__tile--portrait-tall {
-    height: 173px;
-    width: 137px;
+    height: 163px;
+    width: 129px;
   }
 
   .about-collage__tile--leader {
-    height: 101px;
-    width: 130px;
+    height: 95px;
+    width: 123px;
   }
 
   .about-collage__tile--portrait-main {
-    height: 202px;
-    width: 130px;
+    height: 190px;
+    width: 123px;
   }
 
   .about-collage__tile--office-wide {
-    height: 86px;
-    width: 130px;
+    height: 81px;
+    width: 123px;
   }
 
   .about-collage__tile--portrait-right {
-    height: 101px;
-    width: 111px;
+    height: 95px;
+    width: 105px;
   }
 
   .about-collage__tile--meeting {
-    height: 81px;
-    width: 111px;
+    height: 76px;
+    width: 105px;
   }
 
   .about-collage__tile--meeting-sm {
-    height: 68px;
-    width: 89px;
+    height: 64px;
+    width: 84px;
   }
 
   .about-collage__tile {
@@ -1018,7 +1071,7 @@
   }
 
   .digital-marketing-services {
-    padding: 52px 0 48px;
+    padding: 52px 0 28px;
   }
 
   .digital-marketing-services__intro h2 {
@@ -1031,8 +1084,13 @@
   }
 
   .digital-marketing-card {
-    min-height: 0;
+    border: 1px solid #e6e9ef;
+    border-radius: 11px;
+    height: 312px;
+    min-height: 312px;
+    max-width: 100%;
     padding: 12px;
+    width: 373px;
   }
 
   .digital-marketing-card__image {
@@ -1070,7 +1128,7 @@
     align-items: center;
     flex-direction: row;
     gap: 1rem;
-    margin-top: 28px;
+    margin-top: 14px;
   }
 
   .digital-marketing-services__more a {
@@ -1093,7 +1151,9 @@
   }
 
   .digital-marketing-card__number {
-    font-size: 28px;
+    font-size: 34px;
+    height: 24px;
+    width: 38px;
   }
 }
 

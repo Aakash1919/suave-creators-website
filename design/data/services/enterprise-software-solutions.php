@@ -155,17 +155,17 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/images/cos-business-1.webp',
+      'image' => '/images/big-project-sticky-notes-planning.webp',
       'title' => 'Tailored Solutions for Every Business',
       'text' => 'At Suave Creators, we are always ready to design enterprise software that completely aligns with your business goals and industry standards. Our ERP solutions are customized to help you achieve maximum efficiency and scalability.',
     ),
     1 => array(
-      'image' => '/images/cos-business-2.webp',
+      'image' => '/images/generative-engine-dev-team-coding.webp',
       'title' => 'End-to-End Development Expertise',
       'text' => 'Our team handles everything from idea to implementation, which includes planning, designing, development, and support systems. Whether it’s ERP, SaaS, or a complex enterprise system, we ensure a smooth process with a focus on quality and performance, no matter, it’s ERP or SaaS.',
     ),
     2 => array(
-      'image' => '/images/cos-business-3.webp',
+      'image' => '/images/online-reputation-admin-dashboard.webp',
       'title' => 'Ongoing Support & Future-Ready Technology',
       'text' => 'We just go beyond the development. Our team offers continuous support, updates, and enhancements after development to keep your software secure and competitive. By leveraging the latest technologies, we ensure your enterprise system is developed to evolve with your business.',
     ),

@@ -35,12 +35,11 @@
                         aria-hidden="true"></i>
                     <h3 class="relative mt-3 text-base font-bold text-[#171717]">{{ $item['title'] }}</h3>
                     <p class="relative mt-2 pr-5 text-sm leading-[22px] text-[#4D4D4D]">{{ $item['description'] }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-move-right-icon lucide-move-right absolute bottom-5 right-5">
-                        <path d="M18 8L22 12L18 16"></path>
-                        <path d="M2 12H22"></path>
-                    </svg>
+                    <img src="{{ asset('assets/media/soft-blue-right-arrow.png') }}"
+                        alt="Soft blue right arrow for Suave Creators technology solutions"
+                        title="Soft blue right arrow for Suave Creators technology solutions"
+                        width="18" height="5" decoding="async" loading="lazy" aria-hidden="true"
+                        class="absolute bottom-5 right-5">
                 </article>
             @endforeach
         </div>

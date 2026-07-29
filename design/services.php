@@ -209,13 +209,13 @@ require __DIR__ . '/partials/tech-partnerships-marquee.php';
         advanced solutions with us and see the quick growth.</p>
     </div>
 
-    <div class="smart-together-cta__actions flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <div class="smart-together-cta__actions flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
       <a href="/contact-us/#contact-id" class="<?= $btnPrimary ?>">
         Let&rsquo;s Connect to Discuss
         <?= $ctaArrow ?>
       </a>
       <a href="/contact-us/#contact-id"
-        class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-white/70 text-sm font-semibold text-white">
+        class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
         Discuss your Vision
       </a>
     </div>
@@ -249,22 +249,25 @@ require __DIR__ . '/partials/tech-partnerships-marquee.php';
     <?php
     $offshoreSlides = [
       [
-        '/images/endtoenddevelopmentexpertise.webp',
+        '/images/developers-collaborating-code-review.webp',
         'End-to-End Development Expertise',
         'With all of our projects, we always provide end-to-end development services. By leveraging our global young talent and systematic resource allocation, we provide the best and competitive pricing that helps you to get expert solutions and optimise your development budget.',
         ['SEO', 'Mobile', 'First Performance'],
+        'Offshore development team reviewing custom software code together',
       ],
       [
-        '/images/SEO-Performance-Optimization.webp',
+        '/images/seo-infographic-on-imac.webp',
         'SEO-Optimisation and Performance',
         'SEO optimization and high performance are the needs of every website and application nowadays. All of our solutions perform better and follow Search engine algorithms so that they easily gain good visibility on Google soon.',
         ['UI/UX', 'Research', 'Prototyping'],
+        'SEO optimisation strategy on screen for high performance websites',
       ],
       [
-        '/images/global-and-scalable-security.webp',
+        '/images/financial-dashboard-laptop-collaboration.webp',
         'Global and Scalable Security',
         'Our solutions are built to grow with your business. Whether you&rsquo;re a startup expanding into new markets or an enterprise business managing high volumes, we design platforms that scale without performance issues.',
         ['SEO', 'Mobile', 'First Performance'],
+        'Secure scalable analytics dashboard monitored by an enterprise software team',
       ],
     ];
     ?>
@@ -273,7 +276,7 @@ require __DIR__ . '/partials/tech-partnerships-marquee.php';
         <article
           class="flex min-h-full flex-col gap-3 overflow-hidden rounded-[22px] border border-[rgba(42,77,251,0.08)] bg-white shadow-[0_18px_40px_rgba(36,36,84,0.06)]">
           <figure class="aspect-[16/10] overflow-hidden">
-            <img src="<?= $h($slide[0]) ?>" alt="<?= $h($slide[1]) ?>" class="h-full w-full object-cover" loading="lazy">
+            <img src="<?= $h($slide[0]) ?>" alt="<?= $h($slide[4]) ?>" class="h-full w-full object-cover" loading="lazy">
           </figure>
           <div class="flex flex-1 flex-col gap-3 p-[22px]">
             <h3 class="text-base font-bold leading-tight text-[#171717]"><?= $h($slide[1]) ?></h3>
@@ -530,7 +533,7 @@ require __DIR__ . '/partials/tech-partnerships-marquee.php';
               <div>
                 <span class="text-sm font-bold text-[#2A4DFB]">/<?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span>
                 <div class="mt-2 tracking-[3px] text-[#FFC107] text-[20px]" aria-label="5 out of 5 stars">★★★★★</div>
-                <p class="mt-4 text-sm font-medium leading-6 text-[#FAFBFA]"><?= $h($testimonial[0]) ?></p>
+                <p class="mt-4 text-[13px] text-[#FAFBFA]"><?= $h($testimonial[0]) ?></p>
               </div>
               <div class="mt-6 flex items-center gap-4">
                 <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#2A4DFB] to-[#7A5FF8] text-sm font-bold text-white"><?= $h($testimonial[3]) ?></span>
@@ -574,7 +577,7 @@ require __DIR__ . '/partials/tech-partnerships-marquee.php';
         <?= $ctaArrow ?>
       </a>
       <a href="/contact-us/#contact-id"
-        class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-white/70 text-sm font-semibold text-white">
+        class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
         Discuss your Vision
       </a>
     </div>    <div class="mb-4 flex items-center gap-2">

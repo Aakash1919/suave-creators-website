@@ -151,12 +151,12 @@ $collabImage = $service['collabImage'] ?? '/images/collab-front.png';
       <h2 id="service-collab-title">Let’s Build Something Smart Together</h2>
       <p>Ready to transform your ideas into reality with Suave Creators?</p>
     </div>
-    <div class="smart-together-cta__actions flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <div class="smart-together-cta__actions flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
       <a href="/contact-us/#contact-id" class="<?= $btnPrimary ?>">
         Get Started
         <?= $ctaArrow ?>
       </a>
-      <a href="/contact-us/#contact-id" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-white/70 text-sm font-semibold text-white">Discuss your Vision</a>
+      <a href="/contact-us/#contact-id" class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-sm font-semibold text-white">Discuss your Vision</a>
     </div>
     <span class="smart-together-cta__phone" aria-hidden="true">
       <img src="/images/phone.gif" alt="" class="rounded-[10px]">
@@ -425,9 +425,9 @@ require __DIR__ . '/tech-partnerships-marquee.php';
       <h2 id="service-cta-heading" class="text-xl font-semibold leading-none text-white sm:text-2xl"><?= $h($service['ctaTitle'] ?? '') ?></h2>
       <p class="mt-2 text-[11px] font-semibold leading-normal text-[#B1B9DF] sm:text-sm"><?= $h($service['ctaDescription'] ?? '') ?></p>
     </div>
-    <div class="smart-together-cta__actions flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <div class="smart-together-cta__actions flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
       <a href="/contact-us/#contact-id" class="<?= $btnPrimary ?>">Let's Connect to Discuss<?= $ctaArrow ?></a>
-      <a href="/contact-us/#contact-id" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-white/70 text-sm font-semibold text-white">Discuss your Vision</a>
+      <a href="/contact-us/#contact-id" class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-sm font-semibold text-white">Discuss your Vision</a>
     </div>
     <span class="smart-together-cta__phone" aria-hidden="true"><img src="/images/phone.gif" alt="" class="rounded-[10px]"></span>
   </div>
@@ -678,12 +678,12 @@ require __DIR__ . '/tech-partnerships-marquee.php';
           <figure class="consultation-person consultation-person--pink"><img src="/images/consult-1.png" alt="" width="640" height="960" loading="lazy"></figure>
           <figure class="consultation-person consultation-person--orange"><img src="/images/consult-2.png" alt="" width="640" height="960" loading="lazy"></figure>
         </div>
-        <div class="consultation-people__column">
+        <div class="consultation-people__column consultation-people__column--center">
           <figure class="consultation-person consultation-person--yellow"><img src="/images/consult-3.png" alt="" width="640" height="960" loading="lazy"></figure>
-          <figure class="consultation-person consultation-person--blue"><img src="/images/consult-4.png" alt="" width="640" height="960" loading="lazy"></figure>
+          <figure class="consultation-person consultation-person--blue"><img src="/images/consult-5.png" alt="" width="640" height="959" loading="lazy"></figure>
         </div>
         <div class="consultation-people__column consultation-people__column--right">
-          <figure class="consultation-person consultation-person--coral"><img src="/images/consult-5.png" alt="" width="640" height="959" loading="lazy"></figure>
+          <figure class="consultation-person consultation-person--coral"><img src="/images/consult-4.png" alt="" width="640" height="960" loading="lazy"></figure>
           <figure class="consultation-person consultation-person--cyan"><img src="/images/consult-6.png" alt="" width="640" height="960" loading="lazy"></figure>
         </div>
       </div>
