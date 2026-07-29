@@ -1043,11 +1043,13 @@ require __DIR__ . '/partials/articles-insights.php';
 <!-- Consultation CTA Section End -->
 
 <!-- Partnerships Section Start -->
-<section class="full-bleed partnership-section" aria-label="Client logos">
+<section class="full-bleed partnership-section bg-repeat"
+  style="background-image: url('/images/pattern_portfolio.png');"
+  aria-label="Client partnerships">
   <div class="partnership-inner section-inner text-center">
     <p
-      class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%] mb-6">
-      Our Portfolio
+      class="offerings-eyebrow mb-8 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
+      Our Partnerships &amp; Growth Stack
     </p>
 
     <?php
@@ -1065,7 +1067,10 @@ require __DIR__ . '/partials/articles-insights.php';
           <div class="partnership-marquee__group"<?= $group === 1 ? ' aria-hidden="true"' : '' ?>>
             <?php foreach (array_merge($partners, $partners) as $partner): ?>
               <div class="partnership-tile">
-                <img src="<?= htmlspecialchars($partner[0]) ?>" alt="<?= $group === 0 ? htmlspecialchars($partner[1]) . ' logo' : '' ?>"<?= $group === 0 ? ' loading="lazy"' : '' ?>>
+                <img src="<?= htmlspecialchars($partner[0]) ?>"
+                  alt="<?= htmlspecialchars($partner[1]) ?> logo partner of Suave Creators"
+                  title="<?= htmlspecialchars($partner[1]) ?> logo partner of Suave Creators" width="120" height="48"
+                  decoding="async"<?= $group === 0 ? ' loading="lazy"' : '' ?>>
               </div>
             <?php endforeach; ?>
           </div>

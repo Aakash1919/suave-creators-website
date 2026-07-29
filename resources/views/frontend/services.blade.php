@@ -217,7 +217,7 @@
 
 
 <!-- 9. Tech Stack Section Start -->
-<section class="full-bleed bg-white py-16 lg:py-20" aria-labelledby="tech-stack-title">
+<section class="full-bleed bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');" aria-labelledby="tech-stack-title">
   <div class="section-inner">
     <header class="mx-auto mb-12 max-w-[720px] text-center lg:mb-16">
       <p
