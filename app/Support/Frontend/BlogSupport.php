@@ -46,7 +46,7 @@ class BlogSupport
 
         $blog = $query->first();
 
-        return $blog !== null ? self::mapBlog($blog) : null;
+        return $blog !== null ? self::mapBlog($blog, 'original') : null;
     }
 
     /**
@@ -301,9 +301,10 @@ class BlogSupport
     }
 
     /**
+     * @param  'original'|'medium'  $imageVariant
      * @return array<string, mixed>
      */
-    protected static function mapBlog(Blog $blog): array
+    protected static function mapBlog(Blog $blog, string $imageVariant = 'medium'): array
     {
         $publishedAt = $blog->published_at instanceof Carbon
             ? $blog->published_at
@@ -313,13 +314,18 @@ class BlogSupport
         $categoryName = (string) ($blog->category?->name ?? '');
         $categorySlug = (string) ($blog->category?->slug ?? '');
 
+        $image = match ($imageVariant) {
+            'original' => $blog->featuredImageUrl() ?? '',
+            default => $blog->mediumThumbImageUrl() ?? '',
+        };
+
         return [
             'id' => $blog->id,
             'slug' => $slug,
             'title' => (string) $blog->title,
             'status' => (string) $blog->status,
             'is_draft' => $blog->status === Blog::STATUS_DRAFT,
-            'image' => $blog->featuredImageUrl() ?? '',
+            'image' => $image,
             'short_description' => (string) ($blog->short_description ?? ''),
             'content' => self::normalizeStorageUrls((string) ($blog->content ?? '')),
             'author_name' => (string) ($blog->createdBy?->name ?? 'Suave Creators'),

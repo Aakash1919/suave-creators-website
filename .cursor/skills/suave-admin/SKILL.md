@@ -301,11 +301,22 @@ One-off maintenance commands live under `app/Console/Commands/RunOnce/` with sig
 | Command | Purpose |
 |---------|---------|
 | `run-once:sanitize-blog` | Sanitize blog `content`: extract `data:image/…;base64,…` to `storage/app/public/blogs/content/{slug}-{n}.{ext}`, set `img` `alt` to the blog title, remove empty tags (`<p></p>`, `<span>&nbsp;</span>`, `<h2><br></h2>`, nested empties, etc.), and print a table of sanitized blog URLs |
+| `run-once:regenerate-blog-seo-meta` | Regenerate and save `meta_title`, `meta_description`, `og_title`, `og_description` for all blogs via `BlogSeoMetaGenerationService` / `SeoMetaAgent` |
+| `run-once:generate-blog-medium-thumbs` | Generate `medium_thumb_image` (480×280, `{name}-medium.{ext}`) from each blog’s existing `featured_image`; removes legacy `_small` / `_medium` files |
 
 ```bash
 php artisan run-once:sanitize-blog --dry-run
 php artisan run-once:sanitize-blog
 php artisan run-once:sanitize-blog --blog=my-post-slug
+
+php artisan run-once:regenerate-blog-seo-meta --dry-run
+php artisan run-once:regenerate-blog-seo-meta
+php artisan run-once:regenerate-blog-seo-meta --blog=my-post-slug
+
+php artisan run-once:generate-blog-medium-thumbs --dry-run
+php artisan run-once:generate-blog-medium-thumbs
+php artisan run-once:generate-blog-medium-thumbs --missing-only
+php artisan run-once:generate-blog-medium-thumbs --blog=my-post-slug
 ```
 
 Ensure `php artisan storage:link` exists so `/storage/…` URLs resolve. Safe to re-run.

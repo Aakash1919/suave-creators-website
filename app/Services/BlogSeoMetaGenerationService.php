@@ -48,6 +48,22 @@ class BlogSeoMetaGenerationService
     }
 
     /**
+     * Generate SEO / OG fields and persist them on the blog.
+     *
+     * @param  array{title?: string|null, short_description?: string|null, content?: string|null}  $overrides
+     * @return array{meta_title: string, meta_description: string, og_title: string, og_description: string}
+     *
+     * @throws RuntimeException
+     */
+    public function regenerateAndSave(Blog $blog, array $overrides = []): array
+    {
+        $seo = $this->generate($blog, $overrides);
+        $blog->forceFill($seo)->save();
+
+        return $seo;
+    }
+
+    /**
      * Build the user prompt from the post context.
      */
     protected function userPrompt(string $title, string $short, string $excerpt, Blog $blog): string

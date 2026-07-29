@@ -140,7 +140,7 @@
                   <div class="swiper-slide">
                     <article class="articles-card blog-sidebar-card">
                       <figure class="articles-card__image">
-                        <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" title="{{ $item['title'] }}" width="640" height="420" loading="lazy">
+                        <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" title="{{ $item['title'] }}" width="480" height="280" loading="lazy">
                       </figure>
                       <div class="articles-card__body">
                         <div class="articles-card__meta">

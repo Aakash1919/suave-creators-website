@@ -26,6 +26,7 @@ class Blog extends Model
         'short_description',
         'content',
         'featured_image',
+        'medium_thumb_image',
         'status',
         'published_at',
         'toc',
@@ -77,17 +78,33 @@ class Blog extends Model
 
     public function featuredImageUrl(): ?string
     {
-        if (! is_string($this->featured_image) || $this->featured_image === '') {
+        return $this->publicStorageUrl($this->featured_image);
+    }
+
+    /**
+     * Medium thumbnail URL; falls back to the original when missing (legacy rows).
+     */
+    public function mediumThumbImageUrl(): ?string
+    {
+        return $this->publicStorageUrl($this->medium_thumb_image) ?? $this->featuredImageUrl();
+    }
+
+    /**
+     * Relative public URL for a stored path (or absolute http(s) URL).
+     */
+    protected function publicStorageUrl(mixed $path): ?string
+    {
+        if (! is_string($path) || $path === '') {
             return null;
         }
 
-        $path = ltrim(str_replace('\\', '/', $this->featured_image), '/');
+        $normalized = ltrim(str_replace('\\', '/', $path), '/');
 
-        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-            return $path;
+        if (str_starts_with($normalized, 'http://') || str_starts_with($normalized, 'https://')) {
+            return $normalized;
         }
 
         // Relative public URL so images work regardless of APP_URL host/port.
-        return '/storage/'.$path;
+        return '/storage/'.$normalized;
     }
 }
