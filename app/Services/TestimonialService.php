@@ -4,15 +4,17 @@ namespace App\Services;
 
 use App\Http\Requests\Admin\TestimonialStoreRequest;
 use App\Http\Requests\Admin\TestimonialUpdateRequest;
+use App\Models\Image;
 use App\Models\Testimonial;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class TestimonialService
 {
     public const CACHE_KEY = 'frontend.testimonials';
+
+    public function __construct(
+        protected ImageVariantService $images,
+    ) {}
 
     /**
      * Empty model for the create form.
@@ -58,11 +60,9 @@ class TestimonialService
      */
     public function create(TestimonialStoreRequest $request): Testimonial
     {
-        $data = $request->safe()->except(['avatar', 'remove_avatar']);
+        $data = $request->safe()->except(['avatar', 'remove_avatar', 'gallery_image_id']);
 
-        if ($request->hasFile('avatar')) {
-            $data['avatar'] = $this->storeAvatar($request);
-        }
+        $this->applyGallerySelection($data, $request->integer('gallery_image_id') ?: null);
 
         $testimonial = Testimonial::query()->create($data);
         $this->forgetFrontendCache();
@@ -75,16 +75,24 @@ class TestimonialService
      */
     public function update(TestimonialUpdateRequest $request, Testimonial $testimonial): Testimonial
     {
-        $data = $request->safe()->except(['avatar', 'remove_avatar']);
-
-        if ($request->hasFile('avatar')) {
-            $this->deleteStoredAvatar($testimonial->avatar);
-            $data['avatar'] = $this->storeAvatar($request, $testimonial->id);
-        }
+        $data = $request->safe()->except(['avatar', 'remove_avatar', 'gallery_image_id']);
 
         if ($request->boolean('remove_avatar')) {
-            $this->deleteStoredAvatar($testimonial->avatar);
+            $this->deleteOwnedPaths(
+                $testimonial->avatar,
+                $testimonial->small_thumb_avatar,
+                $testimonial->medium_thumb_avatar,
+            );
             $data['avatar'] = null;
+            $data['small_thumb_avatar'] = null;
+            $data['medium_thumb_avatar'] = null;
+        } elseif ($request->filled('gallery_image_id')) {
+            $this->deleteOwnedPaths(
+                $testimonial->avatar,
+                $testimonial->small_thumb_avatar,
+                $testimonial->medium_thumb_avatar,
+            );
+            $this->applyGallerySelection($data, $request->integer('gallery_image_id'));
         }
 
         $testimonial->update($data);
@@ -94,47 +102,54 @@ class TestimonialService
     }
 
     /**
-     * Delete a testimonial, its stored avatar, and the frontend cache.
+     * Delete a testimonial and the frontend cache (gallery files are left intact).
      */
     public function delete(Testimonial $testimonial): void
     {
-        $this->deleteStoredAvatar($testimonial->avatar);
+        $this->deleteOwnedPaths(
+            $testimonial->avatar,
+            $testimonial->small_thumb_avatar,
+            $testimonial->medium_thumb_avatar,
+        );
         $testimonial->delete();
         $this->forgetFrontendCache();
     }
 
     /**
-     * Store an uploaded avatar under testimonials/ on the public disk.
+     * Copy gallery image paths onto the testimonial payload.
+     *
+     * @param  array<string, mixed>  $data
      */
-    public function storeAvatar(Request $request, ?int $id = null): string
+    protected function applyGallerySelection(array &$data, ?int $galleryImageId): void
     {
-        $file = $request->file('avatar');
-        $ext = $file->getClientOriginalExtension() ?: 'jpg';
-        $basename = $id ? 'testimonial-'.$id : 'testimonial-'.Str::lower(Str::random(8));
+        if (! $galleryImageId) {
+            return;
+        }
 
-        return $file->storeAs('testimonials', $basename.'.'.$ext, 'public');
+        $image = Image::query()->find($galleryImageId);
+        if ($image === null) {
+            return;
+        }
+
+        $data['avatar'] = $image->path;
+        $data['small_thumb_avatar'] = $image->small_thumb_path;
+        $data['medium_thumb_avatar'] = $image->medium_thumb_path;
     }
 
     /**
-     * Delete a stored avatar; skip public assets/ and remote URLs.
+     * Delete legacy owned disk files only (never gallery `images/` paths).
      */
-    public function deleteStoredAvatar(?string $path): void
+    protected function deleteOwnedPaths(?string ...$paths): void
     {
-        if (! is_string($path) || $path === '') {
-            return;
+        foreach ($paths as $path) {
+            if (! is_string($path) || $path === '') {
+                continue;
+            }
+
+            $normalized = ltrim(str_replace('\\', '/', $path), '/');
+            if (str_starts_with($normalized, 'blogs/') || str_starts_with($normalized, 'testimonials/')) {
+                $this->images->deletePaths($normalized);
+            }
         }
-
-        $normalized = ltrim(str_replace('\\', '/', $path), '/');
-
-        if (
-            str_starts_with($normalized, 'http://')
-            || str_starts_with($normalized, 'https://')
-            || str_starts_with($normalized, 'assets/')
-            || str_starts_with($normalized, 'storage/')
-        ) {
-            return;
-        }
-
-        Storage::disk('public')->delete($normalized);
     }
 }

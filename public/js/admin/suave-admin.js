@@ -1307,6 +1307,210 @@
       });
   }
 
+  function openGalleryPicker(options = {}) {
+    const modal = document.getElementById('admin-gallery-picker');
+    if (!modal) {
+      createFlashMessage('error', 'Gallery picker is unavailable. Check gallery.view permission.');
+      return;
+    }
+
+    const browseUrl = modal.getAttribute('data-browse-url');
+    const grid = document.getElementById('admin-gallery-picker-grid');
+    const empty = document.getElementById('admin-gallery-picker-empty');
+    const pager = document.getElementById('admin-gallery-picker-pager');
+    const pageLabel = pager ? pager.querySelector('[data-gallery-picker-page]') : null;
+    const searchInput = document.getElementById('admin-gallery-picker-search');
+    const prevBtn = pager ? pager.querySelector('[data-gallery-picker-prev]') : null;
+    const nextBtn = pager ? pager.querySelector('[data-gallery-picker-next]') : null;
+
+    let page = 1;
+    let lastPage = 1;
+    let search = '';
+    let searchTimer = null;
+    const onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
+
+    function renderItems(items) {
+      if (!grid) {
+        return;
+      }
+      grid.innerHTML = '';
+      items.forEach(function (item) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'admin-gallery-picker__item';
+        btn.setAttribute('data-gallery-id', String(item.id));
+
+        const img = document.createElement('img');
+        img.src = item.medium_thumb_url || item.small_thumb_url || item.url || '';
+        img.alt = item.alt_text || item.title || 'Gallery image';
+        btn.appendChild(img);
+
+        const label = document.createElement('span');
+        label.className = 'admin-gallery-picker__item-label';
+        label.textContent = item.title || item.alt_text || ('Image #' + item.id);
+        btn.appendChild(label);
+
+        btn.addEventListener('click', function () {
+          if (onSelect) {
+            onSelect(item);
+          }
+          closeAdminModal(modal);
+        });
+
+        grid.appendChild(btn);
+      });
+    }
+
+    function load() {
+      if (!browseUrl) {
+        return;
+      }
+
+      ajax({
+        url: browseUrl,
+        method: 'GET',
+        data: {
+          _ajax: 1,
+          page: page,
+          search: search,
+        },
+      })
+        .done(function (response) {
+          const items = response?.data || [];
+          const meta = response?.meta || {};
+          lastPage = Number(meta.last_page || 1) || 1;
+          page = Number(meta.current_page || page) || page;
+
+          renderItems(items);
+
+          if (empty) {
+            empty.hidden = items.length > 0;
+          }
+          if (pager) {
+            pager.hidden = lastPage <= 1;
+          }
+          if (pageLabel) {
+            pageLabel.textContent = 'Page ' + page + ' of ' + lastPage;
+          }
+          if (prevBtn) {
+            prevBtn.disabled = page <= 1;
+          }
+          if (nextBtn) {
+            nextBtn.disabled = page >= lastPage;
+          }
+        })
+        .fail(function (xhr) {
+          toast.validation(xhr, 'Unable to load gallery images.');
+        });
+    }
+
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.oninput = function () {
+        window.clearTimeout(searchTimer);
+        searchTimer = window.setTimeout(function () {
+          search = (searchInput.value || '').trim();
+          page = 1;
+          load();
+        }, 280);
+      };
+    }
+
+    if (prevBtn) {
+      prevBtn.onclick = function () {
+        if (page > 1) {
+          page -= 1;
+          load();
+        }
+      };
+    }
+
+    if (nextBtn) {
+      nextBtn.onclick = function () {
+        if (page < lastPage) {
+          page += 1;
+          load();
+        }
+      };
+    }
+
+    openAdminModal(modal);
+    load();
+  }
+
+  function bindGalleryFields(root = document) {
+    (root || document).querySelectorAll('[data-gallery-field]').forEach(function (field) {
+      if (field.dataset.galleryBound === '1') {
+        return;
+      }
+      field.dataset.galleryBound = '1';
+
+      const idInput = field.querySelector('[data-gallery-id-input]');
+      const previewWrap = field.querySelector('[data-gallery-preview]');
+      const previewImg = field.querySelector('[data-gallery-preview-img]');
+      const chooseBtn = field.querySelector('[data-gallery-choose]');
+      const clearBtn = field.querySelector('[data-gallery-clear]');
+      const removeInput = field.querySelector('[data-gallery-remove-input]');
+
+      function setPreview(url) {
+        if (!previewWrap || !previewImg) {
+          return;
+        }
+        if (url) {
+          previewImg.src = url;
+          previewWrap.hidden = false;
+          if (clearBtn) {
+            clearBtn.hidden = false;
+          }
+        } else {
+          previewImg.removeAttribute('src');
+          previewWrap.hidden = true;
+          if (clearBtn) {
+            clearBtn.hidden = true;
+          }
+        }
+      }
+
+      function setRemoveFlag(on) {
+        if (!removeInput) {
+          return;
+        }
+        removeInput.value = on ? '1' : '0';
+        if (removeInput.type === 'checkbox') {
+          removeInput.checked = !!on;
+        }
+      }
+
+      if (chooseBtn) {
+        chooseBtn.addEventListener('click', function () {
+          openGalleryPicker({
+            onSelect: function (item) {
+              if (idInput) {
+                idInput.value = String(item.id);
+              }
+              setRemoveFlag(false);
+              const previewUrl =
+                field.getAttribute('data-gallery-preview-size') === 'small'
+                  ? item.small_thumb_url || item.url
+                  : item.medium_thumb_url || item.url;
+              setPreview(previewUrl || '');
+            },
+          });
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          if (idInput) {
+            idInput.value = '';
+          }
+          setRemoveFlag(true);
+          setPreview('');
+        });
+      }
+    });
+  }
+
   function boot(flash = {}) {
     configureToastr();
     toast.fromFlash(flash);
@@ -1316,6 +1520,7 @@
     bindDetailsOutsideClose();
     bindRepeaters();
     bindAdminModals();
+    bindGalleryFields();
   }
 
   window.SuaveAdmin = {
@@ -1341,6 +1546,8 @@
     openAdminModal,
     closeAdminModal,
     bindAdminModals,
+    openGalleryPicker,
+    bindGalleryFields,
     boot,
   };
 })(window, window.jQuery);

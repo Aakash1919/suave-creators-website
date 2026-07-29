@@ -14,6 +14,11 @@ class BlogStoreRequest extends FormRequest
         return $this->user()?->hasPermission('blogs.create') ?? false;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->prepareBlogFields();
+    }
+
     /**
      * @return array<string, mixed>
      */

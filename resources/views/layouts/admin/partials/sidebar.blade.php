@@ -58,6 +58,14 @@
         <span>Testimonials</span>
       </a>
     @endif
+    @if ($user->hasPermission('gallery.view'))
+      <a href="{{ route('admin.gallery.index') }}"
+        class="admin-nav-link {{ request()->routeIs('admin.gallery.*') ? 'is-active' : '' }}"
+        title="Gallery">
+        <i class="fa-solid fa-images" aria-hidden="true"></i>
+        <span>Gallery</span>
+      </a>
+    @endif
 
     <p class="admin-nav-label">System</p>
     @if ($user->hasPermission('users.view'))
