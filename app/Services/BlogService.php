@@ -164,6 +164,7 @@ class BlogService
             $blog->featured_image,
             $blog->medium_thumb_image,
             $this->images->legacySmallThumbPath($blog->featured_image),
+            $this->images->legacyMediumThumbPath($blog->featured_image),
         );
     }
 
@@ -183,6 +184,7 @@ class BlogService
         $this->images->deletePaths(
             $blog->medium_thumb_image,
             $this->images->legacySmallThumbPath($original),
+            $this->images->legacyMediumThumbPath($original),
         );
 
         $medium = $this->images->generateMediumFromStored($original);

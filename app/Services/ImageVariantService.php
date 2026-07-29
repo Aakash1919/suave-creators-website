@@ -126,6 +126,22 @@ class ImageVariantService
      */
     public function legacySmallThumbPath(?string $originalPath): ?string
     {
+        return $this->legacySiblingPath($originalPath, '_small');
+    }
+
+    /**
+     * Guess a legacy `_medium` sibling path for a stored original (if any).
+     */
+    public function legacyMediumThumbPath(?string $originalPath): ?string
+    {
+        return $this->legacySiblingPath($originalPath, '_medium');
+    }
+
+    /**
+     * Build a sibling path with the given suffix before the extension.
+     */
+    protected function legacySiblingPath(?string $originalPath, string $suffix): ?string
+    {
         if (! is_string($originalPath) || $originalPath === '') {
             return null;
         }
@@ -150,6 +166,6 @@ class ImageVariantService
 
         $prefix = ($directory === '.' || $directory === '') ? '' : $directory.'/';
 
-        return $prefix.$filename.'_small.'.$extension;
+        return $prefix.$filename.$suffix.'.'.$extension;
     }
 }

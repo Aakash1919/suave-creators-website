@@ -302,7 +302,7 @@ One-off maintenance commands live under `app/Console/Commands/RunOnce/` with sig
 |---------|---------|
 | `run-once:sanitize-blog` | Sanitize blog `content`: extract `data:image/…;base64,…` to `storage/app/public/blogs/content/{slug}-{n}.{ext}`, set `img` `alt` to the blog title, remove empty tags (`<p></p>`, `<span>&nbsp;</span>`, `<h2><br></h2>`, nested empties, etc.), and print a table of sanitized blog URLs |
 | `run-once:regenerate-blog-seo-meta` | Regenerate and save `meta_title`, `meta_description`, `og_title`, `og_description` for all blogs via `BlogSeoMetaGenerationService` / `SeoMetaAgent` |
-| `run-once:generate-blog-medium-thumbs` | Generate `medium_thumb_image` (480×280) from each blog’s existing `featured_image`; removes legacy `_small` files |
+| `run-once:generate-blog-medium-thumbs` | Generate `medium_thumb_image` (480×280, `{name}-medium.{ext}`) from each blog’s existing `featured_image`; removes legacy `_small` / `_medium` files |
 
 ```bash
 php artisan run-once:sanitize-blog --dry-run

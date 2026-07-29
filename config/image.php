@@ -15,7 +15,7 @@ return [
         'medium' => [
             'width' => 480,
             'height' => 280,
-            'suffix' => '_medium',
+            'suffix' => '-medium',
         ],
     ],
 
