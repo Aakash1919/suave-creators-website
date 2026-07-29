@@ -57,12 +57,12 @@
         <div class="admin-quick-grid">
           @foreach ($links as $link)
             <a href="{{ route($link['route']) }}" class="admin-quick-link">
-              <span class="admin-quick-link__icon">
-                <i class="fa-solid {{ $link['icon'] }}" aria-hidden="true"></i>
+              <span class="admin-quick-link__icon" aria-hidden="true">
+                <i class="fa-solid {{ $link['icon'] }}"></i>
               </span>
-              <span>
-                <strong>{{ $link['label'] }}</strong>
-                <span>{{ $link['description'] }}</span>
+              <span class="admin-quick-link__body">
+                <strong class="admin-quick-link__title">{{ $link['label'] }}</strong>
+                <span class="admin-quick-link__desc">{{ $link['description'] }}</span>
               </span>
             </a>
           @endforeach

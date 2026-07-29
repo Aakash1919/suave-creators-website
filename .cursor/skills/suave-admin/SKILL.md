@@ -41,8 +41,8 @@ description: >-
 | Service | Responsibility |
 |---------|----------------|
 | `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads |
-| `BlogDraftGenerationService` | AI trend draft generation via `BlogTrendWriterAgent` → saves `status=draft` |
-| `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `BlogSeoMetaWriterAgent` → returns values only (edit form fills inputs; editor saves manually) |
+| `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
+| `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `UserService` | User create/update, password hash, `syncRoles` |
 | `RoleService` | Role create/update/delete, permission sync; protects `admin` role key/delete |
 | `TestimonialService` | Testimonial CRUD, avatar upload, forever frontend cache (`frontend.testimonials`) invalidated on write |
@@ -137,11 +137,56 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
   - `ajax`, `submitForm` (bind via `data-ajax-form`)
   - `initDataTable`, `reloadDataTable`
   - `initDateRangeFilter` (presets + Flatpickr custom range)
-  - `confirmDialog` / `destroyRecord` (custom modal via `data-admin-delete`, not `window.confirm`)
+  - `confirmDialog` / `destroyRecord` — see **Confirm dialogs** below
 - Forms: add `data-ajax-form` (+ optional `data-success-message`, `data-reload-table`)
-- List deletes: `data-admin-delete data-url="..." data-reload-table="#admin-datatable"`
-- Confirm modal markup: `layouts/admin/partials/confirm-dialog.blade.php`
+- List deletes: `data-admin-delete data-url="..." data-reload-table="#admin-datatable"` (+ confirm attrs — see below)
 - Form-page deletes: set `data-reload-table=""` so redirect from JSON is used instead of reloading a missing table
+
+## Confirm dialogs (`SuaveAdmin.confirmDialog`)
+
+**Never use** native `window.confirm()`, `confirm()`, or `onclick="return confirm(...)"` in admin UI. Every destructive or irreversible prompt must use the custom modal.
+
+- Markup (already in the admin layout): `layouts/admin/partials/confirm-dialog.blade.php` (`[data-admin-confirm]`)
+- API: `SuaveAdmin.confirmDialog({ title, message, confirmText, cancelText, danger })` → `Promise<boolean>`
+- Styles: `.admin-confirm*` in `public/css/admin.css`
+
+### Delete buttons (preferred)
+
+Use `data-admin-delete` — `SuaveAdmin.destroyRecord` opens the custom dialog automatically:
+
+| Attribute | Purpose | Example |
+|-----------|---------|---------|
+| `data-admin-delete` | Marks the control as a delete action | (presence) |
+| `data-url` | DELETE endpoint | `{{ route('admin.blogs.destroy', $blog) }}` |
+| `data-confirm` | Body copy (what happens) | `Delete blog “{{ $blog->title }}”? This cannot be undone.` |
+| `data-confirm-title` | Dialog title | `Delete blog?` |
+| `data-confirm-label` | Confirm button label | `Delete` |
+| `data-reload-table` | DataTable selector after success; `""` on form pages to allow JSON redirect | `#admin-datatable` |
+
+DataTable row menus: `DataTableActions::menu([[ 'label' => 'Delete', 'delete' => true, 'url' => …, 'confirm' => …, 'confirmTitle' => …, 'confirmLabel' => 'Delete' ]])`.
+
+### Custom / non-delete confirms (JS)
+
+```js
+SuaveAdmin.confirmDialog({
+  title: 'Stop SEO audit?',
+  message: 'Queued page jobs will be removed. Finished pages stay as a partial report.',
+  confirmText: 'Stop audit',
+  cancelText: 'Keep running',
+  danger: true, // red confirm button + danger icon
+}).then(function (ok) {
+  if (!ok) return;
+  // proceed
+});
+```
+
+### Copy rules
+
+- **Title:** short question naming the action + resource (`Delete blog?`, `Archive contact?`)
+- **Message:** one or two sentences with the consequence; include the record name when known
+- **Confirm button:** verb matching the action (`Delete`, `Archive`, `Stop audit`) — not a generic “OK” / “Confirm” when a clearer verb exists
+- **`danger: true`** for delete / irreversible / stop actions; omit (primary button) for milder confirms
+- Prefer specific copy over “Are you sure?” / “This action cannot be undone.” alone
 
 ## Flash messages (`createFlashMessage`)
 
@@ -261,13 +306,13 @@ php artisan blogs:generate-trend-drafts --force   # ignore BLOG_TREND_DRAFTS_ENA
 
 Schedule (`routes/console.php`): Tuesdays + Fridays at `BLOG_TREND_DRAFTS_TIME` (default `09:00`, app timezone). Requires server cron: `* * * * * php artisan schedule:run`.
 
-Config: `config/blogs.php` + `.env` (`BLOG_TREND_DRAFTS_*`, `OPENAI_API_KEY`). Agent: `App\Ai\Agents\BlogTrendWriterAgent`.
+Config: `config/blogs.php` + `.env` (`BLOG_TREND_DRAFTS_*`, `OPENAI_API_KEY`). Agent: `App\Ai\Agents\BlogWriterAgent`.
 
 Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + sample FAQ) and instructs the model to match that craft: long benefit-led titles, second-person voice, `<h2>`/`<h3>` + `<ul><li><p>` HTML, 5–8 FAQs, `meta_title` ending with `| Suave Creators Blog`, always `status=draft`.
 
 ## Edit-form SEO meta (manual save)
 
-On **Edit blog**, “Generate SEO meta” (`POST admin/blogs/{blog}/generate-seo`, permission `blogs.update`) calls `BlogSeoMetaGenerationService` + `BlogSeoMetaWriterAgent` with the current form title / short description / content. It returns `meta_title`, `meta_description`, `og_title`, `og_description` as JSON and the client fills only those inputs — **no DB write** until the editor clicks Save.
+On **Edit blog**, “Generate SEO meta” (`POST admin/blogs/{blog}/generate-seo`, permission `blogs.update`) calls `BlogSeoMetaGenerationService` + `SeoMetaAgent` with the current form title / short description / content. It returns `meta_title`, `meta_description`, `og_title`, `og_description` as JSON and the client fills only those inputs — **no DB write** until the editor clicks Save.
 
 Config: `config/blogs.php` → `seo_meta.model` (`BLOG_SEO_META_MODEL`).
 
@@ -294,7 +339,8 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 6. Seed new permissions/roles in `RolesAndPermissionsSeeder` (idempotent `updateOrCreate`)
 7. Keep UI in the white-theme admin shell (`admin.css` helpers); do not couple to marketing Tailwind layout patterns unless sharing a deliberate component
 8. User feedback: `createFlashMessage` (PHP session or JS Toastr) — never raw `toastr.*` / ad-hoc `Session::flash('status')` in new code
-9. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
+9. Confirmations: **always** `SuaveAdmin.confirmDialog` / `data-admin-delete` with specific title + message + button label — **never** `window.confirm` / `confirm()`
+10. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
 
 ## Related
 

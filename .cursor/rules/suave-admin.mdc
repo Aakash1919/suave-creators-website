@@ -19,7 +19,8 @@ Before editing the custom admin panel, RBAC, or admin conversation review:
 9. Trend blog drafts: `blogs:generate-trend-drafts` + Tue/Fri schedule in `routes/console.php` (always `draft`; see suave-admin skill). Edit-form “Generate SEO meta” fills meta/OG inputs only — editor must save
 10. UI: white admin theme (`#7539FF` primary, light sidebar) + Toastr/DataTables/Flatpickr/RichTextEditor; keep editor assets in `public/richtexteditor/`
 11. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
-12. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha); public store uses `ContactStoreRequest`
-13. Roles UI: Admin → Roles (`roles.view` / `roles.manage`); protect the `admin` role key from rename/delete via `RoleService`
-14. Testimonials: Admin → Testimonials (`testimonials.view` / `testimonials.manage`); create/edit via modal on index; frontend reads `TestimonialService::cachedForFrontend()` (forever cache, forget on write)
-15. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`
+12. Confirmations: always the custom dialog (`SuaveAdmin.confirmDialog` or `data-admin-delete` with `data-confirm` / `data-confirm-title` / `data-confirm-label`) — never `window.confirm` / `confirm()`. Use action-specific title, message, and button label (see suave-admin skill → Confirm dialogs)
+13. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha); public store uses `ContactStoreRequest`
+14. Roles UI: Admin → Roles (`roles.view` / `roles.manage`); protect the `admin` role key from rename/delete via `RoleService`
+15. Testimonials: Admin → Testimonials (`testimonials.view` / `testimonials.manage`); create/edit via modal on index; frontend reads `TestimonialService::cachedForFrontend()` (forever cache, forget on write)
+16. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`

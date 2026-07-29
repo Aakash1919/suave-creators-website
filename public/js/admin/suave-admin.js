@@ -505,6 +505,11 @@
     const table = $table.DataTable(settings);
     $table.data('suave-datatable', table);
 
+    const $wrapper = $table.closest('.dataTables_wrapper');
+    $table.off('processing.dt.suaveLoader').on('processing.dt.suaveLoader', function (_e, _settings, processing) {
+      $wrapper.toggleClass('is-processing', Boolean(processing));
+    });
+
     enhanceAdminDataTable(table, $table, shell);
 
     return table;
@@ -604,12 +609,14 @@
       return Promise.resolve(window.confirm([opts.title, opts.message].filter(Boolean).join('\n')));
     }
 
+    const dialog = root.querySelector('[data-admin-confirm-dialog]') || root.querySelector('.admin-confirm__dialog');
     const titleEl = root.querySelector('[data-admin-confirm-title]');
     const messageEl = root.querySelector('[data-admin-confirm-message]');
     const okBtn = root.querySelector('[data-admin-confirm-ok]');
     const cancelBtn = root.querySelector('[data-admin-confirm-cancel]');
     const backdrop = root.querySelector('[data-admin-confirm-backdrop]');
     const icon = root.querySelector('[data-admin-confirm-icon]');
+    const iconGlyph = root.querySelector('[data-admin-confirm-icon-glyph]');
 
     if (titleEl) titleEl.textContent = opts.title;
     if (messageEl) messageEl.textContent = opts.message;
@@ -619,23 +626,35 @@
       okBtn.classList.toggle('admin-btn--primary', !opts.danger);
     }
     if (cancelBtn) cancelBtn.textContent = opts.cancelText;
+    if (dialog) dialog.classList.toggle('admin-confirm__dialog--danger', !!opts.danger);
     if (icon) icon.classList.toggle('admin-confirm__icon--danger', !!opts.danger);
+    if (iconGlyph) {
+      iconGlyph.className = opts.danger
+        ? 'fa-solid fa-triangle-exclamation'
+        : 'fa-solid fa-circle-question';
+    }
 
     return new Promise(function (resolve) {
       const previouslyFocused = document.activeElement;
+      let settled = false;
 
       const close = (result) => {
+        if (settled) return;
+        settled = true;
         root.classList.remove('is-open');
-        root.setAttribute('hidden', '');
         document.body.classList.remove('admin-confirm-open');
         document.removeEventListener('keydown', onKeyDown);
         okBtn?.removeEventListener('click', onOk);
         cancelBtn?.removeEventListener('click', onCancel);
         backdrop?.removeEventListener('click', onCancel);
-        if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
-          previouslyFocused.focus();
-        }
-        resolve(result);
+
+        window.setTimeout(function () {
+          root.setAttribute('hidden', '');
+          if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+            previouslyFocused.focus();
+          }
+          resolve(result);
+        }, 160);
       };
 
       const onOk = (event) => {
@@ -650,6 +669,13 @@
         if (event.key === 'Escape') {
           event.preventDefault();
           close(false);
+          return;
+        }
+        if (event.key === 'Enter' && !event.shiftKey && !event.altKey && !event.ctrlKey && !event.metaKey) {
+          const tag = (document.activeElement && document.activeElement.tagName) || '';
+          if (tag === 'TEXTAREA' || tag === 'BUTTON') return;
+          event.preventDefault();
+          close(true);
         }
       };
 
@@ -659,14 +685,19 @@
       document.addEventListener('keydown', onKeyDown);
 
       root.removeAttribute('hidden');
-      root.classList.add('is-open');
       document.body.classList.add('admin-confirm-open');
       document.querySelectorAll('details[open]').forEach(function (el) {
         el.open = false;
       });
+
+      // Next frame so CSS transitions run from the closed state.
+      window.requestAnimationFrame(function () {
+        root.classList.add('is-open');
+      });
+
       window.setTimeout(function () {
         (opts.danger ? cancelBtn : okBtn)?.focus();
-      }, 10);
+      }, 30);
     });
   }
 
