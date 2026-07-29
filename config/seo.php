@@ -39,8 +39,8 @@ return [
         'in_language' => 'en-US',
         'robots' => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
         'google_site_verification' => '8gnHTv-hWNxTIE6HmJwKSMZH5v_ryZuDVQRbAinOpAQ',
-        'google_analytics_id' => 'G-NFN8FD2B2D',
-        'google_tag_manager_id' => 'GTM-TN9JMPST',
+        'google_analytics_id' => 'G-5HX7B8X9QP',
+        'google_tag_manager_id' => 'GTM-THXXRSV6',
         'hreflang' => [
             'en',
             'en-in',
