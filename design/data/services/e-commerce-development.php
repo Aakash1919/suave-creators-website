@@ -156,17 +156,17 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/images/business-1.webp',
+      'image' => '/images/content-strategy-team-planning.webp',
       'title' => 'Tailored eCommerce Solutions',
       'text' => 'We help you to cover a custom e-commerce solution because every business and its needs are different. We will try to make your online store stand out and deliver quality results.',
     ),
     1 => array(
-      'image' => '/images/business-2.webp',
+      'image' => '/images/dev-team-collaborative-coding-session.webp',
       'title' => 'Cutting-Edge Technology',
       'text' => 'We provide scalable and cutting-edge software solutions to all of our customers by using the latest technology, new frameworks, and tools. Our advanced technology ensures your online store performs smoothly on all devices and adapts to future trends.',
     ),
     2 => array(
-      'image' => '/images/business-3.webp',
+      'image' => '/images/startup-mvp-wireframe-planning-session.webp',
       'title' => 'User-Friendly Designs',
       'text' => 'User-friendly designs are the need of this AI and advanced world. We develop user-friendly web design so that you can compete with your competitors on search engines easily and market trends.',
     ),

@@ -33,12 +33,12 @@ class IndustrySupport
     public static function portfolioHeroImages(): array
     {
         return [
-            'assets/portfolio/portfolio-showcase-1.webp',
-            'assets/portfolio/portfolio-showcase-2.webp',
-            'assets/portfolio/portfolio-showcase-3.webp',
-            'assets/portfolio/portfolio-showcase-4.webp',
-            'assets/portfolio/portfolio-showcase-5.webp',
-            'assets/portfolio/portfolio-showcase-6.webp',
+            'assets/portfolio/swastik-culture-hub-website.webp',
+            'assets/portfolio/mavan-growth-agency-website.webp',
+            'assets/portfolio/sales-automation-project-dashboard.webp',
+            'assets/portfolio/hubops-software-company-website.webp',
+            'assets/portfolio/suave-outreach-crm-laptop.webp',
+            'assets/portfolio/ematrics-ai-sales-website.webp',
         ];
     }
 

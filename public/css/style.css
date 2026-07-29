@@ -83,12 +83,6 @@ body {
   overflow-x: clip;
 }
 
-/* ===== HOME PAGE SHELL START ===== */
-.home-page-shell {
-  background: linear-gradient(180deg, #020084 -12.33%, #06011B 108.48%);
-}
-/* ===== HOME PAGE SHELL END ===== */
-
 button,
 input,
 textarea,
@@ -323,6 +317,10 @@ main button.rounded-full.bg-gradient-to-r {
   flex: 1;
   gap: 10px;
   justify-content: flex-start;
+}
+
+.digital-marketing-pagination {
+  gap: 4px;
 }
 
 .offerings-pagination .swiper-pagination-bullet,
@@ -612,7 +610,7 @@ main button.rounded-full.bg-gradient-to-r {
 
 .core-values__grid {
   display: grid;
-  gap: 24px;
+  gap: 34px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 54px;
 }
@@ -649,7 +647,7 @@ main button.rounded-full.bg-gradient-to-r {
 .core-value-card__icon {
   fill: none;
   height: 25px;
-  margin-bottom: 9px;
+  margin-bottom: 16px;
   stroke: #5363e8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -667,10 +665,11 @@ main button.rounded-full.bg-gradient-to-r {
 
 .core-value-card p {
   color: #B1B9DF;
-  font-size: 14px;
-  line-height: 1.42;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 100%;
   margin: 0;
-  max-width: 270px;
+  max-width: 257px;
 }
 
 .core-value-card__image {
@@ -919,7 +918,7 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .industry-card__icon {
-  color: #5968ee;
+  color: #ffffff;
   font-size: 21px;
   line-height: 1;
   margin-bottom: 13px;
@@ -992,6 +991,12 @@ main button.rounded-full.bg-gradient-to-r {
   line-height: 1;
   position: absolute !important;
   right: 14px;
+}
+
+.industry-card__arrow img {
+  display: block;
+  height: 5px;
+  width: 18px;
 }
 
 .industries-served__project {
@@ -1134,14 +1139,14 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .faq-section__image {
-  aspect-ratio: 1.58 / 1;
   border-radius: 5px;
   display: block;
+  height: 244px;
   margin-top: 40px;
-  max-width: 450px;
+  max-width: 100%;
   object-fit: cover;
   object-position: center 42%;
-  width: 100%;
+  width: 418px;
 }
 
 .faq-section--desktop-media .faq-section__image {
@@ -1175,15 +1180,13 @@ main button.rounded-full.bg-gradient-to-r {
   }
 
   .faq-section--align .faq-section__image {
-    aspect-ratio: auto;
-    flex: 1 1 auto;
-    height: auto;
+    flex: 0 0 auto;
+    height: 244px;
     margin-top: 20px;
-    max-height: none;
     max-width: 100%;
-    min-height: 140px;
+    min-height: 0;
     object-fit: cover;
-    width: 100%;
+    width: 418px;
   }
 
   .faq-section--align .faq-list {
@@ -1204,10 +1207,11 @@ main button.rounded-full.bg-gradient-to-r {
   }
 
   .faq-section--contact .faq-section__image {
-    aspect-ratio: 1.9 / 1;
     flex: 0 0 auto;
-    min-height: 73px;
-    max-width: 450px;
+    height: 244px;
+    min-height: 0;
+    max-width: 100%;
+    width: 418px;
   }
 
   .faq-section--desktop-media.faq-section--align .faq-section__inner {
@@ -1250,7 +1254,7 @@ main button.rounded-full.bg-gradient-to-r {
 .faq-list {
   align-self: start;
   display: grid;
-  gap: 9px;
+  gap: 13px;
 }
 
 .faq-item {
@@ -1341,9 +1345,34 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .testimonial-card {
-  background-image: url("/assets/background/testimonial-card-bg.png");
+  background-image:
+    url("/assets/background/testimonial-card-bg.png"),
+    linear-gradient(97.07deg, #2D1231 0.23%, #280D2F 100%);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover, auto;
+  border: 1px solid transparent;
+}
+
+.testimonial-card > div:first-child > p {
+  color: #FAFBFA;
+  font-family: "PP Mori", "Roboto Flex", ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px !important;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 21px;
+}
+
+.testimonial-card h3 {
+  color: #fff;
+  font-family: "PP Mori", "Roboto Flex", ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 100%;
 }
 
 .testimonial-layout {
@@ -1388,7 +1417,7 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .testimonialSwiper {
-  height: 580px;
+  height: 660px;
   width: 100%;
 }
 
@@ -1648,20 +1677,24 @@ main button.rounded-full.bg-gradient-to-r {
 
 .consultation-people {
   display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+  grid-template-columns: repeat(3, 159.7px);
   justify-self: end;
-  width: 500px;
+  width: max-content;
   z-index: 1;
 }
 
 .consultation-people__column {
   display: grid;
-  gap: 12px;
+  gap: 13px;
 }
 
 .consultation-people__column--left {
   transform: translateY(20px);
+}
+
+.consultation-people__column--center {
+  transform: translateY(-24px);
 }
 
 .consultation-people__column--right {
@@ -1770,10 +1803,13 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .consultation-person {
-  border-radius: 12px;
-  height: 140px;
+  border-radius: 21px;
+  height: 160.45px;
   margin: 0;
+  opacity: 1;
   overflow: hidden;
+  transform: rotate(0deg);
+  width: 159.7px;
 }
 
 .consultation-person img {
@@ -3139,6 +3175,10 @@ body.mobile-nav-open {
     --site-gutter: 32px;
   }
 
+  .testimonial-section {
+    padding-block: 64px !important;
+  }
+
   .testimonial-layout {
     display: grid;
     gap: 0 60px;
@@ -3154,12 +3194,13 @@ body.mobile-nav-open {
   .testimonialSwiper {
     grid-column: 2;
     grid-row: 1 / 3;
+    height: 580px;
   }
 
   .testimonial-navigation {
     grid-column: 1;
     grid-row: 2;
-    margin-top: 80px;
+    margin-top: 40px;
   }
 
   .site-footer__main {
@@ -3251,9 +3292,9 @@ body.mobile-nav-open {
   }
 
   .smart-together-cta__actions {
-    align-items: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: 10px;
   }
 
@@ -3331,7 +3372,7 @@ body.mobile-nav-open {
   }
 
   .testimonialSwiper {
-    height: 340px;
+    height: 400px;
     margin-top: 48px;
     order: 2;
   }
@@ -3402,11 +3443,15 @@ body.mobile-nav-open {
 
   .consultation-people {
     flex-shrink: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: min(100%, 290px);
   }
 
   .consultation-person {
-    height: 114px;
+    border-radius: 16px;
+    height: auto;
+    width: 100%;
+    aspect-ratio: 159.7 / 160.45;
   }
 
   .offerings-control,
@@ -3593,7 +3638,8 @@ body.mobile-nav-open {
   .smart-together-cta__actions {
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    gap: 10px;
   }
 
   .smart-together-cta__phone {
@@ -3635,7 +3681,11 @@ body.mobile-nav-open {
 
   .web-service-card p {
     font-size: 13px !important;
+    height: 88px;
     line-height: 1.5;
+    max-width: 100%;
+    opacity: 1;
+    width: 305px;
   }
 
   .web-services__footer {
@@ -3655,12 +3705,13 @@ body.mobile-nav-open {
   }
 
   .core-values__grid {
+    gap: 14px;
     grid-template-columns: 1fr;
-    margin-top: 38px;
+    margin-top: 20px;
   }
 
   .core-values__slider {
-    margin-top: 38px;
+    margin-top: 20px;
   }
 
   .core-values__controls {
@@ -3674,12 +3725,30 @@ body.mobile-nav-open {
   }
 
   .core-value-card__content {
-    min-height: 112px;
+    align-items: flex-start;
     border-left: none !important;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 0;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .core-value-card__icon {
+    flex-shrink: 0;
+    height: 30px;
+    margin-bottom: 0;
+    width: 28px;
+  }
+
+  .core-value-card__text {
+    flex: 1;
+    min-width: 0;
   }
 
   .core-value-card p {
-    max-width: 340px;
+    max-width: none;
     font-size: 13px;
   }
 
@@ -3731,18 +3800,21 @@ body.mobile-nav-open {
   }
 
   .industries-support__copy {
-    max-width: calc(100% - 64px);
+    max-width: calc(100% - 40px);
   }
 
   .industries-support__copy p {
-    font-size: clamp(0.9375rem, 3.5vw, 1.125rem);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0;
   }
 
   .industries-support__illustration {
     margin: 0;
     position: absolute;
     right: 10px;
-    top: 60px;
+    top: 78px;
     transform: scale(0.72);
     transform-origin: top right;
   }
@@ -3762,8 +3834,7 @@ body.mobile-nav-open {
   }
 
   .faq-section__image {
-    margin-top: 34px;
-    max-width: none;
+    display: none;
   }
 
   .faq-item__summary {
@@ -3788,20 +3859,36 @@ body.mobile-nav-open {
   }
 
   .testimonialSwiper {
-    height: 320px;
+    height: 400px;
     margin-top: 0;
     order: 1;
   }
 
+  .testimonialSwiper .swiper-slide {
+    box-sizing: border-box;
+    padding-right: 12px;
+  }
+
   .testimonial-card {
-    border-color: rgb(108 61 160 / 38%) !important;
     border-radius: 8px;
     padding: 22px !important;
   }
 
+  .testimonial-card > div:first-child > p {
+    font-size: 13px !important;
+    height: 147px;
+    letter-spacing: -0.01em;
+    line-height: 21px;
+    max-width: 100%;
+    opacity: 1;
+    width: 331px;
+  }
+
   .testimonial-card h3 {
-    font-size: 14px;
-    line-height: 19px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 100%;
   }
 
   .testimonial-navigation {
@@ -3918,14 +4005,20 @@ body.mobile-nav-open {
 
   .core-value-card__image img {
     display: block;
-    height: 160px;
-    width: 100%;
+    height: 132px;
+    width: 298px;
+    max-width: 100%;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 7px;
   }
 
   .core-value-card__image {
     aspect-ratio: auto;
+    border-radius: 7px;
+    margin-left: 38px;
+    margin-top: 8px;
+    max-width: calc(100% - 38px);
+    width: 298px;
   }
 
   .core-value-card h3 {
@@ -3938,6 +4031,7 @@ body.mobile-nav-open {
   }
 
   .consultation-people {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-self: center;
     width: 100%;
   }
@@ -3947,8 +4041,15 @@ body.mobile-nav-open {
     transform: translateY(14px);
   }
 
+  .consultation-people__column--center {
+    transform: translateY(-14px);
+  }
+
   .consultation-person {
-    height: clamp(102px, 32vw, 124px);
+    border-radius: 14px;
+    height: auto;
+    width: 100%;
+    aspect-ratio: 159.7 / 160.45;
   }
 
   .partnership-section {
@@ -4160,6 +4261,7 @@ body.mobile-nav-open {
   }
 
   .consultation-people {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: min(42%, 300px);
   }
 

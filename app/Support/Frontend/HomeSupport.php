@@ -12,8 +12,8 @@ class HomeSupport
     public static function data(): array
     {
         return array_merge(self::faqData(), [
-            'heroShellClass' => 'home-page-shell',
-            'heroBackgroundImage' => '',
+            'heroShellClass' => 'bg-[#00003f]',
+            'heroBackgroundImage' => 'assets/background/home-hero-cover-bg.png',
             'stats' => self::stats(),
             'offerings' => self::offerings(),
             'coreValues' => self::coreValues(),
@@ -80,31 +80,31 @@ class HomeSupport
             [
                 'title' => 'Product Strategy with Intelligence Inside',
                 'description' => 'Our team helps define your vision, validate your idea.',
-                'image' => 'assets/team/expert-portrait-1.png',
+                'image' => 'assets/media/summary-report-team-meeting.webp',
                 'alt' => 'Product strategy experts planning intelligent software solutions',
             ],
             [
                 'title' => 'Design that Defines Your Brand',
                 'description' => 'We merge creative design, intuitive UX/UI, and brand storytelling.',
-                'image' => 'assets/team/expert-portrait-2.png',
-                'alt' => 'UI UX designer planning a brand experience for digital products',
+                'image' => 'assets/media/big-project-sticky-notes-planning.webp',
+                'alt' => 'UI UX designers planning a brand experience for digital products',
             ],
             [
                 'title' => 'Smart Development, Seamless Performance',
                 'description' => 'Our team crafts high-performance, scalable applications.',
-                'image' => 'assets/team/expert-portrait-3.png',
+                'image' => 'assets/media/developers-collaborating-code-review.webp',
                 'alt' => 'Software engineers building scalable web applications',
             ],
             [
                 'title' => 'Marketing that Fuels Growth',
                 'description' => 'We help your app grow, retain, and dominate its market space.',
-                'image' => 'assets/team/expert-portrait-4.png',
+                'image' => 'assets/media/marketing-analytics-team-presentation.webp',
                 'alt' => 'Digital marketing experts presenting app growth analytics',
             ],
             [
                 'title' => 'Continuous Support & Innovation',
                 'description' => 'We keep your product reliable, relevant, and ready to evolve with ongoing support and smart improvements.',
-                'image' => 'assets/team/expert-portrait-1.png',
+                'image' => 'assets/media/summary-report-team-meeting.webp',
                 'alt' => 'Product support team planning continuous software innovation',
             ],
         ];
@@ -120,29 +120,29 @@ class HomeSupport
                 'id' => 'innovation',
                 'title' => 'Innovation',
                 'description' => 'We work with future trends and the latest technologies.',
-                'image' => 'assets/portfolio/modern-office-yellow-accent-lounge.png',
-                'alt' => 'Modern workspace reflecting innovative software development culture',
+                'image' => 'assets/media/conference-table-analytics-whiteboard.webp',
+                'alt' => 'Innovation-focused software team reviewing analytics on a conference table',
             ],
             [
                 'id' => 'quality',
                 'title' => 'Quality',
                 'description' => 'Delivering the best quality, ensuring our clients get nothing less than the best.',
-                'image' => 'assets/portfolio/contemporary-living-room-kitchen.png',
-                'alt' => 'Contemporary interior design showcasing quality digital craftsmanship',
+                'image' => 'assets/media/financial-dashboard-laptop-collaboration.webp',
+                'alt' => 'Quality-driven financial dashboard collaboration for software excellence',
             ],
             [
                 'id' => 'trust',
                 'title' => 'Trust',
                 'description' => 'We build trust by focusing on the exact client requirements.',
-                'image' => 'assets/portfolio/warm-lounge-plants-artwork.png',
-                'alt' => 'Warm collaborative lounge built for trusted client partnerships',
+                'image' => 'assets/media/diverse-team-data-meeting.webp',
+                'alt' => 'Trusted diverse team aligning on client requirements with data insights',
             ],
             [
                 'id' => 'customer',
                 'title' => 'Customer Focus',
                 'description' => 'We put our clients at the heart of everything we build.',
-                'image' => 'assets/portfolio/office-glass-meeting-rooms.png',
-                'alt' => 'Glass meeting rooms for customer focused software consulting',
+                'image' => 'assets/media/summary-report-team-meeting.webp',
+                'alt' => 'Customer focused team reviewing a summary report in a client meeting',
             ],
         ];
     }
@@ -158,7 +158,7 @@ class HomeSupport
                 'title' => 'Search Engine Optimization',
                 'headline' => 'Boost Your Organic Visibility',
                 'description' => 'With our expertise, we enhance the online visibility of your professional website.',
-                'image' => 'assets/media/seo-infographic-on-imac.png',
+                'image' => 'assets/media/seo-infographic-on-imac.webp',
                 'alt' => 'SEO analytics dashboard for search engine optimization services',
                 'iconAlt' => 'Search engine optimization SEO service icon',
             ],
@@ -167,7 +167,7 @@ class HomeSupport
                 'title' => 'Pay-Per-Click Advertising',
                 'headline' => 'Instant Reach, Tangible Results',
                 'description' => 'Reach high-intent audiences quickly with focused campaigns that maximise conversions and measurable ROI.',
-                'image' => 'assets/media/ppc-campaign-planning.png',
+                'image' => 'assets/media/ppc-campaign-planning.webp',
                 'alt' => 'PPC advertising campaign planning for higher conversions',
                 'iconAlt' => 'Pay per click advertising PPC service icon',
             ],
@@ -176,7 +176,7 @@ class HomeSupport
                 'title' => 'Social Media Marketing',
                 'headline' => 'Engage & Grow Your Community',
                 'description' => 'Build meaningful connections with relevant content that inspires engagement, loyalty, and lasting growth.',
-                'image' => 'assets/media/social-media-marketing-mobile.png',
+                'image' => 'assets/media/social-media-marketing-mobile.webp',
                 'alt' => 'Social media marketing content strategy on a mobile device',
                 'iconAlt' => 'Social media marketing service icon',
             ],
@@ -185,7 +185,7 @@ class HomeSupport
                 'title' => 'Content Strategy & Planning',
                 'headline' => 'Plan. Create. Convert.',
                 'description' => 'Turn ideas into purposeful content that strengthens your brand and guides customers to act.',
-                'image' => 'assets/media/content-strategy-team-planning.png',
+                'image' => 'assets/media/content-strategy-team-planning.webp',
                 'alt' => 'Content strategy team planning digital marketing campaigns',
                 'iconAlt' => 'Content strategy and planning service icon',
             ],
@@ -194,7 +194,7 @@ class HomeSupport
                 'title' => 'Online Reputation Management',
                 'headline' => 'Protect Trust. Build Credibility.',
                 'description' => 'Monitor brand conversations and strengthen the online reputation that shapes customer confidence.',
-                'image' => 'assets/media/seo-infographic-on-imac.png',
+                'image' => 'assets/media/online-reputation-admin-dashboard.webp',
                 'alt' => 'Online reputation management review of brand sentiment analytics',
                 'iconAlt' => 'Online reputation management service icon',
             ],
@@ -203,7 +203,7 @@ class HomeSupport
                 'title' => 'Answer Engine Optimization',
                 'headline' => 'Be the Answer Customers Find',
                 'description' => 'Structure authoritative content so voice assistants and answer engines can surface your expertise.',
-                'image' => 'assets/media/ppc-campaign-planning.png',
+                'image' => 'assets/media/answer-engine-inspiration-mindmap.webp',
                 'alt' => 'Answer engine optimization content planning for AI search',
                 'iconAlt' => 'Answer engine optimization AEO service icon',
             ],
@@ -212,7 +212,7 @@ class HomeSupport
                 'title' => 'Generative Engine Optimization',
                 'headline' => 'Stay Visible in AI Search',
                 'description' => 'Position your brand for discovery across generative platforms with trusted content and clear signals.',
-                'image' => 'assets/media/social-media-marketing-mobile.png',
+                'image' => 'assets/media/generative-engine-dev-team-coding.webp',
                 'alt' => 'Generative engine optimization for brand visibility in AI search',
                 'iconAlt' => 'Generative engine optimization GEO service icon',
             ],
@@ -220,26 +220,52 @@ class HomeSupport
     }
 
     /**
-     * @return array<int, array{image: string, alt: string}>
+     * @return array<int, array{category: string, title: string, description: string, image: string, alt: string}>
      */
     public static function portfolioShowcaseProjects(): array
     {
         return [
             [
-                'image' => 'assets/portfolio/timber-glass-creative-studio.png',
-                'alt' => 'Modern timber and glass creative studio for digital product teams',
+                'category' => 'CRM Development',
+                'title' => 'Suave Outreach CRM Platform',
+                'description' => 'An AI-assisted outreach CRM for discovering leads, enriching business context, and sending personalized emails.',
+                'image' => 'assets/portfolio/suave-outreach-crm-laptop.webp',
+                'alt' => 'Suave Creators outreach CRM platform on a laptop display',
             ],
             [
-                'image' => 'assets/portfolio/bright-contemporary-residence.png',
-                'alt' => 'Bright contemporary space reflecting premium digital design quality',
+                'category' => 'Custom Software',
+                'title' => 'Sales Automation Project Dashboard',
+                'description' => 'A project workspace for tracking sales automation rollouts, task priorities, and team progress in one place.',
+                'image' => 'assets/portfolio/sales-automation-project-dashboard.webp',
+                'alt' => 'Sales automation project dashboard software by Suave Creators',
             ],
             [
-                'image' => 'assets/portfolio/warm-modern-lounge-interior.png',
-                'alt' => 'Warm modern lounge for collaborative software product workshops',
+                'category' => 'Web Development',
+                'title' => 'MAVAN Growth Agency Website',
+                'description' => 'A conversion-focused site for a growth agency that embeds elite talent to solve complex scaling problems.',
+                'image' => 'assets/portfolio/mavan-growth-agency-website.webp',
+                'alt' => 'MAVAN growth agency website built by Suave Creators',
             ],
             [
-                'image' => 'assets/portfolio/timber-glass-creative-studio.png',
-                'alt' => 'Creative studio exterior showcasing Suave Creators portfolio quality',
+                'category' => 'Web Design',
+                'title' => 'HubOps Software Company Website',
+                'description' => 'A high-impact marketing site for a custom software company focused on SaaS, APIs, and industry solutions.',
+                'image' => 'assets/portfolio/hubops-software-company-website.webp',
+                'alt' => 'HubOps custom software company website by Suave Creators',
+            ],
+            [
+                'category' => 'Web Design',
+                'title' => 'Swastik Culture Hub Website',
+                'description' => 'A digital hub for Indian history, art, and culture with curated libraries and original series.',
+                'image' => 'assets/portfolio/swastik-culture-hub-website.webp',
+                'alt' => 'Swastik culture hub website for history art and culture content',
+            ],
+            [
+                'category' => 'AI Product',
+                'title' => 'Ematrics AI Sales Website',
+                'description' => 'A product site for an AI sales catalyst that trains reps, assists live calls, and delivers post-call analytics.',
+                'image' => 'assets/portfolio/ematrics-ai-sales-website.webp',
+                'alt' => 'Ematrics AI sales catalyst website built by Suave Creators',
             ],
         ];
     }
@@ -279,7 +305,7 @@ class HomeSupport
         return [
             'faqCtaHref' => route('contact-us').'#contact-id',
             'faqCtaLabel' => 'Start your Project',
-            'faqMedia' => 'assets/media/faq-team-collaboration.webp',
+            'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',
             'faqMediaType' => 'image',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
             'faqs' => [

@@ -53,7 +53,7 @@ $mainClass = $mainClass ?? 'site-main';
     <?php if ($useHeroBackground && $heroBackgroundImage): ?>
       <div class="site-hero-bg" aria-hidden="true">
         <img src="<?= htmlspecialchars((string) $heroBackgroundImage) ?>" alt="" class="site-hero-bg__image">
-        <?php if ($heroBackgroundImage === '/images/cover_banner.png'): ?>
+        <?php if (in_array($heroBackgroundImage, ['/images/cover_banner.png', '/images/home-hero-cover-bg.png'], true)): ?>
           <img src="/images/hero_Pattern(left).svg" alt="" class="site-hero-bg__pattern">
         <?php endif; ?>
       </div>

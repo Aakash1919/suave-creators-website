@@ -22,9 +22,8 @@ class SuaveAgentKnowledge
             'company' => (string) ($org['legal_name'] ?? 'Suave Creators'),
             'email' => strtolower((string) ($org['email'] ?? 'info@suavecreators.com')),
             'phones' => array_values(array_unique(array_filter([
-                '+91 88949 00142',
+                (string) ($org['telephone'] ?? '+91 88949 00142'),
                 '+91 18944 55019',
-                (string) ($org['telephone'] ?? '+91 97369 00142'),
             ]))),
             'offices' => ContactSupport::offices(),
         ];

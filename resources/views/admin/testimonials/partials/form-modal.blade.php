@@ -51,7 +51,7 @@
         <div>
           <label class="admin-label" for="testimonial-avatar">Avatar image</label>
           <div id="testimonial-avatar-preview" class="mb-2" hidden>
-            <img id="testimonial-avatar-img" src="" alt="" class="h-14 w-14 rounded-full object-cover border border-[var(--admin-border)]">
+            <img id="testimonial-avatar-img" src="" alt="Client testimonial avatar preview" title="Client testimonial avatar preview" class="h-14 w-14 rounded-full object-cover border border-[var(--admin-border)]">
           </div>
           <div id="testimonial-remove-avatar-wrap" class="mb-2" hidden>
             <label class="admin-check">

@@ -15,7 +15,7 @@ class ContactSupport
             'formServices' => self::formServices(),
             'techStack' => AboutSupport::techStack(),
             'faqs' => self::faqs(),
-            'faqMedia' => 'assets/media/faq-team-collaboration.webp',
+            'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
             'faqCtaHref' => route('contact-us').'#contact-id',
             'faqCtaLabel' => 'Send a Message',
@@ -188,10 +188,6 @@ class ContactSupport
                 'links' => [
                     ['href' => 'tel:+918894900142', 'text' => '+91 88949 00142'],
                     ['href' => 'tel:+911894455019', 'text' => '+91 18944 55019'],
-                    [
-                        'href' => (string) ($org['telephone_href'] ?? 'tel:+919736900142'),
-                        'text' => (string) ($org['telephone'] ?? '+91 97369 00142'),
-                    ],
                 ],
             ],
         ];
@@ -214,6 +210,14 @@ class ContactSupport
             [
                 'question' => 'What information should I include when contacting you about a project?',
                 'answer' => 'You can include your project requirements, budget range, and deadline expectations, if available. This helps us understand your vision and provide a more accurate proposal or consultation.',
+            ],
+            [
+                'question' => 'Is the initial consultation free?',
+                'answer' => 'Yes. Your first discovery call is free and obligation-free. We use it to understand your goals, answer questions, and outline a practical next step for your project.',
+            ],
+            [
+                'question' => 'How do I schedule a call with your team?',
+                'answer' => 'Fill out the contact form with your preferred time and project details, or email us at info@suavecreators.com. We will confirm a discovery call that works across your time zone.',
             ],
         ];
     }

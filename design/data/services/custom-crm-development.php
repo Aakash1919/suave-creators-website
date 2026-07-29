@@ -168,17 +168,17 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/images/crm-dev-img-1.webp',
+      'image' => '/images/developers-collaborating-code-review.webp',
       'title' => 'Expertise in Custom Solutions',
       'text' => 'We can proudly say that we have a team of expert custom CRM developers who will listen to your needs and give you a smart solution during the development phase. Let’s reach out to our smart team for your next digital product.',
     ),
     1 => array(
-      'image' => '/images/crm-dev-img-2.webp',
+      'image' => '/images/financial-dashboard-laptop-collaboration.webp',
       'title' => 'Scalable & Secure',
       'text' => 'All of our CRM solutions are scalable and secure to fulfill the clients\' requirements and give them the best possible results with the highest security system.',
     ),
     2 => array(
-      'image' => '/images/crm-dev-img-3.webp',
+      'image' => '/images/conference-table-analytics-whiteboard.webp',
       'title' => 'Seamless Integration ',
       'text' => 'We will always integrate tools and API’s as per the client\'s needs and make a complete automated platform so that users can easily manage it.',
     ),
