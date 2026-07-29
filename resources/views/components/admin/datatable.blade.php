@@ -25,7 +25,7 @@
     data-admin-datatable
     data-table-id="{{ $tableId }}"
   >
-    <div class="admin-card admin-dt__card overflow-visible">
+    <div class="admin-card admin-dt__card">
       <div class="admin-dt__toolbar flex flex-wrap items-center justify-between gap-3 border-b border-[var(--admin-border)] px-4 py-3">
         <div class="flex flex-nowrap items-center gap-2.5 min-w-0 overflow-x-auto">
           <div class="relative inline-flex shrink-0 min-w-[12rem] items-center">
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <div class="admin-card__body admin-card__body--flush">
+      <div class="admin-card__body admin-card__body--flush admin-dt__scroll">
         <table id="{{ $tableId }}" class="admin-table display nowrap w-full" style="width:100%">
           <thead>
             <tr>

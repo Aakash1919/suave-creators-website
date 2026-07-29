@@ -77,6 +77,9 @@
     <div id="mobile-nav" class="mobile-nav" hidden>
         <div class="mobile-nav__backdrop" data-mobile-nav-close tabindex="-1" aria-hidden="true"></div>
         <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+            <button type="button" class="mobile-nav__close u-touch-target" data-mobile-nav-close aria-label="Close menu">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
             <div class="mobile-nav__scroll">
                 <nav class="mobile-nav__links" aria-label="Mobile navigation">
                     <a class="mobile-nav__link {{ $isNavActive('about-us') ? 'is-active' : '' }}" href="{{ route('about-us') }}" @if ($isNavActive('about-us')) aria-current="page" @endif>About</a>
@@ -124,6 +127,11 @@
     var toggle = document.getElementById('mobile-nav-toggle');
     var nav = document.getElementById('mobile-nav');
     if (!toggle || !nav) return;
+
+    // Escape overflow-hidden page wrappers so the slider can cover all content.
+    if (nav.parentElement !== document.body) {
+        document.body.appendChild(nav);
+    }
 
     var menuIcon = toggle.querySelector('.site-header__menu-icon');
     var closeIcon = toggle.querySelector('.site-header__close-icon');

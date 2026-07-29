@@ -16,7 +16,7 @@ use Stringable;
 #[MaxTokens(8192)]
 #[Temperature(0.7)]
 #[Timeout(180)]
-class BlogTrendWriterAgent implements Agent, HasStructuredOutput
+class BlogWriterAgent implements Agent, HasStructuredOutput
 {
     use Promptable;
 

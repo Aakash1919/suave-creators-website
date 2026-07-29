@@ -16,7 +16,7 @@ use Stringable;
 #[MaxTokens(1024)]
 #[Temperature(0.4)]
 #[Timeout(60)]
-class BlogSeoMetaWriterAgent implements Agent, HasStructuredOutput
+class SeoMetaAgent implements Agent, HasStructuredOutput
 {
     use Promptable;
 

@@ -21,8 +21,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'blogs.delete' => 'Delete blogs',
             'conversations.view' => 'View AI conversations',
             'contacts.view' => 'View contact requests',
+            'testimonials.view' => 'View testimonials',
+            'testimonials.manage' => 'Create and edit testimonials',
             'users.view' => 'View users',
-            'users.manage' => 'Manage users and roles',
+            'users.manage' => 'Manage users',
+            'roles.view' => 'View roles',
+            'roles.manage' => 'Create and edit roles and permissions',
             'profile.update' => 'Update own profile',
             'seo.audit' => 'Generate SEO audit reports',
         ];
@@ -55,6 +59,8 @@ class RolesAndPermissionsSeeder extends Seeder
                     'profile.update',
                     'conversations.view',
                     'contacts.view',
+                    'testimonials.view',
+                    'testimonials.manage',
                 ])
                 ->pluck('id')
         );

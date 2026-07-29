@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Concerns\RespondsToAdminAjax;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProfilePasswordUpdateRequest;
+use App\Http\Requests\Admin\ProfileUpdateRequest;
 use App\Services\ProfileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -31,7 +33,7 @@ class ProfileController extends Controller
     /**
      * Update the signed-in user's name and email.
      */
-    public function update(Request $request): JsonResponse|RedirectResponse
+    public function update(ProfileUpdateRequest $request): JsonResponse|RedirectResponse
     {
         $this->profiles->update($request, $request->user());
 
@@ -41,7 +43,7 @@ class ProfileController extends Controller
     /**
      * Change the signed-in user's password after verifying the current one.
      */
-    public function updatePassword(Request $request): JsonResponse|RedirectResponse
+    public function updatePassword(ProfilePasswordUpdateRequest $request): JsonResponse|RedirectResponse
     {
         $this->profiles->updatePassword($request, $request->user());
 

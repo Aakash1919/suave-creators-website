@@ -1,0 +1,15 @@
+---
+description: Always load Suave project skills before coding — suave-admin or suave-frontend
+alwaysApply: true
+---
+
+# Suave skills (required)
+
+Before implementing or editing code in this repo, **read the matching skill with the Read tool as your first action**. Do not rely on memory of prior chats.
+
+| Work | Skill path |
+|------|------------|
+| Admin panel, RBAC, roles, permissions, Form Requests, blogs/users/testimonials CRUD, admin services/DataTables, Toastr/AJAX admin UI, contact inbox admin, AI conversation review, admin page vs modal forms | `.cursor/skills/suave-admin/SKILL.md` |
+| Marketing site, Blade frontend, `design/` imports, `public/assets`, `public/css/style.css`, View Components, HomeSupport / ContactSupport, SuaveAgent widget | `.cursor/skills/suave-frontend/SKILL.md` (+ `reference.md` when renaming assets) |
+
+If both apply, read **both**. After reading, follow that skill for the rest of the change (services, Form Requests, flash helpers, verify scripts, etc.).

@@ -1,6 +1,6 @@
 ---
 description: Suave Creators custom admin panel — read suave-admin skill (not Filament/Spatie)
-globs: routes/admin.php,app/Http/Controllers/Admin/**,app/Http/Middleware/EnsureAdminUser.php,app/Http/Middleware/EnsurePermission.php,app/Models/Role.php,app/Models/Permission.php,app/Models/Concerns/HasRoles.php,app/Models/ChatLead.php,app/Models/ContactRequest.php,app/Support/SiteAdmin.php,app/Support/helpers.php,app/Support/Admin/**,app/Services/BlogService.php,app/Services/UserService.php,app/Services/ProfileService.php,app/Services/ContactRequestService.php,app/Services/ConversationService.php,app/DataTables/Admin/**,resources/views/admin/**,resources/views/layouts/admin.blade.php,resources/views/layouts/admin/**,resources/views/errors/**,public/css/admin.css,public/js/admin/suave-admin.js,database/seeders/RolesAndPermissionsSeeder.php,.cursor/skills/suave-admin/**
+globs: routes/admin.php,app/Http/Controllers/Admin/**,app/Http/Requests/Admin/**,app/Http/Middleware/**,app/Models/**,app/Services/**,app/DataTables/Admin/**,app/Support/Admin/**,app/Support/SiteAdmin.php,app/Support/helpers.php,resources/views/admin/**,resources/views/layouts/admin/**,resources/views/errors/**,public/css/admin.css,public/js/admin/**,database/seeders/**,.cursor/skills/suave-admin/**
 alwaysApply: false
 ---
 
@@ -12,9 +12,15 @@ Before editing the custom admin panel, RBAC, or admin conversation review:
 2. Keep first-party roles/permissions — do not add Filament, Breeze, or Spatie Permission
 3. Gate routes with `admin` + `permission:{name}`; gate nav with `hasPermission`
 4. Put CRUD / domain logic in `App\Services\*Service`; keep Admin controllers thin (HTTP + flash/JSON only)
-5. AI transcripts use Laravel AI SDK conversation tables via `ChatLead` — do not invent a parallel messages schema
-6. Trend blog drafts: `blogs:generate-trend-drafts` + Tue/Fri schedule in `routes/console.php` (always `draft`; see suave-admin skill). Edit-form “Generate SEO meta” fills meta/OG inputs only — editor must save
-7. UI: white admin theme (`#7539FF` primary, light sidebar) + Toastr/DataTables/Flatpickr/RichTextEditor; keep editor assets in `public/richtexteditor/`
-8. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
-9. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha)
-10. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`
+5. Put validation in `App\Http\Requests\Admin\*` Form Requests named `{Resource}StoreRequest` / `{Resource}UpdateRequest` (e.g. `BlogStoreRequest`) — no `$request->validate()` in controllers or services
+6. Admin create/edit forms are **full width** by default — do not constrain with `max-width` unless the user asks
+7. Before building create/edit/mutation UI, **ask the user** whether they want a **page** or a **modal** (unless already specified). Testimonials use index modals.
+8. AI transcripts use Laravel AI SDK conversation tables via `ChatLead` — do not invent a parallel messages schema
+9. Trend blog drafts: `blogs:generate-trend-drafts` + Tue/Fri schedule in `routes/console.php` (always `draft`; see suave-admin skill). Edit-form “Generate SEO meta” fills meta/OG inputs only — editor must save
+10. UI: white admin theme (`#7539FF` primary, light sidebar) + Toastr/DataTables/Flatpickr/RichTextEditor; keep editor assets in `public/richtexteditor/`
+11. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
+12. Confirmations: always the custom dialog (`SuaveAdmin.confirmDialog` or `data-admin-delete` with `data-confirm` / `data-confirm-title` / `data-confirm-label`) — never `window.confirm` / `confirm()`. Use action-specific title, message, and button label (see suave-admin skill → Confirm dialogs)
+13. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha); public store uses `ContactStoreRequest`
+14. Roles UI: Admin → Roles (`roles.view` / `roles.manage`); protect the `admin` role key from rename/delete via `RoleService`
+15. Testimonials: Admin → Testimonials (`testimonials.view` / `testimonials.manage`); create/edit via modal on index; frontend reads `TestimonialService::cachedForFrontend()` (forever cache, forget on write)
+16. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`

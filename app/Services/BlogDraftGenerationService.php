@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Ai\Agents\BlogTrendWriterAgent;
+use App\Ai\Agents\BlogWriterAgent;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Support\SiteAdmin;
@@ -29,7 +29,7 @@ class BlogDraftGenerationService
         $model = (string) config('blogs.trend_drafts.model', 'gpt-4o-mini');
 
         try {
-            $response = (new BlogTrendWriterAgent(
+            $response = (new BlogWriterAgent(
                 categories: $categories,
                 recentTitles: $recentTitles,
                 styleExamples: $styleExamples,

@@ -5,7 +5,7 @@
 @section('content')
   <x-admin.datatable
     title="Users"
-    description="Manage admin users and role assignments."
+    description="Manage admin users and role assignment."
     :columns="$columns"
     :sort-options="[
       ['label' => 'Name A-Z', 'column' => 0, 'dir' => 'asc'],

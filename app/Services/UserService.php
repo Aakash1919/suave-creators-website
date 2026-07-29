@@ -2,14 +2,12 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Admin\UserStoreRequest;
+use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\ValidationException;
 
 class UserService
 {
@@ -33,12 +31,10 @@ class UserService
 
     /**
      * Create a user and sync roles.
-     *
-     * @throws ValidationException
      */
-    public function create(Request $request): User
+    public function create(UserStoreRequest $request): User
     {
-        $data = $this->validated($request);
+        $data = $request->validated();
 
         $user = User::query()->create([
             'name' => $data['name'],
@@ -46,19 +42,17 @@ class UserService
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->syncRoles($data['roles'] ?? []);
+        $user->syncRoles($this->roleNames($data['role'] ?? null));
 
         return $user;
     }
 
     /**
      * Update a user and sync roles.
-     *
-     * @throws ValidationException
      */
-    public function update(Request $request, User $user): User
+    public function update(UserUpdateRequest $request, User $user): User
     {
-        $data = $this->validated($request, $user);
+        $data = $request->validated();
 
         $user->name = $data['name'];
         $user->email = $data['email'];
@@ -68,31 +62,16 @@ class UserService
         }
 
         $user->save();
-        $user->syncRoles($data['roles'] ?? []);
+        $user->syncRoles($this->roleNames($data['role'] ?? null));
 
         return $user->refresh();
     }
 
     /**
-     * @return array{name: string, email: string, password?: string, roles?: list<string>}
-     *
-     * @throws ValidationException
+     * @return list<string>
      */
-    public function validated(Request $request, ?User $user = null): array
+    private function roleNames(?string $role): array
     {
-        $creating = $user === null;
-
-        return $request->validate([
-            'name' => ['required', 'string', 'max:120'],
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('users', 'email')->ignore($user?->id),
-            ],
-            'password' => [$creating ? 'required' : 'nullable', Password::defaults()],
-            'roles' => ['nullable', 'array'],
-            'roles.*' => ['string', Rule::exists('roles', 'name')],
-        ]);
+        return filled($role) ? [(string) $role] : [];
     }
 }

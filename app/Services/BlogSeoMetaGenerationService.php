@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Ai\Agents\BlogSeoMetaWriterAgent;
+use App\Ai\Agents\SeoMetaAgent;
 use App\Models\Blog;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -33,7 +33,7 @@ class BlogSeoMetaGenerationService
         $excerpt = $this->contentExcerpt($content);
 
         try {
-            $response = (new BlogSeoMetaWriterAgent(
+            $response = (new SeoMetaAgent(
                 modelOverride: $model,
             ))->prompt(
                 $this->userPrompt($title, $short, $excerpt, $blog),

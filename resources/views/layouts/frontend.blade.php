@@ -67,6 +67,7 @@
     $bodyClass = $bodyClass ?? 'min-h-screen bg-white font-sans text-slate-900';
     $useHeroBackground = $useHeroBackground ?? true;
     $heroBackgroundImage = $heroBackgroundImage ?? 'assets/background/home-hero-cover-bg.png';
+    $heroShellClass = $heroShellClass ?? ($useHeroBackground ? 'bg-[#00003f]' : 'bg-white');
     $mainClass = $mainClass ?? 'site-main';
 @endphp
 <body class="{{ $bodyClass }}">
@@ -77,7 +78,7 @@
         </noscript>
         <!-- End Google Tag Manager (noscript) -->
     @endif
-    <div class="relative w-full overflow-hidden {{ $useHeroBackground ? 'bg-[#00003f]' : 'bg-white' }}">
+    <div class="relative w-full overflow-hidden {{ $heroShellClass }}">
         @if ($useHeroBackground && $heroBackgroundImage)
             <div class="site-hero-bg" aria-hidden="true">
                 <img

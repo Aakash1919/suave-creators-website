@@ -50,6 +50,14 @@
         <span>Contacts</span>
       </a>
     @endif
+    @if ($user->hasPermission('testimonials.view'))
+      <a href="{{ route('admin.testimonials.index') }}"
+        class="admin-nav-link {{ request()->routeIs('admin.testimonials.*') ? 'is-active' : '' }}"
+        title="Testimonials">
+        <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+        <span>Testimonials</span>
+      </a>
+    @endif
 
     <p class="admin-nav-label">System</p>
     @if ($user->hasPermission('users.view'))
@@ -60,12 +68,14 @@
         <span>Users</span>
       </a>
     @endif
-    <a href="{{ route('admin.profile.edit') }}"
-      class="admin-nav-link {{ request()->routeIs('admin.profile.*') ? 'is-active' : '' }}"
-      title="Profile">
-      <i class="fa-solid fa-user-gear" aria-hidden="true"></i>
-      <span>Profile</span>
-    </a>
+    @if ($user->hasPermission('roles.view'))
+      <a href="{{ route('admin.roles.index') }}"
+        class="admin-nav-link {{ request()->routeIs('admin.roles.*') ? 'is-active' : '' }}"
+        title="Roles">
+        <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+        <span>Roles</span>
+      </a>
+    @endif
   </nav>
 
   <div class="admin-sidebar__footer">

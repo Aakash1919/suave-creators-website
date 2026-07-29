@@ -7,7 +7,7 @@ class DataTableActions
     /**
      * Render a row action kebab menu (native details + Tailwind).
      *
-     * @param  list<array{label: string, url?: string, href?: string, delete?: bool, confirm?: string, confirmTitle?: string, confirmLabel?: string, class?: string, target?: string}>  $items
+     * @param  list<array{label: string, url?: string, href?: string, delete?: bool, button?: bool, attrs?: array<string, scalar|null>, confirm?: string, confirmTitle?: string, confirmLabel?: string, class?: string, target?: string}>  $items
      */
     public static function menu(array $items): string
     {
@@ -35,6 +35,12 @@ class DataTableActions
                 continue;
             }
 
+            if (! empty($item['button'])) {
+                $attrs = self::htmlAttributes(is_array($item['attrs'] ?? null) ? $item['attrs'] : []);
+                $html .= '<button type="button" class="'.$itemClass.' text-[var(--admin-text)] hover:bg-[var(--admin-primary-soft)] hover:text-[var(--admin-primary)]"'.$attrs.'>'.$label.'</button>';
+                continue;
+            }
+
             $target = trim((string) ($item['target'] ?? ''));
             $attrs = '';
             if ($target !== '') {
@@ -48,6 +54,31 @@ class DataTableActions
         }
 
         $html .= '</div></details>';
+
+        return $html;
+    }
+
+    /**
+     * @param  array<string, scalar|null>  $attrs
+     */
+    private static function htmlAttributes(array $attrs): string
+    {
+        $html = '';
+
+        foreach ($attrs as $name => $value) {
+            if ($value === null || $value === false) {
+                continue;
+            }
+
+            $key = e((string) $name);
+
+            if ($value === true) {
+                $html .= ' '.$key;
+                continue;
+            }
+
+            $html .= ' '.$key.'="'.e((string) $value).'"';
+        }
 
         return $html;
     }
