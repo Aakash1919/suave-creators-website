@@ -4,7 +4,7 @@
       <article class="articles-card">
         <figure class="articles-card__image">
           <a href="{{ $post['url'] }}">
-            <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" title="{{ $post['title'] }}" width="1024" height="683" loading="lazy">
+            <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" title="{{ $post['title'] }}" width="480" height="280" loading="lazy">
           </a>
         </figure>
         <div class="articles-card__body">

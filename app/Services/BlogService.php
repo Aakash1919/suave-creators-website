@@ -8,11 +8,14 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BlogService
 {
+    public function __construct(
+        protected ImageVariantService $images,
+    ) {}
+
     /**
      * Categories for the admin blog form select.
      *
@@ -46,7 +49,7 @@ class BlogService
         $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title']);
 
         if ($request->hasFile('featured_image')) {
-            $data['featured_image'] = $this->storeFeaturedImage($request, $data['slug']);
+            $this->applyFeaturedImageVariants($data, $request, $data['slug']);
         }
 
         return Blog::query()->create($data);
@@ -78,8 +81,8 @@ class BlogService
         $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title'], $blog->id);
 
         if ($request->hasFile('featured_image')) {
-            $this->deleteFeaturedImage($blog->featured_image);
-            $data['featured_image'] = $this->storeFeaturedImage($request, $data['slug']);
+            $this->deleteFeaturedImageVariants($blog);
+            $this->applyFeaturedImageVariants($data, $request, $data['slug']);
         }
 
         $blog->update($data);
@@ -136,30 +139,33 @@ class BlogService
     }
 
     /**
-     * Store the featured image on the public disk under blogs/{slug}.{ext}.
+     * Store original + small/medium thumbs under blogs/{slug}*.{ext}.
+     *
+     * @param  array<string, mixed>  $data
      */
-    public function storeFeaturedImage(Request $request, string $slug): string
+    protected function applyFeaturedImageVariants(array &$data, Request $request, string $slug): void
     {
-        $file = $request->file('featured_image');
-        $ext = $file->getClientOriginalExtension() ?: 'jpg';
+        $variants = $this->images->storeWithVariants(
+            $request->file('featured_image'),
+            'blogs',
+            $slug
+        );
 
-        return $file->storeAs('blogs', $slug.'.'.$ext, 'public');
+        $data['featured_image'] = $variants['original'];
+        $data['small_thumb_image'] = $variants['small'];
+        $data['medium_thumb_image'] = $variants['medium'];
     }
 
     /**
-     * Delete a local featured image path; skip remote http(s) URLs.
+     * Delete owned blog featured image variants from the public disk.
      */
-    public function deleteFeaturedImage(?string $path): void
+    protected function deleteFeaturedImageVariants(Blog $blog): void
     {
-        if (! is_string($path) || $path === '') {
-            return;
-        }
-
-        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-            return;
-        }
-
-        Storage::disk('public')->delete($path);
+        $this->images->deletePaths(
+            $blog->featured_image,
+            $blog->small_thumb_image,
+            $blog->medium_thumb_image,
+        );
     }
 
     /**

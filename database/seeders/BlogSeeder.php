@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Services\ImageVariantService;
 use App\Support\SiteAdmin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -56,6 +57,8 @@ class BlogSeeder extends Seeder
             $category = $this->upsertCategory((string) ($payload['category'] ?? 'Insights'));
 
             $featuredPath = null;
+            $smallThumbPath = null;
+            $mediumThumbPath = null;
             $featuredRel = ltrim(str_replace('\\', '/', (string) ($payload['featured_image'] ?? '')), '/');
             if ($featuredRel !== '') {
                 $source = $imagesRoot.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $featuredRel);
@@ -67,6 +70,9 @@ class BlogSeeder extends Seeder
                     $this->command?->warn("  featured image missing: {$slug} → {$featuredRel}");
                 } else {
                     $featuredPath = $stored;
+                    $thumbs = app(ImageVariantService::class)->generateThumbnails($source, $stored);
+                    $smallThumbPath = $thumbs['small'];
+                    $mediumThumbPath = $thumbs['medium'];
                 }
             }
 
@@ -80,6 +86,8 @@ class BlogSeeder extends Seeder
                 'short_description' => (string) ($payload['short_description'] ?? ''),
                 'content' => $content,
                 'featured_image' => $featuredPath,
+                'small_thumb_image' => $smallThumbPath,
+                'medium_thumb_image' => $mediumThumbPath,
                 'blog_category_id' => $category->id,
                 'created_by_id' => $admin->id,
                 'status' => (string) ($payload['status'] ?? Blog::STATUS_PUBLISHED),
@@ -129,7 +137,7 @@ class BlogSeeder extends Seeder
         }
 
         if (empty($data['featured_image']) && filled($blog->featured_image)) {
-            unset($data['featured_image']);
+            unset($data['featured_image'], $data['small_thumb_image'], $data['medium_thumb_image']);
         }
 
         $blog->fill($data);
