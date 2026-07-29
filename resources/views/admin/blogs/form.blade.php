@@ -270,36 +270,23 @@
                     <div class="admin-card__header">
                         <div>
                             <h2 class="admin-card__title">Featured image</h2>
-                            <p>Choose an image from the Gallery.</p>
+                            <p>Shown on cards and social previews.</p>
                         </div>
                     </div>
                     <div class="admin-card__body">
-                        <div data-gallery-field data-gallery-preview-size="medium">
-                            <input type="hidden" name="gallery_image_id" value="" data-gallery-id-input>
-                            <input type="hidden" name="remove_featured_image" value="0" data-gallery-remove-input>
-
-                            <div class="admin-gallery-field__preview" data-gallery-preview @if (! $blog->mediumThumbImageUrl() && ! $blog->featuredImageUrl()) hidden @endif>
-                                <img data-gallery-preview-img
-                                    src="{{ $blog->mediumThumbImageUrl() ?? $blog->featuredImageUrl() }}"
-                                    alt="Current featured image">
-                            </div>
-
-                            <div class="admin-gallery-field__actions">
-                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-gallery-choose>
-                                    <i class="fa-solid fa-images" aria-hidden="true"></i>
-                                    Choose from gallery
-                                </button>
-                                <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-gallery-clear
-                                    @if (! $blog->featuredImageUrl()) hidden @endif>
-                                    Remove
-                                </button>
-                            </div>
-                            <p class="mt-2 text-xs text-[var(--admin-muted)]">
-                                Upload new files under
-                                <a href="{{ route('admin.gallery.index') }}" class="text-[var(--admin-primary)]">Gallery</a>
-                                first.
-                            </p>
-                        </div>
+                        <label class="admin-blog-form__image" for="blog-featured-image">
+                            @if ($blog->featuredImageUrl())
+                                <img src="{{ $blog->featuredImageUrl() }}" alt="Current featured image"
+                                    title="Current featured image" class="admin-blog-form__image-preview">
+                            @else
+                                <span class="admin-blog-form__image-placeholder">
+                                    <i class="fa-regular fa-image" aria-hidden="true"></i>
+                                    Upload a featured image
+                                </span>
+                            @endif
+                            <input id="blog-featured-image" type="file" name="featured_image" accept="image/*"
+                                class="admin-blog-form__image-input">
+                        </label>
                     </div>
                 </section>
 

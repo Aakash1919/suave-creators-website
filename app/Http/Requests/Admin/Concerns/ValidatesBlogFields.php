@@ -28,8 +28,7 @@ trait ValidatesBlogFields
             'blog_category_id' => ['nullable', 'exists:blog_categories,id'],
             'status' => ['required', Rule::in([Blog::STATUS_DRAFT, Blog::STATUS_PUBLISHED])],
             'published_at' => ['nullable', 'date'],
-            'gallery_image_id' => ['nullable', 'integer', 'exists:images,id'],
-            'remove_featured_image' => ['nullable', 'boolean'],
+            'featured_image' => ['nullable', 'image', 'max:5120'],
             'meta_title' => ['nullable', 'string', 'max:60'],
             'meta_description' => ['nullable', 'string', 'max:160'],
             'og_title' => ['nullable', 'string', 'max:60'],
@@ -49,22 +48,5 @@ trait ValidatesBlogFields
             'faqs.*.question.required' => 'Each FAQ needs a question.',
             'faqs.*.answer.required' => 'Each FAQ needs an answer.',
         ];
-    }
-
-    protected function prepareBlogFields(): void
-    {
-        if ($this->has('remove_featured_image')) {
-            $this->merge([
-                'remove_featured_image' => $this->boolean('remove_featured_image'),
-            ]);
-        }
-
-        if ($this->filled('gallery_image_id')) {
-            $this->merge([
-                'gallery_image_id' => (int) $this->input('gallery_image_id'),
-            ]);
-        } else {
-            $this->merge(['gallery_image_id' => null]);
-        }
     }
 }

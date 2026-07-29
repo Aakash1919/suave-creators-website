@@ -28,12 +28,11 @@ description: >-
 ## Access model
 
 - Any authenticated user may enter admin (`User::canAccessAdmin()` returns `true`)
-- Roles/permissions gate nav and routes (`blogs.*`, `conversations.view`, `contacts.view`, `testimonials.*`, `gallery.*`, `users.*`, `roles.*`, `profile.update`)
+- Roles/permissions gate nav and routes (`blogs.*`, `conversations.view`, `contacts.view`, `testimonials.*`, `users.*`, `roles.*`, `profile.update`)
 - Seeded site admin: `SiteAdmin::EMAIL` (`admin@suavecreators.com`) / default password `password` via `SiteAdmin::ensure()` + `RolesAndPermissionsSeeder`
-- Roles: `admin` (all permissions), `editor` (blogs view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage, gallery.view/manage)
+- Roles: `admin` (all permissions), `editor` (blogs view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
 - Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
 - Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
-- Gallery CRUD: Admin → **Gallery** (`gallery.view` / `gallery.manage`); **index / create / edit pages** (like blogs); blogs/testimonials pick images via gallery picker (copy paths, no FK)
 
 ## Services (required)
 
@@ -41,31 +40,15 @@ description: >-
 
 | Service | Responsibility |
 |---------|----------------|
-| `BlogService` | Blog CRUD, slug, featured image via gallery picker (copies path + thumbs), FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads |
+| `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `UserService` | User create/update, password hash, `syncRoles` |
 | `RoleService` | Role create/update/delete, permission sync; protects `admin` role key/delete |
-| `TestimonialService` | Testimonial CRUD, avatar via gallery picker (copies path + thumbs), forever frontend cache (`frontend.testimonials`) invalidated on write |
-| `GalleryService` | Gallery image CRUD (pages like blogs), browse JSON for picker; uploads via `ImageVariantService` into `images/`; refuse delete/replace when blogs/testimonials still reference the path |
-| `ImageVariantService` | Shared upload helper: stores original on the public disk and generates **small** + **medium** thumbs via Intervention Image (`config/image.php`) |
+| `TestimonialService` | Testimonial CRUD, avatar upload, forever frontend cache (`frontend.testimonials`) invalidated on write |
 | `ProfileService` | Own profile + password change |
 | `ContactRequestService` | Public contact store + spam checks; admin mark read / archive |
 | `ConversationService` | Chat lead thread build + Markdown rendering |
-
-### Gallery + image variants
-
-Admin → **Gallery** (`gallery.view` / `gallery.manage`): full **index / create / edit pages** (not index modals). Uploads go through `ImageVariantService::storeWithVariants()` into `images/`:
-
-- **Original** — `images/{basename}.{ext}`
-- **Small** — `{name}_small.{ext}` (default 150×150 cover)
-- **Medium** — `{name}_medium.{ext}` (default 480×280 cover)
-
-DB: `images` (`title`, `path`, `small_thumb_path`, `medium_thumb_path`, `alt_text`, `created_by_id`).
-
-Blogs and testimonials **do not** upload files directly. Forms use `SuaveAdmin.openGalleryPicker` / `[data-gallery-field]` and post `gallery_image_id`; services copy the three gallery paths onto `featured_image` / `small_thumb_image` / `medium_thumb_image` (blogs) or `avatar` / `small_thumb_avatar` / `medium_thumb_avatar` (testimonials). No FK is stored. Clearing an image nulls those columns without deleting gallery files. Gallery delete/file-replace is blocked while any blog/testimonial still references that `path`.
-
-Browse JSON: `GET admin/gallery/browse` for the picker. Frontend cards prefer medium (blogs) or small (testimonial avatars); single-blog hero uses the original. URL helpers fall back to the original when a thumb is missing (seeded/legacy rows).
 
 Rules:
 
@@ -88,7 +71,6 @@ Namespace: `App\Http\Requests\Admin\` (admin) and `App\Http\Requests\Frontend\` 
 | User create/update | `UserStoreRequest` / `UserUpdateRequest` |
 | Role create/update | `RoleStoreRequest` / `RoleUpdateRequest` |
 | Testimonial create/update | `TestimonialStoreRequest` / `TestimonialUpdateRequest` (`Concerns\ValidatesTestimonialFields`) |
-| Gallery create/update | `GalleryStoreRequest` / `GalleryUpdateRequest` |
 | Profile | `ProfileUpdateRequest` / `ProfilePasswordUpdateRequest` |
 | Contact form | `Frontend\ContactStoreRequest` (bot submissions use relaxed rules so silent success still works) |
 
@@ -113,7 +95,6 @@ Namespace: `App\Http\Controllers\Admin\`
 | Users | `UserController` | `App\Services\UserService` |
 | Roles | `RoleController` | `App\Services\RoleService` |
 | Testimonials | `TestimonialController` | `App\Services\TestimonialService` |
-| Gallery | `GalleryController` | `App\Services\GalleryService` |
 | AI chats | `ConversationController` | `App\Services\ConversationService` |
 
 Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC helpers stay on `HasRoles` / `SiteAdmin`.
@@ -141,7 +122,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - Gate sidebar links with `$user->hasPermission(...)`
 - Auth view: `admin.auth.login` (white card on light surface)
 - Error pages: `resources/views/errors/{403,404,500}.blade.php` + `errors/layout.blade.php` (centered white card, illustration, primary CTA)
-- Feature views: `admin/blogs`, `admin/gallery`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
+- Feature views: `admin/blogs`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
 - Do **not** dump admin styles into marketing `public/css/style.css`
 
 ## DataTables + AJAX
@@ -359,7 +340,6 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 - `conversations.view`
 - `contacts.view`
 - `testimonials.view|manage`
-- `gallery.view|manage`
 - `users.view|manage`
 - `roles.view|manage`
 - `profile.update`

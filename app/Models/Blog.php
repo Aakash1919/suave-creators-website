@@ -26,8 +26,6 @@ class Blog extends Model
         'short_description',
         'content',
         'featured_image',
-        'small_thumb_image',
-        'medium_thumb_image',
         'status',
         'published_at',
         'toc',
@@ -79,41 +77,17 @@ class Blog extends Model
 
     public function featuredImageUrl(): ?string
     {
-        return $this->publicStorageUrl($this->featured_image);
-    }
-
-    /**
-     * Small thumbnail URL; falls back to the original when missing (legacy rows).
-     */
-    public function smallThumbImageUrl(): ?string
-    {
-        return $this->publicStorageUrl($this->small_thumb_image) ?? $this->featuredImageUrl();
-    }
-
-    /**
-     * Medium thumbnail URL; falls back to the original when missing (legacy rows).
-     */
-    public function mediumThumbImageUrl(): ?string
-    {
-        return $this->publicStorageUrl($this->medium_thumb_image) ?? $this->featuredImageUrl();
-    }
-
-    /**
-     * Relative public URL for a stored path (or absolute http(s) URL).
-     */
-    protected function publicStorageUrl(mixed $path): ?string
-    {
-        if (! is_string($path) || $path === '') {
+        if (! is_string($this->featured_image) || $this->featured_image === '') {
             return null;
         }
 
-        $normalized = ltrim(str_replace('\\', '/', $path), '/');
+        $path = ltrim(str_replace('\\', '/', $this->featured_image), '/');
 
-        if (str_starts_with($normalized, 'http://') || str_starts_with($normalized, 'https://')) {
-            return $normalized;
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
         }
 
         // Relative public URL so images work regardless of APP_URL host/port.
-        return '/storage/'.$normalized;
+        return '/storage/'.$path;
     }
 }

@@ -15,11 +15,6 @@ class BlogUpdateRequest extends FormRequest
         return $this->user()?->hasPermission('blogs.update') ?? false;
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->prepareBlogFields();
-    }
-
     /**
      * @return array<string, mixed>
      */

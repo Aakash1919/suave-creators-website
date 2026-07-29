@@ -23,8 +23,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'contacts.view' => 'View contact requests',
             'testimonials.view' => 'View testimonials',
             'testimonials.manage' => 'Create and edit testimonials',
-            'gallery.view' => 'View gallery',
-            'gallery.manage' => 'Upload and edit gallery images',
             'users.view' => 'View users',
             'users.manage' => 'Manage users',
             'roles.view' => 'View roles',
@@ -63,8 +61,6 @@ class RolesAndPermissionsSeeder extends Seeder
                     'contacts.view',
                     'testimonials.view',
                     'testimonials.manage',
-                    'gallery.view',
-                    'gallery.manage',
                 ])
                 ->pluck('id')
         );

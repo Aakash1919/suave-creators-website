@@ -23,5 +23,4 @@ Before editing the custom admin panel, RBAC, or admin conversation review:
 13. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha); public store uses `ContactStoreRequest`
 14. Roles UI: Admin → Roles (`roles.view` / `roles.manage`); protect the `admin` role key from rename/delete via `RoleService`
 15. Testimonials: Admin → Testimonials (`testimonials.view` / `testimonials.manage`); create/edit via modal on index; frontend reads `TestimonialService::cachedForFrontend()` (forever cache, forget on write)
-16. Gallery: Admin → Gallery (`gallery.view` / `gallery.manage`); full create/edit pages; `ImageVariantService` + `config/image.php`; blog/testimonial forms use gallery picker (`gallery_image_id`) — no direct file upload
-17. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`
+16. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`

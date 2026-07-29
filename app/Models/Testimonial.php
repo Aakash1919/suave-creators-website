@@ -15,8 +15,6 @@ class Testimonial extends Model
         'name',
         'role',
         'avatar',
-        'small_thumb_avatar',
-        'medium_thumb_avatar',
         'sort_order',
         'is_published',
     ];
@@ -46,35 +44,30 @@ class Testimonial extends Model
      */
     public function frontendAvatarPath(): string
     {
-        return $this->frontendStoragePath($this->avatar);
+        if (! is_string($this->avatar) || $this->avatar === '') {
+            return '';
+        }
+
+        $path = ltrim(str_replace('\\', '/', $this->avatar), '/');
+
+        if (
+            str_starts_with($path, 'http://')
+            || str_starts_with($path, 'https://')
+            || str_starts_with($path, 'assets/')
+            || str_starts_with($path, 'storage/')
+        ) {
+            return $path;
+        }
+
+        return 'storage/'.$path;
     }
 
     /**
-     * Small thumb path for frontend cards; falls back to original when missing.
-     */
-    public function frontendSmallAvatarPath(): string
-    {
-        $small = $this->frontendStoragePath($this->small_thumb_avatar);
-
-        return $small !== '' ? $small : $this->frontendAvatarPath();
-    }
-
-    /**
-     * Medium thumb path for frontend; falls back to original when missing.
-     */
-    public function frontendMediumAvatarPath(): string
-    {
-        $medium = $this->frontendStoragePath($this->medium_thumb_avatar);
-
-        return $medium !== '' ? $medium : $this->frontendAvatarPath();
-    }
-
-    /**
-     * Admin preview URL for the avatar (prefers small thumb).
+     * Admin preview URL for the avatar (absolute path from web root).
      */
     public function avatarUrl(): ?string
     {
-        $path = $this->frontendSmallAvatarPath();
+        $path = $this->frontendAvatarPath();
 
         if ($path === '') {
             return null;
@@ -101,7 +94,7 @@ class Testimonial extends Model
             'name' => $name,
             'role' => (string) $this->role,
             'initials' => self::initialsFromName($name),
-            'avatar' => $this->frontendSmallAvatarPath(),
+            'avatar' => $this->frontendAvatarPath(),
             'avatarAlt' => self::avatarAltFromName($name),
         ];
     }
@@ -134,28 +127,5 @@ class Testimonial extends Model
             ->implode('');
 
         return $initials !== '' ? $initials : 'SC';
-    }
-
-    /**
-     * Normalize a stored path for frontend asset()/URLs.
-     */
-    protected function frontendStoragePath(mixed $path): string
-    {
-        if (! is_string($path) || $path === '') {
-            return '';
-        }
-
-        $normalized = ltrim(str_replace('\\', '/', $path), '/');
-
-        if (
-            str_starts_with($normalized, 'http://')
-            || str_starts_with($normalized, 'https://')
-            || str_starts_with($normalized, 'assets/')
-            || str_starts_with($normalized, 'storage/')
-        ) {
-            return $normalized;
-        }
-
-        return 'storage/'.$normalized;
     }
 }

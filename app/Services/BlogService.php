@@ -6,16 +6,13 @@ use App\Http\Requests\Admin\BlogStoreRequest;
 use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BlogService
 {
-    public function __construct(
-        protected ImageVariantService $images,
-    ) {}
-
     /**
      * Categories for the admin blog form select.
      *
@@ -48,7 +45,9 @@ class BlogService
         $data['created_by_id'] = $request->user()?->id;
         $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title']);
 
-        $this->applyGallerySelection($data, $request->integer('gallery_image_id') ?: null);
+        if ($request->hasFile('featured_image')) {
+            $data['featured_image'] = $this->storeFeaturedImage($request, $data['slug']);
+        }
 
         return Blog::query()->create($data);
     }
@@ -78,22 +77,9 @@ class BlogService
         $data = $this->attributesFromValidated($request->validated());
         $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title'], $blog->id);
 
-        if ($request->boolean('remove_featured_image')) {
-            $this->deleteOwnedPaths(
-                $blog->featured_image,
-                $blog->small_thumb_image,
-                $blog->medium_thumb_image,
-            );
-            $data['featured_image'] = null;
-            $data['small_thumb_image'] = null;
-            $data['medium_thumb_image'] = null;
-        } elseif ($request->filled('gallery_image_id')) {
-            $this->deleteOwnedPaths(
-                $blog->featured_image,
-                $blog->small_thumb_image,
-                $blog->medium_thumb_image,
-            );
-            $this->applyGallerySelection($data, $request->integer('gallery_image_id'));
+        if ($request->hasFile('featured_image')) {
+            $this->deleteFeaturedImage($blog->featured_image);
+            $data['featured_image'] = $this->storeFeaturedImage($request, $data['slug']);
         }
 
         $blog->update($data);
@@ -118,51 +104,13 @@ class BlogService
     public function attributesFromValidated(array $data): array
     {
         $data['faqs'] = $this->normalizeFaqItems($data['faqs'] ?? null);
-        unset($data['featured_image'], $data['gallery_image_id'], $data['remove_featured_image']);
+        unset($data['featured_image']);
 
         if (($data['status'] ?? null) === Blog::STATUS_PUBLISHED && empty($data['published_at'])) {
             $data['published_at'] = now();
         }
 
         return $data;
-    }
-
-    /**
-     * Copy gallery image paths onto the blog payload.
-     *
-     * @param  array<string, mixed>  $data
-     */
-    protected function applyGallerySelection(array &$data, ?int $galleryImageId): void
-    {
-        if (! $galleryImageId) {
-            return;
-        }
-
-        $image = Image::query()->find($galleryImageId);
-        if ($image === null) {
-            return;
-        }
-
-        $data['featured_image'] = $image->path;
-        $data['small_thumb_image'] = $image->small_thumb_path;
-        $data['medium_thumb_image'] = $image->medium_thumb_path;
-    }
-
-    /**
-     * Delete legacy owned blog/testimonial disk files only (never gallery `images/` paths).
-     */
-    protected function deleteOwnedPaths(?string ...$paths): void
-    {
-        foreach ($paths as $path) {
-            if (! is_string($path) || $path === '') {
-                continue;
-            }
-
-            $normalized = ltrim(str_replace('\\', '/', $path), '/');
-            if (str_starts_with($normalized, 'blogs/') || str_starts_with($normalized, 'testimonials/')) {
-                $this->images->deletePaths($normalized);
-            }
-        }
     }
 
     /**
@@ -185,6 +133,33 @@ class BlogService
         }
 
         return $slug;
+    }
+
+    /**
+     * Store the featured image on the public disk under blogs/{slug}.{ext}.
+     */
+    public function storeFeaturedImage(Request $request, string $slug): string
+    {
+        $file = $request->file('featured_image');
+        $ext = $file->getClientOriginalExtension() ?: 'jpg';
+
+        return $file->storeAs('blogs', $slug.'.'.$ext, 'public');
+    }
+
+    /**
+     * Delete a local featured image path; skip remote http(s) URLs.
+     */
+    public function deleteFeaturedImage(?string $path): void
+    {
+        if (! is_string($path) || $path === '') {
+            return;
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return;
+        }
+
+        Storage::disk('public')->delete($path);
     }
 
     /**
