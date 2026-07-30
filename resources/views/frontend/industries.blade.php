@@ -31,7 +31,7 @@
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:justify-start sm:px-5 sm:py-2 sm:text-sm">
           <span class="sm:hidden">Start Your Solution</span>
           <span class="hidden sm:inline">Start Your Custom Industry Solution</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
             <path d="M18 8L22 12L18 16" />
@@ -81,7 +81,7 @@
       <a href="{{ route('contact-us') }}#contact-id"
         class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
         Start your Project
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
           <path d="M18 8L22 12L18 16" />
@@ -119,7 +119,7 @@
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:w-auto sm:max-w-none sm:px-5 sm:py-2 sm:text-sm">
           <span class="sm:hidden">Discuss Your Project</span>
           <span class="hidden sm:inline">Discuss Your Project Requirements</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
             <path d="M18 8L22 12L18 16" />
@@ -201,7 +201,7 @@
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:w-auto sm:max-w-none sm:px-5 sm:py-2 sm:text-sm">
           <span class="sm:hidden">Talk to Experts</span>
           <span class="hidden sm:inline">Speak With Our Industry Tech Experts</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
             <path d="M18 8L22 12L18 16" />
@@ -295,7 +295,7 @@
               <a href="{{ route('contact-us') }}#contact-id"
                 class="u-btn-cta group mt-5 inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white transition hover:brightness-110 sm:mt-6 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
                 Get a Free Project Roadmap
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
                   <path d="M18 8L22 12L18 16" />
@@ -349,7 +349,7 @@
               <h3 class="mt-2 text-[14px] font-semibold leading-[100%] text-[#171717]">
                 {{ $service[2] }}
               </h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M18 8L22 12L18 16" />
                 <path d="M2 12H22" />

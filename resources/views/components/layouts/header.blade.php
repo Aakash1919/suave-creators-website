@@ -61,7 +61,7 @@
             <a href="{{ $ctaHref() }}" class="site-header__cta u-btn-cta hidden shrink-0 cursor-pointer items-center gap-1 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-[14px] py-[8px] text-sm font-bold text-white transition hover:brightness-110 md:inline-flex md:px-[18px]">
                 <span class="hidden lg:inline">{{ $ctaLabel }}</span>
                 <span class="lg:hidden">{{ $ctaLabelShort }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M18 8L22 12L18 16" />
                     <path d="M2 12H22" />
                 </svg>
@@ -109,7 +109,7 @@
                     <a href="{{ $phoneHref }}" class="mobile-nav__phone">{{ $phone }}</a>
                     <a href="{{ $ctaHref() }}" class="mobile-nav__cta u-btn-cta !h-[34px] !min-h-[34px] !py-0 cursor-pointer text-[13px]">
                         {{ $ctaLabel }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M18 8L22 12L18 16" />
                             <path d="M2 12H22" />
                         </svg>

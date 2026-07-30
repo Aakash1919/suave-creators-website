@@ -3,6 +3,7 @@
 namespace App\Console\Commands\RunOnce;
 
 use App\Models\Blog;
+use App\Support\Blogs\BlogHtmlSupport;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
@@ -225,7 +226,7 @@ class SanitizeBlogCommand extends Command
         bool $dryRun,
     ): array {
         $imageResult = $this->rewriteImages($content, $blog, $slug, $title, $disk, $dryRun);
-        $html = $imageResult['content'];
+        $html = BlogHtmlSupport::upgradeInsecureHttpUrls($imageResult['content']);
 
         [$html, $emptyRemoved] = $this->removeEmptyTags($html);
 

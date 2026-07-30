@@ -32,7 +32,7 @@
         <a href="#contact-id"
           class="group inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:text-sm">
           Send a Message
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
             <path d="M18 8L22 12L18 16"></path>
@@ -189,7 +189,7 @@
             <div class="contact-form-panel__actions">
               <button type="submit" class="u-btn-cta contact-form-panel__submit" data-contact-submit>
                 Send inquiry
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
                   <path d="M18 8L22 12L18 16"></path>

@@ -86,7 +86,7 @@ $sampleInsights = [
       <div class="mt-6 flex flex-col items-start gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-7">
         <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
           Let's Connect to Discuss
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
         </a>
         <a href="/contact-us/#contact-id" class="inline-flex w-fit items-center border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">Book a Call</a>
       </div>
@@ -114,7 +114,7 @@ $sampleInsights = [
         <div class="mt-6 sm:mt-8">
           <a href="/services" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
             Explore Services
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+            <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
           </a>
         </div>
       </div>
@@ -167,7 +167,7 @@ $sampleInsights = [
             <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]"><?= $h(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Service') ?></span>
             <div class="flex items-start justify-between gap-2">
               <h3 class="mt-2 min-w-0 text-[14px] font-semibold leading-[130%] text-[#171717]"><?= $h($service['title'] ?? '') ?></h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-2 shrink-0" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+              <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-2 shrink-0" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
             </div>
           </div>
           <p class="mt-1 text-[13px] leading-relaxed text-[#4D4D4D] sm:text-[14px]"><?= $h($service['desc'] ?? '') ?></p>
@@ -178,7 +178,7 @@ $sampleInsights = [
       <?php endforeach; ?>
     </div>
     <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-5">
-      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
       <a href="/contact-us/#contact-id" class="inline-flex w-fit border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">Let's Build Your Digital Future Together</a>
     </div>
   </div>
@@ -197,7 +197,7 @@ $sampleInsights = [
       <p class="mt-2 text-[12px] font-semibold leading-normal text-[#B1B9DF] sm:text-sm"><?= $h($industry['ctaDescription'] ?? '') ?></p>
     </div>
     <div class="flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
-      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
       <a href="/contact-us/#contact-id" class="inline-flex w-fit items-center border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">Discuss your Vision</a>
     </div>
     <span class="smart-together-cta__phone" aria-hidden="true"><img src="/images/phone.gif" alt="" class="rounded-[10px]"></span>
@@ -245,7 +245,7 @@ $sampleInsights = [
           <?php if (!empty($card['icon'])): ?><span class="inline-flex h-[44px] w-[44px] items-center justify-center rounded-[12px] bg-[#EEF1FF] sm:h-[52px] sm:w-[52px] sm:rounded-[14px]"><img src="<?= $h($card['icon']) ?>" alt="" width="26" height="26" class="h-[22px] w-[22px] object-contain sm:h-[26px] sm:w-[26px]" loading="lazy"></span><?php endif; ?>
           <h3 class="text-[15px] font-bold leading-tight text-[#171717] sm:text-base"><?= $h($card['title'] ?? '') ?></h3>
           <p class="flex-1 text-[13px] leading-relaxed text-[#4D4D4D] sm:text-sm"><?= $h($card['text'] ?? '') ?></p>
-          <a href="/contact-us/#contact-id" class="mt-1 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB] no-underline hover:underline">Get Started <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+          <a href="/contact-us/#contact-id" class="mt-1 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB] no-underline hover:underline">Get Started <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
         </article>
       <?php endforeach; ?>
     </div>
@@ -281,7 +281,7 @@ $sampleInsights = [
       </div>
     <?php endforeach; ?>
     <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-5">
-      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's Connect to Discuss<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
       <a href="/contact-us/#contact-id" class="inline-flex w-fit items-center border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">Book a Call</a>
     </div>
   </div>
@@ -337,7 +337,7 @@ require __DIR__ . '/core-values-section.php';
       </p>
       <h2 id="industry-faq-heading" class="mt-3 text-[22px] font-bold leading-tight text-[#171717] sm:text-[clamp(1.75rem,4vw,2.5rem)]">Frequently Ask Question</h2>
       <p class="faq-section__description mt-3 text-[13px] leading-6 text-[#4D4D4D] sm:text-sm">Here are the most asked questions for this industry.</p>
-      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Start your Project<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+      <a href="/contact-us/#contact-id" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Start your Project<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
       <img class="faq-section__image" src="/images/faq-gif.gif" alt="" width="640" height="960" loading="lazy">
     </div>
     <div class="faq-list">
@@ -379,7 +379,7 @@ require __DIR__ . '/core-values-section.php';
         <h2><?= $h($industry['finalTitle'] ?? "Let's Build Your Next Digital Solution with us!") ?></h2>
         <p><?= $h($industry['finalDescription'] ?? '') ?></p>
         <div class="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-          <a href="/contact-us/#contact-id" class="consultation-cta w-fit">Get a Free Quote <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+          <a href="/contact-us/#contact-id" class="consultation-cta w-fit">Get a Free Quote <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
           <a href="/contact-us/#contact-id" class="consultation-secondary-link inline-flex w-fit items-center border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">Contact us Today</a>
         </div>
       </div>
@@ -477,7 +477,7 @@ require __DIR__ . '/core-values-section.php';
       <?php endforeach; ?>
     </div>
     <div class="mt-8 flex justify-center sm:mt-10">
-      <a href="/blogs" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">View All Blogs<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+      <a href="/blogs" class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">View All Blogs<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
     </div>
   </div>
 </section>

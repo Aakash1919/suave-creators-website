@@ -86,7 +86,7 @@ if ($articlesInsightsItems === []) {
                 <div class="articles-card__body">
                   <div class="articles-card__meta">
                     <span class="articles-card__byline">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none"
+                      <svg xmlns="https://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none"
                         stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         aria-hidden="true">
                         <circle cx="12" cy="8" r="5" />
@@ -96,7 +96,7 @@ if ($articlesInsightsItems === []) {
                     </span>
                     <?php if ($date !== ''): ?>
                       <time datetime="<?= $h($datetime) ?>">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none"
+                        <svg xmlns="https://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none"
                           stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           aria-hidden="true">
                           <path d="M8 2v4" />

@@ -37,7 +37,7 @@ require __DIR__ . '/layout/start.php';
         <a href="/contact-us/#contact-id"
           class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
           Start your Project
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1">
             <path d="M18 8L22 12L18 16" />
@@ -217,7 +217,7 @@ require __DIR__ . '/layout/start.php';
         <a href="/about-us"
           class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
           <span>Learn more About Us</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1">
             <path d="M18 8L22 12L18 16"></path>
@@ -339,7 +339,7 @@ require __DIR__ . '/layout/start.php';
       <a href="/contact-us/#contact-id"
         class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
         Get Started
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="transition-transform duration-300 group-hover:translate-x-1">
           <path d="M18 8L22 12L18 16"></path>
@@ -595,7 +595,7 @@ require __DIR__ . '/layout/start.php';
                 <p><?= htmlspecialchars($service[3]) ?></p>
               </div>
               <span class="digital-marketing-card__arrow" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                   stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-move-right-icon lucide-move-right">
                   <path d="M18 8L22 12L18 16"></path>
@@ -838,7 +838,7 @@ $digitalServicesMarqueeItems = [
       <div class="industries-support__copy">
         <p>The Services and Supports You Need for Online Platforms in Suave Creators</p>
         <a href="/contact-us/#contact-id">
-          Talk to an Expert <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+          Talk to an Expert <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1">
             <path d="M18 8L22 12L18 16"></path>
@@ -898,7 +898,7 @@ $digitalServicesMarqueeItems = [
             style="color: <?= htmlspecialchars($technology[3]) ?>" aria-hidden="true"></i>
           <h3 class="relative mt-3 text-base font-bold text-[#171717]"><?= htmlspecialchars($technology[0]) ?></h3>
           <p class="relative mt-2 pr-5 text-sm leading-[22px] text-[#4D4D4D]"><?= htmlspecialchars($technology[1]) ?></p>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A4DFB"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A4DFB"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-move-right-icon lucide-move-right absolute bottom-5 right-5 ">
             <path d="M18 8L22 12L18 16"></path>
@@ -1030,7 +1030,7 @@ require __DIR__ . '/partials/articles-insights.php';
           trends, and is here to help.
         </p>
         <a href="/contact-us/#contact-id" class="consultation-cta">
-          Book a Free Consultation <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+          Book a Free Consultation <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1">
             <path d="M18 8L22 12L18 16"></path>

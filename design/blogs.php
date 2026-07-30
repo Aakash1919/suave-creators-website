@@ -51,7 +51,7 @@ $heroImages = [
           <div class="articles-card__body">
             <div class="articles-card__meta">
               <span class="articles-card__byline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none"
+                <svg xmlns="https://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
                   <circle cx="12" cy="8" r="5" />
@@ -60,7 +60,7 @@ $heroImages = [
                 <?= $h($post['author_name']) ?>
               </span>
               <time datetime="<?= $h($post['published_date']) ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none"
+                <svg xmlns="https://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none"
                   stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
                   <path d="M8 2v4" />
@@ -91,7 +91,7 @@ $heroImages = [
         <h2>Have an Idea? Let's Turn It<br class="hidden sm:block"> Into a Digital Product</h2>
         <p>Whatever stage your business is at, our team is ready to help you plan, design, and build the right solution.</p>
         <div class="flex flex-wrap gap-4">
-          <a href="/contact-us/#contact-id" class="consultation-cta">Get a Free Quote <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+          <a href="/contact-us/#contact-id" class="consultation-cta">Get a Free Quote <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
         </div>
       </div>
       <div class="consultation-people">

@@ -6,8 +6,10 @@ use App\Http\Requests\Admin\BlogStoreRequest;
 use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Support\Blogs\BlogHtmlSupport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BlogService
@@ -91,10 +93,11 @@ class BlogService
     }
 
     /**
-     * Soft-delete a blog post.
+     * Soft-delete a blog post and remove its stored images.
      */
     public function delete(Blog $blog): void
     {
+        $this->deleteStoredImages($blog);
         $blog->delete();
     }
 
@@ -166,6 +169,41 @@ class BlogService
             $this->images->legacySmallThumbPath($blog->featured_image),
             $this->images->legacyMediumThumbPath($blog->featured_image),
         );
+    }
+
+    /**
+     * Delete all stored images for a blog (featured, thumbs, and inline content).
+     */
+    protected function deleteStoredImages(Blog $blog): void
+    {
+        $this->deleteFeaturedImageVariants($blog);
+
+        $contentPaths = BlogHtmlSupport::extractStorageImagePaths((string) $blog->content);
+        $this->images->deletePaths(...$contentPaths);
+
+        $slug = trim((string) $blog->slug);
+        if ($slug !== '') {
+            $this->deleteSlugContentImages($slug);
+        }
+    }
+
+    /**
+     * Remove blogs/content files named {slug}-N.ext (sanitize command convention).
+     */
+    protected function deleteSlugContentImages(string $slug): void
+    {
+        $disk = Storage::disk('public');
+
+        if (! $disk->exists('blogs/content')) {
+            return;
+        }
+
+        foreach ($disk->files('blogs/content') as $file) {
+            $base = basename(str_replace('\\', '/', $file));
+            if (str_starts_with($base, $slug.'-')) {
+                $disk->delete($file);
+            }
+        }
     }
 
     /**

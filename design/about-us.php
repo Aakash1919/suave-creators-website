@@ -8,7 +8,7 @@ $h = static function ($v): string {
   return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
 };
 
-$ctaArrow = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>';
+$ctaArrow = '<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>';
 $btnPrimary = 'u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm';
 
 $smartModules = [
@@ -157,7 +157,7 @@ $partners = [
       <a href="/contact-us/#contact-id"
         class="group mt-8 inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-[3px_7px_22px_-6px_#2A4DFB24] transition hover:brightness-110 whitespace-nowrap sm:mt-10 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
         Let's Discuss
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
           <path d="M18 8L22 12L18 16"></path>
@@ -457,7 +457,7 @@ require __DIR__ . '/partials/articles-insights.php';
           trends, and is here to help.
         </p>
         <a href="/contact-us/#contact-id" class="consultation-cta">
-          Book a Free Consultation <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+          Book a Free Consultation <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1">
             <path d="M18 8L22 12L18 16"></path>

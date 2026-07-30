@@ -30,7 +30,7 @@ $portfolioImages = $service['portfolioImages'] ?? [
 ];
 $blogPosts = is_file(__DIR__ . '/../data/blogs/posts.php') ? require __DIR__ . '/../data/blogs/posts.php' : [];
 $latestPosts = array_slice($blogPosts, 0, 3);
-$ctaArrow = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>';
+$ctaArrow = '<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>';
 $btnPrimary = 'u-btn-cta group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110';
 $bannerBg = $service['bannerBg'] ?? '/images/service-banner-bg.webp';
 $webDevLayoutSlugs = [
@@ -394,7 +394,7 @@ $bodySectionStyle = $useBodyImageLayout
           <h3><?= $h($ind['title'] ?? '') ?></h3>
           <p><?= $h($ind['desc'] ?? '') ?></p>
           <span class="industry-card__arrow" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 8L22 12L18 16"></path>
               <path d="M2 12H22"></path>
             </svg>
@@ -586,7 +586,7 @@ require __DIR__ . '/tech-partnerships-marquee.php';
           <p><?= $h($card['desc'] ?? '') ?></p>
           <?php if (empty($card['step'])): ?>
             <span class="industry-card__arrow" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 8L22 12L18 16"></path>
                 <path d="M2 12H22"></path>
               </svg>
@@ -668,7 +668,7 @@ require __DIR__ . '/tech-partnerships-marquee.php';
         <h2><?= $h($service['finalTitle'] ?? "Let's Build Your Business Website Together") ?></h2>
         <p><?= $h($service['finalDescription'] ?? '') ?></p>
         <div class="flex flex-wrap gap-4">
-          <a href="/contact-us/#contact-id" class="consultation-cta"><?= $h($service['finalPrimaryCta'] ?? 'Get a Free Quote') ?> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+          <a href="/contact-us/#contact-id" class="consultation-cta"><?= $h($service['finalPrimaryCta'] ?? 'Get a Free Quote') ?> <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
           <a href="/contact-us/#contact-id" class="consultation-secondary-link inline-flex items-end pb-0.5 border-b border-white/70 text-sm font-semibold text-white"><?= $h($service['finalSecondaryCta'] ?? 'Contact us Today') ?></a>
         </div>
       </div>

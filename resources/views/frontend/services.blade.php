@@ -140,7 +140,7 @@
 
           <span class="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB]">
             {{ $service[3] }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
+            <svg xmlns="https://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
               stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M18 8L22 12L18 16" />
               <path d="M2 12H22" />
@@ -242,7 +242,7 @@
           <a href="{{ route('services') }}"
             class="relative mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB]">
             Get Started
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
+            <svg xmlns="https://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
               stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M18 8L22 12L18 16" />
               <path d="M2 12H22" />

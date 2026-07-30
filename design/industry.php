@@ -40,7 +40,7 @@ $latestPosts = array_slice($blogPosts, 0, 4);
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-[36px] sm:min-h-[36px] sm:justify-start sm:px-5 sm:py-0 sm:text-sm">
           <span class="sm:hidden">Start Your Solution</span>
           <span class="hidden sm:inline">Start Your Custom Industry Solution</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
             <path d="M18 8L22 12L18 16" />
@@ -100,7 +100,7 @@ $portfolioHeroImages = [
       <a href="/contact-us/#contact-id"
         class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-[36px] sm:min-h-[36px] sm:px-5 sm:py-0 sm:text-sm">
         Start your Project
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
           <path d="M18 8L22 12L18 16" />
@@ -138,7 +138,7 @@ $portfolioHeroImages = [
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-[36px] sm:min-h-[36px] sm:w-auto sm:max-w-none sm:px-5 sm:py-0 sm:text-sm">
           <span class="sm:hidden">Discuss Your Project</span>
           <span class="hidden sm:inline">Discuss Your Project Requirements</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
             <path d="M18 8L22 12L18 16" />
@@ -176,7 +176,7 @@ $portfolioHeroImages = [
         class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-[36px] sm:min-h-[36px] sm:px-5 sm:py-0 sm:text-sm">
         <span class="sm:hidden">Start Your Vision</span>
         <span class="hidden sm:inline">Turn Your Vision Into Reality</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
           <path d="M18 8L22 12L18 16"></path>
@@ -300,7 +300,7 @@ $portfolioHeroImages = [
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-[36px] sm:min-h-[36px] sm:w-auto sm:max-w-none sm:px-5 sm:py-0 sm:text-sm">
           <span class="sm:hidden">Talk to Experts</span>
           <span class="hidden sm:inline">Speak With Our Industry Tech Experts</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
             <path d="M18 8L22 12L18 16" />
@@ -447,7 +447,7 @@ $expertiseDefault = 0;
               <a href="/contact-us/#contact-id"
                 class="u-btn-cta group mt-5 inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white transition hover:brightness-110 sm:mt-6 sm:h-[36px] sm:min-h-[36px] sm:px-5 sm:py-0 sm:text-sm">
                 Get a Free Project Roadmap
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
                   <path d="M18 8L22 12L18 16" />
@@ -512,7 +512,7 @@ $expertiseDefault = 0;
               <h3 class="mt-2 text-[14px] font-semibold leading-[100%] text-[#171717]">
                 <?= htmlspecialchars($service[2]) ?>
               </h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M18 8L22 12L18 16" />
                 <path d="M2 12H22" />
@@ -565,7 +565,7 @@ require __DIR__ . '/partials/core-values-section.php';
       <a href="/contact-us/#contact-id"
         class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit max-w-full shrink-0 items-center gap-2 self-start rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-[36px] sm:min-h-[36px] sm:px-5 sm:py-0 sm:text-sm">
         Start your Project
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="transition-transform duration-300 group-hover:translate-x-1">
           <path d="M18 8L22 12L18 16"></path>
@@ -639,7 +639,7 @@ require __DIR__ . '/partials/core-values-section.php';
         </p>
         <a href="/contact-us/#contact-id" class="consultation-cta">
           Get a Free Quote
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="transition-transform duration-300 group-hover:translate-x-1">
             <path d="M18 8L22 12L18 16"></path>
@@ -688,7 +688,7 @@ require __DIR__ . '/partials/core-values-section.php';
                 <div class="articles-card__body">
                   <div class="articles-card__meta">
                     <span class="articles-card__byline">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none"
+                      <svg xmlns="https://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none"
                         stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <circle cx="12" cy="8" r="5" />
                         <path d="M20 21a8 8 0 0 0-16 0" />
@@ -696,7 +696,7 @@ require __DIR__ . '/partials/core-values-section.php';
                       <?= $h($post['author_name']) ?>
                     </span>
                     <time datetime="<?= $h($post['published_date']) ?>">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none"
+                      <svg xmlns="https://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none"
                         stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M8 2v4" />
                         <path d="M16 2v4" />

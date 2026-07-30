@@ -113,11 +113,11 @@ require __DIR__ . '/../layout/start.php';
 
   <p class="single-blog-main__meta">
     <span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+      <svg xmlns="https://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
       By <?= $h($post['author_name']) ?>
     </span>
     <span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+      <svg xmlns="https://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
       <time datetime="<?= $h($post['published_date']) ?>"><?= $h($post['published_label']) ?></time>
     </span>
     <span class="single-blog-main__category"><?= $h($post['category']) ?></span>
@@ -162,7 +162,7 @@ require __DIR__ . '/../layout/start.php';
 
             <button type="submit" class="u-btn-cta single-blog-comment__submit group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
               Submit
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
+              <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
                 <path d="M18 8L22 12L18 16"></path>
@@ -219,14 +219,14 @@ require __DIR__ . '/../layout/start.php';
                       <div class="articles-card__body">
                         <div class="articles-card__meta">
                           <span class="articles-card__byline">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none" stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <svg xmlns="https://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 24 24" fill="none" stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                               <circle cx="12" cy="8" r="5" />
                               <path d="M20 21a8 8 0 0 0-16 0" />
                             </svg>
                             <?= $h($item['author_name']) ?>
                           </span>
                           <time datetime="<?= $h($item['published_date']) ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none" stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <svg xmlns="https://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 24 24" fill="none" stroke="#85868C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                               <path d="M8 2v4" />
                               <path d="M16 2v4" />
                               <rect width="18" height="18" x="3" y="4" rx="2" />
@@ -317,7 +317,7 @@ $blogFaqs = !empty($post['faqs']) ? $post['faqs'] : array(
       <div class="consultation-copy">
         <h2>Let's Build Your Next Digital<br class="hidden sm:block"> Solution with us!</h2>
         <p>Book a consultation for your next digital project. Suave Creators delivers quality work, stays ahead of trends, and is here to help.</p>
-        <a href="/contact-us/#contact-id" class="consultation-cta">Book a Free Consultation <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
+        <a href="/contact-us/#contact-id" class="consultation-cta">Book a Free Consultation <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></a>
       </div>
       <div class="consultation-people">
         <div class="consultation-people__column consultation-people__column--left">
