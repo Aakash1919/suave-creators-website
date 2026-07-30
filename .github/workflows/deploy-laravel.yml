@@ -75,7 +75,6 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan migrate --force
-            php artisan db:seed --force
             php artisan storage:link
 
             echo "SuaveCreators staging deployment completed"
@@ -150,7 +149,6 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan migrate --force
-            php artisan db:seed --force
             php artisan storage:link
 
             echo "SuaveCreators production deployment completed"
