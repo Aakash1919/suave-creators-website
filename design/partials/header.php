@@ -16,6 +16,7 @@ $dropdowns = [
     ],
 ];
 ?>
+<div class="site-header__sentinel" aria-hidden="true" data-header-sentinel></div>
 <header class="site-header relative z-20 w-full bg-transparent py-3">
     <div class="site-container flex items-center justify-between gap-3 sm:gap-4">
         <a href="/" class="site-header__logo inline-flex shrink-0" aria-label="Suave Creators home">
@@ -120,7 +121,39 @@ $dropdowns = [
         </div>
     </div>
 </header>
+<div class="site-header__spacer" aria-hidden="true" data-header-spacer></div>
 <script>
+(function () {
+    var header = document.querySelector('.site-header');
+    var sentinel = document.querySelector('[data-header-sentinel]');
+    var spacer = document.querySelector('[data-header-spacer]');
+    if (!header || !sentinel || !spacer) return;
+
+    function syncSpacer() {
+        spacer.style.height = header.classList.contains('is-stuck')
+            ? header.getBoundingClientRect().height + 'px'
+            : '';
+    }
+
+    function setStuck(isStuck) {
+        if (header.classList.contains('is-stuck') === isStuck) return;
+        header.classList.toggle('is-stuck', isStuck);
+        syncSpacer();
+    }
+
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+            setStuck(!entries[0].isIntersecting);
+        }, { threshold: 0 }).observe(sentinel);
+    } else {
+        window.addEventListener('scroll', function () {
+            setStuck(sentinel.getBoundingClientRect().bottom <= 0);
+        }, { passive: true });
+    }
+
+    window.addEventListener('resize', syncSpacer);
+})();
+
 (function () {
     var toggle = document.getElementById('mobile-nav-toggle');
     var nav = document.getElementById('mobile-nav');

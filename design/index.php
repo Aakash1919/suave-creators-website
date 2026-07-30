@@ -255,7 +255,7 @@ require __DIR__ . '/layout/start.php';
       [
         'Product Strategy with Intelligence Inside',
         'Our team helps define your vision, validate your idea.',
-        '/images/expert-1.png',
+        '/images/shape1.png',
         'Product strategy team collaborating around a presentation',
       ],
       [

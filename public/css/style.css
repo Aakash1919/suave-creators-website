@@ -8796,3 +8796,43 @@ body.mobile-nav-open {
 }
 /* ===== SUAVE AGENT CHAT END ===== */
 
+/* ===== STICKY SITE HEADER START ===== */
+html {
+  scroll-padding-top: 96px;
+}
+
+/* Zero-height probe at the header's natural position; drives the stuck state. */
+.site-header__sentinel {
+  height: 1px;
+  margin-bottom: -1px;
+  pointer-events: none;
+  width: 100%;
+}
+
+/* Holds the header's height while it is detached from the flow. */
+.site-header__spacer {
+  height: 0;
+}
+
+.site-header {
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Height must stay identical to the unstuck header so the spacer matches. */
+.site-header.is-stuck {
+  backdrop-filter: blur(12px);
+  background-color: rgb(0 0 63 / 92%);
+  box-shadow: 0 10px 30px rgb(0 0 32 / 32%);
+  inset-inline: 0;
+  position: fixed;
+  top: 0;
+  z-index: 11000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
+/* ===== STICKY SITE HEADER END ===== */
+
