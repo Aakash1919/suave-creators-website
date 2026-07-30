@@ -1,8 +1,8 @@
 /*
  * Site stylesheet — unused legacy rules removed (merged style + style2 cleanup).
+ * Google Fonts (Pragati Narrow + Roboto Flex) load from layouts/frontend.blade.php
+ * via non-blocking preload — do not reintroduce @import here (render-blocking chain).
  */
-
-@import url('https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&display=swap');
 
 :root {
   --site-container-width: 1280px;

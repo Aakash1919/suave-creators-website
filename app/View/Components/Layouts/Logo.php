@@ -17,6 +17,10 @@ class Logo extends Component
 
     public string $imgClass;
 
+    public bool $useResponsiveLogo;
+
+    public string $sizes;
+
     public function __construct(
         public string $variant = 'header',
         public ?string $src = null,
@@ -28,13 +32,18 @@ class Logo extends Component
             throw new InvalidArgumentException('Logo variant must be "header" or "footer".');
         }
 
-        $this->resolvedSrc = $this->normalizeAssetPath(
-            $this->src ?? 'assets/brand/logo-white.png'
-        );
+        $defaultSrc = 'assets/brand/logo-white.png';
+        $this->resolvedSrc = $this->normalizeAssetPath($this->src ?? $defaultSrc);
+        $this->useResponsiveLogo = $this->resolvedSrc === $defaultSrc;
 
         $this->imgClass = $this->variant === 'footer'
             ? 'h-9 w-auto max-w-full object-contain sm:h-12'
             : 'block h-9 w-auto object-contain sm:h-10';
+
+        // Header ~89px / footer ~107px wide; 220w+440w covers 1x–3x DPR without the 1024px master.
+        $this->sizes = $this->variant === 'footer'
+            ? '(min-width: 640px) 107px, 80px'
+            : '(min-width: 640px) 89px, 80px';
     }
 
     public function render(): View|Closure|string

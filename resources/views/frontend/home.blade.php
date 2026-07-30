@@ -46,15 +46,45 @@
       <div class="hero-media-grid" aria-hidden="true">
         <div
           class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img src="{{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }}" alt="Team brainstorming software strategy documents with Suave Creators" title="Team brainstorming software strategy documents with Suave Creators" class="block h-full w-full max-w-none object-cover" width="628" height="1024" decoding="async" loading="lazy">
+          <img
+            src="{{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }}"
+            srcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
+            sizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
+            alt="Team brainstorming software strategy documents with Suave Creators"
+            title="Team brainstorming software strategy documents with Suave Creators"
+            class="block h-full w-full max-w-none object-cover"
+            width="628"
+            height="1024"
+            decoding="async"
+            loading="lazy">
         </div>
         <div
           class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img src="{{ asset('assets/hero/hero-professionals-office-meeting.webp') }}" alt="Software professionals collaborating in a modern office meeting" title="Software professionals collaborating in a modern office meeting" class="block h-full w-full max-w-none object-cover" width="688" height="248" decoding="async" loading="lazy">
+          <img
+            src="{{ asset('assets/hero/hero-professionals-office-meeting.webp') }}"
+            srcset="{{ asset('assets/hero/hero-professionals-office-meeting-320.webp') }} 320w, {{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }} 480w, {{ asset('assets/hero/hero-professionals-office-meeting.webp') }} 688w"
+            sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
+            alt="Software professionals collaborating in a modern office meeting"
+            title="Software professionals collaborating in a modern office meeting"
+            class="block h-full w-full max-w-none object-cover"
+            width="688"
+            height="248"
+            decoding="async"
+            loading="lazy">
         </div>
         <div
           class="hero-media-grid__tile col-start-2 row-start-2 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img src="{{ asset('assets/hero/hero-team-conference-collaboration.webp') }}" alt="Cross-functional team collaborating on custom software development" title="Cross-functional team collaborating on custom software development" class="block h-full w-full max-w-none object-cover" width="688" height="736" decoding="async" loading="lazy">
+          <img
+            src="{{ asset('assets/hero/hero-team-conference-collaboration.webp') }}"
+            srcset="{{ asset('assets/hero/hero-team-conference-collaboration-320.webp') }} 320w, {{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }} 480w, {{ asset('assets/hero/hero-team-conference-collaboration.webp') }} 688w"
+            sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
+            alt="Cross-functional team collaborating on custom software development"
+            title="Cross-functional team collaborating on custom software development"
+            class="block h-full w-full max-w-none object-cover"
+            width="688"
+            height="736"
+            decoding="async"
+            loading="lazy">
         </div>
       </div>
     </div>
