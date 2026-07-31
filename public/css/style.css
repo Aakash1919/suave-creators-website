@@ -1408,12 +1408,12 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .testimonial-pagination {
-  display: none;
+  display: none !important;
 }
 
 .testimonial-prev__mobile,
 .testimonial-next__mobile {
-  display: none;
+  display: none !important;
 }
 
 .testimonialSwiper {
