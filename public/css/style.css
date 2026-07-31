@@ -1489,7 +1489,7 @@ main button.rounded-full.bg-gradient-to-r {
   display: inline-flex;
   gap: 3px;
   min-width: 0;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .articles-card__meta time {
