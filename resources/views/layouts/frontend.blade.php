@@ -49,18 +49,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ["PP Mori", "Roboto Flex", "ui-sans-serif", "system-ui", "sans-serif"],
-                    },
-                },
-            },
-        };
-    </script>
+    @vite(['resources/css/app.css'])
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
 
     {{-- Non-critical CSS: preload so it does not block first paint / LCP. --}}
