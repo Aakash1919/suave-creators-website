@@ -1,9 +1,8 @@
 /*
  * Shared stylesheet for classes used across multiple pages.
  * Page-specific CSS lives in each page/partial <style> block.
+ * Google Fonts load from the page layout (non-blocking) — avoid @import here.
  */
-
-@import url('https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&display=swap');
 
 :root {
   --site-container-width: 1280px;
