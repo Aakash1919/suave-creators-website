@@ -17,7 +17,7 @@
 
   <div class="site-container relative z-10 !px-5 sm:!px-6 lg:!px-8">
     <div class="site-footer__main grid grid-cols-1 gap-7 py-7 sm:gap-10 sm:py-10 lg:grid-cols-12 lg:gap-12">
-      <div class="site-footer__brand min-w-0 lg:col-span-3">
+      <div class="site-footer__brand min-w-0 lg:col-span-1">
         <a href="{{ route('home') }}" class="inline-flex max-w-full" aria-label="Suave Creators home">
           <x-layouts.logo variant="footer" />
         </a>
@@ -35,17 +35,19 @@
           <li class="leading-5">
             <div class="inline-block max-w-[280px] space-y-2 sm:max-w-none">
               @foreach ($offices as $office)
+              @if($office['label'] != 'First office') 
+              @else
                 <p>
-                  <span class="block text-[10px] font-semibold uppercase tracking-wide text-white/70 sm:text-[11px]">{{ $office['label'] }}</span>
                   <span>{{ $office['display'] }}</span>
                 </p>
+                @endif
               @endforeach
             </div>
           </li>
         </ul>
       </div>
 
-      <div class="min-w-0 lg:col-span-9">
+      <div class="min-w-0 lg:col-span-1">
         <div class="site-footer__columns !grid !grid-cols-2 !gap-x-4 !gap-y-7 min-[480px]:!grid-cols-3 sm:!grid-cols-3 sm:!gap-x-6 sm:!gap-y-10 lg:!grid-cols-4">
           @foreach ($columns as $title => $links)
             <div class="site-footer__column min-w-0">

@@ -172,7 +172,7 @@
                 <select id="contact-service" name="service">
                   <option value="" disabled selected>Select a service</option>
                   @foreach ($formServices as $value => $label)
-                    <option value="{{ $value }}">{{ $label }}</option>
+                  <option value="{{ $value }}">{{ $label }}</option>
                   @endforeach
                 </select>
                 <span class="contact-form-panel__field-error" data-error-for="service" hidden></span>
@@ -187,7 +187,7 @@
             </label>
 
             <div class="contact-form-panel__actions">
-              <button type="submit" class="u-btn-cta contact-form-panel__submit" data-contact-submit>
+              <button type="submit" class=" contact-form-panel__submit group inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:text-sm" data-contact-submit>
                 Send inquiry
                 <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -196,7 +196,6 @@
                   <path d="M2 12H22"></path>
                 </svg>
               </button>
-              <a href="tel:+918894900142">or call +91 88949 00142</a>
             </div>
 
             <p class="contact-form-panel__disclaimer">
@@ -215,14 +214,13 @@
 <x-frontend.tech-partnerships-section
   :items="$techStack"
   section-class="full-bleed full-bleed--edge bg-white py-10 lg:py-14"
-  background-image="assets/background/technology-section-bg.png"
-/>
+  background-image="assets/background/technology-section-bg.png" />
 <!-- Technologies & Partnerships Marquee End -->
 
 <!-- Contact Information Start -->
 @php
-  $mapOffices = $offices ?? [];
-  $activeOffice = $mapOffices[0] ?? null;
+$mapOffices = $offices ?? [];
+$activeOffice = $mapOffices[0] ?? null;
 @endphp
 <section class="full-bleed contact-reach-section py-16 sm:py-20 lg:py-24"
   style="background-image: url('{{ asset('assets/background/about-section-bg.png') }}');"
@@ -259,68 +257,62 @@
         </div>
 
         @foreach ($contactCards as $card)
-          <div class="contact-reach__item" role="listitem">
-            <span class="contact-reach__item-icon" aria-hidden="true">
-              <i class="{{ $card['icon'] }}"></i>
-            </span>
+        <div class="contact-reach__item" role="listitem">
+          <span class="contact-reach__item-icon" aria-hidden="true">
+            <i class="{{ $card['icon'] }}"></i>
+          </span>
 
-            <div class="contact-reach__item-content">
-              <p class="contact-reach__item-label">{{ $card['label'] }}</p>
-              <h3 class="contact-reach__item-title">{{ $card['title'] }}</h3>
+          <div class="contact-reach__item-content">
+            <p class="contact-reach__item-label">{{ $card['label'] }}</p>
+            <h3 class="contact-reach__item-title">{{ $card['title'] }}</h3>
 
-              <div class="contact-reach__item-body">
-                @if (! empty($card['offices']))
-                  @foreach ($card['offices'] as $officeIndex => $office)
-                    <button
-                      type="button"
-                      class="contact-reach__office{{ $officeIndex === 0 ? ' is-active' : '' }}"
-                      data-contact-office
-                      data-map-src="{{ $office['map_embed'] }}"
-                      data-map-title="{{ $office['display'] }} map"
-                      aria-pressed="{{ $officeIndex === 0 ? 'true' : 'false' }}">
-                      <span class="contact-reach__flag" aria-hidden="true">
-                        @if (($office['flag'] ?? 'us') === 'in')
-                          <svg viewBox="0 0 24 16" width="24" height="16" focusable="false">
-                            <rect width="24" height="5.33" y="0" fill="#FF9933"/>
-                            <rect width="24" height="5.34" y="5.33" fill="#FFFFFF"/>
-                            <rect width="24" height="5.33" y="10.67" fill="#138808"/>
-                            <circle cx="12" cy="8" r="2.1" fill="none" stroke="#000080" stroke-width="0.7"/>
-                            <circle cx="12" cy="8" r="0.45" fill="#000080"/>
-                          </svg>
-                        @else
-                          <svg viewBox="0 0 24 16" width="24" height="16" focusable="false">
-                            <rect width="24" height="16" fill="#B22234"/>
-                            <rect y="1.23" width="24" height="1.23" fill="#FFFFFF"/>
-                            <rect y="3.69" width="24" height="1.23" fill="#FFFFFF"/>
-                            <rect y="6.15" width="24" height="1.23" fill="#FFFFFF"/>
-                            <rect y="8.62" width="24" height="1.23" fill="#FFFFFF"/>
-                            <rect y="11.08" width="24" height="1.23" fill="#FFFFFF"/>
-                            <rect y="13.54" width="24" height="1.23" fill="#FFFFFF"/>
-                            <rect width="9.6" height="8.62" fill="#3C3B6E"/>
-                          </svg>
-                        @endif
-                      </span>
-                      <span class="contact-reach__office-lines">
-                        @foreach ($office['lines'] as $line)
-                          <span class="contact-reach__office-line">{{ $line }}</span>
-                        @endforeach
-                      </span>
-                    </button>
+            <div class="contact-reach__item-body">
+              @if (! empty($card['offices']))
+              @foreach ($card['offices'] as $officeIndex => $office)
+              <button
+                type="button"
+                class="contact-reach__office{{ $officeIndex === 0 ? ' is-active' : '' }}"
+                data-contact-office
+                data-map-src="{{ $office['map_embed'] }}"
+                data-map-title="{{ $office['display'] }} map"
+                aria-pressed="{{ $officeIndex === 0 ? 'true' : 'false' }}">
+                <span class="contact-reach__flag" aria-hidden="true">
+                  @php
+                  $flagUrl = "assets/flags/{$office['flag']}.svg";
+                  @endphp
+                  <img src="{{asset($flagUrl)}}" /> </span>
+                <span class="contact-reach__office-lines">
+                  @foreach ($office['lines'] as $line)
+                  <span class="contact-reach__office-line">{{ $line }}</span>
                   @endforeach
-                @endif
+                </span>
+              </button>
+              @endforeach
+              @endif
 
-                @if (! empty($card['links']))
-                  <div class="contact-reach__links">
-                    @foreach ($card['links'] as $link)
-                      <a href="{{ $link['href'] }}" class="contact-reach__link">
-                        {{ $link['text'] }}
-                      </a>
-                    @endforeach
-                  </div>
-                @endif
+              @if (! empty($card['links']))
+              <div class="contact-reach__links flex">
+                @foreach ($card['links'] as $link)
+                @php
+                $hasFlag = isset($link['flag']);
+                if($hasFlag){
+                $flagUrl = "assets/flags/{$link['flag']}.svg"; }
+                @endphp
+                @if($hasFlag)
+                <div @class(["flex gap-4"])>
+
+                  <img src='{{$flagUrl}}' style='width:20px' />
+                  @endif
+                  <a href="{{ $link['href'] }}" class="contact-reach__link">
+                    {{ $link['text'] }}
+                  </a>
+                </div>
+                @endforeach
               </div>
+              @endif
             </div>
           </div>
+        </div>
         @endforeach
       </div>
     </div>
@@ -340,248 +332,250 @@
   media-type="image"
   :media-alt="$faqMediaAlt"
   :cta-href="$faqCtaHref"
-  :cta-label="$faqCtaLabel"
-/>
+  :cta-label="$faqCtaLabel" />
 @endsection
 
 @push('scripts')
 <script>
-(function () {
-  const root = document.querySelector('[data-contact-reach]');
-  if (!root) {
-    return;
-  }
+  (function() {
+    const root = document.querySelector('[data-contact-reach]');
+    if (!root) {
+      return;
+    }
 
-  const map = root.querySelector('[data-contact-map]');
-  const offices = root.querySelectorAll('[data-contact-office]');
-  if (!map || !offices.length) {
-    return;
-  }
+    const map = root.querySelector('[data-contact-map]');
+    const offices = root.querySelectorAll('[data-contact-office]');
+    if (!map || !offices.length) {
+      return;
+    }
 
-  offices.forEach(function (button) {
-    button.addEventListener('click', function () {
-      const src = button.getAttribute('data-map-src');
-      const title = button.getAttribute('data-map-title') || 'Office location map';
-      if (!src || map.getAttribute('src') === src) {
-        offices.forEach(function (item) {
+    offices.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const src = button.getAttribute('data-map-src');
+        const title = button.getAttribute('data-map-title') || 'Office location map';
+        if (!src || map.getAttribute('src') === src) {
+          offices.forEach(function(item) {
+            const active = item === button;
+            item.classList.toggle('is-active', active);
+            item.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+          return;
+        }
+
+        map.setAttribute('src', src);
+        map.setAttribute('title', title);
+
+        offices.forEach(function(item) {
           const active = item === button;
           item.classList.toggle('is-active', active);
           item.setAttribute('aria-pressed', active ? 'true' : 'false');
         });
-        return;
-      }
-
-      map.setAttribute('src', src);
-      map.setAttribute('title', title);
-
-      offices.forEach(function (item) {
-        const active = item === button;
-        item.classList.toggle('is-active', active);
-        item.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
     });
-  });
-})();
+  })();
 
-(function () {
-  const form = document.querySelector('[data-contact-form]');
-  if (!form) {
-    return;
-  }
-
-  const successEl = document.querySelector('[data-contact-success]');
-  const submitBtn = form.querySelector('[data-contact-submit]');
-  const startedInput = form.querySelector('[data-contact-started]');
-  const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  function field(name) {
-    return form.querySelector('[name="' + name + '"]');
-  }
-
-  function clearErrors() {
-    form.querySelectorAll('.is-invalid').forEach(function (el) {
-      el.classList.remove('is-invalid');
-    });
-    form.querySelectorAll('[data-error-for]').forEach(function (el) {
-      el.hidden = true;
-      el.textContent = '';
-    });
-  }
-
-  function showError(name, message) {
-    const input = field(name);
-    const error = form.querySelector('[data-error-for="' + name + '"]');
-    if (input) {
-      input.classList.add('is-invalid');
-    }
-    if (error) {
-      error.textContent = message;
-      error.hidden = false;
-    }
-  }
-
-  function showServerErrors(errors) {
-    clearErrors();
-    Object.keys(errors || {}).forEach(function (name) {
-      const messages = errors[name];
-      const message = Array.isArray(messages) ? messages[0] : messages;
-      if (message) {
-        showError(name, message);
-      }
-    });
-  }
-
-  function validate() {
-    clearErrors();
-    let ok = true;
-
-    const name = (field('name')?.value || '').trim();
-    const email = (field('email')?.value || '').trim();
-    const phone = (field('phone')?.value || '').trim();
-    const service = field('service')?.value || '';
-    const message = (field('message')?.value || '').trim();
-
-    if (!name) {
-      showError('name', 'Please enter your full name.');
-      ok = false;
-    } else if (name.length > 120) {
-      showError('name', 'Full name may not be longer than 120 characters.');
-      ok = false;
-    }
-
-    if (!email) {
-      showError('email', 'Please enter your email address.');
-      ok = false;
-    } else if (!emailPattern.test(email)) {
-      showError('email', 'Please enter a valid email address.');
-      ok = false;
-    }
-
-    if (!phone) {
-      showError('phone', 'Please enter your phone number.');
-      ok = false;
-    }
-
-    if (!service) {
-      showError('service', 'Please select a service.');
-      ok = false;
-    }
-
-    if (!message) {
-      showError('message', 'Please tell us what you are trying to fix.');
-      ok = false;
-    } else if (message.length < 10) {
-      showError('message', 'Please write at least 10 characters about your request.');
-      ok = false;
-    }
-
-    return ok;
-  }
-
-  function setSubmitting(isSubmitting) {
-    if (!submitBtn) {
+  (function() {
+    const form = document.querySelector('[data-contact-form]');
+    if (!form) {
       return;
     }
-    submitBtn.disabled = isSubmitting;
-    submitBtn.classList.toggle('is-loading', isSubmitting);
-  }
 
-  function showSuccess(message) {
-    if (!successEl) {
-      return;
-    }
-    successEl.textContent = message || 'The request has been sent successfully.';
-    successEl.hidden = false;
-    successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+    const successEl = document.querySelector('[data-contact-success]');
+    const submitBtn = form.querySelector('[data-contact-submit]');
+    const startedInput = form.querySelector('[data-contact-started]');
+    const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 
-  function resetForm() {
-    form.reset();
-    const service = field('service');
-    if (service) {
-      service.selectedIndex = 0;
-    }
-    if (startedInput) {
-      startedInput.value = String(Math.floor(Date.now() / 1000));
-    }
-    clearErrors();
-  }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  ['name', 'email', 'phone', 'service', 'message'].forEach(function (name) {
-    const input = field(name);
-    if (!input) {
-      return;
+    function field(name) {
+      return form.querySelector('[name="' + name + '"]');
     }
-    input.addEventListener('input', function () {
-      input.classList.remove('is-invalid');
+
+    function clearErrors() {
+      form.querySelectorAll('.is-invalid').forEach(function(el) {
+        el.classList.remove('is-invalid');
+      });
+      form.querySelectorAll('[data-error-for]').forEach(function(el) {
+        el.hidden = true;
+        el.textContent = '';
+      });
+    }
+
+    function showError(name, message) {
+      const input = field(name);
       const error = form.querySelector('[data-error-for="' + name + '"]');
-      if (error) {
-        error.hidden = true;
-        error.textContent = '';
+      if (input) {
+        input.classList.add('is-invalid');
       }
+      if (error) {
+        error.textContent = message;
+        error.hidden = false;
+      }
+    }
+
+    function showServerErrors(errors) {
+      clearErrors();
+      Object.keys(errors || {}).forEach(function(name) {
+        const messages = errors[name];
+        const message = Array.isArray(messages) ? messages[0] : messages;
+        if (message) {
+          showError(name, message);
+        }
+      });
+    }
+
+    function validate() {
+      clearErrors();
+      let ok = true;
+
+      const name = (field('name')?.value || '').trim();
+      const email = (field('email')?.value || '').trim();
+      const phone = (field('phone')?.value || '').trim();
+      const service = field('service')?.value || '';
+      const message = (field('message')?.value || '').trim();
+
+      if (!name) {
+        showError('name', 'Please enter your full name.');
+        ok = false;
+      } else if (name.length > 120) {
+        showError('name', 'Full name may not be longer than 120 characters.');
+        ok = false;
+      }
+
+      if (!email) {
+        showError('email', 'Please enter your email address.');
+        ok = false;
+      } else if (!emailPattern.test(email)) {
+        showError('email', 'Please enter a valid email address.');
+        ok = false;
+      }
+
+      if (!phone) {
+        showError('phone', 'Please enter your phone number.');
+        ok = false;
+      }
+
+      if (!service) {
+        showError('service', 'Please select a service.');
+        ok = false;
+      }
+
+      if (!message) {
+        showError('message', 'Please tell us what you are trying to fix.');
+        ok = false;
+      } else if (message.length < 10) {
+        showError('message', 'Please write at least 10 characters about your request.');
+        ok = false;
+      }
+
+      return ok;
+    }
+
+    function setSubmitting(isSubmitting) {
+      if (!submitBtn) {
+        return;
+      }
+      submitBtn.disabled = isSubmitting;
+      submitBtn.classList.toggle('is-loading', isSubmitting);
+    }
+
+    function showSuccess(message) {
+      if (!successEl) {
+        return;
+      }
+      successEl.textContent = message || 'The request has been sent successfully.';
+      successEl.hidden = false;
+      successEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      });
+    }
+
+    function resetForm() {
+      form.reset();
+      const service = field('service');
+      if (service) {
+        service.selectedIndex = 0;
+      }
+      if (startedInput) {
+        startedInput.value = String(Math.floor(Date.now() / 1000));
+      }
+      clearErrors();
+    }
+
+    ['name', 'email', 'phone', 'service', 'message'].forEach(function(name) {
+      const input = field(name);
+      if (!input) {
+        return;
+      }
+      input.addEventListener('input', function() {
+        input.classList.remove('is-invalid');
+        const error = form.querySelector('[data-error-for="' + name + '"]');
+        if (error) {
+          error.hidden = true;
+          error.textContent = '';
+        }
+        if (successEl) {
+          successEl.hidden = true;
+        }
+      });
+      input.addEventListener('change', function() {
+        input.dispatchEvent(new Event('input'));
+      });
+    });
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
       if (successEl) {
         successEl.hidden = true;
       }
-    });
-    input.addEventListener('change', function () {
-      input.dispatchEvent(new Event('input'));
-    });
-  });
 
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
+      if (!validate()) {
+        const firstInvalid = form.querySelector('.is-invalid');
+        firstInvalid?.focus();
+        return;
+      }
 
-    if (successEl) {
-      successEl.hidden = true;
-    }
+      setSubmitting(true);
 
-    if (!validate()) {
-      const firstInvalid = form.querySelector('.is-invalid');
-      firstInvalid?.focus();
-      return;
-    }
+      const body = new FormData(form);
 
-    setSubmitting(true);
+      fetch(form.action, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': csrf,
+          },
+          body: body,
+          credentials: 'same-origin',
+        })
+        .then(async function(response) {
+          const data = await response.json().catch(function() {
+            return {};
+          });
 
-    const body = new FormData(form);
+          if (response.status === 422) {
+            showServerErrors(data.errors || {});
+            return;
+          }
 
-    fetch(form.action, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': csrf,
-      },
-      body: body,
-      credentials: 'same-origin',
-    })
-      .then(async function (response) {
-        const data = await response.json().catch(function () {
-          return {};
+          if (!response.ok || data.success === false) {
+            showError('message', data.message || 'Unable to send your request. Please try again.');
+            return;
+          }
+
+          resetForm();
+          showSuccess(data.message || 'The request has been sent successfully.');
+        })
+        .catch(function() {
+          showError('message', 'Unable to send your request. Please try again.');
+        })
+        .finally(function() {
+          setSubmitting(false);
         });
-
-        if (response.status === 422) {
-          showServerErrors(data.errors || {});
-          return;
-        }
-
-        if (!response.ok || data.success === false) {
-          showError('message', data.message || 'Unable to send your request. Please try again.');
-          return;
-        }
-
-        resetForm();
-        showSuccess(data.message || 'The request has been sent successfully.');
-      })
-      .catch(function () {
-        showError('message', 'Unable to send your request. Please try again.');
-      })
-      .finally(function () {
-        setSubmitting(false);
-      });
-  });
-})();
+    });
+  })();
 </script>
 @endpush
