@@ -50,7 +50,7 @@
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
 
-    @vite('resources/css/app.css');
+    @vite('resources/css/app.css')
 {{-- 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

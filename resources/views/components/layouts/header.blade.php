@@ -59,14 +59,7 @@
             <a href="{{ $phoneHref }}" class="hidden shrink-0 whitespace-nowrap text-sm font-medium text-white hover:font-bold xl:inline">
                 {{ $phone }}
             </a>
-            <a href="{{ $ctaHref() }}" class="site-header__cta u-btn-cta hidden shrink-0 cursor-pointer items-center gap-1 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-[14px] py-[8px] text-sm font-bold text-white transition hover:brightness-110 md:inline-flex md:px-[18px]">
-                <span class="hidden lg:inline">{{ $ctaLabel }}</span>
-                <span class="lg:hidden">{{ $ctaLabelShort }}</span>
-                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M18 8L22 12L18 16" />
-                    <path d="M2 12H22" />
-                </svg>
-            </a>
+           
             <x-layouts.the-suave-star-pearl class="site-header__logo-emblem" />
             <button type="button"id="mobile-nav-toggle"class="site-header__menu-btn inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition hover:bg-white/10 xl:hidden"  aria-label="Open menu"
  aria-expanded="false"
