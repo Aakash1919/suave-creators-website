@@ -27,7 +27,7 @@
     <div class="core-values__grid {{ $gridClass }}">
       @foreach ($items as $item)
         <article class="core-value-card">
-          <div class="core-value-card__content">
+          <div class="core-value-card__content !sm:flex !sm:flex-col">
             <h3>{{ $item['title'] }}</h3>
             <p>{{ $item['desc'] }}</p>
           </div>
