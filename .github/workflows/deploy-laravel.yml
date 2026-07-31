@@ -23,18 +23,18 @@ jobs:
           extensions: mbstring, xml, curl, zip, pdo, bcmath, gd
           coverage: none
       # ---- CACHE NODE ----
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: node-${{ hashFiles('package-lock.json') }}
-      - name: Set robots.txt for STAGING
-        run: |
-          echo "User-agent: *
-          Disallow: /
-          Disallow: /sitemap.xml" > public/robots.txt
-      - name: Install Node dependencies
-        run: npm install --prefer-offline --no-audit
+      # - name: Cache Node Modules
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.npm
+      #     key: node-${{ hashFiles('package-lock.json') }}
+      # - name: Set robots.txt for STAGING
+      #   run: |
+      #     echo "User-agent: *
+      #     Disallow: /
+      #     Disallow: /sitemap.xml" > public/robots.txt
+      # - name: Install Node dependencies
+      #   run: npm install --prefer-offline --no-audit
 
       - name: Build Vite assets
         run: npm run build
