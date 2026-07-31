@@ -20,6 +20,8 @@ class Header extends Component
     public function __construct(
         public string $phone = '+91 88949 00142',
         public string $phoneHref = 'tel:+918894900142',
+        public string $usPhone = '+1 (307) 435-9605',
+        public string $usPhoneHref = 'tel:+13074359605',
         public string $ctaRoute = 'contact-us',
         public string $ctaFragment = 'contact-id',
         public string $ctaLabel = 'Talk to an expert',
