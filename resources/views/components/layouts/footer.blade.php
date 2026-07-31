@@ -17,7 +17,7 @@
 
   <div class="site-container relative z-10 !px-5 sm:!px-6 lg:!px-8">
     <div class="site-footer__main grid grid-cols-1 gap-7 py-7 sm:gap-10 sm:py-10 lg:grid-cols-12 lg:gap-12">
-      <div class="site-footer__brand min-w-0 lg:col-span-3">
+      <div class="site-footer__brand min-w-0 lg:col-span-1">
         <a href="{{ route('home') }}" class="inline-flex max-w-full" aria-label="Suave Creators home">
           <x-layouts.logo variant="footer" />
         </a>
@@ -25,32 +25,29 @@
           Web &amp; Software Development<br>
           <span class="mt-1 inline-block bg-gradient-to-b from-[#2F69FB] to-[#D078FE] bg-clip-text font-extrabold text-transparent">Solutions</span>
         </p>
-        <ul class="site-footer__contact mt-3 space-y-1 text-[12px] font-medium text-[#B1B9DF] sm:text-[13px]">
+        <ul class="site-footer__contact mt-4 space-y-1.5 text-[12px] font-medium text-[#B1B9DF] sm:mt-6 sm:space-y-3 sm:text-[13px]">
           <li>
-            <a href="{{ $phoneHref }}" class="inline-flex !min-h-0 items-center hover:text-white">{{ $phone }}</a>
+            <a href="{{ $phoneHref }}" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">{{ $phone }}</a>
           </li>
           <li>
-            <a href="mailto:{{ $emailHref }}" class="inline-flex !min-h-0 max-w-full items-center break-all hover:text-white">{{ $email }}</a>
+            <a href="mailto:{{ $emailHref }}" class="inline-flex !min-h-0 max-w-full items-center break-all py-1 hover:text-white sm:py-0">{{ $email }}</a>
           </li>
           <li class="leading-5">
-            <div class="inline-block max-w-[280px] space-y-1 sm:max-w-none">
-              @foreach ($offices as $key => $office)
-                @php
-                  if($key >= 1){
-                    continue;
-                  }
-                @endphp
-                <p class="m-0">
-                  {{-- <span class="block text-[10px] font-semibold uppercase tracking-wide text-white/70 sm:text-[11px]">{{ $office['label'] }}</span> --}}
+            <div class="inline-block max-w-[280px] space-y-2 sm:max-w-none">
+              @foreach ($offices as $office)
+              @if($office['label'] != 'First office') 
+              @else
+                <p>
                   <span>{{ $office['display'] }}</span>
                 </p>
+                @endif
               @endforeach
             </div>
           </li>
         </ul>
       </div>
 
-      <div class="min-w-0 lg:col-span-9">
+      <div class="min-w-0 lg:col-span-1">
         <div class="site-footer__columns !grid !grid-cols-2 !gap-x-4 !gap-y-7 min-[480px]:!grid-cols-3 sm:!grid-cols-3 sm:!gap-x-6 sm:!gap-y-10 lg:!grid-cols-4">
           @foreach ($columns as $title => $links)
             <div class="site-footer__column min-w-0">
@@ -74,7 +71,7 @@
               @if ($title === 'Product')
                 <a href="{{ route('product') }}"
                   class="mt-2 inline-flex !min-h-0 items-center text-[12px] font-semibold text-white underline underline-offset-4 sm:mt-4 sm:text-[13px]">
-                  Explore Suave CRM
+                  More
                 </a>
               @endif
             </div>

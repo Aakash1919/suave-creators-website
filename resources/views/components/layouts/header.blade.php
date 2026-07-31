@@ -68,18 +68,19 @@
                 </svg>
             </a>
             <x-layouts.the-suave-star-pearl class="site-header__logo-emblem" />
-            <button type="button" id="mobile-nav-toggle" class="site-header__menu-btn u-touch-target inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition hover:bg-white/10 xl:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+            <button type="button"id="mobile-nav-toggle"class="site-header__menu-btn inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition hover:bg-white/10 xl:hidden"  aria-label="Open menu"
+ aria-expanded="false"
+  aria-controls="mobile-nav">
                 <i class="fa-solid fa-bars text-xl site-header__menu-icon" aria-hidden="true"></i>
-                <i class="fa-solid fa-xmark text-xl site-header__close-icon hidden" aria-hidden="true"></i>
             </button>
         </div>
     </div>
 
-    <div id="mobile-nav" class="mobile-nav" hidden>
+    <div id="mobile-nav" class="mobile-nav" aria-hidden="false">
         <div class="mobile-nav__backdrop" data-mobile-nav-close tabindex="-1" aria-hidden="true"></div>
         <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-            <button type="button" class="mobile-nav__close u-touch-target" data-mobile-nav-close aria-label="Close menu">
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            <button type="button" class="mobile-nav__close hidden u-touch-target" data-mobile-nav-close aria-label="Close menu">
+                <i class="fa-solid fa-xmark" aria-hidden="false"></i>
             </button>
             <div class="mobile-nav__scroll">
                 <nav class="mobile-nav__links" aria-label="Mobile navigation">
