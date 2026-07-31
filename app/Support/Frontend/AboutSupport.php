@@ -28,22 +28,22 @@ class AboutSupport
     {
         return [
             [
-                'end' => 12,
+                'end' => 10,
                 'suffix' => '+',
-                'label' => 'Combined Experience',
-                'description' => 'Years of hands-on delivery across web, product, and enterprise software.',
+                'label' => 'Years of Experience',
+                'description' => 'Building scalable digital products with modern technologies.',
             ],
             [
                 'end' => 50,
                 'suffix' => '+',
-                'label' => 'Projects Done',
-                'description' => 'Successfully completed more than 50+ digital products and platforms.',
+                'label' => 'Projects Delivered',
+                'description' => 'Successfully delivered websites, software, CRMs, mobile apps, and digital solutions.',
             ],
             [
-                'end' => '40M',
-                'suffix' => '+',
-                'label' => 'Funding Secured',
-                'description' => 'Helped clients secure more than $40M+ in funding.',
+                'end' => '98',
+                'suffix' => '%',
+                'label' => 'Client Satisfaction',
+                'description' => 'Focused on quality, transparency, and long-term partnerships.',
             ],
             [
                 'end' => 15,
