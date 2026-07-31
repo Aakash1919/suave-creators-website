@@ -22,18 +22,19 @@ jobs:
           php-version: '8.3'
           extensions: mbstring, xml, curl, zip, pdo, bcmath, gd
           coverage: none
+
       # ---- CACHE NODE ----
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: node-${{ hashFiles('package-lock.json') }}
+      # - name: Cache Node Modules
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.npm
+      #     key: node-${{ hashFiles('package-lock.json') }}
 
-      - name: Install Node dependencies
-        run: npm install --prefer-offline --no-audit
+      # - name: Install Node dependencies
+      #   run: npm install --prefer-offline --no-audit
 
-      - name: Build Vite assets
-        run: npm run build
+      # - name: Build Vite assets
+      #   run: npm run build
 
       - name: Cache Composer
         uses: actions/cache@v3
@@ -109,17 +110,17 @@ jobs:
           coverage: none
 
       # ---- CACHE NODE ----
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: node-${{ hashFiles('package-lock.json') }}
+      # - name: Cache Node Modules
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.npm
+      #     key: node-${{ hashFiles('package-lock.json') }}
 
-      - name: Install Node dependencies
-        run: npm install --prefer-offline --no-audit
+      # - name: Install Node dependencies
+      #   run: npm install --prefer-offline --no-audit
 
-      - name: Build Vite assets
-        run: npm run build
+      # - name: Build Vite assets
+      #   run: npm run build
 
       - name: Cache Composer
         uses: actions/cache@v3
