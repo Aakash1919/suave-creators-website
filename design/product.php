@@ -13,11 +13,72 @@ $h = static function ($v): string {
 
 $contactHref = '/contact-us/#contact-id';
 
+<<<<<<< Updated upstream
 $stats = [
   ['icon' => '/images/product/stat-icon-modules.svg', 'value' => '12+', 'label' => 'INTEGRATED MODULES'],
   ['icon' => '/images/product/stat-icon-workspace.svg', 'value' => '01', 'label' => 'UNIFIED WORKSPACE'],
   ['icon' => '/images/product/stat-icon-shield.svg', 'value' => '100%', 'label' => 'TENANT DATA ISOLATION'],
   ['icon' => '/images/product/stat-icon-clock.svg', 'value' => '24/7', 'label' => 'ALWAYS AVAILABLE'],
+=======
+$heroDashboard = [
+  'src' => '/images/product/hero-illustration.jpg',
+  'alt' => 'Suave AI sales CRM dashboard on a laptop showing deals, tasks and analytics',
+];
+
+$heroLeadAvatar = [
+  'src' => '/images/team-2.png',
+  'alt' => 'Portrait of Devid Warner, a new sales lead captured by Suave AI CRM',
+];
+
+$heroChips = [
+  [
+    'src' => '/images/product page/ai assistant.svg',
+    'label' => 'AI Assistant',
+    'alt' => 'AI assistant icon for the Suave AI powered sales CRM',
+  ],
+  [
+    'src' => '/images/product page/smart automation.svg',
+    'label' => 'Smart Automation',
+    'alt' => 'Smart automation icon for AI driven sales workflow software',
+  ],
+  [
+    'src' => '/images/product page/real-time analysis.svg',
+    'label' => 'Real-time Analysis',
+    'alt' => 'Real-time sales analytics icon for AI CRM revenue reporting',
+  ],
+  [
+    'src' => '/images/product page/secure & reliable.svg',
+    'label' => 'Secure & Reliable',
+    'alt' => 'Security and reliability icon for enterprise sales CRM software',
+  ],
+];
+
+$howItWorksSteps = [
+  [
+    'icon' => '/images/product/capture-lead-icon.svg',
+    'title' => 'Capture Lead',
+    'description' => 'Bring every lead into one centralized workspace, whether it comes from forms, ads, websites, calls, or emails',
+    'alt' => 'Capture lead icon for Suave AI sales CRM lead intake',
+  ],
+  [
+    'icon' => '/images/product/ai-qualification-icon.svg',
+    'title' => 'AI Qualification',
+    'description' => 'AI scores and qualifies leads, ensuring your team spends time on the right opportunities instead of chasing every lead.',
+    'alt' => 'AI qualification icon for Suave sales CRM lead scoring',
+  ],
+  [
+    'icon' => '/images/product/manage-pipeline-icon.svg',
+    'title' => 'Manage Pipeline',
+    'description' => 'Track every conversation, activity, and deal stage in a visual sales pipeline to improve collaboration and productivity.',
+    'alt' => 'Manage pipeline icon for Suave AI powered sales CRM',
+  ],
+  [
+    'icon' => '/images/product/close-deals-icon.svg',
+    'title' => 'Close Deals',
+    'description' => 'Automate follow-ups, gain AI-powered insights, and close more deals faster with intelligent sales automation.',
+    'alt' => 'Close deals icon for Suave AI sales CRM automation',
+  ],
+>>>>>>> Stashed changes
 ];
 
 $features = [

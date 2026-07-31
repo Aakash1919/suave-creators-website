@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" width="24" height="16">
+  <!-- Saffron -->
+  <rect width="24" height="5.333" y="0" fill="#FF9933"></rect>
+
+  <!-- White -->
+  <rect width="24" height="5.334" y="5.333" fill="#FFFFFF"></rect>
+
+  <!-- Green -->
+  <rect width="24" height="5.333" y="10.667" fill="#138808"></rect>
+
+  <!-- Ashoka Chakra -->
+  <g transform="translate(12 8)" stroke="#000080" fill="none">
+    <!-- Outer ring -->
+    <circle r="2" stroke-width="0.18"></circle>
+
+    <!-- 24 spokes -->
+    <g stroke-width="0.12">
+      </g></g></svg>

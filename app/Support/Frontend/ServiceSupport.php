@@ -240,10 +240,10 @@ class ServiceSupport
     public static function introStats(): array
     {
         return [
-            ['50+', 'Projects Delivered', 'Successfully completed more than 50+ projects.', 'assets/icons/projects-delivered-stat-icon.svg', '#4C24F4'],
-            ['10+', 'Years Experience', 'Years of Combined Experience.', 'assets/icons/years-experience-stat-icon.svg', '#1873E7'],
-            ['$40M+', 'Funding Secured', 'Helped clients secure more than $40M+ in funding.', 'assets/icons/funding-secured-stat-icon.svg', '#0F968E'],
-            ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', 'assets/icons/expert-team-stat-icon.svg', '#FA6811'],
+            ['50+', 'Projects Delivered', 'Successfully delivered websites, software, CRMs, mobile apps, and digital solutions.', 'assets/icons/projects-delivered-stat-icon.svg', '#4C24F4'],
+            ['10+', 'Years Experience', 'Building scalable digital products with modern technologies.', 'assets/icons/years-experience-stat-icon.svg', '#1873E7'],
+            ['98%', 'Client Satisfaction', 'Focused on quality, transparency, and long-term partnerships.', 'assets/icons/funding-secured-stat-icon.svg', '#0F968E'],
+            ['15+', 'Expert Team', '15+ passionate developers and management specialists ready to build with you.', 'assets/icons/expert-team-stat-icon.svg', '#FA6811'],
         ];
     }
 
