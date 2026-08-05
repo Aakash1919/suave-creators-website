@@ -635,7 +635,7 @@ img, video, canvas{
   color: #B1B9DF;
   font-size: 14px;
   line-height: 1.6;
-  margin: 12px 0 0;
+  margin: 12px 0 0 ;
 }
 
 .core-values__grid{
@@ -712,6 +712,16 @@ img, video, canvas{
 }
 
 .core-value-card__image img{
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+core-value-card__image1{
+  height: 50%;
+
+}
+.core-value-card__image1 img{
   display: block;
   height: 100%;
   object-fit: cover;

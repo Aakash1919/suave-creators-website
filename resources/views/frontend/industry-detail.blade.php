@@ -368,63 +368,109 @@
     </section>
     <!-- Agile Process Section End -->
 
+
+
     <!-- Core Values Section Start -->
-    <section class=" full-bleed core-values bg-cover bg-top bg-no-repeat py-12 lg:py-20"
-        style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
-        <svg class="core-values__symbols" aria-hidden="true">
-            <symbol id="core-value-innovation" viewBox="0 0 24 24">
-                <path d="M9 18h6M10 21h4M8.3 14.7a7 7 0 1 1 7.4 0c-.9.6-1.4 1.5-1.5 2.3H9.8c-.1-.8-.6-1.7-1.5-2.3Z" />
-                <path d="M12 2V.5M4.9 4.9 3.8 3.8M19.1 4.9l1.1-1.1" />
-            </symbol>
-            <symbol id="core-value-quality" viewBox="0 0 24 24">
-                <path d="m12 2 7 3v5c0 4.6-2.8 8.8-7 10.5C7.8 18.8 5 14.6 5 10V5l7-3Z" />
-                <path d="m8.8 11.1 2 2 4.6-4.7" />
-            </symbol>
-            <symbol id="core-value-trust" viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M8.5 12.5 7.8 21l4.2-2.3 4.2 2.3-.7-8.5" />
-            </symbol>
-            <symbol id="core-value-customer" viewBox="0 0 24 24">
-                <circle cx="12" cy="7" r="4" />
-                <path d="M4.5 21c.3-5 3-8 7.5-8s7.2 3 7.5 8" />
-            </symbol>
-        </svg>
+<section
+  class="  full-bleed core-values bg-[url('/images/background_core_values.png')] bg-cover bg-top bg-no-repeat py-12 lg:py-20">
+  <svg class="core-values__symbols" aria-hidden="true">
+    <symbol id="core-value-fintech" viewBox="0 0 24 24">
+     <path d="M3 9L12 4l9 5H3Z"/>
+  <path d="M5 10v8M9 10v8M15 10v8M19 10v8"/>
+  <path d="M3 18h18M2 21h20"/>
+  <circle cx="12" cy="14" r="2"/>
+    </symbol>
+    <symbol id="core-value-ecommerce" viewBox="0 0 24 24">
+  <path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.5h8.8a2 2 0 0 0 2-1.6L21 8H7" />
+  <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
+  <path d="M17 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
+  <path d="M9 8h10" />
+</symbol>
+   <symbol id="core-value-healthcare" viewBox="0 0 24 24">
+  <path d="M12 21s-7-4.5-9-9.2C1.5 8.5 3.5 5 7 5c2 0 3.3 1.2 5 3 1.7-1.8 3-3 5-3 3.5 0 5.5 3.5 4 6.8C19 16.5 12 21 12 21Z" />
+  <path d="M12 9v6" />
+  <path d="M9 12h6" />
+</symbol>
+   <symbol id="core-value-Education" viewBox="0 0 24 24">
+  <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z" />
+  <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v17h5.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z" />
+</symbol>
+<symbol id="core-value-IT" viewBox="0 0 24 24">
+  <path d="M8 9 4 12l4 3" />
+  <path d="m16 9 4 3-4 3" />
+  <path d="m14 6-4 12" />
+</symbol>
+<symbol id="core-value-logistics" viewBox="0 0 24 24">
+  <path d="M3 6h11v11H3z" />
+  <path d="M14 10h4l3 3v4h-7z" />
+  <circle cx="7" cy="18" r="2" />
+  <circle cx="18" cy="18" r="2" />
+</symbol>
 
-        <div class="core-values__inner section-inner">
-            <header class="core-values__header">
-                <div class="flex items-start gap-2 mb-4">
-                    <span
-                        class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
-                    <span
-                        class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
-                        {{ $industry['processEyebrow'] ?? 'Our Process' }}
-                    </span>
-                </div>
-                <div class="core-values__heading">
-                    <h2>{{ $industry['processTitle'] }}</h2>
-                    <p>{{ $industry['processDescription'] ?? '' }}</p>
-                </div>
-            </header>
 
-            <div class="core-values__grid {{ $industry['processGridClass'] ?? 'core-values__grid--3' }}">
-                @foreach ($coreValuesItems as $value)
-                    <article class="core-value-card">
-                        <div class="core-value-card__content">
-                            <div class="core-value-card__text">
-                                <h3>{{ $value['title'] }}</h3>
-                                <p>{{ $value['desc'] }}</p>
-                            </div>
-                        </div>
-                        <div class="core-value-card__image">
-                            <img src="{{ asset($value['image']) }}" alt="{{ $value['alt'] }}"
-                                title="{{ $value['alt'] }}" loading="lazy" decoding="async">
-                        </div>
-                    </article>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <!-- Core Values Section End -->
+  </svg>
+
+  <div class="core-values__inner section-inner">
+    <header class="core-values__header">
+      <div class="flex items-start gap-2 mb-4">
+        <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
+        <span
+          class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
+          Our Core Values
+        </span>
+      </div>
+      <div class="core-values__heading">
+        <h2>The Pillars Behind Our Excellence</h2>
+        <p>We believe in offering seamless, effective, and custom-made solutions, which cater for your specific future
+          goals</p><br>
+      </div>
+    </header>
+
+    <?php
+    $coreValues = [
+      ['fintech', 'Fintech & Banking Sector', 'Building secure, scalable platforms for modern finance.','/assets/media/fintech-dashboard-financial-analytics.webp' ,'Building secure, scalable platforms for modern finance.'],
+      ['ecommerce', 'E-commerce & Retail Sector', 'Powering secure e-commerce payments and fraud protection.', '/assets/media/ecommerce-storefront-laptop-checkout.webp', 'Powering secure e-commerce payments and fraud protection.'],
+      ['healthcare', 'Healthcare & Insurance Sector', 'Seamless billing, claims & policy management solutions.', '/assets/media/healthcare.png', 'Seamless billing, claims & policy management solutions.'],
+      ['Education', 'Education & EdTech Sector', 'Secure fee and payment solutions for education.', '/assets/media/elearning-platform-online-classroom.webp', 'Secure fee and payment solutions for education'],
+
+      ['IT', 'IT Solutions for Startups', 'Innovative solutions tailored to your business needs.', '/assets/media/it_solutions.png', 'Innovative solutions tailored to your business needs.'],
+      ['logistics', 'Logistics and Supply Chain', 'Streamlined warehouse, inventory & transport management.', '/assets/media/supply_chain.png', 'Streamlined warehouse, inventory & transport management.'],
+
+    ];
+    ?>
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+         <?php foreach ($coreValues as $value): ?>
+
+        <article class="core-value-card flex flex-col h-full">
+  <div class="core-value-card__content min-h-[170px] flex-1">
+    <svg class="core-value-card__icon" aria-hidden="true">
+      <use href="#core-value-<?= htmlspecialchars($value[0]) ?>"></use>
+    </svg>
+
+    <div class="core-value-card__text">
+      <h3><?= htmlspecialchars($value[1]) ?></h3>
+      <p><?= htmlspecialchars($value[2]) ?></p><br>
+    </div>
+  </div>
+
+  <div class="core-value-card__image1">
+    <img 
+      src="<?= htmlspecialchars($value[3]) ?>" 
+      alt="<?= htmlspecialchars($value[4]) ?>" 
+      title="<?= htmlspecialchars($value[4]) ?>" 
+      loading="lazy"
+      
+    >
+  </div>
+</article>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<!-- Core Values Section End -->
+
+
+
     <!-- Industries Delivered Section End -->
 
     <x-frontend.faq-section :qa="$industry['faqs'] ?? []" heading-id="industry-faq-heading"
