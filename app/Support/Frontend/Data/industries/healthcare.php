@@ -149,25 +149,25 @@ return array (
     array (
       'step' => '01',
       'title' => 'Fintech & Banking Sector',
-      'desc' => 'We build safe, scalable, and regulation-ready financial platforms for banks, digital wallets, lending companies, and fintech startups.',
+      'desc' => 'We build secure, scalable, regulation-ready platforms for banks and fintechs.',
     ),
     1 => 
     array (
       'step' => '02',
       'title' => 'E-commerce & Retail Sector',
-      'desc' => 'Our software powers smooth online transactions, subscriptions, EMI options, and fraud protection for e-commerce brands.',
+      'desc' => 'Powering secure payments, subscriptions, EMI, and fraud protection for e-commerce..',
     ),
     2 => 
     array (
       'step' => '03',
       'title' => 'Healthcare & Insurance Sector',
-      'desc' => 'Financial and care solutions for hospitals and insurance providers that streamline billing, claims, and policy management.',
+      'desc' => 'Financial and care solutions for seamless billing, claims, and policy management.',
     ),
     3 => 
     array (
       'step' => '04',
       'title' => 'Education & EdTech Sector',
-      'desc' => 'Fee management systems and payment gateways for schools, colleges, and learning platforms with protected data.',
+      'desc' => 'Secure fee management and payment solutions for schools, colleges, and learning platforms.',
     ),
     4 => 
     array (
