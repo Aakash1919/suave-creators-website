@@ -778,13 +778,24 @@
 }
 
 @media (min-width: 1024px) {
+
   .single-blog-layout {
-    grid-template-columns: minmax(0, 1fr) 300px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
     gap: 56px;
+    align-items: start;
   }
 
-  .single-blog-comment__row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .single-blog-content {
+    height: 1400px;
+    overflow-y: auto;
+    padding-right: 12px; 
+  }
+
+  .single-blog-sidebar {
+    position: sticky;
+    top: 100px;
+    align-self: start;
   }
 }
 
