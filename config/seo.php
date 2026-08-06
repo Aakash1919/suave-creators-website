@@ -175,10 +175,10 @@ return [
             'description' => 'Industry-specific web design, software, and AI solutions for finance, healthcare, education, retail, logistics, and more.',
         ],
         'product' => [
-            'title' => 'Product - AI-Powered Business Platform | Suave Creators',
-            'description' => 'Run your organization with Suave Creators product suite — AI at the core, unified modules, enterprise security, and a single workspace for your team.',
-            'og_title' => 'Product - AI-Powered Business Platform | Suave Creators',
-            'og_description' => 'Run your organization with Suave Creators product suite — AI at the core, unified modules, and enterprise security.',
+        'title' => 'AI-Powered Outreach CRM | Smart Sales Automation Platform | Suave Creators',
+        'description' => 'Boost sales productivity with Suave Creators AI-Powered Outreach CRM. Automate outreach, manage leads, streamline customer engagement, and accelerate business growth with intelligent AI workflows.',
+        'og_title' => 'AI-Powered Outreach CRM | Suave Creators',
+        'og_description' => 'Discover Suave Creators AI-Powered Outreach CRM for intelligent lead management, automated sales outreach, customer engagement, and AI-driven business growth.',
         ],
         'blogs' => [
             'title' => 'Blog - Software Development Insights | Suave Creators',
