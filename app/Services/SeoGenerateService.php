@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
+
 class SeoGenerateService
 {
     /**
@@ -16,7 +18,7 @@ class SeoGenerateService
     {
         $this->overrides = array_merge($this->overrides, array_filter(
             $data,
-            static fn (mixed $value): bool => $value !== null && $value !== ''
+            static fn(mixed $value): bool => $value !== null && $value !== ''
         ));
 
         return $this;
@@ -58,11 +60,11 @@ class SeoGenerateService
                 'json_ld_name' => $page['json_ld_name'] ?? null,
                 'json_ld_description' => $page['json_ld_description'] ?? null,
                 'faqs' => $page['faqs'] ?? null,
-            ], static fn (mixed $value): bool => $value !== null && $value !== ''),
+            ], static fn(mixed $value): bool => $value !== null && $value !== ''),
             $this->overrides,
             array_filter(
                 $overrides ?? [],
-                static fn (mixed $value): bool => $value !== null && $value !== ''
+                static fn(mixed $value): bool => $value !== null && $value !== ''
             )
         );
 
@@ -142,21 +144,17 @@ class SeoGenerateService
         $email = strtolower((string) ($org['email'] ?? ''));
         $telephone = (string) ($org['telephone_schema'] ?? $org['telephone'] ?? '');
         $pageUrl = rtrim($canonical, '/');
-        $webPageId = $routeName === 'home'
-            ? $baseUrl.'/#homepage'
-            : $pageUrl.'/#webpage';
-        $breadcrumbId = $routeName === 'home'
-            ? $baseUrl.'/#breadcrumb'
-            : $pageUrl.'/#breadcrumb';
+        $webPageId = $routeName === 'home' ? $baseUrl . '/#homepage' : $pageUrl . '/#webpage';
+        $breadcrumbId = $routeName === 'home' ? $baseUrl . '/#breadcrumb' : $pageUrl . '/#breadcrumb';
 
         $organization = [
             '@type' => 'Organization',
-            '@id' => $baseUrl.'/#organization',
+            '@id' => $baseUrl . '/#organization',
             'name' => (string) ($org['legal_name'] ?? $site['name'] ?? 'Suave Creators'),
-            'url' => $baseUrl.'/',
+            'url' => $baseUrl . '/',
             'logo' => $logoUrl,
             'image' => $imageUrl,
-            'email' => $email !== '' ? 'mailto:'.$email : null,
+            'email' => $email !== '' ? 'mailto:' . $email : null,
             'telephone' => $telephone !== '' ? $telephone : null,
             'contactPoint' => [
                 '@type' => 'ContactPoint',
@@ -173,23 +171,23 @@ class SeoGenerateService
 
         $organization['contactPoint'] = array_filter(
             $organization['contactPoint'],
-            static fn (mixed $value): bool => $value !== null && $value !== ''
+            static fn(mixed $value): bool => $value !== null && $value !== ''
         );
 
         $graph = [
-            array_filter($organization, static fn (mixed $value): bool => $value !== null),
+            array_filter($organization, static fn(mixed $value): bool => $value !== null),
             [
                 '@type' => 'WebSite',
-                '@id' => $baseUrl.'/#website',
-                'url' => $baseUrl.'/',
+                '@id' => $baseUrl . '/#website',
+                'url' => $baseUrl . '/',
                 'name' => (string) ($site['name'] ?? 'Suave Creators'),
                 'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'publisher' => [
-                    '@id' => $baseUrl.'/#organization',
+                    '@id' => $baseUrl . '/#organization',
                 ],
                 'potentialAction' => [
                     '@type' => 'SearchAction',
-                    'target' => $baseUrl.'/?q={search_term}',
+                    'target' => $baseUrl . '/?q={search_term}',
                     'query-input' => 'required name=search_term',
                 ],
             ],
@@ -201,7 +199,7 @@ class SeoGenerateService
                 'description' => $description,
                 'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'isPartOf' => [
-                    '@id' => $baseUrl.'/#website',
+                    '@id' => $baseUrl . '/#website',
                 ],
                 'breadcrumb' => [
                     '@id' => $breadcrumbId,
@@ -215,7 +213,7 @@ class SeoGenerateService
         ];
 
         if (is_array($faqs) && $faqs !== []) {
-            $faqPageUrl = ($routeName === 'home' ? $baseUrl.'/' : $canonical).'#faq';
+            $faqPageUrl = ($routeName === 'home' ? $baseUrl . '/' : $canonical) . '#faq';
 
             $graph[] = [
                 '@type' => 'FAQPage',
@@ -223,7 +221,7 @@ class SeoGenerateService
                 'mainEntity' => array_values(array_map(static function (array $faq, int $index) use ($faqPageUrl): array {
                     $question = (string) ($faq['question'] ?? $faq['name'] ?? '');
                     $answer = (string) ($faq['answer'] ?? $faq['text'] ?? '');
-                    $answerUrl = $faqPageUrl.'-'.($index + 1);
+                    $answerUrl = $faqPageUrl . '-' . ($index + 1);
 
                     return [
                         '@type' => 'Question',
@@ -250,43 +248,36 @@ class SeoGenerateService
      */
     protected function breadcrumbItems(string $canonical, string $title, string $baseUrl, ?string $routeName): array
     {
-        if ($routeName === 'home') {
-            return [
-                [
-                    '@type' => 'ListItem',
-                    'position' => 1,
-                    'name' => 'Home',
-                    'item' => $baseUrl.'/',
-                ],
-                [
-                    '@type' => 'ListItem',
-                    'position' => 2,
-                    'name' => 'Services',
-                    'item' => $baseUrl.'/services',
-                ],
-                [
-                    '@type' => 'ListItem',
-                    'position' => 3,
-                    'name' => 'Contact',
-                    'item' => $baseUrl.'/contact-us',
-                ],
+        $position = 1;
+        $breadcrumb[] = [
+            '@type' => 'ListItem',
+            'position' => $position,
+            'name' => 'Home',
+            'item' => $baseUrl,
+        ];
+
+        if (in_array($routeName, ['service.show', 'industry.show', 'blog.show'])) {
+            $parentUrl = Str::beforeLast($canonical, '/');
+            $parentSlug = Str::afterLast($parentUrl, '/');
+            $pageTitle = config("seo.pages.$parentSlug.title") ?? ucfirst(str_replace('-', ' ', $parentSlug));
+            $breadcrumb[] = [
+                '@type' => 'ListItem',
+                'position' => ++$position,
+                'name' => $pageTitle,
+                'item' => $parentUrl,
             ];
         }
 
-        return [
-            [
+        if ($routeName != 'home') {
+            $breadcrumb[] = [
                 '@type' => 'ListItem',
-                'position' => 1,
-                'name' => 'Home',
-                'item' => $baseUrl.'/',
-            ],
-            [
-                '@type' => 'ListItem',
-                'position' => 2,
+                'position' => ++$position,
                 'name' => $title,
                 'item' => $canonical,
-            ],
-        ];
+            ];
+        }
+
+        return $breadcrumb;
     }
 
     protected function resolveAssetUrl(mixed $path): ?string

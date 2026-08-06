@@ -27,8 +27,9 @@ Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('p
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
-Route::get('/service/{slug}', [ServiceController::class, 'show'])->name('service.show');
+Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
 
+Route::redirect('industry', 'industries');
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
