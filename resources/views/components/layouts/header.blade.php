@@ -11,14 +11,15 @@
                 class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('about-us') ? 'is-active' : '' }}"
                 @if ($isNavActive('about-us')) aria-current="page" @endif>About</a>
             <a href="{{ route('product') }}"
-                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('product') ? 'is-active' : '' }}"
-                @if ($isNavActive('product')) aria-current="page" @endif>Product</a>
+                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('product') ? 'is-active' : '' }} "
+                 aria-label="View product overview for AI-powered outreach CRM"
+                @if ($isNavActive('product')) aria-current="page" @endif>Our Product</a>
 
             @foreach ($dropdowns as $dropdown)
                 @php($dropdownActive = $isDropdownActive($dropdown))
                 <div class="group relative">
                     <a href="{{ route($dropdown['hubRoute']) }}"
-                        class="site-header__nav-link inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-medium text-white transition group-hover:font-semibold group-hover:text-[#8EB6FF] {{ $dropdownActive ? 'is-active' : '' }}"
+                        class="site-header__nav-link inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-medium text-white transition group-hover:font-semibold group-hover:text-[#8EB6FF] {{ $dropdownActive ? 'is-active' : '' }} "
                         @if ($dropdownActive) aria-current="page" @endif>
                         {{ $dropdown['label'] }}
                         <i class="fa-solid fa-chevron-down text-[10px] transition duration-200 group-hover:rotate-180"
