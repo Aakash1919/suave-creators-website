@@ -4376,6 +4376,12 @@ body.mobile-nav-open {
  background-repeat: no-repeat;
 }
 
+@media (max-width: 767px) {
+ .site-main > .full-bleed.about-modules-section {
+ display: none;
+ }
+}
+
 .about-module-card {
  align-items: center;
  background: #fff;

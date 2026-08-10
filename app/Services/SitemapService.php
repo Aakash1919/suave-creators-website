@@ -25,6 +25,7 @@ class SitemapService
         $entries = [];
 
         foreach ($this->staticPages() as $page) {
+            logger($page);
             $entries[] = $this->entry(
                 route($page['route']),
                 $page['title'],
@@ -239,7 +240,7 @@ class SitemapService
             ['route' => 'about-us', 'title' => 'About us', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['route' => 'services', 'title' => 'Services', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['route' => 'industries', 'title' => 'Industries', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
-            ['route' => 'product', 'title' => 'Product', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            // ['route' => 'product', 'title' => 'Product', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['route' => 'blogs', 'title' => 'Blog', 'group' => 'Primary', 'changefreq' => 'daily', 'priority' => '0.8'],
             ['route' => 'contact-us', 'title' => 'Contact us', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.7'],
             ['route' => 'privacy-policy', 'title' => 'Privacy policy', 'group' => 'Legal', 'changefreq' => 'yearly', 'priority' => '0.3'],
