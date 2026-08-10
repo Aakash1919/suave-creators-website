@@ -1,0 +1,6 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 5C3 3.89543 3.89543 3 5 3H15C16.1046 3 17 3.89543 17 5V15C17 16.1046 16.1046 17 15 17H5C3.89543 17 3 16.1046 3 15V5ZM5.23607 5L10 8.76393L14.7639 5H5.23607ZM15 6.76393L10.5303 10.5303C10.2374 10.8232 9.76256 10.8232 9.46967 10.5303L5 6.76393V15H15V6.76393Z" fill="url(#addonEmailManagement)"/>
+<defs>
+<linearGradient id="addonEmailManagement" x1="3" y1="3" x2="17" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#2A4DFB"/><stop offset="1" stop-color="#7A5FF8"/></linearGradient>
+</defs>
+</svg>

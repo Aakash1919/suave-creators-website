@@ -83,11 +83,25 @@ class Footer extends Component
                 ['route' => 'blogs', 'label' => 'Blog'],
                 ['route' => 'contact-us', 'label' => 'Contact Us'],
             ],
+            'Product' => [
+                ['route' => 'product', 'fragment' => 'how-it-works', 'label' => 'How it Works'],
+                ['route' => 'product', 'fragment' => 'add-ons', 'label' => 'Add Ons'],
+                ['route' => 'product', 'fragment' => 'business-works', 'label' => 'The-Suave AI'],
+                ['route' => 'product', 'fragment' => 'data-privacy', 'label' => 'Data & Privacy'],
+                ['route' => 'product', 'fragment' => 'case-study', 'label' => 'Case Study'],
+                ['route' => 'product', 'fragment' => 'pricing', 'label' => 'Pricing'],
+            ],
         ];
 
         $this->columns = collect($columns)
             ->map(fn (array $items): array => array_values(array_map(function (array $item): array {
-                $item['href'] = route($item['route'], $item['params'] ?? []);
+                $href = route($item['route'], $item['params'] ?? []);
+
+                if (isset($item['fragment'])) {
+                    $href .= '#'.$item['fragment'];
+                }
+
+                $item['href'] = $href;
 
                 return $item;
             }, $items)))
