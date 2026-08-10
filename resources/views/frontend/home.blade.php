@@ -96,7 +96,7 @@
 <section
   class="who-we-are full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="--who-we-are-bg: url('{{ asset('assets/background/about-section-bg.png') }}'); background-image: var(--who-we-are-bg);">
   <div class="section-inner site-container ">
-    <div class="about-stats">
+    <div class="about-stats" data-about-counters>
       @foreach ($stats as $stat)
         <article class="about-stat"
           style="--stat-accent: {{ $stat['accent'] }}; --stat-tint: {{ $stat['tint'] }};">
@@ -105,7 +105,9 @@
               class="about-stat__icon-image" width="40" height="40" decoding="async" loading="lazy">
           </span>
           <div class="about-stat__content">
-            <strong class="about-stat__value">{{ $stat['value'] }}</strong>
+            <strong class="about-stat__value">
+              <span data-counter-end="{{ (int) $stat['end'] }}">0</span>{{ $stat['suffix'] }}
+            </strong>
             <h2 class="about-stat__label">{{ $stat['label'] }}</h2>
             <p class="about-stat__description">{{ $stat['description'] }}</p>
           </div>
@@ -1223,6 +1225,51 @@
 @push('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var counterRoot = document.querySelector('[data-about-counters]');
+
+    if (counterRoot) {
+      var counters = counterRoot.querySelectorAll('[data-counter-end]');
+      var countersStarted = false;
+
+      function animateCounters() {
+        if (countersStarted) return;
+        countersStarted = true;
+
+        counters.forEach(function (el) {
+          var end = parseInt(el.getAttribute('data-counter-end'), 10) || 0;
+          if (reduceMotion) {
+            el.textContent = String(end);
+            return;
+          }
+
+          var duration = 1500;
+          var startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            el.textContent = String(Math.ceil(progress * end));
+            if (progress < 1) requestAnimationFrame(step);
+          }
+
+          requestAnimationFrame(step);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var counterObserver = new IntersectionObserver(function (entries) {
+          if (entries.some(function (entry) { return entry.isIntersecting; })) {
+            animateCounters();
+            counterObserver.disconnect();
+          }
+        }, { threshold: 0.35 });
+        counterObserver.observe(counterRoot);
+      } else {
+        animateCounters();
+      }
+    }
+
     if (typeof Swiper === 'undefined') return;
 
     new Swiper('.offeringsSwiper', {

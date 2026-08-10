@@ -76,26 +76,28 @@ require __DIR__ . '/layout/start.php';
 <section
   class="who-we-are full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="--who-we-are-bg: url('/images/background_about.png'); background-image: var(--who-we-are-bg);">
   <div class="section-inner site-container ">
-    <div class="about-stats">
-      <?php
+    <div class="about-stats" data-about-counters>
+    <?php
       $stats = [
-        ['50+', 'Brands trust us for AI', 'Successfully completed more than 50+ projects.', '/images/rocket.svg', '#4C24F4', '#F0EAFF'],
-        ['10+', 'Years of Experience', 'Years of Combined Experience.', '/images/experience.svg', '#1873E7', '#EAF5FC'],
-        ['$40M+', 'Funding Secured', 'Our creative work has helped clients secure more than $40M+ in funding.', '/images/funding.svg', '#0F968E', '#E8F8F6'],
-        ['15+', 'Expert Team', '15+ Passionate Developers and Management Teams.', '/images/team.svg', '#FA6811 ', '#FFF0E7'],
+        [50, '+', 'Brands trust us for AI', 'Successfully completed more than 50+ projects.', '/images/rocket.svg', '#4C24F4', '#F0EAFF'],
+        [10, '+', 'Years of Experience', 'Years of Combined Experience.', '/images/experience.svg', '#1873E7', '#EAF5FC'],
+        [40, 'M+', 'Funding Secured', 'Our creative work has helped clients secure more than $40M+ in funding.', '/images/funding.svg', '#0F968E', '#E8F8F6'],
+        [15, '+', 'Expert Team', '15+ Passionate Developers and Management Teams.', '/images/team.svg', '#FA6811 ', '#FFF0E7'],
       ];
       foreach ($stats as $stat):
         ?>
         <article class="about-stat"
-          style="--stat-accent: <?= htmlspecialchars($stat[4]) ?>; --stat-tint: <?= htmlspecialchars($stat[5]) ?>;">
+          style="--stat-accent: <?= htmlspecialchars($stat[5]) ?>; --stat-tint: <?= htmlspecialchars($stat[6]) ?>;">
           <span class="about-stat__icon">
-            <img src="<?= htmlspecialchars($stat[3]) ?>" alt="<?= htmlspecialchars($stat[1]) ?>"
+            <img src="<?= htmlspecialchars($stat[4]) ?>" alt="<?= htmlspecialchars($stat[2]) ?>"
               class="about-stat__icon-image">
           </span>
           <div class="about-stat__content">
-            <strong class="about-stat__value"><?= htmlspecialchars($stat[0]) ?></strong>
-            <h2 class="about-stat__label"><?= htmlspecialchars($stat[1]) ?></h2>
-            <p class="about-stat__description"><?= htmlspecialchars($stat[2]) ?></p>
+            <strong class="about-stat__value">
+              <span data-counter-end="<?= (int) $stat[0] ?>">0</span><?= htmlspecialchars($stat[1]) ?>
+            </strong>
+            <h2 class="about-stat__label"><?= htmlspecialchars($stat[2]) ?></h2>
+            <p class="about-stat__description"><?= htmlspecialchars($stat[3]) ?></p>
           </div>
         </article>
       <?php endforeach; ?>
@@ -1111,6 +1113,51 @@ require __DIR__ . '/partials/articles-insights.php';
 <!-- Partnerships Section End -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var counterRoot = document.querySelector('[data-about-counters]');
+
+    if (counterRoot) {
+      var counters = counterRoot.querySelectorAll('[data-counter-end]');
+      var countersStarted = false;
+
+      function animateCounters() {
+        if (countersStarted) return;
+        countersStarted = true;
+
+        counters.forEach(function (el) {
+          var end = parseInt(el.getAttribute('data-counter-end'), 10) || 0;
+          if (reduceMotion) {
+            el.textContent = String(end);
+            return;
+          }
+
+          var duration = 1500;
+          var startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            el.textContent = String(Math.ceil(progress * end));
+            if (progress < 1) requestAnimationFrame(step);
+          }
+
+          requestAnimationFrame(step);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var counterObserver = new IntersectionObserver(function (entries) {
+          if (entries.some(function (entry) { return entry.isIntersecting; })) {
+            animateCounters();
+            counterObserver.disconnect();
+          }
+        }, { threshold: 0.35 });
+        counterObserver.observe(counterRoot);
+      } else {
+        animateCounters();
+      }
+    }
+
     if (typeof Swiper !== 'undefined') {
       new Swiper('.offeringsSwiper', {
         slidesPerView: 1,

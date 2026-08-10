@@ -27,13 +27,14 @@ class HomeSupport
     }
 
     /**
-     * @return array<int, array{value: string, label: string, description: string, icon: string, accent: string, tint: string, alt: string}>
+     * @return array<int, array{end: int, suffix: string, label: string, description: string, icon: string, accent: string, tint: string, alt: string}>
      */
     public static function stats(): array
     {
         return [
             [
-                'value' => '50+',
+                'end' => 50,
+                'suffix' => '+',
                 'label' => 'Projects Delivered',
                 'description' => 'Successfully delivered websites, software, CRMs, mobile apps, and digital solutions.',
                 'icon' => 'assets/icons/brands-growth-rocket-icon.svg',
@@ -42,7 +43,8 @@ class HomeSupport
                 'alt' => 'Successfully delivered websites, software, CRMs, mobile apps, and digital solutions.',
             ],
             [
-                'value' => '10+',
+                'end' => 10,
+                'suffix' => '+',
                 'label' => 'Years of Experience',
                 'description' => 'Building scalable digital products with modern technologies.',
                 'icon' => 'assets/icons/years-experience-icon.svg',
@@ -51,7 +53,8 @@ class HomeSupport
                 'alt' => 'Building scalable digital products with modern technologies.',
             ],
             [
-                'value' => '98%',
+                'end' => 98,
+                'suffix' => '%',
                 'label' => 'Client Satisfaction',
                 'description' => 'Focused on quality, transparency, and long-term partnerships.',
                 'icon' => 'assets/icons/funding-secured-icon.svg',
@@ -60,7 +63,8 @@ class HomeSupport
                 'alt' => 'Focused on quality, transparency, and long-term partnerships.',
             ],
             [
-                'value' => '15+',
+                'end' => 15,
+                'suffix' => '+',
                 'label' => 'Expert Team',
                 'description' => '15+ passionate developers and management specialists ready to build with you.',
                 'icon' => 'assets/team/expert-team-icon.svg',
