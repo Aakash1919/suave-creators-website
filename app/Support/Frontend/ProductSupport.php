@@ -18,11 +18,13 @@ class ProductSupport
             'demoHref' => ContactSupport::demoHref(),
             'heroBadge' => 'AI - POWERED SALES CRM',
             'heroBackground' => asset('assets/product/product-top-sections-bg.webp'),
-            'heroFloatingStats' => self::heroFloatingStats(),
+            'heroBannerTiles' => self::heroBannerTiles(),
             'heroChips' => self::heroChips(),
             'heroBanner' => [
-                'src' => asset('assets/product/product-hero-banner.webp'),
-                'alt' => 'Suave AI sales CRM dashboard with lead capture, AI follow-up, deal won and company discovery analytics',
+                'src' => asset('assets/product/hero_banner.gif'),
+                'backSrc' => asset('assets/product/hero_banner_back.png'),
+                'alt' => 'Professional executive with animated blue digital energy streaks for Suave AI sales CRM outreach platform',
+                'backAlt' => 'Soft blue screen blend glow layer behind Suave AI sales CRM product hero banner',
             ],
             'howItWorksSteps' => self::howItWorksSteps(),
             'addOns' => self::addOns(),
@@ -35,20 +37,34 @@ class ProductSupport
     }
 
     /**
-     * @return array<int, array{position: string, src: string, alt: string}>
+     * @return array<int, array<string, mixed>>
      */
-    protected static function heroFloatingStats(): array
+    protected static function heroBannerTiles(): array
     {
         return [
             [
-                'position' => 'left',
-                'src' => asset('assets/product/hero-stat-website-briefing-card.png'),
-                'alt' => 'Suave AI sales CRM website briefing analysis stat card',
+                'position' => 'top-left',
+                'type' => 'lead',
+                'src' => asset('assets/product/hero-banner-new-lead-tile.png'),
+                'alt' => 'New lead notification tile for Devid Warner in Suave AI sales CRM outreach platform',
             ],
             [
-                'position' => 'right',
-                'src' => asset('assets/product/hero-stat-s-mail-outreach-card.png'),
-                'alt' => 'Suave CRM S-Mail cold email outreach performance stat card',
+                'position' => 'bottom-left',
+                'type' => 'follow-up',
+                'title' => 'AI Follow-up',
+                'description' => 'Email drafted for Devid Warner.',
+            ],
+            [
+                'position' => 'top-right',
+                'type' => 'deal-won',
+                'src' => asset('assets/product/hero-banner-deal-won-tile.png'),
+                'alt' => 'Deal won notification tile for Albert Flores website redesign in Suave AI sales CRM',
+            ],
+            [
+                'position' => 'bottom-right',
+                'type' => 'companies',
+                'src' => asset('assets/product/hero-banner-companies-discovered-tile.png'),
+                'alt' => 'Companies discovered stat tile showing 248 leads from map and list in Suave AI sales CRM',
             ],
         ];
     }
@@ -208,24 +224,9 @@ class ProductSupport
                 'footerType' => 'integrations',
                 'integrations' => [
                     [
-                        'src' => asset('assets/product/integration-google-logo.png'),
-                        'alt' => 'Google logo for Suave AI Gmail OAuth integration',
-                    ],
-                    [
-                        'src' => asset('assets/product/integration-google-calendar-logo.png'),
-                        'alt' => 'Google Calendar logo for Suave AI workspace integration',
-                    ],
-                    [
-                        'src' => asset('assets/product/integration-slack-logo.png'),
-                        'alt' => 'Slack logo for Suave AI team communication integration',
-                    ],
-                    [
                         'src' => asset('assets/product/integration-gmail-logo.png'),
                         'alt' => 'Gmail logo for Suave AI S-Mail cold outreach integration',
-                    ],
-                    [
-                        'src' => asset('assets/product/Add.png'),
-                        'alt' => 'More integrations available in Suave AI business operating system',
+                        'tags' => ['Gmail'],
                     ],
                 ],
             ],

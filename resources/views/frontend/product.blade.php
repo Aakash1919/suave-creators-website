@@ -2,7 +2,7 @@
 
 @push('custom-css')
 <link rel="preload" as="image" href="{{ $heroBackground }}" type="image/webp">
-<link rel="preload" as="image" href="{{ $heroBanner['src'] }}" type="image/webp">
+<link rel="preload" as="image" href="{{ $heroBanner['src'] }}" type="image/gif">
 @endpush
 
 @section('content')
@@ -21,20 +21,6 @@
    </span>
 
         <div class="product-hero__headline-wrap">
-          @foreach ($heroFloatingStats as $stat)
-            <div class="product-hero__float-card product-hero__float-card--{{ $stat['position'] }}">
-              <img
-                src="{{ $stat['src'] }}"
-                alt="{{ $stat['alt'] }}"
-                title="{{ $stat['alt'] }}"
-                width="280"
-                height="172"
-                decoding="async"
-                loading="lazy"
-              >
-            </div>
-          @endforeach
-
           <h1 id="product-hero-heading" class="product-hero__title">
             <span class="product-hero__title-line">
               <span class="product-hero__title-accent">AI-Powered Outreach</span>
@@ -76,14 +62,81 @@
 
         <div class="product-hero__banner">
           <img
-            src="{{ $heroBanner['src'] }}"
-            alt="{{ $heroBanner['alt'] }}"
-            title="{{ $heroBanner['alt'] }}"
-            width="1200"
-            height="675"
+            src="{{ $heroBanner['backSrc'] }}"
+            alt="{{ $heroBanner['backAlt'] }}"
+            title="{{ $heroBanner['backAlt'] }}"
+            class="product-hero__banner-back"
+            width="1006"
+            height="498"
             decoding="async"
-            fetchpriority="high"
+            loading="lazy"
+            aria-hidden="true"
           >
+          <div class="product-hero__banner-stage">
+            <img
+              src="{{ $heroBanner['src'] }}"
+              alt="{{ $heroBanner['alt'] }}"
+              title="{{ $heroBanner['alt'] }}"
+              class="product-hero__banner-gif"
+              width="796"
+              height="448"
+              decoding="async"
+              fetchpriority="high"
+            >
+            @foreach ($heroBannerTiles as $tile)
+              <div class="product-hero__banner-tile product-hero__banner-tile--{{ $tile['position'] }}" aria-hidden="true">
+                @switch($tile['type'])
+                  @case('lead')
+                    <img
+                      src="{{ $tile['src'] }}"
+                      alt="{{ $tile['alt'] }}"
+                      title="{{ $tile['alt'] }}"
+                      class="product-hero__banner-tile-image"
+                      width="240"
+                      height="138"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                    @break
+                  @case('follow-up')
+                    <div class="product-hero__banner-tile-card product-hero__banner-tile-card--follow-up">
+                      <div class="product-hero__banner-tile-head product-hero__banner-tile-head--follow-up">
+                        <span class="product-hero__banner-tile-icon product-hero__banner-tile-icon--square">
+                          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        <span class="product-hero__banner-tile-title product-hero__banner-tile-title--follow-up">{{ $tile['title'] }}</span>
+                      </div>
+                      <p class="product-hero__banner-tile-copy">{{ $tile['description'] }}</p>
+                    </div>
+                    @break
+                  @case('deal-won')
+                    <img
+                      src="{{ $tile['src'] }}"
+                      alt="{{ $tile['alt'] }}"
+                      title="{{ $tile['alt'] }}"
+                      class="product-hero__banner-tile-image"
+                      width="210"
+                      height="230"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                    @break
+                  @case('companies')
+                    <img
+                      src="{{ $tile['src'] }}"
+                      alt="{{ $tile['alt'] }}"
+                      title="{{ $tile['alt'] }}"
+                      class="product-hero__banner-tile-image"
+                      width="340"
+                      height="150"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                    @break
+                @endswitch
+              </div>
+            @endforeach
+          </div>
         </div>
       </div>
     </section>
@@ -187,6 +240,9 @@
                       loading="lazy"
                     >
                   </span>
+                  @foreach ($integration['tags'] ?? [] as $tag)
+                    <span class="product-business-works__tag">{{ $tag }}</span>
+                  @endforeach
                 @endforeach
               </div>
             @elseif ($card['footerType'] === 'tags')
