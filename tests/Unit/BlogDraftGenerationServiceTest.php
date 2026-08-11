@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Ai\Agents\BlogWriterAgent;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\User;
@@ -53,7 +54,7 @@ class BlogDraftGenerationServiceTest extends TestCase
         $this->assertSame('Artificial Intelligence', $blog->category?->name);
         $this->assertIsArray($blog->faqs);
         $this->assertCount(1, $blog->faqs);
-        $this->assertStringContainsString('Suave Creators Blog', (string) $blog->meta_title);
+        $this->assertSame('AI Agents and Product Roadmaps', (string) $blog->meta_title);
     }
 
     public function test_style_examples_are_built_from_existing_blogs(): void
@@ -133,5 +134,23 @@ class BlogDraftGenerationServiceTest extends TestCase
 
         $preferred = $service->preferredCategoryNames();
         $this->assertSame('Software Development', $preferred[0]);
+    }
+
+    public function test_blog_writer_prompt_prioritizes_customer_acquisition_topic_angles(): void
+    {
+        $agent = new BlogWriterAgent(
+            categories: ['Software Development', 'Web Development'],
+            recentTitles: ['Why Your Website Is Your Most Important Salesperson'],
+        );
+
+        $instructions = (string) $agent->instructions();
+
+        $this->assertStringContainsString('CUSTOMER ACQUISITION TOPIC STRATEGY', $instructions);
+        $this->assertStringContainsString('Service-intent posts', $instructions);
+        $this->assertStringContainsString('Industry-intent posts', $instructions);
+        $this->assertStringContainsString('Problem-intent posts', $instructions);
+        $this->assertStringContainsString('Comparison-intent posts', $instructions);
+        $this->assertStringContainsString('Buyer-ready / bottom-funnel posts', $instructions);
+        $this->assertStringContainsString('The draft must help Suave Creators attract qualified organic leads', $instructions);
     }
 }

@@ -19,10 +19,10 @@ class GenerateTrendBlogDraftsCommand extends Command
     /**
      * @var string
      */
-    protected $description = 'Generate AI trend-based blog posts and save them as drafts';
+    protected $description = 'Generate AI customer-acquisition blog posts and save them as drafts';
 
     /**
-     * Generate one or more draft blogs from current trends via Laravel AI.
+     * Generate one or more lead-focused draft blogs from current trends via Laravel AI.
      */
     public function handle(BlogDraftGenerationService $generator): int
     {
@@ -42,7 +42,7 @@ class GenerateTrendBlogDraftsCommand extends Command
         $count = (int) ($this->option('count') ?: config('blogs.trend_drafts.count', 1));
         $count = max(1, $count);
 
-        $this->info("Generating {$count} trend blog draft(s)…");
+        $this->info("Generating {$count} customer-acquisition blog draft(s)…");
 
         $created = [];
 
