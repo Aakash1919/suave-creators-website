@@ -36,7 +36,7 @@
                         </svg>
                     </a>
 
-                    <a href="{{ route('contact-us') }}#contact-id"
+                    <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
                         Book a Call </a>
                 </div>
@@ -360,7 +360,7 @@
                         <path d="M18 8L22 12L18 16" />
                         <path d="M2 12H22" />
                     </svg></a>
-                <a href="{{ route('contact-us') }}#contact-id"
+                <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                     class="inline-flex shrink-0 items-center border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book
                     a Call</a>
             </div>

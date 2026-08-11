@@ -5,321 +5,260 @@ $useHeroBackground = true; // keeps white header text readable over dark strip
 $bodyClass = 'min-h-screen bg-white font-sans text-slate-900 product-site product-layout';
 $extraStylesheets = ['/css/product.css'];
 $mainClass = 'site-main product-layout-main';
-require __DIR__ . '/layout/start.php';
+require __DIR__.'/layout/start.php';
 
 $h = static function ($v): string {
-  return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
 };
 
 $contactHref = '/contact-us/#contact-id';
 
-<<<<<<< Updated upstream
 $stats = [
-  ['icon' => '/images/product/stat-icon-modules.svg', 'value' => '12+', 'label' => 'INTEGRATED MODULES'],
-  ['icon' => '/images/product/stat-icon-workspace.svg', 'value' => '01', 'label' => 'UNIFIED WORKSPACE'],
-  ['icon' => '/images/product/stat-icon-shield.svg', 'value' => '100%', 'label' => 'TENANT DATA ISOLATION'],
-  ['icon' => '/images/product/stat-icon-clock.svg', 'value' => '24/7', 'label' => 'ALWAYS AVAILABLE'],
-=======
-$heroDashboard = [
-  'src' => '/images/product/hero-illustration.jpg',
-  'alt' => 'Suave AI sales CRM dashboard on a laptop showing deals, tasks and analytics',
-];
-
-$heroLeadAvatar = [
-  'src' => '/images/team-2.png',
-  'alt' => 'Portrait of Devid Warner, a new sales lead captured by Suave AI CRM',
-];
-
-$heroChips = [
-  [
-    'src' => '/images/product page/ai assistant.svg',
-    'label' => 'AI Assistant',
-    'alt' => 'AI assistant icon for the Suave AI powered sales CRM',
-  ],
-  [
-    'src' => '/images/product page/smart automation.svg',
-    'label' => 'Smart Automation',
-    'alt' => 'Smart automation icon for AI driven sales workflow software',
-  ],
-  [
-    'src' => '/images/product page/real-time analysis.svg',
-    'label' => 'Real-time Analysis',
-    'alt' => 'Real-time sales analytics icon for AI CRM revenue reporting',
-  ],
-  [
-    'src' => '/images/product page/secure & reliable.svg',
-    'label' => 'Secure & Reliable',
-    'alt' => 'Security and reliability icon for enterprise sales CRM software',
-  ],
-];
-
-$howItWorksSteps = [
-  [
-    'icon' => '/images/product/capture-lead-icon.svg',
-    'title' => 'Capture Lead',
-    'description' => 'Bring every lead into one centralized workspace, whether it comes from forms, ads, websites, calls, or emails',
-    'alt' => 'Capture lead icon for Suave AI sales CRM lead intake',
-  ],
-  [
-    'icon' => '/images/product/ai-qualification-icon.svg',
-    'title' => 'AI Qualification',
-    'description' => 'AI scores and qualifies leads, ensuring your team spends time on the right opportunities instead of chasing every lead.',
-    'alt' => 'AI qualification icon for Suave sales CRM lead scoring',
-  ],
-  [
-    'icon' => '/images/product/manage-pipeline-icon.svg',
-    'title' => 'Manage Pipeline',
-    'description' => 'Track every conversation, activity, and deal stage in a visual sales pipeline to improve collaboration and productivity.',
-    'alt' => 'Manage pipeline icon for Suave AI powered sales CRM',
-  ],
-  [
-    'icon' => '/images/product/close-deals-icon.svg',
-    'title' => 'Close Deals',
-    'description' => 'Automate follow-ups, gain AI-powered insights, and close more deals faster with intelligent sales automation.',
-    'alt' => 'Close deals icon for Suave AI sales CRM automation',
-  ],
->>>>>>> Stashed changes
+    ['icon' => '/images/product/stat-icon-modules.svg', 'value' => '12+', 'label' => 'INTEGRATED MODULES'],
+    ['icon' => '/images/product/stat-icon-workspace.svg', 'value' => '01', 'label' => 'UNIFIED WORKSPACE'],
+    ['icon' => '/images/product/stat-icon-shield.svg', 'value' => '100%', 'label' => 'TENANT DATA ISOLATION'],
+    ['icon' => '/images/product/stat-icon-clock.svg', 'value' => '24/7', 'label' => 'ALWAYS AVAILABLE'],
 ];
 
 $features = [
-  [
-    'icon' => '/images/product/feature-icon-lightning.svg',
-    'title' => 'Lightning Fast',
-    'description' => 'Sub-100ms responses across all modules. Your team never waits.',
-  ],
-  [
-    'icon' => '/images/product/feature-icon-shield.svg',
-    'title' => 'Enterprise Security',
-    'description' => 'Role-based access, audit logs, and SOC2-ready infrastructure.',
-  ],
-  [
-    'icon' => '/images/product/feature-icon-ai.svg',
-    'title' => 'AI-Powered',
-    'description' => 'Built-in AI assistant for report generation, summarization, and smart suggestions.',
-  ],
-  [
-    'icon' => '/images/product/feature-icon-team.svg',
-    'title' => 'Team-First Design',
-    'description' => 'Designed for how creative teams actually work — async, distributed, deadline-driven.',
-  ],
+    [
+        'icon' => '/images/product/feature-icon-lightning.svg',
+        'title' => 'Lightning Fast',
+        'description' => 'Sub-100ms responses across all modules. Your team never waits.',
+    ],
+    [
+        'icon' => '/images/product/feature-icon-shield.svg',
+        'title' => 'Enterprise Security',
+        'description' => 'Role-based access, audit logs, and SOC2-ready infrastructure.',
+    ],
+    [
+        'icon' => '/images/product/feature-icon-ai.svg',
+        'title' => 'AI-Powered',
+        'description' => 'Built-in AI assistant for report generation, summarization, and smart suggestions.',
+    ],
+    [
+        'icon' => '/images/product/feature-icon-team.svg',
+        'title' => 'Team-First Design',
+        'description' => 'Designed for how creative teams actually work — async, distributed, deadline-driven.',
+    ],
 ];
 
 $workspaceBullets = [
-  'Real-time sync across all modules.',
-  'One login for your entire team.',
-  'Unified notifications & activity feed.',
-  'Custom roles & permission levels.',
+    'Real-time sync across all modules.',
+    'One login for your entire team.',
+    'Unified notifications & activity feed.',
+    'Custom roles & permission levels.',
 ];
 
 $modules = [
-  [
-    'id' => 'project',
-    'name' => 'Project Module',
-    'icon' => '/images/product/Icon%20(8).png',
-    'badge' => 'End-to-end project visibility',
-    'image' => '/images/product/module-feature.jpg',
-    'description' => 'Manage projects from kickoff to delivery. Track clients, deadlines, milestones, and team assignments in one Kanban-powered workspace.',
-    'highlights' => ['Client-linked projects', 'Milestone tracking', 'Kanban & List views', 'Role-based access'],
-  ],
-  [
-    'id' => 'task',
-    'name' => 'Task Module',
-    'icon' => '/images/product/Icon.png',
-    'badge' => 'Stay on top of every deliverable',
-    'image' => '/images/product/module-feature.jpg',
-    'description' => 'Break work into actionable tasks, assign owners, set priorities, and track progress across your entire organization.',
-    'highlights' => ['Priority tagging', 'Due date reminders', 'Team assignments', 'Status tracking'],
-  ],
-  [
-    'id' => 'attendance',
-    'name' => 'Attendance Module',
-    'icon' => '/images/product/Icon%20(7).png',
-    'badge' => 'Clock-in made effortless',
-    'image' => '/images/product/workspace.jpg',
-    'description' => 'Track attendance, shifts, and working hours with real-time dashboards and automated reporting for HR teams.',
-    'highlights' => ['Shift management', 'Leave balance', 'Working hours', 'Attendance reports'],
-  ],
-  [
-    'id' => 'holiday',
-    'name' => 'Holiday Module',
-    'icon' => '/images/product/Icon%20(6).png',
-    'badge' => 'Plan time off with clarity',
-    'image' => '/images/product/workspace.jpg',
-    'description' => 'Manage company holidays, team calendars, and leave policies in one centralized system everyone can trust.',
-    'highlights' => ['Holiday calendar', 'Leave policies', 'Team availability', 'Auto-approvals'],
-  ],
-  [
-    'id' => 'messenger',
-    'name' => 'Messenger Module',
-    'icon' => '/images/product/Icon%20(2).png',
-    'badge' => 'Communicate without context-switching',
-    'image' => '/images/product/module-feature.jpg',
-    'description' => 'Built-in team messaging tied to projects and tasks — no more jumping between Slack and your project tools.',
-    'highlights' => ['Project channels', 'Direct messages', 'File sharing', 'Mention alerts'],
-  ],
-  [
-    'id' => 'ai-chat',
-    'name' => 'AI Chat Module',
-    'icon' => '/images/product/Icon%20(2).png',
-    'badge' => 'Your intelligent assistant',
-    'image' => '/images/product/module-feature.jpg',
-    'description' => 'Ask questions, generate reports, summarize meetings, and get smart suggestions — all powered by AI built into every module.',
-    'highlights' => ['Report generation', 'Smart summaries', 'Data insights', 'Natural language queries'],
-  ],
-  [
-    'id' => 'comment',
-    'name' => 'Comment Module',
-    'icon' => '/images/product/Icon%20(3).png',
-    'badge' => 'Feedback where work happens',
-    'image' => '/images/product/workspace.jpg',
-    'description' => 'Threaded comments on tasks, projects, and documents keep conversations contextual and searchable.',
-    'highlights' => ['Threaded replies', '@mentions', 'Activity feed', 'Searchable history'],
-  ],
-  [
-    'id' => 'attachment',
-    'name' => 'Attachment Module',
-    'icon' => '/images/product/Icon%20(4).png',
-    'badge' => 'Files at your fingertips',
-    'image' => '/images/product/module-feature.jpg',
-    'description' => 'Upload, organize, and share files directly within projects and tasks with version control and access permissions.',
-    'highlights' => ['Version control', 'Access permissions', 'Preview support', 'Cloud storage'],
-  ],
-  [
-    'id' => 'daily-work',
-    'name' => 'Daily Work Record',
-    'icon' => '/images/product/Icon%20(5).png',
-    'badge' => 'Track daily output',
-    'image' => '/images/product/workspace.jpg',
-    'description' => 'Log daily work activities, track time spent on tasks, and generate productivity reports for managers.',
-    'highlights' => ['Daily logs', 'Time tracking', 'Productivity reports', 'Manager dashboards'],
-  ],
-  [
-    'id' => 'invoice',
-    'name' => 'Invoice Module',
-    'icon' => '/images/product/Icon%20(1).png',
-    'badge' => 'Bill clients with confidence',
-    'image' => '/images/product/module-feature.jpg',
-    'description' => 'Create, send, and track invoices linked to projects and timesheets. Get paid faster with automated reminders.',
-    'highlights' => ['Project-linked billing', 'Payment tracking', 'Auto reminders', 'PDF export'],
-  ],
+    [
+        'id' => 'project',
+        'name' => 'Project Module',
+        'icon' => '/images/product/Icon%20(8).png',
+        'badge' => 'End-to-end project visibility',
+        'image' => '/images/product/module-feature.jpg',
+        'description' => 'Manage projects from kickoff to delivery. Track clients, deadlines, milestones, and team assignments in one Kanban-powered workspace.',
+        'highlights' => ['Client-linked projects', 'Milestone tracking', 'Kanban & List views', 'Role-based access'],
+    ],
+    [
+        'id' => 'task',
+        'name' => 'Task Module',
+        'icon' => '/images/product/Icon.png',
+        'badge' => 'Stay on top of every deliverable',
+        'image' => '/images/product/module-feature.jpg',
+        'description' => 'Break work into actionable tasks, assign owners, set priorities, and track progress across your entire organization.',
+        'highlights' => ['Priority tagging', 'Due date reminders', 'Team assignments', 'Status tracking'],
+    ],
+    [
+        'id' => 'attendance',
+        'name' => 'Attendance Module',
+        'icon' => '/images/product/Icon%20(7).png',
+        'badge' => 'Clock-in made effortless',
+        'image' => '/images/product/workspace.jpg',
+        'description' => 'Track attendance, shifts, and working hours with real-time dashboards and automated reporting for HR teams.',
+        'highlights' => ['Shift management', 'Leave balance', 'Working hours', 'Attendance reports'],
+    ],
+    [
+        'id' => 'holiday',
+        'name' => 'Holiday Module',
+        'icon' => '/images/product/Icon%20(6).png',
+        'badge' => 'Plan time off with clarity',
+        'image' => '/images/product/workspace.jpg',
+        'description' => 'Manage company holidays, team calendars, and leave policies in one centralized system everyone can trust.',
+        'highlights' => ['Holiday calendar', 'Leave policies', 'Team availability', 'Auto-approvals'],
+    ],
+    [
+        'id' => 'messenger',
+        'name' => 'Messenger Module',
+        'icon' => '/images/product/Icon%20(2).png',
+        'badge' => 'Communicate without context-switching',
+        'image' => '/images/product/module-feature.jpg',
+        'description' => 'Built-in team messaging tied to projects and tasks — no more jumping between Slack and your project tools.',
+        'highlights' => ['Project channels', 'Direct messages', 'File sharing', 'Mention alerts'],
+    ],
+    [
+        'id' => 'ai-chat',
+        'name' => 'AI Chat Module',
+        'icon' => '/images/product/Icon%20(2).png',
+        'badge' => 'Your intelligent assistant',
+        'image' => '/images/product/module-feature.jpg',
+        'description' => 'Ask questions, generate reports, summarize meetings, and get smart suggestions — all powered by AI built into every module.',
+        'highlights' => ['Report generation', 'Smart summaries', 'Data insights', 'Natural language queries'],
+    ],
+    [
+        'id' => 'comment',
+        'name' => 'Comment Module',
+        'icon' => '/images/product/Icon%20(3).png',
+        'badge' => 'Feedback where work happens',
+        'image' => '/images/product/workspace.jpg',
+        'description' => 'Threaded comments on tasks, projects, and documents keep conversations contextual and searchable.',
+        'highlights' => ['Threaded replies', '@mentions', 'Activity feed', 'Searchable history'],
+    ],
+    [
+        'id' => 'attachment',
+        'name' => 'Attachment Module',
+        'icon' => '/images/product/Icon%20(4).png',
+        'badge' => 'Files at your fingertips',
+        'image' => '/images/product/module-feature.jpg',
+        'description' => 'Upload, organize, and share files directly within projects and tasks with version control and access permissions.',
+        'highlights' => ['Version control', 'Access permissions', 'Preview support', 'Cloud storage'],
+    ],
+    [
+        'id' => 'daily-work',
+        'name' => 'Daily Work Record',
+        'icon' => '/images/product/Icon%20(5).png',
+        'badge' => 'Track daily output',
+        'image' => '/images/product/workspace.jpg',
+        'description' => 'Log daily work activities, track time spent on tasks, and generate productivity reports for managers.',
+        'highlights' => ['Daily logs', 'Time tracking', 'Productivity reports', 'Manager dashboards'],
+    ],
+    [
+        'id' => 'invoice',
+        'name' => 'Invoice Module',
+        'icon' => '/images/product/Icon%20(1).png',
+        'badge' => 'Bill clients with confidence',
+        'image' => '/images/product/module-feature.jpg',
+        'description' => 'Create, send, and track invoices linked to projects and timesheets. Get paid faster with automated reminders.',
+        'highlights' => ['Project-linked billing', 'Payment tracking', 'Auto reminders', 'PDF export'],
+    ],
 ];
 
 $pricingPlans = [
-  [
-    'name' => 'Free',
-    'description' => 'Perfect for small teams getting started',
-    'custom' => false,
-    'features' => [
-      'Up to 10 users',
-      'Project & Task Modules',
-      'Attendance & Holiday',
-      'Basic Messenger',
-      '5 GB storage',
-      'Email support',
+    [
+        'name' => 'Free',
+        'description' => 'Perfect for small teams getting started',
+        'custom' => false,
+        'features' => [
+            'Up to 10 users',
+            'Project & Task Modules',
+            'Attendance & Holiday',
+            'Basic Messenger',
+            '5 GB storage',
+            'Email support',
+        ],
+        'cta' => 'Start 3 week trial',
+        'featured' => false,
     ],
-    'cta' => 'Start 3 week trial',
-    'featured' => false,
-  ],
-  [
-    'name' => 'Enterprise',
-    'description' => 'Custom setup for large organizations',
-    'custom' => true,
-    'features' => [
-      'Unlimited users',
-      'All 12 Modules',
-      'Dedicated AI model',
-      'SSO & SAML',
-      'Unlimited storage',
-      '24/7 dedicated support',
-      'Custom integrations',
+    [
+        'name' => 'Enterprise',
+        'description' => 'Custom setup for large organizations',
+        'custom' => true,
+        'features' => [
+            'Unlimited users',
+            'All 12 Modules',
+            'Dedicated AI model',
+            'SSO & SAML',
+            'Unlimited storage',
+            '24/7 dedicated support',
+            'Custom integrations',
+        ],
+        'cta' => 'Contact Sales',
+        'featured' => false,
     ],
-    'cta' => 'Contact Sales',
-    'featured' => false,
-  ],
 ];
 
 $productivityFeatures = [
-  [
-    'icon' => '/images/product/Icon%20(3).png',
-    'title' => 'Two-way synchronization',
-    'description' => 'Integrate your task tracker with GitHub to sync changes instantly.',
-  ],
-  [
-    'icon' => '/images/product/Icon%20(4).png',
-    'title' => 'Private tasks',
-    'description' => 'Integration and management of multiple data repositories effectively.',
-  ],
-  [
-    'icon' => '/images/product/Icon%20(5).png',
-    'title' => 'Multiple repositories',
-    'description' => 'Organize multiple projects for more effective planning and collaboration.',
-  ],
-  [
-    'icon' => '/images/product/feature-icon-milestone.svg',
-    'title' => 'Milestone migration',
-    'description' => 'Seamless migration of key project milestones between repositories.',
-  ],
-  [
-    'icon' => '/images/product/Icon%20(7).png',
-    'title' => 'Track progress',
-    'description' => 'Keep track of GitHub contributions and changes within your workspace.',
-  ],
-  [
-    'icon' => '/images/product/Icon%20(8).png',
-    'title' => 'Advanced filtering',
-    'description' => 'Precise project data search with advanced filtering capabilities.',
-  ],
+    [
+        'icon' => '/images/product/Icon%20(3).png',
+        'title' => 'Two-way synchronization',
+        'description' => 'Integrate your task tracker with GitHub to sync changes instantly.',
+    ],
+    [
+        'icon' => '/images/product/Icon%20(4).png',
+        'title' => 'Private tasks',
+        'description' => 'Integration and management of multiple data repositories effectively.',
+    ],
+    [
+        'icon' => '/images/product/Icon%20(5).png',
+        'title' => 'Multiple repositories',
+        'description' => 'Organize multiple projects for more effective planning and collaboration.',
+    ],
+    [
+        'icon' => '/images/product/feature-icon-milestone.svg',
+        'title' => 'Milestone migration',
+        'description' => 'Seamless migration of key project milestones between repositories.',
+    ],
+    [
+        'icon' => '/images/product/Icon%20(7).png',
+        'title' => 'Track progress',
+        'description' => 'Keep track of GitHub contributions and changes within your workspace.',
+    ],
+    [
+        'icon' => '/images/product/Icon%20(8).png',
+        'title' => 'Advanced filtering',
+        'description' => 'Precise project data search with advanced filtering capabilities.',
+    ],
 ];
 
 $principles = [
-  [
-    'icon' => '/images/product/Icon%20(3).png',
-    'title' => 'People first',
-    'description' => 'Every decision starts with the teams who use the product daily - clarity over clutter, always.',
-  ],
-  [
-    'icon' => '/images/product/Icon%20(1).png',
-    'title' => 'Secure by design',
-    'description' => 'Each organization runs in an isolated workspace with encryption in transit and strict access controls.',
-  ],
-  [
-    'icon' => '/images/product/Icon%20(7).png',
-    'title' => 'Fast & reliable',
-    'description' => 'A modern stack tuned for speed, so your team spends time on work — not on waiting.',
-  ],
-  [
-    'icon' => '/images/product/Icon%20(2).png',
-    'title' => 'Built to evolve',
-    'description' => 'We ship continuously and design every module to grow with your organization.',
-  ],
+    [
+        'icon' => '/images/product/Icon%20(3).png',
+        'title' => 'People first',
+        'description' => 'Every decision starts with the teams who use the product daily - clarity over clutter, always.',
+    ],
+    [
+        'icon' => '/images/product/Icon%20(1).png',
+        'title' => 'Secure by design',
+        'description' => 'Each organization runs in an isolated workspace with encryption in transit and strict access controls.',
+    ],
+    [
+        'icon' => '/images/product/Icon%20(7).png',
+        'title' => 'Fast & reliable',
+        'description' => 'A modern stack tuned for speed, so your team spends time on work — not on waiting.',
+    ],
+    [
+        'icon' => '/images/product/Icon%20(2).png',
+        'title' => 'Built to evolve',
+        'description' => 'We ship continuously and design every module to grow with your organization.',
+    ],
 ];
 
 $partnerCards = [
-  [
-    'image' => '/images/product/analytics-dashboard-performance-metrics.jpg',
-    'title' => 'The company you can trust',
-    'description' => 'Suave Creator\'s is built for security, reliability, and transparency, meeting leading compliance standards.',
-    'href' => '/about-us',
-  ],
-  [
-    'image' => '/images/product/partner-support-card.jpg',
-    'title' => 'Expert support, at every stage',
-    'description' => 'Suave Creator\'s Success and Services teams give you direct access to the experts behind the product.',
-    'href' => '/contact-us',
-  ],
-  [
-    'image' => '/images/product/hero-shape.png',
-    'title' => 'The AI Agent Blueprint',
-    'description' => 'A practical guide to launching and scaling AI in customer service, built from real-world experience and best practices.',
-    'href' => '/blogs',
-  ],
+    [
+        'image' => '/images/product/analytics-dashboard-performance-metrics.jpg',
+        'title' => 'The company you can trust',
+        'description' => 'Suave Creator\'s is built for security, reliability, and transparency, meeting leading compliance standards.',
+        'href' => '/about-us',
+    ],
+    [
+        'image' => '/images/product/partner-support-card.jpg',
+        'title' => 'Expert support, at every stage',
+        'description' => 'Suave Creator\'s Success and Services teams give you direct access to the experts behind the product.',
+        'href' => '/contact-us',
+    ],
+    [
+        'image' => '/images/product/hero-shape.png',
+        'title' => 'The AI Agent Blueprint',
+        'description' => 'A practical guide to launching and scaling AI in customer service, built from real-world experience and best practices.',
+        'href' => '/blogs',
+    ],
 ];
 
 $socialLinks = [
-  ['icon' => 'fa-solid fa-link', 'href' => '/contact-us', 'label' => 'Contact', 'external' => false],
-  ['icon' => 'fa-brands fa-facebook-f', 'href' => 'https://www.facebook.com/share/1Zt4fotyAa/', 'label' => 'Facebook', 'external' => true],
-  ['icon' => 'fa-brands fa-instagram', 'href' => 'https://www.instagram.com/suavecreators/?igsh=MWRscWJoZXJrNG10cw%3D%3D#', 'label' => 'Instagram', 'external' => true],
-  ['icon' => 'fa-brands fa-linkedin-in', 'href' => 'https://www.linkedin.com/company/suave-creators/', 'label' => 'LinkedIn', 'external' => true],
+    ['icon' => 'fa-solid fa-link', 'href' => '/contact-us', 'label' => 'Contact', 'external' => false],
+    ['icon' => 'fa-brands fa-facebook-f', 'href' => 'https://www.facebook.com/share/1Zt4fotyAa/', 'label' => 'Facebook', 'external' => true],
+    ['icon' => 'fa-brands fa-instagram', 'href' => 'https://www.instagram.com/suavecreators/?igsh=MWRscWJoZXJrNG10cw%3D%3D#', 'label' => 'Instagram', 'external' => true],
+    ['icon' => 'fa-brands fa-linkedin-in', 'href' => 'https://www.linkedin.com/company/suave-creators/', 'label' => 'LinkedIn', 'external' => true],
 ];
 
 $firstModule = $modules[0];
@@ -329,15 +268,15 @@ $firstModule = $modules[0];
 
   <!-- 0. Social Rail Start -->
   <aside class="product-social" aria-label="Social links">
-    <?php foreach ($socialLinks as $link): ?>
+    <?php foreach ($socialLinks as $link) { ?>
       <a
         href="<?= $h($link['href']) ?>"
-        <?php if ($link['external']): ?>target="_blank" rel="noopener noreferrer"<?php endif; ?>
+        <?php if ($link['external']) { ?>target="_blank" rel="noopener noreferrer"<?php } ?>
         aria-label="<?= $h($link['label']) ?>"
       >
         <i class="<?= $h($link['icon']) ?>" aria-hidden="true"></i>
       </a>
-    <?php endforeach; ?>
+    <?php } ?>
   </aside>
   <!-- 0. Social Rail End -->
 
@@ -379,13 +318,13 @@ $firstModule = $modules[0];
       </div>
 
       <div class="product-stats">
-        <?php foreach ($stats as $stat): ?>
+        <?php foreach ($stats as $stat) { ?>
           <div class="product-stat">
             <img src="<?= $h($stat['icon']) ?>" alt="" class="product-stat__icon">
             <div class="product-stat__value"><?= $h($stat['value']) ?></div>
             <div class="product-stat__label"><?= $h($stat['label']) ?></div>
           </div>
-        <?php endforeach; ?>
+        <?php } ?>
       </div>
 
       <div class="product-hero__laptop">
@@ -407,7 +346,7 @@ $firstModule = $modules[0];
       </div>
 
       <div class="product-features product-features--why">
-        <?php foreach ($features as $feature): ?>
+        <?php foreach ($features as $feature) { ?>
           <div class="product-feature-card">
             <div class="product-feature-card__icon">
               <img src="<?= $h($feature['icon']) ?>" alt="">
@@ -415,7 +354,7 @@ $firstModule = $modules[0];
             <h3><?= $h($feature['title']) ?></h3>
             <p><?= $h($feature['description']) ?></p>
           </div>
-        <?php endforeach; ?>
+        <?php } ?>
       </div>
     </div>
   </section>
@@ -434,9 +373,9 @@ $firstModule = $modules[0];
           SuaveCRM brings everything into one place so your team has a single source of truth.
         </p>
         <ul class="product-bullets">
-          <?php foreach ($workspaceBullets as $item): ?>
+          <?php foreach ($workspaceBullets as $item) { ?>
             <li><?= $h($item) ?></li>
-          <?php endforeach; ?>
+          <?php } ?>
         </ul>
       </div>
       <div class="product-workspace__image">
@@ -462,7 +401,7 @@ $firstModule = $modules[0];
 
       <div class="product-modules">
         <nav class="product-modules__sidebar" aria-label="Module navigation">
-          <?php foreach ($modules as $index => $mod): ?>
+          <?php foreach ($modules as $index => $mod) { ?>
             <button
               type="button"
               class="product-modules__tab<?= $index === 0 ? ' is-active' : '' ?>"
@@ -479,7 +418,7 @@ $firstModule = $modules[0];
               </span>
               <span class="product-modules__tab-label"><?= $h($mod['name']) ?></span>
             </button>
-          <?php endforeach; ?>
+          <?php } ?>
         </nav>
 
         <div class="product-modules__panel" id="product-modules-panel">
@@ -503,12 +442,12 @@ $firstModule = $modules[0];
             </div>
             <p id="product-module-description"><?= $h($firstModule['description']) ?></p>
             <div class="product-modules__highlights" id="product-module-highlights">
-              <?php foreach ($firstModule['highlights'] as $item): ?>
+              <?php foreach ($firstModule['highlights'] as $item) { ?>
                 <div class="product-modules__highlight">
                   <span class="product-dot"></span>
                   <?= $h($item) ?>
                 </div>
-              <?php endforeach; ?>
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -529,36 +468,36 @@ $firstModule = $modules[0];
       </div>
 
       <div class="product-pricing">
-        <?php foreach ($pricingPlans as $plan): ?>
-          <div class="product-pricing-card<?= !empty($plan['featured']) ? ' is-featured' : '' ?>">
-            <?php if (!empty($plan['featured'])): ?>
+        <?php foreach ($pricingPlans as $plan) { ?>
+          <div class="product-pricing-card<?= ! empty($plan['featured']) ? ' is-featured' : '' ?>">
+            <?php if (! empty($plan['featured'])) { ?>
               <div class="product-pricing-card__badge">Most Popular</div>
-            <?php endif; ?>
+            <?php } ?>
             <h3><?= $h($plan['name']) ?></h3>
             <p class="product-pricing-card__desc"><?= $h($plan['description']) ?></p>
             <div class="product-pricing-card__price">
-              <?php if (!empty($plan['custom'])): ?>
+              <?php if (! empty($plan['custom'])) { ?>
                 <span class="product-pricing-card__amount">Custom pricing</span>
-              <?php else: ?>
+              <?php } else { ?>
                 <span class="product-pricing-card__amount">Free</span>
-              <?php endif; ?>
+              <?php } ?>
             </div>
             <ul class="product-pricing-card__features">
-              <?php foreach ($plan['features'] as $feature): ?>
+              <?php foreach ($plan['features'] as $feature) { ?>
                 <li>
                   <i class="fa-solid fa-check" aria-hidden="true"></i>
                   <?= $h($feature) ?>
                 </li>
-              <?php endforeach; ?>
+              <?php } ?>
             </ul>
             <a
               href="<?= $h($contactHref) ?>"
-              class="product-btn <?= !empty($plan['featured']) ? 'product-btn--gradient' : 'product-btn--outline' ?>"
+              class="product-btn <?= ! empty($plan['featured']) ? 'product-btn--gradient' : 'product-btn--outline' ?>"
             >
               <?= $h($plan['cta']) ?>
             </a>
           </div>
-        <?php endforeach; ?>
+        <?php } ?>
       </div>
     </div>
   </section>
@@ -601,7 +540,7 @@ $firstModule = $modules[0];
       </div>
 
       <div class="product-dark-features">
-        <?php foreach ($productivityFeatures as $feature): ?>
+        <?php foreach ($productivityFeatures as $feature) { ?>
           <div class="product-dark-feature">
             <div class="product-dark-feature__icon">
               <img src="<?= $h($feature['icon']) ?>" alt="">
@@ -609,7 +548,7 @@ $firstModule = $modules[0];
             <h3><?= $h($feature['title']) ?></h3>
             <p><?= $h($feature['description']) ?></p>
           </div>
-        <?php endforeach; ?>
+        <?php } ?>
       </div>
     </div>
   </section>
@@ -624,7 +563,7 @@ $firstModule = $modules[0];
       </div>
 
       <div class="product-principles__grid">
-        <?php foreach ($principles as $item): ?>
+        <?php foreach ($principles as $item) { ?>
           <div class="product-principles__card">
             <div class="product-principles__icon">
               <img src="<?= $h($item['icon']) ?>" alt="">
@@ -632,7 +571,7 @@ $firstModule = $modules[0];
             <h3><?= $h($item['title']) ?></h3>
             <p><?= $h($item['description']) ?></p>
           </div>
-        <?php endforeach; ?>
+        <?php } ?>
       </div>
 
       <div class="product-section__cta">
@@ -657,14 +596,14 @@ $firstModule = $modules[0];
       </div>
 
       <div class="product-partner-cards">
-        <?php foreach ($partnerCards as $card): ?>
+        <?php foreach ($partnerCards as $card) { ?>
           <div class="product-partner-card">
             <img src="<?= $h($card['image']) ?>" alt="<?= $h($card['title']) ?>">
             <h3><?= $h($card['title']) ?></h3>
             <p><?= $h($card['description']) ?></p>
             <a href="<?= $h($card['href']) ?>" class="product-partner-card__link">Learn More</a>
           </div>
-        <?php endforeach; ?>
+        <?php } ?>
       </div>
     </div>
   </section>
@@ -769,4 +708,4 @@ $firstModule = $modules[0];
 })();
 </script>
 
-<?php require __DIR__ . '/layout/end.php'; ?>
+<?php require __DIR__.'/layout/end.php'; ?>

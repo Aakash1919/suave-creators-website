@@ -3,6 +3,7 @@
 namespace App\View\Components\Frontend;
 
 use App\Support\Frontend\Concerns\NormalizesAssetPaths;
+use App\Support\Frontend\ContactSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -30,7 +31,7 @@ class ConnectCtaSection extends Component
         }
 
         if ($this->secondaryHref === '') {
-            $this->secondaryHref = route('contact-us').'#contact-id';
+            $this->secondaryHref = ContactSupport::demoHref();
         }
 
         $this->phoneImage = $this->normalizeAssetPath($this->phoneImage);

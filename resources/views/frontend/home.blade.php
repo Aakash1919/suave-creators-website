@@ -35,7 +35,7 @@
           </svg>
         </a>
 
-        <a href="{{ route('contact-us') }}#contact-id"
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
           class="inline-flex items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
           Schedule a discovery call
         </a>
@@ -505,7 +505,7 @@
       </div>
       <p class="digital-marketing-services__more">
         <span>Discuss your project</span>
-        <a href="{{ route('services') }}">Discuss your Vision</a>
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Discuss your Vision</a>
       </p>
     </div>
   </div>

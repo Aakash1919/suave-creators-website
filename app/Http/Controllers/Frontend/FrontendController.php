@@ -28,6 +28,8 @@ abstract class FrontendController extends Controller
                 'image' => $data['seoImage'] ?? null,
                 'faqs' => $data['seoFaqs'] ?? null,
                 'robots' => $data['seoRobots'] ?? null,
+                'json_ld_graph' => $data['seoJsonLdGraph'] ?? null,
+                'json_ld_webpage_about' => $data['seoJsonLdWebpageAbout'] ?? null,
             ], static fn (mixed $value): bool => $value !== null && $value !== '');
 
             $payload['seo'] = app(SeoGenerateService::class)->generate($overrides);

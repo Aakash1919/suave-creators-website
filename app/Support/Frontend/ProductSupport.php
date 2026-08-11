@@ -15,12 +15,13 @@ class ProductSupport
             'useHeroBackground' => true,
             'heroBackgroundImage' => '',
             'contactHref' => route('contact-us').'#contact-id',
-            'heroBadge' => '✨ AI - POWERED SALES CRM',
-            'heroBackground' => asset('assets/product/product-top-sections-bg.png'),
+            'demoHref' => ContactSupport::demoHref(),
+            'heroBadge' => 'AI - POWERED SALES CRM',
+            'heroBackground' => asset('assets/product/product-top-sections-bg.webp'),
             'heroFloatingStats' => self::heroFloatingStats(),
             'heroChips' => self::heroChips(),
             'heroBanner' => [
-                'src' => asset('assets/product/product-hero-banner.png'),
+                'src' => asset('assets/product/product-hero-banner.webp'),
                 'alt' => 'Suave AI sales CRM dashboard with lead capture, AI follow-up, deal won and company discovery analytics',
             ],
             'howItWorksSteps' => self::howItWorksSteps(),
@@ -41,12 +42,12 @@ class ProductSupport
         return [
             [
                 'position' => 'left',
-                'src' => asset('assets/product/tile1.png'),
+                'src' => asset('assets/product/hero-stat-website-briefing-card.png'),
                 'alt' => 'Suave AI sales CRM website briefing analysis stat card',
             ],
             [
                 'position' => 'right',
-                'src' => asset('assets/product/Tile-2.png'),
+                'src' => asset('assets/product/hero-stat-s-mail-outreach-card.png'),
                 'alt' => 'Suave CRM S-Mail cold email outreach performance stat card',
             ],
         ];
@@ -59,22 +60,22 @@ class ProductSupport
     {
         return [
             [
-                'icon' => asset('assets/product/hero-chip-ai-assistant.svg'),
+                'icon' => asset('assets/product/ai_assistant.png'),
                 'label' => 'AI Assistant',
                 'alt' => 'AI assistant icon for the Suave AI powered sales CRM',
             ],
             [
-                'icon' => asset('assets/product/hero-chip-smart-automation.svg'),
+                'icon' => asset('assets/product/smart_automation.png'),
                 'label' => 'Smart Automation',
                 'alt' => 'Smart automation icon for AI driven sales workflow software',
             ],
             [
-                'icon' => asset('assets/product/hero-chip-real-time-analysis.svg'),
+                'icon' => asset('assets/product/real_time_analysis.png'),
                 'label' => 'Real-time Analysis',
                 'alt' => 'Real-time sales analytics icon for AI CRM revenue reporting',
             ],
             [
-                'icon' => asset('assets/product/hero-chip-secure-reliable.svg'),
+                'icon' => asset('assets/product/hero-chip-secure-reliable.png'),
                 'label' => 'Secure & Reliable',
                 'alt' => 'Security and reliability icon for enterprise sales CRM software',
             ],
@@ -123,49 +124,49 @@ class ProductSupport
 
         return [
             [
-                'icon' => asset('assets/product/addon-projects-tasks-icon.svg'),
+                'icon' => asset('assets/product/project.png'),
                 'title' => 'Projects & Tasks',
                 'description' => $description,
                 'alt' => 'Projects and tasks add-on icon for Suave CRM work management',
             ],
             [
-                'icon' => asset('assets/product/addon-attendance-icon.svg'),
+                'icon' => asset('assets/product/Attendance.png'),
                 'title' => 'Attendance',
                 'description' => $description,
                 'alt' => 'Attendance tracking add-on icon for Suave CRM team management',
             ],
             [
-                'icon' => asset('assets/product/addon-timesheets-icon.svg'),
+                'icon' => asset('assets/product/Timesheet.png'),
                 'title' => 'Timesheets',
                 'description' => $description,
                 'alt' => 'Timesheets add-on icon for Suave CRM delivery time tracking',
             ],
             [
-                'icon' => asset('assets/product/addon-invoicing-icon.svg'),
+                'icon' => asset('assets/product/invoicing.png'),
                 'title' => 'Invoicing',
                 'description' => $description,
                 'alt' => 'Invoicing add-on icon for Suave CRM billing and finance',
             ],
             [
-                'icon' => asset('assets/product/addon-documents-icon.svg'),
+                'icon' => asset('assets/product/document.png'),
                 'title' => 'Documents',
                 'description' => $description,
                 'alt' => 'Documents add-on icon for Suave CRM file and knowledge management',
             ],
             [
-                'icon' => asset('assets/product/addon-messenger-icon.svg'),
+                'icon' => asset('assets/product/messenger.png'),
                 'title' => 'Messenger',
                 'description' => $description,
                 'alt' => 'Messenger add-on icon for Suave CRM team communication',
             ],
             [
-                'icon' => asset('assets/product/addon-targets-icon.svg'),
+                'icon' => asset('assets/product/target.png'),
                 'title' => 'Targets',
                 'description' => $description,
                 'alt' => 'Targets add-on icon for Suave CRM goal and KPI tracking',
             ],
             [
-                'icon' => asset('assets/product/addon-email-management-icon.svg'),
+                'icon' => asset('assets/product/email.png'),
                 'title' => 'Email Management',
                 'description' => $description,
                 'alt' => 'Email management add-on icon for Suave CRM inbox workflows',
@@ -207,23 +208,23 @@ class ProductSupport
                 'footerType' => 'integrations',
                 'integrations' => [
                     [
-                        'src' => asset('assets/product/integration-google-logo.svg'),
+                        'src' => asset('assets/product/integration-google-logo.png'),
                         'alt' => 'Google logo for Suave AI Gmail OAuth integration',
                     ],
                     [
-                        'src' => asset('assets/product/integration-google-calendar-logo.svg'),
+                        'src' => asset('assets/product/integration-google-calendar-logo.png'),
                         'alt' => 'Google Calendar logo for Suave AI workspace integration',
                     ],
                     [
-                        'src' => asset('assets/product/integration-slack-logo.svg'),
+                        'src' => asset('assets/product/integration-slack-logo.png'),
                         'alt' => 'Slack logo for Suave AI team communication integration',
                     ],
                     [
-                        'src' => asset('assets/product/integration-gmail-logo.svg'),
+                        'src' => asset('assets/product/integration-gmail-logo.png'),
                         'alt' => 'Gmail logo for Suave AI S-Mail cold outreach integration',
                     ],
                     [
-                        'src' => asset('assets/product/integration-plus-icon.svg'),
+                        'src' => asset('assets/product/Add.png'),
                         'alt' => 'More integrations available in Suave AI business operating system',
                     ],
                 ],
@@ -308,7 +309,7 @@ class ProductSupport
             'titleAccent' => 'Turbo Trans Corporation',
             'subtitle' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation',
             'logo' => [
-                'src' => asset('assets/product/turbo-trans-corporation-logo.svg'),
+                'src' => asset('assets/product/turbo-trans-corporation-logo.png'),
                 'alt' => 'Turbo Trans Corporation logistics company logo for Suave AI CRM case study',
             ],
             'tags' => [
@@ -316,29 +317,39 @@ class ProductSupport
                 ['icon' => 'fa-globe', 'label' => 'Global Operations'],
                 ['icon' => 'fa-users', 'label' => '100+ Employees'],
             ],
-            'intro' => 'Turbo Trans Corporation is a leading logistics and freight company with global operations spanning multiple continents and over 100 employees.',
+            'intro' => 'TurboTrans Corporation is a leading logistics and freight forwarding company specializing in air freight, ocean freight, land transportation, customs clearance, and end-to-end supply chain solutions. With customers across multiple industries, the company needed a smarter way to manage inquiries, sales pipelines, and customer relationships.',
             'challenge' => [
                 'title' => 'The Challenge',
+                'intro' => 'Before implementing The Suave Sales CRM, the sales team faced several operational challenges:',
                 'items' => [
-                    'Leads coming from multiple sources with no unified tracking',
-                    'Delayed follow-ups causing lost opportunities',
-                    'Manual lead qualification consuming valuable sales time',
-                    'No visibility into pipeline health and conversion rates',
+                    'Leads coming from multiple sources without a centralized system',
+                    'Delayed follow-ups causing missed opportunities',
+                    'Limited visibility into the sales pipeline',
+                    'Manual reporting and scattered customer information',
+                    'Difficulty tracking sales performance across the team',
                 ],
             ],
             'solution' => [
                 'title' => 'The Solution',
-                'intro' => 'The Suave Sales CRM transformed their sales operations with:',
+                'intro' => 'TurboTrans adopted The Suave Sales CRM to centralize its entire sales process.',
+                'itemsIntro' => 'Key implementations included:',
                 'items' => [
-                    'AI-powered lead qualification and scoring',
-                    'Automated follow-up reminders and sequences',
-                    'Unified pipeline management across all channels',
-                    'Real-time analytics and performance insights',
+                    'AI-powered lead qualification',
+                    'Automated follow-up reminders',
+                    'Visual sales pipeline',
+                    'Real-time sales dashboard',
+                    'Team collaboration',
+                    'Smart reporting & analytics',
+                    'Customer activity timeline',
                 ],
             ],
             'metrics' => self::caseStudyMetrics(),
+            'quoteMark' => [
+                'src' => asset('assets/product/case-study-quote-mark-blue.png'),
+                'alt' => 'Blue opening quotation mark icon for Suave AI CRM case study testimonial',
+            ],
             'testimonial' => [
-                'quote' => 'Suave CRM completely transformed how we manage leads and close deals. Our team now responds faster, qualifies better, and has complete visibility into every opportunity.',
+                'quote' => 'The Suave Sales CRM streamlined our entire sales process. Our team responds faster, works smarter, and closes more deals.',
                 'name' => 'Rajesh Patel',
                 'role' => 'Sales Director',
                 'company' => 'Turbo Trans Corporation',
@@ -366,32 +377,38 @@ class ProductSupport
                 'label' => 'More Qualified Leads',
                 'caption' => 'vs. Previous Quarter',
                 'tone' => 'blue',
-                'icon' => asset('assets/product/case-study-metric-qualified-leads-icon.svg'),
+                'icon' => asset('assets/product/leads.png'),
                 'alt' => 'Qualified leads growth icon for Suave AI sales CRM case study metric',
+                'chart' => asset('assets/product/graph_vector1.png'),
+                'chartVariant' => 'strip',
             ],
             [
                 'value' => '3.4x',
                 'label' => 'Faster Response Time',
                 'caption' => 'Average Lead Response',
                 'tone' => 'purple',
-                'icon' => asset('assets/product/case-study-metric-response-time-icon.svg'),
+                'icon' => asset('assets/product/follow_ups.png'),
                 'alt' => 'Faster response time icon for Suave AI CRM automation case study',
+                'chart' => asset('assets/product/graph_vector2.png'),
+                'chartVariant' => 'strip',
             ],
             [
                 'value' => '68%',
                 'label' => 'Pipeline Visibility',
                 'caption' => 'Complete Deal Tracking',
                 'tone' => 'teal',
-                'icon' => asset('assets/product/case-study-metric-pipeline-visibility-icon.svg'),
+                'icon' => asset('assets/product/Manual_work.png'),
                 'alt' => 'Pipeline visibility icon for Suave AI sales CRM deal tracking case study',
+                'chart' => asset('assets/product/graph_vector3.png'),
             ],
             [
                 'value' => '2.8x',
                 'label' => 'Revenue Growth',
                 'caption' => 'Year-over-Year Increase',
                 'tone' => 'orange',
-                'icon' => asset('assets/product/case-study-metric-revenue-growth-icon.svg'),
+                'icon' => asset('assets/product/case-study-metric-revenue-growth-icon.png'),
                 'alt' => 'Revenue growth icon for Suave AI powered sales CRM success story',
+                'chart' => asset('assets/product/graph_vector4.png'),
             ],
         ];
     }
@@ -403,9 +420,11 @@ class ProductSupport
     {
         return [
             'badge' => 'Want Similar Results?',
-            'titlePrefix' => 'Ready to Build a',
+            'titleLead' => 'Ready to ',
+            'titleBuild' => 'Build a',
             'titleAccent' => 'Smarter Sales Team?',
             'description' => 'See how The Suave Sales CRM can help your business capture more leads, automate sales workflows, and close deals faster.',
+            'background' => asset('assets/product/data-privacy-section-bg.webp'),
             'button' => 'Book Free Demo',
             'dealCard' => [
                 'title' => 'New Deal',
@@ -415,6 +434,10 @@ class ProductSupport
                 'avatar' => [
                     'src' => asset('assets/product/product-sales-cta-deal-avatar.svg'),
                     'alt' => 'New deal contact avatar for Suave AI sales CRM demo preview card',
+                ],
+                'chart' => [
+                    'src' => asset('assets/product/new-deal-graph.png'),
+                    'alt' => 'New deal revenue growth chart for Suave AI sales CRM preview card',
                 ],
             ],
             'insightCard' => [
@@ -466,7 +489,7 @@ class ProductSupport
                 'featured' => false,
                 'custom' => false,
                 'tone' => 'blue',
-                'icon' => asset('assets/product/pricing-plan-free-icon.svg'),
+                'icon' => asset('assets/product/free.png'),
                 'alt' => 'Free plan icon for Suave AI sales CRM pricing tier',
             ],
             [
@@ -487,7 +510,7 @@ class ProductSupport
                 'featured' => false,
                 'custom' => false,
                 'tone' => 'purple',
-                'icon' => asset('assets/product/pricing-plan-starter-icon.svg'),
+                'icon' => asset('assets/product/starter.png'),
                 'alt' => 'Starter plan icon for Suave AI CRM essential sales tools pricing',
             ],
             [
@@ -509,7 +532,7 @@ class ProductSupport
                 'featured' => true,
                 'custom' => false,
                 'tone' => 'teal',
-                'icon' => asset('assets/product/pricing-plan-growth-icon.svg'),
+                'icon' => asset('assets/product/growth.png'),
                 'alt' => 'Growth plan icon for Suave AI powered sales CRM automation pricing',
             ],
             [
@@ -531,9 +554,123 @@ class ProductSupport
                 'featured' => false,
                 'custom' => true,
                 'tone' => 'orange',
-                'icon' => asset('assets/product/pricing-plan-enterprise-icon.svg'),
+                'icon' => asset('assets/product/expertise.png'),
                 'alt' => 'Enterprise plan icon for Suave AI CRM custom organization pricing',
             ],
         ];
+    }
+
+    /**
+     * SEO structured-data overrides for the product page (JSON-LD graph nodes).
+     *
+     * @return array{seoJsonLdGraph: array<int, array<string, mixed>>, seoJsonLdWebpageAbout: string}
+     */
+    public static function seoStructuredData(): array
+    {
+        $pageUrl = rtrim(route('product'), '/');
+        $softwareId = $pageUrl.'/#software';
+
+        return [
+            'seoJsonLdGraph' => [self::jsonLdSoftwareApplication($pageUrl, $softwareId)],
+            'seoJsonLdWebpageAbout' => $softwareId,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected static function jsonLdSoftwareApplication(string $pageUrl, string $softwareId): array
+    {
+        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
+        $pricingUrl = $pageUrl.'/#pricing';
+        $caseStudy = self::caseStudy();
+        $testimonial = $caseStudy['testimonial'];
+        $name = (string) (config('seo.pages.product.json_ld_name') ?? 'Suave AI-Powered Outreach CRM');
+        $description = (string) (config('seo.pages.product.json_ld_description')
+            ?? config('seo.pages.product.description')
+            ?? 'Suave AI-Powered Outreach CRM');
+
+        $featureList = array_values(array_unique(array_merge(
+            array_map(static fn (array $chip): string => (string) $chip['label'], self::heroChips()),
+            array_map(static fn (array $step): string => (string) $step['title'], self::howItWorksSteps()),
+            ['S-Mail cold email outreach', 'Gmail OAuth integration', 'AI company briefing'],
+        )));
+
+        $offerNodes = [];
+        $numericPrices = [];
+
+        foreach (self::pricingPlans() as $plan) {
+            $offer = [
+                '@type' => 'Offer',
+                'name' => (string) $plan['name'],
+                'description' => (string) $plan['tagline'],
+                'url' => $pricingUrl,
+                'availability' => 'https://schema.org/InStock',
+                'seller' => [
+                    '@id' => $baseUrl.'/#organization',
+                ],
+            ];
+
+            if (! ($plan['custom'] ?? false)) {
+                $price = preg_replace('/[^0-9.]/', '', (string) $plan['price']) ?? '';
+                if ($price !== '') {
+                    $offer['price'] = $price;
+                    $offer['priceCurrency'] = 'USD';
+                    $numericPrices[] = (float) $price;
+                }
+            }
+
+            $offerNodes[] = array_filter(
+                $offer,
+                static fn (mixed $value): bool => $value !== null && $value !== ''
+            );
+        }
+
+        $offers = [
+            '@type' => 'AggregateOffer',
+            'url' => $pricingUrl,
+            'priceCurrency' => 'USD',
+            'offerCount' => count($offerNodes),
+            'offers' => $offerNodes,
+        ];
+
+        if ($numericPrices !== []) {
+            $offers['lowPrice'] = (string) min($numericPrices);
+            $offers['highPrice'] = (string) max($numericPrices);
+        }
+
+        return array_filter([
+            '@type' => 'SoftwareApplication',
+            '@id' => $softwareId,
+            'name' => $name,
+            'description' => $description,
+            'url' => $pageUrl,
+            'applicationCategory' => 'BusinessApplication',
+            'operatingSystem' => 'Web browser',
+            'image' => asset('assets/product/product-hero-banner.webp'),
+            'screenshot' => asset('assets/product/product-hero-banner.webp'),
+            'featureList' => $featureList,
+            'provider' => [
+                '@id' => $baseUrl.'/#organization',
+            ],
+            'offers' => $offers,
+            'review' => [
+                '@type' => 'Review',
+                '@id' => $pageUrl.'/#review',
+                'author' => [
+                    '@type' => 'Person',
+                    'name' => (string) $testimonial['name'],
+                    'jobTitle' => (string) $testimonial['role'],
+                    'worksFor' => [
+                        '@type' => 'Organization',
+                        'name' => (string) $testimonial['company'],
+                    ],
+                ],
+                'reviewBody' => (string) $testimonial['quote'],
+                'itemReviewed' => [
+                    '@id' => $softwareId,
+                ],
+            ],
+        ], static fn (mixed $value): bool => $value !== null && $value !== '');
     }
 }

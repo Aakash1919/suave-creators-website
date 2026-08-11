@@ -89,7 +89,6 @@ class Footer extends Component
                 ['route' => 'product', 'fragment' => 'business-works', 'label' => 'The-Suave AI'],
                 ['route' => 'product', 'fragment' => 'data-privacy', 'label' => 'Data & Privacy'],
                 ['route' => 'product', 'fragment' => 'case-study', 'label' => 'Case Study'],
-                ['route' => 'product', 'fragment' => 'pricing', 'label' => 'Pricing'],
             ],
         ];
 

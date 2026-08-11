@@ -88,7 +88,7 @@
           <path d="M2 12H22" />
         </svg>
       </a>
-      <a href="{{ route('contact-us') }}#contact-id" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">Book a Call</a>
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">Book a Call</a>
     </div>
   </div>
 </section>
@@ -126,7 +126,7 @@
             <path d="M2 12H22" />
           </svg>
         </a>
-        <a href="{{ route('contact-us') }}#contact-id" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">
           Schedule a discovery call
         </a>
       </div>

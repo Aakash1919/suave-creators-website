@@ -1,8 +1,11 @@
 <?php
 
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
+
 require __DIR__.'/../vendor/autoload.php';
 $app = require __DIR__.'/../bootstrap/app.php';
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+$kernel = $app->make(Kernel::class);
 
 $uris = [
     '/',
@@ -12,7 +15,7 @@ $uris = [
     '/service/web-development-services',
     '/industries',
     '/industries/healthcare',
-    '/product',
+    '/ai-powered-outreach-crm',
     '/blogs',
     '/blog/digital-strategy-that-creates-value',
     '/privacy-policy',
@@ -20,7 +23,7 @@ $uris = [
 ];
 
 foreach ($uris as $uri) {
-    $request = Illuminate\Http\Request::create($uri, 'GET');
+    $request = Request::create($uri, 'GET');
     try {
         $response = $kernel->handle($request);
         $status = $response->getStatusCode();

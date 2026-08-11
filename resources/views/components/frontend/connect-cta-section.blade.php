@@ -20,6 +20,7 @@
       </x-frontend.cta-button>
       @if ($secondaryLabel !== '')
         <a href="{{ $secondaryHref }}"
+          @if (str_starts_with($secondaryHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
           class="inline-flex shrink-0 cursor-pointer items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
           {{ $secondaryLabel }}
         </a>
