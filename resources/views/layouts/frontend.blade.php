@@ -128,6 +128,7 @@
     </div>
 
     <x-layouts.footer />
+    <x-layouts.analytics-events />
     {{-- Swiper is below-fold on marketing pages; defer so it is not render-blocking. Inits wait on DOMContentLoaded. --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     @stack('scripts')

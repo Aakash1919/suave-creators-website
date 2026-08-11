@@ -601,6 +601,14 @@
                             return;
                         }
 
+                        const selectedService = field('service')?.value || '';
+                        if (typeof window.suaveTrackEvent === 'function') {
+                            window.suaveTrackEvent('generate_lead', {
+                                lead_type: 'contact_form',
+                                service: selectedService,
+                                form_name: 'contact_us',
+                            });
+                        }
                         resetForm();
                         showSuccess(data.message || 'The request has been sent successfully.');
                     })

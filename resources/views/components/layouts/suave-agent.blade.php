@@ -288,6 +288,12 @@
               session_token: data.session_token,
               conversation_id: data.conversation_id
             };
+            if (typeof window.suaveTrackEvent === 'function') {
+              window.suaveTrackEvent('chat_lead', {
+                lead_type: 'suave_agent',
+                form_name: 'suave_agent_start'
+              });
+            }
             saveSession();
             showChat();
             messagesEl.innerHTML = '';
