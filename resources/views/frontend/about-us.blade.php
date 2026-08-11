@@ -294,7 +294,7 @@
 
     <div class="mt-10 flex flex-wrap items-center justify-start gap-2 sm:justify-end sm:gap-3">
       <span class="text-[13px] font-medium text-white/90 lg:text-[14px]">Let&rsquo;s Connect to Discuss</span>
-      <a href="{{ route('contact-us') }}#contact-id"
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
         class="text-[13px] font-semibold text-[#8B95FF] underline underline-offset-4 transition hover:text-white lg:text-[14px]">
         Book a Call
       </a>

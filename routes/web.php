@@ -33,7 +33,7 @@ Route::redirect('industry', 'industries');
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
-// Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
+Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');

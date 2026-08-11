@@ -3,6 +3,7 @@
 namespace App\View\Components\Frontend;
 
 use App\Support\Frontend\Concerns\NormalizesAssetPaths;
+use App\Support\Frontend\ContactSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -33,7 +34,7 @@ class FaqSection extends Component
         $this->media = filled($this->media) ? $this->normalizeAssetPath($this->media) : null;
 
         if ($this->ctaHref === '') {
-            $this->ctaHref = route('contact-us').'#contact-id';
+            $this->ctaHref = $this->resolveDefaultCtaHref();
         }
 
         $this->resolvedMediaType = $this->mediaType
@@ -46,6 +47,15 @@ class FaqSection extends Component
                 'number' => $index + 1,
             ];
         }, $this->qa, array_keys($this->qa)));
+    }
+
+    protected function resolveDefaultCtaHref(): string
+    {
+        if (ContactSupport::isBookingCtaLabel($this->ctaLabel)) {
+            return ContactSupport::demoHref();
+        }
+
+        return route('contact-us').'#contact-id';
     }
 
     protected function detectMediaType(?string $media): string

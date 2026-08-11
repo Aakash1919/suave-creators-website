@@ -5,6 +5,9 @@ namespace App\Providers;
 use App\Models\User;
 use App\Observers\UserObserver;
 use App\Services\SeoGenerateService;
+use App\Support\Frontend\ContactSupport;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
 
-        \Illuminate\Pagination\Paginator::useTailwind();
+        View::composer(['frontend.*', 'components.frontend.*'], function ($view): void {
+            $view->with('demoHref', ContactSupport::demoHref());
+        });
+
+        Paginator::useTailwind();
     }
 }

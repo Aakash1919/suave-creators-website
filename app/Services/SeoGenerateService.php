@@ -18,7 +18,7 @@ class SeoGenerateService
     {
         $this->overrides = array_merge($this->overrides, array_filter(
             $data,
-            static fn(mixed $value): bool => $value !== null && $value !== ''
+            static fn (mixed $value): bool => $value !== null && $value !== ''
         ));
 
         return $this;
@@ -56,15 +56,19 @@ class SeoGenerateService
                 'og_title' => $page['og_title'] ?? null,
                 'og_description' => $page['og_description'] ?? null,
                 'image' => $page['og_image'] ?? null,
+                'og_image_width' => $page['og_image_width'] ?? null,
+                'og_image_height' => $page['og_image_height'] ?? null,
+                'og_image_alt' => $page['og_image_alt'] ?? null,
                 'robots' => $page['robots'] ?? null,
                 'json_ld_name' => $page['json_ld_name'] ?? null,
                 'json_ld_description' => $page['json_ld_description'] ?? null,
+                'json_ld_breadcrumb_name' => $page['json_ld_breadcrumb_name'] ?? null,
                 'faqs' => $page['faqs'] ?? null,
-            ], static fn(mixed $value): bool => $value !== null && $value !== ''),
+            ], static fn (mixed $value): bool => $value !== null && $value !== ''),
             $this->overrides,
             array_filter(
                 $overrides ?? [],
-                static fn(mixed $value): bool => $value !== null && $value !== ''
+                static fn (mixed $value): bool => $value !== null && $value !== ''
             )
         );
 
@@ -119,7 +123,10 @@ class SeoGenerateService
                 $canonical,
                 $imageUrl,
                 is_array($faqs) ? $faqs : null,
-                is_string($routeName) ? $routeName : null
+                is_string($routeName) ? $routeName : null,
+                is_array($merged['json_ld_graph'] ?? null) ? $merged['json_ld_graph'] : null,
+                is_string($merged['json_ld_webpage_about'] ?? null) ? $merged['json_ld_webpage_about'] : null,
+                is_string($merged['json_ld_breadcrumb_name'] ?? null) ? $merged['json_ld_breadcrumb_name'] : null,
             ),
         ];
     }
@@ -127,6 +134,7 @@ class SeoGenerateService
     /**
      * @param  array<string, mixed>  $site
      * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>|null  $faqs
+     * @param  array<int, array<string, mixed>>|null  $extraGraph
      * @return array<string, mixed>
      */
     protected function buildJsonLd(
@@ -136,7 +144,10 @@ class SeoGenerateService
         string $canonical,
         ?string $imageUrl,
         ?array $faqs,
-        ?string $routeName
+        ?string $routeName,
+        ?array $extraGraph = null,
+        ?string $webPageAboutId = null,
+        ?string $breadcrumbName = null,
     ): array {
         $org = (array) ($site['organization'] ?? []);
         $baseUrl = rtrim((string) config('app.url', url('/')), '/');
@@ -144,17 +155,17 @@ class SeoGenerateService
         $email = strtolower((string) ($org['email'] ?? ''));
         $telephone = (string) ($org['telephone_schema'] ?? $org['telephone'] ?? '');
         $pageUrl = rtrim($canonical, '/');
-        $webPageId = $routeName === 'home' ? $baseUrl . '/#homepage' : $pageUrl . '/#webpage';
-        $breadcrumbId = $routeName === 'home' ? $baseUrl . '/#breadcrumb' : $pageUrl . '/#breadcrumb';
+        $webPageId = $routeName === 'home' ? $baseUrl.'/#homepage' : $pageUrl.'/#webpage';
+        $breadcrumbId = $routeName === 'home' ? $baseUrl.'/#breadcrumb' : $pageUrl.'/#breadcrumb';
 
         $organization = [
             '@type' => 'Organization',
-            '@id' => $baseUrl . '/#organization',
+            '@id' => $baseUrl.'/#organization',
             'name' => (string) ($org['legal_name'] ?? $site['name'] ?? 'Suave Creators'),
-            'url' => $baseUrl . '/',
+            'url' => $baseUrl.'/',
             'logo' => $logoUrl,
             'image' => $imageUrl,
-            'email' => $email !== '' ? 'mailto:' . $email : null,
+            'email' => $email !== '' ? 'mailto:'.$email : null,
             'telephone' => $telephone !== '' ? $telephone : null,
             'contactPoint' => [
                 '@type' => 'ContactPoint',
@@ -171,23 +182,23 @@ class SeoGenerateService
 
         $organization['contactPoint'] = array_filter(
             $organization['contactPoint'],
-            static fn(mixed $value): bool => $value !== null && $value !== ''
+            static fn (mixed $value): bool => $value !== null && $value !== ''
         );
 
         $graph = [
-            array_filter($organization, static fn(mixed $value): bool => $value !== null),
+            array_filter($organization, static fn (mixed $value): bool => $value !== null),
             [
                 '@type' => 'WebSite',
-                '@id' => $baseUrl . '/#website',
-                'url' => $baseUrl . '/',
+                '@id' => $baseUrl.'/#website',
+                'url' => $baseUrl.'/',
                 'name' => (string) ($site['name'] ?? 'Suave Creators'),
                 'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'publisher' => [
-                    '@id' => $baseUrl . '/#organization',
+                    '@id' => $baseUrl.'/#organization',
                 ],
                 'potentialAction' => [
                     '@type' => 'SearchAction',
-                    'target' => $baseUrl . '/?q={search_term}',
+                    'target' => $baseUrl.'/?q={search_term}',
                     'query-input' => 'required name=search_term',
                 ],
             ],
@@ -199,7 +210,7 @@ class SeoGenerateService
                 'description' => $description,
                 'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'isPartOf' => [
-                    '@id' => $baseUrl . '/#website',
+                    '@id' => $baseUrl.'/#website',
                 ],
                 'breadcrumb' => [
                     '@id' => $breadcrumbId,
@@ -208,12 +219,12 @@ class SeoGenerateService
             [
                 '@type' => 'BreadcrumbList',
                 '@id' => $breadcrumbId,
-                'itemListElement' => $this->breadcrumbItems($canonical, $title, $baseUrl, $routeName),
+                'itemListElement' => $this->breadcrumbItems($canonical, $breadcrumbName ?? $title, $baseUrl, $routeName),
             ],
         ];
 
         if (is_array($faqs) && $faqs !== []) {
-            $faqPageUrl = ($routeName === 'home' ? $baseUrl . '/' : $canonical) . '#faq';
+            $faqPageUrl = ($routeName === 'home' ? $baseUrl.'/' : $canonical).'#faq';
 
             $graph[] = [
                 '@type' => 'FAQPage',
@@ -221,7 +232,7 @@ class SeoGenerateService
                 'mainEntity' => array_values(array_map(static function (array $faq, int $index) use ($faqPageUrl): array {
                     $question = (string) ($faq['question'] ?? $faq['name'] ?? '');
                     $answer = (string) ($faq['answer'] ?? $faq['text'] ?? '');
-                    $answerUrl = $faqPageUrl . '-' . ($index + 1);
+                    $answerUrl = $faqPageUrl.'-'.($index + 1);
 
                     return [
                         '@type' => 'Question',
@@ -235,6 +246,22 @@ class SeoGenerateService
                     ];
                 }, $faqs, array_keys($faqs))),
             ];
+        }
+
+        if ($webPageAboutId !== null && $webPageAboutId !== '') {
+            foreach ($graph as $index => $node) {
+                if (($node['@type'] ?? '') === 'WebPage') {
+                    $graph[$index]['about'] = ['@id' => $webPageAboutId];
+                    $graph[$index]['mainEntity'] = ['@id' => $webPageAboutId];
+                    break;
+                }
+            }
+        }
+
+        if (is_array($extraGraph) && $extraGraph !== []) {
+            foreach ($extraGraph as $node) {
+                $graph[] = $node;
+            }
         }
 
         return [
@@ -297,7 +324,7 @@ class SeoGenerateService
      * @param  array<string, mixed>  $org
      * @return array<int, array<string, mixed>>|array<string, mixed>|null
      */
-    protected function postalAddresses(array $org): array|null
+    protected function postalAddresses(array $org): ?array
     {
         $addresses = [];
 

@@ -1,0 +1,7 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 5C4 3.89543 4.89543 3 6 3H8.2L9.5 4.5H14C15.1046 4.5 16 5.39543 16 6.5V15C16 16.1046 15.1046 17 14 17H6C4.89543 17 4 16.1046 4 15V5Z" fill="url(#managePipe)"/>
+<path d="M7 9H13M7 12H11" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+<defs>
+<linearGradient id="managePipe" x1="4" y1="3" x2="16" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#C56BFF"/><stop offset="1" stop-color="#7A5FF8"/></linearGradient>
+</defs>
+</svg>

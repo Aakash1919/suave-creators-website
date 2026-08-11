@@ -27,11 +27,14 @@
         businesses of all sizes.
       </p>
       <div class="mt-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
-        <x-frontend.cta-button>
+        <x-frontend.cta-button :href="$demoHref">
           Let&rsquo;s Discuss About Vision
         </x-frontend.cta-button>
         <a href="#core-services" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#111827]/70 text-sm font-semibold text-[#111827]">
           Explore Our Services
+        </a>
+        <a href="{{ route('product') }}" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#111827]/70 text-sm font-semibold text-[#111827]">
+          Explore Suave Outreach CRM
         </a>
       </div>
     </div>
@@ -152,6 +155,7 @@
 
     <div class="web-services__footer">
       <a href="{{ route('contact-us') }}#contact-id">Discuss your Requirements</a>
+      <a href="{{ route('product') }}">Explore Suave Outreach CRM</a>
     </div>
   </div>
 </section>

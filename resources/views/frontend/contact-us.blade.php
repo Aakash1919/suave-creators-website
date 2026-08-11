@@ -290,8 +290,15 @@
                                                 <span class="contact-reach__flag" aria-hidden="true">
                                                     @php
                                                         $flagUrl = "assets/flags/{$office['flag']}.svg";
+                                                        $flagAlt = match ($office['flag']) {
+                                                            'in' => 'India flag for Suave Creators Palampur Himachal Pradesh office',
+                                                            default => 'United States flag for Suave Creators Sheridan Wyoming office',
+                                                        };
                                                     @endphp
-                                                    <img src="{{ asset($flagUrl) }}" /> </span>
+                                                    <img src="{{ asset($flagUrl) }}" alt="{{ $flagAlt }}"
+                                                        title="{{ $flagAlt }}" width="20" height="20"
+                                                        decoding="async" />
+                                                </span>
                                                 <span class="contact-reach__office-lines">
                                                     @foreach ($office['lines'] as $line)
                                                         <span
@@ -308,13 +315,19 @@
                                                 @php
                                                     $hasFlag = isset($link['flag']);
                                                     if ($hasFlag) {
-                                                        $flagUrl = "assets/flags/{$link['flag']}.svg";
+                                                        $flagUrl = asset("assets/flags/{$link['flag']}.svg");
+                                                        $flagAlt = match ($link['flag']) {
+                                                            'in' => 'India flag for Suave Creators India phone contact number',
+                                                            default => 'United States flag for Suave Creators USA phone contact number',
+                                                        };
                                                     }
                                                 @endphp
                                                 <div
                                                     class='flex gap-4  @if ($hasFlag)country-contact-number country-{{ $link['flag'] }} @endif @if ($hasFlag && $link['flag'] != 'us') hidden @endif'>
                                                     @if ($hasFlag)
-                                                        <img src='{{ $flagUrl }}' style='width:20px' />
+                                                        <img src="{{ $flagUrl }}" alt="{{ $flagAlt }}"
+                                                            title="{{ $flagAlt }}" width="20" height="20"
+                                                            decoding="async" />
                                                     @endif
                                                     <a href="{{ $link['href'] }}" class="contact-reach__link">
                                                         {{ $link['text'] }}

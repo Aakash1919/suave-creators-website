@@ -3,6 +3,7 @@
 namespace App\View\Components\Frontend;
 
 use App\Support\Frontend\Concerns\NormalizesAssetPaths;
+use App\Support\Frontend\ContactSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -27,7 +28,7 @@ class FourCardSection extends Component
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
 
         if ($this->ctaHref === '') {
-            $this->ctaHref = route('contact-us').'#contact-id';
+            $this->ctaHref = ContactSupport::demoHref();
         }
 
         if ($this->items === []) {

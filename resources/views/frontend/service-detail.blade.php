@@ -26,7 +26,7 @@
           <x-frontend.cta-button class="shrink-0 whitespace-nowrap px-4 py-2 text-[13px] sm:px-5 sm:text-sm">
             {{ $service['primaryCta'] ?? "Let's Connect to Discuss" }}
           </x-frontend.cta-button>
-          <a href="{{ route('contact-us') }}#contact-id" class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-[13px] font-semibold whitespace-nowrap text-white sm:text-sm">{{ $service['secondaryCta'] ?? 'Book a Call' }}</a>
+          <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-[13px] font-semibold whitespace-nowrap text-white sm:text-sm">{{ $service['secondaryCta'] ?? 'Book a Call' }}</a>
         </div>
       </div>
       <div class="relative z-10 hidden w-full min-w-0 items-center justify-center lg:flex lg:justify-end">
@@ -73,6 +73,13 @@
           <x-frontend.cta-button :href="$service['introLinkUrl'] ?? route('services')">
             {{ $service['introLinkText'] ?? 'Explore Services' }}
           </x-frontend.cta-button>
+          @if (($service['slug'] ?? '') === 'custom-crm-development')
+            <p class="mt-4">
+              <a href="{{ route('product') }}" class="inline-flex items-end border-b border-[#2A4DFB]/70 pb-0.5 text-sm font-semibold text-[#2A4DFB]">
+                Explore our live Suave Outreach CRM
+              </a>
+            </p>
+          @endif
         </div>
       </div>
       <div class="grid grid-cols-1 gap-3.5 min-[480px]:grid-cols-2">
@@ -265,7 +272,7 @@
       <x-frontend.cta-button>
         Start your Project
       </x-frontend.cta-button>
-      <a href="{{ route('contact-us') }}#contact-id" class="border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book a Call</a>
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book a Call</a>
     </div>
   </div>
 </section>
@@ -394,7 +401,7 @@ $n = $index + 1;
       @endforeach
     </div>
     <div class="mt-10 flex justify-center">
-      <x-frontend.cta-button>
+      <x-frontend.cta-button :href="$demoHref">
         {{ $service['whyButtonText'] ?? "Let's Discuss Your Vision" }}
       </x-frontend.cta-button>
     </div>

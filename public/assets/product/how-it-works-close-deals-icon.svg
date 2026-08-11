@@ -1,0 +1,7 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="10" cy="10" r="7" stroke="url(#closeDeals)" stroke-width="2"/>
+<circle cx="10" cy="10" r="3" fill="url(#closeDeals)"/>
+<defs>
+<linearGradient id="closeDeals" x1="3" y1="3" x2="17" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#2A4DFB"/></linearGradient>
+</defs>
+</svg>

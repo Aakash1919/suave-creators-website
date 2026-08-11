@@ -9,6 +9,9 @@ class ProductController extends FrontendController
 {
     public function index(): View
     {
-        return $this->view('frontend.product', ProductSupport::data());
+        return $this->view('frontend.product', array_merge(
+            ProductSupport::data(),
+            ProductSupport::seoStructuredData(),
+        ));
     }
 }
