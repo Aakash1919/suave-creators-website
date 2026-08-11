@@ -76,7 +76,7 @@ class SeoGenerateService
         $description = (string) $merged['description'];
         $ogTitle = (string) ($merged['og_title'] ?? $title);
         $ogDescription = (string) ($merged['og_description'] ?? $description);
-        $canonical = (string) ($merged['canonical'] ?? url()->current());
+        $canonical = $this->canonicalUrl($merged['canonical'] ?? null);
         $imageUrl = $this->resolveAssetUrl($merged['image'] ?? null);
         $siteName = (string) ($site['name'] ?? 'Suave Creators');
 
@@ -318,6 +318,22 @@ class SeoGenerateService
         }
 
         return asset(ltrim($path, '/'));
+    }
+
+    protected function canonicalUrl(mixed $url): string
+    {
+        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
+        $currentUrl = is_string($url) && $url !== '' ? $url : url()->current();
+
+        if (! str_starts_with($currentUrl, 'http://') && ! str_starts_with($currentUrl, 'https://')) {
+            $currentUrl = '/'.ltrim($currentUrl, '/');
+        }
+
+        $path = (string) (parse_url($currentUrl, PHP_URL_PATH) ?: '/');
+        $query = (string) (parse_url($currentUrl, PHP_URL_QUERY) ?: '');
+        $path = '/'.ltrim($path, '/');
+
+        return $baseUrl.$path.($query !== '' ? '?'.$query : '');
     }
 
     /**
