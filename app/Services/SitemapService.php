@@ -201,8 +201,8 @@ class SitemapService
         $lines[] = '';
         $lines[] = '## Machine-readable sitemap';
         $lines[] = '';
-        $lines[] = '- XML sitemap: '.url('/sitemap.xml');
-        $lines[] = '- This file: '.url('/llm.txt');
+        $lines[] = '- XML sitemap: '.$this->siteUrl('/sitemap.xml');
+        $lines[] = '- This file: '.$this->siteUrl('/llm.txt');
         $lines[] = '';
 
         return implode("\n", $lines);
@@ -224,8 +224,8 @@ class SitemapService
             'Disallow: /admin',
             'Disallow: /suave-agent',
             '',
-            'Sitemap: '.url('/sitemap.xml'),
-            '# LLM discovery: '.url('/llm.txt'),
+            'Sitemap: '.$this->siteUrl('/sitemap.xml'),
+            '# LLM discovery: '.$this->siteUrl('/llm.txt'),
             '',
         ]);
     }
@@ -272,6 +272,11 @@ class SitemapService
     protected function xml(string $value): string
     {
         return htmlspecialchars($value, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+    }
+
+    protected function siteUrl(string $path = '/'): string
+    {
+        return rtrim((string) config('app.url', url('/')), '/').'/'.ltrim($path, '/');
     }
 
     /**
