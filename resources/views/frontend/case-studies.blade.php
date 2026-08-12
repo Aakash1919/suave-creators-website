@@ -26,7 +26,9 @@
               $itemHref = route('case-study.show', ['slug' => $item['slug']]);
               $tags = array_slice($item['technologies'] ?? [], 0, 5);
               $tagLine = implode(' | ', $tags);
-              $subtitle = $item['listing_subtitle'] ?? ($item['industry'] ?? '');
+              $subtitle = trim((string) ($item['listing_subtitle'] ?? '')) !== ''
+                ? $item['listing_subtitle']
+                : ($item['industry'] ?? '');
               $stats = array_slice($item['results'] ?? [], 0, 3);
             @endphp
             <article class="case-studies-grid__item">

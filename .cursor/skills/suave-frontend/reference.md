@@ -177,6 +177,8 @@ Namespace: `App\Http\Controllers\Frontend\`. Names are **singular**.
 | Industries hub | `IndustryController@index` | `industries` |
 | Industry details (×6) | `IndustryController@show($slug)` | `industry.show` |
 | Product | `ProductController@index` | `product` |
+| Case study listing | `CaseStudyController@index` | `case-studies` |
+| Case study details | `CaseStudyController@show` | `case-study.show` |
 | Blog listing | `BlogController@index` | `blogs` |
 | Blog posts | `BlogController@show` | `blog.show` |
 
