@@ -22,6 +22,7 @@ class AnalyticsTrackingTest extends TestCase
         $response = $this->get('/contact-us');
 
         $response->assertOk();
+        $response->assertSee('https://cdn.tailwindcss.com', false);
         $response->assertDontSee('/build/assets/app-', false);
         $response->assertDontSee('@vite', false);
     }
