@@ -21,7 +21,8 @@ class ConnectCtaSection extends Component
         public string $primaryHref = '',
         public string $secondaryLabel = 'Discuss your Vision',
         public string $secondaryHref = '',
-        public string $phoneImage = 'assets/hero/mobile-app-phone-demo.gif',
+        public string $phoneVideo = 'assets/hero/mobile-app-phone-demo.mp4',
+        public string $phonePoster = 'assets/hero/mobile-app-phone-demo-poster.webp',
         public string $phoneAlt = 'Mobile app demo for a custom CRM and software product',
         public bool $showPhone = true,
         public string $sectionClass = 'full-bleed smart-together-cta py-6',
@@ -34,7 +35,8 @@ class ConnectCtaSection extends Component
             $this->secondaryHref = ContactSupport::demoHref();
         }
 
-        $this->phoneImage = $this->normalizeAssetPath($this->phoneImage);
+        $this->phoneVideo = $this->normalizeAssetPath($this->phoneVideo);
+        $this->phonePoster = $this->normalizeAssetPath($this->phonePoster);
     }
 
     public function render(): View|Closure|string

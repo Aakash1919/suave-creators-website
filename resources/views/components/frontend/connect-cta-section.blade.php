@@ -29,8 +29,28 @@
 
     @if ($showPhone)
       <span class="smart-together-cta__phone" aria-hidden="true">
-        <img src="{{ asset($phoneImage) }}" alt="{{ $phoneAlt }}" title="{{ $phoneAlt }}" class="rounded-[10px]"
-          decoding="async" loading="lazy">
+        <video
+          class="smart-together-cta__phone-video rounded-[10px]"
+          width="140"
+          height="140"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="{{ asset($phonePoster) }}"
+          aria-label="{{ $phoneAlt }}">
+          <source src="{{ asset($phoneVideo) }}" type="video/mp4">
+        </video>
+        <img
+          class="smart-together-cta__phone-poster rounded-[10px]"
+          src="{{ asset($phonePoster) }}"
+          alt="{{ $phoneAlt }}"
+          title="{{ $phoneAlt }}"
+          width="140"
+          height="140"
+          decoding="async"
+          loading="lazy">
       </span>
     @endif
   </div>

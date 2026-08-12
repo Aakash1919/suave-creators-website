@@ -48,7 +48,33 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    {{-- Core site CSS (shared layout + homepage sections). --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
+
+    @php
+        $deferredCssHref = asset('css/style-deferred.css').'?v='.filemtime(public_path('css/style-deferred.css'));
+        $loadDeferredCssSync = request()->routeIs(
+            'about-us',
+            'product',
+            'blogs',
+            'blogs.category',
+            'blog.show',
+            'contact-us',
+            'privacy-policy',
+            'terms-and-conditions',
+            'services',
+            'service.show',
+            'industries',
+            'industry.show',
+        );
+    @endphp
+
+    @if ($loadDeferredCssSync)
+        <link rel="stylesheet" href="{{ $deferredCssHref }}">
+    @else
+        {{-- Page-specific CSS deferred on the homepage to reduce unused CSS bytes. --}}
+        <link rel="preload" as="style" href="{{ $deferredCssHref }}" onload="this.onload=null;this.rel='stylesheet'">
+    @endif
 
     @vite('resources/css/app.css')
 {{-- 
@@ -67,12 +93,22 @@
 
     {{-- Non-critical CSS: preload so it does not block first paint / LCP. --}}
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    {{-- Font Awesome: core + used weights only (skip all.min.css icon catalog). --}}
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/regular.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/regular.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+        @unless ($loadDeferredCssSync)
+            <link rel="stylesheet" href="{{ $deferredCssHref }}">
+        @endunless
     </noscript>
 
     @stack('custom-css')
