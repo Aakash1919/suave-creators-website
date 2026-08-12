@@ -1155,13 +1155,14 @@
 
   function reindexRepeater(root) {
     const name = root.getAttribute('data-name') || 'items';
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const rows = root.querySelectorAll('[data-repeater-row]');
     rows.forEach(function (row, index) {
       row.querySelectorAll('[name]').forEach(function (field) {
         const current = field.getAttribute('name') || '';
         field.setAttribute(
           'name',
-          current.replace(new RegExp('^' + name + '\\[\\d+\\]'), name + '[' + index + ']')
+          current.replace(new RegExp('^' + escaped + '\\[\\d+\\]'), name + '[' + index + ']')
             .replace(name + '[__INDEX__]', name + '[' + index + ']')
         );
       });

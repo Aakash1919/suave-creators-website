@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\CaseStudyController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\IndustryController;
@@ -34,6 +35,9 @@ Route::get('/industries', [IndustryController::class, 'index'])->name('industrie
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
 Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
+
+Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');
+Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');

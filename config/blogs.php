@@ -8,8 +8,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | Scheduled artisan command blogs:generate-trend-drafts writes draft posts
-    | from current industry trends (Tuesday + Friday by default). Requires a
-    | configured AI provider (OPENAI_API_KEY / AI_DEFAULT_*).
+    | from customer-acquisition content angles and current industry trends
+    | (Tuesday + Friday by default). Requires a configured AI provider
+    | (OPENAI_API_KEY / AI_DEFAULT_*).
     |
     */
 

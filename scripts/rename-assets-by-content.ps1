@@ -110,7 +110,7 @@ $explicit = [ordered]@{
     'hero/hero_gif2.gif' = 'hero/hero-motion-panel-2.gif'
     'hero/hero_gif3.gif' = 'hero/hero-motion-panel-3.gif'
     'hero/hero_Pattern(left).svg' = 'hero/hero-pattern-left.svg'
-    'hero/phone.gif' = 'media/mobile-app-phone-demo.gif'
+    'hero/phone.gif' = 'hero/mobile-app-phone-demo.mp4'
 
     # Backgrounds
     'background/background_about.png' = 'background/about-section-bg.png'

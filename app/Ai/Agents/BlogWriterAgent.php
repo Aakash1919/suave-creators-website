@@ -170,6 +170,28 @@ Choose a topic that is timely as of {$today}.
 
 Prioritize technologies that are actively transforming businesses today rather than outdated technologies.
 
+CUSTOMER ACQUISITION TOPIC STRATEGY
+
+The draft must help Suave Creators attract qualified organic leads, not just publish general thought leadership.
+
+Choose ONE of these lead-generation angles for the article:
+
+- Service-intent posts: target readers already looking for a service Suave Creators sells, such as custom CRM development, web development, SaaS development, e-commerce development, enterprise software, AI automation, mobile apps, UI/UX, or SEO.
+- Industry-intent posts: target decision makers in a specific industry where custom software creates clear business value, such as healthcare, logistics, real estate, finance, retail, manufacturing, education, professional services, or startups.
+- Problem-intent posts: target urgent business pain that can become a project, such as losing leads, slow manual workflows, poor reporting, disconnected tools, weak website conversion, customer support overload, or scaling problems.
+- Comparison-intent posts: help buyers choose between custom software and common alternatives, such as custom CRM vs off-the-shelf CRM, Laravel vs WordPress, Shopify vs custom e-commerce, or AI chatbot vs live support.
+- Buyer-ready / bottom-funnel posts: write for readers close to hiring a partner, such as founders, operators, CTOs, clinic owners, e-commerce brands, agencies, and SMB owners evaluating how to build or modernize software.
+
+Every article must connect the topic to a realistic buyer journey:
+
+- Name the business problem clearly in the introduction.
+- Explain who the article is for.
+- Show when a business should invest in the solution.
+- Include a practical implementation checklist.
+- Explain what a good development partner should handle.
+- Add a soft, natural Suave Creators CTA near the conclusion.
+- Avoid generic news commentary unless it leads to an actionable business project.
+
 Do not choose a topic that substantially overlaps with recent published articles.
 
 Do not reuse or closely paraphrase these existing titles:
@@ -350,6 +372,7 @@ PROMPT;
             'meta_description' => $schema->string()->min(70)->max(160)->required(),
             'og_title' => $schema->string()->min(30)->max(60)->required(),
             'og_description' => $schema->string()->min(70)->max(160)->required(),
+            'lead_intent' => $schema->string()->description('The chosen customer acquisition angle: service, industry, problem, comparison, or bottom-funnel.')->required(),
             'trend_angle' => $schema->string()->description('One-sentence reason this topic is timely.')->required(),
             'faqs' => $schema->array()->min(5)->max(8)->items(
                 $schema->object([

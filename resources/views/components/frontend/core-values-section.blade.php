@@ -33,8 +33,12 @@
           </div>
           @if ($item['image'] !== '')
             <div class="core-value-card__image">
-              <img src="{{ asset($item['image']) }}" alt="{{ $item['alt'] }}" title="{{ $item['alt'] }}"
-                loading="lazy" decoding="async">
+              <x-frontend.responsive-webp-image
+                :src="$item['image']"
+                :alt="$item['alt']"
+                sizes="(min-width: 1024px) 366px, (min-width: 768px) 292px, 298px"
+                loading="lazy"
+                decoding="async" />
             </div>
           @endif
         </article>

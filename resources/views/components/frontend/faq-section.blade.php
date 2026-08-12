@@ -42,14 +42,13 @@
             aria-label="{{ $mediaAlt }}">
           </video>
         @else
-          <img
+          <x-frontend.responsive-webp-image
             class="faq-section__image"
-            src="{{ asset($media) }}"
-            alt="{{ $mediaAlt }}" title="{{ $mediaAlt }}"
-            width="418"
-            height="244"
+            :src="$media"
+            :alt="$mediaAlt"
+            sizes="(min-width: 768px) 418px, 90vw"
             loading="lazy"
-            decoding="async">
+            decoding="async" />
         @endif
       @endif
     </div>
