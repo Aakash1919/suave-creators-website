@@ -60,6 +60,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - **Services exception:** one `ServiceController` — `index` for `/services`, `show(string $slug)` for all `/service/{slug}` details (no per-service controllers; abort 404 for unknown slugs)
 - **Industries exception:** one `IndustryController` — `index` for `/industries`, `show(string $slug)` for all `/industries/{slug}` details (no per-industry controllers; abort 404 for unknown slugs)
 - **Blogs:** one `BlogController` — `index` for `/blogs`, `show(string $slug)` for `/blog/{slug}` (abort 404 for unknown slugs; shared single-blog Blade)
+- **Case studies:** one `CaseStudyController` — `index` for `/case-studies`, `show(string $slug)` for `/case-studies/{slug}` (abort 404 for unknown slugs; shared single-case-study Blade). Rows come from `case_studies` via `CaseStudySupport`. **Manual admin content only** — never auto-generated
 - **Contact:** `ContactController` — `index` for `/contact-us`, `store` for `POST /contact-us` (`contact-us.store`, throttled) via `ContactRequestService`
 - **SEO discovery:** `SitemapController` + `App\Services\SitemapService` — `/sitemap.xml`, `/llm.txt` (+ `/llms.txt`), dynamic `/robots.txt` (do not put a static `public/robots.txt` in front of the route; point to llm.txt via a `#` comment only — never an `LLM:` directive)
 - Full controller map: [reference.md](reference.md)
@@ -72,7 +73,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - Fragment links: `route('contact-us') . '#contact-id'`
 - Contact form: `POST` to `route('contact-us.store')` via AJAX (`novalidate` + custom field errors). On success: clear form and show “The request has been sent successfully.” Also includes `@csrf`, honeypot `website`, and `form_started_at` (bots get silent JSON success)
 - Legal pages: `PageController` methods `privacyPolicy` / `termsAndConditions` (`privacy-policy`, `terms-and-conditions`; Footer must use `route()`, not `url()`)
-- Sitemap / LLM: `route('sitemap')`, `route('llm.txt')`, `route('robots')` — generated from published blogs, services, industries, and static pages
+- Sitemap / LLM: `route('sitemap')`, `route('llm.txt')`, `route('robots')` — generated from published blogs, case studies, services, industries, and static pages
 - Assets: `asset('assets/...')`; external / `tel:` / `mailto:` stay as-is
 - When a named route lands, update Header, Footer, Topbar, SuaveAgent CTAs, and page CTAs that still use `url()`
 

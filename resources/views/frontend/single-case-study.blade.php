@@ -17,6 +17,12 @@
           <span aria-current="page">{{ $case['client'] ?? $case['title'] }}</span>
         </nav>
 
+        @if (! empty($isDraft) || ! empty($case['is_draft']))
+          <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-semibold text-amber-800" role="status">
+            Draft preview — only visible while logged in
+          </p>
+        @endif
+
         <p class="case-studies-hero__eyebrow pragati-narrow-regular">{{ $case['industry'] }}</p>
         <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">{{ $case['title'] }}</h1>
         <p class="case-study-detail-hero__lead">{{ $case['short_description'] }}</p>
@@ -116,11 +122,22 @@
 
   @foreach (array_slice($sections, 0, 2) as $index => $section)
     @php
+      $hasCopy = trim((string) ($section['title'] ?? '')) !== ''
+        || trim((string) ($section['body'] ?? '')) !== ''
+        || trim((string) ($section['eyebrow'] ?? '')) !== ''
+        || ! empty($section['points']);
+      $hasImage = ! empty($section['image']);
+    @endphp
+    @continue(! $hasCopy && ! $hasImage)
+    @php
       $type = $section['type'] ?? 'split';
       $side = ($section['image_side'] ?? (($index % 2 === 0) ? 'right' : 'left')) === 'left' ? 'left' : 'right';
       $sectionId = 'section-' . ($index + 1);
       $visual = \App\Support\Frontend\CaseStudySupport::visualForSection($section, $index);
       $altClass = ($index % 2 === 1) ? ' case-study-split--alt' : '';
+      $visualAlt = trim((string) ($section['title'] ?? '')) !== ''
+        ? $section['title'].' product screenshot for Suave Creators software development'
+        : $case['title'].' product screenshot for Suave Creators software development';
     @endphp
 
     @if ($type === 'split' || $type === 'shot')
@@ -142,7 +159,11 @@
               </ol>
             @endif
           </div>
-          @include('frontend.partials.case-study-visual', ['visual' => $visual, 'section' => $section])
+          @include('frontend.partials.case-study-visual', [
+            'visual' => $visual,
+            'section' => $section,
+            'imageAlt' => $visualAlt,
+          ])
         </div>
       </section>
     @endif

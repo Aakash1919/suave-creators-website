@@ -1,7 +1,7 @@
 <?php
 /**
- * Case studies for listing and detail pages.
- * Live detail middle: Metrics → Overview → exactly 2 splits → CTA.
+ * Seed catalog for CaseStudySeeder (database/data/case-studies/cases.php).
+ * Public layout: Metrics → Overview → exactly 2 splits → CTA.
  * `technologies` powers listing tags only (not rendered on the detail middle).
  */
 return [
