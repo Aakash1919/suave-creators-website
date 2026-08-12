@@ -42,12 +42,11 @@
         <x-layouts.seo :seo="$seo ?? []" />
     @endif
 
-    {{-- Warm CDN origins early; keep Tailwind + site CSS on the critical path (marketing layout convention). --}}
+    {{-- Warm CDN origins early; Tailwind via Vite build + site CSS on the critical path. --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     {{-- Core site CSS (shared layout + homepage sections). --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
 
@@ -76,18 +75,7 @@
         <link rel="preload" as="style" href="{{ $deferredCssHref }}" onload="this.onload=null;this.rel='stylesheet'">
     @endif
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ["PP Mori", "Roboto Flex", "ui-sans-serif", "system-ui", "sans-serif"],
-                    },
-                },
-            },
-        };
-    </script>
+    @vite('resources/css/app.css')
 
     {{-- Non-critical CSS: preload so it does not block first paint / LCP. --}}
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" onload="this.onload=null;this.rel='stylesheet'">

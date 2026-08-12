@@ -30,7 +30,7 @@ After importing a page or editing frontend code/assets/CSS:
    - Core PHP string helpers in components/views when Laravel `str()` / `Str` / `NormalizesAssetPaths` should be used
    - Page JS that belongs in a component (`@once` + `@push('scripts')`)
    - Flat `public/images/` files (must live under `public/assets/...`)
-   - Vite wiring on marketing layout unless explicitly requested; star-pearl only via `<x-layouts.the-suave-star-pearl />` (never directly in `layouts/frontend.blade.php`)
+   - Tailwind CDN on marketing layout (use `@vite('resources/css/app.css')`); star-pearl only via `<x-layouts.the-suave-star-pearl />` (never directly in `layouts/frontend.blade.php`)
 5. Summarize what was verified and what was removed
 
 ## Page import workflow (future pages)
@@ -223,8 +223,9 @@ Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSu
 
 ## Layout / CSS
 
-- Marketing layout: Tailwind CDN + Swiper CDN + Font Awesome + `asset('css/style.css')`
-- No Vite on marketing pages
+- Marketing layout: Tailwind **3.4.17** via Vite (`@vite('resources/css/app.css')`) + Swiper CDN + Font Awesome + `asset('css/style.css')`
+- Pin `tailwindcss` to `3.4.17` (matches former Play CDN); PostCSS + `tailwind.config.js` — not `@tailwindcss/vite` / v4
+- Do not use the Tailwind Play CDN (`cdn.tailwindcss.com`) on marketing pages
 - Star-pearl emblem only via `<x-layouts.the-suave-star-pearl />` (not wired into `layouts/frontend.blade.php`)
 - Do not set `display` on `.u-touch-target` in CSS (breaks responsive utilities)
 
