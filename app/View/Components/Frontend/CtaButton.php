@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\ContactSupport;
 use App\Support\Frontend\UiHelper;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -23,7 +24,7 @@ class CtaButton extends Component
     ) {
         $this->resolvedHref = $this->href !== ''
             ? $this->href
-            : route('contact-us').'#contact-id';
+            : ContactSupport::demoHref();
 
         $this->btnClass = UiHelper::btnPrimary($this->variant);
     }

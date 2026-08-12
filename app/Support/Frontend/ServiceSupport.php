@@ -295,7 +295,7 @@ class ServiceSupport
 
         return match (true) {
             $path === 'services' => route('services'),
-            $path === 'contact-us' => route('contact-us').(str_contains($href, '#') ? '#'.(string) str($href)->after('#') : ''),
+            $path === 'contact-us' => ContactSupport::demoHref(),
             $path === 'blogs' => route('blogs'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),
             str_starts_with($path, 'service/') => route('service.show', ['slug' => (string) str($path)->after('service/')]),

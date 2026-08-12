@@ -79,7 +79,9 @@
 
     @if ($footerLabel !== '')
       <div class="industries-served__project">
-        <a href="{{ $footerHref }}" class="border-b border-white/70 text-sm font-semibold text-white">{{ $footerLabel }}</a>
+        <a href="{{ $footerHref }}"
+          @if (str_starts_with($footerHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
+          class="border-b border-white/70 text-sm font-semibold text-white">{{ $footerLabel }}</a>
       </div>
     @endif
 
@@ -87,7 +89,8 @@
       <aside class="industries-support" aria-label="Online platform services support">
         <div class="industries-support__copy">
           <p>{{ $supportText }}</p>
-          <a href="{{ $supportHref }}">
+          <a href="{{ $supportHref }}"
+            @if (str_starts_with($supportHref, 'http')) target="_blank" rel="noopener noreferrer" @endif>
             {{ $supportLabel }}
             <x-frontend.cta-arrow />
           </a>

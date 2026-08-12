@@ -25,7 +25,7 @@
                 <p class="mb-2 mt-2 text-[13px] leading-6 text-[#B1B9DF] sm:text-sm">{{ $industry['heroDescription'] ?? '' }}
                 </p>
                 <div class="mt-8 flex items-center gap-4 sm:gap-7">
-                    <a href="{{ route('contact-us') }}#contact-id"
+                    <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                         class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
                         Let's Connect to Discuss
                         <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"
@@ -175,7 +175,7 @@
                 @endforeach
             </div>
             <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-5">
-                <a href="{{ route('contact-us') }}#contact-id"
+                <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                     class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-fit items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">Let's
                     Connect to Discuss<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -184,7 +184,7 @@
                         <path d="M18 8L22 12L18 16" />
                         <path d="M2 12H22" />
                     </svg></a>
-                <a href="{{ route('contact-us') }}#contact-id"
+                <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                     class="inline-flex w-fit border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">Let's
                     Build Your Digital Future Together</a>
             </div>
@@ -288,7 +288,7 @@
                         @endif
                         <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $card['title'] ?? '' }}</h3>
                         <p class="flex-1 text-sm leading-relaxed text-[#4D4D4D]">{{ $card['text'] ?? '' }}</p>
-                        <a href="{{ route('contact-us') }}#contact-id"
+                        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                             class="mt-1 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB] no-underline hover:underline">Get
                             Started <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -351,7 +351,7 @@
                 </div>
             @endforeach
             <div class="mt-10 flex flex-nowrap items-center justify-center gap-3 sm:gap-5">
-                <a href="{{ route('contact-us') }}#contact-id"
+                <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                     class="u-btn-cta group inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:px-5">Let's
                     Connect to Discuss<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -372,7 +372,8 @@
 
     <!-- Core Values Section Start -->
 <section
-  class="  full-bleed core-values bg-[url('/images/background_core_values.png')] bg-cover bg-top bg-no-repeat py-12 lg:py-20">
+  class="full-bleed core-values bg-cover bg-top bg-no-repeat py-12 lg:py-20"
+  style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
   <svg class="core-values__symbols" aria-hidden="true">
     <symbol id="core-value-fintech" viewBox="0 0 24 24">
      <path d="M3 9L12 4l9 5H3Z"/>
@@ -426,44 +427,41 @@
       </div>
     </header>
 
-    <?php
+    @php
     $coreValues = [
       ['fintech', 'Fintech & Banking Sector', 'Building secure, scalable platforms for modern finance.','/assets/media/fintech-dashboard-financial-analytics.webp' ,'Building secure, scalable platforms for modern finance.'],
       ['ecommerce', 'E-commerce & Retail Sector', 'Powering secure e-commerce payments and fraud protection.', '/assets/media/ecommerce-storefront-laptop-checkout.webp', 'Powering secure e-commerce payments and fraud protection.'],
       ['healthcare', 'Healthcare & Insurance Sector', 'Seamless billing, claims & policy management solutions.', '/assets/media/healthcare.png', 'Seamless billing, claims & policy management solutions.'],
       ['Education', 'Education & EdTech Sector', 'Secure fee and payment solutions for education.', '/assets/media/elearning-platform-online-classroom.webp', 'Secure fee and payment solutions for education'],
-
       ['IT', 'IT Solutions for Startups', 'Innovative solutions tailored to your business needs.', '/assets/media/it_solutions.png', 'Innovative solutions tailored to your business needs.'],
       ['logistics', 'Logistics and Supply Chain', 'Streamlined warehouse, inventory & transport management.', '/assets/media/supply_chain.png', 'Streamlined warehouse, inventory & transport management.'],
-
     ];
-    ?>
+    @endphp
    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-         <?php foreach ($coreValues as $value): ?>
+         @foreach ($coreValues as $value)
 
         <article class="core-value-card flex flex-col h-full">
   <div class="core-value-card__content min-h-[170px] flex-1">
     <svg class="core-value-card__icon" aria-hidden="true">
-      <use href="#core-value-<?= htmlspecialchars($value[0]) ?>"></use>
+      <use href="#core-value-{{ $value[0] }}"></use>
     </svg>
 
     <div class="core-value-card__text">
-      <h3><?= htmlspecialchars($value[1]) ?></h3>
-      <p><?= htmlspecialchars($value[2]) ?></p><br>
+      <h3>{{ $value[1] }}</h3>
+      <p>{{ $value[2] }}</p><br>
     </div>
   </div>
 
   <div class="core-value-card__image1">
-    <img 
-      src="<?= htmlspecialchars($value[3]) ?>" 
-      alt="<?= htmlspecialchars($value[4]) ?>" 
-      title="<?= htmlspecialchars($value[4]) ?>" 
+    <img
+      src="{{ $value[3] }}"
+      alt="{{ $value[4] }}"
+      title="{{ $value[4] }}"
       loading="lazy"
-      
     >
   </div>
 </article>
-      <?php endforeach; ?>
+      @endforeach
     </div>
   </div>
 </section>

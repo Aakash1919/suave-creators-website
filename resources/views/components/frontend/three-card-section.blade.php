@@ -44,7 +44,8 @@
 
         @if (filled($ctaHref) && filled($ctaLabel))
             <div class="web-services__footer">
-                <a href="{{ $ctaHref }}">{{ $ctaLabel }}</a>
+                <a href="{{ $ctaHref }}"
+                    @if (str_starts_with($ctaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif>{{ $ctaLabel }}</a>
             </div>
         @endif
     </div>
