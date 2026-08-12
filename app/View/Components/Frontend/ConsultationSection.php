@@ -3,6 +3,7 @@
 namespace App\View\Components\Frontend;
 
 use App\Support\Frontend\Concerns\NormalizesAssetPaths;
+use App\Support\Frontend\ContactSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -31,11 +32,11 @@ class ConsultationSection extends Component
         public ?array $people = null,
     ) {
         if ($this->ctaHref === '') {
-            $this->ctaHref = route('contact-us').'#contact-id';
+            $this->ctaHref = ContactSupport::demoHref();
         }
 
         if ($this->secondaryCtaHref === '' && $this->secondaryCtaLabel !== '') {
-            $this->secondaryCtaHref = route('contact-us').'#contact-id';
+            $this->secondaryCtaHref = ContactSupport::demoHref();
         }
 
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);

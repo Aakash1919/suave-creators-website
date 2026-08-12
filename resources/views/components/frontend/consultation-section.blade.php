@@ -22,17 +22,22 @@
         <p>{{ $description }}</p>
         @if ($secondaryCtaLabel !== '')
           <div class="flex flex-wrap gap-4">
-            <a href="{{ $ctaHref }}" class="group consultation-cta cursor-pointer">
+            <a href="{{ $ctaHref }}"
+              @if (str_starts_with($ctaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
+              class="group consultation-cta cursor-pointer">
               {{ $ctaLabel }}
               <x-frontend.cta-arrow />
             </a>
             <a href="{{ $secondaryCtaHref }}"
+              @if (str_starts_with($secondaryCtaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
               class="consultation-secondary-link inline-flex cursor-pointer items-end border-b border-white/70 pb-0.5 text-sm font-semibold text-white">
               {{ $secondaryCtaLabel }}
             </a>
           </div>
         @else
-          <a href="{{ $ctaHref }}" class="group consultation-cta cursor-pointer">
+          <a href="{{ $ctaHref }}"
+            @if (str_starts_with($ctaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
+            class="group consultation-cta cursor-pointer">
             {{ $ctaLabel }}
             <x-frontend.cta-arrow />
           </a>

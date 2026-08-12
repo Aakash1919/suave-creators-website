@@ -154,7 +154,7 @@
     </div>
 
     <div class="web-services__footer">
-      <a href="{{ route('contact-us') }}#contact-id">Discuss your Requirements</a>
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Discuss your Requirements</a>
       <a href="{{ route('product') }}">Explore Suave Outreach CRM</a>
     </div>
   </div>

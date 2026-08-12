@@ -1,6 +1,6 @@
 @php
   $sections = $case['sections'] ?? [];
-  $contactHref = route('contact-us') . '#contact-id';
+  $contactHref = $demoHref;
 @endphp
 
 @extends('layouts.frontend')
@@ -41,7 +41,7 @@
             See the story
             <x-frontend.cta-arrow />
           </a>
-          <a href="{{ $contactHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--ghost">
+          <a href="{{ $contactHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--ghost">
             Start a similar project
           </a>
         </div>
@@ -177,7 +177,7 @@
           <p>Tell us about your workflow — we will help you turn it into a clear product experience.</p>
         </div>
         <div class="case-study-story__cta-actions">
-          <a href="{{ $contactHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
+          <a href="{{ $contactHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
             Talk to us
             <x-frontend.cta-arrow />
           </a>

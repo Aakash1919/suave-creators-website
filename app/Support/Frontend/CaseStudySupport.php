@@ -50,11 +50,62 @@ class CaseStudySupport
      */
     public static function indexData(): array
     {
+        $cases = self::cases();
+
         return [
-            'cases' => self::cases(),
+            'cases' => $cases,
+            'fanImages' => self::fanImages(),
             'seoTitle' => 'Case Studies | Suave Creators',
             'seoDescription' => 'See how Suave Creators designs and ships real products — stories from the software we build for clients.',
         ];
+    }
+
+    /**
+     * Static product snapshots for the listing hero fan.
+     *
+     * @return list<array{src: string, alt: string, fan_rotate: float, fan_y: float, fan_z: int}>
+     */
+    public static function fanImages(): array
+    {
+        $images = [
+            [
+                'src' => 'assets/case-studies/suave-crm-outreach/outbound-new-target.png',
+                'alt' => 'Team outbound targets CRM software built by Suave Creators',
+            ],
+            [
+                'src' => 'assets/blog/insight-future-of-work.jpg',
+                'alt' => 'Future of work digital product insight from Suave Creators',
+            ],
+            [
+                'src' => 'assets/blog/insight-digital-strategy.jpg',
+                'alt' => 'Digital strategy software development insight from Suave Creators',
+            ],
+            [
+                'src' => 'assets/blog/insight-product-growth.jpg',
+                'alt' => 'Product growth case study insight from Suave Creators',
+            ],
+            [
+                'src' => 'assets/case-studies/shownoshow/location-check-in.jpg',
+                'alt' => 'Appointment location check-in map designed by Suave Creators',
+            ],
+            [
+                'src' => 'assets/case-studies/suave-crm-outreach/outreach-new-company-intelligence.png',
+                'alt' => 'CRM company intelligence outreach workspace by Suave Creators',
+            ],
+        ];
+
+        $count = count($images);
+        $mid = max($count - 1, 1) / 2;
+
+        foreach ($images as $index => &$image) {
+            $t = $count > 1 ? ($index - $mid) / $mid : 0.0;
+            $image['fan_rotate'] = round($t * 16, 2);
+            $image['fan_y'] = round(abs($t) * 38, 1);
+            $image['fan_z'] = $index + 1;
+        }
+        unset($image);
+
+        return $images;
     }
 
     /**

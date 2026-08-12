@@ -307,7 +307,7 @@ class HomeSupport
     public static function faqData(): array
     {
         return [
-            'faqCtaHref' => route('contact-us').'#contact-id',
+            'faqCtaHref' => ContactSupport::demoHref(),
             'faqCtaLabel' => 'Start your Project',
             'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',
             'faqMediaType' => 'image',

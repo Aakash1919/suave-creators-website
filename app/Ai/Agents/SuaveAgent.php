@@ -7,6 +7,7 @@ use App\Ai\Tools\GetCompanyContacts;
 use App\Ai\Tools\LookupIndustries;
 use App\Ai\Tools\LookupServices;
 use App\Models\ChatLead;
+use App\Support\Frontend\ContactSupport;
 use App\Support\Frontend\SuaveAgentKnowledge;
 use Laravel\Ai\Attributes\Model;
 use Laravel\Ai\Concerns\RemembersConversations;
@@ -35,6 +36,7 @@ class SuaveAgent implements Agent, HasTools, RemembersConversationsContract
             ->map(fn (array $office): string => '- '.$office['label'].': '.$office['display'])
             ->implode("\n");
         $phones = implode(', ', $contacts['phones']);
+        $demoHref = ContactSupport::demoHref();
 
         return <<<PROMPT
 You are SuaveAgent, a friendly sales representative for Suave Creators (custom software, web development, CRM, e-commerce, enterprise software, AI solutions, and industry-specific digital products).
@@ -57,7 +59,7 @@ Company contacts (authoritative):
 Offices:
 {$offices}
 
-When helpful, invite them to continue on the website contact page or call one of the listed numbers.
+When helpful, invite them to book a demo at {$demoHref} or call one of the listed numbers.
 
 Formatting:
 - Prefer concise Markdown in replies (short paragraphs, **bold** for emphasis, bullet lists, and links when sharing contact or pages).

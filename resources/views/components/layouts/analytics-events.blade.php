@@ -45,7 +45,11 @@
                     } else {
                         try {
                             var url = new URL(href, window.location.href);
-                            if (url.origin === window.location.origin && url.pathname === '/contact-us') {
+                            if (
+                                (url.origin === window.location.origin && url.pathname === '/contact-us')
+                                || url.hostname === 'calendar.app.google'
+                                || url.hostname === 'calendar.google.com'
+                            ) {
                                 eventName = 'cta_click';
                             }
                         } catch (e) {}

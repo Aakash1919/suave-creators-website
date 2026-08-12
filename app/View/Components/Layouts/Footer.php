@@ -27,7 +27,7 @@ class Footer extends Component
     public string $year;
 
     /**
-     * @var array<string, array<int, array{route: string, params?: array<string, string>, label: string, href: string}>>
+     * @var array<string, array<int, array{route?: string, params?: array<string, string>, label: string, href: string}>>
      */
     public array $columns;
 
@@ -37,7 +37,7 @@ class Footer extends Component
     public array $socialLinks;
 
     /**
-     * @param  array<string, array<int, array{route: string, params?: array<string, string>, label: string}>>|null  $columns
+     * @param  array<string, array<int, array{route?: string, params?: array<string, string>, href?: string, label: string}>>|null  $columns
      * @param  array<int, array{href: string, label: string, icon: string}>|null  $socialLinks
      */
     public function __construct(
@@ -81,7 +81,7 @@ class Footer extends Component
                 ['route' => 'about-us', 'label' => 'About Us'],
                 ['route' => 'services', 'label' => 'Services'],
                 ['route' => 'blogs', 'label' => 'Blog'],
-                ['route' => 'contact-us', 'label' => 'Contact Us'],
+                ['href' => ContactSupport::demoHref(), 'label' => 'Contact Us'],
             ],
             'Product' => [
                 ['route' => 'product', 'fragment' => 'how-it-works', 'label' => 'How it Works'],
@@ -94,13 +94,15 @@ class Footer extends Component
 
         $this->columns = collect($columns)
             ->map(fn (array $items): array => array_values(array_map(function (array $item): array {
-                $href = route($item['route'], $item['params'] ?? []);
+                if (! isset($item['href'])) {
+                    $href = route($item['route'], $item['params'] ?? []);
 
-                if (isset($item['fragment'])) {
-                    $href .= '#'.$item['fragment'];
+                    if (isset($item['fragment'])) {
+                        $href .= '#'.$item['fragment'];
+                    }
+
+                    $item['href'] = $href;
                 }
-
-                $item['href'] = $href;
 
                 return $item;
             }, $items)))

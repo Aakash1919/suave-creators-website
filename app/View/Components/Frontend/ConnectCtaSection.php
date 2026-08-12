@@ -28,7 +28,7 @@ class ConnectCtaSection extends Component
         public string $sectionClass = 'full-bleed smart-together-cta py-6',
     ) {
         if ($this->primaryHref === '') {
-            $this->primaryHref = route('contact-us').'#contact-id';
+            $this->primaryHref = ContactSupport::demoHref();
         }
 
         if ($this->secondaryHref === '') {
