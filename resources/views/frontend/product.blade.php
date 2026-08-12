@@ -39,7 +39,7 @@
         </p>
 
         <div class="product-hero__actions">
-          <a href="{{ $contactHref }}" class="product-btn product-btn--primary">
+          <a href="{{ $contactHref }}" class="product-btn product-btn--primary" target="_blank" rel="noopener noreferrer">
             Start Free Trial <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
           </a>
           <a href="{{ $demoHref }}" class="product-btn product-btn--secondary product-btn--ghost" target="_blank" rel="noopener noreferrer">
@@ -194,7 +194,7 @@
       </div>
 
       <div class="product-add-ons__cta">
-        <a href="{{ $contactHref }}" class="product-add-ons__link">
+        <a href="{{ $contactHref }}" class="product-add-ons__link" target="_blank" rel="noopener noreferrer">
           Ask which add-ons fit your team
           <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </a>

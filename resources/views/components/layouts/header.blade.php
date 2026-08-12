@@ -62,13 +62,14 @@
             <a href="{{ route('blogs') }}"
                 class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                 @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>
-            <a href="{{ route('contact-us') }}"
-                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('contact-us') ? 'is-active' : '' }}"
-                @if ($isNavActive('contact-us')) aria-current="page" @endif>Contact</a>
+            <a href="{{ $ctaHref() }}"
+                target="_blank" rel="noopener noreferrer"
+                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF]">Contact</a>
         </nav>
 
         <div class="site-header__actions flex items-center justify-end gap-2 sm:gap-4 xl:gap-5">
             <a href="{{ $ctaHref() }}"
+                target="_blank" rel="noopener noreferrer"
                 class="site-header__cta u-btn-cta !hidden shrink-0 cursor-pointer items-center gap-1 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-[14px] py-[8px] text-sm font-bold text-white transition hover:brightness-110 md:!inline-flex md:px-[18px]">
                 <span class="hidden lg:inline">{{ $ctaLabel }}</span>
                 <span class="lg:hidden">{{ $ctaLabelShort }}</span>
@@ -132,24 +133,26 @@
                     <a class="mobile-nav__link {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                         href="{{ route('blogs') }}"
                         @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>
-                    <a class="mobile-nav__link {{ $isNavActive('contact-us') ? 'is-active' : '' }}"
-                        href="{{ route('contact-us') }}"
-                        @if ($isNavActive('contact-us')) aria-current="page" @endif>Contact</a>
+                    <a class="mobile-nav__link"
+                        href="{{ $ctaHref() }}"
+                        target="_blank" rel="noopener noreferrer">Contact</a>
                 </nav>
 
                 <div class="mobile-nav__footer">
                     <div class="flex flex-col gap-2">
                         <a href="{{ $phoneHref }}"
                             class="mobile-nav__phone !min-h-0 inline-flex items-center gap-2">
-                            <img src="{{ asset('assets/flags/in.svg') }}" alt="India" class="w-4 h-4" />
+                            <img src="{{ asset('assets/flags/in.svg') }}" alt="India flag for Suave Creators India office phone" title="India flag for Suave Creators India office phone" class="w-4 h-4" />
                             {{ $phone }}</a>
                         <a href="{{ $usPhoneHref }}"
                             class="mobile-nav__phone !min-h-0 inline-flex items-center gap-2"><img
-                                src="{{ asset('assets/flags/us.svg') }}" alt="India"
+                                src="{{ asset('assets/flags/us.svg') }}" alt="United States flag for Suave Creators USA office phone"
+                                title="United States flag for Suave Creators USA office phone"
                                 class="w-4 h-4" />{{ $usPhone }}</a>
                     </div>
 
                     <a href="{{ $ctaHref() }}"
+                        target="_blank" rel="noopener noreferrer"
                         class="mobile-nav__cta u-btn-cta !h-[34px] !min-h-[34px] !py-0 cursor-pointer text-[13px]">
                         {{ $ctaLabel }}
                         <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"

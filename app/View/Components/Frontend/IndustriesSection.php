@@ -3,6 +3,7 @@
 namespace App\View\Components\Frontend;
 
 use App\Support\Frontend\Concerns\NormalizesAssetPaths;
+use App\Support\Frontend\ContactSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -35,11 +36,11 @@ class IndustriesSection extends Component
         $this->supportImage = $this->normalizeAssetPath($this->supportImage);
 
         if ($this->footerHref === '' && $this->footerLabel !== '') {
-            $this->footerHref = route('contact-us').'#contact-id';
+            $this->footerHref = ContactSupport::demoHref();
         }
 
         if ($this->supportHref === '') {
-            $this->supportHref = route('contact-us').'#contact-id';
+            $this->supportHref = ContactSupport::demoHref();
         }
 
         $this->cards ??= [

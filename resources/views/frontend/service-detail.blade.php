@@ -126,7 +126,7 @@
         <x-frontend.cta-button>
           Let's Connect to Discuss
         </x-frontend.cta-button>
-        <a href="{{ route('contact-us') }}#contact-id" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">Let's Build Your Digital Future Together</a>
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">Let's Build Your Digital Future Together</a>
       </div>
     </div>
   </div>
@@ -233,7 +233,7 @@
         <em>{{ $service['collabText'] ?? 'Come and build together a better business with' }}</em>
         <strong id="service-collab-title">{{ $service['collabBrand'] ?? 'SUAVE CREATORS.' }}</strong>
       </p>
-      <a href="{{ route('contact-us') }}#contact-id" class="collab-section__link">{{ $service['collabButtonText'] ?? 'REQUEST A QUOTE' }}</a>
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="collab-section__link">{{ $service['collabButtonText'] ?? 'REQUEST A QUOTE' }}</a>
     </div>
     @if ($collabImage !== '')
       <div class="collab-section__media">

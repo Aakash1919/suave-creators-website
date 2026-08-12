@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-  <section class="case-studies-hero site-container" aria-labelledby="case-studies-heading">
+  <section class="case-studies-hero site-container case-studies-hero--with-fan" aria-labelledby="case-studies-heading">
     <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
       <a href="{{ route('home') }}">Home</a>
       <span aria-hidden="true">/</span>
@@ -14,6 +14,30 @@
     <p class="case-studies-hero__lead">
       Stories from the software we design and ship — how we turn messy workflows into clear product experiences.
     </p>
+    @if (! empty($fanImages))
+      <div class="case-studies-fan">
+        <ul class="case-studies-fan__list" aria-label="Case study product snapshots">
+          @foreach ($fanImages as $item)
+            <li
+              class="case-studies-fan__item"
+              style="--fan-rotate: {{ $item['fan_rotate'] }}deg; --fan-y: {{ $item['fan_y'] }}px; --fan-z: {{ $item['fan_z'] }};"
+            >
+              <figure class="case-studies-fan__card">
+                  <img
+                    src="{{ asset($item['src']) }}"
+                    alt="{{ $item['alt'] }}"
+                    title="{{ $item['alt'] }}"
+                    width="280"
+                    height="150"
+                    loading="lazy"
+                    decoding="async"
+                  >
+              </figure>
+            </li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
   </section>
 
   @if (! empty($cases))
