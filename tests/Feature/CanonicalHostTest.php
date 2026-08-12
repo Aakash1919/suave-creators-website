@@ -22,8 +22,11 @@ class CanonicalHostTest extends TestCase
         $response->assertOk();
         $response->assertSee('<link rel="canonical" href="https://suavecreators.com/contact-us">', false);
         $response->assertSee('<meta property="og:url" content="https://suavecreators.com/contact-us">', false);
+        $response->assertSee('<meta property="og:image" content="https://suavecreators.com/assets/brand/og-default.png">', false);
+        $response->assertSee('<meta name="twitter:image" content="https://suavecreators.com/assets/brand/og-default.png">', false);
         $response->assertSee('<link rel="alternate" href="https://suavecreators.com/contact-us" hreflang="x-default">', false);
         $response->assertSee('"url":"https://suavecreators.com/contact-us"', false);
         $response->assertDontSee('<link rel="canonical" href="https://www.suavecreators.com/contact-us">', false);
+        $response->assertDontSee('<meta property="og:image" content="https://www.suavecreators.com/assets/brand/og-default.png">', false);
     }
 }

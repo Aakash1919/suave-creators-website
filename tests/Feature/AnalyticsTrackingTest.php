@@ -17,6 +17,15 @@ class AnalyticsTrackingTest extends TestCase
         $response->assertSee('cta_click', false);
     }
 
+    public function test_frontend_layout_does_not_load_vite_marketing_assets(): void
+    {
+        $response = $this->get('/contact-us');
+
+        $response->assertOk();
+        $response->assertDontSee('/build/assets/app-', false);
+        $response->assertDontSee('@vite', false);
+    }
+
     public function test_contact_form_success_tracks_generate_lead_event(): void
     {
         $response = $this->get('/contact-us');

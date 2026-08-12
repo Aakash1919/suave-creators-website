@@ -313,11 +313,23 @@ class SeoGenerateService
             return null;
         }
 
+        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
+
         if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            $assetHost = strtolower((string) (parse_url($path, PHP_URL_HOST) ?: ''));
+            $primaryHost = strtolower((string) (parse_url($baseUrl, PHP_URL_HOST) ?: ''));
+
+            if ($assetHost !== '' && $primaryHost !== '' && in_array($assetHost, [$primaryHost, 'www.'.$primaryHost], true)) {
+                $assetPath = (string) (parse_url($path, PHP_URL_PATH) ?: '/');
+                $query = (string) (parse_url($path, PHP_URL_QUERY) ?: '');
+
+                return $baseUrl.'/'.ltrim($assetPath, '/').($query !== '' ? '?'.$query : '');
+            }
+
             return $path;
         }
 
-        return asset(ltrim($path, '/'));
+        return $baseUrl.'/'.ltrim($path, '/');
     }
 
     protected function canonicalUrl(mixed $url): string
