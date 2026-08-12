@@ -27,6 +27,16 @@ class AnalyticsTrackingTest extends TestCase
         $response->assertDontSee('@vite', false);
     }
 
+    public function test_footer_desktop_grid_uses_full_width_columns(): void
+    {
+        $response = $this->get('/contact-us');
+
+        $response->assertOk();
+        $response->assertSee('lg:col-span-3', false);
+        $response->assertSee('lg:col-span-9', false);
+        $response->assertDontSee('lg:col-span-1', false);
+    }
+
     public function test_contact_form_success_tracks_generate_lead_event(): void
     {
         $response = $this->get('/contact-us');

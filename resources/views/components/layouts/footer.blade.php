@@ -17,7 +17,7 @@
 
   <div class="site-container relative z-10 !px-5 sm:!px-6 lg:!px-8">
     <div class="site-footer__main grid grid-cols-1 gap-7 py-7 sm:gap-10 sm:py-10 lg:grid-cols-12 lg:gap-12">
-      <div class="site-footer__brand min-w-0 lg:col-span-1">
+      <div class="site-footer__brand min-w-0 lg:col-span-3">
         <a href="{{ route('home') }}" class="inline-flex max-w-full" aria-label="Suave Creators home">
           <x-layouts.logo variant="footer" />
         </a>
@@ -47,7 +47,7 @@
         </ul>
       </div>
 
-      <div class="min-w-0 lg:col-span-1">
+      <div class="min-w-0 lg:col-span-9">
         <div class="site-footer__columns !grid !grid-cols-2 !gap-x-4 !gap-y-7 min-[480px]:!grid-cols-3 sm:!grid-cols-3 sm:!gap-x-6 sm:!gap-y-10 lg:!grid-cols-4">
           @foreach ($columns as $title => $links)
             <div class="site-footer__column min-w-0">
