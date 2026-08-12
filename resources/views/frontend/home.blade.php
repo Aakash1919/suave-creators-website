@@ -48,7 +48,7 @@
           class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
           <img
             src="{{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }}"
-            srcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
+            srcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
             sizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
             alt="Team brainstorming software strategy documents with Suave Creators"
             title="Team brainstorming software strategy documents with Suave Creators"
@@ -62,7 +62,7 @@
           class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
           <img
             src="{{ asset('assets/hero/hero-professionals-office-meeting.webp') }}"
-            srcset="{{ asset('assets/hero/hero-professionals-office-meeting-320.webp') }} 320w, {{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }} 480w, {{ asset('assets/hero/hero-professionals-office-meeting.webp') }} 688w"
+            srcset="{{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }} 480w, {{ asset('assets/hero/hero-professionals-office-meeting-640.webp') }} 640w, {{ asset('assets/hero/hero-professionals-office-meeting.webp') }} 688w"
             sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
             alt="Software professionals collaborating in a modern office meeting"
             title="Software professionals collaborating in a modern office meeting"
@@ -76,7 +76,7 @@
           class="hero-media-grid__tile col-start-2 row-start-2 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
           <img
             src="{{ asset('assets/hero/hero-team-conference-collaboration.webp') }}"
-            srcset="{{ asset('assets/hero/hero-team-conference-collaboration-320.webp') }} 320w, {{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }} 480w, {{ asset('assets/hero/hero-team-conference-collaboration.webp') }} 688w"
+            srcset="{{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }} 480w, {{ asset('assets/hero/hero-team-conference-collaboration-640.webp') }} 640w, {{ asset('assets/hero/hero-team-conference-collaboration.webp') }} 688w"
             sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
             alt="Cross-functional team collaborating on custom software development"
             title="Cross-functional team collaborating on custom software development"
@@ -270,8 +270,14 @@
           <div class="swiper-slide h-auto">
             <article class="offerings-card h-full">
               <div class="offerings-card__image">
-                <img src="{{ asset($offering['image']) }}" alt="{{ $offering['alt'] }}" title="{{ $offering['alt'] }}"
-                  loading="lazy" decoding="async">
+                <x-frontend.responsive-webp-image
+                  :src="$offering['image']"
+                  :alt="$offering['alt']"
+                  sizes="(min-width: 1024px) 303px, (min-width: 768px) 280px, 85vw"
+                  width="608"
+                  height="578"
+                  loading="lazy"
+                  decoding="async" />
               </div>
               <div class="pt-3">
                 <h3>{{ $offering['title'] }}</h3>
@@ -356,7 +362,12 @@
             </div>
           </div>
           <div class="core-value-card__image">
-            <img src="{{ asset($value['image']) }}" alt="{{ $value['alt'] }}" title="{{ $value['alt'] }}" loading="lazy" decoding="async">
+            <x-frontend.responsive-webp-image
+              :src="$value['image']"
+              :alt="$value['alt']"
+              sizes="(min-width: 1024px) 366px, (min-width: 768px) 292px, 298px"
+              loading="lazy"
+              decoding="async" />
           </div>
         </article>
       @endforeach
@@ -822,7 +833,7 @@
 }
 
 .digital-marketing-card__number {
-  color: #F7F8F8;
+  color: #949494;
   font-family: "Roboto Flex", "PP Mori", ui-sans-serif, system-ui, sans-serif;
   font-size: 34px;
   font-weight: 800;
