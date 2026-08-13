@@ -79,7 +79,7 @@
             class="flex min-h-[128px] flex-col justify-between rounded-[16px] border-2 border-white bg-[#F8FAFB] p-4 shadow-[0_10px_28px_rgba(35,38,91,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(35,38,91,0.10)] sm:min-h-[156px] sm:p-5 md:p-6">
             <div class="min-w-0">
               <p class="m-0 text-[28px] font-semibold font-mori italic leading-none tracking-[-0.04em] text-[#00003F] sm:text-[32px] lg:text-[36px]">
-                <span data-counter-end="{{ (int) $stat['end'] }}">0</span>{{ $stat['suffix'] }}
+                <span data-counter-end="{{ (int) $stat['end'] }}" style="display:inline-block;min-width:{{ strlen((string) $stat['end']) }}ch;font-variant-numeric:tabular-nums">0</span>{{ $stat['suffix'] }}
               </p>
               <h3 class="mt-2 text-[13px] font-semibold leading-snug text-[#2A4DFB] sm:text-[14px]">
                 {{ $stat['label'] }}

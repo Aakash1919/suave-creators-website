@@ -69,19 +69,83 @@
         ], true);
     @endphp
 
-    {{-- Critical first-paint / LCP shell only; full sheets deferred below. --}}
+    {{-- Critical first-paint / CLS shell; full sheets stay non-blocking below. --}}
     <style>
-        :root{--color-navy:#00003f}
+        :root{--color-navy:#00003f;--site-container-width:1280px;--site-gutter:20px;--site-font:"Roboto Flex",ui-sans-serif,system-ui,sans-serif}
         html{overflow-x:clip}
-        body{margin:0;overflow-x:clip;background:#fff;color:#0f172a}
+        body{margin:0;overflow-x:clip;background:#fff;color:#0f172a;font-family:var(--site-font)}
         .bg-\[\#00003f\]{background-color:var(--color-navy)}
         .relative{position:relative}
         .w-full{width:100%}
         .overflow-hidden{overflow:hidden}
         .z-10{position:relative;z-index:10}
+        .z-20{position:relative;z-index:20}
+        .flex{display:flex}
+        .inline-flex{display:inline-flex}
+        .grid{display:grid}
+        .hidden{display:none}
+        .items-center{align-items:center}
+        .justify-between{justify-content:space-between}
+        .justify-center{justify-content:center}
+        .justify-end{justify-content:flex-end}
+        .shrink-0,.flex-shrink-0{flex-shrink:0}
+        .min-w-0{min-width:0}
+        .gap-3{gap:.75rem}
+        .gap-10{gap:2.5rem}
+        .site-container{box-sizing:border-box;margin-inline:auto;max-width:calc(var(--site-container-width) + (var(--site-gutter) * 2));padding-inline:var(--site-gutter);width:100%}
+        .site-main{display:grid;grid-template-columns:[full-start] minmax(var(--site-gutter),1fr) [content-start] minmax(0,var(--site-container-width)) [content-end] minmax(var(--site-gutter),1fr) [full-end];min-width:0}
+        .site-main>*{grid-column:content;min-width:0}
+        .site-main .site-container{max-width:var(--site-container-width);padding-inline:0}
+        .site-topbar{background:#010062;min-height:2rem}
+        .site-topbar img{height:.75rem;width:.75rem}
+        .site-header{box-sizing:border-box;min-height:3.75rem;padding-block:.75rem;position:-webkit-sticky;position:sticky;top:0;width:100%;z-index:11000}
+        .site-header>.site-container{align-items:center;display:flex;gap:.75rem;justify-content:space-between}
+        .site-header__logo img{aspect-ratio:220/99;display:block;height:2.25rem;object-fit:contain;width:auto}
+        .site-header__logo-emblem[data-the-suave-emblem],.site-header__logo-emblem{aspect-ratio:1/1;display:block;flex-shrink:0;height:3rem;line-height:0;overflow:hidden;position:relative;width:3rem}
+        .site-header__logo-emblem img{height:100%;left:50%;max-width:none;object-fit:contain;position:absolute;top:50%;transform:translate(-50%,-50%);width:100%}
+        .site-header__menu-btn{height:2.75rem;width:2.75rem}
+        .site-header__cta{display:none}
+        .mobile-nav[hidden]{display:none!important}
+        .floating-chat{bottom:24px;height:64px;position:fixed;right:24px;width:64px;z-index:9999}
         .site-hero-bg{background-color:var(--color-navy);height:min(100%,920px);inset-inline:0;overflow:hidden;pointer-events:none;position:absolute;top:0;z-index:0}
         .site-hero-bg__image{height:100%;left:50%;max-width:none;object-fit:cover;object-position:top center;position:absolute;top:0;transform:translateX(-50%);width:max(100%,1920px)}
         .site-hero-bg__pattern{height:100%;inset:0;mix-blend-mode:soft-light;object-fit:cover;object-position:top center;opacity:.2;position:absolute;width:100%}
+        .site-main>.site-container.relative{padding-bottom:3rem;padding-top:2rem}
+        .site-main>.site-container.relative>.grid{align-items:center;display:grid;gap:2.5rem;grid-template-columns:minmax(0,1fr)}
+        .site-main>.site-container.relative h1{color:#fff;font-size:36px;font-weight:600;line-height:1;margin:.5rem 0}
+        .site-main>.site-container.relative h1+p{color:#b1b9df;font-size:12px;line-height:1.25rem;margin:.5rem 0}
+        .hero-media-grid{aspect-ratio:670/512;display:grid;flex-shrink:0;grid-template-columns:314fr 344fr;grid-template-rows:124fr 368fr;max-width:670px;width:100%}
+        .hero-media-grid__tile{height:100%;min-height:0;min-width:0;overflow:hidden;width:100%}
+        .hero-media-grid__tile img{display:block;height:100%;max-width:none;object-fit:cover;width:100%}
+        .about-stat__icon{display:inline-flex;flex-shrink:0;height:40px;width:40px}
+        .about-stat__icon-image{aspect-ratio:1/1;display:block;height:40px;width:40px}
+        .about-stat__value [data-counter-end]{display:inline-block;font-variant-numeric:tabular-nums}
+        @media (min-width:375px){
+            .site-main>.site-container.relative h1{font-size:42px}
+        }
+        @media (min-width:640px){
+            .site-topbar{min-height:2.25rem}
+            .site-topbar img{height:.875rem;width:.875rem}
+            .site-header__logo img{height:2.5rem}
+            .site-main>.site-container.relative h1{font-size:3rem}
+            .sm\:gap-4{gap:1rem}
+        }
+        @media (min-width:768px){
+            .site-header__cta{display:inline-flex;align-items:center}
+            .site-main>.site-container.relative{min-height:440px;padding-bottom:4rem;padding-top:2.5rem}
+            .site-main>.site-container.relative h1+p{font-size:.875rem;line-height:1.5rem}
+        }
+        @media (min-width:1024px){
+            .site-main>.site-container.relative{min-height:640px;padding-bottom:5rem;padding-top:52px}
+            .site-main>.site-container.relative>.grid{gap:3rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+            .site-main>.site-container.relative h1{font-size:60px}
+            .lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+            .lg\:justify-end{justify-content:flex-end}
+        }
+        @media (min-width:1280px){
+            .xl\:flex{display:flex}
+            .site-header__menu-btn{display:none}
+        }
     </style>
 
     @if ($useHeroBackground && $heroBackgroundImage)
@@ -109,7 +173,8 @@
     @if ($loadDeferredCss)
         <link rel="stylesheet" href="{{ $deferredCssHref }}" media="print" onload="this.media='all'">
     @endif
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    {{-- display=optional avoids late font swaps that inflate CLS; cached visits still get the face. --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=optional" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="{{ $styleCssHref }}">
         @unless ($viteCssHot)
@@ -118,7 +183,7 @@
         <link rel="stylesheet" href="{{ $faSubsetHref }}">
         <link rel="stylesheet" href="{{ asset('css/pp-mori.css') }}?v={{ filemtime(public_path('css/pp-mori.css')) }}">
         <link rel="stylesheet" href="{{ asset('css/fontawesome-extra.css') }}?v={{ filemtime(public_path('css/fontawesome-extra.css')) }}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=optional">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         @if ($loadDeferredCss)
             <link rel="stylesheet" href="{{ $deferredCssHref }}">
@@ -135,7 +200,7 @@
         </noscript>
         <!-- End Google Tag Manager (noscript) -->
     @endif
-    <div class="relative w-full overflow-hidden {{ $heroShellClass }}">
+    <div class="relative w-full {{ $heroShellClass }}">
         @if ($useHeroBackground && $heroBackgroundImage)
             <div class="site-hero-bg" aria-hidden="true">
                 <img
