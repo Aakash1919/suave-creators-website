@@ -442,17 +442,29 @@
         });
 
         function resizeComposer() {
+          // field-sizing: content handles growth in supporting browsers — skip layout thrash.
+          if (typeof CSS !== 'undefined' && CSS.supports && CSS.supports('field-sizing', 'content')) {
+            messageInput.style.height = '';
+            return;
+          }
+
+          var max = 12 + 12 + (1.45 * 16 * 3); // matches CSS max-height formula
+          var previous = messageInput.style.height;
           messageInput.style.height = 'auto';
-          var max = parseFloat(window.getComputedStyle(messageInput).maxHeight) || 0;
           var next = messageInput.scrollHeight;
           if (max > 0) {
             next = Math.min(next, max);
           }
-          messageInput.style.height = next + 'px';
+          var nextPx = next + 'px';
+          // Avoid a second style write when height did not change.
+          if (previous === nextPx) {
+            return;
+          }
+          messageInput.style.height = nextPx;
         }
 
         messageInput.addEventListener('input', resizeComposer);
-        resizeComposer();
+        // Do not call resizeComposer() on load — chat starts hidden and it forced a reflow.
       })();
     </script>
   @endpush

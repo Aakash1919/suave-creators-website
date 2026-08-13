@@ -86,7 +86,7 @@
         <article class="about-stat"
           style="--stat-accent: {{ $item[3] }}; --stat-tint: {{ $item[4] }};">
           <span class="about-stat__icon">
-            <img src="{{ asset($item[0]) }}" alt="{{ $item[5] ?? $item[1] }}" title="{{ $item[5] ?? $item[1] }}" class="about-stat__icon-image" loading="lazy">
+            <img src="{{ asset($item[0]) }}" alt="{{ $item[5] ?? $item[1] }}" title="{{ $item[5] ?? $item[1] }}" class="about-stat__icon-image" width="40" height="40" decoding="async" loading="lazy">
           </span>
           <div class="about-stat__content">
             <strong class="about-stat__value about-stat__value--title">{{ $item[1] }}</strong>

@@ -106,7 +106,7 @@
           </span>
           <div class="about-stat__content">
             <strong class="about-stat__value">
-              <span data-counter-end="{{ (int) $stat['end'] }}">0</span>{{ $stat['suffix'] }}
+              <span data-counter-end="{{ (int) $stat['end'] }}" style="min-width: {{ strlen((string) $stat['end']) }}ch">0</span>{{ $stat['suffix'] }}
             </strong>
             <h2 class="about-stat__label">{{ $stat['label'] }}</h2>
             <p class="about-stat__description">{{ $stat['description'] }}</p>

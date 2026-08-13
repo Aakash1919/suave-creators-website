@@ -82,150 +82,31 @@
 @push('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const faqItems = document.querySelectorAll('.faq-list .faq-item');
+    var faqItems = document.querySelectorAll('.faq-list .faq-item');
     if (!faqItems.length) return;
 
-    const faqMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const faqAnimationTokens = new WeakMap();
-    const faqTransitionHandlers = new WeakMap();
-
-    function nextFaqAnimationToken(item) {
-      const token = (faqAnimationTokens.get(item) || 0) + 1;
-      faqAnimationTokens.set(item, token);
-      return token;
-    }
-
-    function clearFaqTransitionHandler(answer) {
-      const handler = faqTransitionHandlers.get(answer);
-
-      if (handler) {
-        answer.removeEventListener('transitionend', handler);
-        faqTransitionHandlers.delete(answer);
-      }
-    }
-
     function setFaqAria(item, isOpen) {
-      const button = item.querySelector('.faq-item__summary');
-      const answer = item.querySelector('.faq-item__answer');
-
+      var button = item.querySelector('.faq-item__summary');
+      var answer = item.querySelector('.faq-item__answer');
       button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       answer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
     }
 
-    function openFaq(item) {
-      const answer = item.querySelector('.faq-item__answer');
-      const token = nextFaqAnimationToken(item);
-
-      clearFaqTransitionHandler(answer);
-      item.classList.add('is-open');
-      setFaqAria(item, true);
-
-      if (faqMotionQuery.matches) {
-        answer.style.height = 'auto';
-        return;
-      }
-
-      const startHeight = answer.getBoundingClientRect().height;
-      answer.style.height = startHeight + 'px';
-      answer.offsetHeight;
-
-      const onHeightEnd = function (event) {
-        if (
-          event.propertyName === 'height' &&
-          faqAnimationTokens.get(item) === token &&
-          item.classList.contains('is-open')
-        ) {
-          answer.style.height = 'auto';
-          clearFaqTransitionHandler(answer);
-        }
-      };
-
-      faqTransitionHandlers.set(answer, onHeightEnd);
-      answer.addEventListener('transitionend', onHeightEnd);
-
-      requestAnimationFrame(function () {
-        if (faqAnimationTokens.get(item) === token) {
-          answer.style.height = answer.scrollHeight + 'px';
-        }
-      });
-    }
-
-    function closeFaq(item) {
-      const answer = item.querySelector('.faq-item__answer');
-      const token = nextFaqAnimationToken(item);
-
-      clearFaqTransitionHandler(answer);
-
-      if (faqMotionQuery.matches) {
-        item.classList.remove('is-open');
-        setFaqAria(item, false);
-        answer.style.height = '0px';
-        return;
-      }
-
-      const startHeight = answer.style.height === 'auto'
-        ? answer.scrollHeight
-        : answer.getBoundingClientRect().height;
-
-      answer.style.height = startHeight + 'px';
-      answer.offsetHeight;
-      item.classList.remove('is-open');
-      setFaqAria(item, false);
-
-      const onHeightEnd = function (event) {
-        if (
-          event.propertyName === 'height' &&
-          faqAnimationTokens.get(item) === token &&
-          !item.classList.contains('is-open')
-        ) {
-          answer.style.height = '0px';
-          clearFaqTransitionHandler(answer);
-        }
-      };
-
-      faqTransitionHandlers.set(answer, onHeightEnd);
-      answer.addEventListener('transitionend', onHeightEnd);
-
-      requestAnimationFrame(function () {
-        if (faqAnimationTokens.get(item) === token) {
-          answer.style.height = '0px';
-        }
-      });
-    }
-
     faqItems.forEach(function (item) {
-      const answer = item.querySelector('.faq-item__answer');
-      const isOpen = item.classList.contains('is-open');
-
-      answer.style.transition = 'none';
-      answer.style.height = isOpen ? 'auto' : '0px';
-      setFaqAria(item, isOpen);
-    });
-
-    if (faqItems.length) {
-      faqItems[0].offsetHeight;
-    }
-
-    faqItems.forEach(function (item) {
-      const button = item.querySelector('.faq-item__summary');
-      const answer = item.querySelector('.faq-item__answer');
-
-      answer.style.removeProperty('transition');
+      var button = item.querySelector('.faq-item__summary');
 
       button.addEventListener('click', function () {
-        const shouldOpen = !item.classList.contains('is-open');
+        var shouldOpen = !item.classList.contains('is-open');
 
         faqItems.forEach(function (sibling) {
           if (sibling !== item && sibling.classList.contains('is-open')) {
-            closeFaq(sibling);
+            sibling.classList.remove('is-open');
+            setFaqAria(sibling, false);
           }
         });
 
-        if (shouldOpen) {
-          openFaq(item);
-        } else {
-          closeFaq(item);
-        }
+        item.classList.toggle('is-open', shouldOpen);
+        setFaqAria(item, shouldOpen);
       });
     });
   });

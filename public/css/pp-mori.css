@@ -1,6 +1,6 @@
 /* PP Mori — loaded after first paint (see frontend-deferred.js). */
 @font-face {
-  font-display: swap;
+  font-display: optional;
   font-family: "PP Mori";
   src: url("/fonts/PPMori-Regular.ttf") format("truetype");
   font-style: normal;
@@ -8,7 +8,7 @@
 }
 
 @font-face {
-  font-display: swap;
+  font-display: optional;
   font-family: "PP Mori";
   src: url("/fonts/PPMori-Medium.ttf") format("truetype");
   font-style: normal;
@@ -16,7 +16,7 @@
 }
 
 @font-face {
-  font-display: swap;
+  font-display: optional;
   font-family: "PP Mori";
   src: url("/fonts/PPMori-Semibold.ttf") format("truetype");
   font-style: normal;
@@ -24,7 +24,7 @@
 }
 
 @font-face {
-  font-display: swap;
+  font-display: optional;
   font-family: "PP Mori";
   src: url("/fonts/PPMori-Bold.ttf") format("truetype");
   font-style: normal;
@@ -32,7 +32,7 @@
 }
 
 @font-face {
-  font-display: swap;
+  font-display: optional;
   font-family: "PP Mori";
   src: url("/fonts/PPMori-Extrabold.ttf") format("truetype");
   font-style: normal;
