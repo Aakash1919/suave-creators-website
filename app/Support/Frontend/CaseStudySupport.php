@@ -131,8 +131,8 @@ class CaseStudySupport
                 'alt' => 'Product growth case study insight from Suave Creators',
             ],
             [
-                'src' => 'assets/case-studies/shownoshow/location-check-in.jpg',
-                'alt' => 'Appointment location check-in map designed by Suave Creators',
+                'src' => 'assets/case-studies/appointment-insurance/location-check-in.jpg',
+                'alt' => 'Appointment insurance location check-in map by Suave Creators',
             ],
             [
                 'src' => 'assets/case-studies/suave-crm-outreach/outreach-new-company-intelligence.png',

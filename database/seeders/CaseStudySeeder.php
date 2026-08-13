@@ -33,6 +33,15 @@ class CaseStudySeeder extends Seeder
         $imported = 0;
         $updated = 0;
 
+        // Remap legacy public slugs so re-seed updates the same row.
+        foreach ([
+            'shownoshow-appointment-insurance' => 'appointment-insurance-platform-case-study',
+        ] as $legacySlug => $newSlug) {
+            CaseStudy::withTrashed()
+                ->where('slug', $legacySlug)
+                ->update(['slug' => $newSlug]);
+        }
+
         $this->command?->info('Seeding '.count($raw).' case study(ies) from database/data/case-studies…');
 
         foreach ($raw as $index => $payload) {
