@@ -46,6 +46,52 @@ class CaseStudySupport
     }
 
     /**
+     * Published case studies tagged for a service page (or any service when slug is null).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function forService(?string $slug = null, int $limit = 6): array
+    {
+        return self::forPlacement('service_slugs', $slug, $limit);
+    }
+
+    /**
+     * Published case studies tagged for an industry page (or any industry when slug is null).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function forIndustry(?string $slug = null, int $limit = 6): array
+    {
+        return self::forPlacement('industry_slugs', $slug, $limit);
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    protected static function forPlacement(string $column, ?string $slug, int $limit): array
+    {
+        $query = CaseStudy::query()
+            ->published()
+            ->orderBy('sort_order')
+            ->orderBy('id');
+
+        if ($slug !== null && $slug !== '') {
+            $query->whereJsonContains($column, $slug);
+        } else {
+            $query->whereNotNull($column)
+                ->where($column, '!=', '[]')
+                ->where($column, '!=', 'null');
+        }
+
+        return $query
+            ->limit(max(1, $limit))
+            ->get()
+            ->map(fn (CaseStudy $caseStudy): array => self::mapCase($caseStudy))
+            ->values()
+            ->all();
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public static function indexData(): array
@@ -181,6 +227,8 @@ class CaseStudySupport
             'short_description' => (string) ($caseStudy->short_description ?? ''),
             'listing_subtitle' => (string) ($caseStudy->listing_subtitle ?? ''),
             'industry' => (string) ($caseStudy->industry ?? ''),
+            'service_slugs' => is_array($caseStudy->service_slugs) ? array_values($caseStudy->service_slugs) : [],
+            'industry_slugs' => is_array($caseStudy->industry_slugs) ? array_values($caseStudy->industry_slugs) : [],
             'client' => (string) ($caseStudy->client ?? ''),
             'year' => (string) ($caseStudy->year ?? ''),
             'technologies' => is_array($caseStudy->technologies) ? $caseStudy->technologies : [],

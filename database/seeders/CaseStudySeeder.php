@@ -53,6 +53,8 @@ class CaseStudySeeder extends Seeder
                 'short_description' => (string) ($payload['short_description'] ?? ''),
                 'listing_subtitle' => $payload['listing_subtitle'] ?? null,
                 'industry' => $payload['industry'] ?? null,
+                'service_slugs' => $this->stringList($payload['service_slugs'] ?? null) ?? [],
+                'industry_slugs' => $this->stringList($payload['industry_slugs'] ?? null) ?? [],
                 'client' => $payload['client'] ?? null,
                 'year' => $payload['year'] ?? null,
                 'featured_image' => $this->normalizeImagePath($payload['image'] ?? null),

@@ -92,6 +92,14 @@ class CaseStudyService
         $data['technologies'] = $this->normalizeTechnologies($data['technologies'] ?? null);
         $data['results'] = $this->normalizeResults($data['results'] ?? null);
         $data['sections'] = $this->normalizeSections($data['sections'] ?? null);
+        $data['service_slugs'] = $this->normalizePlacementSlugs(
+            $data['service_slugs'] ?? null,
+            array_keys($this->servicePlacementOptions())
+        );
+        $data['industry_slugs'] = $this->normalizePlacementSlugs(
+            $data['industry_slugs'] ?? null,
+            array_keys($this->industryPlacementOptions())
+        );
         $data['sort_order'] = (int) ($data['sort_order'] ?? 0);
         unset($data['featured_image']);
 
@@ -100,6 +108,64 @@ class CaseStudyService
         }
 
         return $data;
+    }
+
+    /**
+     * Service detail pages where a case study may appear (slug => label).
+     *
+     * @return array<string, string>
+     */
+    public function servicePlacementOptions(): array
+    {
+        return [
+            'web-development-services' => 'Web Development Services',
+            'custom-crm-development' => 'Custom CRM Development',
+            'enterprise-software-solutions' => 'Enterprise Software Solutions',
+            'e-commerce-development' => 'E-commerce Development',
+        ];
+    }
+
+    /**
+     * Industry detail pages where a case study may appear (slug => label).
+     *
+     * @return array<string, string>
+     */
+    public function industryPlacementOptions(): array
+    {
+        return [
+            'healthcare' => 'Healthcare',
+            'it-software-solutions-for-startups' => 'IT & Software for Startups',
+            'finance-banking-software-development' => 'Finance & Banking',
+            'retail-ecommerce-solutions' => 'Retail & E-commerce',
+            'logistics-supply-chain-apps' => 'Logistics & Supply Chain',
+            'education-elearning-platforms' => 'Education & E-learning',
+        ];
+    }
+
+    /**
+     * Keep only allowed placement slugs in a stable unique list.
+     *
+     * @param  list<string>  $allowed
+     * @return list<string>
+     */
+    public function normalizePlacementSlugs(mixed $items, array $allowed): array
+    {
+        if (! is_array($items) || $items === []) {
+            return [];
+        }
+
+        $allowedLookup = array_fill_keys($allowed, true);
+        $out = [];
+
+        foreach ($items as $item) {
+            $slug = trim((string) $item);
+            if ($slug === '' || ! isset($allowedLookup[$slug]) || isset($out[$slug])) {
+                continue;
+            }
+            $out[$slug] = $slug;
+        }
+
+        return array_values($out);
     }
 
     /**

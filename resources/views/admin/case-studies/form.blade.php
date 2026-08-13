@@ -20,6 +20,13 @@
       $technologiesValue = implode(', ', is_array($caseStudy->technologies) ? $caseStudy->technologies : []);
   }
 
+  $selectedServiceSlugs = old('service_slugs', is_array($caseStudy->service_slugs) ? $caseStudy->service_slugs : []);
+  $selectedServiceSlugs = is_array($selectedServiceSlugs) ? array_map('strval', $selectedServiceSlugs) : [];
+  $selectedIndustrySlugs = old('industry_slugs', is_array($caseStudy->industry_slugs) ? $caseStudy->industry_slugs : []);
+  $selectedIndustrySlugs = is_array($selectedIndustrySlugs) ? array_map('strval', $selectedIndustrySlugs) : [];
+  $serviceOptions = $serviceOptions ?? [];
+  $industryOptions = $industryOptions ?? [];
+
   $visualLabels = [
       'discovery' => 'Discovery (map / search)',
       'preparation' => 'Preparation (document / AI)',
@@ -96,10 +103,10 @@
                                     placeholder="Client or product name">
                             </div>
                             <div>
-                                <label class="admin-label" for="case-study-industry">Industry</label>
+                                <label class="admin-label" for="case-study-industry">Display industry</label>
                                 <input id="case-study-industry" type="text" name="industry"
                                     value="{{ old('industry', $caseStudy->industry) }}" class="admin-input"
-                                    placeholder="Shown as the hero eyebrow">
+                                    placeholder="Hero eyebrow label (free text)">
                             </div>
                             <div>
                                 <label class="admin-label" for="case-study-year">Year</label>
@@ -111,6 +118,34 @@
                                 <input id="case-study-technologies" type="text" name="technologies"
                                     value="{{ $technologiesValue }}" class="admin-input"
                                     placeholder="Comma-separated, e.g. Map discovery, AI briefings">
+                            </div>
+                        </div>
+                        <div class="admin-form-grid admin-form-grid--2">
+                            <div>
+                                <span class="admin-label">Show on services</span>
+                                <p class="admin-help">Select service pages that should feature this case study.</p>
+                                <div class="admin-check-grid">
+                                    @foreach ($serviceOptions as $slug => $label)
+                                        <label class="admin-check">
+                                            <input type="checkbox" name="service_slugs[]" value="{{ $slug }}"
+                                                @checked(in_array($slug, $selectedServiceSlugs, true))>
+                                            <span>{{ $label }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div>
+                                <span class="admin-label">Show on industries</span>
+                                <p class="admin-help">Select industry pages that should feature this case study.</p>
+                                <div class="admin-check-grid">
+                                    @foreach ($industryOptions as $slug => $label)
+                                        <label class="admin-check">
+                                            <input type="checkbox" name="industry_slugs[]" value="{{ $slug }}"
+                                                @checked(in_array($slug, $selectedIndustrySlugs, true))>
+                                            <span>{{ $label }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -336,15 +371,26 @@
                     </section>
                 @endforeach
 
-                <details class="admin-card admin-blog-form__seo" data-details-persist>
+                <details class="admin-card admin-blog-form__seo" data-details-persist open>
                     <summary class="admin-blog-form__seo-summary">
                         <div>
                             <h2 class="admin-card__title">SEO</h2>
-                            <p>Optional meta and Open Graph. Enter these by hand — nothing is generated.</p>
+                            <p>Optional meta and Open Graph.</p>
                         </div>
                         <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </summary>
                     <div class="admin-card__body space-y-5">
+                        @if ($caseStudy->exists)
+                            <div class="admin-blog-form__seo-toolbar">
+                                <p class="admin-blog-form__seo-hint">Generate suggestions from the current title, short description, and overview. Nothing is saved until you click Save changes.</p>
+                                <button type="button" id="case-study-generate-seo" class="admin-btn admin-btn--secondary admin-btn--sm"
+                                    data-url="{{ route('admin.case-studies.generate-seo', $caseStudy) }}"
+                                    data-loading-text="Generating…">
+                                    <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                                    Generate SEO meta
+                                </button>
+                            </div>
+                        @endif
                         <div class="admin-form-grid admin-form-grid--2">
                             <div>
                                 <label class="admin-label" for="case-study-meta-title">Meta title</label>
@@ -476,6 +522,74 @@
                     }
                     img.src = url;
                 });
+            });
+
+            const generateSeoBtn = document.getElementById('case-study-generate-seo');
+            generateSeoBtn?.addEventListener('click', function () {
+                const btn = this;
+                const url = btn.getAttribute('data-url');
+                if (!url || btn.classList.contains('is-loading')) {
+                    return;
+                }
+
+                const form = document.querySelector('.admin-blog-form');
+                const title = document.getElementById('case-study-title')?.value?.trim() || '';
+                if (!title) {
+                    SuaveAdmin.createFlashMessage('error', 'Add a case study title before generating SEO meta.');
+                    return;
+                }
+
+                const originalHtml = btn.innerHTML;
+                const loadingText = btn.getAttribute('data-loading-text') || 'Generating…';
+                btn.classList.add('is-loading');
+                btn.disabled = true;
+                btn.setAttribute('aria-busy', 'true');
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> ' + loadingText;
+
+                SuaveAdmin.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            _token: document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ||
+                                form?.querySelector('input[name="_token"]')?.value,
+                            _ajax: 1,
+                            title: title,
+                            short_description: document.getElementById('case-study-short-description')?.value || '',
+                            client: document.getElementById('case-study-client')?.value || '',
+                            industry: document.getElementById('case-study-industry')?.value || '',
+                            challenge: document.getElementById('case-study-challenge')?.value || '',
+                            solution: document.getElementById('case-study-solution')?.value || '',
+                            outcome: document.getElementById('case-study-outcome')?.value || '',
+                        },
+                    })
+                    .done(function (response) {
+                        const seo = response?.seo || {};
+                        const fields = {
+                            'case-study-meta-title': seo.meta_title,
+                            'case-study-meta-description': seo.meta_description,
+                            'case-study-og-title': seo.og_title,
+                            'case-study-og-description': seo.og_description,
+                        };
+                        Object.keys(fields).forEach(function (id) {
+                            const el = document.getElementById(id);
+                            if (el && fields[id] != null) {
+                                el.value = fields[id];
+                            }
+                        });
+                        SuaveAdmin.createFlashMessage(
+                            'success',
+                            response?.message || 'SEO meta generated. Review the fields and save when ready.'
+                        );
+                    })
+                    .fail(function (xhr) {
+                        SuaveAdmin.toast.validation(xhr, 'Unable to generate SEO meta.');
+                    })
+                    .always(function () {
+                        btn.classList.remove('is-loading');
+                        btn.disabled = false;
+                        btn.removeAttribute('aria-busy');
+                        btn.innerHTML = originalHtml;
+                    });
             });
         });
     </script>

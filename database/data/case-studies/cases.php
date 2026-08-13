@@ -12,6 +12,8 @@ return [
     'short_description' => 'Ematrics helps fast-growing sales teams keep performance consistent as they hire — with AI practice, live call coaching, and clear scores so new reps ramp faster and managers don’t wait on recordings.',
     'listing_subtitle' => 'AI Sales Coaching for Growing Sales Teams',
     'industry' => 'Sales Enablement',
+    'service_slugs' => ['custom-crm-development', 'enterprise-software-solutions'],
+    'industry_slugs' => ['it-software-solutions-for-startups'],
     'client' => 'Ematrics',
     'year' => '2026',
     'results' => [
@@ -59,7 +61,9 @@ return [
     'short_description' => 'We redesigned Suave CRM’s fragmented outbound process into one clear workspace, helping sales teams find companies, understand prospects, and begin relevant conversations with about 65% fewer steps.',
     'listing_subtitle' => 'A Clearer Outbound Sales Workflow',
     'industry' => 'B2B SaaS / Sales CRM',
-    'client' => 'Suave CRM',
+    'service_slugs' => ['custom-crm-development'],
+    'industry_slugs' => ['it-software-solutions-for-startups'],
+    'client' => null,
     'year' => '2026',
     'results' => [
       ['value' => '~65%', 'label' => 'Fewer steps for routine sales prospecting'],
@@ -114,6 +118,8 @@ return [
     'short_description' => 'Suave CRM rebuilt Tasks into a project-scoped workspace with List, Kanban, and an AI Task Assistant — ask what’s overdue, list your work, and create tasks by typing, with ~50% less switching between separate views.',
     'listing_subtitle' => 'Project Workspace + AI Task Assistant',
     'industry' => 'B2B SaaS / Delivery CRM',
+    'service_slugs' => ['custom-crm-development', 'enterprise-software-solutions'],
+    'industry_slugs' => ['it-software-solutions-for-startups'],
     'client' => 'Suave CRM',
     'year' => '2026',
     'results' => [
@@ -169,6 +175,8 @@ return [
     'short_description' => 'A free Spiritual Energy Scan in under 2 minutes becomes AI-personalized Vedic insight across six life areas — then a clear Dev, Mantra, Yantra, or Daan path to buy, gift, or fulfill.',
     'listing_subtitle' => 'Spiritual Energy Scan to Sacred Commerce',
     'industry' => 'Spiritual Wellness / Ecommerce',
+    'service_slugs' => ['e-commerce-development', 'web-development-services'],
+    'industry_slugs' => ['retail-ecommerce-solutions'],
     'client' => 'Teerrath',
     'year' => '2026',
     'results' => [
@@ -226,6 +234,8 @@ return [
     'short_description' => 'Appointment Insurance™ with smart Stripe refunds that cut card fees on returned deposits — plus text invites, arrival check-in, and fair no-show payouts.',
     'listing_subtitle' => 'Appointment Insurance Against No-Shows',
     'industry' => 'Appointment Insurance / Scheduling',
+    'service_slugs' => ['web-development-services', 'custom-crm-development'],
+    'industry_slugs' => ['healthcare', 'finance-banking-software-development'],
     'client' => 'ShowNoShow',
     'year' => '2025',
     'results' => [
@@ -273,6 +283,8 @@ return [
     'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
     'listing_subtitle' => 'Automated AI Product Matching',
     'industry' => 'Nonprofit / Procurement',
+    'service_slugs' => ['enterprise-software-solutions', 'web-development-services'],
+    'industry_slugs' => ['it-software-solutions-for-startups', 'education-elearning-platforms'],
     'client' => 'CABVI',
     'year' => '2026',
     'results' => [
