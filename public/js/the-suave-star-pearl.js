@@ -23,22 +23,8 @@
   }
 
   function ensureRemovalObserver() {
-    if (
-      removalObserver ||
-      !doc ||
-      !doc.documentElement ||
-      typeof global.MutationObserver !== "function"
-    ) return;
-
-    removalObserver = new global.MutationObserver(() => {
-      for (const controller of Array.from(controllers)) {
-        if (!controller.root.isConnected) controller.destroy();
-      }
-    });
-    removalObserver.observe(doc.documentElement, {
-      childList: true,
-      subtree: true,
-    });
+    // Intentionally no document-wide MutationObserver — it forced main-thread work
+    // on every DOM mutation. Emblems are static layout chrome and cleaned via destroy().
   }
 
   class EmblemController {
@@ -174,12 +160,20 @@
 
   global.TheSuaveStarPearl = api;
   if (doc) {
+    function boot() {
+      if ('requestIdleCallback' in global) {
+        global.requestIdleCallback(function () { api.initAll(); }, { timeout: 1500 });
+      } else {
+        global.setTimeout(function () { api.initAll(); }, 1);
+      }
+    }
+
     if (doc.readyState === "loading") {
-      doc.addEventListener("DOMContentLoaded", () => api.initAll(), {
+      doc.addEventListener("DOMContentLoaded", boot, {
         once: true,
       });
     } else {
-      api.initAll();
+      boot();
     }
   }
 })(window);
