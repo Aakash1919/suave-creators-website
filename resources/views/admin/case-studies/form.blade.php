@@ -97,12 +97,6 @@
                         </div>
                         <div class="admin-form-grid admin-form-grid--2">
                             <div>
-                                <label class="admin-label" for="case-study-client">Client</label>
-                                <input id="case-study-client" type="text" name="client"
-                                    value="{{ old('client', $caseStudy->client) }}" class="admin-input"
-                                    placeholder="Client or product name">
-                            </div>
-                            <div>
                                 <label class="admin-label" for="case-study-industry">Display industry</label>
                                 <input id="case-study-industry" type="text" name="industry"
                                     value="{{ old('industry', $caseStudy->industry) }}" class="admin-input"

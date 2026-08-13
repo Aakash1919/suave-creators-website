@@ -6,24 +6,35 @@
  */
 return [
   [
-    'slug' => 'ematrics-ai-sales-coaching',
-    'title' => 'Ematrics — An AI Sales Coach That Practices, Whispers, and Scores',
+    'slug' => 'ai-sales-coaching-platform-case-study',
+    'title' => 'An AI Sales Coach That Practices, Whispers, and Scores',
     'image' => 'assets/case-studies/ematrics/ai-sales-coach-hero.jpg',
-    'short_description' => 'Ematrics helps fast-growing sales teams keep performance consistent as they hire — with AI practice, live call coaching, and clear scores so new reps ramp faster and managers don’t wait on recordings.',
-    'listing_subtitle' => 'AI Sales Coaching for Growing Sales Teams',
+    'short_description' => 'An AI sales coaching platform that helps fast-growing teams keep performance consistent as they hire — with voice practice, live call coaching, and clear scores so new reps ramp faster and managers don’t wait on recordings.',
+    'listing_subtitle' => 'AI Sales Coaching Platform for Growing Teams',
     'industry' => 'Sales Enablement',
     'service_slugs' => ['custom-crm-development', 'enterprise-software-solutions'],
     'industry_slugs' => ['it-software-solutions-for-startups'],
-    'client' => 'Ematrics',
     'year' => '2026',
+    'meta_title' => 'AI Sales Coaching Platform Case Study | Suave Creators',
+    'meta_description' => 'Case study: how Suave Creators built an AI sales coaching platform with voice practice, live call assist, and post-call scoring for faster ramp and consistent call quality.',
+    'og_title' => 'AI Sales Coaching Platform Case Study',
+    'og_description' => 'See how an AI sales coach practices with reps, whispers live tips, and scores calls so growing teams ramp faster without living in a recording queue.',
     'results' => [
       ['value' => '~55%', 'label' => 'Faster path from hire to confident customer calls'],
       ['value' => '~60%', 'label' => 'Less manager time spent reviewing recordings for feedback'],
       ['value' => '~50%', 'label' => 'Improvement in call quality consistency as the team expands'],
       ['value' => '~45%', 'label' => 'Fewer opportunities lost waiting on delayed coaching'],
     ],
+    'technologies' => [
+      'AI sales coaching',
+      'Voice practice',
+      'Live call assist',
+      'Call scoring',
+      'Buyer personas',
+      'Calendar sync',
+    ],
     'challenge' => 'A fast-growing company was struggling to maintain consistent sales performance as its team expanded. New sales representatives required weeks of coaching before handling customer calls confidently, while sales managers had limited time to review recordings and provide feedback. As a result, coaching was delayed, call quality varied across the team, and valuable opportunities were lost before improvements could be made. The harder build was an AI agent that could play realistic buyers for practice, whisper short tips during live calls, and score messy conversations quickly enough for managers to coach without living in a recording queue.',
-    'solution' => 'Ematrics is an AI sales catalyst for growing teams: voice practice against six buyer personalities so new reps gain confidence before customer calls, live meeting assist for objections and next asks so coaching isn’t delayed, and post-call scores with clear next actions so managers can act without reviewing every recording. Teams connect Google or Microsoft calendars and use Stripe-backed AI-minute plans as the roster grows.',
+    'solution' => 'We built an AI sales catalyst for growing teams: voice practice against six buyer personalities so new reps gain confidence before customer calls, live meeting assist for objections and next asks so coaching isn’t delayed, and post-call scores with clear next actions so managers can act without reviewing every recording. Teams connect Google or Microsoft calendars and use Stripe-backed AI-minute plans as the roster grows.',
     'outcome' => 'New hires ramp toward confident customer calls without waiting weeks on scarce manager time. Coaching lands during and right after the conversation — not only when someone finds a recording. Call quality stays more consistent as the team expands, and fewer opportunities slip away before feedback can land.',
     'sections' => [
       [
@@ -37,6 +48,7 @@ return [
           'Face six personalities that stay in character',
           'Build confidence before the first high-stakes customer call',
         ],
+        'image' => 'assets/case-studies/ematrics/objection-handling.png',
         'image_side' => 'right',
       ],
       [
@@ -50,6 +62,7 @@ return [
           'Clear scores when the call ends — not days later',
           'Team views that keep quality more consistent as you hire',
         ],
+        'image' => 'assets/case-studies/ematrics/call-assist.png',
         'image_side' => 'left',
       ],
     ],
@@ -63,7 +76,6 @@ return [
     'industry' => 'B2B SaaS / Sales CRM',
     'service_slugs' => ['custom-crm-development'],
     'industry_slugs' => ['it-software-solutions-for-startups'],
-    'client' => null,
     'year' => '2026',
     'meta_title' => 'B2B CRM Outbound Sales Workflow | the suave app',
     'meta_description' => 'How we unified B2B CRM outbound sales in the suave app — map discovery, AI prospecting, cold email, and pipeline tracking in one workspace with 65% fewer steps.',
@@ -124,7 +136,6 @@ return [
     'industry' => 'B2B SaaS / Work Management',
     'service_slugs' => ['custom-crm-development'],
     'industry_slugs' => ['it-software-solutions-for-startups'],
-    'client' => null,
     'year' => '2026',
     'meta_title' => 'B2B CRM Task Management Redesign | the suave app',
     'meta_description' => 'How we unified B2B CRM task management in the suave app — Kanban and List view integration, AI project management, and an automated task assistant in one workspace.',
@@ -185,7 +196,6 @@ return [
     'industry' => 'Spiritual Wellness / Ecommerce',
     'service_slugs' => ['e-commerce-development', 'web-development-services'],
     'industry_slugs' => ['retail-ecommerce-solutions'],
-    'client' => 'Teerrath',
     'year' => '2026',
     'results' => [
       ['value' => '<2m', 'label' => 'Free Spiritual Energy Scan completion'],
@@ -244,7 +254,6 @@ return [
     'industry' => 'Appointment Insurance / Scheduling',
     'service_slugs' => ['web-development-services', 'custom-crm-development'],
     'industry_slugs' => ['healthcare', 'finance-banking-software-development'],
-    'client' => 'ShowNoShow',
     'year' => '2025',
     'results' => [
       ['value' => '~$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
@@ -293,7 +302,6 @@ return [
     'industry' => 'Nonprofit / Procurement',
     'service_slugs' => ['enterprise-software-solutions', 'web-development-services'],
     'industry_slugs' => ['it-software-solutions-for-startups', 'education-elearning-platforms'],
-    'client' => 'CABVI',
     'year' => '2026',
     'results' => [
       ['value' => '~70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],

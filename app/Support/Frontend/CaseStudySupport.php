@@ -229,7 +229,6 @@ class CaseStudySupport
             'industry' => (string) ($caseStudy->industry ?? ''),
             'service_slugs' => is_array($caseStudy->service_slugs) ? array_values($caseStudy->service_slugs) : [],
             'industry_slugs' => is_array($caseStudy->industry_slugs) ? array_values($caseStudy->industry_slugs) : [],
-            'client' => (string) ($caseStudy->client ?? ''),
             'year' => (string) ($caseStudy->year ?? ''),
             'technologies' => is_array($caseStudy->technologies) ? $caseStudy->technologies : [],
             'results' => is_array($caseStudy->results) ? $caseStudy->results : [],

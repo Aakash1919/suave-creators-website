@@ -32,7 +32,6 @@ trait ValidatesCaseStudyFields
             'service_slugs.*' => ['string', Rule::in(ServiceSupport::SLUGS)],
             'industry_slugs' => ['nullable', 'array'],
             'industry_slugs.*' => ['string', Rule::in(array_keys(IndustryDetailSupport::SLUG_FILES))],
-            'client' => ['nullable', 'string', 'max:160'],
             'year' => ['nullable', 'string', 'max:20'],
             'status' => ['required', Rule::in([CaseStudy::STATUS_DRAFT, CaseStudy::STATUS_PUBLISHED])],
             'published_at' => ['nullable', 'date'],

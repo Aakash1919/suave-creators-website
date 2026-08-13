@@ -102,6 +102,7 @@ class CaseStudyService
         );
         $data['sort_order'] = (int) ($data['sort_order'] ?? 0);
         unset($data['featured_image']);
+        $data['client'] = null;
 
         if (($data['status'] ?? null) === CaseStudy::STATUS_PUBLISHED && empty($data['published_at'])) {
             $data['published_at'] = now();

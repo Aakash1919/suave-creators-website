@@ -14,7 +14,7 @@
           <span aria-hidden="true">/</span>
           <a href="{{ route('case-studies') }}">Case Studies</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">{{ $case['client'] ?? $case['title'] }}</span>
+          <span aria-current="page">{{ $case['title'] }}</span>
         </nav>
 
         @if (! empty($isDraft) || ! empty($case['is_draft']))
@@ -28,9 +28,6 @@
         <p class="case-study-detail-hero__lead">{{ $case['short_description'] }}</p>
 
         <div class="case-study-detail-hero__meta">
-          @if (! empty($case['client']))
-            <span><strong>Client</strong> {{ $case['client'] }}</span>
-          @endif
           @if (! empty($case['year']))
             <span><strong>Year</strong> {{ $case['year'] }}</span>
           @endif

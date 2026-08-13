@@ -55,7 +55,7 @@ class CaseStudySeeder extends Seeder
                 'industry' => $payload['industry'] ?? null,
                 'service_slugs' => $this->stringList($payload['service_slugs'] ?? null) ?? [],
                 'industry_slugs' => $this->stringList($payload['industry_slugs'] ?? null) ?? [],
-                'client' => $payload['client'] ?? null,
+                'client' => null,
                 'year' => $payload['year'] ?? null,
                 'featured_image' => $this->normalizeImagePath($payload['image'] ?? null),
                 'created_by_id' => $admin->id,
@@ -204,7 +204,7 @@ class CaseStudySeeder extends Seeder
                 $visual = CaseStudy::VISUALS[$index % count(CaseStudy::VISUALS)];
             }
 
-            $out[] = [
+            $section = [
                 'type' => 'split',
                 'visual' => $visual,
                 'image_side' => ($item['image_side'] ?? ($index === 0 ? 'right' : 'left')) === 'left' ? 'left' : 'right',
@@ -213,6 +213,13 @@ class CaseStudySeeder extends Seeder
                 'body' => trim((string) ($item['body'] ?? '')),
                 'points' => $points,
             ];
+
+            $image = $this->normalizeImagePath($item['image'] ?? null);
+            if ($image !== null) {
+                $section['image'] = $image;
+            }
+
+            $out[] = $section;
         }
 
         return $out === [] ? null : $out;
