@@ -213,10 +213,7 @@ class ServiceSupport
                 fn (mixed $icon): string => asset(is_string($icon) ? self::mapDesignPath($icon) : ''),
                 $service['marqueeIcons'] ?? self::defaultMarqueeIcons(),
             ),
-            'portfolioImages' => array_map(
-                fn (mixed $image): string => asset(is_string($image) ? self::mapDesignPath($image) : ''),
-                $service['portfolioImages'] ?? self::defaultPortfolioImages(),
-            ),
+            'portfolioItems' => self::mapPortfolioItems($service['portfolioImages'] ?? self::defaultPortfolioImages()),
             'introStats' => self::introStats(),
             'industryCards' => self::mapIndustryCards($service['industries'] ?? []),
             'standoutCards' => self::mapStandoutCards($service['standoutCards'] ?? []),
@@ -295,7 +292,7 @@ class ServiceSupport
 
         return match (true) {
             $path === 'services' => route('services'),
-            $path === 'contact-us' => route('contact-us').(str_contains($href, '#') ? '#'.(string) str($href)->after('#') : ''),
+            $path === 'contact-us' => ContactSupport::demoHref(),
             $path === 'blogs' => route('blogs'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),
             str_starts_with($path, 'service/') => route('service.show', ['slug' => (string) str($path)->after('service/')]),
@@ -377,5 +374,49 @@ class ServiceSupport
             '/assets/portfolio/suave-outreach-crm-laptop.webp',
             '/assets/portfolio/ematrics-ai-sales-website.webp',
         ];
+    }
+
+    /**
+     * @param  array<int, mixed>  $images
+     * @return array<int, array{image: string, url: string, alt: string, external: bool}>
+     */
+    protected static function mapPortfolioItems(array $images): array
+    {
+        $byBasename = [];
+
+        foreach (HomeSupport::portfolioShowcaseProjects() as $project) {
+            $basename = basename((string) ($project['image'] ?? ''));
+
+            if ($basename !== '') {
+                $byBasename[$basename] = $project;
+            }
+        }
+
+        $items = [];
+
+        foreach ($images as $index => $image) {
+            if (! is_string($image) || $image === '') {
+                continue;
+            }
+
+            $mapped = self::mapDesignPath($image);
+            $basename = basename($mapped);
+            $project = $byBasename[$basename] ?? null;
+            $alt = is_array($project) && is_string($project['alt'] ?? null)
+                ? (string) $project['alt']
+                : 'Suave Creators project showcase '.($index + 1);
+            $url = is_array($project) && is_string($project['url'] ?? null)
+                ? (string) $project['url']
+                : '';
+
+            $items[] = [
+                'image' => asset($mapped),
+                'url' => $url,
+                'alt' => $alt,
+                'external' => is_array($project) ? (bool) ($project['external'] ?? false) : false,
+            ];
+        }
+
+        return $items;
     }
 }

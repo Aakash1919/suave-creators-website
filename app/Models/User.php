@@ -38,6 +38,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Case studies authored by this user.
+     */
+    public function caseStudies(): HasMany
+    {
+        return $this->hasMany(CaseStudy::class, 'created_by_id');
+    }
+
+    /**
      * Whether the user may enter the admin panel (roles gate features inside).
      */
     public function canAccessAdmin(): bool

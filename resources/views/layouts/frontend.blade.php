@@ -66,7 +66,7 @@
         <link rel="stylesheet" href="{{ $deferredCssHref }}">
     @endif
 
-    @vite('resources/css/app.css')
+@vite('resources/css/app.css')
 
     {{-- Non-critical CSS: preload so it does not block first paint / LCP. --}}
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" onload="this.onload=null;this.rel='stylesheet'">

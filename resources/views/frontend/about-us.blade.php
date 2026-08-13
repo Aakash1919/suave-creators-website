@@ -22,7 +22,7 @@
           Fortune 500 companies.</span>
       </p>
 
-      <a href="{{ route('contact-us') }}#contact-id"
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
         class="group mt-8 inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-[3px_7px_22px_-6px_#2A4DFB24] transition hover:brightness-110 whitespace-nowrap sm:mt-10 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
         Let's Discuss
         <x-frontend.cta-arrow />
@@ -65,7 +65,7 @@
         </p>
 
         <div class="mt-6 flex flex-wrap items-center gap-4 sm:mt-8 sm:gap-5">
-          <a href="{{ route('contact-us') }}#contact-id"
+          <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
             class="inline-flex min-h-11 items-center underline text-sm font-semibold bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] bg-clip-text text-transparent transition hover:opacity-80">
             Need more services based on your demand?
           </a>

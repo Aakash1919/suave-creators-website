@@ -14,7 +14,7 @@ class ProductSupport
             'mainClass' => 'site-main product-layout-main',
             'useHeroBackground' => true,
             'heroBackgroundImage' => '',
-            'contactHref' => route('contact-us').'#contact-id',
+            'contactHref' => ContactSupport::demoHref(),
             'demoHref' => ContactSupport::demoHref(),
             'heroBadge' => 'AI - POWERED SALES CRM',
             'heroBackground' => asset('assets/product/product-top-sections-bg.webp'),

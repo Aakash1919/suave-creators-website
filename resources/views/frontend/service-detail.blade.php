@@ -126,7 +126,7 @@
         <x-frontend.cta-button>
           Let's Connect to Discuss
         </x-frontend.cta-button>
-        <a href="{{ route('contact-us') }}#contact-id" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">Let's Build Your Digital Future Together</a>
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">Let's Build Your Digital Future Together</a>
       </div>
     </div>
   </div>
@@ -233,7 +233,7 @@
         <em>{{ $service['collabText'] ?? 'Come and build together a better business with' }}</em>
         <strong id="service-collab-title">{{ $service['collabBrand'] ?? 'SUAVE CREATORS.' }}</strong>
       </p>
-      <a href="{{ route('contact-us') }}#contact-id" class="collab-section__link">{{ $service['collabButtonText'] ?? 'REQUEST A QUOTE' }}</a>
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="collab-section__link">{{ $service['collabButtonText'] ?? 'REQUEST A QUOTE' }}</a>
     </div>
     @if ($collabImage !== '')
       <div class="collab-section__media">
@@ -257,11 +257,19 @@
     <div class="service-portfolio-rail portfolio-hero-rail">
       <div class="swiper servicePortfolioSwiper !overflow-hidden" aria-label="Project showcase carousel">
         <div class="swiper-wrapper">
-          @foreach ($portfolioImages as $i => $img)
+          @foreach ($portfolioItems as $item)
             <div class="swiper-slide h-auto">
-              <figure class="portfolio-showcase__image h-full w-full">
-                <img src="{{ $img }}" alt="Suave Creators project showcase {{ $i + 1 }}" title="Suave Creators project showcase {{ $i + 1 }}" loading="lazy" draggable="false">
-              </figure>
+              @if (($item['url'] ?? '') !== '')
+                <a href="{{ $item['url'] }}" class="portfolio-showcase__link block h-full w-full" @if (!empty($item['external'])) target="_blank" rel="noopener noreferrer" @endif aria-label="{{ $item['alt'] }}">
+                  <figure class="portfolio-showcase__image h-full w-full">
+                    <img src="{{ $item['image'] }}" alt="{{ $item['alt'] }}" title="{{ $item['alt'] }}" loading="lazy" draggable="false">
+                  </figure>
+                </a>
+              @else
+                <figure class="portfolio-showcase__image h-full w-full">
+                  <img src="{{ $item['image'] }}" alt="{{ $item['alt'] }}" title="{{ $item['alt'] }}" loading="lazy" draggable="false">
+                </figure>
+              @endif
             </div>
           @endforeach
         </div>
@@ -288,11 +296,19 @@
   <div class="service-portfolio-rail">
     <div class="swiper servicePortfolioSwiper !overflow-hidden" aria-label="Project showcase carousel">
       <div class="swiper-wrapper">
-        @foreach ($portfolioImages as $i => $img)
+        @foreach ($portfolioItems as $item)
           <div class="swiper-slide h-auto">
-            <figure class="portfolio-showcase__image service-portfolio-showcase__image h-full w-full">
-              <img src="{{ $img }}" alt="Project showcase {{ $i + 1 }}" title="Project showcase {{ $i + 1 }}" loading="lazy" draggable="false">
-            </figure>
+            @if (($item['url'] ?? '') !== '')
+              <a href="{{ $item['url'] }}" class="portfolio-showcase__link block h-full w-full" @if (!empty($item['external'])) target="_blank" rel="noopener noreferrer" @endif aria-label="{{ $item['alt'] }}">
+                <figure class="portfolio-showcase__image service-portfolio-showcase__image h-full w-full">
+                  <img src="{{ $item['image'] }}" alt="{{ $item['alt'] }}" title="{{ $item['alt'] }}" loading="lazy" draggable="false">
+                </figure>
+              </a>
+            @else
+              <figure class="portfolio-showcase__image service-portfolio-showcase__image h-full w-full">
+                <img src="{{ $item['image'] }}" alt="{{ $item['alt'] }}" title="{{ $item['alt'] }}" loading="lazy" draggable="false">
+              </figure>
+            @endif
           </div>
         @endforeach
       </div>

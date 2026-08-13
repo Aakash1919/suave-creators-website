@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\CaseStudy;
 use App\Support\Frontend\IndustryDetailSupport;
 use App\Support\Frontend\ServiceSupport;
 use Carbon\CarbonInterface;
@@ -87,6 +88,22 @@ class SitemapService
                     'monthly',
                     '0.7',
                     $blog->updated_at ?? $blog->published_at
+                );
+            });
+
+        CaseStudy::query()
+            ->published()
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get(['slug', 'title', 'updated_at', 'published_at'])
+            ->each(function (CaseStudy $caseStudy) use (&$entries): void {
+                $entries[] = $this->entry(
+                    route('case-study.show', ['slug' => $caseStudy->slug]),
+                    (string) $caseStudy->title,
+                    'Case Studies',
+                    'monthly',
+                    '0.7',
+                    $caseStudy->updated_at ?? $caseStudy->published_at
                 );
             });
 
@@ -241,6 +258,7 @@ class SitemapService
             ['route' => 'services', 'title' => 'Services', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['route' => 'industries', 'title' => 'Industries', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['route' => 'product', 'title' => 'Product', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['route' => 'case-studies', 'title' => 'Case studies', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['route' => 'blogs', 'title' => 'Blog', 'group' => 'Primary', 'changefreq' => 'daily', 'priority' => '0.8'],
             ['route' => 'contact-us', 'title' => 'Contact us', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.7'],
             ['route' => 'privacy-policy', 'title' => 'Privacy policy', 'group' => 'Legal', 'changefreq' => 'yearly', 'priority' => '0.3'],

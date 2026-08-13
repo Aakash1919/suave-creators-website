@@ -24,7 +24,7 @@
         Enterprise Software Solutions to help businesses grow.
       </p>
       <div class="mt-8 flex items-center gap-4 sm:gap-7">
-        <a href="{{ route('contact-us') }}#contact-id"
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
           class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
           Start your Project
           <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
@@ -299,7 +299,7 @@
         </button>
       </div>
       <div class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></div>
-      <a class="offerings-expert-link" href="{{ route('contact-us') }}#contact-id">Talk to an Expert</a>
+      <a class="offerings-expert-link" href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Talk to an Expert</a>
     </div>
   </div>
 </section>

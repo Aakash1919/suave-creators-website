@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Layouts;
 
+use App\Support\Frontend\ContactSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -70,7 +71,7 @@ class Header extends Component
 
     public function ctaHref(): string
     {
-        return route($this->ctaRoute).'#'.$this->ctaFragment;
+        return ContactSupport::demoHref();
     }
 
     public function isNavActive(string ...$patterns): bool

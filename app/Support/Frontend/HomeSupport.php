@@ -235,6 +235,8 @@ class HomeSupport
                 'description' => 'An AI-assisted outreach CRM for discovering leads, enriching business context, and sending personalized emails.',
                 'image' => 'assets/portfolio/suave-outreach-crm-laptop.webp',
                 'alt' => 'Suave Creators outreach CRM platform on a laptop display',
+                'url' => route('product'),
+                'external' => false,
             ],
             [
                 'category' => 'Custom Software',
@@ -242,6 +244,8 @@ class HomeSupport
                 'description' => 'A project workspace for tracking sales automation rollouts, task priorities, and team progress in one place.',
                 'image' => 'assets/portfolio/sales-automation-project-dashboard.webp',
                 'alt' => 'Sales automation project dashboard software by Suave Creators',
+                'url' => route('case-study.show', ['slug' => 'suave-crm-tasks-case-study']),
+                'external' => false,
             ],
             [
                 'category' => 'Web Development',
@@ -249,6 +253,8 @@ class HomeSupport
                 'description' => 'A conversion-focused site for a growth agency that embeds elite talent to solve complex scaling problems.',
                 'image' => 'assets/portfolio/mavan-growth-agency-website.webp',
                 'alt' => 'MAVAN growth agency website built by Suave Creators',
+                'url' => 'https://www.mavan.com/',
+                'external' => true,
             ],
             [
                 'category' => 'Web Design',
@@ -256,6 +262,8 @@ class HomeSupport
                 'description' => 'A high-impact marketing site for a custom software company focused on SaaS, APIs, and industry solutions.',
                 'image' => 'assets/portfolio/hubops-software-company-website.webp',
                 'alt' => 'HubOps custom software company website by Suave Creators',
+                'url' => 'https://thehubops.com/',
+                'external' => true,
             ],
             [
                 'category' => 'Web Design',
@@ -263,6 +271,8 @@ class HomeSupport
                 'description' => 'A digital hub for Indian history, art, and culture with curated libraries and original series.',
                 'image' => 'assets/portfolio/swastik-culture-hub-website.webp',
                 'alt' => 'Swastik culture hub website for history art and culture content',
+                'url' => 'https://swastikstories.com/',
+                'external' => true,
             ],
             [
                 'category' => 'AI Product',
@@ -270,6 +280,8 @@ class HomeSupport
                 'description' => 'A product site for an AI sales catalyst that trains reps, assists live calls, and delivers post-call analytics.',
                 'image' => 'assets/portfolio/ematrics-ai-sales-website.webp',
                 'alt' => 'Ematrics AI sales catalyst website built by Suave Creators',
+                'url' => 'https://www.ematrics.com/',
+                'external' => true,
             ],
         ];
     }
@@ -307,7 +319,7 @@ class HomeSupport
     public static function faqData(): array
     {
         return [
-            'faqCtaHref' => route('contact-us').'#contact-id',
+            'faqCtaHref' => ContactSupport::demoHref(),
             'faqCtaLabel' => 'Start your Project',
             'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',
             'faqMediaType' => 'image',
