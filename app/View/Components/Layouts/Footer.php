@@ -81,7 +81,7 @@ class Footer extends Component
                 ['route' => 'about-us', 'label' => 'About Us'],
                 ['route' => 'services', 'label' => 'Services'],
                 ['route' => 'blogs', 'label' => 'Blog'],
-                ['href' => ContactSupport::demoHref(), 'label' => 'Contact Us'],
+                ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact Us'],
             ],
             'Product' => [
                 ['route' => 'product', 'fragment' => 'how-it-works', 'label' => 'How it Works'],

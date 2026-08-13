@@ -62,9 +62,9 @@
             <a href="{{ route('blogs') }}"
                 class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                 @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>
-            <a href="{{ $ctaHref() }}"
-                target="_blank" rel="noopener noreferrer"
-                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF]">Contact</a>
+            <a href="{{ $contactHref() }}"
+                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive($ctaRoute) ? 'is-active' : '' }}"
+                @if ($isNavActive($ctaRoute)) aria-current="page" @endif>Contact</a>
         </nav>
 
         <div class="site-header__actions flex items-center justify-end gap-2 sm:gap-4 xl:gap-5">
@@ -133,9 +133,9 @@
                     <a class="mobile-nav__link {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                         href="{{ route('blogs') }}"
                         @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>
-                    <a class="mobile-nav__link"
-                        href="{{ $ctaHref() }}"
-                        target="_blank" rel="noopener noreferrer">Contact</a>
+                    <a class="mobile-nav__link {{ $isNavActive($ctaRoute) ? 'is-active' : '' }}"
+                        href="{{ $contactHref() }}"
+                        @if ($isNavActive($ctaRoute)) aria-current="page" @endif>Contact</a>
                 </nav>
 
                 <div class="mobile-nav__footer">
