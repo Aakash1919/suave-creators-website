@@ -68,6 +68,10 @@ class CaseStudySeeder extends Seeder
                 'solution' => $payload['solution'] ?? null,
                 'outcome' => $payload['outcome'] ?? null,
                 'sections' => $this->sections($payload['sections'] ?? null),
+                'meta_title' => $this->nullableString($payload['meta_title'] ?? null),
+                'meta_description' => $this->nullableString($payload['meta_description'] ?? null),
+                'og_title' => $this->nullableString($payload['og_title'] ?? null),
+                'og_description' => $this->nullableString($payload['og_description'] ?? null),
             ]);
 
             $wasExisting ? $updated++ : $imported++;
@@ -100,6 +104,17 @@ class CaseStudySeeder extends Seeder
         $caseStudy->save();
 
         return $caseStudy;
+    }
+
+    protected function nullableString(mixed $value): ?string
+    {
+        if (! is_string($value)) {
+            return null;
+        }
+
+        $trimmed = trim($value);
+
+        return $trimmed === '' ? null : $trimmed;
     }
 
     protected function normalizeImagePath(mixed $path): ?string
