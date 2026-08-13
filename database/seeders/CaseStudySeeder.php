@@ -36,6 +36,8 @@ class CaseStudySeeder extends Seeder
         // Remap legacy public slugs so re-seed updates the same row.
         foreach ([
             'shownoshow-appointment-insurance' => 'appointment-insurance-platform-case-study',
+            'cabvi-product-matching' => 'product-matching-platform-case-study',
+            'ai-product-matching-platform-case-study' => 'product-matching-platform-case-study',
         ] as $legacySlug => $newSlug) {
             CaseStudy::withTrashed()
                 ->where('slug', $legacySlug)
