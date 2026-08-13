@@ -28,11 +28,12 @@ description: >-
 ## Access model
 
 - Any authenticated user may enter admin (`User::canAccessAdmin()` returns `true`)
-- Roles/permissions gate nav and routes (`blogs.*`, `conversations.view`, `contacts.view`, `testimonials.*`, `users.*`, `roles.*`, `profile.update`)
+- Roles/permissions gate nav and routes (`blogs.*`, `case-studies.*`, `conversations.view`, `contacts.view`, `testimonials.*`, `users.*`, `roles.*`, `profile.update`)
 - Seeded site admin: `SiteAdmin::EMAIL` (`admin@suavecreators.com`) / default password `password` via `SiteAdmin::ensure()` + `RolesAndPermissionsSeeder`
-- Roles: `admin` (all permissions), `editor` (blogs view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
+- Roles: `admin` (all permissions), `editor` (blogs view/create/update, case-studies view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
 - Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
 - Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
+- Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-generated**
 
 ## Services (required)
 
@@ -43,6 +44,7 @@ description: >-
 | `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
+| `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization. **Manual only** — no AI draft or SEO generation |
 | `UserService` | User create/update, password hash, `syncRoles` |
 | `RoleService` | Role create/update/delete, permission sync; protects `admin` role key/delete |
 | `TestimonialService` | Testimonial CRUD, avatar upload, forever frontend cache (`frontend.testimonials`) invalidated on write |
@@ -68,6 +70,7 @@ Namespace: `App\Http\Requests\Admin\` (admin) and `App\Http\Requests\Frontend\` 
 |--------|---------|
 | Admin login | `AdminLoginRequest` |
 | Blog create/update | `BlogStoreRequest` / `BlogUpdateRequest` (`Concerns\ValidatesBlogFields`) |
+| Case study create/update | `CaseStudyStoreRequest` / `CaseStudyUpdateRequest` (`Concerns\ValidatesCaseStudyFields`) |
 | User create/update | `UserStoreRequest` / `UserUpdateRequest` |
 | Role create/update | `RoleStoreRequest` / `RoleUpdateRequest` |
 | Testimonial create/update | `TestimonialStoreRequest` / `TestimonialUpdateRequest` (`Concerns\ValidatesTestimonialFields`) |
@@ -90,6 +93,7 @@ Namespace: `App\Http\Controllers\Admin\`
 | Auth | `AuthController` | — (`AdminLoginRequest` for login) |
 | Home | `DashboardController` | — (stats/links) |
 | Blogs | `BlogController` | `App\Services\BlogService` |
+| Case studies | `CaseStudyController` | `App\Services\CaseStudyService` |
 | Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store via `ContactStoreRequest`) |
 | Profile | `ProfileController` | `App\Services\ProfileService` |
 | Users | `UserController` | `App\Services\UserService` |
@@ -122,13 +126,13 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - Gate sidebar links with `$user->hasPermission(...)`
 - Auth view: `admin.auth.login` (white card on light surface)
 - Error pages: `resources/views/errors/{403,404,500}.blade.php` + `errors/layout.blade.php` (centered white card, illustration, primary CTA)
-- Feature views: `admin/blogs`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
+- Feature views: `admin/blogs`, `admin/case-studies`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
 - Do **not** dump admin styles into marketing `public/css/style.css`
 
 ## DataTables + AJAX
 
 - Package: `yajra/laravel-datatables-oracle`
-- Server classes: `app/DataTables/Admin/{Blog,User,Role,Testimonial,Conversation}DataTable.php`
+- Server classes: `app/DataTables/Admin/{Blog,CaseStudy,User,Role,Testimonial,Conversation}DataTable.php`
 - Index controllers return Yajra JSON when `$request->ajax()` / `wantsAdminJson()`; otherwise the Blade list view
 - Mutations use `RespondsToAdminAjax` (`adminSuccess` / `adminError`) so store/update/destroy return JSON for AJAX or flash redirects otherwise
 - Client helpers in `public/js/admin/suave-admin.js` (`window.SuaveAdmin`):
@@ -228,7 +232,7 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 ## Date range filter (list pages)
 
 - Partial: `layouts/admin/partials/date-range-filter.blade.php`
-- Used on **Blogs**, **AI conversations**, and **Contact requests** index page-head actions
+- Used on **Blogs**, **Case studies**, **AI conversations**, and **Contact requests** index page-head actions
 - Presets: Today, Yesterday, Last 7 Days, Last 30 Days (default), This Month, Last Month, Custom Range
 - Custom Range opens Flatpickr in `mode: 'range'`
 - Client sends `date_from` / `date_to` (`Y-m-d`) with DataTables AJAX
@@ -294,6 +298,22 @@ php artisan db:seed --class=BlogSeeder
 
 `DatabaseSeeder` calls `BlogSeeder` after ensuring the site admin exists.
 
+## Case study seed import (offline)
+
+Do **not** scrape the live site. Seed from the committed package via `CaseStudySeeder`:
+
+- `database/data/case-studies/cases.php` — all studies (hero, metrics, overview, two story sections)
+- Seeded hero images stay in `public/assets/case-studies/` (`assets/case-studies/...` paths). Admin uploads go to `storage/app/public/case-studies/`
+
+```bash
+php artisan db:seed                 # RolesAndPermissionsSeeder + SiteAdmin + BlogSeeder + CaseStudySeeder
+php artisan db:seed --class=CaseStudySeeder
+```
+
+`DatabaseSeeder` calls `CaseStudySeeder` after `BlogSeeder`.
+
+**Case studies are never auto-generated.** There is no trend-draft command, scheduled writer, or “Generate SEO meta” action. Editors fill the fixed public layout (hero, metrics, overview, two splits) by hand.
+
 ## Run-once commands
 
 One-off maintenance commands live under `app/Console/Commands/RunOnce/` with signature prefix `run-once:…`.
@@ -348,6 +368,7 @@ Config: `config/blogs.php` → `seo_meta.model` (`BLOG_SEO_META_MODEL`).
 Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permission:` middleware on routes:
 
 - `blogs.view|create|update|delete`
+- `case-studies.view|create|update|delete`
 - `conversations.view`
 - `contacts.view`
 - `testimonials.view|manage`

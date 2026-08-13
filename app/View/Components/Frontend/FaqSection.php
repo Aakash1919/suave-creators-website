@@ -55,7 +55,7 @@ class FaqSection extends Component
             return ContactSupport::demoHref();
         }
 
-        return route('contact-us').'#contact-id';
+        return ContactSupport::demoHref();
     }
 
     protected function detectMediaType(?string $media): string

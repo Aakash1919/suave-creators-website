@@ -16,8 +16,8 @@
   <div class="h-px bg-white/10" aria-hidden="true"></div>
 
   <div class="site-container relative z-10 !px-5 sm:!px-6 lg:!px-8">
-    <div class="site-footer__main grid grid-cols-1 gap-7 py-7 sm:gap-10 sm:py-10 lg:grid-cols-12 lg:gap-12">
-      <div class="site-footer__brand min-w-0 lg:col-span-3">
+    <div class="site-footer__main">
+      <div class="site-footer__brand">
         <a href="{{ route('home') }}" class="inline-flex max-w-full" aria-label="Suave Creators home">
           <x-layouts.logo variant="footer" />
         </a>
@@ -47,8 +47,8 @@
         </ul>
       </div>
 
-      <div class="min-w-0 lg:col-span-9">
-        <div class="site-footer__columns !grid !grid-cols-2 !gap-x-4 !gap-y-7 min-[480px]:!grid-cols-3 sm:!grid-cols-3 sm:!gap-x-6 sm:!gap-y-10 lg:!grid-cols-4">
+      <div class="min-w-0">
+        <div class="site-footer__columns">
           @foreach ($columns as $title => $links)
             <div class="site-footer__column min-w-0">
               <h2 class="text-[11px] font-bold uppercase tracking-wide text-white sm:text-xs">
@@ -59,6 +59,7 @@
                 @foreach ($links as $link)
                   <li>
                     <a href="{{ $link['href'] }}"
+                      @if (str_starts_with($link['href'], 'http')) target="_blank" rel="noopener noreferrer" @endif
                       class="group flex !min-h-0 items-start gap-1.5 py-0.5 text-[11px] leading-4 text-[#B1B9DF] transition hover:text-white sm:gap-2 sm:py-0 sm:text-[13px]">
                       <i class="fa-solid fa-chevron-right mt-0.5 shrink-0 text-[8px] text-[#B1B9DF] transition-transform group-hover:translate-x-0.5 sm:text-[9px]"
                         aria-hidden="true"></i>
