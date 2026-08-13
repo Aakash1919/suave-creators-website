@@ -238,7 +238,7 @@
             <path d="M2 12H22"></path>
           </svg>
         </a>
-        <a href="" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
+        <a href="{{ route('product') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
       </div>
     </div>
   </div>

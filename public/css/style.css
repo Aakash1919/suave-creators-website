@@ -921,7 +921,7 @@ main button.rounded-full.bg-gradient-to-r {
 
 .industry-card {
   background: #00003F;
-  border: 1px solid rgb(110 119 219 / 8%);
+  border: 1px solid transparent;
   border-radius: 24px;
   box-shadow: 2px 7px 13px 2px #2A4DFB17;
   display: flex;
@@ -929,17 +929,19 @@ main button.rounded-full.bg-gradient-to-r {
   min-height: 181px;
   padding: 32px;
   position: relative;
-  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-  border-color: transparent;
+  transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   overflow: hidden;
-  isolation: isolate;
   text-decoration: none;
 }
 
-.industry-card:hover {
-  border-color: rgb(101 111 255 / 58%);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%),
-  0 15px 32px rgb(0 0 0 / 22%);
+.industry-card:hover,
+.industry-card:focus-visible {
+  background:
+    linear-gradient(#00003F, #00003F) padding-box,
+    linear-gradient(90deg, #2A4DFB 0%, #7A5FF8 100%) border-box;
+  box-shadow:
+    0 8px 22px rgb(42 77 251 / 16%),
+    0 2px 8px rgb(0 0 0 / 14%);
   transform: translateY(-2px);
 }
 
@@ -1877,32 +1879,6 @@ main button.rounded-full.bg-gradient-to-r {
   width: 64px;
   height: 64px;
   z-index: 9999;
-}
-
-.industry-card::before {
-  content: "";
-  position: absolute;
-  inset: -150%;
-  border-radius: inherit;
-  background: conic-gradient(
-  from 0deg,
-  #2E69FB,
-  #4D8BFF,
-  #D178FE,
-  #A855F7,
-  #2E69FB
-  );
-  animation: rotateBorder 6s linear infinite;
-  z-index: -2;
-}
-
-.industry-card::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: calc(24px - 1px);
-  background: #00003F;
-  z-index: -1;
 }
 
 .site-topbar__text {
@@ -3088,14 +3064,6 @@ body.mobile-nav-open {
   }
 }
 
-@keyframes rotateBorder {
-  from {
-  transform: rotate(0deg);
-  }
-  to {
-  transform: rotate(360deg);
-  }
-}
 
 @keyframes industry-orbit-float {
   0%,
@@ -4130,10 +4098,6 @@ body.mobile-nav-open {
     padding: 20px 0 !important;
   }
 
-  .industry-card::after {
-    border-radius: calc(16px - 1px);
-  }
-
   .technology-card {
     min-height: 0;
   }
@@ -4234,10 +4198,6 @@ body.mobile-nav-open {
   }
 
   .footer-moving-line::before {
-    animation: none;
-  }
-
-  .industry-card::before {
     animation: none;
   }
 

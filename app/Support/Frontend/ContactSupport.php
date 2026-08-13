@@ -4,7 +4,7 @@ namespace App\Support\Frontend;
 
 class ContactSupport
 {
-    public const DEMO_HREF = 'https://calendar.app.google/7oaPSMbtwPgPxRSWA';
+    public const DEMO_HREF = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2D8d2UlApRNeJryaGldFknb4uF3ua7jFnBA4-ga1Q-lgnLz9K382sK5S2-4J2e-tWD8arDeGXy';
 
     public static function demoHref(): string
     {

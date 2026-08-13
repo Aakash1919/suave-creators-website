@@ -70,7 +70,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - Every marketing page registers a **named route** in `routes/web.php`
 - Internal page hrefs use **`route()` only** — never `url('/path')` or raw paths for marketing pages
 - Prefer storing route names (and params) in component/Support defaults, then call `route()` in Blade
-- Marketing CTAs that used to go to the contact page use **`ContactSupport::demoHref()`** (`https://calendar.app.google/7oaPSMbtwPgPxRSWA`) with `target="_blank" rel="noopener noreferrer"` — including header/footer Contact links and page CTAs. Do not point those at `route('contact-us')`
+- Marketing CTAs that used to go to the contact page use **`ContactSupport::demoHref()`** (`https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2D8d2UlApRNeJryaGldFknb4uF3ua7jFnBA4-ga1Q-lgnLz9K382sK5S2-4J2e-tWD8arDeGXy`) with `target="_blank" rel="noopener noreferrer"` — including header/footer Contact links and page CTAs. Do not point those at `route('contact-us')`
 - Same-page contact form anchors on `/contact-us` may still use `#contact-id`
 - Contact form: `POST` to `route('contact-us.store')` via AJAX (`novalidate` + custom field errors). On success: clear form and show “The request has been sent successfully.” Also includes `@csrf`, honeypot `website`, and `form_started_at` (bots get silent JSON success)
 - Legal pages: `PageController` methods `privacyPolicy` / `termsAndConditions` (`privacy-policy`, `terms-and-conditions`; Footer must use `route()`, not `url()`)
