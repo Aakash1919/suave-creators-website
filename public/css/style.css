@@ -838,6 +838,17 @@ main button.rounded-full.bg-gradient-to-r {
   overflow: hidden;
 }
 
+.portfolio-showcase__link {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.portfolio-showcase__link:hover .portfolio-showcase__image img,
+.portfolio-showcase__link:focus-visible .portfolio-showcase__image img {
+  transform: scale(1.025);
+}
+
 .portfolio-showcase__image img {
   -webkit-user-drag: none;
   display: block;
