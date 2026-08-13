@@ -1,6 +1,7 @@
 /**
- * Defers third-party JS (GTM / gtag / Swiper) until after LCP-critical work.
+ * Defers third-party JS (GTM / gtag / Swiper) and non-critical font CSS until after LCP.
  * Page scripts should init carousels via window.suaveWhenSwiperReady(fn).
+ * Compatible with a tiny head/body stub that queues calls before this file runs (defer).
  */
 (function () {
   'use strict';
@@ -8,8 +9,9 @@
   var cfg = window.__suavePerf || {};
   var analyticsLoaded = false;
   var swiperLoading = null;
-  var swiperCallbacks = [];
+  var swiperCallbacks = Array.isArray(window.__suaveSwiperQ) ? window.__suaveSwiperQ.slice() : [];
   var swiperScheduled = false;
+  window.__suaveSwiperQ = swiperCallbacks;
 
   function loadScript(src, options) {
     return new Promise(function (resolve, reject) {
@@ -25,12 +27,39 @@
   }
 
   function ensureStylesheet(href, marker) {
-    if (document.querySelector('link[' + marker + ']')) return;
+    if (!href || document.querySelector('link[' + marker + ']')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = href;
     link.setAttribute(marker, '1');
     document.head.appendChild(link);
+  }
+
+  function loadFaWebfonts() {
+    ensureStylesheet(cfg.faExtraCss, 'data-suave-fa-extra');
+  }
+
+  function loadPpMori() {
+    ensureStylesheet(cfg.ppMoriCss, 'data-suave-pp-mori');
+  }
+
+  function scheduleDeferredFonts() {
+    // FA icons (header): inject ASAP after this deferred script runs.
+    loadFaWebfonts();
+
+    function idleLoadPpMori() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function () { loadPpMori(); }, { timeout: 2000 });
+      } else {
+        setTimeout(loadPpMori, 1);
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      idleLoadPpMori();
+    } else {
+      window.addEventListener('load', idleLoadPpMori, { once: true });
+    }
   }
 
   function loadAnalytics() {
@@ -172,6 +201,7 @@
     }
   };
 
+  scheduleDeferredFonts();
   scheduleAnalytics();
 
   if (document.readyState === 'loading') {

@@ -2,7 +2,7 @@
 
 | Folder | Contents | Example path |
 |--------|----------|--------------|
-| `brand/` | Site logos, chat widget icons | `assets/brand/logo-white.png` |
+| `brand/` | Site logos, chat widget icons | `assets/brand/logo-white.webp` |
 | `team/` | Team photos, consultation portraits, team icons | `assets/team/professional-man-navy-blazer-portrait.png` |
 | `clients/` | Real client / partner **company** logos only | `assets/clients/verysoul-logo.png` |
 | `background/` | Section backgrounds | `assets/background/about-section-bg.png` |

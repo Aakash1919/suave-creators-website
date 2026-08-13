@@ -3006,21 +3006,35 @@ body.mobile-nav-open {
   }
 }
 
-.service-banner-logos > .swiper-wrapper {
+/*
+ * Desktop grid must beat deferred Swiper CSS (.swiper { display:block },
+ * .swiper-slide { width:100% }) which loads after style.css and was collapsing
+ * the hero technology cards into a broken single-column layout.
+ */
+.service-banner-logos.swiper:not(.swiper-initialized),
+.service-banner-logos:not(.swiper-initialized) {
+  display: grid;
+}
+
+.service-banner-logos:not(.swiper-initialized) > .swiper-wrapper {
   display: contents;
 }
 
-.service-banner-logos .swiper-slide {
+.service-banner-logos:not(.swiper-initialized) .swiper-slide {
+  box-sizing: border-box;
   height: auto;
+  margin: 0;
+  max-width: 100%;
   min-width: 0;
   overflow: visible;
+  width: auto;
 }
 
 .service-banner-logos.swiper-initialized {
   display: block;
+  margin: 0;
   overflow: hidden;
   padding: 0;
-  margin: 0;
   width: 100%;
 }
 
@@ -3042,45 +3056,7 @@ body.mobile-nav-open {
   to { transform: rotate(360deg); }
 }
 
-@font-face {
-  font-display: swap;
-  font-family: "PP Mori";
-  src: url("/fonts/PPMori-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "PP Mori";
-  src: url("/fonts/PPMori-Medium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "PP Mori";
-  src: url("/fonts/PPMori-Semibold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 600;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "PP Mori";
-  src: url("/fonts/PPMori-Bold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 700;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "PP Mori";
-  src: url("/fonts/PPMori-Extrabold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 800;
-}
+/* PP Mori @font-face lives in css/pp-mori.css (idle-loaded) to shorten the critical CSS→font chain. */
 
 @keyframes digital-services-marquee {
   from {

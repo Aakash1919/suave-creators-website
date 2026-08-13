@@ -62,7 +62,6 @@ jobs:
             --exclude=".cursor/" \
             --exclude="design/" \
             --exclude=".env" \
-            --exclude=".htaccess" \
             --exclude="storage/" \
             --exclude="storage/framework/cache/data" \
             ./ \
@@ -148,8 +147,6 @@ jobs:
             --exclude=".cursor/" \
             --exclude="design/" \
             --exclude=".env" \
-            --exclude=".htaccess" \
-            --exclude="public/.htaccess" \
             --exclude="storage/" \
             --exclude="storage/framework/cache/data" \
             ./ \

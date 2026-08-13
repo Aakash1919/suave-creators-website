@@ -75,13 +75,14 @@
 
 @once
   @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
     <script>
       (function () {
         var root = document.querySelector('[data-suave-agent]');
         if (!root) return;
 
         var STORAGE_KEY = 'suave_agent_session_v1';
+        var MARKED_SRC = 'https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js';
+        var markedLoading = null;
         var toggle = root.querySelector('[data-suave-agent-toggle]');
         var panel = root.querySelector('[data-suave-agent-panel]');
         var closeBtn = root.querySelector('[data-suave-agent-close]');
@@ -100,8 +101,35 @@
         var streaming = false;
         var historyLoaded = false;
 
-        if (window.marked && typeof window.marked.setOptions === 'function') {
-          window.marked.setOptions({ breaks: true, gfm: true });
+        function ensureMarked() {
+          if (window.marked && typeof window.marked.parse === 'function') {
+            if (typeof window.marked.setOptions === 'function') {
+              window.marked.setOptions({ breaks: true, gfm: true });
+            }
+            return Promise.resolve();
+          }
+          if (markedLoading) return markedLoading;
+
+          markedLoading = new Promise(function (resolve, reject) {
+            var s = document.createElement('script');
+            s.src = MARKED_SRC;
+            s.async = true;
+            s.onload = function () {
+              if (window.marked && typeof window.marked.setOptions === 'function') {
+                window.marked.setOptions({ breaks: true, gfm: true });
+              }
+              resolve();
+            };
+            s.onerror = function () {
+              markedLoading = null;
+              reject(new Error('Failed to load marked'));
+            };
+            document.head.appendChild(s);
+          }).catch(function () {
+            return null;
+          });
+
+          return markedLoading;
         }
 
         function renderMarkdown(text) {
@@ -216,6 +244,7 @@
           setStatus('Loading previous chat…');
 
           try {
+            await ensureMarked();
             var url = historyUrl + '?lead_uuid=' + encodeURIComponent(session.lead_uuid)
               + '&session_token=' + encodeURIComponent(session.session_token);
             if (session.conversation_id) {
@@ -245,7 +274,10 @@
         toggle.addEventListener('click', function () {
           var open = panel.hidden;
           setOpen(open);
-          if (open) resumeIfPossible(false);
+          if (open) {
+            ensureMarked();
+            resumeIfPossible(false);
+          }
         });
 
         closeBtn.addEventListener('click', function () {
@@ -297,6 +329,7 @@
             saveSession();
             showChat();
             messagesEl.innerHTML = '';
+            await ensureMarked();
             if (data.greeting) appendMessage('assistant', data.greeting, true);
             historyLoaded = true;
             messageInput.disabled = false;
@@ -348,6 +381,7 @@
           var assistantBubble = appendMessage('assistant', '', false);
           var rawAssistant = '';
           setStatus('Reviewing your request…');
+          await ensureMarked();
 
           try {
             var res = await fetch(chatUrl, {

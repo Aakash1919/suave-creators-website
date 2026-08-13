@@ -79,28 +79,69 @@ function fetchCss(string $url): string
     return $css;
 }
 
-function absoluteWebfonts(string $css): string
+function localWebfonts(string $css): string
 {
-    return preg_replace(
-        '#url\((\.\./webfonts/([^)]+))\)#',
-        'url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/$2)',
+    $css = preg_replace(
+        '#url\(https://cdnjs\.cloudflare\.com/ajax/libs/font-awesome/6\.7\.2/webfonts/([^)]+)\)#',
+        'url(../fonts/fontawesome/$1)',
         $css
     ) ?? $css;
+
+    $css = preg_replace(
+        '#url\(\.\./webfonts/([^)]+)\)#',
+        'url(../fonts/fontawesome/$1)',
+        $css
+    ) ?? $css;
+
+    $css = str_replace('font-display:block', 'font-display:swap', $css);
+
+    // WOFF2 only — drop heavier TTF fallbacks from the marketing subset.
+    return preg_replace(
+        '#,\s*url\(\.\./fonts/fontawesome/[^)]+\.ttf\)\s*format\("truetype"\)#',
+        '',
+        $css
+    ) ?? $css;
+}
+
+function ensureWebfonts(string $fontsDir): void
+{
+    if (! is_dir($fontsDir) && ! mkdir($fontsDir, 0755, true) && ! is_dir($fontsDir)) {
+        throw new RuntimeException("Failed to create {$fontsDir}");
+    }
+
+    $files = [
+        'fa-solid-900.woff2',
+        'fa-brands-400.woff2',
+        'fa-regular-400.woff2',
+    ];
+
+    foreach ($files as $file) {
+        $destination = $fontsDir.'/'.$file;
+        if (is_file($destination) && filesize($destination) > 0) {
+            continue;
+        }
+
+        $url = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/'.$file;
+        $bytes = fetchCss($url);
+        if ($bytes === '' || file_put_contents($destination, $bytes) === false) {
+            throw new RuntimeException("Failed to write {$destination}");
+        }
+    }
 }
 
 function sheetPrelude(string $css): string
 {
     // Keep :root vars, @font-face, and weight helpers — stop before icon catalog.
     if (preg_match('/^(.*?\.(?:fa-solid|fa-brands|fa-regular|fas|fab|far)\{font-weight:\d+\})/s', $css, $m)) {
-        return absoluteWebfonts($m[1]);
+        return localWebfonts($m[1]);
     }
 
     // Fallback: everything before first .fa-<name>{--fa:
     if (preg_match('/^(.*?)(?=\.fa-[a-z0-9-]+\{\-\-fa:)/s', $css, $m)) {
-        return absoluteWebfonts(rtrim($m[1]));
+        return localWebfonts(rtrim($m[1]));
     }
 
-    return absoluteWebfonts($css);
+    return localWebfonts($css);
 }
 
 function extractIconVars(string $css, array $iconList): string
@@ -137,14 +178,22 @@ CSS;
 
 $iconCss = extractIconVars($core, $iconList).extractIconVars($brands, $iconList).extractIconVars($regular, $iconList);
 
+$fontsDir = $root.'/public/fonts/fontawesome';
+ensureWebfonts($fontsDir);
+
 $css = '/*! Font Awesome Free 6.7.2 subset — Suave Creators marketing (scripts/build-fa-subset.php) */'."\n"
     .$minimalCore."\n"
     .$iconCss."\n"
+    .'/* Webfont @font-face rules: css/fontawesome-extra.css (injected after first paint). */'."\n";
+
+file_put_contents($out, $css);
+
+$extraCss = '/*! Font Awesome Free 6.7.2 webfonts — injected after first paint (see frontend-deferred.js). */'."\n"
     .sheetPrelude($solid)."\n"
     .sheetPrelude($brands)."\n"
     .sheetPrelude($regular)."\n";
-
-file_put_contents($out, $css);
+$extraOut = $root.'/public/css/fontawesome-extra.css';
+file_put_contents($extraOut, $extraCss);
 
 $missing = [];
 foreach ($iconList as $name) {
@@ -155,6 +204,8 @@ foreach ($iconList as $name) {
 
 echo "Wrote {$out}\n";
 echo 'Size: '.strlen($css).' bytes (~'.round(strlen($css) / 1024, 1)." KiB)\n";
+echo "Wrote {$extraOut}\n";
+echo 'Extra size: '.strlen($extraCss).' bytes (~'.round(strlen($extraCss) / 1024, 1)." KiB)\n";
 echo 'Icons: '.count($iconList).' ('.implode(', ', $iconList).")\n";
 if ($missing) {
     echo 'MISSING glyph rules: '.implode(', ', $missing)."\n";

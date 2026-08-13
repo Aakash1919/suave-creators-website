@@ -197,7 +197,7 @@
 
     <!-- Specialized Services Section Start -->
     <section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20"
-        style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')"
+        style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')"
         aria-labelledby="industry-specialized-heading">
         <div class="section-inner">
             <div class="mx-auto mb-8 max-w-[720px] text-center sm:mb-10 lg:mb-14">
@@ -328,7 +328,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="agile-process-tabs__pagination" aria-label="Process phases pagination"></div>
+                <nav class="agile-process-tabs__pagination" aria-label="Process phases pagination"></nav>
             </div>
             @foreach ($agileTabs as $ti => $tab)
                 <div role="tabpanel" data-agile-panel="{{ $tab }}" {{ $ti === 0 ? '' : 'hidden' }}>

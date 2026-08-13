@@ -2,7 +2,7 @@
 <!-- Articles Insights Section Start -->
 <section
   {{ $attributes->merge(['class' => "full-bleed articles-insights bg-cover bg-top bg-no-repeat relative overflow-hidden {$sectionClass}"]) }}
-  style="background-image: url('{{ asset('assets/background/blog-section-bg.png') }}');"
+  style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}');"
   aria-labelledby="{{ $headingId }}">
   <div class="articles-insights__inner section-inner">
     <div class="articles-insights__content">
@@ -73,7 +73,7 @@
           aria-label="Previous article">
           <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
         </button>
-        <div class="articles-insights-pagination" aria-label="Articles pagination"></div>
+        <nav class="articles-insights-pagination" aria-label="Articles pagination"></nav>
         <a class="articles-insights__more" href="{{ str_starts_with($moreHref, 'http') || str_starts_with($moreHref, '/') ? $moreHref : route($moreHref) }}">{{ $moreLabel }}</a>
         <button class="articles-insights-next articles-insights__control" type="button"
           aria-label="Next article">

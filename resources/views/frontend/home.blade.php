@@ -47,8 +47,8 @@
         <div
           class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
           <img
-            src="{{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }}"
-            srcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
+            src="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }}"
+            srcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
             sizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
             alt="Team brainstorming software strategy documents with Suave Creators"
             title="Team brainstorming software strategy documents with Suave Creators"
@@ -61,8 +61,8 @@
         <div
           class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
           <img
-            src="{{ asset('assets/hero/hero-professionals-office-meeting.webp') }}"
-            srcset="{{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }} 480w, {{ asset('assets/hero/hero-professionals-office-meeting-640.webp') }} 640w, {{ asset('assets/hero/hero-professionals-office-meeting.webp') }} 688w"
+            src="{{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }}"
+            srcset="{{ asset('assets/hero/hero-professionals-office-meeting-320.webp') }} 320w, {{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }} 480w, {{ asset('assets/hero/hero-professionals-office-meeting-640.webp') }} 640w, {{ asset('assets/hero/hero-professionals-office-meeting.webp') }} 688w"
             sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
             alt="Software professionals collaborating in a modern office meeting"
             title="Software professionals collaborating in a modern office meeting"
@@ -75,8 +75,8 @@
         <div
           class="hero-media-grid__tile col-start-2 row-start-2 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
           <img
-            src="{{ asset('assets/hero/hero-team-conference-collaboration.webp') }}"
-            srcset="{{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }} 480w, {{ asset('assets/hero/hero-team-conference-collaboration-640.webp') }} 640w, {{ asset('assets/hero/hero-team-conference-collaboration.webp') }} 688w"
+            src="{{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }}"
+            srcset="{{ asset('assets/hero/hero-team-conference-collaboration-320.webp') }} 320w, {{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }} 480w, {{ asset('assets/hero/hero-team-conference-collaboration-640.webp') }} 640w, {{ asset('assets/hero/hero-team-conference-collaboration.webp') }} 688w"
             sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
             alt="Cross-functional team collaborating on custom software development"
             title="Cross-functional team collaborating on custom software development"
@@ -298,7 +298,7 @@
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></div>
+      <nav class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></nav>
       <a class="offerings-expert-link" href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Talk to an Expert</a>
     </div>
   </div>
@@ -441,7 +441,7 @@
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="digital-marketing-pagination flex md:hidden" aria-label="Digital marketing pagination"></div>
+      <nav class="digital-marketing-pagination flex md:hidden" aria-label="Digital marketing pagination"></nav>
       <p class="digital-marketing-services__more">
         <span class="digital-marketing-services__more-text">Need more services based on your demand?</span>
         <a href="{{ route('services') }}">See All Services</a>

@@ -33,7 +33,7 @@ if (Test-Path $imagesDir) {
 # Remove unused legacy brand duplicates when canonical logos exist
 $brandDir = Join-Path $root 'public\assets\brand'
 $legacyBrand = @{
-    'white_logo.svg'    = 'logo-white.png'
+    'white_logo.svg'    = 'logo-white.webp'
     'gradient-logo.svg' = 'logo.png'
 }
 foreach ($entry in $legacyBrand.GetEnumerator()) {
@@ -65,22 +65,22 @@ foreach ($file in $codeFiles) {
     }
 
     if ($text -match 'white_logo\.svg' -or $text -match 'gradient-logo\.svg') {
-        Add-Fail "$rel references legacy logo filename (use assets/brand/logo-white.png or logo.png)"
+        Add-Fail "$rel references legacy logo filename (use assets/brand/logo-white.webp or logo.png)"
     }
 }
 
-# 3) Marketing layout: no Vite / star-pearl
+# 3) Marketing layout: Vite Tailwind + style.css; no star-pearl wired directly
 $layout = Join-Path $root 'resources\views\layouts\frontend.blade.php'
 if (Test-Path $layout) {
     $layoutText = [IO.File]::ReadAllText($layout)
-    if ($layoutText -match '@vite') {
-        Add-Fail 'layouts/frontend.blade.php uses @vite (CDN layout only)'
+    if ($layoutText -notmatch '@vite') {
+        Add-Fail 'layouts/frontend.blade.php missing @vite (use Vite Tailwind, not Play CDN)'
+    }
+    if ($layoutText -match 'cdn\.tailwindcss\.com') {
+        Add-Fail 'layouts/frontend.blade.php must not use Tailwind Play CDN'
     }
     if ($layoutText -match 'the-suave-star-pearl') {
         Add-Fail 'layouts/frontend.blade.php references the-suave-star-pearl'
-    }
-    if ($layoutText -notmatch 'cdn\.tailwindcss\.com') {
-        Add-Fail 'layouts/frontend.blade.php missing Tailwind CDN'
     }
     if ($layoutText -notmatch "asset\('css/style\.css'\)") {
         Add-Fail "layouts/frontend.blade.php missing asset('css/style.css')"

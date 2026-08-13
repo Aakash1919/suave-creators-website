@@ -167,7 +167,7 @@ $partners = [
     </div>
 
     <div class="order-1 mx-auto w-full overflow-hidden rounded-xl border-[6px] border-white sm:order-2 sm:mt-8 sm:rounded-2xl sm:border-[10px]">
-      <img src="/images/about-team-grayscale-portrait-banner.webp" alt="Suave Creators IT company team portraits for web design and development" title="Suave Creators IT company team portraits for web design and development"
+      <img src="/assets/team/about-us-team-portrait-banner.webp" alt="Suave Creators IT company team portraits for web design and development" title="Suave Creators IT company team portraits for web design and development"
         class="block h-auto w-full rounded-lg object-cover sm:rounded-[12px]" loading="eager">
     </div>
   </div>

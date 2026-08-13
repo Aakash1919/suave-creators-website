@@ -172,7 +172,7 @@
                   </div>
                 @endforeach
               </div>
-              <div class="blog-sidebar-slider__pagination" aria-label="Blog cards pagination"></div>
+              <nav class="blog-sidebar-slider__pagination" aria-label="Blog cards pagination"></nav>
             </div>
           </div>
         @endif

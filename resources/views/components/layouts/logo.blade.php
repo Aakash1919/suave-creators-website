@@ -2,7 +2,7 @@
     {{ $attributes->merge(['class' => $imgClass]) }}
     src="{{ asset($resolvedSrc) }}"
     @if ($useResponsiveLogo)
-        srcset="{{ asset('assets/brand/logo-white-220.png') }} 220w, {{ asset('assets/brand/logo-white.png') }} 440w"
+        srcset="{{ asset('assets/brand/logo-white-220.webp') }} 220w, {{ asset('assets/brand/logo-white.webp') }} 440w"
         sizes="{{ $sizes }}"
     @endif
     alt="{{ $alt }}" title="{{ $alt }}"
