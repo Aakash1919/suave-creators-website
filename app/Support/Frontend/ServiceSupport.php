@@ -30,6 +30,7 @@ class ServiceSupport
             'processCards' => self::processCards(),
             'faqs' => self::faqs(),
             'articles' => self::articles(),
+            'caseStudies' => CaseStudySupport::forService(null, 6),
             'connectCta' => [
                 'eyebrow' => 'Ready to Start Your Project?',
                 'title' => 'Are you Ready to Start Your Project?',
@@ -219,6 +220,7 @@ class ServiceSupport
             'standoutCards' => self::mapStandoutCards($service['standoutCards'] ?? []),
             'processSteps' => self::mapProcessSteps($service['processSteps'] ?? []),
             'articles' => self::mapArticles($posts),
+            'caseStudies' => CaseStudySupport::forService($slug, 6),
             'techStack' => AboutSupport::techStack(),
             'webDevLayoutSlugs' => self::SLUGS,
             'isWebDevelopmentService' => in_array($slug, self::SLUGS, true),

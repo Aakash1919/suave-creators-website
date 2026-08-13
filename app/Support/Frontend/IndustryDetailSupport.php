@@ -67,6 +67,7 @@ class IndustryDetailSupport
             'marqueeLabels' => $industry['marqueeLabels'] ?? ['INNOVATION', 'SECURITY', 'SCALABILITY', 'AI POWERED', 'GROWTH', 'SUPPORT'],
             'techStack' => AboutSupport::techStack(),
             'articles' => self::sampleInsights(),
+            'caseStudies' => CaseStudySupport::forIndustry($slug, 6),
         ];
     }
 

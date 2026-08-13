@@ -46,6 +46,52 @@ class CaseStudySupport
     }
 
     /**
+     * Published case studies tagged for a service page (or any service when slug is null).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function forService(?string $slug = null, int $limit = 6): array
+    {
+        return self::forPlacement('service_slugs', $slug, $limit);
+    }
+
+    /**
+     * Published case studies tagged for an industry page (or any industry when slug is null).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function forIndustry(?string $slug = null, int $limit = 6): array
+    {
+        return self::forPlacement('industry_slugs', $slug, $limit);
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    protected static function forPlacement(string $column, ?string $slug, int $limit): array
+    {
+        $query = CaseStudy::query()
+            ->published()
+            ->orderBy('sort_order')
+            ->orderBy('id');
+
+        if ($slug !== null && $slug !== '') {
+            $query->whereJsonContains($column, $slug);
+        } else {
+            $query->whereNotNull($column)
+                ->where($column, '!=', '[]')
+                ->where($column, '!=', 'null');
+        }
+
+        return $query
+            ->limit(max(1, $limit))
+            ->get()
+            ->map(fn (CaseStudy $caseStudy): array => self::mapCase($caseStudy))
+            ->values()
+            ->all();
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public static function indexData(): array
@@ -85,8 +131,8 @@ class CaseStudySupport
                 'alt' => 'Product growth case study insight from Suave Creators',
             ],
             [
-                'src' => 'assets/case-studies/shownoshow/location-check-in.jpg',
-                'alt' => 'Appointment location check-in map designed by Suave Creators',
+                'src' => 'assets/case-studies/appointment-insurance/location-check-in.jpg',
+                'alt' => 'Appointment insurance location check-in map by Suave Creators',
             ],
             [
                 'src' => 'assets/case-studies/suave-crm-outreach/outreach-new-company-intelligence.png',
@@ -181,7 +227,8 @@ class CaseStudySupport
             'short_description' => (string) ($caseStudy->short_description ?? ''),
             'listing_subtitle' => (string) ($caseStudy->listing_subtitle ?? ''),
             'industry' => (string) ($caseStudy->industry ?? ''),
-            'client' => (string) ($caseStudy->client ?? ''),
+            'service_slugs' => is_array($caseStudy->service_slugs) ? array_values($caseStudy->service_slugs) : [],
+            'industry_slugs' => is_array($caseStudy->industry_slugs) ? array_values($caseStudy->industry_slugs) : [],
             'year' => (string) ($caseStudy->year ?? ''),
             'technologies' => is_array($caseStudy->technologies) ? $caseStudy->technologies : [],
             'results' => is_array($caseStudy->results) ? $caseStudy->results : [],

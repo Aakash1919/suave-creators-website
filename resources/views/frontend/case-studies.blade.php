@@ -73,9 +73,6 @@
                 @endif
               </a>
               <div class="case-studies-grid__copy">
-                @if (! empty($item['client']))
-                  <p class="case-studies-grid__client pragati-narrow-regular">{{ $item['client'] }}</p>
-                @endif
                 <h3 class="case-studies-grid__title">
                   <a href="{{ $itemHref }}">{{ $item['title'] }}</a>
                 </h3>

@@ -1161,6 +1161,19 @@ body:has(.admin-messenger) {
   accent-color: var(--admin-primary);
 }
 
+.admin-check-grid {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.65rem;
+}
+
+.admin-help {
+  margin: 0.25rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--admin-muted, #6b7280);
+}
+
 .admin-form-grid {
   display: grid;
   gap: 1rem;

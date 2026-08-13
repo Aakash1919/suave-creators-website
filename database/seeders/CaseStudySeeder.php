@@ -33,6 +33,15 @@ class CaseStudySeeder extends Seeder
         $imported = 0;
         $updated = 0;
 
+        // Remap legacy public slugs so re-seed updates the same row.
+        foreach ([
+            'shownoshow-appointment-insurance' => 'appointment-insurance-platform-case-study',
+        ] as $legacySlug => $newSlug) {
+            CaseStudy::withTrashed()
+                ->where('slug', $legacySlug)
+                ->update(['slug' => $newSlug]);
+        }
+
         $this->command?->info('Seeding '.count($raw).' case study(ies) from database/data/case-studies…');
 
         foreach ($raw as $index => $payload) {
@@ -53,7 +62,9 @@ class CaseStudySeeder extends Seeder
                 'short_description' => (string) ($payload['short_description'] ?? ''),
                 'listing_subtitle' => $payload['listing_subtitle'] ?? null,
                 'industry' => $payload['industry'] ?? null,
-                'client' => $payload['client'] ?? null,
+                'service_slugs' => $this->stringList($payload['service_slugs'] ?? null) ?? [],
+                'industry_slugs' => $this->stringList($payload['industry_slugs'] ?? null) ?? [],
+                'client' => null,
                 'year' => $payload['year'] ?? null,
                 'featured_image' => $this->normalizeImagePath($payload['image'] ?? null),
                 'created_by_id' => $admin->id,
@@ -66,6 +77,10 @@ class CaseStudySeeder extends Seeder
                 'solution' => $payload['solution'] ?? null,
                 'outcome' => $payload['outcome'] ?? null,
                 'sections' => $this->sections($payload['sections'] ?? null),
+                'meta_title' => $this->nullableString($payload['meta_title'] ?? null),
+                'meta_description' => $this->nullableString($payload['meta_description'] ?? null),
+                'og_title' => $this->nullableString($payload['og_title'] ?? null),
+                'og_description' => $this->nullableString($payload['og_description'] ?? null),
             ]);
 
             $wasExisting ? $updated++ : $imported++;
@@ -98,6 +113,17 @@ class CaseStudySeeder extends Seeder
         $caseStudy->save();
 
         return $caseStudy;
+    }
+
+    protected function nullableString(mixed $value): ?string
+    {
+        if (! is_string($value)) {
+            return null;
+        }
+
+        $trimmed = trim($value);
+
+        return $trimmed === '' ? null : $trimmed;
     }
 
     protected function normalizeImagePath(mixed $path): ?string
@@ -187,7 +213,7 @@ class CaseStudySeeder extends Seeder
                 $visual = CaseStudy::VISUALS[$index % count(CaseStudy::VISUALS)];
             }
 
-            $out[] = [
+            $section = [
                 'type' => 'split',
                 'visual' => $visual,
                 'image_side' => ($item['image_side'] ?? ($index === 0 ? 'right' : 'left')) === 'left' ? 'left' : 'right',
@@ -196,6 +222,13 @@ class CaseStudySeeder extends Seeder
                 'body' => trim((string) ($item['body'] ?? '')),
                 'points' => $points,
             ];
+
+            $image = $this->normalizeImagePath($item['image'] ?? null);
+            if ($image !== null) {
+                $section['image'] = $image;
+            }
+
+            $out[] = $section;
         }
 
         return $out === [] ? null : $out;

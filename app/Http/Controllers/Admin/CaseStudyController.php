@@ -9,10 +9,13 @@ use App\Http\Requests\Admin\CaseStudyStoreRequest;
 use App\Http\Requests\Admin\CaseStudyUpdateRequest;
 use App\Models\CaseStudy;
 use App\Services\CaseStudyService;
+use App\Services\CaseStudySeoMetaGenerationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use RuntimeException;
+use Throwable;
 
 class CaseStudyController extends Controller
 {
@@ -20,6 +23,7 @@ class CaseStudyController extends Controller
 
     public function __construct(
         private readonly CaseStudyService $caseStudies,
+        private readonly CaseStudySeoMetaGenerationService $seoMeta,
     ) {}
 
     /**
@@ -44,6 +48,8 @@ class CaseStudyController extends Controller
         return view('admin.case-studies.form', [
             'caseStudy' => $this->caseStudies->newDraft(),
             'defaultSections' => $this->caseStudies->defaultSections(),
+            'serviceOptions' => $this->caseStudies->servicePlacementOptions(),
+            'industryOptions' => $this->caseStudies->industryPlacementOptions(),
         ]);
     }
 
@@ -72,6 +78,8 @@ class CaseStudyController extends Controller
         return view('admin.case-studies.form', [
             'caseStudy' => $caseStudy,
             'defaultSections' => $this->caseStudies->defaultSections(),
+            'serviceOptions' => $this->caseStudies->servicePlacementOptions(),
+            'industryOptions' => $this->caseStudies->industryPlacementOptions(),
         ]);
     }
 
@@ -100,5 +108,41 @@ class CaseStudyController extends Controller
         $this->caseStudies->delete($caseStudy);
 
         return $this->adminSuccess($request, 'Case study', 'deleted', 'admin.case-studies.index');
+    }
+
+    /**
+     * Generate SEO / OG field suggestions for the edit form (does not save).
+     */
+    public function generateSeoMeta(Request $request, CaseStudy $caseStudy): JsonResponse|RedirectResponse
+    {
+        try {
+            $seo = $this->seoMeta->generate($caseStudy, $request->only([
+                'title',
+                'short_description',
+                'client',
+                'industry',
+                'challenge',
+                'solution',
+                'outcome',
+            ]));
+        } catch (RuntimeException $e) {
+            return $this->adminError($request, $e->getMessage());
+        } catch (Throwable $e) {
+            report($e);
+
+            return $this->adminError($request, 'Unable to generate SEO meta right now. Please try again.');
+        }
+
+        $message = 'SEO meta generated. Review the fields and save when ready.';
+
+        if ($this->wantsAdminJson($request)) {
+            return response()->json([
+                'success' => true,
+                'message' => $message,
+                'seo' => $seo,
+            ]);
+        }
+
+        return back()->with('status', $message)->withInput(array_merge($request->all(), $seo));
     }
 }
