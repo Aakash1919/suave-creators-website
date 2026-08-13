@@ -44,22 +44,28 @@
   }
 
   function scheduleDeferredFonts() {
-    // FA icons (header): inject ASAP after this deferred script runs.
-    loadFaWebfonts();
-
-    function idleLoadPpMori() {
+    function idleInject(fn, timeoutMs) {
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(function () { loadPpMori(); }, { timeout: 2000 });
+        requestIdleCallback(fn, { timeout: timeoutMs });
       } else {
-        setTimeout(loadPpMori, 1);
+        setTimeout(fn, Math.min(timeoutMs, 1500));
       }
     }
 
-    if (document.readyState === 'complete') {
-      idleLoadPpMori();
-    } else {
-      window.addEventListener('load', idleLoadPpMori, { once: true });
+    function afterLoad(fn) {
+      if (document.readyState === 'complete') {
+        fn();
+      } else {
+        window.addEventListener('load', fn, { once: true });
+      }
     }
+
+    // Solid FA is already declared in critical CSS + preloaded; delay extra faces
+    // so stylesheet injection does not compete with LCP style/layout work.
+    afterLoad(function () {
+      idleInject(loadFaWebfonts, 2500);
+      idleInject(loadPpMori, 4000);
+    });
   }
 
   function loadAnalytics() {
@@ -167,14 +173,14 @@
           io.disconnect();
           loadSoon();
         }
-      }, { rootMargin: '480px 0px', threshold: 0.01 });
+      }, { rootMargin: '200px 0px', threshold: 0.01 });
 
       document.querySelectorAll('.swiper').forEach(function (el) {
         io.observe(el);
       });
 
       window.addEventListener('load', function () {
-        setTimeout(loadSoon, 5000);
+        setTimeout(loadSoon, 8000);
       }, { once: true });
     } else {
       loadSoon();

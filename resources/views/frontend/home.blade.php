@@ -56,7 +56,8 @@
             width="628"
             height="1024"
             decoding="async"
-            loading="lazy">
+            loading="eager"
+            fetchpriority="high">
         </div>
         <div
           class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
