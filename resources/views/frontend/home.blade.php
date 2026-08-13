@@ -2,86 +2,72 @@
 
 @section('content')
 <!-- Hero Section Start -->
-<section
-  class="relative z-10 w-full pb-12 pt-8 md:min-h-[440px] md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container">
-  <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
-    <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[520px]">
-      <p
-        class="inline-block mb-2 bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent text-sm font-bold uppercase tracking-wide pragati-narrow-regular">
+<section class="home-hero site-container" aria-label="Suave Creators software development hero">
+  <div class="home-hero__grid">
+    <div class="home-hero__copy">
+      <p class="home-hero__eyebrow pragati-narrow-regular">
         Software, Apps & AI • CRM • ERP • Since 2021
       </p>
-      <h1
-        class="mb-2 mt-2 flex flex-col text-[36px] font-semibold leading-none text-white min-[375px]:text-[42px] sm:text-5xl lg:text-[60px] leading-[100%]">
+      <h1 class="home-hero__title">
         <span>Web &amp; Software</span>
         <span>Development</span>
-        <span
-          class="bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text text-transparent font-extrabold inline-block">
-          Solutions
-        </span>
+        <span class="home-hero__title-accent">Solutions</span>
       </h1>
-      <p class="mb-2 mt-2 text-[12px] leading-5 md:text-sm md:leading-6 text-[#B1B9DF]">
+      <p class="home-hero__lead">
         We are a trusted Custom Software Development Company that specializes in CRM Development, Web Application, &
         Enterprise Software Solutions to help businesses grow.
       </p>
-      <div class="mt-8 flex items-center gap-4 sm:gap-7">
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-          class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
+      <div class="home-hero__actions">
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="home-hero__cta-primary group">
           Start your Project
           <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1">
+            class="home-hero__cta-icon" aria-hidden="true">
             <path d="M18 8L22 12L18 16" />
             <path d="M2 12H22" />
           </svg>
         </a>
-
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="home-hero__cta-secondary">
           Schedule a discovery call
         </a>
       </div>
     </div>
-
-    <div class="relative z-10 flex w-full min-w-0 items-center justify-center lg:justify-end">
+    <div class="home-hero__media">
       <div class="hero-media-grid" aria-hidden="true">
-        <div
-          class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
+        <div class="hero-media-grid__tile hero-media-grid__tile--tall">
           <img
             src="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }}"
             srcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
             sizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
             alt="Team brainstorming software strategy documents with Suave Creators"
             title="Team brainstorming software strategy documents with Suave Creators"
-            class="block h-full w-full max-w-none object-cover"
+            class="hero-media-grid__img"
             width="628"
             height="1024"
             decoding="async"
-            loading="eager"
-            fetchpriority="high">
+            loading="eager">
         </div>
-        <div
-          class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
+        <div class="hero-media-grid__tile hero-media-grid__tile--top">
           <img
             src="{{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }}"
             srcset="{{ asset('assets/hero/hero-professionals-office-meeting-320.webp') }} 320w, {{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }} 480w, {{ asset('assets/hero/hero-professionals-office-meeting-640.webp') }} 640w, {{ asset('assets/hero/hero-professionals-office-meeting.webp') }} 688w"
             sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
             alt="Software professionals collaborating in a modern office meeting"
             title="Software professionals collaborating in a modern office meeting"
-            class="block h-full w-full max-w-none object-cover"
+            class="hero-media-grid__img"
             width="688"
             height="248"
             decoding="async"
             loading="lazy">
         </div>
-        <div
-          class="hero-media-grid__tile col-start-2 row-start-2 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
+        <div class="hero-media-grid__tile hero-media-grid__tile--bottom">
           <img
             src="{{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }}"
             srcset="{{ asset('assets/hero/hero-team-conference-collaboration-320.webp') }} 320w, {{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }} 480w, {{ asset('assets/hero/hero-team-conference-collaboration-640.webp') }} 640w, {{ asset('assets/hero/hero-team-conference-collaboration.webp') }} 688w"
             sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
             alt="Cross-functional team collaborating on custom software development"
             title="Cross-functional team collaborating on custom software development"
-            class="block h-full w-full max-w-none object-cover"
+            class="hero-media-grid__img"
             width="688"
             height="736"
             decoding="async"
@@ -95,7 +81,7 @@
 
 <!-- About Section Start / Who We Are -->
 <section
-  class="who-we-are full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="--who-we-are-bg: url('{{ asset('assets/background/about-section-bg.png') }}'); background-image: var(--who-we-are-bg);">
+  class="who-we-are full-bleed bg-cover bg-top bg-no-repeat" style="--who-we-are-bg: url('{{ asset('assets/background/about-section-bg.png') }}'); background-image: var(--who-we-are-bg);">
   <div class="section-inner site-container ">
     <div class="about-stats" data-about-counters>
       @foreach ($stats as $stat)
@@ -586,6 +572,132 @@
   width: 58px;
 }
 
+.home-hero {
+  box-sizing: border-box;
+  contain: layout;
+  min-height: 36rem;
+  padding-bottom: 3rem;
+  padding-top: 2rem;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+.who-we-are {
+  background-color: #fff;
+  box-sizing: border-box;
+  padding-block: 2.5rem;
+}
+
+.home-hero__grid {
+  align-items: center;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.home-hero__copy {
+  display: flex;
+  flex-direction: column;
+  max-width: 36rem;
+  min-width: 0;
+  position: relative;
+  text-align: left;
+  z-index: 0;
+}
+
+.home-hero__eyebrow {
+  background-image: linear-gradient(90deg, #2A4DFB, #7A5FF8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  margin: 0 0 0.5rem;
+}
+
+.home-hero__title {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.home-hero__title-accent {
+  background-image: linear-gradient(180deg, #2F69FB 15%, #C56BFF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-weight: 800;
+}
+
+.home-hero__lead {
+  color: #b1b9df;
+  font-size: 12px;
+  line-height: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.home-hero__actions {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.home-hero__cta-primary {
+  align-items: center;
+  background-image: linear-gradient(90deg, #2A4DFB, #0026E3);
+  border-radius: 9999px;
+  box-shadow: 0 10px 15px -3px rgba(30, 27, 75, 0.3);
+  color: #fff;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: filter 0.2s ease;
+  white-space: nowrap;
+}
+
+.home-hero__cta-primary:hover {
+  filter: brightness(1.1);
+}
+
+.home-hero__cta-icon {
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.home-hero__cta-primary:hover .home-hero__cta-icon {
+  transform: translateX(0.25rem);
+}
+
+.home-hero__cta-secondary {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-hero__media {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
 .hero-media-grid {
   aspect-ratio: 670 / 512;
   column-gap: calc(12 / 670 * 100%);
@@ -599,10 +711,108 @@
 }
 
 .hero-media-grid__tile {
+  border-radius: 22px;
+  clip-path: inset(0 round 22px);
   height: 100%;
   min-height: 0;
   min-width: 0;
+  overflow: hidden;
   width: 100%;
+}
+
+.hero-media-grid__tile--tall {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.hero-media-grid__tile--top {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.hero-media-grid__tile--bottom {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.hero-media-grid__img,
+.hero-media-grid__tile img {
+  display: block;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (min-width: 375px) {
+  .home-hero__title {
+    font-size: 42px;
+  }
+}
+
+@media (min-width: 640px) {
+  .home-hero {
+    min-height: 38rem;
+  }
+
+  .home-hero__title {
+    font-size: 3rem;
+  }
+
+  .home-hero__actions {
+    gap: 1.75rem;
+  }
+
+  .home-hero__cta-primary,
+  .home-hero__cta-secondary {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-hero {
+    min-height: 440px;
+    padding-bottom: 4rem;
+    padding-top: 2.5rem;
+  }
+
+  .home-hero__lead {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+  }
+
+  .who-we-are {
+    padding-block: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-hero {
+    min-height: 640px;
+    padding-bottom: 5rem;
+    padding-top: 52px;
+  }
+
+  .home-hero__grid {
+    gap: 3rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-hero__copy {
+    max-width: 520px;
+  }
+
+  .home-hero__media {
+    justify-content: flex-end;
+  }
+
+  .home-hero__title {
+    font-size: 60px;
+  }
+
+  .who-we-are {
+    padding-block: 5rem;
+  }
 }
 
 .about-collage {

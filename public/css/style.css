@@ -2453,6 +2453,7 @@ body.mobile-nav-open {
 }
 
 .site-footer {
+  background-color: #00003f;
   box-sizing: border-box;
   color: #fff;
   overflow-x: clip;
@@ -4739,15 +4740,17 @@ html {
  * Skip style/layout/paint for off-screen marketing sections until near the viewport.
  * Intrinsic size keeps approximate scroll height so scrollbar jump stays minimal.
  */
-.site-main > .full-bleed,
+.site-main > .full-bleed:not(.who-we-are),
 .site-main > .faq-section,
 .site-footer {
   content-visibility: auto;
   contain-intrinsic-size: auto 720px;
 }
 
+/* Near-fold: keep fully laid out so deferred style.css does not CLS the hero. */
 .site-main > .who-we-are {
-  contain-intrinsic-size: auto 980px;
+  content-visibility: visible;
+  contain-intrinsic-size: none;
 }
 
 .site-main > .offerings-showcase,
@@ -4769,7 +4772,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-main > .full-bleed,
+  .site-main > .full-bleed:not(.who-we-are),
   .site-main > .faq-section,
   .site-footer {
     content-visibility: visible;

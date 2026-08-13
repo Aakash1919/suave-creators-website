@@ -2228,6 +2228,7 @@ body.mobile-nav-open{
 }
 
 .site-footer{
+  background-color: #00003f;
   box-sizing: border-box;
   color: #fff;
   overflow-x: clip;

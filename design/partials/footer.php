@@ -35,7 +35,7 @@ $footerColumns = [
   ],
 ];
 ?>
-<footer class="site-footer overflow-x-clip text-white bg-[url('/images/footer-bg.png')] bg-cover bg-top bg-no-repeat">
+<footer class="site-footer overflow-x-clip bg-[#00003f] text-white bg-[url('/images/footer-bg.png')] bg-cover bg-top bg-no-repeat" style="background-color: #00003f;">
   <div class="site-container !px-5 sm:!px-6 lg:!px-8">
     <div class="site-footer__cta flex flex-col items-start gap-3 pb-5 pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5 sm:pb-8 sm:pt-8">
       <p class="text-[15px] font-semibold leading-snug sm:text-lg">Got a project? Let's talk</p>
