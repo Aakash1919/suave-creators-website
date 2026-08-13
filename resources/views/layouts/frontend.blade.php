@@ -15,27 +15,20 @@
         <meta name="google-site-verification" content="{{ $googleSiteVerification }}">
     @endif
 
-    @if ($googleAnalyticsId = config('seo.site.google_analytics_id'))
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAnalyticsId }}"></script>
+    @php
+        $googleAnalyticsId = config('seo.site.google_analytics_id');
+        $googleTagManagerId = config('seo.site.google_tag_manager_id');
+    @endphp
+    @if ($googleAnalyticsId || $googleTagManagerId)
+        {{-- Queue analytics commands early; gtag.js / gtm.js load after idle or first interaction. --}}
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+            @if ($googleAnalyticsId)
             gtag('js', new Date());
             gtag('config', @json($googleAnalyticsId));
+            @endif
         </script>
-    @endif
-
-    @if ($googleTagManagerId = config('seo.site.google_tag_manager_id'))
-        <!-- Google Tag Manager -->
-        <script>
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer',@json($googleTagManagerId));
-        </script>
-        <!-- End Google Tag Manager -->
     @endif
 
     @if ($withSeo ?? true)
@@ -52,7 +45,8 @@
 
     @php
         $deferredCssHref = asset('css/style-deferred.css').'?v='.filemtime(public_path('css/style-deferred.css'));
-        $loadDeferredCssSync = request()->routeIs(
+        $faSubsetHref = asset('css/fontawesome-subset.css').'?v='.filemtime(public_path('css/fontawesome-subset.css'));
+        $loadDeferredCss = request()->routeIs(
             'about-us',
             'product',
             'blogs',
@@ -68,33 +62,23 @@
         );
     @endphp
 
-    @if ($loadDeferredCssSync)
+    @if ($loadDeferredCss)
         <link rel="stylesheet" href="{{ $deferredCssHref }}">
-    @else
-        {{-- Page-specific CSS deferred on the homepage to reduce unused CSS bytes. --}}
-        <link rel="preload" as="style" href="{{ $deferredCssHref }}" onload="this.onload=null;this.rel='stylesheet'">
     @endif
 
     @vite('resources/css/app.css')
 
     {{-- Non-critical CSS: preload so it does not block first paint / LCP. --}}
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    {{-- Font Awesome: core + used weights only (skip all.min.css icon catalog). --}}
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/regular.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    {{-- Font Awesome: local subset (~4.6 KiB, used icons only). Sync — needed for header icons. --}}
+    <link rel="stylesheet" href="{{ $faSubsetHref }}">
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/regular.min.css">
+        <link rel="stylesheet" href="{{ $faSubsetHref }}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-        @unless ($loadDeferredCssSync)
+        @if ($loadDeferredCss)
             <link rel="stylesheet" href="{{ $deferredCssHref }}">
-        @endunless
+        @endif
     </noscript>
 
     @stack('custom-css')
@@ -107,7 +91,7 @@
     $mainClass = $mainClass ?? 'site-main';
 @endphp
 <body class="{{ $bodyClass }}">
-    @if ($googleTagManagerId = config('seo.site.google_tag_manager_id'))
+    @if ($googleTagManagerId)
         <!-- Google Tag Manager (noscript) -->
         <noscript>
             <iframe src="https://www.googletagmanager.com/ns.html?id={{ $googleTagManagerId }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -151,8 +135,16 @@
 
     <x-layouts.footer />
     <x-layouts.analytics-events />
-    {{-- Swiper is below-fold on marketing pages; defer so it is not render-blocking. Inits wait on DOMContentLoaded. --}}
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    {{-- Defer GTM/gtag + lazy-load Swiper only when .swiper is near the viewport. --}}
+    <script>
+        window.__suavePerf = {
+            gaId: @json($googleAnalyticsId),
+            gtmId: @json($googleTagManagerId),
+            swiperJs: 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+            swiperCss: 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'
+        };
+    </script>
+    <script src="{{ asset('js/frontend-deferred.js') }}?v={{ filemtime(public_path('js/frontend-deferred.js')) }}"></script>
     @stack('scripts')
 </body>
 </html>

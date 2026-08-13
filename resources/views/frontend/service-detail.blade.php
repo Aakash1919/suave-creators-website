@@ -1283,10 +1283,10 @@ $n = $index + 1;
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+window.suaveWhenSwiperReady(function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  if (typeof Swiper !== 'undefined' && document.querySelector('.servicePortfolioSwiper')) {
+  if (document.querySelector('.servicePortfolioSwiper')) {
     var isIndustryStylePortfolio = !!document.querySelector('.portfolio-hero-rail .servicePortfolioSwiper');
     var portfolioMarqueeSpeed = 18000;
     var portfolioDragSpeed = 500;
@@ -1360,7 +1360,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
   }
 
-  if (typeof Swiper !== 'undefined' && document.querySelector('.serviceCapabilitiesSwiper')) {
+  if (document.querySelector('.serviceCapabilitiesSwiper')) {
     new Swiper('.serviceCapabilitiesSwiper', {
       slidesPerView: 1,
       spaceBetween: 16,
@@ -1383,7 +1383,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var bannerLogosEl = document.querySelector('.serviceBannerLogosSwiper');
-  if (typeof Swiper !== 'undefined' && bannerLogosEl) {
+  if (bannerLogosEl) {
     var bannerLogosMq = window.matchMedia('(max-width: 1023px)');
     var bannerLogosSwiper = null;
 
@@ -1424,7 +1424,10 @@ document.addEventListener('DOMContentLoaded', function () {
       bannerLogosMq.addListener(syncBannerLogosSwiper);
     }
   }
+});
 
+document.addEventListener('DOMContentLoaded', function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var whyItems = document.querySelectorAll('.why-choose-list .why-choose-item');
   function setWhyAria(item, open) {
     item.querySelector('.why-choose-item__summary').setAttribute('aria-expanded', open ? 'true' : 'false');

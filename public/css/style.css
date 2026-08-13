@@ -1835,9 +1835,28 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .footer-moving-line {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+
+.footer-moving-line::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 200%;
+  background: linear-gradient(
+    90deg,
+    #2a4dfb,
+    #5256fa,
+    #111,
+    #2a4dfb,
+    #5256fa,
+    #111,
+    #2a4dfb
+  );
   animation: footer-line-move 2.5s linear infinite;
-  background: linear-gradient(90deg, #2a4dfb, #5256fa, #111, #2a4dfb);
-  background-size: 300% 100%;
+  will-change: transform;
 }
 
 .floating-chat {
@@ -3074,11 +3093,11 @@ body.mobile-nav-open {
 
 @keyframes footer-line-move {
   from {
-  background-position: 0 0;
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-  background-position: 100% 0;
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -4224,6 +4243,10 @@ body.mobile-nav-open {
   }
 
   .footer-moving-line {
+    animation: none;
+  }
+
+  .footer-moving-line::before {
     animation: none;
   }
 

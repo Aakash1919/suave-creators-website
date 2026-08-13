@@ -1280,9 +1280,9 @@
         animateCounters();
       }
     }
+  });
 
-    if (typeof Swiper === 'undefined') return;
-
+  window.suaveWhenSwiperReady(function () {
     new Swiper('.offeringsSwiper', {
       slidesPerView: 1,
       spaceBetween: 16,

@@ -89,8 +89,7 @@
 @once
 @push('scripts')
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Swiper === 'undefined') return;
+  window.suaveWhenSwiperReady(function () {
     document.querySelectorAll('.articlesInsightsSwiper:not(.swiper-initialized)').forEach(function (el) {
       var root = el.closest('.articles-insights');
       if (!root) return;

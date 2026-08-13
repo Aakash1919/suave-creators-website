@@ -495,7 +495,44 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof Swiper !== 'undefined' && document.querySelector('.industry-testimonial-swiper')) {
+            var agileRoot = document.querySelector('[data-agile-process]');
+            if (!agileRoot) return;
+
+            var tabs = agileRoot.querySelectorAll('[data-agile-tab]');
+            var panels = agileRoot.querySelectorAll('[data-agile-panel]');
+            var tabsEl = agileRoot.querySelector('[data-agile-tabs]');
+            var tabsMq = window.matchMedia('(max-width: 767px)');
+            var tabsSwiper = null;
+
+            window.__suaveAgileTabs = {
+                getSwiper: function() { return tabsSwiper; },
+                setSwiper: function(instance) { tabsSwiper = instance; },
+                tabsEl: tabsEl,
+                tabsMq: tabsMq,
+                tabs: tabs
+            };
+
+            tabs.forEach(function(tab, index) {
+                tab.addEventListener('click', function() {
+                    var key = tab.getAttribute('data-agile-tab');
+                    tabs.forEach(function(t) {
+                        var on = t === tab;
+                        t.setAttribute('aria-selected', on ? 'true' : 'false');
+                    });
+                    panels.forEach(function(p) {
+                        var on = p.getAttribute('data-agile-panel') === key;
+                        if (on) p.removeAttribute('hidden');
+                        else p.setAttribute('hidden', '');
+                    });
+                    if (tabsSwiper) {
+                        tabsSwiper.slideTo(index, 300);
+                    }
+                });
+            });
+        });
+
+        window.suaveWhenSwiperReady(function() {
+            if (document.querySelector('.industry-testimonial-swiper:not(.swiper-initialized)')) {
                 var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 new Swiper('.industry-testimonial-swiper', {
                     direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
@@ -526,73 +563,53 @@
                 });
             }
 
-            var agileRoot = document.querySelector('[data-agile-process]');
-            if (agileRoot) {
-                var tabs = agileRoot.querySelectorAll('[data-agile-tab]');
-                var panels = agileRoot.querySelectorAll('[data-agile-panel]');
-                var tabsEl = agileRoot.querySelector('[data-agile-tabs]');
-                var tabsMq = window.matchMedia('(max-width: 767px)');
-                var tabsSwiper = null;
+            var state = window.__suaveAgileTabs;
+            if (!state || !state.tabsEl) return;
 
-                function syncAgileTabsSwiper() {
-                    if (!tabsEl || typeof Swiper === 'undefined') return;
+            var tabsEl = state.tabsEl;
+            var tabsMq = state.tabsMq;
 
-                    if (tabsMq.matches) {
-                        if (tabsSwiper) return;
-                        tabsSwiper = new Swiper(tabsEl, {
-                            slidesPerView: 'auto',
-                            spaceBetween: 10,
-                            freeMode: {
-                                enabled: true,
-                                sticky: false
-                            },
-                            grabCursor: true,
-                            allowTouchMove: true,
-                            simulateTouch: true,
-                            watchOverflow: true,
-                            touchStartPreventDefault: false,
-                            pagination: {
-                                el: tabsEl.querySelector('.agile-process-tabs__pagination'),
-                                clickable: true
-                            },
-                            a11y: {
-                                enabled: true,
-                                containerMessage: 'Agile process phases'
-                            }
-                        });
-                        return;
-                    }
+            function syncAgileTabsSwiper() {
+                if (typeof Swiper === 'undefined') return;
 
-                    if (tabsSwiper) {
-                        tabsSwiper.destroy(true, true);
-                        tabsSwiper = null;
-                    }
-                }
-
-                tabs.forEach(function(tab, index) {
-                    tab.addEventListener('click', function() {
-                        var key = tab.getAttribute('data-agile-tab');
-                        tabs.forEach(function(t) {
-                            var on = t === tab;
-                            t.setAttribute('aria-selected', on ? 'true' : 'false');
-                        });
-                        panels.forEach(function(p) {
-                            var on = p.getAttribute('data-agile-panel') === key;
-                            if (on) p.removeAttribute('hidden');
-                            else p.setAttribute('hidden', '');
-                        });
-                        if (tabsSwiper) {
-                            tabsSwiper.slideTo(index, 300);
+                if (tabsMq.matches) {
+                    if (state.getSwiper()) return;
+                    state.setSwiper(new Swiper(tabsEl, {
+                        slidesPerView: 'auto',
+                        spaceBetween: 10,
+                        freeMode: {
+                            enabled: true,
+                            sticky: false
+                        },
+                        grabCursor: true,
+                        allowTouchMove: true,
+                        simulateTouch: true,
+                        watchOverflow: true,
+                        touchStartPreventDefault: false,
+                        pagination: {
+                            el: tabsEl.querySelector('.agile-process-tabs__pagination'),
+                            clickable: true
+                        },
+                        a11y: {
+                            enabled: true,
+                            containerMessage: 'Agile process phases'
                         }
-                    });
-                });
-
-                syncAgileTabsSwiper();
-                if (typeof tabsMq.addEventListener === 'function') {
-                    tabsMq.addEventListener('change', syncAgileTabsSwiper);
-                } else if (typeof tabsMq.addListener === 'function') {
-                    tabsMq.addListener(syncAgileTabsSwiper);
+                    }));
+                    return;
                 }
+
+                var existing = state.getSwiper();
+                if (existing) {
+                    existing.destroy(true, true);
+                    state.setSwiper(null);
+                }
+            }
+
+            syncAgileTabsSwiper();
+            if (typeof tabsMq.addEventListener === 'function') {
+                tabsMq.addEventListener('change', syncAgileTabsSwiper);
+            } else if (typeof tabsMq.addListener === 'function') {
+                tabsMq.addListener(syncAgileTabsSwiper);
             }
         });
     </script>

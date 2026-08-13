@@ -60,9 +60,7 @@
 @once
 @push('scripts')
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Swiper === 'undefined') return;
-
+  window.suaveWhenSwiperReady(function () {
     document.querySelectorAll('.testimonialSwiper:not(.swiper-initialized)').forEach(function (el) {
       var root = el.closest('.testimonial-section') || el.parentElement;
       new Swiper(el, {

@@ -1179,54 +1179,57 @@
 
 @push('scripts')
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Swiper !== 'undefined') {
-      if (document.querySelector('.industryCoreServicesSwiper')) {
-        new Swiper('.industryCoreServicesSwiper', {
-          slidesPerView: 1,
-          spaceBetween: 16,
-          speed: 650,
-          rewind: true,
-          watchOverflow: true,
-          keyboard: { enabled: true, onlyInViewport: true },
-          a11y: {
-            prevSlideMessage: 'Previous service',
-            nextSlideMessage: 'Next service'
-          },
-          navigation: {
-            nextEl: '.industry-core-services-next',
-            prevEl: '.industry-core-services-prev'
-          },
-          pagination: {
-            el: '.industry-core-services-pagination',
-            clickable: true
-          },
-          breakpoints: {
-            768: { slidesPerView: 2, spaceBetween: 18 },
-            1024: { slidesPerView: 3, spaceBetween: 24 }
-          }
-        });
-      }
-
-      if (document.querySelector('.testimonialSwiper')) {
-        new Swiper('.testimonialSwiper', {
-          direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
-          slidesPerView: 1,
-          spaceBetween: 16,
-          loop: true,
-          speed: 700,
-          autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
-          navigation: { nextEl: '.testimonial-next', prevEl: '.testimonial-prev' },
-          pagination: {
-            el: '.testimonial-pagination',
-            clickable: true
-          },
-          breakpoints: { 1024: { slidesPerView: 2, spaceBetween: 24 } }
-        });
-      }
-
+  window.suaveWhenSwiperReady(function () {
+    if (document.querySelector('.industryCoreServicesSwiper')) {
+      new Swiper('.industryCoreServicesSwiper', {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        speed: 650,
+        rewind: true,
+        watchOverflow: true,
+        keyboard: { enabled: true, onlyInViewport: true },
+        a11y: {
+          prevSlideMessage: 'Previous service',
+          nextSlideMessage: 'Next service'
+        },
+        navigation: {
+          nextEl: '.industry-core-services-next',
+          prevEl: '.industry-core-services-prev'
+        },
+        pagination: {
+          el: '.industry-core-services-pagination',
+          clickable: true
+        },
+        breakpoints: {
+          768: { slidesPerView: 2, spaceBetween: 18 },
+          1024: { slidesPerView: 3, spaceBetween: 24 }
+        }
+      });
     }
 
+    document.querySelectorAll('.testimonialSwiper:not(.swiper-initialized)').forEach(function (el) {
+      var root = el.closest('.testimonial-section') || el.parentElement;
+      new Swiper(el, {
+        direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        speed: 700,
+        autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+        navigation: {
+          nextEl: root ? root.querySelector('.testimonial-next') : '.testimonial-next',
+          prevEl: root ? root.querySelector('.testimonial-prev') : '.testimonial-prev'
+        },
+        pagination: {
+          el: root ? root.querySelector('.testimonial-pagination') : '.testimonial-pagination',
+          clickable: true
+        },
+        breakpoints: { 1024: { slidesPerView: 2, spaceBetween: 24 } }
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
     const expertiseRoot = document.querySelector('[data-industry-expertise]');
     if (expertiseRoot) {
       const tabs = expertiseRoot.querySelectorAll('[data-expertise-index]');
