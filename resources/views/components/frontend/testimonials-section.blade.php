@@ -47,7 +47,7 @@
         <i class="fa-solid fa-chevron-left testimonial-prev__mobile" aria-hidden="true"></i>
         <i class="fa-solid fa-chevron-up testimonial-prev__desktop" aria-hidden="true"></i>
       </button>
-      <div class="testimonial-pagination" aria-label="Testimonial pagination"></div>
+      <nav class="testimonial-pagination" aria-label="Testimonial pagination"></nav>
       <button class="testimonial-next" type="button" aria-label="Next testimonial">
         <i class="fa-solid fa-chevron-right testimonial-next__mobile" aria-hidden="true"></i>
         <i class="fa-solid fa-chevron-down testimonial-next__desktop" aria-hidden="true"></i>
@@ -60,9 +60,7 @@
 @once
 @push('scripts')
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Swiper === 'undefined') return;
-
+  window.suaveWhenSwiperReady(function () {
     document.querySelectorAll('.testimonialSwiper:not(.swiper-initialized)').forEach(function (el) {
       var root = el.closest('.testimonial-section') || el.parentElement;
       new Swiper(el, {

@@ -70,7 +70,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - Every marketing page registers a **named route** in `routes/web.php`
 - Internal page hrefs use **`route()` only** — never `url('/path')` or raw paths for marketing pages
 - Prefer storing route names (and params) in component/Support defaults, then call `route()` in Blade
-- Marketing CTAs that used to go to the contact page use **`ContactSupport::demoHref()`** (`https://calendar.app.google/7oaPSMbtwPgPxRSWA`) with `target="_blank" rel="noopener noreferrer"` — including header/footer Contact links and page CTAs. Do not point those at `route('contact-us')`
+- Marketing CTAs that used to go to the contact page use **`ContactSupport::demoHref()`** (`https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2D8d2UlApRNeJryaGldFknb4uF3ua7jFnBA4-ga1Q-lgnLz9K382sK5S2-4J2e-tWD8arDeGXy`) with `target="_blank" rel="noopener noreferrer"` — including header/footer Contact links and page CTAs. Do not point those at `route('contact-us')`
 - Same-page contact form anchors on `/contact-us` may still use `#contact-id`
 - Contact form: `POST` to `route('contact-us.store')` via AJAX (`novalidate` + custom field errors). On success: clear form and show “The request has been sent successfully.” Also includes `@csrf`, honeypot `website`, and `form_started_at` (bots get silent JSON success)
 - Legal pages: `PageController` methods `privacyPolicy` / `termsAndConditions` (`privacy-policy`, `terms-and-conditions`; Footer must use `route()`, not `url()`)
@@ -129,7 +129,7 @@ Keep contact details consistent across SEO, footer, contact page, privacy, and S
 - Root: `public/assets/{brand,team,clients,background,hero,blog,portfolio,icons,media,product}/`
 - Nested: `blog/blogs-hero`, `icons/tech`
 - Files: `asset('assets/...')`; pages: `route()` only
-- Logos: `assets/brand/logo-white.png` (header/footer), `assets/brand/logo.png` (light surfaces)
+- Logos: `assets/brand/logo-white.webp` (header/footer), `assets/brand/logo.png` (light surfaces)
 - **Placement rule:** dedicated folder when it fits; otherwise **`media`**.
 - **`clients/`** = real client/partner **company** logos only (e.g. VerySoul, Bioassay). Not tech brands.
 - **`icons/tech/`** = tech stack logos/wordmarks (Node.js, React, WordPress, Angular, Vue, PHP, Python, Shopify marks, etc.).
@@ -138,7 +138,7 @@ Keep contact details consistent across SEO, footer, contact page, privacy, and S
 - After imports: `scripts/reclassify-assets.ps1` if anything is in the wrong folder.
 - After bulk renames: `scripts/rename-assets-by-content.ps1` + `scripts/asset-rename-map.json`.
 - **`public/images` must not exist.**
-- Do not keep `white_logo.svg` / `gradient-logo.svg` / `logo-white.svg` / `logo.svg` (use `logo-white.png` / `logo.png`).
+- Do not keep `white_logo.svg` / `gradient-logo.svg` / `logo-white.svg` / `logo.svg` (use `logo-white.webp` / `logo.png`).
 
 ### Content naming (required)
 
@@ -225,7 +225,9 @@ Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSu
 
 ## Layout / CSS
 
-- Marketing layout: Tailwind **3.4.17** via Vite (`@vite('resources/css/app.css')`) + Swiper CDN + Font Awesome + `asset('css/style.css')`
+- Marketing layout: Tailwind **3.4.17** via Vite (`@vite('resources/css/app.css')`) + Font Awesome subset + `asset('css/style.css')` (+ `style-deferred.css` on non-home pages)
+- **Render-blocking:** load those sheets with `media="print" onload="this.media='all'"` (Vite via `Vite::useStyleTagAttributes` when not in HMR). Keep a small inline critical CSS block in `layouts/frontend.blade.php` for the hero LCP shell. Do not reintroduce sync `<link rel="stylesheet">` for those files on the critical path.
+- Swiper CSS/JS: lazy via `frontend-deferred.js` when `.swiper` is near the viewport — not global head links
 - Pin `tailwindcss` to `3.4.17` (matches former Play CDN); PostCSS + `tailwind.config.js` — not `@tailwindcss/vite` / v4
 - Do not use the Tailwind Play CDN (`cdn.tailwindcss.com`) on marketing pages
 - Star-pearl emblem only via `<x-layouts.the-suave-star-pearl />` (not wired into `layouts/frontend.blade.php`)

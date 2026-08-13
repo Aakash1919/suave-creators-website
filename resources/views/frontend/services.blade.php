@@ -170,7 +170,7 @@
 />
 
 <!-- 7. Offshore Services Section Start -->
-<section class="full-bleed bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')"
+<section class="full-bleed bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')"
   aria-labelledby="offshore-services-title">
   <div class="section-inner">
     <header class="mx-auto mb-12 max-w-[720px] text-center lg:mb-14">

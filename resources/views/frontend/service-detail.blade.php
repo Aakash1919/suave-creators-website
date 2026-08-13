@@ -42,7 +42,10 @@
     </div>
 
     @if (!empty($service['bannerLogos']))
-      <div class="service-banner-logos serviceBannerLogosSwiper swiper mt-10 md:mt-12" aria-label="Technologies">
+      <div
+        class="service-banner-logos serviceBannerLogosSwiper swiper mt-10 md:mt-12"
+        style="--banner-logo-cols: {{ count($service['bannerLogos']) }}"
+        aria-label="Technologies">
         <div class="swiper-wrapper">
           @foreach ($service['bannerLogos'] as $logo)
             <div class="swiper-slide">
@@ -342,7 +345,7 @@
 @endif
 
 <!-- 11. Why Choose Us Section Start -->
-<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.png') }}')" aria-labelledby="service-why-heading">
+<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')" aria-labelledby="service-why-heading">
   <div class="section-inner">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-14">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['whyEyebrow'] ?? 'Suave Creators' }}</p>
@@ -827,7 +830,8 @@ $n = $index + 1;
   width: 100%;
 }
 
-.service-banner-logos {
+.service-banner-logos,
+.service-banner-logos.swiper:not(.swiper-initialized) {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
@@ -837,12 +841,14 @@ $n = $index + 1;
 }
 
 @media (min-width: 1024px) {
-  .service-banner-logos {
+  .service-banner-logos,
+  .service-banner-logos.swiper:not(.swiper-initialized) {
+    grid-template-columns: repeat(var(--banner-logo-cols, 6), minmax(0, 1fr));
+    margin: -10px;
+    max-width: none;
     overflow: visible;
     padding: 10px;
-    margin: -10px;
     width: calc(100% + 20px);
-    max-width: none;
   }
 }
 
@@ -1126,9 +1132,10 @@ $n = $index + 1;
 }
 
 @media (min-width: 1024px) {
-  .service-banner-logos {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+  .service-banner-logos,
+  .service-banner-logos.swiper:not(.swiper-initialized) {
     gap: 20px;
+    grid-template-columns: repeat(var(--banner-logo-cols, 6), minmax(0, 1fr));
   }
 
   .service-banner-logo {
@@ -1299,10 +1306,10 @@ $n = $index + 1;
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+window.suaveWhenSwiperReady(function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  if (typeof Swiper !== 'undefined' && document.querySelector('.servicePortfolioSwiper')) {
+  if (document.querySelector('.servicePortfolioSwiper')) {
     var isIndustryStylePortfolio = !!document.querySelector('.portfolio-hero-rail .servicePortfolioSwiper');
     var portfolioMarqueeSpeed = 18000;
     var portfolioDragSpeed = 500;
@@ -1376,7 +1383,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
   }
 
-  if (typeof Swiper !== 'undefined' && document.querySelector('.serviceCapabilitiesSwiper')) {
+  if (document.querySelector('.serviceCapabilitiesSwiper')) {
     new Swiper('.serviceCapabilitiesSwiper', {
       slidesPerView: 1,
       spaceBetween: 16,
@@ -1399,7 +1406,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var bannerLogosEl = document.querySelector('.serviceBannerLogosSwiper');
-  if (typeof Swiper !== 'undefined' && bannerLogosEl) {
+  if (bannerLogosEl) {
     var bannerLogosMq = window.matchMedia('(max-width: 1023px)');
     var bannerLogosSwiper = null;
 
@@ -1440,7 +1447,10 @@ document.addEventListener('DOMContentLoaded', function () {
       bannerLogosMq.addListener(syncBannerLogosSwiper);
     }
   }
+});
 
+document.addEventListener('DOMContentLoaded', function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var whyItems = document.querySelectorAll('.why-choose-list .why-choose-item');
   function setWhyAria(item, open) {
     item.querySelector('.why-choose-item__summary').setAttribute('aria-expanded', open ? 'true' : 'false');

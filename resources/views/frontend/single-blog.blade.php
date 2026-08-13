@@ -172,7 +172,7 @@
                   </div>
                 @endforeach
               </div>
-              <div class="blog-sidebar-slider__pagination" aria-label="Blog cards pagination"></div>
+              <nav class="blog-sidebar-slider__pagination" aria-label="Blog cards pagination"></nav>
             </div>
           </div>
         @endif
@@ -814,37 +814,35 @@
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  if (typeof Swiper !== 'undefined') {
-    document.querySelectorAll('.blogSidebarSwiper:not(.swiper-initialized)').forEach(function (el) {
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      new Swiper(el, {
-        slidesPerView: 1,
-        spaceBetween: 12,
-        speed: 550,
-        loop: el.querySelectorAll('.swiper-slide').length > 1,
-        watchOverflow: true,
-        allowTouchMove: true,
-        grabCursor: true,
-        autoplay: reduceMotion ? false : {
-          delay: 3500,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true
-        },
-        pagination: {
-          el: el.querySelector('.blog-sidebar-slider__pagination'),
-          clickable: true
-        },
-        a11y: {
-          containerMessage: 'More blog articles carousel'
-        },
-        keyboard: {
-          enabled: true,
-          onlyInViewport: true
-        }
-      });
+window.suaveWhenSwiperReady(function () {
+  document.querySelectorAll('.blogSidebarSwiper:not(.swiper-initialized)').forEach(function (el) {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    new Swiper(el, {
+      slidesPerView: 1,
+      spaceBetween: 12,
+      speed: 550,
+      loop: el.querySelectorAll('.swiper-slide').length > 1,
+      watchOverflow: true,
+      allowTouchMove: true,
+      grabCursor: true,
+      autoplay: reduceMotion ? false : {
+        delay: 3500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
+      },
+      pagination: {
+        el: el.querySelector('.blog-sidebar-slider__pagination'),
+        clickable: true
+      },
+      a11y: {
+        containerMessage: 'More blog articles carousel'
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true
+      }
     });
-  }
+  });
 });
 </script>
 @endpush
