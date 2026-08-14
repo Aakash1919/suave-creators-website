@@ -41,6 +41,8 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
     @php
+        // Keep Vite HMR CSS blocking in `npm run dev`; defer the built stylesheet for audits/prod.
+        $viteCssHot = file_exists(public_path('hot'));
         $styleCssHref = asset('css/style.css').'?v='.filemtime(public_path('css/style.css'));
         $deferredCssHref = asset('css/style-deferred.css').'?v='.filemtime(public_path('css/style-deferred.css'));
         $faSubsetHref = asset('css/fontawesome-subset.css').'?v='.filemtime(public_path('css/fontawesome-subset.css'));
@@ -143,6 +145,12 @@
         .about-stat__icon{display:inline-flex;flex-shrink:0;height:40px;width:40px}
         .about-stat__icon-image{aspect-ratio:1/1;display:block;height:40px;width:40px}
         .about-stat__value [data-counter-end]{display:inline-block;font-variant-numeric:tabular-nums}
+        /* Preloader hides the unstyled shell while the non-blocking sheets are still fetching. */
+        .site-preloader{align-items:center;background:var(--color-navy);display:flex;inset:0;justify-content:center;position:fixed;z-index:2147483000}
+        .site-preloader__spinner{animation:site-preloader-spin .9s linear infinite,site-preloader-fade-in .3s ease .15s forwards;block-size:44px;border:3px solid rgb(255 255 255 / 18%);border-radius:50%;border-top-color:#2a4dfb;box-sizing:border-box;display:block;inline-size:44px;opacity:0}
+        html.is-css-ready .site-preloader{opacity:0;pointer-events:none;transition:opacity .3s ease,visibility 0s linear .3s;visibility:hidden}
+        @keyframes site-preloader-spin{to{transform:rotate(1turn)}}
+        @keyframes site-preloader-fade-in{to{opacity:1}}
         @media (min-width:375px){
             .site-main>.site-container.relative h1{font-size:42px}
         }
@@ -197,15 +205,22 @@
         >
     @endif
 
+    {{-- media="print" sheets download at low priority; preload keeps the design CSS on a high-priority fetch. --}}
+    {{-- @vite already emits its own preload for the built stylesheet. --}}
+    <link rel="preload" as="style" href="{{ $styleCssHref }}">
+    @if ($loadDeferredCss)
+        <link rel="preload" as="style" href="{{ $deferredCssHref }}">
+    @endif
+
     {{-- Non-blocking stylesheets: fetch immediately, apply after load (not on critical path). --}}
-    <link rel="stylesheet" href="{{ $styleCssHref }}" media="print" onload="this.media='all'">
+    {{-- data-suave-css marks the sheets the preloader waits for before revealing the page. --}}
+    <link rel="stylesheet" href="{{ $styleCssHref }}" media="print" onload="this.media='all'" data-suave-css>
     @php
-        // Keep Vite HMR CSS blocking in `npm run dev`; defer the built stylesheet for audits/prod.
-        $viteCssHot = file_exists(public_path('hot'));
         if (! $viteCssHot) {
             Illuminate\Support\Facades\Vite::useStyleTagAttributes([
                 'media' => 'print',
                 'onload' => "this.media='all'",
+                'data-suave-css' => true,
             ]);
         }
     @endphp
@@ -213,11 +228,13 @@
     {{-- FA glyph classes only; webfonts inject via frontend-deferred.js after first paint. --}}
     <link rel="stylesheet" href="{{ $faSubsetHref }}" media="print" onload="this.media='all'">
     @if ($loadDeferredCss)
-        <link rel="stylesheet" href="{{ $deferredCssHref }}" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="{{ $deferredCssHref }}" media="print" onload="this.media='all'" data-suave-css>
     @endif
     {{-- display=optional avoids late font swaps that inflate CLS; cached visits still get the face. --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@400;700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=optional" media="print" onload="this.media='all'">
     <noscript>
+        {{-- Without JS these sheets are render-blocking, so there is nothing for the preloader to wait on. --}}
+        <style>.site-preloader{display:none}</style>
         <link rel="stylesheet" href="{{ $styleCssHref }}">
         @unless ($viteCssHot)
             <link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}">
@@ -235,6 +252,7 @@
     @stack('custom-css')
 </head>
 <body class="{{ $bodyClass }}">
+    <x-layouts.site-preloader />
     @if ($googleTagManagerId)
         <!-- Google Tag Manager (noscript) -->
         <noscript>
