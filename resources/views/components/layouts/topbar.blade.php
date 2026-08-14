@@ -14,14 +14,20 @@
                 <span class="bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold leading-none text-transparent sm:text-xs sm:leading-[1.35]">{{ $title }}</span>
                 <span class="hidden text-[11px] font-semibold leading-[1.35] text-white sm:inline sm:text-xs">{{ $subtitle }}</span>
             </a>
-            <i class="fa-solid fa-arrow-right shrink-0 text-[10px] text-white sm:text-xs" aria-hidden="true"></i>
+            <svg class="site-topbar__chevron shrink-0 text-white" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="M13 6l6 6-6 6" />
+            </svg>
             <span class="ml-2 hidden shrink-0 items-center gap-1 sm:ml-4 sm:flex" aria-hidden="true">
                 <span class="h-2 w-2 rounded-full bg-white"></span>
                 <span class="h-2 w-2 rounded-full bg-white/40"></span>
             </span>
         </p>
         <button type="button" class="site-topbar__dismiss justify-self-end text-xs text-white opacity-40 hover:opacity-70 sm:text-sm" aria-label="Dismiss announcement" onclick="document.getElementById('announcement-bar').remove()">
-            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M18 6L6 18" />
+                <path d="M6 6l12 12" />
+            </svg>
         </button>
     </div>
 </div>

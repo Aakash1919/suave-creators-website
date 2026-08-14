@@ -25,12 +25,20 @@
         }
     }
 
+    $fallbackSrc = $path;
+
     if ($isWebp && filled($imageBase) && filled($fullWidth)) {
-        foreach ([640, 480] as $variantWidth) {
-            $variantPath = public_path($imageBase.'-'.$variantWidth.'.webp');
+        foreach ([320, 480, 640] as $variantWidth) {
+            $variantRelative = $imageBase.'-'.$variantWidth.'.webp';
+            $variantPath = public_path($variantRelative);
 
             if (is_file($variantPath)) {
-                $srcset[] = asset($imageBase.'-'.$variantWidth.'.webp').' '.$variantWidth.'w';
+                $srcset[] = asset($variantRelative).' '.$variantWidth.'w';
+
+                // Prefer the smallest variant as src fallback (not the largest).
+                if ($fallbackSrc === $path) {
+                    $fallbackSrc = $variantRelative;
+                }
             }
         }
 
@@ -39,7 +47,7 @@
 @endphp
 
 <img
-  src="{{ asset($path) }}"
+  src="{{ asset($fallbackSrc) }}"
   @if ($srcset !== [])
     srcset="{{ implode(', ', $srcset) }}"
     sizes="{{ $sizes }}"

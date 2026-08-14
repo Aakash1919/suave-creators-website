@@ -32,7 +32,7 @@ class Logo extends Component
             throw new InvalidArgumentException('Logo variant must be "header" or "footer".');
         }
 
-        $defaultSrc = 'assets/brand/logo-white.png';
+        $defaultSrc = 'assets/brand/logo-white.webp';
         $this->resolvedSrc = $this->normalizeAssetPath($this->src ?? $defaultSrc);
         $this->useResponsiveLogo = $this->resolvedSrc === $defaultSrc;
 

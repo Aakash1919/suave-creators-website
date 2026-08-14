@@ -1,5 +1,5 @@
 <div class="site-header__sentinel" aria-hidden="true" data-header-sentinel></div>
-<header {{ $attributes->merge(['class' => 'site-header relative z-20 w-full bg-transparent py-3']) }}>
+<header {{ $attributes->merge(['class' => 'site-header z-20 w-full bg-transparent py-3']) }}>
     <div class="site-container flex items-center justify-between gap-3 sm:gap-4">
         <a href="{{ route('home') }}" class="site-header__logo inline-flex shrink-0 items-center"
             aria-label="Suave Creators home">
@@ -62,9 +62,9 @@
             <a href="{{ route('blogs') }}"
                 class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                 @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>
-            <a href="{{ $ctaHref() }}"
-                target="_blank" rel="noopener noreferrer"
-                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF]">Contact</a>
+            <a href="{{ $contactHref() }}"
+                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive($ctaRoute) ? 'is-active' : '' }}"
+                @if ($isNavActive($ctaRoute)) aria-current="page" @endif>Contact</a>
         </nav>
 
         <div class="site-header__actions flex items-center justify-end gap-2 sm:gap-4 xl:gap-5">
@@ -89,7 +89,7 @@
         </div>
     </div>
 
-    <div id="mobile-nav" class="mobile-nav" aria-hidden="false">
+    <div id="mobile-nav" class="mobile-nav" hidden aria-hidden="true">
         <div class="mobile-nav__backdrop" data-mobile-nav-close tabindex="-1" aria-hidden="true"></div>
         <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
             <button type="button" class="mobile-nav__close hidden u-touch-target" data-mobile-nav-close
@@ -133,9 +133,9 @@
                     <a class="mobile-nav__link {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                         href="{{ route('blogs') }}"
                         @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>
-                    <a class="mobile-nav__link"
-                        href="{{ $ctaHref() }}"
-                        target="_blank" rel="noopener noreferrer">Contact</a>
+                    <a class="mobile-nav__link {{ $isNavActive($ctaRoute) ? 'is-active' : '' }}"
+                        href="{{ $contactHref() }}"
+                        @if ($isNavActive($ctaRoute)) aria-current="page" @endif>Contact</a>
                 </nav>
 
                 <div class="mobile-nav__footer">
@@ -167,7 +167,6 @@
         </div>
     </div>
 </header>
-<div class="site-header__spacer" aria-hidden="true" data-header-spacer></div>
 
 @once
     @push('scripts')
@@ -175,19 +174,11 @@
             (function() {
                 var header = document.querySelector('.site-header');
                 var sentinel = document.querySelector('[data-header-sentinel]');
-                var spacer = document.querySelector('[data-header-spacer]');
-                if (!header || !sentinel || !spacer) return;
+                if (!header || !sentinel) return;
 
-                function syncSpacer() {
-                    spacer.style.height = header.classList.contains('is-stuck') ?
-                        header.getBoundingClientRect().height + 'px' :
-                        '';
-                }
-
+                // Sticky keeps the header in normal flow (no spacer CLS). is-stuck is visual only.
                 function setStuck(isStuck) {
-                    if (header.classList.contains('is-stuck') === isStuck) return;
                     header.classList.toggle('is-stuck', isStuck);
-                    syncSpacer();
                 }
 
                 if ('IntersectionObserver' in window) {
@@ -203,8 +194,6 @@
                         passive: true
                     });
                 }
-
-                window.addEventListener('resize', syncSpacer);
             })
             ();
 
@@ -228,6 +217,7 @@
                     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                     toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
                     document.body.classList.toggle('mobile-nav-open', isOpen);
+                    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
 
                     if (isOpen) {
                         nav.hidden = false;

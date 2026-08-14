@@ -1,0 +1,39 @@
+/*! Font Awesome Free 6.7.2 webfonts — injected after first paint (see frontend-deferred.js). */
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: optional;
+  src: url(../fonts/fontawesome/fa-solid-900.woff2) format("woff2");
+}
+
+.fa-solid,
+.fas {
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url(../fonts/fontawesome/fa-brands-400.woff2) format("woff2");
+}
+
+.fa-brands,
+.fab {
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url(../fonts/fontawesome/fa-regular-400.woff2) format("woff2");
+}
+
+.fa-regular,
+.far {
+  font-weight: 400;
+}

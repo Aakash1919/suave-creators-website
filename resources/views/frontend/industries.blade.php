@@ -95,7 +95,7 @@
 <!-- 2. Portfolio Showcase Marquee Section End -->
 
 <!-- 3. Intro CTA Section Start -->
-<section class="full-bleed bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/core-section-bg.png') }}')" aria-labelledby="industry-intro-title">
+<section class="full-bleed bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/core-section-bg.webp') }}')" aria-labelledby="industry-intro-title">
   <div class="section-inner text-center">
     <div class="mx-auto flex max-w-[1000px] flex-col items-center px-1">
       <div class="mb-3 flex items-center justify-center gap-2 sm:mb-4">
@@ -146,7 +146,7 @@
 
 <!-- 5. AI Solutions Section Start -->
 <section
-  class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/blog-section-bg.png') }}')"
+  class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}')"
   aria-labelledby="ai-solutions-title">
   <div class="section-inner relative z-10 py-10 sm:py-16 lg:py-[86px]">
     <div class="mx-auto max-w-[720px] text-center">
@@ -195,7 +195,7 @@
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="industry-core-services-pagination flex md:hidden" aria-label="Core services pagination"></div>
+      <nav class="industry-core-services-pagination flex md:hidden" aria-label="Core services pagination"></nav>
       <div class="flex w-full flex-col items-center gap-4 md:ml-auto md:w-auto md:flex-row md:justify-end md:gap-5">
         <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:w-auto sm:max-w-none sm:px-5 sm:py-2 sm:text-sm">
@@ -1186,54 +1186,57 @@
 
 @push('scripts')
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Swiper !== 'undefined') {
-      if (document.querySelector('.industryCoreServicesSwiper')) {
-        new Swiper('.industryCoreServicesSwiper', {
-          slidesPerView: 1,
-          spaceBetween: 16,
-          speed: 650,
-          rewind: true,
-          watchOverflow: true,
-          keyboard: { enabled: true, onlyInViewport: true },
-          a11y: {
-            prevSlideMessage: 'Previous service',
-            nextSlideMessage: 'Next service'
-          },
-          navigation: {
-            nextEl: '.industry-core-services-next',
-            prevEl: '.industry-core-services-prev'
-          },
-          pagination: {
-            el: '.industry-core-services-pagination',
-            clickable: true
-          },
-          breakpoints: {
-            768: { slidesPerView: 2, spaceBetween: 18 },
-            1024: { slidesPerView: 3, spaceBetween: 24 }
-          }
-        });
-      }
-
-      if (document.querySelector('.testimonialSwiper')) {
-        new Swiper('.testimonialSwiper', {
-          direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
-          slidesPerView: 1,
-          spaceBetween: 16,
-          loop: true,
-          speed: 700,
-          autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
-          navigation: { nextEl: '.testimonial-next', prevEl: '.testimonial-prev' },
-          pagination: {
-            el: '.testimonial-pagination',
-            clickable: true
-          },
-          breakpoints: { 1024: { slidesPerView: 2, spaceBetween: 24 } }
-        });
-      }
-
+  window.suaveWhenSwiperReady(function () {
+    if (document.querySelector('.industryCoreServicesSwiper')) {
+      new Swiper('.industryCoreServicesSwiper', {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        speed: 650,
+        rewind: true,
+        watchOverflow: true,
+        keyboard: { enabled: true, onlyInViewport: true },
+        a11y: {
+          prevSlideMessage: 'Previous service',
+          nextSlideMessage: 'Next service'
+        },
+        navigation: {
+          nextEl: '.industry-core-services-next',
+          prevEl: '.industry-core-services-prev'
+        },
+        pagination: {
+          el: '.industry-core-services-pagination',
+          clickable: true
+        },
+        breakpoints: {
+          768: { slidesPerView: 2, spaceBetween: 18 },
+          1024: { slidesPerView: 3, spaceBetween: 24 }
+        }
+      });
     }
 
+    document.querySelectorAll('.testimonialSwiper:not(.swiper-initialized)').forEach(function (el) {
+      var root = el.closest('.testimonial-section') || el.parentElement;
+      new Swiper(el, {
+        direction: window.matchMedia('(min-width: 1024px)').matches ? 'vertical' : 'horizontal',
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        speed: 700,
+        autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+        navigation: {
+          nextEl: root ? root.querySelector('.testimonial-next') : '.testimonial-next',
+          prevEl: root ? root.querySelector('.testimonial-prev') : '.testimonial-prev'
+        },
+        pagination: {
+          el: root ? root.querySelector('.testimonial-pagination') : '.testimonial-pagination',
+          clickable: true
+        },
+        breakpoints: { 1024: { slidesPerView: 2, spaceBetween: 24 } }
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
     const expertiseRoot = document.querySelector('[data-industry-expertise]');
     if (expertiseRoot) {
       const tabs = expertiseRoot.querySelectorAll('[data-expertise-index]');

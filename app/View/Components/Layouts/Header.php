@@ -74,6 +74,15 @@ class Header extends Component
         return ContactSupport::demoHref();
     }
 
+    public function contactHref(): string
+    {
+        $href = route($this->ctaRoute);
+
+        return $this->ctaFragment !== ''
+            ? $href.'#'.$this->ctaFragment
+            : $href;
+    }
+
     public function isNavActive(string ...$patterns): bool
     {
         return request()->routeIs(...$patterns);

@@ -30,7 +30,7 @@
     </div>
 
     <div class="order-1 mx-auto w-full overflow-hidden rounded-xl border-[6px] border-white sm:order-2 sm:mt-8 sm:rounded-2xl sm:border-[10px]">
-      <img src="{{ asset('assets/media/about-team-grayscale-portrait-banner.webp') }}"
+      <img src="{{ asset('assets/team/about-us-team-portrait-banner.webp') }}"
         alt="Suave Creators IT company team portraits for web design and development"
         title="Suave Creators IT company team portraits for web design and development"
         class="block h-auto w-full rounded-lg object-cover sm:rounded-[12px]" loading="eager" decoding="async">
@@ -79,7 +79,7 @@
             class="flex min-h-[128px] flex-col justify-between rounded-[16px] border-2 border-white bg-[#F8FAFB] p-4 shadow-[0_10px_28px_rgba(35,38,91,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(35,38,91,0.10)] sm:min-h-[156px] sm:p-5 md:p-6">
             <div class="min-w-0">
               <p class="m-0 text-[28px] font-semibold font-mori italic leading-none tracking-[-0.04em] text-[#00003F] sm:text-[32px] lg:text-[36px]">
-                <span data-counter-end="{{ (int) $stat['end'] }}">0</span>{{ $stat['suffix'] }}
+                <span data-counter-end="{{ (int) $stat['end'] }}" style="display:inline-block;min-width:{{ strlen((string) $stat['end']) }}ch;font-variant-numeric:tabular-nums">0</span>{{ $stat['suffix'] }}
               </p>
               <h3 class="mt-2 text-[13px] font-semibold leading-snug text-[#2A4DFB] sm:text-[14px]">
                 {{ $stat['label'] }}
@@ -123,8 +123,13 @@
       @foreach ($shoreSlides as $slide)
         <article class="flex min-w-0 flex-col">
           <figure class="overflow-hidden rounded-[14px]">
-            <img src="{{ asset($slide['image']) }}" alt="{{ $slide['alt'] }}" title="{{ $slide['alt'] }}"
-              class="aspect-[4/3] h-auto w-full object-cover" width="640" height="480" loading="lazy" decoding="async">
+            <x-frontend.responsive-webp-image
+              :src="$slide['image']"
+              :alt="$slide['alt']"
+              class="aspect-[4/3] h-auto w-full object-cover"
+              sizes="(min-width: 1280px) 405px, (min-width: 1024px) 300px, (min-width: 768px) calc((100vw - 68px) / 2), calc(100vw - 40px)"
+              loading="lazy"
+              decoding="async" />
           </figure>
           <div class="mt-4 flex flex-wrap gap-2">
             @foreach ($slide['tags'] as $tag)
@@ -173,7 +178,7 @@
 
 <!-- 5. Core Values Section Start -->
 <section class="full-bleed bg-cover bg-top bg-no-repeat py-12 sm:py-16 lg:py-24"
-  style="background-image: url('{{ asset('assets/background/core-section-bg.png') }}');"
+  style="background-image: url('{{ asset('assets/background/core-section-bg.webp') }}');"
   aria-labelledby="core-values-title">
   <div class="section-inner">
     <header class="mb-8 grid grid-cols-1 items-start gap-4 sm:mb-10 lg:mb-14 lg:grid-cols-[190px_minmax(0,1fr)] lg:gap-8">

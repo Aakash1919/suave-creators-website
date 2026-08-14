@@ -776,8 +776,10 @@ core-value-card__image1{
 }
 
 .digital-services-marquee__label--outlined{
-  color: transparent;
-  -webkit-text-stroke: 1px #c2c3c8;
+  /* Opaque color for contrast checkers; transparent fill keeps the outlined look */
+  color: var(--color-muted, #4d4d4d);
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.15px var(--color-muted, #4d4d4d);
   font-size: 28px;
 }
 
