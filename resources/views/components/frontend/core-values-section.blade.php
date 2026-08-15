@@ -1,5 +1,5 @@
 <section
-  {{ $attributes->merge(['class' => 'full-bleed core-values core-values-section bg-cover bg-top bg-no-repeat py-16 lg:py-20']) }}
+  {{ $attributes->merge(['class' => 'full-bleed core-values core-values-section bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20']) }}
   style="background-image: url('{{ asset($backgroundImage) }}');"
   @if ($titleId !== '') aria-labelledby="{{ $titleId }}" @endif>
   <div class="core-values__inner section-inner">
@@ -14,9 +14,9 @@
       </div>
       <div class="core-values__heading">
         @if ($titleId !== '')
-          <h2 id="{{ $titleId }}">{{ $title }}</h2>
+          <h2 id="{{ $titleId }}" class="home-type-h2">{{ $title }}</h2>
         @else
-          <h2>{{ $title }}</h2>
+          <h2 class="home-type-h2">{{ $title }}</h2>
         @endif
         @if ($description !== '')
           <p>{{ $description }}</p>
@@ -36,7 +36,7 @@
               <x-frontend.responsive-webp-image
                 :src="$item['image']"
                 :alt="$item['alt']"
-                sizes="(min-width: 1024px) 366px, (min-width: 768px) 292px, 298px"
+                sizes="(min-width: 1024px) 366px, (min-width: 768px) 292px, 90vw"
                 loading="lazy"
                 decoding="async" />
             </div>

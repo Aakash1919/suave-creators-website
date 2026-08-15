@@ -4,9 +4,9 @@
   aria-labelledby="{{ $headingId }}">
   <div class="faq-section__inner section-inner">
     <div class="faq-section__intro">
-      <p class="faq-section__eyebrow flex items-center gap-2">
-        <span class="inline-block h-4 w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
-        <span class="bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent font-bold text-[14px]">
+      <p class="faq-section__eyebrow mb-4 flex items-center gap-2">
+        <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
+        <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
           {{ $eyebrow }}
         </span>
       </p>
@@ -18,7 +18,7 @@
       @if ($showCta)
         <a href="{{ str_starts_with((string) $ctaHref, '#') || str_starts_with((string) $ctaHref, 'http') ? $ctaHref : (str_starts_with((string) $ctaHref, '/') ? $ctaHref : route($ctaHref)) }}"
           @if (str_starts_with((string) $ctaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-          class="faq-section__cta group inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
+          class="faq-section__cta u-btn-cta group inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110">
           {{ $ctaLabel }}
           <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

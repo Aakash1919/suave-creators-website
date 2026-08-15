@@ -5,15 +5,15 @@
 
 <!-- 1. Hero Section (IndustryBanner) Start -->
 <section
-  class="relative z-10 w-full overflow-x-clip pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container">
+  class="relative z-10 w-full overflow-x-clip section-pad-m pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container">
   <div class="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
-    <div class="relative z-0 order-2 flex max-w-xl min-w-0 flex-col text-left lg:order-1 lg:max-w-[560px]">
+    <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[560px]">
       <p
         class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold uppercase tracking-wide text-transparent pragati-narrow-regular sm:text-sm">
         Finance • Healthcare • Retail • Education • Logistics
       </p>
       <h1
-        class="mb-2 mt-1 flex flex-col text-[28px] font-semibold leading-[1.05] text-white min-[375px]:text-[34px] sm:mt-2 sm:text-5xl lg:text-[56px] lg:leading-[100%]">
+        class="page-hero-title mb-2 mt-1 flex flex-col text-[26px] font-semibold leading-[28px] text-white sm:mt-2 sm:text-5xl lg:text-[56px] lg:leading-[100%]">
         <span
           class="inline-block bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text font-extrabold text-transparent">
           Industry-Specific
@@ -21,7 +21,7 @@
         <span>Web Design, Software</span>
         <span>&amp; AI Solutions</span>
       </h1>
-      <p class="mb-2 mt-2 text-[13px] leading-6 text-[#B1B9DF] sm:text-sm">
+      <p class="mb-2 mt-2 text-[13px] leading-[18px] text-[#B1B9DF] sm:text-sm sm:leading-5">
         Industry solutions are the need of every business nowadays. Our focus industries include financial services,
         healthcare, logistics, retail, and education. We transform operations with solutions designed to enhance customer
         interactions and automate CRM with cost-effective development services.
@@ -39,13 +39,13 @@
           </svg>
         </a>
         <a href="#industry-expertise"
-          class="inline-flex max-lg:min-h-[44px] items-end justify-center border-b border-white/70 pb-0.5 text-[13px] font-semibold text-white sm:justify-start sm:text-sm">
+          class="banner-text-link max-lg:min-h-[44px] items-end justify-center border-b border-white/70 pb-0.5 text-[13px] font-semibold text-white sm:justify-start sm:text-sm">
           Explore industries
         </a>
       </div>
     </div>
 
-    <div class="relative z-10 order-1 mx-auto flex w-full max-w-[360px] min-w-0 items-center justify-center sm:max-w-[420px] lg:order-2 lg:mx-0 lg:max-w-none lg:justify-end">
+    <div class="industry-hero-visual-wrap relative z-10 mx-auto hidden w-full max-w-[360px] min-w-0 items-center justify-center sm:max-w-[420px] lg:mx-0 lg:flex lg:max-w-none lg:justify-end">
       <div class="industry-hero-visual" aria-hidden="true">
         <img src="{{ asset('assets/media/industry-left-visual.webp') }}" alt="Industry Left Visual for Suave Creators software development" title="Industry Left Visual for Suave Creators software development" class="industry-hero-visual__half industry-hero-visual__half--left" width="320" height="520" loading="eager">
         <img src="{{ asset('assets/media/industry-right-visual.webp') }}" alt="Industry Right Visual for Suave Creators software development" title="Industry Right Visual for Suave Creators software development" class="industry-hero-visual__half industry-hero-visual__half--right" width="320" height="520" loading="eager">
@@ -62,7 +62,7 @@
 <!-- 1. Hero Section End -->
 
 <!-- 2. Portfolio Showcase Marquee Section Start -->
-<section class="full-bleed full-bleed--edge portfolio-showcase portfolio-hero-showcase overflow-hidden bg-[linear-gradient(180deg,#F8FAFF_0%,#FFFFFF_100%)] !py-8 sm:!py-10 md:!py-14" aria-label="Our recent work">
+<section class="full-bleed full-bleed--edge portfolio-showcase portfolio-hero-showcase overflow-hidden bg-[linear-gradient(180deg,#F8FAFF_0%,#FFFFFF_100%)] section-pad-m !py-6 sm:!py-10 md:!py-14" aria-label="Our recent work">
   <div class="industry-portfolio-marquee" tabindex="0">
     <div class="industry-portfolio-marquee__track">
       @for ($group = 0; $group < 2; $group++)
@@ -95,7 +95,7 @@
 <!-- 2. Portfolio Showcase Marquee Section End -->
 
 <!-- 3. Intro CTA Section Start -->
-<section class="full-bleed bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/core-section-bg.webp') }}')" aria-labelledby="industry-intro-title">
+<section class="full-bleed bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/core-section-bg.webp') }}')" aria-labelledby="industry-intro-title">
   <div class="section-inner text-center">
     <div class="mx-auto flex max-w-[1000px] flex-col items-center px-1">
       <div class="mb-3 flex items-center justify-center gap-2 sm:mb-4">
@@ -106,11 +106,11 @@
         </span>
       </div>
       <h2 id="industry-intro-title"
-        class="text-[22px] font-bold leading-tight text-[#171717] sm:text-[28px] lg:text-[clamp(1.75rem,4vw,2.75rem)]">
+        class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
         Building Smart Designs with <span
           class="bg-[linear-gradient(180deg,_#2F69FB_12%,_#C56BFF_100%)] bg-clip-text text-transparent">Powerful Back-Ends</span>
       </h2>
-      <p class="mx-auto mt-3 max-w-[580px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px]">
+      <p class="mx-auto mt-3 max-w-[580px] text-[13px] leading-[18px] text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-5">
         We believe in delivering visually stunning and superior web experiences that boost brands and drive long-term
         performance.
       </p>
@@ -146,19 +146,19 @@
 
 <!-- 5. AI Solutions Section Start -->
 <section
-  class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat" style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}')"
+  class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat section-pad-m" style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}')"
   aria-labelledby="ai-solutions-title">
-  <div class="section-inner relative z-10 py-10 sm:py-16 lg:py-[86px]">
+  <div class="section-inner relative z-10 sm:py-16 lg:py-[86px]">
     <div class="mx-auto max-w-[720px] text-center">
       <p
         class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
         Services
       </p>
       <h2 id="ai-solutions-title"
-        class="mt-3 text-[20px] font-semibold leading-tight tracking-[-0.025em] text-[#171717] sm:mt-4 sm:text-[22px] lg:text-[24px]">
+        class="home-type-h2 mt-3 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:mt-4 lg:text-[24px] lg:leading-[36px]">
         Our Core Services — Smart Tech Solutions for the AI Revolution
       </h2>
-      <p class="mx-auto mt-3 max-w-[605px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-[24px]">
+      <p class="mx-auto mt-3 max-w-[605px] text-[13px] leading-[18px] text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-5">
         As a top-tier company, we offer industry-specific software solutions with a proven track record of delivering the
         latest future trends and innovative solutions.
       </p>
@@ -220,7 +220,7 @@
 
 <!-- 7. Industry Expertise Section Start -->
 <section id="industry-expertise"
-  class="full-bleed expertise-showcase-section relative overflow-hidden bg-[#070B1F] py-10 sm:py-14 lg:py-24"
+  class="full-bleed expertise-showcase-section relative overflow-hidden bg-[#070B1F] section-pad-m py-6 lg:py-24"
   aria-labelledby="industry-expertise-title">
   <div class="expertise-showcase-section__glow" aria-hidden="true"></div>
   <div class="section-inner relative z-[1]">
@@ -232,10 +232,10 @@
         </span>
       </div>
       <h2 id="industry-expertise-title"
-        class="text-[22px] font-bold leading-tight tracking-[-0.03em] text-white sm:text-[32px] lg:text-[40px]">
+        class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-white sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
         Crafting Digital Solutions that Drive Success
       </h2>
-      <p class="mt-3 max-w-[560px] text-[13px] leading-6 text-[#B1B9DF] sm:mt-4 sm:text-[14px]">
+      <p class="mt-3 max-w-[560px] text-[13px] leading-[18px] text-[#B1B9DF] sm:mt-4 sm:text-[14px] sm:leading-5">
         By adding values to your business we always give the best solution for all types of businesses.
       </p>
     </header>
@@ -312,7 +312,7 @@
 <!-- 7. Industry Expertise Section End -->
 
 <!-- 9. Why Suave Creators (Core Services) Section Start -->
-<section class="full-bleed web-services bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
+<section class="full-bleed web-services bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
   aria-labelledby="why-suave-title">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
@@ -324,10 +324,10 @@
         </span>
       </div>
       <div class="web-services__intro">
-        <h2 id="why-suave-title" class="mb-3 text-[20px] font-semibold leading-tight text-[#171717] sm:mb-4 sm:text-[22px] lg:text-[24px]">
+        <h2 id="why-suave-title" class="home-type-h2 mb-3 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:mb-4 lg:text-[24px] lg:leading-[36px]">
           Why Suave Creators is Your Go-To for IT Web Design and Development
         </h2>
-        <p class="text-[13px] leading-6 text-[#4D4D4D] sm:text-[14px]">
+        <p class="text-[13px] leading-[18px] text-[#4D4D4D] sm:text-[14px] sm:leading-5">
           Industry-focused software, design, and support built around your business goals.
         </p>
       </div>
@@ -346,7 +346,7 @@
               {{ $service[1] }}
             </span>
             <div class="flex items-center justify-between">
-              <h3 class="mt-2 text-[14px] font-semibold leading-[100%] text-[#171717]">
+              <h3 class="mt-2 text-[14px] font-semibold leading-[18px] text-[#171717]">
                 {{ $service[2] }}
               </h3>
               <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -408,7 +408,7 @@
 <x-frontend.articles-insights-section
   :items="$articles"
   heading-id="industry-insights-title"
-  section-class="py-10 sm:py-12 lg:py-18"
+  section-class="section-pad-m py-6 lg:py-18"
   more-href="{{ route('blogs') }}"
   more-label="View all blog articles"
 />
@@ -528,6 +528,13 @@
 @media (min-width: 768px) {
   .industry-expertise {
     gap: 40px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .industry-hero-visual-wrap,
+  .industry-hero-visual {
+    display: none !important;
   }
 }
 
@@ -1111,11 +1118,13 @@
     }
 
     .industry-service-card h3 {
-      font-size: 15px;
+      font-size: 14px;
+      line-height: 18px;
     }
 
     .industry-service-card > p {
-      font-size: 13px;
+      font-size: 14px;
+      line-height: 20px;
     }
 
     .industry-service-card__tags span {
@@ -1143,7 +1152,12 @@
     }
 
     .expertise-showcase__copy h3 {
-      font-size: 18px;
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    .expertise-showcase__copy p {
+      line-height: 18px;
     }
 
     .expertise-showcase__tags span {
@@ -1157,7 +1171,7 @@
     }
 
     .faq-section {
-      padding-block: 40px 48px;
+      padding-block: 24px;
     }
   }
 

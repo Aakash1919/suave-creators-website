@@ -13,6 +13,8 @@ class BlogSupport
 {
     public const PER_PAGE = 9;
 
+    public const TABLET_PER_PAGE = 10;
+
     /**
      * @return Collection<int, array<string, mixed>>
      */
@@ -50,12 +52,23 @@ class BlogSupport
     }
 
     /**
+     * @return int
+     */
+    public static function perPage(?int $requested = null): int
+    {
+        return $requested === self::TABLET_PER_PAGE
+            ? self::TABLET_PER_PAGE
+            : self::PER_PAGE;
+    }
+
+    /**
      * @return array<string, mixed>
      */
-    public static function indexData(?string $categorySlug = null, int $page = 1, ?string $search = null): array
+    public static function indexData(?string $categorySlug = null, int $page = 1, ?string $search = null, ?int $perPage = null): array
     {
         $category = null;
         $search = trim((string) $search);
+        $perPage = self::perPage($perPage);
 
         if ($categorySlug !== null && $categorySlug !== '') {
             $category = BlogCategory::query()->where('slug', $categorySlug)->first();
@@ -69,7 +82,7 @@ class BlogSupport
         $paginator = self::publishedQuery($category?->slug, $search !== '' ? $search : null)
             ->with(['category', 'createdBy'])
             ->orderByDesc('published_at')
-            ->paginate(self::PER_PAGE, ['*'], 'page', max(1, $page))
+            ->paginate($perPage, ['*'], 'page', max(1, $page))
             ->withQueryString();
 
         $posts = $paginator->getCollection()
