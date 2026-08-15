@@ -351,12 +351,12 @@ class ProductSupport
             ],
             'testimonial' => [
                 'quote' => 'The Suave Sales CRM streamlined our entire sales process. Our team responds faster, works smarter, and closes more deals.',
-                'name' => 'Rajesh Patel',
-                'role' => 'Sales Director',
+                'name' => 'Amit Rana',
+                'role' => 'Managing Director',
                 'company' => 'Turbo Trans Corporation',
                 'avatar' => [
-                    'src' => asset('assets/product/rajesh-patel-sales-director-portrait.svg'),
-                    'alt' => 'Rajesh Patel Sales Director Turbo Trans Corporation Suave AI CRM testimonial portrait',
+                    'src' => asset('assets/product/amit-rana-managing-director-portrait.svg'),
+                    'alt' => 'Amit Rana Managing Director Turbo Trans Corporation Suave AI CRM testimonial portrait',
                 ],
             ],
             'cta' => [
