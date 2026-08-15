@@ -127,9 +127,9 @@
                         </div>
                     @endforeach
 
-                    <a class="mobile-nav__link {{ $isNavActive('case-studies', 'case-study.*') ? 'is-active' : '' }}"
+                    {{-- <a class="mobile-nav__link {{ $isNavActive('case-studies', 'case-study.*') ? 'is-active' : '' }}"
                         href="{{ route('case-studies') }}"
-                        @if ($isNavActive('case-studies', 'case-study.*')) aria-current="page" @endif>Case Studies</a>
+                        @if ($isNavActive('case-studies', 'case-study.*')) aria-current="page" @endif>Case Studies</a> --}}
                     <a class="mobile-nav__link {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                         href="{{ route('blogs') }}"
                         @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>
