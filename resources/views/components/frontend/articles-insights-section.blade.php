@@ -12,11 +12,11 @@
           {{ $eyebrow }}
         </p>
         <h2 id="{{ $headingId }}"
-          class="mt-4 text-[20px] font-semibold leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
+          class="mt-4 home-type-h2 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
           {{ $title }}
         </h2>
         <p
-          class="portfolio-showcase__intro mx-auto mt-2 max-w-[690px] text-[14px] leading-[24px] text-[#4D4D4D] sm:text-[14px]">
+          class="portfolio-showcase__intro mx-auto mt-2 max-w-[690px] text-[14px] leading-5 text-[#4D4D4D] sm:text-[14px]">
           {{ $subtitle }}
         </p>
       </header>

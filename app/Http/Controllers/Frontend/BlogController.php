@@ -16,7 +16,8 @@ class BlogController extends FrontendController
             BlogSupport::indexData(
                 $this->categorySlugFromRequest($request),
                 max(1, (int) $request->query('page', 1)),
-                $this->searchFromRequest($request)
+                $this->searchFromRequest($request),
+                $this->perPageFromRequest($request)
             )
         );
     }
@@ -28,7 +29,8 @@ class BlogController extends FrontendController
             BlogSupport::indexData(
                 $slug,
                 max(1, (int) $request->query('page', 1)),
-                $this->searchFromRequest($request)
+                $this->searchFromRequest($request),
+                $this->perPageFromRequest($request)
             )
         );
     }
@@ -46,7 +48,7 @@ class BlogController extends FrontendController
             }
         }
 
-        $data = BlogSupport::indexData($categorySlug, $page, $search);
+        $data = BlogSupport::indexData($categorySlug, $page, $search, $this->perPageFromRequest($request));
         $data['paginator']->withPath(route('blogs', absolute: false));
 
         return response()->json([
@@ -83,5 +85,10 @@ class BlogController extends FrontendController
         $search = trim((string) $request->query('q', ''));
 
         return $search !== '' ? $search : null;
+    }
+
+    protected function perPageFromRequest(Request $request): int
+    {
+        return BlogSupport::perPage((int) $request->query('per_page', BlogSupport::PER_PAGE));
     }
 }

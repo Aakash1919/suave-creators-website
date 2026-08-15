@@ -1,10 +1,10 @@
 @extends('layouts.frontend')
 
 @section('content')
-<section class="blogs-hero relative z-10 w-full pb-8 pt-6 md:pb-10 md:pt-8 lg:pb-12 lg:pt-10 site-container">
+<section class="blogs-hero relative z-10 w-full section-pad-m pb-8 pt-6 md:pb-10 md:pt-8 lg:pb-12 lg:pt-10 site-container">
   <div class="mx-auto max-w-[900px] text-center">
     <p class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-sm font-bold uppercase tracking-wide text-transparent pragati-narrow-regular">Blogs &amp; Insights</p>
-    <h1 class="mt-2 text-[34px] font-semibold leading-[1.15] text-white min-[375px]:text-[40px] sm:text-5xl lg:text-[52px]">
+    <h1 class="page-hero-title mt-2 text-[26px] font-semibold leading-[28px] text-white sm:text-5xl lg:text-[52px]">
       @if (! empty($activeCategory))
         {{ $activeCategory['name'] }}
         <span class="inline-block bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text pb-1 font-extrabold text-transparent">Articles</span>
@@ -12,7 +12,7 @@
         Ideas, Strategy &amp; <span class="inline-block bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text pb-1 font-extrabold text-transparent">Engineering Insights</span>
       @endif
     </h1>
-    <p class="mt-4 text-sm leading-6 text-[#B1B9DF]">
+    <p class="mt-4 text-[14px] leading-5 text-[#B1B9DF]">
       @if (! empty($activeCategory))
         Practical {{ strtolower($activeCategory['name']) }} articles from Suave Creators — strategies and engineering notes to help you build better software.
       @else
@@ -30,7 +30,7 @@
   </div>
 </section>
 
-<section class="full-bleed bg-white bg-cover bg-top bg-no-repeat py-16 lg:py-20" aria-label="All blog posts"
+<section class="full-bleed bg-white bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" aria-label="All blog posts"
   style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}');"
   data-blog-listing
   data-filter-url="{{ route('blogs.filter') }}"
@@ -92,7 +92,12 @@
   var categorySelect = root.querySelector('[data-blog-category-select]');
   var debounceTimer = null;
   var activeRequest = null;
-  var currentPage = 1;
+  var currentPage = parseInt(new URLSearchParams(window.location.search).get('page'), 10) || 1;
+  var tabletQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
+
+  function isTablet() {
+    return tabletQuery.matches;
+  }
 
   function currentParams(page) {
     var params = new URLSearchParams();
@@ -101,11 +106,14 @@
     if (q) params.set('q', q);
     if (category) params.set('category', category);
     if (page && page > 1) params.set('page', String(page));
+    if (isTablet()) params.set('per_page', '10');
     return params;
   }
 
   function updateHistory(params) {
-    var query = params.toString();
+    var historyParams = new URLSearchParams(params);
+    historyParams.delete('per_page');
+    var query = historyParams.toString();
     var nextUrl = blogsUrl + (query ? ('?' + query) : '');
     window.history.replaceState({}, '', nextUrl);
   }
@@ -207,6 +215,20 @@
       event.preventDefault();
       fetchResults(1);
     });
+  }
+
+  function onViewportChange() {
+    fetchResults(currentPage);
+  }
+
+  if (isTablet()) {
+    fetchResults(currentPage);
+  }
+
+  if (typeof tabletQuery.addEventListener === 'function') {
+    tabletQuery.addEventListener('change', onViewportChange);
+  } else if (typeof tabletQuery.addListener === 'function') {
+    tabletQuery.addListener(onViewportChange);
   }
 })();
 </script>

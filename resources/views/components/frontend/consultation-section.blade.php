@@ -10,7 +10,7 @@
     >
       <div class="consultation-copy">
         @if ($eyebrow !== '')
-          <span class="mb-2 inline-block text-sm font-semibold text-white/80">{{ $eyebrow }}</span>
+          <span class="consultation-eyebrow">{{ $eyebrow }}</span>
         @endif
         <h2>
           @if ($allowHtmlTitle)
