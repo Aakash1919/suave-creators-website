@@ -3,19 +3,19 @@
 @section('content')
 
 <!-- 1. About Banner Section Start -->
-<section class="full-bleed bg-cover bg-center bg-no-repeat py-10 sm:py-14 lg:py-20"
+<section class="full-bleed bg-cover bg-center bg-no-repeat section-pad-m py-6 sm:py-14 lg:py-20"
   style="background-image: url('{{ asset('assets/background/about-banner-bg.png') }}');" aria-labelledby="about-banner-title">
   <div class="section-inner flex flex-col">
     <div class="order-2 mx-auto mt-6 max-w-[900px] text-center sm:order-1 sm:mt-0">
       <h1 id="about-banner-title"
-        class="text-[28px] font-semibold leading-[1.15] tracking-[-0.03em] text-[#171717] min-[375px]:text-[32px] sm:text-[40px] md:text-[44px] lg:text-[48px]">
+        class="page-hero-title text-[26px] font-semibold leading-[28px] tracking-[-0.03em] text-[#171717] sm:text-[40px] md:text-[44px] lg:text-[48px]">
         Leading IT Company with
         <span class="bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent font-extrabold">
           Web Design &amp; Development
         </span>
       </h1>
 
-      <p class="mx-auto mt-4 max-w-[780px] text-[13px] leading-5 text-[#171717] sm:mt-5 sm:text-[14px] sm:leading-6 lg:text-[16px]">
+      <p class="mx-auto mt-4 max-w-[780px] text-[13px] leading-[18px] text-[#171717] sm:mt-5 sm:text-[14px] sm:leading-5 lg:text-[16px]">
         <span class="font-bold"> Suave Creators is a leading and smart IT company offering budget-friendly and robust
           digital solutions.</span><span class="font-semibold"> With our expertise, we help clients deliver exceptional
           technology solutions for world-class businesses in every business industry, from dynamic startups and SMBs to
@@ -40,7 +40,7 @@
 <!-- 1. About Banner Section End -->
 
 <!-- 2. About / Stats Section Start -->
-<section class="full-bleed bg-white py-10 sm:py-12 md:py-16 lg:py-20" aria-labelledby="about-stats-title">
+<section class="full-bleed bg-white section-pad-m py-6 sm:py-12 md:py-16 lg:py-20" aria-labelledby="about-stats-title">
   <div class="section-inner">
     <div class="grid grid-cols-1 items-start gap-8 md:gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
       <div class="min-w-0">
@@ -54,11 +54,11 @@
         </div>
 
         <h2 id="about-stats-title"
-          class="mt-4 max-w-[480px] text-[20px] font-bold leading-tight tracking-[-0.02em] text-[#171717] lg:text-[24px]">
+          class="home-type-h2 mt-4 max-w-[480px] text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] lg:text-[24px] lg:leading-[36px]">
           At Suave Creators, we craft powerful and innovative digital solutions.
         </h2>
 
-        <p class="mt-4 max-w-[520px] text-[13px] leading-6 text-[#4D4D4D] lg:text-[14px]">
+        <p class="mt-4 max-w-[520px] text-[13px] leading-[18px] text-[#4D4D4D] lg:text-[14px] lg:leading-5">
           From web development and UI/UX design to custom CRM and eCommerce
           platforms—engineered for scalability, performance, SEO success,
           and long-term business growth.
@@ -97,7 +97,7 @@
 <!-- 2. About / Stats Section End -->
 
 <!-- 3. Why Suave Creators Section Start -->
-<section class="full-bleed bg-white py-10 sm:py-14 md:py-16 lg:py-20" aria-labelledby="about-why-title">
+<section class="full-bleed bg-white section-pad-m py-6 sm:py-14 md:py-16 lg:py-20" aria-labelledby="about-why-title">
   <div class="section-inner">
     <header class="mb-8 grid grid-cols-1 items-start gap-4 sm:mb-10 lg:mb-14 lg:grid-cols-[190px_minmax(0,1fr)] lg:gap-8">
       <div class="flex items-center gap-2">
@@ -109,10 +109,10 @@
         </p>
       </div>
       <div class="min-w-0">
-        <h2 id="about-why-title" class="text-[20px] font-bold leading-tight text-[#171717] lg:text-[24px]">
+        <h2 id="about-why-title" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] lg:text-[24px] lg:leading-[36px]">
           Why Suave Creators
         </h2>
-        <p class="mt-3 max-w-[720px] text-[13px] leading-6 text-[#4D4D4D] lg:text-[14px]">
+        <p class="mt-3 max-w-[720px] text-[13px] leading-[18px] text-[#4D4D4D] lg:text-[14px] lg:leading-5">
           We are one of the reputed website development companies where we focus on giving cent percent to the
           client&rsquo;s requirement.
         </p>
@@ -139,10 +139,10 @@
               </span>
             @endforeach
           </div>
-          <h3 class="mt-4 text-[18px] font-semibold leading-snug text-[#171717] lg:text-[20px]">
+          <h3 class="mt-4 text-[14px] font-semibold leading-[18px] text-[#171717] lg:text-[20px]">
             {{ $slide['title'] }}
           </h3>
-          <p class="mt-3 text-[13px] leading-6 text-[#4D4D4D] lg:text-[14px]">
+          <p class="mt-3 text-[13px] leading-[18px] text-[#4D4D4D] lg:text-[14px] lg:leading-5">
             {{ $slide['text'] }}
           </p>
         </article>
@@ -153,7 +153,7 @@
 <!-- 3. Why Suave Creators Section End -->
 
 <!-- 4. Smart Modules Section Start -->
-<section class="full-bleed about-modules-section py-12 md:py-14 lg:py-16" aria-labelledby="about-modules-title">
+<section class="full-bleed about-modules-section section-pad-m py-6 md:py-14 lg:py-16" aria-labelledby="about-modules-title">
   <div class="section-inner">
     <header class="mx-auto mb-8 max-w-[720px] text-center md:mb-10">
       <h2 id="about-modules-title" class="text-[14px] font-semibold leading-snug text-[#5B6CFF]">
@@ -177,7 +177,7 @@
 <!-- 4. Smart Modules Section End -->
 
 <!-- 5. Core Values Section Start -->
-<section class="full-bleed bg-cover bg-top bg-no-repeat py-12 sm:py-16 lg:py-24"
+<section class="full-bleed bg-cover bg-top bg-no-repeat section-pad-m py-6 sm:py-16 lg:py-24"
   style="background-image: url('{{ asset('assets/background/core-section-bg.webp') }}');"
   aria-labelledby="core-values-title">
   <div class="section-inner">
@@ -190,9 +190,9 @@
           Values</p>
       </div>
       <div class="min-w-0">
-        <h2 id="core-values-title" class="text-[20px] font-bold leading-tight text-[#171717] lg:text-[24px]">Our Core
+        <h2 id="core-values-title" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] lg:text-[24px] lg:leading-[36px]">Our Core
           Values</h2>
-        <p class="mt-4 max-w-[760px] text-[13px] leading-5 text-[#4D4D4D] sm:leading-6 lg:text-[14px] lg:leading-6">
+        <p class="mt-4 max-w-[760px] text-[13px] leading-[18px] text-[#4D4D4D] sm:leading-5 lg:text-[14px] lg:leading-5">
           Driven by innovation, integrity, and excellence, we focus on delivering meaningful digital solutions that
           empower businesses, inspire creativity, and build lasting partnerships.
         </p>
@@ -222,7 +222,7 @@
 <!-- 5. Core Values Section End -->
 
 <!-- 6. Work With Us CTA Section Start -->
-<section class="full-bleed overflow-hidden bg-white py-10 sm:py-14 lg:py-20" aria-labelledby="about-work-title">
+<section class="full-bleed overflow-hidden bg-white section-pad-m py-6 sm:py-14 lg:py-20" aria-labelledby="about-work-title">
   <div class="section-inner rounded-2xl bg-cover bg-center bg-no-repeat p-5 sm:p-8 lg:p-12"
     style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
     <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12">
@@ -233,10 +233,10 @@
           class="ml-auto h-auto w-full max-w-[520px] object-cover lg:max-w-none" loading="lazy" decoding="async">
       </div>
       <div class="order-1 max-w-[640px] text-left lg:order-2">
-        <h2 id="about-work-title" class="text-[20px] font-semibold leading-tight text-white lg:text-[24px]">
+        <h2 id="about-work-title" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-white lg:text-[24px] lg:leading-[36px]">
           Ready to transform your business?
         </h2>
-        <p class="mt-4 text-[13px] font-normal leading-6 text-[#B1B9DF] sm:text-[14px]">
+        <p class="mt-4 text-[13px] font-normal leading-[18px] text-[#B1B9DF] sm:text-[14px] sm:leading-5">
           Let’s transform your idea into a high-performing digital solution. Our team is ready to collaborate, innovate, and deliver results that matter.
         </p>
         <x-frontend.cta-button variant="compact" class="mt-6 sm:mt-8">
@@ -256,7 +256,7 @@
 <!-- 7. Technologies Marquee Section End -->
 
 <!-- 8. Why Choose Us Section Start -->
-<section class="full-bleed bg-[#050A24] bg-cover bg-center bg-no-repeat py-10 sm:py-14 md:py-16 lg:py-20"
+<section class="full-bleed bg-[#050A24] bg-cover bg-center bg-no-repeat section-pad-m py-6 sm:py-14 md:py-16 lg:py-20"
   style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');"
   aria-labelledby="digital-growth-title">
   <div class="section-inner">
@@ -270,10 +270,10 @@
         </p>
       </div>
       <div class="min-w-0">
-        <h2 id="digital-growth-title" class="text-[20px] font-bold leading-tight text-white lg:text-[24px]">
+        <h2 id="digital-growth-title" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-white lg:text-[24px] lg:leading-[36px]">
           Expertise for your <span class="font-extrabold">digital growth journey</span>
         </h2>
-        <p class="mt-3 max-w-[760px] text-[13px] leading-6 text-[#B1B9DF] lg:text-[14px]">
+        <p class="mt-3 max-w-[760px] text-[13px] leading-[18px] text-[#B1B9DF] lg:text-[14px] lg:leading-5">
           By empowering your digital growth journey with expert solutions in custom web development, UX/UI design,
           AI solutions, and brand identity. We pursue innovative, scalable, and user-centric experiences to promote
           your brand, engage your audience, and drive success in the digital landscape.
@@ -290,8 +290,8 @@
               class="aspect-[16/10] h-auto w-full object-cover" width="640" height="400" loading="lazy" decoding="async">
           </figure>
           <div class="p-5 sm:p-6">
-            <h3 class="text-[18px] font-semibold leading-snug text-white lg:text-[20px]">{{ $feature['title'] }}</h3>
-            <p class="mt-3 text-[13px] leading-6 text-[#B1B9DF] lg:text-[14px]">{{ $feature['text'] }}</p>
+            <h3 class="text-[14px] font-semibold leading-[18px] text-white lg:text-[20px]">{{ $feature['title'] }}</h3>
+            <p class="mt-3 text-[13px] leading-[18px] text-[#B1B9DF] lg:text-[14px] lg:leading-5">{{ $feature['text'] }}</p>
           </div>
         </article>
       @endforeach
@@ -313,7 +313,7 @@
   heading-id="about-insights-title"
   more-href="{{ route('blogs') }}"
   more-label="View all blog articles"
-  section-class="py-10 sm:py-12 lg:py-18"
+  section-class="section-pad-m py-6 sm:py-12 lg:py-18"
 />
 
 <x-frontend.consultation-section />

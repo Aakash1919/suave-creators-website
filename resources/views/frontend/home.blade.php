@@ -24,16 +24,9 @@
         Enterprise Software Solutions to help businesses grow.
       </p>
       <div class="mt-8 flex items-center gap-4 sm:gap-7">
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-          class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
+        <x-frontend.cta-button :href="$demoHref" class="whitespace-nowrap">
           Start your Project
-          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1">
-            <path d="M18 8L22 12L18 16" />
-            <path d="M2 12H22" />
-          </svg>
-        </a>
+        </x-frontend.cta-button>
 
         <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
           class="inline-flex items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
@@ -42,7 +35,7 @@
       </div>
     </div>
 
-    <div class="relative z-10 flex w-full min-w-0 items-center justify-center lg:justify-end">
+    <div class="relative z-10 flex w-full min-w-0 items-center justify-start lg:justify-end">
       <div class="hero-media-grid" aria-hidden="true">
         <div
           class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
@@ -136,7 +129,7 @@
           <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
             We develop user-friendly web and mobile applications that enhance your overall growth and user experience.
           </p>
-          <p class="mt-4 hidden text-[14px] leading-[24px] text-[#4D4D4D] max-w-[520px] md:block">
+          <p class="mt-4 hidden text-[14px] leading-5 text-[#4D4D4D] max-w-[520px] md:block">
             We are a group of young talent who believe in teamwork and, with our expertise, deliver the best industry
             solution according to the client's requirements. Being one of the most valued software development companies,
             we design a range of AI-integrated smart software for this faster developing world.
@@ -149,7 +142,7 @@
 
             <div class="flex min-w-0 flex-col gap-1">
               <strong class="text-sm font-semibold text-[#171717]">Teamwork First</strong>
-              <p class="text-[13px] leading-[16px] font-medium text-[#4D4D4D]">
+              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
                 We believe great things happen together.
               </p>
             </div>
@@ -162,7 +155,7 @@
 
             <div class="flex min-w-0 flex-col gap-1">
               <strong class="text-sm font-semibold text-[#171717]">Client Focused</strong>
-              <p class="text-[13px] leading-[16px] font-medium text-[#4D4D4D]">
+              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
                 Your goals drive our solutions.
               </p>
             </div>
@@ -175,7 +168,7 @@
 
             <div class="flex min-w-0 flex-col gap-1">
               <strong class="text-sm font-semibold text-[#171717]">Future Ready</strong>
-              <p class="text-[13px] leading-[16px] font-medium text-[#4D4D4D]">
+              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
                 We build smart solutions for tomorrow.
               </p>
             </div>
@@ -229,16 +222,9 @@
       </div>
 
       <div class="mt-0 flex flex-wrap items-center gap-5">
-        <a href="{{ route('about-us') }}"
-          class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
-          <span>Learn more About Us</span>
-          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1">
-            <path d="M18 8L22 12L18 16"></path>
-            <path d="M2 12H22"></path>
-          </svg>
-        </a>
+        <x-frontend.cta-button :href="route('about-us')" class="whitespace-nowrap">
+          Learn more About Us
+        </x-frontend.cta-button>
         <a href="{{ route('product') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
       </div>
     </div>
@@ -249,17 +235,17 @@
 <!-- Offerings Showcase Section Start -->
 <section
   class="offerings-showcase full-bleed overflow-hidden bg-[#F9FAFC] bg-repeat" style="background-image: url('{{ asset('assets/background/what-we-do-section-pattern-bg.png') }}');">
-  <div class="section-inner relative z-10 pt-0 pb-12 sm:py-20 lg:py-[80px]">
+  <div class="section-inner relative z-10 pb-6 sm:py-20 lg:py-[80px]">
     <div class="mx-auto max-w-[660px] text-center">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
         What we Do
       </p>
       <h2
-        class="mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
+        class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
         We are creating App Startups, not just Apps. You are our Partner, not just a Client!
       </h2>
-      <p class="mx-auto mt-4 max-w-[605px] text-[13px] leading-[18px] sm:leading-[24px] text-[#4D4D4D] sm:text-[14px]">
+      <p class="mx-auto mt-4 max-w-[605px] text-[13px] leading-[18px] sm:leading-5 text-[#4D4D4D] sm:text-[14px]">
         Our clients mean everything to us. We combine Business Model Innovation, User Acquisition Strategy, and
         Monetisation Strategy to make the Best Software solution for you.
       </p>
@@ -344,7 +330,7 @@
         </span>
       </div>
       <div class="core-values__heading">
-        <h2>The Pillars Behind Our Excellence</h2>
+        <h2 class="home-type-h2">The Pillars Behind Our Excellence</h2>
         <p>We believe in offering seamless, effective, and custom-made solutions, which cater for your specific future
           goals</p>
       </div>
@@ -366,7 +352,7 @@
             <x-frontend.responsive-webp-image
               :src="$value['image']"
               :alt="$value['alt']"
-              sizes="(min-width: 1024px) 366px, (min-width: 768px) 292px, 298px"
+              sizes="(min-width: 1024px) 366px, (min-width: 768px) 292px, 90vw"
               loading="lazy"
               decoding="async" />
           </div>
@@ -391,9 +377,9 @@
         </span>
       </div>
       <div class="digital-marketing-services__intro">
-        <h2 id="digital-marketing-title" class="font-semibold text-[24px] text-[#171717] leading-[100%] mb-4">Transform
+        <h2 id="digital-marketing-title" class="home-type-h2 font-semibold text-[24px] text-[#171717] leading-[100%] mb-4">Transform
           Online Engagement Into Real Business Results</h2>
-        <p class="text-[14px] text-[#4D4D4D] leading-[100%]">By optimising your UX, leveraging SEO, writing quality
+        <p class="text-[14px] text-[#4D4D4D] leading-5">By optimising your UX, leveraging SEO, writing quality
           content, and integrating AI, chatbots, etc, for
           unparalleled success.</p>
       </div>
@@ -464,7 +450,7 @@
 
 <!-- Portfolio Showcase Section Start -->
 <section
-  class="full-bleed portfolio-showcase !hidden bg-repeat py-12 md:!grid lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-pattern-bg.png') }}');"
+  class="full-bleed portfolio-showcase !hidden bg-repeat py-6 md:!grid md:py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-pattern-bg.png') }}');"
   aria-labelledby="portfolio-showcase-title">
   <div class="portfolio-showcase__pattern" aria-hidden="true"></div>
   <div class="portfolio-showcase__container section-inner">
@@ -474,10 +460,10 @@
         Our Portfolio
       </p>
       <h2 id="portfolio-showcase-title"
-        class="mt-1 sm:mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
+        class="home-type-h2 mt-1 sm:mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
         Projects That Define Our Expertise</h2>
       <p
-        class="portfolio-showcase__intro mx-auto mt-1 sm:mt-4 max-w-[605px] text-[13px] leading-[19px] sm:text-[14px] sm:leading-[24px] text-[#4D4D4D]">
+        class="portfolio-showcase__intro mx-auto mt-1 sm:mt-4 max-w-[605px] text-[13px] leading-[18px] sm:text-[14px] sm:leading-5 text-[#4D4D4D]">
         Check out our best portfolio, which defines our expertise and different
         industries.</p>
     </header>
@@ -496,7 +482,7 @@
                   {{ $project['category'] }}
                 </p>
                 <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2">{{ $project['title'] }}</h3>
-                <p class=" text-[14px] text-[#4D4D4D] max-w-[360px] ">{{ $project['description'] }}</p>
+                <p class=" text-[14px] leading-5 text-[#4D4D4D] max-w-[360px] ">{{ $project['description'] }}</p>
               </div>
             </article>
           </div>
@@ -742,7 +728,7 @@
 .offerings-card p {
   color: #4d4d4d;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1.25rem;
   margin-top: 4px;
   max-width: 97%;
   font-weight: 500;
@@ -882,7 +868,7 @@
 .digital-marketing-card__content p {
   color: #4D4D4D;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.25rem;
   margin-top: 8px;
 }
 
@@ -939,7 +925,7 @@
   color: #00003F;
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.25rem;
   text-decoration: underline;
 }
 
@@ -1032,6 +1018,10 @@
     overflow: visible;
   }
 
+  .offerings-showcase > .section-inner {
+    padding-block: 24px;
+  }
+
   .offeringsSwiper.swiper {
     overflow: visible !important;
     padding: 8px 6px 20px;
@@ -1107,7 +1097,19 @@
   .digital-marketing-services__footer {
     align-items: center;
     flex-direction: row;
-    gap: 1rem;
+    flex-wrap: nowrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .offerings-pagination {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .offerings-expert-link {
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .digital-marketing-services__more-text {
@@ -1115,7 +1117,7 @@
   }
 
   .digital-marketing-services {
-    padding: 52px 0 28px;
+    padding: 24px 0;
   }
 
   .digital-marketing-services__intro h2 {
@@ -1160,7 +1162,7 @@
 
   .digital-marketing-card__content p {
     font-size: 13px;
-    line-height: 19px;
+    line-height: 18px;
     margin-top: 6px;
   }
 
@@ -1191,13 +1193,16 @@
 
   .hero-media-grid {
     border-radius: 16px;
-    max-width: 100%;
+    max-width: 100% !important;
+    width: 100%;
   }
 
   .digital-marketing-card__number {
-    font-size: 34px;
-    height: 24px;
-    width: 38px;
+    font-size: 28px;
+    height: auto;
+    line-height: 1;
+    top: 0;
+    width: auto;
   }
 }
 
@@ -1220,11 +1225,70 @@
   }
 
   .about-collage {
+    --collage-gap: 10px;
+    grid-template-columns: 190fr 180fr 154fr;
+    justify-content: stretch;
+    margin-inline: 0;
     max-width: 100%;
+    width: 100%;
+  }
+
+  .about-collage__column--left,
+  .about-collage__column--center,
+  .about-collage__column--right {
+    width: 100%;
+  }
+
+  .about-collage__tile,
+  .about-collage__tile--team,
+  .about-collage__tile--office-small,
+  .about-collage__tile--portrait-tall,
+  .about-collage__tile--leader,
+  .about-collage__tile--portrait-main,
+  .about-collage__tile--office-wide,
+  .about-collage__tile--portrait-right,
+  .about-collage__tile--meeting,
+  .about-collage__tile--meeting-sm {
+    height: auto;
+    width: 100%;
+  }
+
+  .about-collage__tile--team,
+  .about-collage__tile--office-small {
+    aspect-ratio: 120 / 90;
+  }
+
+  .about-collage__tile--portrait-tall {
+    aspect-ratio: 190 / 240;
+  }
+
+  .about-collage__tile--leader {
+    aspect-ratio: 180 / 140;
+  }
+
+  .about-collage__tile--portrait-main {
+    aspect-ratio: 180 / 280;
+  }
+
+  .about-collage__tile--office-wide {
+    aspect-ratio: 180 / 120;
+  }
+
+  .about-collage__tile--portrait-right {
+    aspect-ratio: 154 / 140;
+  }
+
+  .about-collage__tile--meeting {
+    aspect-ratio: 154 / 112;
+  }
+
+  .about-collage__tile--meeting-sm {
+    aspect-ratio: 124 / 94;
   }
 
   .hero-media-grid {
-    max-width: min(100%, 560px);
+    max-width: 100% !important;
+    width: 100%;
   }
 
   .digital-marketing-card {

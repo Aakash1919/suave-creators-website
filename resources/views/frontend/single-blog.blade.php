@@ -4,7 +4,7 @@
 
 
 <!-- Single Blog Hero Section Start -->
-<section class="single-blog-top relative z-10 w-full pb-10 pt-6 md:pb-14 md:pt-8 lg:pb-16 site-container">
+<section class="single-blog-top relative z-10 w-full section-pad-m pb-10 pt-6 md:pb-14 md:pt-8 lg:pb-16 site-container">
   <nav class="blog-breadcrumb" aria-label="Breadcrumb">
     <a href="{{ route('home') }}">Home</a>
     <span aria-hidden="true">/</span>
@@ -19,7 +19,7 @@
     </p>
   @endif
 
-  <h1 class="single-blog-main__title">
+  <h1 class="page-hero-title single-blog-main__title">
     @if ($titleLead !== '')
       {{ $titleLead }}
     @endif
@@ -47,7 +47,7 @@
 <!-- Single Blog Hero Section End -->
 
 <!-- Single Blog Article Section Start -->
-<section class="full-bleed bg-white py-12 md:py-16 lg:py-20" aria-label="Blog article">
+<section class="full-bleed bg-white section-pad-m py-6 md:py-16 lg:py-20" aria-label="Blog article">
   <div class="section-inner">
     <div class="single-blog-layout">
       <article class="single-blog-main">
@@ -211,10 +211,13 @@
   font-size: 13px;
   font-weight: 600;
   color: #b1b9df;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .blog-breadcrumb a {
   color: #b1b9df;
+  flex: 0 0 auto;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -223,8 +226,18 @@
   color: #fff;
 }
 
+.blog-breadcrumb span[aria-hidden="true"] {
+  flex: 0 0 auto;
+}
+
 .blog-breadcrumb span[aria-current] {
   color: #fff;
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .single-blog-top {

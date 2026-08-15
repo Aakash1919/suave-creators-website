@@ -5,14 +5,14 @@
 
     <!-- Hero Section Start -->
     <section
-        class="relative z-10 w-full overflow-x-clip pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[600px] lg:pb-20 lg:pt-[52px] site-container">
+        class="industry-detail-banner relative z-10 w-full overflow-x-clip section-pad-m pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[600px] lg:pb-20 lg:pt-[52px] site-container">
         <div class="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
-            <div class="relative z-0 order-2 flex max-w-xl min-w-0 flex-col text-left lg:order-1 lg:max-w-[560px]">
+            <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[560px]">
                 <p
                     class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold uppercase tracking-wide text-transparent sm:text-sm">
                     {{ $industry['eyebrow'] ?? 'Industry Solutions' }}</p>
                 <h1
-                    class="mb-2 mt-1 flex flex-col text-[28px] font-semibold leading-[1.05] text-white min-[375px]:text-[34px] sm:mt-2 sm:text-5xl lg:text-[52px] lg:leading-none">
+                    class="page-hero-title mb-2 mt-1 flex flex-col text-[26px] font-semibold leading-[28px] text-white sm:mt-2 sm:text-5xl lg:text-[52px] lg:leading-none">
                     @foreach ($industry['heroTitle'] ?? [] as $i => $line)
                         @if ($i === 0)
                             <span
@@ -22,7 +22,7 @@
                         @endif
                     @endforeach
                 </h1>
-                <p class="mb-2 mt-2 text-[13px] leading-6 text-[#B1B9DF] sm:text-sm">{{ $industry['heroDescription'] ?? '' }}
+                <p class="mb-2 mt-2 text-[13px] leading-[18px] text-[#B1B9DF] sm:text-sm sm:leading-5">{{ $industry['heroDescription'] ?? '' }}
                 </p>
                 <div class="mt-8 flex items-center gap-4 sm:gap-7">
                     <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
@@ -37,12 +37,12 @@
                     </a>
 
                     <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
+                        class="banner-text-link items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
                         Book a Call </a>
                 </div>
             </div>
             <div
-                class="relative z-10 order-1 mx-auto flex w-full max-w-[360px] min-w-0 items-center justify-center sm:max-w-[420px] lg:order-2 lg:mx-0 lg:max-w-[480px] lg:justify-end">
+                class="industry-hero-media relative z-10 order-1 mx-auto hidden w-full max-w-[360px] min-w-0 items-center justify-center sm:max-w-[420px] lg:order-2 lg:mx-0 lg:flex lg:max-w-[480px] lg:justify-end">
                 @if (!empty($industry['heroImage']))
                     <img src="{{ $industry['heroImage'] }}" alt="{{ $industry['pageTitle'] ?? '' }}"
                         title="{{ $industry['pageTitle'] ?? '' }}" width="560" height="560"
@@ -55,7 +55,7 @@
     <!-- Hero Section End -->
 
     <!-- Intro + Stats Section Start -->
-    <section class="full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20"
+    <section class="full-bleed bg-white bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20"
         style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}')"
         aria-labelledby="industry-intro-heading">
         <div class="section-inner">
@@ -68,9 +68,9 @@
                             class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">{{ $industry['introEyebrow'] ?? 'Professional Solutions' }}</span>
                     </div>
                     <h2 id="industry-intro-heading"
-                        class="text-[22px] font-bold leading-tight text-[#171717] sm:text-[clamp(1.75rem,4vw,2.75rem)]">
+                        class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
                         {{ $industry['introTitle'] ?? '' }}</h2>
-                    <p class="mt-3 max-w-[560px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px]">
+                    <p class="mt-3 max-w-[560px] text-[13px] leading-[18px] text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-5">
                         {{ $industry['introDescription'] ?? '' }}</p>
                     <div class="mt-6 sm:mt-8">
                         <a href="{{ route('services') }}"
@@ -115,7 +115,7 @@
     <!-- Intro + Stats Section End -->
 
     <!-- Services Hub Section Start -->
-    <section class="full-bleed web-services industry-detail-services bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20"
+    <section class="full-bleed web-services industry-detail-services bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20"
         style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
         aria-labelledby="industry-services-heading">
         <div class="web-services__inner section-inner">
@@ -128,9 +128,9 @@
                 </div>
                 <div class="web-services__intro">
                     <h2 id="industry-services-heading"
-                        class="mb-3 text-[20px] font-semibold leading-tight text-[#171717] sm:mb-4 sm:text-[22px] lg:text-[24px]">
+                        class="home-type-h2 mb-3 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:mb-4 lg:text-[24px] lg:leading-[36px]">
                         {{ $industry['servicesTitle'] ?? '' }}</h2>
-                    <p class="text-[13px] leading-[150%] text-[#4D4D4D] sm:text-[14px]">
+                    <p class="text-[13px] leading-[18px] text-[#4D4D4D] sm:text-[14px] sm:leading-5">
                         {{ $industry['servicesDescription'] ?? '' }}</p>
                 </div>
             </header>
@@ -147,7 +147,7 @@
                             <span
                                 class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Service' }}</span>
                             <div class="flex items-start justify-between gap-2">
-                                <h3 class="mt-2 min-w-0 text-[14px] font-semibold leading-[130%] text-[#171717]">
+                                <h3 class="mt-2 min-w-0 text-[14px] font-semibold leading-[18px] text-[#171717]">
                                     {{ $service['title'] ?? '' }}</h3>
                                 <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                     fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round"
@@ -157,7 +157,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <p class="mt-1 text-[13px] leading-relaxed text-[#4D4D4D] sm:text-[14px]">
+                        <p class="mt-1 text-[13px] leading-[18px] text-[#4D4D4D] sm:text-[14px] sm:leading-5">
                             {{ $service['desc'] ?? '' }}</p>
                         @if (!empty($service['img']))
                             @php
@@ -196,7 +196,7 @@
         primary-label="Let's Connect to Discuss" section-class="full-bleed smart-together-cta py-5 sm:py-6" />
 
     <!-- Specialized Services Section Start -->
-    <section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-10 sm:py-14 lg:py-20"
+    <section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20"
         style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')"
         aria-labelledby="industry-specialized-heading">
         <div class="section-inner">
@@ -205,10 +205,10 @@
                     class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">
                     {{ $industry['specializedEyebrow'] ?? 'Specialized Services' }}</p>
                 <h2 id="industry-specialized-heading"
-                    class="mt-3 text-[20px] font-semibold leading-[1.3] text-[#171717] sm:mt-4 lg:text-[24px] lg:leading-[36px]">
+                    class="home-type-h2 mt-3 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:mt-4 lg:text-[24px] lg:leading-[36px]">
                     {{ $industry['specializedTitle'] ?? '' }}</h2>
                 <p
-                    class="mx-auto mt-3 max-w-[605px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-[24px]">
+                    class="mx-auto mt-3 max-w-[605px] text-[13px] leading-[18px] text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-5">
                     {{ $industry['specializedDescription'] ?? '' }}</p>
             </div>
             <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
@@ -224,8 +224,8 @@
                                     width="26" height="26" class="h-[26px] w-[26px] object-contain"
                                     loading="lazy"></span>
                         @endif
-                        <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $item['title'] ?? '' }}</h3>
-                        <p class="flex-1 text-sm leading-relaxed text-[#4D4D4D]">{{ $item['desc'] ?? '' }}</p>
+                        <h3 class="text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $item['title'] ?? '' }}</h3>
+                        <p class="flex-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $item['desc'] ?? '' }}</p>
                     </article>
                 @endforeach
             </div>
@@ -257,7 +257,7 @@
     <!-- Marquee Section End -->
 
     <!-- Why Choose Section Start -->
-    <section class="full-bleed industry-why-section relative overflow-hidden bg-[#F8FAFC] py-10 sm:py-14 lg:py-20"
+    <section class="full-bleed industry-why-section relative overflow-hidden bg-[#F8FAFC] section-pad-m py-6 lg:py-20"
         aria-labelledby="industry-why-heading">
         <div class="industry-why-section__bg" aria-hidden="true"></div>
         <div class="section-inner relative z-10">
@@ -269,9 +269,9 @@
                         class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">{{ $industry['whyEyebrow'] ?? 'Why Us' }}</span>
                 </div>
                 <h2 id="industry-why-heading"
-                    class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight text-[#171717]">
+                    class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
                     {{ $industry['whyTitle'] ?? '' }}</h2>
-                <p class="mx-auto mt-3 max-w-[560px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px]">
+                <p class="mx-auto mt-3 max-w-[560px] text-[13px] leading-[18px] text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-5">
                     {{ $industry['whyDescription'] ?? '' }}</p>
             </header>
             <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -286,8 +286,8 @@
                                     title="{{ $card['title'] ?? 'Why choose Suave Creators' }} icon" width="26"
                                     height="26" class="h-[26px] w-[26px] object-contain" loading="lazy"></span>
                         @endif
-                        <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $card['title'] ?? '' }}</h3>
-                        <p class="flex-1 text-sm leading-relaxed text-[#4D4D4D]">{{ $card['text'] ?? '' }}</p>
+                        <h3 class="text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $card['title'] ?? '' }}</h3>
+                        <p class="flex-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $card['text'] ?? '' }}</p>
                         <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
                             class="mt-1 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB] no-underline hover:underline">Get
                             Started <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
@@ -304,16 +304,16 @@
     <!-- Why Choose Section End -->
 
     <!-- Agile Process Section Start -->
-    <section class="full-bleed bg-white py-10 sm:py-14 lg:py-20" aria-labelledby="agile-process-title" data-agile-process>
+    <section class="full-bleed bg-white section-pad-m py-6 lg:py-20" aria-labelledby="agile-process-title" data-agile-process>
         <div class="section-inner">
             <header class="mx-auto mb-8 max-w-[720px] text-center sm:mb-10 lg:mb-12">
                 <p
                     class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[13px] font-bold text-transparent sm:text-[14px]">
                     Need it simpler and faster? We have a solution for you!</p>
                 <h2 id="agile-process-title"
-                    class="mt-3 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717] sm:mt-4">
+                    class="home-type-h2 mt-3 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:mt-4 lg:text-[24px] lg:leading-[36px]">
                     {{ $industry['agileTitle'] ?? 'Our Agile Development Process' }}</h2>
-                <p class="mx-auto mt-3 max-w-[560px] text-[13px] leading-6 text-[#4D4D4D] sm:mt-4 sm:text-[14px]">
+                <p class="mx-auto mt-3 max-w-[560px] text-[13px] leading-[18px] text-[#4D4D4D] sm:mt-4 sm:text-[14px] sm:leading-5">
                     {{ $industry['agileSubtitle'] ?? 'Let’s connect with our experienced developers for expert guidance and tailored solutions.' }}
                 </p>
             </header>
@@ -343,8 +343,8 @@
                                         title="{{ ($item['title'] ?? 'Agile process') . ' icon for Suave Creators industry development' }}"
                                         width="24" height="24" class="h-6 w-6 object-contain"
                                         loading="lazy"></span>
-                                <h3 class="text-[15px] font-bold text-[#171717]">{{ $item['title'] ?? '' }}</h3>
-                                <p class="text-[13px] leading-relaxed text-[#4D4D4D]">{{ $item['desc'] ?? '' }}</p>
+                                <h3 class="text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $item['title'] ?? '' }}</h3>
+                                <p class="text-[13px] leading-[18px] text-[#4D4D4D]">{{ $item['desc'] ?? '' }}</p>
                             </article>
                         @endforeach
                     </div>
@@ -372,7 +372,7 @@
 
     <!-- Core Values Section Start -->
 <section
-  class="full-bleed core-values bg-cover bg-top bg-no-repeat py-12 lg:py-20"
+  class="full-bleed core-values bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20"
   style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
   <svg class="core-values__symbols" aria-hidden="true">
     <symbol id="core-value-fintech" viewBox="0 0 24 24">
@@ -421,9 +421,9 @@
         </span>
       </div>
       <div class="core-values__heading">
-        <h2>The Pillars Behind Our Excellence</h2>
+        <h2 class="home-type-h2">The Pillars Behind Our Excellence</h2>
         <p>We believe in offering seamless, effective, and custom-made solutions, which cater for your specific future
-          goals</p><br>
+          goals</p>
       </div>
     </header>
 
@@ -437,22 +437,22 @@
       ['logistics', 'Logistics and Supply Chain', 'Streamlined warehouse, inventory & transport management.', '/assets/media/supply_chain.png', 'Streamlined warehouse, inventory & transport management.'],
     ];
     @endphp
-   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+   <div class="core-values__grid core-values__grid--3">
          @foreach ($coreValues as $value)
 
-        <article class="core-value-card flex flex-col h-full">
-  <div class="core-value-card__content min-h-[170px] flex-1">
+        <article class="core-value-card">
+  <div class="core-value-card__content">
     <svg class="core-value-card__icon" aria-hidden="true">
       <use href="#core-value-{{ $value[0] }}"></use>
     </svg>
 
     <div class="core-value-card__text">
       <h3>{{ $value[1] }}</h3>
-      <p>{{ $value[2] }}</p><br>
+      <p>{{ $value[2] }}</p>
     </div>
   </div>
 
-  <div class="core-value-card__image1">
+  <div class="core-value-card__image">
     <img
       src="{{ $value[3] }}"
       alt="{{ $value[4] }}"
@@ -474,7 +474,7 @@
     <x-frontend.faq-section :qa="$industry['faqs'] ?? []" heading-id="industry-faq-heading"
         eyebrow="Have questions about our Industry Solutions?"
         description="Here are the most asked questions for this industry."
-        class="faq-section--align !py-10 sm:!py-14 lg:!py-[76px]" />
+        class="faq-section--align" />
 
     <x-frontend.consultation-section :background-image="$industry['finalBg'] ?? 'assets/background/consultation-section-bg.png'" :eyebrow="$industry['finalEyebrow'] ?? 'Your Digital Future Together'" :title="$industry['finalTitle'] ?? 'Let\'s Build Your Next Digital Solution with us!'" :description="$industry['finalDescription'] ?? ''"
         cta-label="Get a Free Quote" secondary-cta-label="Contact us Today" :show-people="false" :hide-bg-below-desktop="($industry['hideFinalBgBelowDesktop'] ?? false) === true"
@@ -486,7 +486,7 @@
     <x-frontend.articles-insights-section :items="$articles" heading-id="industry-insights-title"
         title="Explore Our Insights"
         subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
-        section-class="py-10 sm:py-14 lg:py-18" more-href="{{ route('blogs') }}" more-label="View all blog articles" />
+        section-class="section-pad-m py-6 lg:py-18" more-href="{{ route('blogs') }}" more-label="View all blog articles" />
 
 @endsection
 
@@ -573,12 +573,9 @@
                 if (tabsMq.matches) {
                     if (state.getSwiper()) return;
                     state.setSwiper(new Swiper(tabsEl, {
-                        slidesPerView: 'auto',
-                        spaceBetween: 10,
-                        freeMode: {
-                            enabled: true,
-                            sticky: false
-                        },
+                        slidesPerView: 3,
+                        spaceBetween: 8,
+                        slidesPerGroup: 1,
                         grabCursor: true,
                         allowTouchMove: true,
                         simulateTouch: true,

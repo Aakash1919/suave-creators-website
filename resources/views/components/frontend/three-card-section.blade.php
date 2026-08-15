@@ -1,5 +1,5 @@
 <section
-    {{ $attributes->merge(['class' => 'full-bleed web-services bg-cover bg-top bg-no-repeat py-12 lg:py-20']) }}
+    {{ $attributes->merge(['class' => 'full-bleed web-services bg-cover bg-top bg-no-repeat section-pad-m py-12 lg:py-20']) }}
     @if (filled($backgroundImage)) style="background-image: url('{{ asset($backgroundImage) }}');" @endif
     aria-labelledby="{{ $headingId }}">
     <div class="web-services__inner section-inner">
@@ -11,11 +11,11 @@
                 </span>
             </div>
             <div class="web-services__intro">
-                <h2 id="{{ $headingId }}" class="mb-4 text-[24px] font-semibold leading-[100%] text-[#171717]">
+                <h2 id="{{ $headingId }}" class="home-type-h2 mb-4 text-[24px] font-semibold leading-[100%] text-[#171717]">
                     {{ $title }}
                 </h2>
                 @if (filled($subtitle))
-                    <p class="text-[14px] leading-[100%] text-[#4D4D4D]">{{ $subtitle }}</p>
+                    <p class="text-[14px] leading-5 text-[#4D4D4D]">{{ $subtitle }}</p>
                 @endif
             </div>
         </header>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <p class="mt-1 text-[14px] text-[#4D4D4D]">{{ $item['description'] }}</p>
+                    <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $item['description'] }}</p>
                 </article>
             @endforeach
         </div>

@@ -3,7 +3,7 @@
 @section('content')
     <!-- Contact Hero Start -->
     <section
-        class="relative z-10 w-full overflow-hidden pb-12 pt-8 sm:pb-16 sm:pt-10 lg:min-h-[580px] lg:pb-20 lg:pt-[52px] site-container">
+        class="relative z-10 w-full overflow-hidden section-pad-m pb-12 pt-8 sm:pb-16 sm:pt-10 lg:min-h-[580px] lg:pb-20 lg:pt-[52px] site-container">
         <div class="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[#7A5FF8]/20 blur-3xl"
             aria-hidden="true"></div>
         <div class="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-[#2A4DFB]/20 blur-3xl"
@@ -17,7 +17,7 @@
                 </p>
 
                 <h1
-                    class="mb-2 mt-2 text-[36px] font-semibold leading-[100%] text-white min-[375px]:text-[42px] sm:text-5xl lg:text-[60px]">
+                    class="page-hero-title mb-2 mt-2 text-[26px] font-semibold leading-[28px] text-white sm:text-5xl lg:text-[60px]">
                     Have a project<br>
                     in mind?
                     <span
@@ -26,7 +26,7 @@
                     </span>
                 </h1>
 
-                <p class="mb-2 mt-2 max-w-[610px] text-[12px] leading-5 text-[#B1B9DF] md:text-sm md:leading-6">
+                <p class="mb-2 mt-2 max-w-[610px] text-[13px] leading-[18px] text-[#B1B9DF] md:text-sm md:leading-5">
                     We always love to hear from you! Whether you’re looking to develop a business website, app, or custom
                     digital
                     solution, our professional team is here to help you turn your ideas into reality.
@@ -34,7 +34,7 @@
 
                 <div class="mt-8 flex flex-wrap items-center gap-4 sm:gap-7">
                     <a href="#contact-id"
-                        class="group inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:text-sm">
+                        class="group inline-flex h-[34px] min-h-[34px] items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:py-2 sm:text-sm">
                         Send a Message
                         <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -45,7 +45,7 @@
                         </svg>
                     </a>
                     <a href="tel:+918894900142"
-                        class="inline-flex items-center gap-2 whitespace-nowrap border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">
+                        class="banner-text-link items-center gap-2 whitespace-nowrap border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">
                         <i class="fa-solid fa-phone text-xs" aria-hidden="true"></i>
                         +91 88949 00142
                     </a>
@@ -60,7 +60,7 @@
                         <div>
                             <p class="text-sm font-bold uppercase tracking-wide text-[#8598F8] pragati-narrow-regular">What
                                 happens next</p>
-                            <h2 class="mt-2 text-xl font-semibold text-white sm:text-2xl">A clear path from idea to plan
+                            <h2 class="home-type-h2 mt-2 text-[20px] font-semibold leading-[28px] text-white sm:text-2xl">A clear path from idea to plan
                             </h2>
                         </div>
                         <span
@@ -74,8 +74,8 @@
                             <span
                                 class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white">01</span>
                             <div>
-                                <h3 class="text-sm font-semibold text-white">Share your project</h3>
-                                <p class="mt-1 text-[13px] leading-5 text-[#B1B9DF]">Tell us your goals, timeline, and
+                                <h3 class="text-[14px] font-semibold leading-[18px] text-white">Share your project</h3>
+                                <p class="mt-1 text-[13px] leading-[18px] text-[#B1B9DF]">Tell us your goals, timeline, and
                                     current challenges.</p>
                             </div>
                         </li>
@@ -83,8 +83,8 @@
                             <span
                                 class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white">02</span>
                             <div>
-                                <h3 class="text-sm font-semibold text-white">Hear from an expert</h3>
-                                <p class="mt-1 text-[13px] leading-5 text-[#B1B9DF]">We usually respond within 12 hours on
+                                <h3 class="text-[14px] font-semibold leading-[18px] text-white">Hear from an expert</h3>
+                                <p class="mt-1 text-[13px] leading-[18px] text-[#B1B9DF]">We usually respond within 12 hours on
                                     business days.</p>
                             </div>
                         </li>
@@ -92,8 +92,8 @@
                             <span
                                 class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white">03</span>
                             <div>
-                                <h3 class="text-sm font-semibold text-white">Get your next steps</h3>
-                                <p class="mt-1 text-[13px] leading-5 text-[#B1B9DF]">We’ll suggest a discovery call and a
+                                <h3 class="text-[14px] font-semibold leading-[18px] text-white">Get your next steps</h3>
+                                <p class="mt-1 text-[13px] leading-[18px] text-[#B1B9DF]">We’ll suggest a discovery call and a
                                     practical way forward.</p>
                             </div>
                         </li>
@@ -105,7 +105,7 @@
     <!-- Contact Hero End -->
 
     <!-- Contact Form Start -->
-    <section id="contact-id" class="full-bleed scroll-mt-6 overflow-hidden bg-cover bg-center py-12 sm:py-16 lg:py-20"
+    <section id="contact-id" class="full-bleed scroll-mt-6 overflow-hidden bg-cover bg-center section-pad-m py-6 sm:py-16 lg:py-20"
         style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');"
         aria-labelledby="contact-form-heading">
         <div class="section-inner contact-form-section-inner">
@@ -115,7 +115,7 @@
                         <span class="contact-form-panel__eyebrow-bar" aria-hidden="true"></span>
                         Contact · 1-day reply
                     </p>
-                    <h2 id="contact-form-heading" class="contact-form-panel__title">
+                    <h2 id="contact-form-heading" class="home-type-h2 contact-form-panel__title">
                         Tell us what you&rsquo;re<br>
                         <span>trying to fix.</span>
                     </h2>
@@ -239,7 +239,7 @@
         $mapOffices = $offices ?? [];
         $activeOffice = $mapOffices[0] ?? null;
     @endphp
-    <section class="full-bleed contact-reach-section py-16 sm:py-20 lg:py-24"
+    <section class="full-bleed contact-reach-section section-pad-m py-6 sm:py-20 lg:py-24"
         style="background-image: url('{{ asset('assets/background/about-section-bg.png') }}');"
         aria-labelledby="contact-details-heading" data-contact-reach>
         <div class="section-inner">
@@ -248,7 +248,7 @@
                     <span class="contact-reach__eyebrow-bar" aria-hidden="true"></span>
                     Prefer another way to reach us?
                 </p>
-                <h2 id="contact-details-heading" class="contact-reach__title">
+                <h2 id="contact-details-heading" class="home-type-h2 contact-reach__title">
                     We’re always within reach
                 </h2>
                 <p class="contact-reach__lead">

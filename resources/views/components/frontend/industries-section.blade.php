@@ -1,5 +1,5 @@
 <section
-  {{ $attributes->merge(['class' => 'full-bleed industries-served bg-cover bg-top bg-no-repeat py-12 lg:py-[80px]']) }}
+  {{ $attributes->merge(['class' => 'full-bleed industries-served bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-[80px]']) }}
   style="background-image: url('{{ asset($backgroundImage) }}');"
   aria-labelledby="{{ $headingId }}">
   <div class="industries-served__inner section-inner">
@@ -13,7 +13,7 @@
         </span>
       </div>
       <div class="core-values__heading">
-        <h2 id="{{ $headingId }}">{{ $title }}</h2>
+        <h2 id="{{ $headingId }}" class="home-type-h2">{{ $title }}</h2>
         @if ($description !== '')
           <p>{{ $description }}</p>
         @endif

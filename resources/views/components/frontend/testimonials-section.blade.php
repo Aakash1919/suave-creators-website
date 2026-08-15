@@ -12,8 +12,8 @@
             {{ $eyebrow }}
           </span>
         </div>
-        <h2 id="{{ $headingId }}" class="mt-4 text-2xl font-semibold text-white">{{ $title }}</h2>
-        <p class="mt-5 max-w-sm text-sm leading-[22px] text-[#B1B9DF]">
+        <h2 id="{{ $headingId }}" class="home-type-h2 mt-4 text-2xl font-semibold text-white">{{ $title }}</h2>
+        <p class="mt-5 max-w-sm text-sm leading-5 text-[#B1B9DF]">
           {{ $subtitle }}
         </p>
       </div>
@@ -27,13 +27,13 @@
               <div>
                 <span class="text-sm font-bold text-[#2A4DFB]">/{{ $testimonial['number'] }}</span>
                 <div class="mt-2 tracking-[3px] text-[#FFC107] text-[20px]" aria-label="5 out of 5 stars">★★★★★</div>
-                <p class="mt-4 text-[13px] text-[#FAFBFA]">{{ $testimonial['quote'] }}</p>
+                <p class="mt-4 text-[13px] leading-[18px] text-[#FAFBFA]">{{ $testimonial['quote'] }}</p>
               </div>
               <div class="mt-6 flex items-center gap-4">
                 <span class="testimonial-card__initials grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#2A4DFB] to-[#7A5FF8] text-sm font-bold text-white">{{ $testimonial['initials'] }}</span>
                 <div>
                   <h3 class="text-white">{{ $testimonial['name'] }}</h3>
-                  <p class="mt-1 text-[13px] text-[#B1B9DF]">{{ $testimonial['role'] }}</p>
+                  <p class="mt-1 text-[13px] leading-[18px] text-[#B1B9DF]">{{ $testimonial['role'] }}</p>
                 </div>
               </div>
             </article>

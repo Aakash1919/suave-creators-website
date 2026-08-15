@@ -4705,6 +4705,12 @@ right: max(0px, calc(50% - 580px));
 .blogs-hero__frame--sm { height: clamp(6.5rem, 22vw, 16rem); }
 .blogs-hero__frame--md { height: clamp(9rem, 30vw, 22rem); }
 .blogs-hero__frame--lg { height: clamp(11.5rem, 38vw, 28rem); }
+
+@media (max-width: 1023px) {
+  .site-main > .blogs-hero {
+    min-height: 0 !important;
+  }
+}
 .blog-grid {
   display: grid;
   gap: 26px;
@@ -4800,6 +4806,57 @@ right: max(0px, calc(50% - 580px));
 .blog-filters__category select:focus {
   border-color: #2a4dfb;
   box-shadow: 0 0 0 3px rgba(42, 77, 251, 0.12);
+}
+
+@media (max-width: 767px) {
+  .blog-filters {
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    max-width: none;
+  }
+
+  .blog-filters__search,
+  .blog-filters__category {
+    flex: 1 1 0;
+    max-width: none;
+  }
+
+  .blog-filters__search input,
+  .blog-filters__category select {
+    border-radius: 10px;
+    font-size: 13px;
+    min-height: 36px;
+  }
+
+  .blog-filters__search input {
+    padding: 0 10px 0 34px;
+  }
+
+  .blog-filters__search svg {
+    height: 14px;
+    left: 10px;
+    width: 14px;
+  }
+
+  .blog-filters__category select {
+    background-position: right 10px center;
+    padding: 0 32px 0 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .blog-filters {
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-filters__search input,
+  .blog-filters__category select {
+    border-radius: 10px;
+    font-size: 13px;
+    min-height: 40px;
+  }
 }
 
 .blog-results {
@@ -5780,10 +5837,13 @@ right: max(0px, calc(50% - 580px));
   font-size: 13px;
   font-weight: 600;
   color: #b1b9df;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .blog-breadcrumb a {
   color: #b1b9df;
+  flex: 0 0 auto;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -5792,8 +5852,18 @@ right: max(0px, calc(50% - 580px));
   color: #fff;
 }
 
+.blog-breadcrumb span[aria-hidden="true"] {
+  flex: 0 0 auto;
+}
+
 .blog-breadcrumb span[aria-current] {
   color: #fff;
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .legal-hero__title{
@@ -6041,6 +6111,23 @@ right: max(0px, calc(50% - 580px));
   white-space: nowrap;
 }
 
+@media (max-width: 767px) {
+  .agile-process-tabs__slide {
+    height: auto;
+  }
+
+  .agile-process-tabs__tab {
+    box-sizing: border-box;
+    font-size: 11px;
+    line-height: 1.25;
+    min-height: 44px;
+    padding: 8px 6px;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+  }
+}
+
 .agile-process-tabs__pagination {
   align-items: center;
   display: flex;
@@ -6065,6 +6152,12 @@ right: max(0px, calc(50% - 580px));
   border-color: #00003f;
 }
 
+@media (max-width: 1023px) {
+  .industry-hero-media {
+    display: none !important;
+  }
+}
+
 @media (min-width: 768px) {
   .agile-process-tabs {
     overflow: visible;
@@ -6085,6 +6178,34 @@ right: max(0px, calc(50% - 580px));
 
   .agile-process-tabs__pagination {
     display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .agile-process-tabs__list {
+    flex-wrap: nowrap;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .agile-process-tabs__slide {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .agile-process-tabs__tab {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    font-size: 11px;
+    height: 44px;
+    justify-content: center;
+    line-height: 1.2;
+    min-height: 44px;
+    padding: 8px 6px;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
   }
 }
 /* ===== INDUSTRY DETAIL AGILE END ===== */
@@ -6224,6 +6345,17 @@ right: max(0px, calc(50% - 580px));
     margin-top: 16px;
     max-width: 780px;
     text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .digital-solution-section {
+    padding: 56px 0 40px;
+  }
+
+  .digital-solution-section__title-top,
+  .digital-solution-section__title-agency {
+    font-size: clamp(2.25rem, 5.5vw, 3rem);
   }
 }
 

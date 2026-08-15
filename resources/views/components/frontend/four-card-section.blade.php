@@ -1,4 +1,4 @@
-<section {{ $attributes->merge(['class' => 'full-bleed bg-cover bg-top bg-no-repeat py-12 lg:py-20']) }}
+<section {{ $attributes->merge(['class' => 'full-bleed bg-cover bg-top bg-no-repeat section-pad-m py-12 lg:py-20']) }}
     @if (filled($backgroundImage)) style="background-image: url('{{ asset($backgroundImage) }}');" @endif
     aria-labelledby="{{ $headingId }}">
     <div class="section-inner">
@@ -12,10 +12,10 @@
                 </span>
             </div>
             <div class="max-w-[760px]">
-                <h2 id="{{ $headingId }}" class="text-2xl font-semibold leading-tight text-[#171717]">
+                <h2 id="{{ $headingId }}" class="home-type-h2 text-2xl font-semibold leading-tight text-[#171717]">
                     {{ $title }}</h2>
                 @if (filled($subtitle))
-                    <p class="mt-2 text-sm leading-6 text-[#4D4D4D] sm:mt-5">
+                    <p class="mt-2 text-sm leading-5 text-[#4D4D4D] sm:mt-5">
                         {{ $subtitle }}
                     </p>
                 @endif
@@ -34,7 +34,7 @@
                     <i class="fa-brands {{ $item['icon'] }} relative text-[30px]" style="color: {{ $item['color'] }}"
                         aria-hidden="true"></i>
                     <h3 class="relative mt-3 text-base font-bold text-[#171717]">{{ $item['title'] }}</h3>
-                    <p class="relative mt-2 pr-5 text-sm leading-[22px] text-[#4D4D4D]">{{ $item['description'] }}</p>
+                    <p class="relative mt-2 pr-5 text-sm leading-5 text-[#4D4D4D]">{{ $item['description'] }}</p>
                     <img src="{{ asset('assets/media/soft-blue-right-arrow.png') }}"
                         alt="Soft blue right arrow for Suave Creators technology solutions"
                         title="Soft blue right arrow for Suave Creators technology solutions"
