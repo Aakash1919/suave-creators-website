@@ -12,7 +12,7 @@
     <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
       <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[560px]">
         <p class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-sm font-bold uppercase tracking-wide text-transparent">{{ $service['eyebrow'] ?? 'Our Services' }}</p>
-        <h1 id="service-banner-heading" class="mb-2 mt-2 flex flex-col text-[34px] font-semibold leading-tight text-white min-[375px]:text-[40px] sm:text-5xl sm:leading-none lg:text-[52px]">
+        <h1 id="service-banner-heading" class="page-hero-title mb-2 mt-2 flex flex-col text-[26px] font-semibold leading-[28px] text-white sm:text-5xl sm:leading-none lg:text-[52px]">
           @foreach (($service['heroTitle'] ?? []) as $i => $line)
             @if ($i === 0)
               <span class="inline-block bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text font-extrabold text-transparent">{{ $line }}</span>
@@ -21,12 +21,12 @@
             @endif
           @endforeach
         </h1>
-        <p class="mb-2 mt-2 text-sm leading-6 text-white">{{ $service['heroDescription'] ?? '' }}</p>
-        <div class="mt-8 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3 sm:mb-0 sm:gap-7">
+        <p class="mb-2 mt-2 text-[14px] leading-5 text-white">{{ $service['heroDescription'] ?? '' }}</p>
+        <div class="mt-8 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3 lg:mb-0 sm:gap-7">
           <x-frontend.cta-button class="shrink-0 whitespace-nowrap px-4 py-2 text-[13px] sm:px-5 sm:text-sm">
             {{ $service['primaryCta'] ?? "Let's Connect to Discuss" }}
           </x-frontend.cta-button>
-          <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="inline-flex shrink-0 items-center border-b border-white/70 pb-px text-[13px] font-semibold whitespace-nowrap text-white sm:text-sm">{{ $service['secondaryCta'] ?? 'Book a Call' }}</a>
+          <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="banner-text-link shrink-0 items-center border-b border-white/70 pb-px text-[13px] font-semibold whitespace-nowrap text-white sm:text-sm">{{ $service['secondaryCta'] ?? 'Book a Call' }}</a>
         </div>
       </div>
       <div class="relative z-10 hidden w-full min-w-0 items-center justify-center lg:flex lg:justify-end">
@@ -43,7 +43,7 @@
 
     @if (!empty($service['bannerLogos']))
       <div
-        class="service-banner-logos serviceBannerLogosSwiper swiper mt-10 md:mt-12"
+        class="service-banner-logos serviceBannerLogosSwiper swiper mt-12 md:mt-14 lg:mt-12"
         style="--banner-logo-cols: {{ count($service['bannerLogos']) }}"
         aria-label="Technologies">
         <div class="swiper-wrapper">
@@ -62,7 +62,7 @@
 <!-- 1. Hero / Service Banner Section End -->
 
 <!-- 2. Intro + Stats (ProjectProcess) Section Start -->
-<section class="full-bleed bg-white bg-[url('{{ $introBg }}')] bg-cover bg-top bg-no-repeat py-16 lg:py-20" aria-labelledby="service-intro-heading">
+<section class="full-bleed bg-white bg-[url('{{ $introBg }}')] bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" aria-labelledby="service-intro-heading">
   <div class="section-inner">
     <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
       <div>
@@ -70,8 +70,8 @@
           <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
           <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['introEyebrow'] ?? 'Our Services' }}</span>
         </div>
-        <h2 id="service-intro-heading" class="text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">{{ $service['introTitle'] ?? '' }}</h2>
-        <p class="mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $service['introDescription'] ?? '' }}</p>
+        <h2 id="service-intro-heading" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">{{ $service['introTitle'] ?? '' }}</h2>
+        <p class="mt-4 max-w-[560px] text-[14px] leading-5 text-[#4D4D4D]">{{ $service['introDescription'] ?? '' }}</p>
         <div class="mt-8">
           <x-frontend.cta-button :href="$service['introLinkUrl'] ?? route('services')">
             {{ $service['introLinkText'] ?? 'Explore Services' }}
@@ -108,7 +108,7 @@
 
 <!-- 4. Service Body (ServiceSection) Start -->
 <section
-  class="full-bleed{{ $useBodyImageLayout ? ' full-bleed--edge service-body service-body--webdev' : (($service['bodyBg'] ?? '') !== '' ? ' bg-cover bg-center bg-no-repeat py-16 lg:py-20' : ' bg-white py-16 lg:py-20') }}"
+  class="full-bleed{{ $useBodyImageLayout ? ' full-bleed--edge service-body service-body--webdev' : (($service['bodyBg'] ?? '') !== '' ? ' bg-cover bg-center bg-no-repeat section-pad-m py-6 lg:py-20' : ' bg-white section-pad-m py-6 lg:py-20') }}"
   @if ($bodySectionStyle !== '')style="{{ $bodySectionStyle }}"@endif
   aria-labelledby="service-body-heading">
   <div class="{{ $useBodyImageLayout ? 'service-body__inner' : 'section-inner' }}">
@@ -121,9 +121,9 @@
       @else
       <p class="offerings-eyebrow mb-4 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['bodyEyebrow'] ?? 'Suave Creators' }}</p>
       @endif
-      <h2 id="service-body-heading" class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight text-[#171717]">{{ $service['bodyTitle'] ?? '' }}</h2>
+      <h2 id="service-body-heading" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">{{ $service['bodyTitle'] ?? '' }}</h2>
       @foreach (($service['bodyParagraphs'] ?? []) as $para)
-        <p class="mt-4 text-[14px] leading-6 text-[#4D4D4D]">{{ $para }}</p>
+        <p class="mt-4 text-[14px] leading-5 text-[#4D4D4D]">{{ $para }}</p>
       @endforeach
       <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-5{{ $useBodyImageLayout ? ' items-start sm:items-center' : ' items-center justify-center' }}">
         <x-frontend.cta-button>
@@ -153,7 +153,7 @@
 <!-- 5. Service Move Marquee Section End -->
 
 <!-- 6. Capabilities Section Start -->
-<section class="full-bleed web-services{{ $capabilitiesAsSlider ? ' web-services--capabilities-slider' : '' }} bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="service-capabilities-heading">
+<section class="full-bleed web-services{{ $capabilitiesAsSlider ? ' web-services--capabilities-slider' : '' }} bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="service-capabilities-heading">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
       <div class="mb-4 flex items-center gap-2">
@@ -161,8 +161,8 @@
         <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['capabilitiesEyebrow'] ?? "Let's Build Together" }}</span>
       </div>
       <div class="web-services__intro">
-        <h2 id="service-capabilities-heading" class="mb-4 text-[24px] font-semibold text-[#171717]">{{ $service['capabilitiesTitle'] ?? 'Our Expertise' }}</h2>
-        <p class="text-[14px] leading-[150%] text-[#4D4D4D]">{{ $service['capabilitiesDescription'] ?? '' }}</p>
+        <h2 id="service-capabilities-heading" class="home-type-h2 mb-4 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">{{ $service['capabilitiesTitle'] ?? 'Our Expertise' }}</h2>
+        <p class="text-[14px] leading-5 text-[#4D4D4D]">{{ $service['capabilitiesDescription'] ?? '' }}</p>
       </div>
     </header>
     @if ($capabilitiesAsSlider)
@@ -175,7 +175,7 @@
                   <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
                   <div class="web-service-card__category">
                     <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
-                    <h3 class="mt-2 text-[14px] font-semibold leading-[130%] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
+                    <h3 class="mt-2 text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
                   </div>
                   @if (!empty($cap['tags']))
                     <div class="mt-2 flex flex-wrap gap-1.5">
@@ -184,7 +184,7 @@
                       @endforeach
                     </div>
                   @endif
-                  <p class="mt-2 text-[14px] text-[#4D4D4D]">{{ $cap['desc'] ?? '' }}</p>
+                  <p class="mt-2 text-[14px] leading-5 text-[#4D4D4D]">{{ $cap['desc'] ?? '' }}</p>
                 </article>
               </div>
             @endforeach
@@ -206,7 +206,7 @@
             <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
             <div class="web-service-card__category">
               <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
-              <h3 class="mt-2 text-[14px] font-semibold leading-[130%] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
+              <h3 class="mt-2 text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
             </div>
             @if (!empty($cap['tags']))
               <div class="mt-2 flex flex-wrap gap-1.5">
@@ -215,7 +215,7 @@
                 @endforeach
               </div>
             @endif
-            <p class="mt-2 text-[14px] text-[#4D4D4D]">{{ $cap['desc'] ?? '' }}</p>
+            <p class="mt-2 text-[14px] leading-5 text-[#4D4D4D]">{{ $cap['desc'] ?? '' }}</p>
           </article>
         @endforeach
       </div>
@@ -227,7 +227,7 @@
 <!-- 7. Collab Band Section Start -->
 @if (!$isWebDevelopmentService)
 <section
-  class="full-bleed collab-section bg-cover bg-center bg-no-repeat py-12 md:py-16"
+  class="full-bleed collab-section bg-cover bg-center bg-no-repeat section-pad-m py-6 md:py-16"
   style="background-image: url('{{ $collabBackground }}');"
   aria-labelledby="service-collab-title">
   <div class="section-inner collab-section__inner">
@@ -250,12 +250,12 @@
 
 <!-- 8. Portfolio Showcase Section Start -->
 @if ($isWebDevelopmentService)
-<section class="full-bleed portfolio-showcase portfolio-hero-showcase overflow-hidden bg-[linear-gradient(180deg,#F8FAFF_0%,#FFFFFF_100%)] !py-10 md:!py-14" aria-labelledby="service-portfolio-heading">
+<section class="full-bleed portfolio-showcase portfolio-hero-showcase overflow-hidden bg-[linear-gradient(180deg,#F8FAFF_0%,#FFFFFF_100%)] section-pad-m !py-6 md:!py-14" aria-labelledby="service-portfolio-heading">
   <div class="section-inner">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-12">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['portfolioEyebrow'] ?? 'Our Projects' }}</p>
-      <h2 id="service-portfolio-heading" class="mt-4 text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight text-[#171717]">{{ $service['portfolioTitle'] ?? '' }}</h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $service['portfolioDescription'] ?? '' }}</p>
+      <h2 id="service-portfolio-heading" class="mt-4 home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">{{ $service['portfolioTitle'] ?? '' }}</h2>
+      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-5 text-[#4D4D4D]">{{ $service['portfolioDescription'] ?? '' }}</p>
     </header>
     <div class="service-portfolio-rail portfolio-hero-rail">
       <div class="swiper servicePortfolioSwiper !overflow-hidden" aria-label="Project showcase carousel">
@@ -288,12 +288,12 @@
   </div>
 </section>
 @else
-<section class="full-bleed full-bleed--edge portfolio-showcase portfolio-hero-showcase service-portfolio-showcase overflow-hidden bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/portfolio-section-bg.png') }}')" aria-labelledby="service-portfolio-heading">
+<section class="full-bleed full-bleed--edge portfolio-showcase portfolio-hero-showcase service-portfolio-showcase overflow-hidden bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/portfolio-section-bg.png') }}')" aria-labelledby="service-portfolio-heading">
   <div class="section-inner">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-12">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['portfolioEyebrow'] ?? 'Our Projects' }}</p>
-      <h2 id="service-portfolio-heading" class="mt-4 text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight text-[#171717]">{{ $service['portfolioTitle'] ?? '' }}</h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $service['portfolioDescription'] ?? '' }}</p>
+      <h2 id="service-portfolio-heading" class="mt-4 home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">{{ $service['portfolioTitle'] ?? '' }}</h2>
+      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-5 text-[#4D4D4D]">{{ $service['portfolioDescription'] ?? '' }}</p>
     </header>
   </div>
   <div class="service-portfolio-rail">
@@ -327,7 +327,7 @@
   :title="$service['industriesTitle'] ?? ''"
   :description="$service['industriesDescription'] ?? ''"
   heading-id="service-industries-heading"
-  class="py-[80px]"
+  class="section-pad-m py-6 lg:py-[80px]"
 />
 
 <!-- 9. Technologies & Partnerships Marquee Section Start -->
@@ -345,12 +345,12 @@
 @endif
 
 <!-- 11. Why Choose Us Section Start -->
-<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')" aria-labelledby="service-why-heading">
+<section class="full-bleed overflow-hidden bg-[#F9FAFC] bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')" aria-labelledby="service-why-heading">
   <div class="section-inner">
     <header class="mx-auto mb-10 max-w-[720px] text-center lg:mb-14">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['whyEyebrow'] ?? 'Suave Creators' }}</p>
-      <h2 id="service-why-heading" class="mt-4 text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight text-[#171717]">{{ $service['whyTitle'] ?? '' }}</h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-6 text-[#4D4D4D]">{{ $service['whyDescription'] ?? '' }}</p>
+      <h2 id="service-why-heading" class="mt-4 home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">{{ $service['whyTitle'] ?? '' }}</h2>
+      <p class="mx-auto mt-4 max-w-[560px] text-[14px] leading-5 text-[#4D4D4D]">{{ $service['whyDescription'] ?? '' }}</p>
     </header>
     <div class="why-choose-list lg:hidden" role="list">
       @foreach (($service['whyCards'] ?? []) as $index => $card)
@@ -413,8 +413,8 @@ $n = $index + 1;
             <figure class="aspect-[16/10] overflow-hidden"><img src="{{ $card['image'] }}" alt="{{ ($card['title'] ?? 'Service').' benefit visual for Suave Creators software services' }}" title="{{ ($card['title'] ?? 'Service').' benefit visual for Suave Creators software services' }}" class="h-full w-full object-cover" loading="lazy"></figure>
           @endif
           <div class="flex flex-1 flex-col gap-3 p-[22px]">
-            <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $card['title'] ?? '' }}</h3>
-            <p class="flex-1 text-sm leading-relaxed text-[#4D4D4D]">{{ $card['text'] ?? '' }}</p>
+            <h3 class="text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $card['title'] ?? '' }}</h3>
+            <p class="flex-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $card['text'] ?? '' }}</p>
           </div>
         </article>
       @endforeach
@@ -433,7 +433,7 @@ $n = $index + 1;
   <div class="section-inner">
     <header class="development-process-section__header">
       <p class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold text-transparent">{{ $service['processEyebrow'] ?? 'Suave Creators' }}</p>
-      <h2 id="service-process-heading" class="development-process-section__title">{{ $service['processTitle'] ?? '' }}</h2>
+      <h2 id="service-process-heading" class="home-type-h2 development-process-section__title">{{ $service['processTitle'] ?? '' }}</h2>
       <p class="development-process-section__description font-sans">{{ $service['processDescription'] ?? '' }}</p>
     </header>
     <div class="development-process-section__inner">
@@ -442,7 +442,7 @@ $n = $index + 1;
           <article class="development-process-section__step">
             <div class="development-process-section__step-top">
               <span class="development-process-section__step-icon">
-                <img src="{{ asset($step['icon']) }}" alt="{{ $step['title'] !== '' ? $step['title'] : 'Development process step' }} icon for Suave Creators" title="{{ $step['title'] !== '' ? $step['title'] : 'Development process step' }} icon for Suave Creators" width="28" height="28" loading="lazy">
+                <img src="{{ asset($step['icon']) }}" alt="{{ $step['title'] !== '' ? $step['title'] : 'Development process step' }} icon for Suave Creators" title="{{ $step['title'] !== '' ? $step['title'] : 'Development process step' }} icon for Suave Creators" width="40" height="40" loading="lazy">
               </span>
               <span class="development-process-section__step-number" aria-hidden="true">{{ $step['step'] }}</span>
             </div>
@@ -463,7 +463,7 @@ $n = $index + 1;
   :description="$service['standoutDescription'] ?? ''"
   heading-id="service-standout-heading"
   variant="standout"
-  class="py-[80px]"
+  class="section-pad-m py-6 lg:py-[80px]"
 />
 
 <!-- 14. Logo Shape Marquee Section Start -->
@@ -514,7 +514,7 @@ $n = $index + 1;
   heading-id="service-insights-title"
   title="Explore Our Insights"
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
-  section-class="py-16 lg:py-18"
+  section-class="section-pad-m py-6 lg:py-18"
   more-href="{{ route('blogs') }}"
   more-label="View all blog articles"
 />
@@ -838,10 +838,13 @@ $n = $index + 1;
 }
 
 .service-banner-logos,
+.service-banner-logos.swiper,
 .service-banner-logos.swiper:not(.swiper-initialized) {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+  margin-top: 0;
+  padding-top: 32px !important;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -849,12 +852,13 @@ $n = $index + 1;
 
 @media (min-width: 1024px) {
   .service-banner-logos,
+  .service-banner-logos.swiper,
   .service-banner-logos.swiper:not(.swiper-initialized) {
     grid-template-columns: repeat(var(--banner-logo-cols, 6), minmax(0, 1fr));
     margin: -10px;
     max-width: none;
     overflow: visible;
-    padding: 10px;
+    padding: 10px !important;
     width: calc(100% + 20px);
   }
 }
@@ -1019,15 +1023,15 @@ $n = $index + 1;
   border-radius: 16px;
   display: inline-flex;
   flex-shrink: 0;
-  height: 56px;
+  height: 64px;
   justify-content: center;
-  width: 56px;
+  width: 64px;
 }
 
 .development-process-section__step-icon img {
-  height: 28px;
+  height: 36px;
   object-fit: contain;
-  width: 28px;
+  width: 36px;
 }
 
 .development-process-section__step-number {
@@ -1125,6 +1129,16 @@ $n = $index + 1;
     grid-column: 1 / -1;
   }
 
+  .development-process-section__step-icon {
+    height: 72px;
+    width: 72px;
+  }
+
+  .development-process-section__step-icon img {
+    height: 40px;
+    width: 40px;
+  }
+
   .development-process-section__step-title {
     font-size: 17px;
     margin: 0 0 8px;
@@ -1163,6 +1177,67 @@ $n = $index + 1;
 
   .web-service-card__icon-img {
     margin-inline: auto;
+  }
+
+  .why-choose-item__toggle {
+    font-size: 16px;
+  }
+
+  .why-choose-item__toggle::before {
+    width: 10px;
+  }
+
+  .why-choose-item__toggle::after {
+    height: 10px;
+  }
+
+  .development-process-section {
+    padding: 24px 0 !important;
+  }
+
+  .development-process-section__description {
+    line-height: 20px;
+  }
+
+  .development-process-section__step-title {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .development-process-section__step-text {
+    line-height: 20px;
+  }
+
+  .service-body--webdev {
+    padding-block: 24px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .why-choose-item__toggle {
+    font-size: 18px;
+  }
+
+  .why-choose-item__toggle::before {
+    width: 12px;
+  }
+
+  .why-choose-item__toggle::after {
+    height: 12px;
+  }
+
+  .why-choose-item__title {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .development-process-section__step-title {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .service-body--webdev {
+    padding-block: 40px !important;
   }
 }
 
@@ -1296,6 +1371,7 @@ $n = $index + 1;
   .service-banner-logos {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
+    padding-top: 32px !important;
   }
 
   .service-banner-logo {

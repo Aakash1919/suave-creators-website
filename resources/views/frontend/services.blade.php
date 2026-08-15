@@ -5,7 +5,7 @@
 
 <!-- 1. Hero Section (MainService) Start -->
 <section
-  class="full-bleed relative flex items-center bg-cover bg-center bg-no-repeat py-10 md:py-12 lg:py-16" style="background-image: url('{{ asset('assets/media/top-banner-visual.webp') }}')"
+  class="full-bleed relative flex items-center bg-cover bg-center bg-no-repeat py-6 md:py-12 lg:py-16" style="background-image: url('{{ asset('assets/media/top-banner-visual.webp') }}')"
   aria-labelledby="services-hero-title">
   <div class="section-inner relative z-[1]">
     <div class="relative max-w-[720px] pl-6 sm:pl-8 md:max-w-[66%] lg:pl-10">
@@ -14,12 +14,12 @@
         Our Services
       </p>
       <h1 id="services-hero-title"
-        class="mb-3 text-[32px] font-bold leading-[1.15] text-[#111827] min-[375px]:text-[38px] sm:mb-4 sm:text-[44px] lg:text-[50px]">
+        class="page-hero-title mb-3 text-[26px] font-bold leading-[28px] text-[#111827] sm:mb-4 sm:text-[44px] sm:leading-[1.15] lg:text-[50px] lg:leading-[1.15]">
         Offshore Web, Software &amp;<br class="hidden sm:block">
         Digital Development Services<br class="hidden sm:block">
         for Global Businesses
       </h1>
-      <p class="mb-0 mt-1 max-w-xl text-[14px] leading-6 text-[#4D4D4D]">
+      <p class="mb-0 mt-1 max-w-xl text-[14px] leading-5 text-[#4D4D4D]">
         Let&rsquo;s transform your business with custom software and digital development services. At Suave Creators,
         we build websites and trust by developing top-notch digital products. Our custom offshore development
         services are a merger of cost-effective and innovative design solutions that drive digital transformation.
@@ -30,10 +30,10 @@
         <x-frontend.cta-button :href="$demoHref">
           Let&rsquo;s Discuss About Vision
         </x-frontend.cta-button>
-        <a href="#core-services" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#111827]/70 text-sm font-semibold text-[#111827]">
+        <a href="#core-services" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
           Explore Our Services
         </a>
-        <a href="{{ route('product') }}" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#111827]/70 text-sm font-semibold text-[#111827]">
+        <a href="{{ route('product') }}" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
           Explore Suave Outreach CRM
         </a>
       </div>
@@ -69,14 +69,14 @@
 <!-- 2. Digital Solution Agency Section End -->
 
 <!-- 3. Expertise Section Start -->
-<section class="full-bleed bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/digital-marketing-section-bg.png') }}')" aria-labelledby="expertise-title">
+<section class="full-bleed bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/digital-marketing-section-bg.png') }}')" aria-labelledby="expertise-title">
   <div class="section-inner">
-    <header class="mb-12 max-w-[960px] lg:mb-16">
+    <header class="mb-8 max-w-[960px] lg:mb-16">
       <p
         class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
         Expertise
       </p>
-      <h2 id="expertise-title" class="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">
+      <h2 id="expertise-title" class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:text-[18px] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
         We Build impactful solutions through web design and development.
       </h2>
     </header>
@@ -104,7 +104,7 @@
 <!-- 4. Technologies & Partnerships Marquee Section End -->
 
 <!-- 5. Core Services Section Start -->
-<section id="core-services" class="full-bleed web-services bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
+<section id="core-services" class="full-bleed web-services bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')"
   aria-labelledby="core-services-title">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
@@ -116,10 +116,10 @@
         </span>
       </div>
       <div class="web-services__intro">
-        <h2 id="core-services-title" class="mb-4 text-[24px] font-semibold leading-[100%] text-[#171717]">
+        <h2 id="core-services-title" class="home-type-h2 mb-4 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:text-[18px] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
           Our Core Services
         </h2>
-        <p class="text-[14px] leading-[150%] text-[#4D4D4D]">
+        <p class="text-[14px] leading-5 text-[#4D4D4D]">
           A complete offshore development suite covering web, software, design, CRM, e-commerce and AI &mdash;
           everything you need under one roof.
         </p>
@@ -134,14 +134,14 @@
           </span>
 
           <div class="web-service-card__category">
-            <h3 class="text-[14px] font-semibold leading-[130%] text-[#171717]">
+            <h3 class="text-[14px] font-semibold leading-[18px] text-[#171717]">
               {{ $service[1] }}
             </h3>
           </div>
 
-          <p class="mt-1 text-[14px] leading-[20px] text-[#4D4D4D]">{{ $service[2] }}</p>
+          <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $service[2] }}</p>
 
-          <span class="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB]">
+          <span class="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
             {{ $service[3] }}
             <svg xmlns="https://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
               stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -170,19 +170,19 @@
 />
 
 <!-- 7. Offshore Services Section Start -->
-<section class="full-bleed bg-[#F9FAFC] bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')"
+<section class="full-bleed bg-[#F9FAFC] bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')"
   aria-labelledby="offshore-services-title">
   <div class="section-inner">
-    <header class="mx-auto mb-12 max-w-[720px] text-center lg:mb-14">
+    <header class="mx-auto mb-8 max-w-[720px] text-center lg:mb-14">
       <p
         class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
         Offshore Services
       </p>
       <h2 id="offshore-services-title"
-        class="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">
+        class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:text-[18px] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
         Why Global Businesses Choose Our Offshore Services
       </h2>
-      <p class="mx-auto mt-4 max-w-[620px] text-[14px] leading-6 text-[#4D4D4D]">
+      <p class="mx-auto mt-4 max-w-[620px] text-[14px] leading-5 text-[#4D4D4D]">
         Our Offshore services provide a flexible and scalable solution for your business needs. You can easily
         adjust your service requirements up or down as and when needed.
       </p>
@@ -196,8 +196,8 @@
             <img src="{{ asset($slide[0]) }}" alt="{{ $slide[4] }}" title="{{ $slide[4] }}" class="h-full w-full object-cover" loading="lazy">
           </figure>
           <div class="flex flex-1 flex-col gap-3 p-[22px]">
-            <h3 class="text-base font-bold leading-tight text-[#171717]">{{ $slide[1] }}</h3>
-            <p class="flex-1 text-sm leading-relaxed text-[#4D4D4D]">{{ $slide[2] }}</p>
+            <h3 class="text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $slide[1] }}</h3>
+            <p class="flex-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $slide[2] }}</p>
             <div class="flex flex-wrap gap-1.5">
               @foreach ($slide[3] as $tag)
                 <span
@@ -221,14 +221,14 @@
 
 
 <!-- 9. Tech Stack Section Start -->
-<section class="full-bleed bg-cover bg-top bg-no-repeat py-16 lg:py-20" style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');" aria-labelledby="tech-stack-title">
+<section class="full-bleed bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');" aria-labelledby="tech-stack-title">
   <div class="section-inner">
-    <header class="mx-auto mb-12 max-w-[720px] text-center lg:mb-16">
+    <header class="mx-auto mb-8 max-w-[720px] text-center lg:mb-16">
       <p
         class="offerings-eyebrow inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
         Our Technology
       </p>
-      <h2 id="tech-stack-title" class="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight text-[#171717]">
+      <h2 id="tech-stack-title" class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:text-[18px] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
         The Technology Behind Our Solutions
       </h2>
     </header>
@@ -241,10 +241,10 @@
             class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             style="background: radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--technology-color) 12%, transparent), transparent 58%);"></span>
           <img src="{{ asset($tech[0]) }}" alt="{{ $tech[1] }} technology icon for Suave Creators software development" title="{{ $tech[1] }} technology icon for Suave Creators software development" class="relative h-10 w-10 object-contain" loading="lazy">
-          <h3 class="relative mt-3 text-base font-bold text-[#171717]">{{ $tech[1] }}</h3>
-          <p class="relative mt-2 pr-5 text-sm leading-[22px] text-[#4D4D4D]">{{ $tech[2] }}</p>
+          <h3 class="relative mt-3 text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $tech[1] }}</h3>
+          <p class="relative mt-2 pr-5 text-[14px] leading-5 text-[#4D4D4D]">{{ $tech[2] }}</p>
           <a href="{{ route('services') }}"
-            class="relative mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB]">
+            class="relative mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
             Get Started
             <svg xmlns="https://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
               stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -265,7 +265,7 @@
   title="Our process guides you step by step towards achieving success"
   description="We follow a clear, collaborative process that takes your idea from research to a fully functional, high-performing product."
   heading-id="services-process-title"
-  class="py-[80px]"
+  class="py-6 lg:py-[80px]"
 />
 <x-frontend.faq-section
   :qa="$faqs"
@@ -288,7 +288,7 @@
   :allow-html-title="false"
 />
 
-<x-frontend.testimonials-section heading-id="services-testimonials-title" class="py-20 lg:py-24" />
+<x-frontend.testimonials-section heading-id="services-testimonials-title" class="py-6 lg:py-24" />
 
 <x-frontend.case-studies-spotlight-section
   :items="$caseStudies ?? []"
@@ -302,7 +302,7 @@
   heading-id="services-insights-title"
   title="Explore Our Latest Insights"
   subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
-  section-class="py-16 lg:py-18"
+  section-class="section-pad-m py-6 lg:py-18"
   more-href="{{ route('blogs') }}"
   more-label="View all blog articles"
 />
@@ -311,4 +311,58 @@
 
 
 @endsection
+
+@push('custom-css')
+<style>
+@media (max-width: 767px) {
+  #services-hero-title {
+    font-size: 26px;
+    line-height: 28px;
+  }
+
+  section[aria-labelledby="services-hero-title"],
+  section[aria-labelledby="expertise-title"],
+  section[aria-labelledby="core-services-title"],
+  section[aria-labelledby="offshore-services-title"],
+  section[aria-labelledby="tech-stack-title"],
+  section[aria-labelledby="services-process-title"] {
+    padding-block: 24px !important;
+  }
+
+  #core-services-title,
+  .web-services__intro h2,
+  #services-process-title {
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+
+  .digital-solution-section {
+    padding: 24px 0;
+  }
+
+  .digital-solution-section__title-top,
+  .digital-solution-section__title-agency {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.025em;
+  }
+
+  .digital-solution-section__copy {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .about-stat__value--title {
+    font-size: 14px !important;
+    letter-spacing: -0.025em;
+    line-height: 18px !important;
+  }
+
+  .about-stat__description {
+    font-size: 13px !important;
+    line-height: 18px !important;
+  }
+}
+</style>
+@endpush
 

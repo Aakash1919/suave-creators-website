@@ -153,7 +153,7 @@
 
                     <a href="{{ $ctaHref() }}"
                         target="_blank" rel="noopener noreferrer"
-                        class="mobile-nav__cta u-btn-cta !h-[34px] !min-h-[34px] !py-0 cursor-pointer text-[13px]">
+                        class="mobile-nav__cta u-btn-cta cursor-pointer">
                         {{ $ctaLabel }}
                         <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

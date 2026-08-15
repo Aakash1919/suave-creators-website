@@ -22,7 +22,7 @@ class ArticlesInsightsSection extends Component
         public string $headingId = 'articles-insights-title',
         public string $moreHref = '',
         public string $moreLabel = 'View all blog articles',
-        public string $sectionClass = 'py-12 lg:py-18',
+        public string $sectionClass = 'py-6 lg:py-18',
         public bool $initSwiper = true,
     ) {
         if ($this->moreHref === '') {
