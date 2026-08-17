@@ -848,7 +848,7 @@ $n = $index + 1;
   .service-banner-logos.swiper,
   .service-banner-logos.swiper:not(.swiper-initialized) {
     grid-template-columns: repeat(var(--banner-logo-cols, 6), minmax(0, 1fr));
-    margin: -10px;
+    margin: 48px -10px -10px;
     max-width: none;
     overflow: visible;
     padding: 10px !important;
