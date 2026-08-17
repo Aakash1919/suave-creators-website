@@ -60,7 +60,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - **Services exception:** one `ServiceController` — `index` for `/services`, `show(string $slug)` for all `/service/{slug}` details (no per-service controllers; abort 404 for unknown slugs)
 - **Industries exception:** one `IndustryController` — `index` for `/industries`, `show(string $slug)` for all `/industries/{slug}` details (no per-industry controllers; abort 404 for unknown slugs)
 - **Blogs:** one `BlogController` — `index` for `/blogs`, `show(string $slug)` for `/blog/{slug}` (abort 404 for unknown slugs; shared single-blog Blade)
-- **Case studies:** one `CaseStudyController` — `index` for `/case-studies`, `show(string $slug)` for `/case-studies/{slug}` (abort 404 for unknown slugs; shared single-case-study Blade). Rows come from `case_studies` via `CaseStudySupport`. **Manual admin content only** — never auto-generated. Placement: `service_slugs` / `industry_slugs` drive the dark `<x-frontend.case-studies-spotlight-section>` on `/services`, `/services/{slug}`, `/industries`, and `/industries/{slug}`
+- **Case studies:** one `CaseStudyController` — `index` for `/case-studies`, `show(string $slug)` for `/case-studies/{slug}` (abort 404 for unknown slugs; shared single-case-study Blade). Rows come from `case_studies` via `CaseStudySupport`. **Manual admin content only** — never auto-generated. Placement: `service_slugs` drive the light `<x-frontend.case-studies-carousel-section>` on `/services` and `/service/{slug}`; `industry_slugs` drive the dark `<x-frontend.case-studies-spotlight-section>` on `/industries` and `/industries/{slug}`
 - **Contact:** `ContactController` — `index` for `/contact-us`, `store` for `POST /contact-us` (`contact-us.store`, throttled) via `ContactRequestService`
 - **SEO discovery:** `SitemapController` + `App\Services\SitemapService` — `/sitemap.xml`, `/llm.txt` (+ `/llms.txt`), dynamic `/robots.txt` (do not put a static `public/robots.txt` in front of the route; point to llm.txt via a `#` comment only — never an `LLM:` directive)
 - Full controller map: [reference.md](reference.md)
@@ -214,7 +214,7 @@ Alts must be **SEO-friendly**: natural language that describes the image **and**
 | Blade | `resources/views/components/frontend/{name}-section.blade.php` |
 | Tag | `<x-frontend.{name}-section />` |
 
-Shared multi-page blocks must be Section components (not `resources/views/frontend/partials/`). Examples: `tech-partnerships-section`, `partnerships-section`, `core-values-section`, `faq-section`, `testimonials-section`, `articles-insights-section`, `marquee-section`, `consultation-section`, `connect-cta-section`, `industries-section`.
+Shared multi-page blocks must be Section components (not `resources/views/frontend/partials/`). Examples: `tech-partnerships-section`, `partnerships-section`, `core-values-section`, `faq-section`, `testimonials-section`, `articles-insights-section`, `marquee-section`, `consultation-section`, `connect-cta-section`, `industries-section`, `case-studies-carousel-section`, `case-studies-spotlight-section`.
 
 Shared CTA chrome: `UiHelper::btnPrimary()` / `UiHelper::ctaArrow()` in `app/Support/Frontend/UiHelper.php`; Blade tags `<x-frontend.cta-button>` and `<x-frontend.cta-arrow />` (do not pass `$btnPrimary` / `$ctaArrow` from controllers).
 

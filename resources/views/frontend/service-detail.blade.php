@@ -502,7 +502,7 @@ $n = $index + 1;
   :allow-html-title="false"
 />
 
-<x-frontend.case-studies-spotlight-section
+<x-frontend.case-studies-carousel-section
   :items="$caseStudies ?? []"
   heading-id="service-case-studies-title"
   title="Related case studies"
