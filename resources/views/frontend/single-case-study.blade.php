@@ -53,8 +53,8 @@
             src="{{ $case['image'] }}"
             alt="{{ $case['title'] }}"
             title="{{ $case['title'] }}"
-            width="{{ ($case['slug'] ?? '') === 'ai-sales-coaching-platform-case-study' ? 384 : 960 }}"
-            height="{{ ($case['slug'] ?? '') === 'ai-sales-coaching-platform-case-study' ? 284 : 720 }}"
+            width="{{ ($case['slug'] ?? '') === 'ai-sales-coaching-platform-case-study' ? 640 : 960 }}"
+            height="{{ ($case['slug'] ?? '') === 'ai-sales-coaching-platform-case-study' ? 473 : 720 }}"
             loading="eager"
             decoding="async"
           >
