@@ -211,6 +211,69 @@ class CaseStudySupport
     }
 
     /**
+     * Data payload for static case study page preview or fallback.
+     *
+     * @return array<string, mixed>
+     */
+    public static function staticData(?string $slug = null): array
+    {
+        $file = base_path('database/data/case-studies/cases.php');
+        $catalog = file_exists($file) ? require $file : [];
+
+        $case = null;
+        if ($slug !== null && is_array($catalog)) {
+            foreach ($catalog as $item) {
+                if (isset($item['slug']) && $item['slug'] === $slug) {
+                    $case = $item;
+                    break;
+                }
+            }
+        }
+
+        if ($case === null && is_array($catalog) && count($catalog) > 0) {
+            $case = $catalog[0];
+        }
+
+        if ($case === null) {
+            abort(404);
+        }
+
+        if (! empty($case['image']) && ! str_starts_with($case['image'], 'http') && ! str_starts_with($case['image'], '/')) {
+            $case['image'] = asset($case['image']);
+        }
+
+        if (isset($case['sections']) && is_array($case['sections'])) {
+            foreach ($case['sections'] as &$section) {
+                if (! empty($section['image']) && ! str_starts_with($section['image'], 'http') && ! str_starts_with($section['image'], '/')) {
+                    $section['image'] = asset($section['image']);
+                }
+            }
+            unset($section);
+        }
+
+        $seoTitle = trim((string) ($case['meta_title'] ?? ''));
+        if ($seoTitle === '') {
+            $seoTitle = $case['title'].' | Case Study | Suave Creators';
+        }
+
+        $seoDescription = trim((string) ($case['meta_description'] ?? ''));
+        if ($seoDescription === '') {
+            $seoDescription = (string) ($case['short_description'] ?? '');
+        }
+
+        return [
+            'case' => $case,
+            'seoTitle' => $seoTitle,
+            'seoDescription' => $seoDescription,
+            'seoOgTitle' => trim((string) ($case['og_title'] ?? '')) ?: null,
+            'seoOgDescription' => trim((string) ($case['og_description'] ?? '')) ?: null,
+            'seoImage' => $case['image'] ?? null,
+            'seoRobots' => null,
+            'isDraft' => false,
+        ];
+    }
+
+    /**
      * @return array<string, mixed>
      */
     protected static function mapCase(CaseStudy $caseStudy): array

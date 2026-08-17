@@ -38,6 +38,7 @@ Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->nam
 
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
+Route::get('/outreach-case-study', [CaseStudyController::class, 'outreachcasestudy'])->name('outreach-case-study');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');
