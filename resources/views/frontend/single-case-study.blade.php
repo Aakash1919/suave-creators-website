@@ -45,13 +45,16 @@
       </div>
 
       @if (! empty($case['image']))
-        <figure class="case-study-detail-hero__media">
+        <figure @class([
+          'case-study-detail-hero__media',
+          'case-study-detail-hero__media--compact' => ($case['slug'] ?? '') === 'ai-sales-coaching-platform-case-study',
+        ])>
           <img
             src="{{ $case['image'] }}"
             alt="{{ $case['title'] }}"
             title="{{ $case['title'] }}"
-            width="960"
-            height="720"
+            width="{{ ($case['slug'] ?? '') === 'ai-sales-coaching-platform-case-study' ? 384 : 960 }}"
+            height="{{ ($case['slug'] ?? '') === 'ai-sales-coaching-platform-case-study' ? 284 : 720 }}"
             loading="eager"
             decoding="async"
           >

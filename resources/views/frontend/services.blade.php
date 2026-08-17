@@ -290,7 +290,7 @@
 
 <x-frontend.testimonials-section heading-id="services-testimonials-title" class="py-6 lg:py-24" />
 
-<x-frontend.case-studies-spotlight-section
+<x-frontend.case-studies-carousel-section
   :items="$caseStudies ?? []"
   heading-id="services-case-studies-title"
   title="Case studies from our services"

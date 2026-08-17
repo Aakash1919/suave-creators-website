@@ -36,10 +36,23 @@ class CaseStudySeeder extends Seeder
         // Remap legacy public slugs so re-seed updates the same row.
         foreach ([
             'shownoshow-appointment-insurance' => 'appointment-insurance-platform-case-study',
+            'ematrics-ai-sales-coaching' => 'ai-sales-coaching-platform-case-study',
         ] as $legacySlug => $newSlug) {
-            CaseStudy::withTrashed()
-                ->where('slug', $legacySlug)
-                ->update(['slug' => $newSlug]);
+            $legacy = CaseStudy::withTrashed()->where('slug', $legacySlug)->first();
+            if ($legacy === null) {
+                continue;
+            }
+
+            $canonical = CaseStudy::withTrashed()->where('slug', $newSlug)->first();
+            if ($canonical === null) {
+                $legacy->update(['slug' => $newSlug]);
+
+                continue;
+            }
+
+            if (! $legacy->trashed()) {
+                $legacy->delete();
+            }
         }
 
         $this->command?->info('Seeding '.count($raw).' case study(ies) from database/data/case-studies…');
@@ -68,8 +81,8 @@ class CaseStudySeeder extends Seeder
                 'year' => $payload['year'] ?? null,
                 'featured_image' => $this->normalizeImagePath($payload['image'] ?? null),
                 'created_by_id' => $admin->id,
-                'status' => CaseStudy::STATUS_PUBLISHED,
-                'published_at' => now(),
+                'status' => $this->status($payload['status'] ?? null),
+                'published_at' => $this->publishedAt($payload['status'] ?? null),
                 'sort_order' => $index + 1,
                 'technologies' => $this->stringList($payload['technologies'] ?? null),
                 'results' => $this->results($payload['results'] ?? null),
@@ -113,6 +126,20 @@ class CaseStudySeeder extends Seeder
         $caseStudy->save();
 
         return $caseStudy;
+    }
+
+    protected function status(mixed $value): string
+    {
+        $status = is_string($value) ? strtolower(trim($value)) : '';
+
+        return $status === CaseStudy::STATUS_DRAFT
+            ? CaseStudy::STATUS_DRAFT
+            : CaseStudy::STATUS_PUBLISHED;
+    }
+
+    protected function publishedAt(mixed $value): mixed
+    {
+        return $this->status($value) === CaseStudy::STATUS_PUBLISHED ? now() : null;
     }
 
     protected function nullableString(mixed $value): ?string
