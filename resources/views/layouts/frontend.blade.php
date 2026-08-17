@@ -146,8 +146,9 @@
         .about-stat__icon-image{aspect-ratio:1/1;display:block;height:40px;width:40px}
         .about-stat__value [data-counter-end]{display:inline-block;font-variant-numeric:tabular-nums}
         /* Preloader hides the unstyled shell while the non-blocking sheets are still fetching. */
-        .site-preloader{align-items:center;background:var(--color-navy);display:flex;inset:0;justify-content:center;position:fixed;z-index:2147483000}
-        .site-preloader__spinner{animation:site-preloader-spin .9s linear infinite,site-preloader-fade-in .3s ease .15s forwards;block-size:44px;border:3px solid rgb(255 255 255 / 18%);border-radius:50%;border-top-color:#2a4dfb;box-sizing:border-box;display:block;inline-size:44px;opacity:0}
+        .site-preloader{align-items:center;background: url('/assets/background/loader_bg.webp') center / cover no-repeat;display:flex;inset:0;justify-content:center;position:fixed;z-index:2147483000}
+        .site-preloader__spinner{url('/assets/backgroun/loading_gif.gif') center;
+        };border-radius:50%;border-top-color:#2a4dfb;box-sizing:border-box;display:block;inline-size:44px;opacity:0}
         html.is-css-ready .site-preloader{opacity:0;pointer-events:none;transition:opacity .3s ease,visibility 0s linear .3s;visibility:hidden}
         @keyframes site-preloader-spin{to{transform:rotate(1turn)}}
         @keyframes site-preloader-fade-in{to{opacity:1}}
