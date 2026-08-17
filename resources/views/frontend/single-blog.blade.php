@@ -4,7 +4,7 @@
 
 
 <!-- Single Blog Hero Section Start -->
-<section class="single-blog-top relative z-10 w-full section-pad-m pb-10 pt-6 md:pb-14 md:pt-8 lg:pb-16 site-container">
+<section class="single-blog-top relative z-10 w-full pb-3 pt-1 md:pb-4 md:pt-2 lg:pb-6 lg:pt-3 site-container">
   <nav class="blog-breadcrumb" aria-label="Breadcrumb">
     <a href="{{ route('home') }}">Home</a>
     <span aria-hidden="true">/</span>
@@ -207,7 +207,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   font-size: 13px;
   font-weight: 600;
   color: #b1b9df;
@@ -240,12 +240,29 @@
   white-space: nowrap;
 }
 
-.single-blog-top {
-  padding-top: 12px;
+.site-main > .single-blog-top {
+  min-height: 0 !important;
+  padding-top: 0.25rem;
+  padding-bottom: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .site-main > .single-blog-top {
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-main > .single-blog-top {
+    padding-top: 0.75rem;
+    padding-bottom: 1.5rem;
+  }
 }
 
 .single-blog-top .single-blog-main__title {
-  margin-top: 18px;
+  display: block;
+  margin-top: 10px;
   max-width: 920px;
   color: #fff;
 }
