@@ -1,17 +1,17 @@
 <?php
 return array(
   'slug' => 'enterprise-software-solutions',
-  'pageTitle' => 'Enterprise Software Development Services | Suave Creators',
-  'pageDescription' => 'Get scalable, secure enterprise software tailored for growing businesses. Automate workflows, boost efficiency, and modernize operations with Suave Creators.',
-  'ogTitle' => 'Enterprise Software Development Services | Suave Creators',
-  'ogDescription' => 'Build scalable and secure enterprise software solutions with Suave Creators. Automate workflows, enhance productivity, and accelerate business growth.',
+  'pageTitle' => 'Enterprise Software Solutions, Examples & Management | Suave Creators',
+  'pageDescription' => 'Enterprise software solutions, definition, examples, and management support for growing teams. Build ERP, CRM, dashboards, and workflow systems with Suave Creators.',
+  'ogTitle' => 'Enterprise Software Solutions, Examples & Management | Suave Creators',
+  'ogDescription' => 'Explore enterprise software definition, examples, and management support. Suave Creators builds ERP, CRM, dashboards, integrations, and workflow systems.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',
   'heroTitle' =>
   array(
     0 => 'Smart Enterprise Software ',
     1 => 'Solutions to upgrade your Business.',
   ),
-  'heroDescription' => 'Let’s upgrade your organisation with Custom-made enterprise software solutions that are designed to optimise workload, boost productivity, and enhance reliability.',
+  'heroDescription' => 'Upgrade your organisation with custom enterprise software solutions that organise data, automate daily work, improve management visibility, and support reliable growth.',
   'heroImage1' => '/assets/media/build-visual.png',
   'heroImage2' => '/assets/icons/build-icon.png',
   'bannerLogos' =>
@@ -30,12 +30,12 @@ return array(
   'introLinkText' => 'Explore Services',
   'introLinkUrl' => '/services',
   'bodyEyebrow' => 'Suave Creators',
-  'bodyTitle' => 'Scalable Software Solutions to Drive Business Growth',
+  'bodyTitle' => 'Enterprise Software Solutions for Operations, Management, and Growth',
   'bodyBg' => '/assets/background/about-banner-bg.png',
   'bodyParagraphs' =>
   array(
-    0 => 'ERP Solutions are the need of every business. Our expert team is skilled in developing custom enterprise software that enhances efficiency, accelerates growth, and streamlines complex workflows. Enterprise software is a necessity for growing businesses nowadays. According to your business, we will design an all-in-one ERP solution to make your workload reliable and efficient.',
-    1 => 'With over 5+ years of experience in custom-based enterprise software solutions, we bring constant innovation and efficiency to transform your business into a digital powerhouse. Try our reliable Enterprise software solutions and make your team\'s workflow smoother and easier during all tasks.',
+    0 => 'Enterprise software is a business system that helps teams manage complex operations, shared data, permissions, reporting, workflows, and integrations in one reliable place. Suave Creators builds enterprise software solutions for companies that need more control than spreadsheets, disconnected tools, or off-the-shelf apps can provide.',
+    1 => 'Common enterprise software examples include ERP, CRM, HR management, inventory and order management, analytics dashboards, workflow automation, and system integrations. We design these systems around your actual processes, so your team can track work, reduce manual effort, and make faster decisions from accurate data.',
   ),
   'marqueeIcons' =>
   array(
@@ -148,8 +148,8 @@ return array(
     7 => '/assets/icons/tech/wordpress-logo.svg',
   ),
   'ctaEyebrow' => 'Ready to Start Your Project?',
-  'ctaTitle' => 'Ready to Build Your Website? Let’s Get Started!',
-  'ctaDescription' => 'At Suave Creators, we are ready to bring your imagination to life in the digital world with the help of our web development skills. Our end-to-end web development services help you to improve your online presence, add any new feature, boost revenue, and make the web design appealing. Let’s digitise the business with us!',
+  'ctaTitle' => 'Ready to Build Enterprise Software That Fits Your Workflow?',
+  'ctaDescription' => 'At Suave Creators, we turn complex operations into secure, scalable software systems. From ERP and CRM platforms to workflow automation, dashboards, and integrations, our enterprise software team helps your business manage work with clarity and speed.',
   'ctaBg' => '/assets/background/enterprise-service-bg.webp',
   'whyEyebrow' => 'Suave Creators',
   'whyTitle' => 'Why Choose Suave Creators for Your Enterprise Software Needs?',
@@ -232,38 +232,42 @@ return array(
   'faqs' =>
   array(
     0 => array(
-      'question' => 'What are custom enterprise software solutions?',
-      'answer' => 'Custom enterprise software solutions are custom-made applications designed according to your business demands. They smooth the operations, improve efficiency, and offer long-term growth.',
+      'question' => 'What is enterprise software?',
+      'answer' => 'Enterprise software is a business application used to manage company-wide operations, data, teams, permissions, reporting, and workflows. It helps growing organisations replace scattered tools with one reliable system.',
     ),
     1 => array(
-      'question' => 'How long does it take to develop custom enterprise software?',
-      'answer' => ' The deadline totally depends on the complexity of the project. On average, it can take anywhere from  1 month to 6 months, depending on the features and scale of the software.',
+      'question' => 'What are examples of enterprise software?',
+      'answer' => 'Examples of enterprise software include ERP, CRM, HR management, inventory and order management, analytics dashboards, workflow automation, and system integrations built around daily business operations.',
     ),
     2 => array(
-      'question' => 'What industries benefit from custom enterprise software solutions?',
-      'answer' => 'Industries like banking, college, logistics, healthcare, and manufacturing all benefit from custom enterprise software designed for their daily tasks.',
+      'question' => 'How does enterprise software management help operations?',
+      'answer' => 'Enterprise software management helps leaders organise workflows, assign access, monitor performance, connect departments, reduce manual work, and keep business data accurate across teams.',
     ),
     3 => array(
+      'question' => 'What are custom enterprise software solutions?',
+      'answer' => 'Custom enterprise software solutions are applications designed around your exact business needs. They streamline operations, improve efficiency, connect systems, and support long-term growth.',
+    ),
+    4 => array(
+      'question' => 'How long does it take to develop custom enterprise software?',
+      'answer' => 'The timeline depends on the complexity of the project. On average, it can take anywhere from 1 month to 6 months, depending on the features, integrations, data requirements, and scale of the software.',
+    ),
+    5 => array(
+      'question' => 'What industries benefit from custom enterprise software solutions?',
+      'answer' => 'Industries like banking, education, logistics, healthcare, retail, e-commerce, and manufacturing all benefit from custom enterprise software designed for their daily tasks.',
+    ),
+    6 => array(
       'question' => 'What is the difference between SaaS and custom enterprise software?',
       'answer' => 'SaaS is a ready-to-use subscription-based software solution, while custom enterprise software is developed from scratch to meet your specific business requirements.',
     ),
-    4 => array(
+    7 => array(
       'question' => 'How do you ensure the security of enterprise software solutions?',
       'answer' => 'We follow strict security practices, including data encryption, safe coding, regular updates, and compliance with industry standards to keep your system secure.',
-    ),
-    5 => array(
-      'question' => 'Do you optimize websites for speed and SEO?',
-      'answer' => 'Yes, after completing the whole website, we will make a complete SEO on-page audit and optimize the website for SEO and speed. So your professional website is completely SEO friendly before we deliver it to you.',
-    ),
-    6 => array(
-      'question' => 'How can digital marketing help my business?',
-      'answer' => 'Digital marketing can help your online business grow by increasing visibility, attracting more targeted customers, and increasing brand awareness.',
     ),
   ),
   'finalEyebrow' => 'Your Digital Future Together',
   'finalTitle' => 'Let’s Build Your Enterprise Software Together',
 
-  'finalDescription' => 'At Suave Creators, we believe your website should do more than just exist online; it should deliver impact as well. Our Enterprise Software Solutions services are tailored to your business goals. From smooth landing pages to robust web applications, our professional experts work with you throughout the journey to build an online website that truly works for your success.',
+  'finalDescription' => 'At Suave Creators, we believe enterprise software should make everyday work clearer, faster, and easier to manage. Our Enterprise Software Solutions services are tailored to your business goals, from internal dashboards and ERP tools to CRM workflows, automation, and secure system integrations.',
   'finalBg' => '/assets/background/enterprise-service-alt-bg.webp',
   'hideFinalBgBelowDesktop' => true,
   'finalPrimaryCta' => 'Get a Free Quote',
