@@ -1,6 +1,17 @@
 @php
   $sections = $case['sections'] ?? [];
   $contactHref = $demoHref;
+  $heroSlug = $case['slug'] ?? '';
+  $heroMediaMod = match ($heroSlug) {
+    'ai-sales-coaching-platform-case-study' => 'compact',
+    'suave-crm-outreach-case-study' => 'graphic',
+    default => null,
+  };
+  [$heroWidth, $heroHeight] = match ($heroSlug) {
+    'ai-sales-coaching-platform-case-study' => [384, 284],
+    'suave-crm-outreach-case-study' => [991, 842],
+    default => [960, 720],
+  };
 @endphp
 
 @extends('layouts.frontend')
@@ -45,13 +56,16 @@
       </div>
 
       @if (! empty($case['image']))
-        <figure class="case-study-detail-hero__media">
+        <figure @class([
+          'case-study-detail-hero__media',
+          'case-study-detail-hero__media--'.$heroMediaMod => $heroMediaMod !== null,
+        ])>
           <img
             src="{{ $case['image'] }}"
             alt="{{ $case['title'] }}"
             title="{{ $case['title'] }}"
-            width="960"
-            height="720"
+            width="{{ $heroWidth }}"
+            height="{{ $heroHeight }}"
             loading="eager"
             decoding="async"
           >

@@ -7083,6 +7083,52 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   }
 }
 
+.case-study-detail-hero__media--compact {
+  max-width: min(100%, 24rem);
+  justify-self: center;
+}
+
+.case-study-detail-hero__media--compact img {
+  max-height: min(42vh, 280px);
+  min-height: 0;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
+}
+
+@media (min-width: 960px) {
+  .case-study-detail-hero__media--compact img {
+    max-height: 284px;
+    min-height: 0;
+  }
+}
+
+.case-study-detail-hero__media--graphic {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.case-study-detail-hero__media--graphic::after {
+  content: none;
+}
+
+.case-study-detail-hero__media--graphic img {
+  width: 100%;
+  height: auto;
+  max-height: min(70vh, 560px);
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (min-width: 960px) {
+  .case-study-detail-hero__media--graphic img {
+    max-height: 560px;
+    min-height: 0;
+  }
+}
+
 /* Key Performance Metrics */
 .case-study-metrics {
   background: #fff;
@@ -8026,6 +8072,14 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   .case-study-detail-hero__media img {
     max-height: 240px;
     min-height: 0;
+  }
+
+  .case-study-detail-hero__media--compact img {
+    max-height: 220px;
+  }
+
+  .case-study-detail-hero__media--graphic img {
+    max-height: 380px;
   }
 
   .case-study-visual {
