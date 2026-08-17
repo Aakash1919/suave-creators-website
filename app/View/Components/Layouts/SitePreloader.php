@@ -9,12 +9,14 @@ use Illuminate\View\Component;
 class SitePreloader extends Component
 {
     /**
-     * Brand overlay shown until the non-blocking stylesheets have applied.
+     * Brand overlay shown by default and removed after the document is ready.
      *
-     * @param  int  $timeout  Hard cap in ms after which the overlay is removed even if a sheet never loads.
+     * @param  int  $minDisplayTime  Minimum duration in ms to show the loader (default: 1500ms).
+     * @param  int  $timeout  Hard cap in ms after which the overlay is removed even if ready never fires.
      */
     public function __construct(
-        public int $timeout = 2500,
+        public int $minDisplayTime = 500,
+        public int $timeout = 5000,
         public string $label = 'Loading Suave Creators',
     ) {}
 

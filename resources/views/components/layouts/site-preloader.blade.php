@@ -1,16 +1,18 @@
 <div class="site-preloader" data-site-preloader role="status" aria-label="{{ $label }}">
     <span class="site-preloader__spinner" aria-hidden="true"></span>
 </div>
-{{-- Must run inline at body start: the overlay has to lift the moment the deferred sheets apply, before any deferred JS. --}}
+{{-- Must run inline at body start: the overlay is visible by default and lifts when document is ready (at least $minDisplayTime). --}}
 <script> 
     (function () { 
         var root = document.documentElement; 
+        var startTime = Date.now(); 
+        var minDisplayTime = {{ $minDisplayTime }}; 
         var timeout = {{ $timeout }}; 
         var revealed = false; 
  
         root.classList.add('is-css-pending'); 
  
-        function reveal() { 
+        function executeReveal() { 
             if (revealed) return; 
             revealed = true; 
  
@@ -27,30 +29,20 @@
             }, 400); 
         } 
  
-        function stylesPending() { 
-            var links = document.querySelectorAll('link[data-suave-css]'); 
- 
-            for (var i = 0; i < links.length; i++) { 
-                // media stays "print" until the link's own onload swaps it to "all". 
-                if (!links[i].sheet || links[i].media === 'print') return true; 
-            } 
- 
-            return false; 
+        function scheduleReveal() { 
+            var elapsed = Date.now() - startTime; 
+            var remaining = Math.max(0, minDisplayTime - elapsed); 
+            window.setTimeout(executeReveal, remaining); 
         } 
  
-        function poll() { 
-            if (stylesPending()) { 
-                window.setTimeout(poll, 50); 
-                return; 
-            } 
- 
-            reveal(); 
+        if (document.readyState === 'interactive' || document.readyState === 'complete') { 
+            scheduleReveal(); 
+        } else { 
+            document.addEventListener('DOMContentLoaded', scheduleReveal); 
         } 
- 
-        poll(); 
         
-        window.setTimeout(reveal, timeout); 
-        window.addEventListener('load', reveal);
+        window.addEventListener('load', scheduleReveal); 
+        window.setTimeout(executeReveal, timeout); 
     })(); 
 </script> 
 
