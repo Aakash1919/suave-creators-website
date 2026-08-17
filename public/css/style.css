@@ -1614,6 +1614,7 @@ main button.rounded-full.bg-gradient-to-r {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  margin-bottom: 30px;
   width: 100%;
 }
 
