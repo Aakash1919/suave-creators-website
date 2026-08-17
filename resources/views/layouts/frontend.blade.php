@@ -147,44 +147,33 @@
         .about-stat__value [data-counter-end]{display:inline-block;font-variant-numeric:tabular-nums}
         
         /* Preloader hides the unstyled shell while the non-blocking sheets are still fetching. */
-      /* Preloader hides the unstyled shell while the non-blocking sheets are still fetching. */
-.site-preloader {
-    align-items: center;
-    background: url('/assets/background/loader_bg.webp') center / cover no-repeat;
-    display: flex;
-    inset: 0;
-    justify-content: center;
-    position: fixed;
-    z-index: 2147483000;
-}
+        .site-preloader {
+            align-items: center;
+            background: #00003f url('{{ asset('assets/background/loader_bg.webp') }}') center / cover no-repeat;
+            display: flex;
+            inset: 0;
+            justify-content: center;
+            position: fixed;
+            z-index: 2147483000;
+        }
 
-.site-preloader__spinner {
-    background: url('/assets/background/loading_gif.gif') center / contain no-repeat;
-    box-sizing: border-box;
-    display: block;
-    inline-size: 44px;
-    block-size: 44px;
-    opacity: 1;
-}
+        .site-preloader__spinner {
+            background: url('{{ asset('assets/background/loading_gif.gif') }}') center / contain no-repeat;
+            box-sizing: border-box;
+            display: block;
+            height: 44px;
+            width: 44px;
+            inline-size: 44px;
+            block-size: 44px;
+            opacity: 1;
+        }
 
-html.is-css-ready .site-preloader {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .3s ease, visibility 0s linear .3s;
-    visibility: hidden;
-}
-
-@keyframes site-preloader-spin {
-    to {
-        transform: rotate(1turn);
-    }
-}
-
-@keyframes site-preloader-fade-in {
-    to {
-        opacity: 1;
-    }
-}
+        html.is-css-ready .site-preloader {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease, visibility 0s linear .3s;
+            visibility: hidden;
+        }
         @media (min-width:375px){
             .site-main>.site-container.relative h1{font-size:42px}
         }
@@ -221,6 +210,8 @@ html.is-css-ready .site-preloader {
         }
     </style>
 
+    <link rel="preload" as="image" href="{{ asset('assets/background/loader_bg.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('assets/background/loading_gif.gif') }}" fetchpriority="high">
     <link rel="preload" as="font" href="{{ asset('fonts/fontawesome/fa-solid-900.woff2') }}" type="font/woff2" crossorigin>
 
     @if ($useHeroBackground && $heroBackgroundImage)
