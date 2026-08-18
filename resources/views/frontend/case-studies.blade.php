@@ -50,9 +50,6 @@
               $itemHref = $item['url'] ?? \App\Support\Frontend\CaseStudySupport::urlForSlug((string) ($item['slug'] ?? ''));
               $tags = array_slice($item['technologies'] ?? [], 0, 5);
               $tagLine = implode(' | ', $tags);
-              $subtitle = trim((string) ($item['listing_subtitle'] ?? '')) !== ''
-                ? $item['listing_subtitle']
-                : ($item['industry'] ?? '');
               $stats = array_slice($item['results'] ?? [], 0, 3);
             @endphp
             <article class="case-studies-grid__item">
@@ -76,27 +73,21 @@
                 <h3 class="case-studies-grid__title">
                   <a href="{{ $itemHref }}">{{ $item['title'] }}</a>
                 </h3>
-                @if ($subtitle !== '')
-                  <p class="case-studies-grid__subtitle">{{ $subtitle }}</p>
-                @endif
-                @if (! empty($item['short_description']))
-                  <p class="case-studies-grid__desc">{{ $item['short_description'] }}</p>
+                @if ($stats)
+                  <div class="case-studies-grid__stats" aria-label="Key results">
+                    @foreach ($stats as $stat)
+                      <div class="case-studies-grid__stat">
+                        <span class="case-studies-grid__stat-value">{{ $stat['value'] }}</span>
+                        <span class="case-studies-grid__stat-label">{{ $stat['label'] }}</span>
+                      </div>
+                    @endforeach
+                  </div>
                 @endif
                 <a class="case-studies-grid__cta" href="{{ $itemHref }}">
                   Read the full story
                   <svg xmlns="https://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
                 </a>
               </div>
-              @if ($stats)
-                <div class="case-studies-grid__stats" aria-label="Key results">
-                  @foreach ($stats as $stat)
-                    <div class="case-studies-grid__stat">
-                      <span class="case-studies-grid__stat-value">{{ $stat['value'] }}</span>
-                      <span class="case-studies-grid__stat-label">{{ $stat['label'] }}</span>
-                    </div>
-                  @endforeach
-                </div>
-              @endif
             </article>
           @endforeach
         </div>
