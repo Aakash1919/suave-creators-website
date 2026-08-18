@@ -290,8 +290,8 @@
 
 <x-frontend.testimonials-section heading-id="services-testimonials-title" class="py-6 lg:py-24" />
 
-<x-frontend.case-studies-spotlight-section
-  :items="$caseStudies ?? []"
+<x-frontend.case-studies-carousel-section
+  :items="\App\Support\Frontend\CaseStudySupport::servicesPageItems()"
   heading-id="services-case-studies-title"
   title="Case studies from our services"
   subtitle="Selected delivery stories that show how we design and ship software across our practice areas."

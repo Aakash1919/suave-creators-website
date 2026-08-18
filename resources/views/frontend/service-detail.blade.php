@@ -502,10 +502,10 @@ $n = $index + 1;
   :allow-html-title="false"
 />
 
-<x-frontend.case-studies-spotlight-section
+<x-frontend.case-studies-carousel-section
   :items="$caseStudies ?? []"
   heading-id="service-case-studies-title"
-  title="Related case studies"
+  title="From Outbound Chaos to a Modern Sales Workspace"
   subtitle="Projects where this service shaped the product — from workflow design to shipped software."
 />
 

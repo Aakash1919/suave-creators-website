@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\CaseStudy;
+use App\Support\Frontend\CaseStudySupport;
 use App\Support\Frontend\IndustryDetailSupport;
 use App\Support\Frontend\ServiceSupport;
 use Carbon\CarbonInterface;
@@ -91,21 +91,16 @@ class SitemapService
                 );
             });
 
-        CaseStudy::query()
-            ->published()
-            ->orderBy('sort_order')
-            ->orderBy('id')
-            ->get(['slug', 'title', 'updated_at', 'published_at'])
-            ->each(function (CaseStudy $caseStudy) use (&$entries): void {
-                $entries[] = $this->entry(
-                    route('case-study.show', ['slug' => $caseStudy->slug]),
-                    (string) $caseStudy->title,
-                    'Case Studies',
-                    'monthly',
-                    '0.7',
-                    $caseStudy->updated_at ?? $caseStudy->published_at
-                );
-            });
+        foreach (CaseStudySupport::cases() as $caseStudy) {
+            $entries[] = $this->entry(
+                (string) ($caseStudy['url'] ?? CaseStudySupport::urlForSlug((string) ($caseStudy['slug'] ?? ''))),
+                (string) ($caseStudy['title'] ?? ''),
+                'Case Studies',
+                'monthly',
+                '0.7',
+                null
+            );
+        }
 
         return $entries;
     }

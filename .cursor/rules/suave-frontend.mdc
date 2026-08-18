@@ -12,7 +12,7 @@ Before editing marketing views, View Components, frontend support, `public/asset
 2. Use categorized `asset('assets/...')` paths — never reintroduce flat `public/images/`
 3. Tech logos → `assets/icons/tech/`; company logos → `assets/clients/`; content-based filenames only (no `black-logo-N` / `tech-dev-N`)
 4. Keep path sanitization in PHP components; component JS uses `@once` + `@push('scripts')`
-5. Controllers: singular names under `App\Http\Controllers\Frontend\`; dedicated per page (services: one `ServiceController` with `index`/`show`; industries: one `IndustryController` with `index`/`show`; blogs: one `BlogController` with `index`/`show`; case studies: one `CaseStudyController` with `index`/`show`)
+5. Controllers: singular names under `App\Http\Controllers\Frontend\`; dedicated per page (services: one `ServiceController` with `index`/`show`; industries: one `IndustryController` with `index`/`show`; blogs: one `BlogController` with `index`/`show`; case studies: one `CaseStudyController` with `index` plus dedicated static methods per story)
 6. Page links: `route()` only — never `url('/path')` for internal marketing pages
 7. SuaveAgent floating icon opens the chat panel (not contact-us); contacts/offices stay aligned with ContactSupport + SEO
 8. After the change set, display: **The changes are being verified and unwanted file functions are being removed**

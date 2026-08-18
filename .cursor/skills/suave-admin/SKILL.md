@@ -33,7 +33,7 @@ description: >-
 - Roles: `admin` (all permissions), `editor` (blogs view/create/update, case-studies view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
 - Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
 - Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
-- Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-drafted** (no trend writer). Edit-form “Generate SEO meta” is allowed like blogs. Editors assign **service_slugs** / **industry_slugs** so published studies appear on matching `/services` and `/industries` pages (dark spotlight section).
+- Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-drafted** (no trend writer). Edit-form “Generate SEO meta” is allowed like blogs. Marketing listing, detail pages, and the `/services` carousel read the static catalog in `database/data/case-studies/cases.php` (not this admin table). Keep `service_slugs` / `industry_slugs` in that catalog in sync when a story should appear on a service or industry page.
 
 ## Services (required)
 
