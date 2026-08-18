@@ -244,7 +244,7 @@ class HomeSupport
                 'description' => 'A project workspace for tracking sales automation rollouts, task priorities, and team progress in one place.',
                 'image' => 'assets/portfolio/sales-automation-project-dashboard.webp',
                 'alt' => 'Sales automation project dashboard software by Suave Creators',
-                'url' => route('case-study.show', ['slug' => 'suave-crm-tasks-case-study']),
+                'url' => CaseStudySupport::urlForSlug('suave-crm-tasks-case-study'),
                 'external' => false,
             ],
             [

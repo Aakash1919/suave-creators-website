@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\CaseStudySupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -39,7 +40,7 @@ class CaseStudiesSpotlightSection extends Component
                     : (string) ($item['industry'] ?? ''),
                 'description' => (string) ($item['short_description'] ?? ''),
                 'image' => (string) ($item['image'] ?? ''),
-                'url' => $slug !== '' ? route('case-study.show', ['slug' => $slug]) : route('case-studies'),
+                'url' => $slug !== '' ? CaseStudySupport::urlForSlug($slug) : route('case-studies'),
                 'stats' => $stats,
             ];
         }, $this->items));

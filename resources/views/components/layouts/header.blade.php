@@ -57,8 +57,8 @@
             @endforeach
 
             <a href="{{ route('case-studies') }}"
-                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('case-studies', 'case-study.*') ? 'is-active' : '' }}"
-                @if ($isNavActive('case-studies', 'case-study.*')) aria-current="page" @endif>Case Studies</a>
+                class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('case-studies', 'case-study.*', '*-case-study') ? 'is-active' : '' }}"
+                @if ($isNavActive('case-studies', 'case-study.*', '*-case-study')) aria-current="page" @endif>Case Studies</a>
             <a href="{{ route('blogs') }}"
                 class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('blogs', 'blog.*') ? 'is-active' : '' }}"
                 @if ($isNavActive('blogs', 'blog.*')) aria-current="page" @endif>Blog</a>

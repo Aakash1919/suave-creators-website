@@ -6,6 +6,7 @@ use App\Models\CaseStudy;
 use App\Models\User;
 use App\Support\Admin\DataTableActions;
 use App\Support\Admin\DateRangeFilter;
+use App\Support\Frontend\CaseStudySupport;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class CaseStudyDataTable
                 $titleHtml = $title;
 
                 if ($caseStudy->slug !== '') {
-                    $url = e(route('case-study.show', ['slug' => $caseStudy->slug]));
+                    $url = e(CaseStudySupport::urlForSlug((string) $caseStudy->slug));
                     $titleHtml = '<a href="'.$url.'" target="_blank" rel="noopener noreferrer" class="admin-table__title-link">'.$title.'</a>';
                 }
 

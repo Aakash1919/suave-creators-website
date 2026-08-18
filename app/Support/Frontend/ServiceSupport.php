@@ -30,7 +30,6 @@ class ServiceSupport
             'processCards' => self::processCards(),
             'faqs' => self::faqs(),
             'articles' => self::articles(),
-            'caseStudies' => CaseStudySupport::forService(null, 6),
             'connectCta' => [
                 'eyebrow' => 'Ready to Start Your Project?',
                 'title' => 'Are you Ready to Start Your Project?',

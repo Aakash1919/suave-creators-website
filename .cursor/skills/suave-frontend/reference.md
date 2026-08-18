@@ -178,7 +178,8 @@ Namespace: `App\Http\Controllers\Frontend\`. Names are **singular**.
 | Industry details (×6) | `IndustryController@show($slug)` | `industry.show` |
 | Product | `ProductController@index` | `product` |
 | Case study listing | `CaseStudyController@index` | `case-studies` |
-| Case study details | `CaseStudyController@show` | `case-study.show` |
+| Case study details (static) | `CaseStudyController` dedicated methods | `outreach-case-study`, `ai-sales-coaching-case-study`, `tasks-case-study`, `teerrath-case-study`, `appointment-insurance-case-study`, `cabvi-case-study` |
+| Legacy case study slug | `CaseStudyController@show` (301) | `case-study.show` |
 | Blog listing | `BlogController@index` | `blogs` |
 | Blog posts | `BlogController@show` | `blog.show` |
 

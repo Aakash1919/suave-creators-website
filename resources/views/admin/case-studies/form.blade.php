@@ -46,7 +46,7 @@
         </div>
         <div class="admin-page-head__actions">
             @if ($caseStudy->exists)
-                <a href="{{ route('case-study.show', $caseStudy->slug) }}" target="_blank" rel="noopener"
+                <a href="{{ \App\Support\Frontend\CaseStudySupport::urlForSlug((string) $caseStudy->slug) }}" target="_blank" rel="noopener"
                     class="admin-btn admin-btn--secondary">
                     <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                     View live
