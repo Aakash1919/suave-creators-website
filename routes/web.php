@@ -37,8 +37,13 @@ Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('ind
 Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
 
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');
+Route::get('/ai-sales-coaching-case-study', [CaseStudyController::class, 'aiSalesCoachingCaseStudy'])->name('ai-sales-coaching-case-study');
+Route::get('/outreach-case-study', [CaseStudyController::class, 'outreachCaseStudy'])->name('outreach-case-study');
+Route::get('/tasks-case-study', [CaseStudyController::class, 'tasksCaseStudy'])->name('tasks-case-study');
+Route::get('/teerrath-case-study', [CaseStudyController::class, 'teerrathCaseStudy'])->name('teerrath-case-study');
+Route::get('/appointment-insurance-case-study', [CaseStudyController::class, 'appointmentInsuranceCaseStudy'])->name('appointment-insurance-case-study');
+Route::get('/cabvi-case-study', [CaseStudyController::class, 'cabviCaseStudy'])->name('cabvi-case-study');
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
-Route::get('/outreach-case-study', [CaseStudyController::class, 'outreachcasestudy'])->name('outreach-case-study');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');
