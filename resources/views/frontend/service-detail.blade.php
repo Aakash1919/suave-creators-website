@@ -502,6 +502,13 @@ $n = $index + 1;
   :allow-html-title="false"
 />
 
+<x-frontend.case-studies-spotlight-section
+  :items="$caseStudies ?? []"
+  heading-id="service-case-studies-title"
+  title="Related case studies"
+  subtitle="Projects where this service shaped the product — from workflow design to shipped software."
+/>
+
 <x-frontend.articles-insights-section
   :items="$articles"
   heading-id="service-insights-title"

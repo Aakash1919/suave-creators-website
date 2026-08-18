@@ -33,7 +33,7 @@ description: >-
 - Roles: `admin` (all permissions), `editor` (blogs view/create/update, case-studies view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
 - Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
 - Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
-- Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-generated**
+- Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-drafted** (no trend writer). Edit-form “Generate SEO meta” is allowed like blogs. Editors assign **service_slugs** / **industry_slugs** so published studies appear on matching `/services` and `/industries` pages (dark spotlight section).
 
 ## Services (required)
 
@@ -44,7 +44,8 @@ description: >-
 | `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
-| `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization. **Manual only** — no AI draft or SEO generation |
+| `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization, service/industry placement slug lists. **No AI drafts** — content is editor-filled only |
+| `CaseStudySeoMetaGenerationService` | AI SEO/OG field suggestions via `CaseStudySeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `UserService` | User create/update, password hash, `syncRoles` |
 | `RoleService` | Role create/update/delete, permission sync; protects `admin` role key/delete |
 | `TestimonialService` | Testimonial CRUD, avatar upload, forever frontend cache (`frontend.testimonials`) invalidated on write |
@@ -312,7 +313,7 @@ php artisan db:seed --class=CaseStudySeeder
 
 `DatabaseSeeder` calls `CaseStudySeeder` after `BlogSeeder`.
 
-**Case studies are never auto-generated.** There is no trend-draft command, scheduled writer, or “Generate SEO meta” action. Editors fill the fixed public layout (hero, metrics, overview, two splits) by hand.
+**Case studies are never auto-drafted.** There is no trend-draft command or scheduled writer. Editors fill the fixed public layout (hero, metrics, overview, two splits) by hand. Edit-form “Generate SEO meta” is available (same pattern as blogs).
 
 ## Run-once commands
 
@@ -362,6 +363,10 @@ Generation reads existing posts (titles, category frequency, 2–3 rich style ex
 On **Edit blog**, “Generate SEO meta” (`POST admin/blogs/{blog}/generate-seo`, permission `blogs.update`) calls `BlogSeoMetaGenerationService` + `SeoMetaAgent` with the current form title / short description / content. It returns `meta_title`, `meta_description`, `og_title`, `og_description` as JSON and the client fills only those inputs — **no DB write** until the editor clicks Save.
 
 Config: `config/blogs.php` → `seo_meta.model` (`BLOG_SEO_META_MODEL`).
+
+On **Edit case study**, “Generate SEO meta” (`POST admin/case-studies/{caseStudy}/generate-seo`, permission `case-studies.update`) calls `CaseStudySeoMetaGenerationService` + `CaseStudySeoMetaAgent` with the current form title / short description / client / industry / challenge / solution / outcome. Same fill-only behavior — **no DB write** until Save.
+
+Config: `config/case-studies.php` → `seo_meta.model` (`CASE_STUDY_SEO_META_MODEL`).
 
 ## Permissions catalog
 

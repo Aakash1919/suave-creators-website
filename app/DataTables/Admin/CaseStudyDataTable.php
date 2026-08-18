@@ -32,10 +32,7 @@ class CaseStudyDataTable
                     $titleHtml = '<a href="'.$url.'" target="_blank" rel="noopener noreferrer" class="admin-table__title-link">'.$title.'</a>';
                 }
 
-                $meta = trim(implode(' · ', array_filter([
-                    $caseStudy->client,
-                    $caseStudy->industry,
-                ])));
+                $meta = trim((string) ($caseStudy->industry ?? ''));
 
                 return '<div class="admin-table__title">'.$titleHtml.'</div>'
                     .'<div class="admin-table__meta">'.e($meta !== '' ? $meta : $slug).'</div>';
@@ -88,7 +85,7 @@ class CaseStudyDataTable
     }
 
     /**
-     * Configure the client DataTable column definitions.
+     * Configure the DataTable column definitions.
      *
      * @return list<array<string, mixed>>
      */
@@ -96,7 +93,6 @@ class CaseStudyDataTable
     {
         return [
             ['data' => 'title', 'name' => 'title', 'title' => 'Title'],
-            ['data' => 'client', 'name' => 'client', 'title' => 'Client'],
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
             ['data' => 'sort_order', 'name' => 'sort_order', 'title' => 'Order'],
             ['data' => 'published_at', 'name' => 'published_at', 'title' => 'Published'],

@@ -16,4 +16,9 @@ class CaseStudyController extends FrontendController
     {
         return $this->view('frontend.single-case-study', CaseStudySupport::showData($slug));
     }
+
+    public function outreachcasestudy(): View
+    {
+        return $this->view('frontend.case-studies.outreach-case-study',);
+    }
 }

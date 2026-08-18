@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Admin\Concerns;
 
 use App\Models\CaseStudy;
+use App\Support\Frontend\IndustryDetailSupport;
+use App\Support\Frontend\ServiceSupport;
 use Illuminate\Validation\Rule;
 
 trait ValidatesCaseStudyFields
@@ -26,7 +28,10 @@ trait ValidatesCaseStudyFields
             'short_description' => ['nullable', 'string'],
             'listing_subtitle' => ['nullable', 'string', 'max:255'],
             'industry' => ['nullable', 'string', 'max:160'],
-            'client' => ['nullable', 'string', 'max:160'],
+            'service_slugs' => ['nullable', 'array'],
+            'service_slugs.*' => ['string', Rule::in(ServiceSupport::SLUGS)],
+            'industry_slugs' => ['nullable', 'array'],
+            'industry_slugs.*' => ['string', Rule::in(array_keys(IndustryDetailSupport::SLUG_FILES))],
             'year' => ['nullable', 'string', 'max:20'],
             'status' => ['required', Rule::in([CaseStudy::STATUS_DRAFT, CaseStudy::STATUS_PUBLISHED])],
             'published_at' => ['nullable', 'date'],

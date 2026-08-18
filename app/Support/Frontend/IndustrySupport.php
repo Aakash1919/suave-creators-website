@@ -12,6 +12,7 @@ class IndustrySupport
         return [
             'latestPosts' => BlogSupport::posts()->take(3)->values()->all(),
             'articles' => BlogSupport::articleCards(3),
+            'caseStudies' => CaseStudySupport::forIndustry(null, 6),
             'techStack' => AboutSupport::techStack(),
             'portfolioHeroImages' => self::portfolioHeroImages(),
             'aiSolutions' => self::aiSolutions(),

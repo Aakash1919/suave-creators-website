@@ -483,6 +483,13 @@
     <x-frontend.testimonials-section :items="$testimonialItems" eyebrow="Client Testimonials" title="What Our Clients Say"
         subtitle="" heading-id="industry-testimonials-title" />
 
+    <x-frontend.case-studies-spotlight-section
+      :items="$caseStudies ?? []"
+      heading-id="industry-case-studies-title"
+      title="Related case studies"
+      subtitle="Projects where this industry context shaped the product — from discovery to shipped software."
+    />
+
     <x-frontend.articles-insights-section :items="$articles" heading-id="industry-insights-title"
         title="Explore Our Insights"
         subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."

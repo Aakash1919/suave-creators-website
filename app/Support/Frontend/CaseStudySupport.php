@@ -46,6 +46,52 @@ class CaseStudySupport
     }
 
     /**
+     * Published case studies tagged for a service page (or any service when slug is null).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function forService(?string $slug = null, int $limit = 6): array
+    {
+        return self::forPlacement('service_slugs', $slug, $limit);
+    }
+
+    /**
+     * Published case studies tagged for an industry page (or any industry when slug is null).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function forIndustry(?string $slug = null, int $limit = 6): array
+    {
+        return self::forPlacement('industry_slugs', $slug, $limit);
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    protected static function forPlacement(string $column, ?string $slug, int $limit): array
+    {
+        $query = CaseStudy::query()
+            ->published()
+            ->orderBy('sort_order')
+            ->orderBy('id');
+
+        if ($slug !== null && $slug !== '') {
+            $query->whereJsonContains($column, $slug);
+        } else {
+            $query->whereNotNull($column)
+                ->where($column, '!=', '[]')
+                ->where($column, '!=', 'null');
+        }
+
+        return $query
+            ->limit(max(1, $limit))
+            ->get()
+            ->map(fn (CaseStudy $caseStudy): array => self::mapCase($caseStudy))
+            ->values()
+            ->all();
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public static function indexData(): array
@@ -85,8 +131,8 @@ class CaseStudySupport
                 'alt' => 'Product growth case study insight from Suave Creators',
             ],
             [
-                'src' => 'assets/case-studies/shownoshow/location-check-in.jpg',
-                'alt' => 'Appointment location check-in map designed by Suave Creators',
+                'src' => 'assets/case-studies/appointment-insurance/location-check-in.jpg',
+                'alt' => 'Appointment insurance location check-in map by Suave Creators',
             ],
             [
                 'src' => 'assets/case-studies/suave-crm-outreach/outreach-new-company-intelligence.png',
@@ -165,6 +211,69 @@ class CaseStudySupport
     }
 
     /**
+     * Data payload for static case study page preview or fallback.
+     *
+     * @return array<string, mixed>
+     */
+    public static function staticData(?string $slug = null): array
+    {
+        $file = base_path('database/data/case-studies/cases.php');
+        $catalog = file_exists($file) ? require $file : [];
+
+        $case = null;
+        if ($slug !== null && is_array($catalog)) {
+            foreach ($catalog as $item) {
+                if (isset($item['slug']) && $item['slug'] === $slug) {
+                    $case = $item;
+                    break;
+                }
+            }
+        }
+
+        if ($case === null && is_array($catalog) && count($catalog) > 0) {
+            $case = $catalog[0];
+        }
+
+        if ($case === null) {
+            abort(404);
+        }
+
+        if (! empty($case['image']) && ! str_starts_with($case['image'], 'http') && ! str_starts_with($case['image'], '/')) {
+            $case['image'] = asset($case['image']);
+        }
+
+        if (isset($case['sections']) && is_array($case['sections'])) {
+            foreach ($case['sections'] as &$section) {
+                if (! empty($section['image']) && ! str_starts_with($section['image'], 'http') && ! str_starts_with($section['image'], '/')) {
+                    $section['image'] = asset($section['image']);
+                }
+            }
+            unset($section);
+        }
+
+        $seoTitle = trim((string) ($case['meta_title'] ?? ''));
+        if ($seoTitle === '') {
+            $seoTitle = $case['title'].' | Case Study | Suave Creators';
+        }
+
+        $seoDescription = trim((string) ($case['meta_description'] ?? ''));
+        if ($seoDescription === '') {
+            $seoDescription = (string) ($case['short_description'] ?? '');
+        }
+
+        return [
+            'case' => $case,
+            'seoTitle' => $seoTitle,
+            'seoDescription' => $seoDescription,
+            'seoOgTitle' => trim((string) ($case['og_title'] ?? '')) ?: null,
+            'seoOgDescription' => trim((string) ($case['og_description'] ?? '')) ?: null,
+            'seoImage' => $case['image'] ?? null,
+            'seoRobots' => null,
+            'isDraft' => false,
+        ];
+    }
+
+    /**
      * @return array<string, mixed>
      */
     protected static function mapCase(CaseStudy $caseStudy): array
@@ -181,7 +290,8 @@ class CaseStudySupport
             'short_description' => (string) ($caseStudy->short_description ?? ''),
             'listing_subtitle' => (string) ($caseStudy->listing_subtitle ?? ''),
             'industry' => (string) ($caseStudy->industry ?? ''),
-            'client' => (string) ($caseStudy->client ?? ''),
+            'service_slugs' => is_array($caseStudy->service_slugs) ? array_values($caseStudy->service_slugs) : [],
+            'industry_slugs' => is_array($caseStudy->industry_slugs) ? array_values($caseStudy->industry_slugs) : [],
             'year' => (string) ($caseStudy->year ?? ''),
             'technologies' => is_array($caseStudy->technologies) ? $caseStudy->technologies : [],
             'results' => is_array($caseStudy->results) ? $caseStudy->results : [],

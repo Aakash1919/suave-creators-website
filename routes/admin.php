@@ -64,6 +64,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::middleware('permission:case-studies.update')->group(function () {
         Route::get('/case-studies/{caseStudy}/edit', [CaseStudyController::class, 'edit'])->name('case-studies.edit');
         Route::put('/case-studies/{caseStudy}', [CaseStudyController::class, 'update'])->name('case-studies.update');
+        Route::post('/case-studies/{caseStudy}/generate-seo', [CaseStudyController::class, 'generateSeoMeta'])
+            ->name('case-studies.generate-seo');
     });
 
     Route::middleware('permission:case-studies.delete')->group(function () {

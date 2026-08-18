@@ -27,6 +27,8 @@ class CaseStudy extends Model
         'short_description',
         'listing_subtitle',
         'industry',
+        'service_slugs',
+        'industry_slugs',
         'client',
         'year',
         'featured_image',
@@ -53,6 +55,8 @@ class CaseStudy extends Model
         return [
             'published_at' => 'datetime',
             'sort_order' => 'integer',
+            'service_slugs' => 'array',
+            'industry_slugs' => 'array',
             'technologies' => 'array',
             'results' => 'array',
             'sections' => 'array',
