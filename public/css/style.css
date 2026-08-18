@@ -2468,12 +2468,28 @@ body.mobile-nav-open {
   transition: opacity 0.2s ease;
 }
 
+.site-footer__column a {
+  color: #e4e9f8;
+}
+
+.site-footer__column a:hover,
+.site-footer__column a:focus-visible {
+  color: #fff;
+}
+
 .site-footer__column a span {
+  color: #e4e9f8;
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
+.site-footer__column a:hover span,
+.site-footer__column a:focus-visible span {
+  color: #fff;
+}
+
 .site-footer {
+  background-color: var(--color-navy);
   box-sizing: border-box;
   color: #fff;
   overflow-x: clip;
@@ -2517,7 +2533,7 @@ body.mobile-nav-open {
 }
 
 .site-footer__contact {
-  color: #b1b9df;
+  color: #e4e9f8;
   display: grid;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -2558,10 +2574,10 @@ body.mobile-nav-open {
 
 .site-footer__legal {
   align-items: flex-start;
-  color: #b1b9df;
+  color: #e4e9f8;
   display: flex;
   flex-direction: column;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   gap: 0.75rem;
   padding-block: 1rem;
