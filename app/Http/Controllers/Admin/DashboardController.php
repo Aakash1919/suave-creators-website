@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Concerns\RespondsToAdminAjax;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\CaseStudy;
 use App\Models\ChatLead;
 use App\Models\ContactRequest;
 use App\Models\User;
@@ -29,7 +28,6 @@ class DashboardController extends Controller
         $user = $request->user();
 
         $canBlogs = $user->hasPermission('blogs.view');
-        $canCaseStudies = $user->hasPermission('case-studies.view');
         $canConversations = $user->hasPermission('conversations.view');
         $canContacts = $user->hasPermission('contacts.view');
         $canUsers = $user->hasPermission('users.view');
@@ -45,15 +43,6 @@ class DashboardController extends Controller
                 'tone' => '',
                 'route' => 'admin.blogs.index',
                 'show' => $canBlogs,
-            ],
-            [
-                'label' => 'Case studies',
-                'value' => $canCaseStudies ? CaseStudy::query()->count() : null,
-                'hint' => $canCaseStudies ? CaseStudy::query()->where('status', CaseStudy::STATUS_PUBLISHED)->count().' published' : null,
-                'icon' => 'fa-briefcase',
-                'tone' => '',
-                'route' => 'admin.case-studies.index',
-                'show' => $canCaseStudies,
             ],
             [
                 'label' => 'Chat leads',
@@ -110,13 +99,6 @@ class DashboardController extends Controller
                     'icon' => 'fa-newspaper',
                     'route' => 'admin.blogs.index',
                     'show' => $canBlogs,
-                ],
-                [
-                    'label' => 'Case studies',
-                    'description' => 'Add and edit client case studies',
-                    'icon' => 'fa-briefcase',
-                    'route' => 'admin.case-studies.index',
-                    'show' => $canCaseStudies,
                 ],
                 [
                     'label' => 'AI Conversations',

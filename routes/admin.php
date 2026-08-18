@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\CaseStudyController;
 use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\ConversationController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -50,26 +49,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::middleware('permission:blogs.delete')->group(function () {
         Route::delete('/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
-    });
-
-    Route::middleware('permission:case-studies.view')->group(function () {
-        Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies.index');
-    });
-
-    Route::middleware('permission:case-studies.create')->group(function () {
-        Route::get('/case-studies/create', [CaseStudyController::class, 'create'])->name('case-studies.create');
-        Route::post('/case-studies', [CaseStudyController::class, 'store'])->name('case-studies.store');
-    });
-
-    Route::middleware('permission:case-studies.update')->group(function () {
-        Route::get('/case-studies/{caseStudy}/edit', [CaseStudyController::class, 'edit'])->name('case-studies.edit');
-        Route::put('/case-studies/{caseStudy}', [CaseStudyController::class, 'update'])->name('case-studies.update');
-        Route::post('/case-studies/{caseStudy}/generate-seo', [CaseStudyController::class, 'generateSeoMeta'])
-            ->name('case-studies.generate-seo');
-    });
-
-    Route::middleware('permission:case-studies.delete')->group(function () {
-        Route::delete('/case-studies/{caseStudy}', [CaseStudyController::class, 'destroy'])->name('case-studies.destroy');
     });
 
     Route::middleware('permission:conversations.view')->group(function () {

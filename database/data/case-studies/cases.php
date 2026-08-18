@@ -1,6 +1,6 @@
 <?php
 /**
- * Seed catalog for CaseStudySeeder (database/data/case-studies/cases.php).
+ * Static catalog for frontend case study pages.
  * Public layout: Metrics → Overview → exactly 2 splits → CTA.
  * `technologies` powers listing tags only (not rendered on the detail middle).
  */

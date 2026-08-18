@@ -1,17 +1,11 @@
-# Case study seed package
+# Case study static catalog
 
-Offline source used by `Database\Seeders\CaseStudySeeder` (via `php artisan db:seed`).
+Offline source used directly by frontend support classes for static case study pages.
 
 | Path | Purpose |
 |------|---------|
 | `cases.php` | All case study fields (hero, metrics, overview, two story sections) |
 
-Hero images stay in `public/assets/case-studies/` and are referenced as `assets/case-studies/...` on seeded rows. New uploads from admin go to `storage/app/public/case-studies/`.
-
-```bash
-php artisan db:seed
-# or
-php artisan db:seed --class=CaseStudySeeder
-```
+Hero images stay in `public/assets/case-studies/` and are referenced as `assets/case-studies/...` entries in this catalog.
 
 Case studies are **manual only** — there is no AI draft generation.

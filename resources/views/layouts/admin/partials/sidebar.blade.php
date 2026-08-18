@@ -34,14 +34,6 @@
         <span>Blogs</span>
       </a>
     @endif
-    @if ($user->hasPermission('case-studies.view'))
-      <a href="{{ route('admin.case-studies.index') }}"
-        class="admin-nav-link {{ request()->routeIs('admin.case-studies.*') ? 'is-active' : '' }}"
-        title="Case studies">
-        <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-        <span>Case studies</span>
-      </a>
-    @endif
     @if ($user->hasPermission('conversations.view'))
       <a href="{{ route('admin.conversations.index') }}"
         class="admin-nav-link {{ request()->routeIs('admin.conversations.*') ? 'is-active' : '' }}"
