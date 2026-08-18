@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\CaseStudySupport;
 use App\Support\Frontend\Concerns\NormalizesAssetPaths;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -40,7 +41,7 @@ class CaseStudiesCarouselSection extends Component
                 'imageAlt' => $title !== ''
                     ? $title.' case study visual for Suave Creators software development'
                     : 'Case study visual for Suave Creators software development',
-                'url' => $slug !== '' ? route('case-study.show', ['slug' => $slug]) : route('case-studies'),
+                'url' => $slug !== '' ? CaseStudySupport::urlForSlug($slug) : route('case-studies'),
                 'stats' => array_values(array_map(function (array $stat): array {
                     $value = trim((string) ($stat['value'] ?? ''));
 

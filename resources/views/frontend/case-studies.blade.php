@@ -47,7 +47,7 @@
         <div class="case-studies-grid__list">
           @foreach ($cases as $item)
             @php
-              $itemHref = route('case-study.show', ['slug' => $item['slug']]);
+              $itemHref = $item['url'] ?? \App\Support\Frontend\CaseStudySupport::urlForSlug((string) ($item['slug'] ?? ''));
               $tags = array_slice($item['technologies'] ?? [], 0, 5);
               $tagLine = implode(' | ', $tags);
               $subtitle = trim((string) ($item['listing_subtitle'] ?? '')) !== ''
