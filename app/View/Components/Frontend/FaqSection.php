@@ -24,7 +24,7 @@ class FaqSection extends Component
         public ?string $mediaType = null,
         public string $mediaAlt = 'Business team collaborating on a custom software project with Suave Creators',
         public string $eyebrow = 'Have questions about our Web Services?',
-        public string $title = 'Frequently Ask Question',
+        public string $title = 'Frequently Asked Question',
         public string $description = 'Here are the most asked questions based on feedback from our users.',
         public string $headingId = 'faq-heading',
         public string $ctaHref = '',

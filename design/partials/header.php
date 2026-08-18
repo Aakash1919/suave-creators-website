@@ -102,6 +102,7 @@ $dropdowns = [
                             </div>
                         </div>
                     <?php endforeach; ?>
+                    <a class="mobile-nav__link" href="/caseStudies">Case Studies</a>
 
                     <a class="mobile-nav__link" href="/blogs">Blog</a>
                     <a class="mobile-nav__link" href="/contact-us">Contact</a>
