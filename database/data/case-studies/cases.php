@@ -135,7 +135,7 @@ return [
   [
     'slug' => 'suave-crm-tasks-case-study',
     'title' => 'The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace',
-    'status' => 'draft',
+    'status' => 'published',
     'image' => 'assets/case-studies/suave-crm-tasks/tasks-list-view.png',
     'short_description' => 'We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.',
     'listing_subtitle' => 'B2B CRM Task Management Workflow Redesign',
@@ -196,7 +196,7 @@ return [
   [
     'slug' => 'teerrath-spiritual-commerce',
     'title' => 'Teerrath — From Stuck to a Clear Sacred Path',
-    'status' => 'draft',
+    'status' => 'published',
     'image' => 'assets/case-studies/teerrath/spiritual-energy-scan-hero.png',
     'short_description' => 'A free Spiritual Energy Scan in under 2 minutes becomes AI-personalized Vedic insight across six life areas — then a clear Dev, Mantra, Yantra, or Daan path to buy, gift, or fulfill.',
     'listing_subtitle' => 'Spiritual Energy Scan to Sacred Commerce',
@@ -255,7 +255,7 @@ return [
   [
     'slug' => 'appointment-insurance-platform-case-study',
     'title' => 'Appointment Insurance That Makes Showing Up the Default',
-    'status' => 'draft',
+    'status' => 'published',
     'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-hero.png',
     'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
     'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
@@ -316,7 +316,7 @@ return [
   [
     'slug' => 'cabvi-product-matching',
     'title' => 'CABVI — From Manual Product Matching to an Automated AI Workspace',
-    'status' => 'draft',
+    'status' => 'published',
     'image' => 'assets/case-studies/cabvi/cabvi-logo.png',
     'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
     'listing_subtitle' => 'Automated AI Product Matching',
