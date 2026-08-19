@@ -405,7 +405,7 @@
 <x-frontend.testimonials-section :items="$testimonials" />
 <!-- 14. Testimonials Section End -->
 
-<x-frontend.case-studies-spotlight-section
+<x-frontend.case-studies-carousel-section
   :items="$caseStudies ?? []"
   heading-id="industries-case-studies-title"
   title="Case studies across industries"

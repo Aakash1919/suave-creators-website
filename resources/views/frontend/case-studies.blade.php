@@ -19,17 +19,17 @@
         <ul class="case-studies-fan__list" aria-label="Case study product snapshots">
           @foreach ($fanImages as $item)
             <li
-              class="case-studies-fan__item"
-              style="--fan-rotate: {{ $item['fan_rotate'] }}deg; --fan-y: {{ $item['fan_y'] }}px; --fan-z: {{ $item['fan_z'] }};"
+              class="case-studies-fan__item{{ ! empty($item['featured']) ? ' case-studies-fan__item--center' : '' }}"
+              style="--fan-rotate: {{ $item['fan_rotate'] }}deg; --fan-y: {{ $item['fan_y'] }}px; --fan-scale: {{ $item['fan_scale'] }}; --fan-z: {{ $item['fan_z'] }};"
             >
               <figure class="case-studies-fan__card">
                   <img
                     src="{{ asset($item['src']) }}"
                     alt="{{ $item['alt'] }}"
                     title="{{ $item['alt'] }}"
-                    width="280"
-                    height="150"
-                    loading="lazy"
+                    width="{{ ! empty($item['featured']) ? 560 : 480 }}"
+                    height="{{ ! empty($item['featured']) ? 448 : 384 }}"
+                    loading="eager"
                     decoding="async"
                   >
               </figure>
@@ -65,11 +65,11 @@
                     decoding="async"
                   >
                 @endif
-                @if ($tagLine !== '')
-                  <span class="case-studies-grid__tags">{{ $tagLine }}</span>
-                @endif
               </a>
               <div class="case-studies-grid__copy">
+                @if ($tagLine !== '')
+                  <p class="case-studies-grid__tags">{{ $tagLine }}</p>
+                @endif
                 <h3 class="case-studies-grid__title">
                   <a href="{{ $itemHref }}">{{ $item['title'] }}</a>
                 </h3>

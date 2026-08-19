@@ -483,7 +483,7 @@
     <x-frontend.testimonials-section :items="$testimonialItems" eyebrow="Client Testimonials" title="What Our Clients Say"
         subtitle="" heading-id="industry-testimonials-title" />
 
-    <x-frontend.case-studies-spotlight-section
+    <x-frontend.case-studies-carousel-section
       :items="$caseStudies ?? []"
       heading-id="industry-case-studies-title"
       title="Related case studies"
