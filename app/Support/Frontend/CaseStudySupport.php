@@ -96,6 +96,16 @@ class CaseStudySupport
     }
 
     /**
+     * Static cards for the /industries case study carousel.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function industriesPageItems(): array
+    {
+        return self::forIndustry(null, 6);
+    }
+
+    /**
      * Published case studies tagged for an industry page (or any industry when slug is null).
      *
      * @return list<array<string, mixed>>
@@ -149,51 +159,55 @@ class CaseStudySupport
     }
 
     /**
-     * Static product snapshots for the listing hero fan.
+     * Static product snapshots for the listing hero filmstrip.
      *
-     * @return list<array{src: string, alt: string, fan_rotate: float, fan_y: float, fan_z: int}>
+     * @return list<array{src: string, alt: string, fan_rotate: float, fan_y: float, fan_scale: float, fan_z: int, featured?: bool}>
      */
     public static function fanImages(): array
     {
-        $images = [
+        return [
             [
-                'src' => 'assets/case-studies/suave-crm-outreach/outbound-new-target.png',
-                'alt' => 'Team outbound targets CRM software built by Suave Creators',
+                'src' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'alt' => 'Show No Show event booking product banner by Suave Creators',
+                'fan_rotate' => -1.6,
+                'fan_y' => -18,
+                'fan_scale' => 0.96,
+                'fan_z' => 1,
             ],
             [
-                'src' => 'assets/blog/insight-future-of-work.jpg',
-                'alt' => 'Future of work digital product insight from Suave Creators',
+                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
+                'alt' => 'AI sales coaching dashboard software built by Suave Creators',
+                'fan_rotate' => -0.8,
+                'fan_y' => 10,
+                'fan_scale' => 0.99,
+                'fan_z' => 2,
             ],
             [
-                'src' => 'assets/blog/insight-digital-strategy.jpg',
-                'alt' => 'Digital strategy software development insight from Suave Creators',
+                'src' => 'assets/case-studies/suave-crm-outreach/outreach_right.webp',
+                'alt' => 'CRM outreach map discovery software built by Suave Creators',
+                'fan_rotate' => 0.35,
+                'fan_y' => 0,
+                'fan_scale' => 1.04,
+                'fan_z' => 5,
+                'featured' => true,
             ],
             [
-                'src' => 'assets/blog/insight-product-growth.jpg',
-                'alt' => 'Product growth case study insight from Suave Creators',
+                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_right.webp',
+                'alt' => 'AI sales coaching product workspace designed by Suave Creators',
+                'fan_rotate' => 0.9,
+                'fan_y' => 12,
+                'fan_scale' => 0.99,
+                'fan_z' => 3,
             ],
             [
-                'src' => 'assets/case-studies/appointment-insurance/location-check-in.jpg',
-                'alt' => 'Appointment insurance location check-in map by Suave Creators',
-            ],
-            [
-                'src' => 'assets/case-studies/suave-crm-outreach/outreach-new-company-intelligence.png',
-                'alt' => 'CRM company intelligence outreach workspace by Suave Creators',
+                'src' => 'assets/case-studies/shownoshow/show_no_show left.webp',
+                'alt' => 'Show No Show booking features designed by Suave Creators',
+                'fan_rotate' => 1.5,
+                'fan_y' => -14,
+                'fan_scale' => 0.96,
+                'fan_z' => 1,
             ],
         ];
-
-        $count = count($images);
-        $mid = max($count - 1, 1) / 2;
-
-        foreach ($images as $index => &$image) {
-            $t = $count > 1 ? ($index - $mid) / $mid : 0.0;
-            $image['fan_rotate'] = round($t * 16, 2);
-            $image['fan_y'] = round(abs($t) * 38, 1);
-            $image['fan_z'] = $index + 1;
-        }
-        unset($image);
-
-        return $images;
     }
 
     /**
