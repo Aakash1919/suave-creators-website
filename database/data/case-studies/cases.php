@@ -251,12 +251,13 @@ return [
         'image_side' => 'left',
       ],
     ],
+
   ],
   [
     'slug' => 'appointment-insurance-platform-case-study',
     'title' => 'Appointment Insurance That Makes Showing Up the Default',
     'status' => 'published',
-    'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-hero.png',
+    'image' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
     'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
     'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
     'industry' => 'Appointment Scheduling / Fintech',
@@ -296,6 +297,7 @@ return [
           '$10,000 example: about $261 in card fees saved',
           'Show up → money returns · no-show → pay who waited',
         ],
+        'image'=>'assets/case-studies/shownoshow/show_no-show right.webp',
         'image_side' => 'right',
       ],
       [
@@ -309,6 +311,7 @@ return [
           'Text invites and reminders without hand-chasing every guest',
           'Check-in + fair payout when someone doesn’t show',
         ],
+        'image'=>'assets/case-studies/shownoshow/show_no_show left.webp',
         'image_side' => 'left',
       ],
     ],

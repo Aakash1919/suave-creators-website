@@ -13,7 +13,7 @@
       title="{{ $imageAlt }}"
       width="960"
       height="720"
-      loading="lazy"
+      loading="eager"
       decoding="async"
     >
   </figure>
