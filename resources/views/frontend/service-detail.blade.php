@@ -22,11 +22,13 @@
           @endforeach
         </h1>
         <p class="mb-2 mt-2 text-[14px] leading-5 text-white">{{ $service['heroDescription'] ?? '' }}</p>
-        <div class="mt-8 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3 lg:mb-0 sm:gap-7">
-          <x-frontend.cta-button class="shrink-0 whitespace-nowrap px-4 py-2 text-[13px] sm:px-5 sm:text-sm">
-            {{ $service['primaryCta'] ?? "Let's Connect to Discuss" }}
-          </x-frontend.cta-button>
-          <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="banner-text-link shrink-0 items-center border-b border-white/70 pb-px text-[13px] font-semibold whitespace-nowrap text-white sm:text-sm">{{ $service['secondaryCta'] ?? 'Book a Call' }}</a>
+        <div class="mt-8 mb-6 lg:mb-0">
+          <x-frontend.inline-consultation-form
+            theme="dark"
+            placeholder="Enter your phone or email"
+            button-text="Get Free Consultation"
+            :secondary-href="$demoHref"
+            secondary-label="Schedule a discovery call" />
         </div>
       </div>
       <div class="relative z-10 hidden w-full min-w-0 items-center justify-center lg:flex lg:justify-end">
@@ -279,11 +281,13 @@
       </div>
     </div>
     <div class="portfolio-hero-pagination"></div>
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-5">
-      <x-frontend.cta-button>
-        Get Free Consultation
-      </x-frontend.cta-button>
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book a Call</a>
+    <div class="mt-10 flex flex-col items-center justify-center gap-4">
+      <x-frontend.inline-consultation-form
+        theme="light"
+        placeholder="Enter your phone or email"
+        button-text="Get Free Consultation"
+        :secondary-href="$demoHref"
+        secondary-label="Book a Call" />
     </div>
   </div>
 </section>

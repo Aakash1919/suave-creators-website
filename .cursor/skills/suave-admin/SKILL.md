@@ -50,7 +50,7 @@ description: >-
 | `RoleService` | Role create/update/delete, permission sync; protects `admin` role key/delete |
 | `TestimonialService` | Testimonial CRUD, avatar upload, forever frontend cache (`frontend.testimonials`) invalidated on write |
 | `ProfileService` | Own profile + password change |
-| `ContactRequestService` | Public contact store + spam checks; admin mark read / archive |
+| `ContactRequestService` | Public contact store + field-blur drafts + spam checks; admin mark read / archive |
 | `ConversationService` | Chat lead thread build + Markdown rendering |
 
 Rules:
@@ -77,6 +77,7 @@ Namespace: `App\Http\Requests\Admin\` (admin) and `App\Http\Requests\Frontend\` 
 | Testimonial create/update | `TestimonialStoreRequest` / `TestimonialUpdateRequest` (`Concerns\ValidatesTestimonialFields`) |
 | Profile | `ProfileUpdateRequest` / `ProfilePasswordUpdateRequest` |
 | Contact form | `Frontend\ContactStoreRequest` (bot submissions use relaxed rules so silent success still works) |
+| Contact draft | `Frontend\ContactDraftRequest` (partial field saves on blur; empty values allowed) |
 
 Conventions:
 
@@ -95,7 +96,7 @@ Namespace: `App\Http\Controllers\Admin\`
 | Home | `DashboardController` | — (stats/links) |
 | Blogs | `BlogController` | `App\Services\BlogService` |
 | Case studies | `CaseStudyController` | `App\Services\CaseStudyService` |
-| Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store via `ContactStoreRequest`) |
+| Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store/draft via `ContactStoreRequest` / `ContactDraftRequest`) |
 | Profile | `ProfileController` | `App\Services\ProfileService` |
 | Users | `UserController` | `App\Services\UserService` |
 | Roles | `RoleController` | `App\Services\RoleService` |
@@ -279,10 +280,23 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 
 ## Contact requests (admin)
 
-- Model/table: `ContactRequest` / `contact_requests` (`name`, `email`, `phone`, `service`, `message`, `status` new|read|archived, `ip_address`, `user_agent`)
+- Model/table: `ContactRequest` / `contact_requests` (`draft_token`, `name`, `email`, `phone`, `service`, `message`, `status` draft|new|read|archived, `ip_address`, `user_agent`)
 - Public POST: `contact-us.store` via `ContactRequestService` — honeypot `website`, `form_started_at` min 3s, CSRF, `throttle:5,1`; bots get silent success (no row)
-- Admin: `ContactRequestController` + `ContactRequestDataTable`; permission `contacts.view`
-- Opening a request marks `new` → `read`; archive via PATCH `admin.contacts.archive`
+- Public draft POST: `contact-us.draft` (`throttle:30,1`) — honeypot only; upserts one `status=draft` row per `draft_token` as fields blur; submit upgrades that row to `new` and still returns “The request has been sent successfully.”
+- Admin: `ContactRequestController` + `ContactRequestDataTable`; permission `contacts.view`; Incomplete (`draft`) badge; opening a request marks `new` → `read` (drafts stay draft); archive via PATCH `admin.contacts.archive`
+
+## Migrations
+
+**Never edit a migration that already ran on live.** Add a new migration instead.
+
+Every new migration must be idempotent with `Schema::has*` guards so it is safe to re-run and will not fail if the table or column already exists:
+
+- Create table: wrap in `if (! Schema::hasTable('…'))`
+- Add column: wrap in `if (! Schema::hasColumn('table', 'column'))`
+- Drop column: wrap in `if (Schema::hasColumn('table', 'column'))` (skip if missing)
+- Changing nullability / type: confirm the column exists (`hasColumn`) and only `change()` when the current definition still needs it (`Schema::getColumns()`)
+
+Follow the existing `blogs` thumb migrations and `2026_08_21_010000_add_draft_fields_to_contact_requests_table.php`.
 
 ## Blog seed import (offline)
 
@@ -392,7 +406,8 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 7. Keep UI in the white-theme admin shell (`admin.css` helpers); do not couple to marketing Tailwind layout patterns unless sharing a deliberate component
 8. User feedback: `createFlashMessage` (PHP session or JS Toastr) — never raw `toastr.*` / ad-hoc `Session::flash('status')` in new code
 9. Confirmations: **always** `SuaveAdmin.confirmDialog` / `data-admin-delete` with specific title + message + button label — **never** `window.confirm` / `confirm()`
-10. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
+10. **Migrations:** never edit a migration that already ran on live; add a new one. Guard with `Schema::hasTable` / `Schema::hasColumn` (see **Migrations** above)
+11. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
 
 ## Related
 

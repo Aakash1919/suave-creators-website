@@ -6,7 +6,7 @@ This project uses **Cursor Agent Skills**. Skills are not optional documentation
 
 | Area | Read first |
 |------|------------|
-| Admin / RBAC / Form Requests / admin CRUD | [`.cursor/skills/suave-admin/SKILL.md`](.cursor/skills/suave-admin/SKILL.md) |
+| Admin / RBAC / Form Requests / admin CRUD / migrations | [`.cursor/skills/suave-admin/SKILL.md`](.cursor/skills/suave-admin/SKILL.md) |
 | Marketing frontend / design import / assets / CSS | [`.cursor/skills/suave-frontend/SKILL.md`](.cursor/skills/suave-frontend/SKILL.md) |
 
 ## How to use

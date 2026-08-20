@@ -83,4 +83,4 @@ class ContactRequest extends Model
 
         return $labels[$service] ?? $service;
     }
-}
+};

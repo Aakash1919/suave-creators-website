@@ -1,6 +1,6 @@
 ---
 description: Suave Creators custom admin panel — read suave-admin skill (not Filament/Spatie)
-globs: routes/admin.php,app/Http/Controllers/Admin/**,app/Http/Requests/Admin/**,app/Http/Middleware/**,app/Models/**,app/Services/**,app/DataTables/Admin/**,app/Support/Admin/**,app/Support/SiteAdmin.php,app/Support/helpers.php,resources/views/admin/**,resources/views/layouts/admin/**,resources/views/errors/**,public/css/admin.css,public/js/admin/**,database/seeders/**,.cursor/skills/suave-admin/**
+globs: routes/admin.php,app/Http/Controllers/Admin/**,app/Http/Requests/Admin/**,app/Http/Middleware/**,app/Models/**,app/Services/**,app/DataTables/Admin/**,app/Support/Admin/**,app/Support/SiteAdmin.php,app/Support/helpers.php,resources/views/admin/**,resources/views/layouts/admin/**,resources/views/errors/**,public/css/admin.css,public/js/admin/**,database/migrations/**,database/seeders/**,.cursor/skills/suave-admin/**
 alwaysApply: false
 ---
 
@@ -20,8 +20,9 @@ Before editing the custom admin panel, RBAC, or admin conversation review:
 10. UI: white admin theme (`#7539FF` primary, light sidebar) + Toastr/DataTables/Flatpickr/RichTextEditor; keep editor assets in `public/richtexteditor/`
 11. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
 12. Confirmations: always the custom dialog (`SuaveAdmin.confirmDialog` or `data-admin-delete` with `data-confirm` / `data-confirm-title` / `data-confirm-label`) — never `window.confirm` / `confirm()`. Use action-specific title, message, and button label (see suave-admin skill → Confirm dialogs)
-13. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha); public store uses `ContactStoreRequest`
-14. Roles UI: Admin → Roles (`roles.view` / `roles.manage`); protect the `admin` role key from rename/delete via `RoleService`
-15. Testimonials: Admin → Testimonials (`testimonials.view` / `testimonials.manage`); create/edit via modal on index; frontend reads `TestimonialService::cachedForFrontend()` (forever cache, forget on write)
-16. Case studies: Admin → Case studies (`case-studies.view|create|update|delete`); create/edit via **full pages** like blogs; public layout is fixed (hero, metrics, overview, two splits) — editors only fill content. Assign service/industry placement slugs for marketing pages. **Never auto-drafted** (no AI drafts). Edit-form “Generate SEO meta” fills meta/OG inputs only — editor must save
-17. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`
+13. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha); public store uses `ContactStoreRequest`; field-blur drafts use `ContactDraftRequest` / `contact-us.draft`
+14. Migrations: never edit a migration that already ran on live — add a new file. Guard `up`/`down` with `Schema::hasTable` / `Schema::hasColumn` so missing or already-present tables/columns do not fail
+15. Roles UI: Admin → Roles (`roles.view` / `roles.manage`); protect the `admin` role key from rename/delete via `RoleService`
+16. Testimonials: Admin → Testimonials (`testimonials.view` / `testimonials.manage`); create/edit via modal on index; frontend reads `TestimonialService::cachedForFrontend()` (forever cache, forget on write)
+17. Case studies: Admin → Case studies (`case-studies.view|create|update|delete`); create/edit via **full pages** like blogs; public layout is fixed (hero, metrics, overview, two splits) — editors only fill content. Assign service/industry placement slugs for marketing pages. **Never auto-drafted** (no AI drafts). Edit-form “Generate SEO meta” fills meta/OG inputs only — editor must save
+18. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`

@@ -546,7 +546,7 @@
                         lastDraftPayload = serialized;
                     })
                     .catch(function() {
-                    // Draft capture is best-effort; submit still works without it.
+                        // Draft capture is best-effort; submit still works without it.
                     });
             }
 
