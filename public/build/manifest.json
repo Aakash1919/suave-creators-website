@@ -13,11 +13,5 @@
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
-  },
-  "resources/js/bento.js": {
-    "file": "assets/bento-KCpa7vM2.js",
-    "name": "bento",
-    "src": "resources/js/bento.js",
-    "isEntry": true
   }
 }

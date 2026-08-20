@@ -150,9 +150,10 @@
                         <p class="contact-form-panel__flash" data-contact-success role="status" hidden></p>
 
                         <form action="{{ route('contact-us.store') }}" method="post" class="contact-form-panel__fields"
-                            data-contact-form novalidate>
+                            data-contact-form data-draft-url="{{ route('contact-us.draft') }}" novalidate>
                             @csrf
                             <input type="hidden" name="_ajax" value="1">
+                            <input type="hidden" name="draft_token" value="" data-contact-draft-token>
                             <input type="hidden" name="form_started_at" data-contact-started
                                 value="{{ $formStartedAt ?? time() }}">
                             <div class="contact-form-honeypot" aria-hidden="true">
@@ -417,12 +418,134 @@
             const successEl = document.querySelector('[data-contact-success]');
             const submitBtn = form.querySelector('[data-contact-submit]');
             const startedInput = form.querySelector('[data-contact-started]');
+            const draftTokenInput = form.querySelector('[data-contact-draft-token]');
+            const draftUrl = form.getAttribute('data-draft-url') || '';
             const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+            const DRAFT_STORAGE_KEY = 'suave_contact_draft_v1';
+            const draftFields = ['name', 'email', 'phone', 'service', 'message'];
 
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let lastDraftPayload = '';
+            let draftAbort = null;
+            let formSubmitted = false;
 
             function field(name) {
                 return form.querySelector('[name="' + name + '"]');
+            }
+
+            function createDraftToken() {
+                if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                    return window.crypto.randomUUID();
+                }
+
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(char) {
+                    const rand = Math.random() * 16 | 0;
+                    const value = char === 'x' ? rand : (rand & 0x3 | 0x8);
+
+                    return value.toString(16);
+                });
+            }
+
+            function readStoredDraftToken() {
+                try {
+                    return sessionStorage.getItem(DRAFT_STORAGE_KEY) || '';
+                } catch (error) {
+                    return '';
+                }
+            }
+
+            function writeStoredDraftToken(token) {
+                try {
+                    if (token) {
+                        sessionStorage.setItem(DRAFT_STORAGE_KEY, token);
+                    } else {
+                        sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+                    }
+                } catch (error) {
+                    // Private mode may block sessionStorage.
+                }
+            }
+
+            function setDraftToken(token) {
+                if (draftTokenInput) {
+                    draftTokenInput.value = token || '';
+                }
+                writeStoredDraftToken(token || '');
+            }
+
+            function ensureDraftToken() {
+                const existing = (draftTokenInput?.value || '').trim() || readStoredDraftToken();
+                const token = existing || createDraftToken();
+                setDraftToken(token);
+
+                return token;
+            }
+
+            function currentDraftPayload() {
+                const data = {};
+                draftFields.forEach(function(name) {
+                    data[name] = (field(name)?.value || '').trim();
+                });
+
+                return data;
+            }
+
+            function hasDraftContent(data) {
+                return draftFields.some(function(name) {
+                    return !!data[name];
+                });
+            }
+
+            function saveDraft(keepalive) {
+                if (formSubmitted || !draftUrl) {
+                    return;
+                }
+
+                const data = currentDraftPayload();
+                if (!hasDraftContent(data)) {
+                    return;
+                }
+
+                const serialized = JSON.stringify(data);
+                if (serialized === lastDraftPayload) {
+                    return;
+                }
+
+                ensureDraftToken();
+                const body = new FormData(form);
+
+                if (draftAbort) {
+                    draftAbort.abort();
+                }
+                draftAbort = new AbortController();
+
+                fetch(draftUrl, {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrf,
+                        },
+                        body: body,
+                        credentials: 'same-origin',
+                        keepalive: !!keepalive,
+                        signal: keepalive ? undefined : draftAbort.signal,
+                    })
+                    .then(async function(response) {
+                        const payload = await response.json().catch(function() {
+                            return {};
+                        });
+                        if (!response.ok || payload.success === false) {
+                            return;
+                        }
+                        if (payload.draft_token) {
+                            setDraftToken(payload.draft_token);
+                        }
+                        lastDraftPayload = serialized;
+                    })
+                    .catch(function() {
+                        // Draft capture is best-effort; submit still works without it.
+                    });
             }
 
             function clearErrors() {
@@ -534,6 +657,9 @@
                 if (startedInput) {
                     startedInput.value = String(Math.floor(Date.now() / 1000));
                 }
+                setDraftToken('');
+                lastDraftPayload = '';
+                formSubmitted = false;
                 clearErrors();
             }
 
@@ -555,7 +681,20 @@
                 });
                 input.addEventListener('change', function() {
                     input.dispatchEvent(new Event('input'));
+                    saveDraft(false);
                 });
+                input.addEventListener('blur', function() {
+                    saveDraft(false);
+                });
+            });
+
+            const storedToken = readStoredDraftToken();
+            if (storedToken) {
+                setDraftToken(storedToken);
+            }
+
+            window.addEventListener('pagehide', function() {
+                saveDraft(true);
             });
 
             form.addEventListener('submit', function(event) {
@@ -571,6 +710,10 @@
                     return;
                 }
 
+                formSubmitted = true;
+                if (draftAbort) {
+                    draftAbort.abort();
+                }
                 setSubmitting(true);
 
                 const body = new FormData(form);
@@ -591,11 +734,13 @@
                         });
 
                         if (response.status === 422) {
+                            formSubmitted = false;
                             showServerErrors(data.errors || {});
                             return;
                         }
 
                         if (!response.ok || data.success === false) {
+                            formSubmitted = false;
                             showError('message', data.message ||
                                 'Unable to send your request. Please try again.');
                             return;
@@ -613,6 +758,7 @@
                         showSuccess(data.message || 'The request has been sent successfully.');
                     })
                     .catch(function() {
+                        formSubmitted = false;
                         showError('message', 'Unable to send your request. Please try again.');
                     })
                     .finally(function() {

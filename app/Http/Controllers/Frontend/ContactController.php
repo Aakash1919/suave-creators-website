@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Requests\Frontend\ContactDraftRequest;
 use App\Http\Requests\Frontend\ContactStoreRequest;
 use App\Services\ContactRequestService;
 use App\Support\Frontend\ContactSupport;
@@ -57,6 +58,19 @@ class ContactController extends FrontendController
         createFlashMessage('Contact request', 'created');
 
         return redirect()->route('contact-us')->withFragment('contact-id');
+    }
+
+    /**
+     * Silently persist a field-by-field draft so abandoned forms still capture leads.
+     */
+    public function draft(ContactDraftRequest $request): JsonResponse
+    {
+        $contact = $this->contacts->saveDraft($request);
+
+        return response()->json([
+            'success' => true,
+            'draft_token' => $contact?->draft_token,
+        ]);
     }
 
     public function quickConsultation(\App\Http\Requests\Frontend\QuickConsultationRequest $request): JsonResponse|RedirectResponse

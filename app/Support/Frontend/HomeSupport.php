@@ -14,7 +14,6 @@ class HomeSupport
         return array_merge(self::faqData(), [
             'heroShellClass' => 'bg-[#00003f]',
             'heroBackgroundImage' => 'assets/background/home-hero-cover-bg.png',
-            'heroBento' => self::heroBento(),
             'stats' => self::stats(),
             'offerings' => self::offerings(),
             'coreValues' => self::coreValues(),
@@ -25,51 +24,6 @@ class HomeSupport
             'servicesMarqueeItems' => self::servicesMarqueeItems(),
             'partnerMarqueeItems' => self::partnerMarqueeItems(),
         ]);
-    }
-
-    /**
-     * Asymmetric metrics bento for the home hero (right column).
-     *
-     * @return array{
-     *     primary: array{value: string, label: string},
-     *     secondary: array{value: string, label: string, sublabel: string},
-     *     portrait: array{src: string, alt: string, width: int, height: int},
-     *     logo: array{src: string, alt: string, width: int, height: int},
-     *     chip: array{label: string},
-     *     chartBars: list<int>,
-     *     caseStudyRoute: string
-     * }
-     */
-    public static function heroBento(): array
-    {
-        return [
-            'primary' => [
-                'value' => '65%',
-                'label' => 'Fewer Prospecting Steps',
-            ],
-            'secondary' => [
-                'value' => '35%',
-                'label' => 'Less Effort',
-                'sublabel' => 'In Sales Pipeline Work',
-            ],
-            'portrait' => [
-                'src' => 'assets/team/professional-man-navy-blazer-portrait.png',
-                'alt' => 'Suave Creators CRM specialist for B2B sales software development',
-                'width' => 688,
-                'height' => 860,
-            ],
-            'logo' => [
-                'src' => 'assets/brand/logo.png',
-                'alt' => 'Suave Creators logo for custom CRM software development',
-                'width' => 120,
-                'height' => 32,
-            ],
-            'chip' => [
-                'label' => 'Connected CRM Workspace',
-            ],
-            'chartBars' => [42, 58, 48, 88, 64, 72],
-            'caseStudyRoute' => 'outreach-case-study',
-        ];
     }
 
     /**

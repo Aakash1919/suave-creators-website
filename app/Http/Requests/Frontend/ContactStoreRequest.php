@@ -22,6 +22,7 @@ class ContactStoreRequest extends FormRequest
         // Bots must pass validation so the controller can return a silent success.
         if (app(ContactRequestService::class)->isBotSubmission($this)) {
             return [
+                'draft_token' => ['nullable', 'uuid'],
                 'name' => ['nullable', 'string', 'max:120'],
                 'email' => ['nullable', 'email', 'max:255'],
                 'phone' => ['nullable', 'string', 'max:60'],
@@ -31,6 +32,7 @@ class ContactStoreRequest extends FormRequest
         }
 
         return [
+            'draft_token' => ['nullable', 'uuid'],
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'string', 'max:60'],

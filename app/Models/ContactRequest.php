@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactRequest extends Model
 {
+    public const STATUS_DRAFT = 'draft';
+
     public const STATUS_NEW = 'new';
 
     public const STATUS_READ = 'read';
@@ -17,6 +19,7 @@ class ContactRequest extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'draft_token',
         'name',
         'email',
         'phone',
@@ -34,6 +37,18 @@ class ContactRequest extends Model
     public function scopeStatus(Builder $query, string $status): Builder
     {
         return $query->where('status', $status);
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->status === self::STATUS_DRAFT;
+    }
+
+    public function displayName(): string
+    {
+        $name = trim((string) $this->name);
+
+        return $name !== '' ? $name : 'Incomplete lead';
     }
 
     public function markRead(): void
@@ -60,6 +75,12 @@ class ContactRequest extends Model
             'other' => 'Other',
         ];
 
-        return $labels[$this->service] ?? $this->service;
+        $service = trim((string) $this->service);
+
+        if ($service === '') {
+            return '—';
+        }
+
+        return $labels[$service] ?? $service;
     }
-}
+};
