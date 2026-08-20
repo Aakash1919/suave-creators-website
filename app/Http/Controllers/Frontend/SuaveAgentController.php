@@ -16,22 +16,30 @@ use Laravel\Ai\Responses\StreamableAgentResponse;
 class SuaveAgentController extends FrontendController
 {
     /**
-     * Create a ChatLead + conversation with an instant greeting (no LLM wait).
+     * Create a ChatLead + conversation session with an instant greeting.
+     *
+     * @return array{lead_uuid: string, session_token: string, conversation_id: string, greeting: string, escalated: bool, lead: array{name: string, email: string}}
      */
-    public function start(Request $request): JsonResponse
+    public static function createLeadSession(string $name, string $contact): array
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:120'],
-            'email' => ['required', 'email', 'max:255'],
-        ]);
+        $contact = trim($contact);
+        $name = trim($name);
+
+        if ($name === '') {
+            if (filter_var($contact, FILTER_VALIDATE_EMAIL)) {
+                $name = ucfirst(Str::before($contact, '@'));
+            } else {
+                $name = 'Guest';
+            }
+        }
 
         $plainToken = Str::random(48);
-        $greeting = $this->instantGreeting($validated['name']);
+        $greeting = (new self)->instantGreeting($name, $contact);
 
-        [$lead, $conversationId] = DB::transaction(function () use ($validated, $plainToken, $greeting): array {
+        [$lead, $conversationId] = DB::transaction(function () use ($name, $contact, $plainToken, $greeting): array {
             $lead = ChatLead::query()->create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
+                'name' => $name,
+                'email' => $contact,
                 'session_token' => ChatLead::hashSessionToken($plainToken),
             ]);
 
@@ -63,7 +71,7 @@ class SuaveAgentController extends FrontendController
             return [$lead, $conversationId];
         });
 
-        return response()->json([
+        return [
             'lead_uuid' => $lead->uuid,
             'session_token' => $plainToken,
             'conversation_id' => $conversationId,
@@ -73,7 +81,30 @@ class SuaveAgentController extends FrontendController
                 'name' => $lead->name,
                 'email' => $lead->email,
             ],
+        ];
+    }
+
+    /**
+     * Create a ChatLead + conversation with an instant greeting (no LLM wait).
+     */
+    public function start(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'name' => ['nullable', 'string', 'max:120'],
+            'email' => ['nullable', 'string', 'max:255'],
+            'contact' => ['nullable', 'string', 'max:255'],
         ]);
+
+        $contact = $validated['contact'] ?? $validated['email'] ?? null;
+        if (blank($contact)) {
+            throw ValidationException::withMessages([
+                'email' => 'Please provide a valid email or phone number.',
+            ]);
+        }
+
+        $sessionData = self::createLeadSession((string) ($validated['name'] ?? ''), (string) $contact);
+
+        return response()->json($sessionData);
     }
 
     /**
@@ -154,13 +185,23 @@ class SuaveAgentController extends FrontendController
     }
 
     /**
-     * Instant first reply shown after name/email — no model round-trip.
+     * Instant first reply shown after name/email/phone — no model round-trip.
      */
-    protected function instantGreeting(string $name): string
+    protected function instantGreeting(string $name, string $contact = ''): string
     {
+        $contact = trim($contact);
+        $name = trim($name);
+
+        $isEmail = filter_var($contact, FILTER_VALIDATE_EMAIL);
+        $isPhone = ! $isEmail && $contact !== '';
+
+        if ($isPhone || $name === '' || in_array(strtolower($name), ['guest', 'visitor', 'valued guest', 'valued'], true)) {
+            return "Hi there! 👋\n\nThanks for reaching out! Whether you're planning a new web or mobile app, custom software, or scaling an existing platform — we'd love to help bring it to life.\n\nWhat is the main goal or idea you're looking to build?";
+        }
+
         $firstName = trim(Str::before($name, ' ')) ?: $name;
 
-        return "Hi **{$firstName}**! I’m SuaveAgent from Suave Creators sales. Tell me about the project you’re planning — goals, challenges, or timeline — and I can share how our services and industries fit. What are you looking to build?";
+        return "Hi **{$firstName}**! 👋\n\nThanks for reaching out! Whether you're planning a new web or mobile app, custom software, or scaling an existing platform — we'd love to help bring it to life.\n\nWhat is the main goal or idea you're looking to build?";
     }
 
     /**

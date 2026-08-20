@@ -172,6 +172,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Names are **singular**.
 | About Us | `AboutController@index` | `about-us` |
 | Contact Us | `ContactController@index` | `contact-us` |
 | Contact submit | `ContactController@store` | `contact-us.store` |
+| Contact draft | `ContactController@draft` | `contact-us.draft` |
 | Services hub | `ServiceController@index` | `services` |
 | Service details (×4) | `ServiceController@show($slug)` | `service.show` |
 | Industries hub | `IndustryController@index` | `industries` |

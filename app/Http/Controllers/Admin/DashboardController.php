@@ -60,6 +60,9 @@ class DashboardController extends Controller
                 'value' => $canContacts ? ContactRequest::query()->count() : null,
                 'hint' => $canContacts
                     ? ContactRequest::query()->where('status', ContactRequest::STATUS_NEW)->count().' new'
+                        .(ContactRequest::query()->where('status', ContactRequest::STATUS_DRAFT)->count() > 0
+                            ? ' · '.ContactRequest::query()->where('status', ContactRequest::STATUS_DRAFT)->count().' incomplete'
+                            : '')
                     : null,
                 'icon' => 'fa-envelope-open-text',
                 'tone' => 'amber',

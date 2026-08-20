@@ -2,12 +2,12 @@
 
 @section('content')
   <section class="case-studies-hero site-container case-studies-hero--with-fan" aria-labelledby="case-studies-heading">
-    <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
+    {{-- <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
       <a href="{{ route('home') }}">Home</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">Case Studies</span>
-    </nav>
-    <p class="case-studies-hero__eyebrow pragati-narrow-regular">Case Studies</p>
+    </nav> --}}
+    {{-- <p class="case-studies-hero__eyebrow pragati-narrow-regular">Case Studies</p> --}}
     <h1 id="case-studies-heading" class="case-studies-hero__title">
       Built in the open. <span class="case-studies-hero__title-accent">Proven in product.</span>
     </h1>

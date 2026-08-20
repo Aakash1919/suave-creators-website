@@ -26,16 +26,21 @@
         Our expert team focuses on reducing operational costs and enhancing mobile and cloud capabilities for
         businesses of all sizes.
       </p>
-      <div class="mt-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
-        <x-frontend.cta-button :href="$demoHref">
-          Let&rsquo;s Discuss About Vision
-        </x-frontend.cta-button>
-        <a href="#core-services" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
-          Explore Our Services
-        </a>
-        <a href="{{ route('product') }}" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
-          Explore Suave Outreach CRM
-        </a>
+      <div class="mt-5 flex flex-col items-start gap-4">
+        <x-frontend.inline-consultation-form
+          theme="light"
+          placeholder="Enter your phone or email"
+          button-text="Get Free Consultation"
+          :secondary-href="$demoHref"
+          secondary-label="Schedule a discovery call" />
+        {{-- <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
+          <a href="#core-services" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
+            Explore Our Services
+          </a>
+          <a href="{{ route('product') }}" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
+            Explore Suave Outreach CRM
+          </a>
+        </div> --}}
       </div>
     </div>
   </div>
@@ -209,10 +214,13 @@
       @endforeach
     </div>
 
-    <div class="mt-10 flex justify-center">
-      <x-frontend.cta-button>
-        Request a Free Consultation
-      </x-frontend.cta-button>
+    <div class="mt-10 flex flex-col items-center justify-center gap-4">
+      <x-frontend.inline-consultation-form
+        theme="light"
+        placeholder="Enter your phone or email"
+        button-text="Get Free Consultation"
+        :secondary-href="$demoHref"
+        secondary-label="Book a Call" />
     </div>
   </div>
 </section>
