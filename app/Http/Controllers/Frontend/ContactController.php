@@ -39,6 +39,7 @@ class ContactController extends FrontendController
                 return response()->json([
                     'success' => true,
                     'message' => ContactRequestService::SUCCESS_MESSAGE,
+                    'lead_tracked' => false,
                 ]);
             }
 
@@ -53,6 +54,7 @@ class ContactController extends FrontendController
             return response()->json([
                 'success' => true,
                 'message' => ContactRequestService::SUCCESS_MESSAGE,
+                'lead_tracked' => true,
             ]);
         }
 
@@ -82,6 +84,7 @@ class ContactController extends FrontendController
             if ($wantsJson) {
                 return response()->json([
                     'success' => true,
+                    'lead_tracked' => false,
                 ]);
             }
 
@@ -98,6 +101,7 @@ class ContactController extends FrontendController
         if ($wantsJson) {
             return response()->json([
                 'success' => true,
+                'lead_tracked' => true,
                 'chat_session' => $chatSession,
             ]);
         }
