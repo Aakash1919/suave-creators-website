@@ -406,7 +406,7 @@
                       loading="lazy"
                     >
                   </div>
-                  <p class="product-case-study__metric-value">{{ $metric['value'] }}</p>
+                  <x-frontend.case-study-metric-value class="product-case-study__metric-value" tag="p" :value="$metric['value']" />
                   <p class="product-case-study__metric-label">{{ $metric['label'] }}</p>
                   <p class="product-case-study__metric-caption">{{ $metric['caption'] }}</p>
                   <div

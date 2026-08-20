@@ -33,7 +33,7 @@ description: >-
 - Roles: `admin` (all permissions), `editor` (blogs view/create/update, case-studies view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
 - Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
 - Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
-- Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-drafted** (no trend writer). Edit-form “Generate SEO meta” is allowed like blogs. Marketing listing, detail pages, and the `/services` carousel read the static catalog in `database/data/case-studies/cases.php` (not this admin table). Keep `service_slugs` / `industry_slugs` in that catalog in sync when a story should appear on a service or industry page.
+- Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-drafted** (no trend writer). Edit-form “Generate SEO meta” is allowed like blogs. Marketing listing cards and the `/services` carousel read the static catalog in `App\Support\Frontend\CaseStudySupport` (not this admin table). Public detail pages are independent Blade views under `resources/views/frontend/case-studies/`. Keep `service_slugs` / `industry_slugs` in that catalog in sync when a story should appear on a service or industry page.
 
 ## Services (required)
 
@@ -301,9 +301,8 @@ php artisan db:seed --class=BlogSeeder
 
 ## Case study seed import (offline)
 
-Do **not** scrape the live site. Seed from the committed package via `CaseStudySeeder`:
+Do **not** scrape the live site. Marketing listing cards come from `App\Support\Frontend\CaseStudySupport` (not this admin table). Public story copy lives in `resources/views/frontend/case-studies/`.
 
-- `database/data/case-studies/cases.php` — all studies (hero, metrics, overview, two story sections)
 - Seeded hero images stay in `public/assets/case-studies/` (`assets/case-studies/...` paths). Admin uploads go to `storage/app/public/case-studies/`
 
 ```bash

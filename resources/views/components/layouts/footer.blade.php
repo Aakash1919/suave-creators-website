@@ -59,7 +59,6 @@
                 @foreach ($links as $link)
                   <li>
                     <a href="{{ $link['href'] }}"
-                      @if (str_starts_with($link['href'], 'http')) target="_blank" rel="noopener noreferrer" @endif
                       class="group flex !min-h-0 items-start gap-1.5 py-0.5 text-[13px] leading-4 text-[#E4E9F8] transition hover:text-white sm:gap-2 sm:py-0">
                       <i class="fa-solid fa-chevron-right mt-0.5 shrink-0 text-[8px] text-[#E4E9F8] transition-transform group-hover:translate-x-0.5 sm:text-[9px]"
                         aria-hidden="true"></i>
