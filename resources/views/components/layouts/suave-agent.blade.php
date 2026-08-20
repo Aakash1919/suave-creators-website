@@ -80,6 +80,11 @@
         var root = document.querySelector('[data-suave-agent]');
         if (!root) return;
 
+        // Escape footer overflow-x:clip / content-visibility so the toggle stays viewport-fixed.
+        if (root.parentElement !== document.body) {
+          document.body.appendChild(root);
+        }
+
         var STORAGE_KEY = 'suave_agent_session_v1';
         var MARKED_SRC = 'https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js';
         var markedLoading = null;
