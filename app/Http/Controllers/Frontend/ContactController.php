@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\Frontend\ContactDraftRequest;
 use App\Http\Requests\Frontend\ContactStoreRequest;
+use App\Http\Requests\Frontend\QuickConsultationRequest;
 use App\Services\ContactRequestService;
 use App\Support\Frontend\ContactSupport;
 use Illuminate\Http\JsonResponse;
@@ -73,7 +74,7 @@ class ContactController extends FrontendController
         ]);
     }
 
-    public function quickConsultation(\App\Http\Requests\Frontend\QuickConsultationRequest $request): JsonResponse|RedirectResponse
+    public function quickConsultation(QuickConsultationRequest $request): JsonResponse|RedirectResponse
     {
         $wantsJson = $request->ajax() || $request->expectsJson() || $request->boolean('_ajax');
 

@@ -422,11 +422,13 @@
             const draftUrl = form.getAttribute('data-draft-url') || '';
             const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
             const DRAFT_STORAGE_KEY = 'suave_contact_draft_v1';
+            const DRAFT_INPUT_SAVE_DELAY_MS = 900;
             const draftFields = ['name', 'email', 'phone', 'service', 'message'];
 
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             let lastDraftPayload = '';
             let draftAbort = null;
+            let draftInputTimer = null;
             let formSubmitted = false;
 
             function field(name) {
@@ -546,6 +548,26 @@
                     .catch(function() {
                         // Draft capture is best-effort; submit still works without it.
                     });
+            }
+
+            function scheduleDraftSave() {
+                if (draftInputTimer) {
+                    window.clearTimeout(draftInputTimer);
+                }
+
+                draftInputTimer = window.setTimeout(function() {
+                    draftInputTimer = null;
+                    saveDraft(false);
+                }, DRAFT_INPUT_SAVE_DELAY_MS);
+            }
+
+            function flushDraftSave(keepalive) {
+                if (draftInputTimer) {
+                    window.clearTimeout(draftInputTimer);
+                    draftInputTimer = null;
+                }
+
+                saveDraft(keepalive);
             }
 
             function clearErrors() {
@@ -678,13 +700,14 @@
                     if (successEl) {
                         successEl.hidden = true;
                     }
+                    scheduleDraftSave();
                 });
                 input.addEventListener('change', function() {
                     input.dispatchEvent(new Event('input'));
-                    saveDraft(false);
+                    flushDraftSave(false);
                 });
                 input.addEventListener('blur', function() {
-                    saveDraft(false);
+                    flushDraftSave(false);
                 });
             });
 
@@ -694,7 +717,7 @@
             }
 
             window.addEventListener('pagehide', function() {
-                saveDraft(true);
+                flushDraftSave(true);
             });
 
             form.addEventListener('submit', function(event) {
@@ -711,6 +734,10 @@
                 }
 
                 formSubmitted = true;
+                if (draftInputTimer) {
+                    window.clearTimeout(draftInputTimer);
+                    draftInputTimer = null;
+                }
                 if (draftAbort) {
                     draftAbort.abort();
                 }

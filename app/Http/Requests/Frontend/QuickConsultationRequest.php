@@ -19,11 +19,13 @@ class QuickConsultationRequest extends FormRequest
     {
         if (app(ContactRequestService::class)->isBotSubmission($this)) {
             return [
+                'draft_token' => ['nullable', 'uuid'],
                 'contact' => ['nullable', 'string', 'max:255'],
             ];
         }
 
         return [
+            'draft_token' => ['nullable', 'uuid'],
             'contact' => [
                 'required',
                 'string',

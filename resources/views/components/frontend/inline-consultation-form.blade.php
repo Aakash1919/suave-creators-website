@@ -16,8 +16,10 @@
   <form id="{{ $resolvedFormId }}" action="{{ route('consultation.store') }}" method="POST"
     class="consultation-inline-form consultation-inline-form--{{ $theme }}"
     data-consultation-form
+    data-draft-url="{{ route('contact-us.draft') }}"
     novalidate>
     @csrf
+    <input type="hidden" name="draft_token" value="" data-consultation-draft-token>
     <input type="hidden" name="form_started_at" value="{{ time() }}">
     <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
       <input type="text" name="website" tabindex="-1" autocomplete="off">
@@ -56,6 +58,8 @@
 <script>
   (function () {
     var csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    var DRAFT_SAVE_DELAY_MS = 900;
+    var DRAFT_STORAGE_PREFIX = 'suave_consultation_draft_v1:';
 
     function initConsultationForm(form) {
       if (form.dataset.consultationInitialized) return;
@@ -67,6 +71,13 @@
       var submitBtn = form.querySelector('button[type="submit"]');
       var labelSpan = submitBtn ? submitBtn.querySelector('[data-button-label]') : null;
       var originalBtnText = labelSpan ? labelSpan.textContent : (submitBtn ? submitBtn.textContent : '');
+      var draftUrl = form.getAttribute('data-draft-url') || '';
+      var draftTokenInput = form.querySelector('[data-consultation-draft-token]');
+      var draftStorageKey = DRAFT_STORAGE_PREFIX + (form.id || 'default');
+      var draftTimer = null;
+      var draftAbort = null;
+      var lastDraftPayload = '';
+      var submitted = false;
 
       function showMessage(type, message) {
         if (!statusEl) return;
@@ -88,7 +99,163 @@
         form.classList.remove('has-error');
       }
 
-      if (input) input.addEventListener('input', clearMessage);
+      function createDraftToken() {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+          return window.crypto.randomUUID();
+        }
+
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (char) {
+          var rand = Math.random() * 16 | 0;
+          var value = char === 'x' ? rand : (rand & 0x3 | 0x8);
+
+          return value.toString(16);
+        });
+      }
+
+      function readStoredDraftToken() {
+        try {
+          return sessionStorage.getItem(draftStorageKey) || '';
+        } catch (error) {
+          return '';
+        }
+      }
+
+      function writeStoredDraftToken(token) {
+        try {
+          if (token) {
+            sessionStorage.setItem(draftStorageKey, token);
+          } else {
+            sessionStorage.removeItem(draftStorageKey);
+          }
+        } catch (error) {
+          // Private mode may block sessionStorage.
+        }
+      }
+
+      function setDraftToken(token) {
+        if (draftTokenInput) {
+          draftTokenInput.value = token || '';
+        }
+        writeStoredDraftToken(token || '');
+      }
+
+      function ensureDraftToken() {
+        var existing = ((draftTokenInput && draftTokenInput.value) || '').trim() || readStoredDraftToken();
+        var token = existing || createDraftToken();
+        setDraftToken(token);
+
+        return token;
+      }
+
+      function draftPayload(value) {
+        var data = {
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: '',
+        };
+
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          data.email = value;
+        } else {
+          data.phone = value;
+        }
+
+        data.message = 'Inline consultation started for: ' + value;
+
+        return data;
+      }
+
+      function saveDraft(keepalive) {
+        if (submitted || !draftUrl || !input) return;
+
+        var value = input.value.trim();
+        if (!value) return;
+
+        var data = draftPayload(value);
+        var serialized = JSON.stringify(data);
+        if (serialized === lastDraftPayload) return;
+
+        var body = new FormData();
+        body.append('draft_token', ensureDraftToken());
+        body.append('name', data.name);
+        body.append('email', data.email);
+        body.append('phone', data.phone);
+        body.append('service', data.service);
+        body.append('message', data.message);
+
+        if (draftAbort) {
+          draftAbort.abort();
+        }
+        draftAbort = new AbortController();
+
+        fetch(draftUrl, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': csrf,
+          },
+          body: body,
+          credentials: 'same-origin',
+          keepalive: !!keepalive,
+          signal: keepalive ? undefined : draftAbort.signal,
+        })
+          .then(async function (response) {
+            var data = await response.json().catch(function () { return {}; });
+            if (!response.ok || data.success === false) return;
+            if (data.draft_token) {
+              setDraftToken(data.draft_token);
+            }
+            lastDraftPayload = serialized;
+          })
+          .catch(function () {
+            // Draft capture is best-effort; submit still works without it.
+          });
+      }
+
+      function scheduleDraftSave() {
+        if (draftTimer) {
+          window.clearTimeout(draftTimer);
+        }
+
+        draftTimer = window.setTimeout(function () {
+          draftTimer = null;
+          saveDraft(false);
+        }, DRAFT_SAVE_DELAY_MS);
+      }
+
+      function flushDraftSave(keepalive) {
+        if (draftTimer) {
+          window.clearTimeout(draftTimer);
+          draftTimer = null;
+        }
+
+        saveDraft(keepalive);
+      }
+
+      var storedToken = readStoredDraftToken();
+      if (storedToken) {
+        setDraftToken(storedToken);
+      }
+
+      if (input) {
+        input.addEventListener('input', function () {
+          clearMessage();
+          scheduleDraftSave();
+        });
+        input.addEventListener('change', function () {
+          flushDraftSave(false);
+        });
+        input.addEventListener('blur', function () {
+          flushDraftSave(false);
+        });
+      }
+
+      window.addEventListener('pagehide', function () {
+        flushDraftSave(true);
+      });
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -118,6 +285,14 @@
           submitBtn.disabled = true;
         }
         if (labelSpan) labelSpan.textContent = 'Submitting…';
+        submitted = true;
+        if (draftTimer) {
+          window.clearTimeout(draftTimer);
+          draftTimer = null;
+        }
+        if (draftAbort) {
+          draftAbort.abort();
+        }
 
         fetch(form.action, {
           method: 'POST',
@@ -134,11 +309,13 @@
 
             if (response.status === 422) {
               var err = (data.errors && data.errors.contact && data.errors.contact[0]) || data.message || 'Please check your input and try again.';
+              submitted = false;
               showMessage('error', err);
               return;
             }
 
             if (!response.ok || data.success === false) {
+              submitted = false;
               showMessage('error', data.message || 'Unable to submit request. Please try again.');
               return;
             }
@@ -152,6 +329,8 @@
             }
 
             clearMessage();
+            setDraftToken('');
+            lastDraftPayload = '';
             if (input) input.value = '';
 
             // Start Suave Agent chat session with the entered contact details
@@ -170,6 +349,7 @@
             }
           })
           .catch(function () {
+            submitted = false;
             showMessage('error', 'Unable to submit request. Please try again.');
           })
           .finally(function () {
