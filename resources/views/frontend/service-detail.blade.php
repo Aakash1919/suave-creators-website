@@ -279,11 +279,13 @@
       </div>
     </div>
     <div class="portfolio-hero-pagination"></div>
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-5">
-      <x-frontend.cta-button>
-        Get Free Consultation
-      </x-frontend.cta-button>
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book a Call</a>
+    <div class="mt-10 flex flex-col items-center justify-center gap-4">
+      <x-frontend.inline-consultation-form
+        theme="light"
+        placeholder="Enter your phone or email"
+        button-text="Get Free Consultation"
+        :secondary-href="$demoHref"
+        secondary-label="Book a Call" />
     </div>
   </div>
 </section>

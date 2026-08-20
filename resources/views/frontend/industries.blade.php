@@ -77,18 +77,13 @@
     </div>
   </div>
   <div class="section-inner">
-    <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:mt-10 sm:gap-5">
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-        class="u-btn-cta group inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
-        Get Free Consultation
-        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-          <path d="M18 8L22 12L18 16" />
-          <path d="M2 12H22" />
-        </svg>
-      </a>
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">Book a Call</a>
+    <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10">
+      <x-frontend.inline-consultation-form
+        theme="light"
+        placeholder="Enter your phone or email"
+        button-text="Get Free Consultation"
+        :secondary-href="$demoHref"
+        secondary-label="Book a Call" />
     </div>
   </div>
 </section>

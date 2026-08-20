@@ -50,6 +50,27 @@ class ContactRequestService
     }
 
     /**
+     * Persist an inline quick consultation request.
+     */
+    public function storeQuickConsultation(\App\Http\Requests\Frontend\QuickConsultationRequest $request): ContactRequest
+    {
+        $contact = trim((string) $request->validated('contact'));
+        $isEmail = filter_var($contact, FILTER_VALIDATE_EMAIL) !== false;
+        $agent = $request->userAgent();
+
+        return ContactRequest::query()->create([
+            'name' => 'Consultation Lead',
+            'email' => $isEmail ? $contact : 'consultation-lead@suavecreators.com',
+            'phone' => $isEmail ? '' : Str::limit($contact, 60, ''),
+            'service' => 'Free Consultation',
+            'message' => 'Free consultation requested via inline form for: '.$contact,
+            'status' => ContactRequest::STATUS_NEW,
+            'ip_address' => $request->ip(),
+            'user_agent' => $agent ? Str::limit($agent, 500, '') : null,
+        ]);
+    }
+
+    /**
      * Mark a contact request as read when it is still new.
      */
     public function markRead(ContactRequest $contact): ContactRequest

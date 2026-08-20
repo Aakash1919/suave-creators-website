@@ -24,6 +24,9 @@ Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us
 Route::post('/contact-us', [ContactController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('contact-us.store');
+Route::post('/consultation-request', [ContactController::class, 'quickConsultation'])
+    ->middleware('throttle:10,1')
+    ->name('consultation.store');
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 

@@ -58,4 +58,37 @@ class ContactController extends FrontendController
 
         return redirect()->route('contact-us')->withFragment('contact-id');
     }
+
+    public function quickConsultation(\App\Http\Requests\Frontend\QuickConsultationRequest $request): JsonResponse|RedirectResponse
+    {
+        $wantsJson = $request->ajax() || $request->expectsJson() || $request->boolean('_ajax');
+
+        if ($this->contacts->isBotSubmission($request)) {
+            if ($wantsJson) {
+                return response()->json([
+                    'success' => true,
+                ]);
+            }
+
+            createFlashMessage('Consultation request', 'created');
+
+            return back();
+        }
+
+        $this->contacts->storeQuickConsultation($request);
+
+        $contact = (string) $request->input('contact');
+        $chatSession = SuaveAgentController::createLeadSession('', $contact);
+
+        if ($wantsJson) {
+            return response()->json([
+                'success' => true,
+                'chat_session' => $chatSession,
+            ]);
+        }
+
+        createFlashMessage('Consultation request', 'created');
+
+        return back();
+    }
 }

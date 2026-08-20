@@ -209,10 +209,13 @@
       @endforeach
     </div>
 
-    <div class="mt-10 flex justify-center">
-      <x-frontend.cta-button>
-        Request a Free Consultation
-      </x-frontend.cta-button>
+    <div class="mt-10 flex flex-col items-center justify-center gap-4">
+      <x-frontend.inline-consultation-form
+        theme="light"
+        placeholder="Enter your phone or email"
+        button-text="Get Free Consultation"
+        :secondary-href="$demoHref"
+        secondary-label="Book a Call" />
     </div>
   </div>
 </section>
