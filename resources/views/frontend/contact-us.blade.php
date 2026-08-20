@@ -774,7 +774,7 @@
                         }
 
                         const selectedService = field('service')?.value || '';
-                        if (typeof window.suaveTrackEvent === 'function') {
+                        if (data.lead_tracked !== false && typeof window.suaveTrackEvent === 'function') {
                             window.suaveTrackEvent('generate_lead', {
                                 lead_type: 'contact_form',
                                 service: selectedService,

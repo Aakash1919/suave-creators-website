@@ -44,6 +44,7 @@ class AnalyticsTrackingTest extends TestCase
         $response->assertOk();
         $response->assertSee('generate_lead', false);
         $response->assertSee('contact_form', false);
+        $response->assertSee('lead_tracked', false);
         $response->assertSee("field('service')", false);
     }
 

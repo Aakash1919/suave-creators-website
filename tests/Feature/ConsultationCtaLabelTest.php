@@ -51,6 +51,7 @@ class ConsultationCtaLabelTest extends TestCase
         $response->assertOk();
         $response->assertJson([
             'success' => true,
+            'lead_tracked' => true,
         ]);
         $response->assertJsonStructure([
             'chat_session' => [
@@ -81,6 +82,7 @@ class ConsultationCtaLabelTest extends TestCase
         $response->assertOk();
         $response->assertJson([
             'success' => true,
+            'lead_tracked' => true,
         ]);
         $response->assertJsonStructure([
             'chat_session' => [
@@ -167,7 +169,10 @@ class ConsultationCtaLabelTest extends TestCase
             ]);
 
         $response->assertOk();
-        $response->assertJson(['success' => true]);
+        $response->assertJson([
+            'success' => true,
+            'lead_tracked' => false,
+        ]);
         $response->assertJsonMissingPath('chat_session');
         $this->assertDatabaseMissing('contact_requests', [
             'email' => 'too-many@company.com',

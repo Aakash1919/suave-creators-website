@@ -84,6 +84,7 @@ class ContactFormDraftTest extends TestCase
         $response->assertJson([
             'success' => true,
             'message' => 'The request has been sent successfully.',
+            'lead_tracked' => true,
         ]);
         $this->assertDatabaseCount('contact_requests', 1);
         $this->assertDatabaseHas('contact_requests', [
@@ -135,6 +136,7 @@ class ContactFormDraftTest extends TestCase
         $response->assertJson([
             'success' => true,
             'message' => 'The request has been sent successfully.',
+            'lead_tracked' => false,
         ]);
         $this->assertDatabaseMissing('contact_requests', [
             'email' => 'fake-lead@company.com',
