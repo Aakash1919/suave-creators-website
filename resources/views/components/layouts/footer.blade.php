@@ -91,5 +91,4 @@
       <a href="{{ route('terms-and-conditions') }}" class="inline-flex !min-h-0 items-center py-1 text-[#E4E9F8] hover:text-white sm:py-0">Terms &amp; Conditions</a>
     </p>
   </div>
-  <x-layouts.suave-agent />
 </footer>

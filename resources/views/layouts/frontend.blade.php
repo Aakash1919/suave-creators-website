@@ -332,6 +332,8 @@
     </div>
 
     <x-layouts.footer />
+    {{-- Body-level so position:fixed is not captured by footer overflow-x:clip / content-visibility. --}}
+    <x-layouts.suave-agent />
     <x-layouts.analytics-events />
     {{-- Defer GTM/gtag + fonts + Swiper; stub queues carousel inits until deferred.js runs. --}}
     @php

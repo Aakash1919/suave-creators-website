@@ -83,7 +83,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 
 Site-wide sales chat widget — **not** a contact-page link.
 
-- Layout component: `App\View\Components\Layouts\SuaveAgent` → `resources/views/components/layouts/suave-agent.blade.php` (`<x-layouts.suave-agent />`)
+- Layout component: `App\View\Components\Layouts\SuaveAgent` → `resources/views/components/layouts/suave-agent.blade.php` (`<x-layouts.suave-agent />` in `layouts/frontend.blade.php` as a **body-level** sibling of the footer — never inside `.site-footer`, whose `overflow-x: clip` and `content-visibility: auto` capture `position: fixed`)
 - Toggle + panel brand mark: `<x-layouts.chat-widget-icon />` (classic circular chat SVG)
 - CSS: `public/css/style.css` under `/* ===== SUAVE AGENT CHAT ===== */`
 - API: `SuaveAgentController` routes `/suave-agent/start|chat|history` in `routes/web.php`
