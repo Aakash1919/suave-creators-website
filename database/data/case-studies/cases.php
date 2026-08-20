@@ -1,10 +1,122 @@
 <?php
 /**
- * Static catalog for frontend case study pages.
- * Public layout: Metrics → Overview → exactly 2 splits → CTA.
- * `technologies` powers listing tags only (not rendered on the detail middle).
+ * Listing catalog for frontend case study cards, carousels, and sitemap.
+ * Story copy lives in independent Blade pages under resources/views/frontend/case-studies/.
+ * `technologies` powers listing tags only.
  */
 return [
+  [
+    'slug' => 'turbo-trans-corporation-case-study',
+    'title' => 'Success Story : The Turbo Trans Corporation',
+    'status' => 'published',
+    'image' => 'assets/case-studies/turbo-trans/turbo-trans-sales-crm-metrics-banner.png',
+    'short_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation TurboTrans Corporation is a leading logistics and freight forwarding company specializing in air freight, ocean freight, land transportation, customs clearance, and end-to-end supply chain solutions.',
+    'listing_subtitle' => 'Global Operations',
+    'industry' => 'Logistics & Freight',
+    'service_slugs' => ['custom-crm-development'],
+    'industry_slugs' => ['logistics-supply-chain-apps'],
+    'year' => '',
+    'meta_title' => 'Success Story : Turbo Trans Corporation | Suave Creators',
+    'meta_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation',
+    'og_title' => 'Success Story: Turbo Trans Corporation',
+    'og_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation',
+    'results' => [
+      ['value' => '42%', 'label' => 'More Qualified Leads vs. Previous Quarter'],
+      ['value' => '3.4x', 'label' => 'Faster Response Time Average Lead Response'],
+      ['value' => '68%', 'label' => 'Pipeline Visibility Complete Deal Tracking'],
+      ['value' => '2.8x', 'label' => 'Revenue Growth Year-over-Year Increase'],
+    ],
+    'technologies' => [
+      'AI-powered lead qualification',
+      'Automated follow-up reminders',
+      'Visual sales pipeline',
+      'Real-time sales dashboard',
+      'Team collaboration',
+      'Smart reporting & analytics',
+      'Customer activity timeline',
+    ],
+    'challenge' => 'Before implementing The Suave Sales CRM, the sales team faced several operational challenges: Leads coming from multiple sources without a centralized system. Delayed follow-ups causing missed opportunities. Limited visibility into the sales pipeline. Manual reporting and scattered customer information. Difficulty tracking sales performance across the team.',
+    'solution' => 'TurboTrans adopted The Suave Sales CRM to centralize its entire sales process. Key implementations included: AI-powered lead qualification, Automated follow-up reminders, Visual sales pipeline, Real-time sales dashboard, Team collaboration, Smart reporting & analytics, Customer activity timeline.',
+    'outcome' => 'The Suave Sales CRM streamlined our entire sales process. Our team responds faster, works smarter, and closes more deals. — Amit Rana, Managing Director, Turbo Trans Corporation',
+    'sections' => [
+      [
+        'type' => 'split',
+        'visual' => 'discovery',
+        'eyebrow' => '',
+        'title' => 'The Challenge',
+        'body' => 'Before implementing The Suave Sales CRM, the sales team faced several operational challenges:',
+        'points' => [
+          'Leads coming from multiple sources without a centralized system',
+          'Delayed follow-ups causing missed opportunities',
+          'Limited visibility into the sales pipeline',
+          'Manual reporting and scattered customer information',
+          'Difficulty tracking sales performance across the team',
+        ],
+        'metrics' => [
+          [
+            'value' => '42%',
+            'label' => 'More Qualified Leads',
+            'caption' => 'vs. Previous Quarter',
+            'tone' => 'blue',
+            'icon' => 'assets/product/leads.png',
+            'alt' => 'Qualified leads growth icon for Suave AI sales CRM case study metric',
+            'chart' => 'assets/product/graph_vector1.png',
+            'chartVariant' => 'strip',
+          ],
+          [
+            'value' => '3.4x',
+            'label' => 'Faster Response Time',
+            'caption' => 'Average Lead Response',
+            'tone' => 'purple',
+            'icon' => 'assets/product/follow_ups.png',
+            'alt' => 'Faster response time icon for Suave AI CRM automation case study',
+            'chart' => 'assets/product/graph_vector2.png',
+            'chartVariant' => 'strip',
+          ],
+        ],
+        'image_side' => 'right',
+      ],
+      [
+        'type' => 'split',
+        'visual' => 'pipeline',
+        
+        'title' => 'The Solution',
+        'body' => 'TurboTrans adopted The Suave Sales CRM to centralize its entire sales process. Key implementations included:',
+        'points' => [
+          'AI-powered lead qualification',
+          'Automated follow-up reminders',
+          'Visual sales pipeline',
+          'Real-time sales dashboard',
+          'Team collaboration',
+          'Smart reporting & analytics',
+          'Customer activity timeline',
+        ],
+        'metrics' => [
+          [
+            'value' => '68%',
+            'label' => 'Pipeline Visibility',
+            'caption' => 'Complete Deal Tracking',
+            'tone' => 'teal',
+            'icon' => 'assets/product/Manual_work.png',
+            'alt' => 'Pipeline visibility icon for Suave AI sales CRM deal tracking case study',
+            'chart' => 'assets/product/graph_vector3.png',
+            'chartVariant' => 'strip',
+          ],
+          [
+            'value' => '2.8x',
+            'label' => 'Revenue Growth',
+            'caption' => 'Year-over-Year Increase',
+            'tone' => 'orange',
+            'icon' => 'assets/product/case-study-metric-revenue-growth-icon.png',
+            'alt' => 'Revenue growth icon for Suave AI powered sales CRM success story',
+            'chart' => 'assets/product/graph_vector4.png',
+            'chartVariant' => 'strip',
+          ],
+        ],
+        'image_side' => 'left',
+      ],
+    ],
+  ],
   [
     'slug' => 'ai-sales-coaching-platform-case-study',
     'title' => 'An AI Sales Coach That Practices, Whispers, and Scores',

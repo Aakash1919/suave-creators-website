@@ -2,8 +2,6 @@
 
 namespace App\Support\Frontend;
 
-use Illuminate\Support\Facades\Auth;
-
 class CaseStudySupport
 {
     /**
@@ -12,6 +10,7 @@ class CaseStudySupport
      * @var array<string, string>
      */
     public const ROUTES = [
+        'turbo-trans-corporation-case-study' => 'turbo-trans-case-study',
         'ai-sales-coaching-platform-case-study' => 'ai-sales-coaching-case-study',
         'suave-crm-outreach-case-study' => 'outreach-case-study',
         'suave-crm-tasks-case-study' => 'tasks-case-study',
@@ -19,9 +18,6 @@ class CaseStudySupport
         'appointment-insurance-platform-case-study' => 'appointment-insurance-case-study',
         'cabvi-product-matching' => 'cabvi-case-study',
     ];
-
-    /** @var list<string> */
-    private const VISUALS = ['discovery', 'preparation', 'pipeline'];
 
     /**
      * Published case studies for the listing page, ordered for the grid.
@@ -34,33 +30,6 @@ class CaseStudySupport
             self::catalog(),
             static fn (array $case): bool => ($case['status'] ?? '') === 'published'
         ));
-    }
-
-    /**
-     * @return array<string, mixed>|null
-     */
-    public static function case(string $slug): ?array
-    {
-        foreach (self::catalog() as $case) {
-            if (($case['slug'] ?? '') !== $slug) {
-                continue;
-            }
-
-            $status = (string) ($case['status'] ?? '');
-            $isDraft = $status === 'draft';
-
-            if ($isDraft && ! Auth::check()) {
-                return null;
-            }
-
-            if ($status !== 'published' && ! $isDraft) {
-                return null;
-            }
-
-            return $case;
-        }
-
-        return null;
     }
 
     public static function routeName(string $slug): ?string
@@ -153,8 +122,6 @@ class CaseStudySupport
         return [
             'cases' => $cases,
             'fanImages' => self::fanImages(),
-            'seoTitle' => 'Case Studies | Suave Creators',
-            'seoDescription' => 'See how Suave Creators designs and ships real products — stories from the software we build for clients.',
         ];
     }
 
@@ -211,50 +178,48 @@ class CaseStudySupport
     }
 
     /**
-     * @return array<string, mixed>
-     */
-    public static function showData(string $slug): array
-    {
-        $case = self::case($slug);
-
-        if ($case === null) {
-            abort(404);
-        }
-
-        return self::pageData($case);
-    }
-
-    /**
-     * Data payload for a static case study page.
+     * Split a metric string such as "~55%", "3.4x", "~$261", or "01" for count-up animation.
      *
-     * @return array<string, mixed>
+     * @return array{raw: string, numeric: bool, prefix: string, end: float, decimals: int, suffix: string, pad: int}
      */
-    public static function staticData(string $slug): array
+    public static function parseMetricValue(string $value): array
     {
-        return self::showData($slug);
-    }
+        $raw = trim($value);
+        $empty = [
+            'raw' => $raw,
+            'numeric' => false,
+            'prefix' => '',
+            'end' => 0.0,
+            'decimals' => 0,
+            'suffix' => '',
+            'pad' => 0,
+        ];
 
-    public static function visualForSection(array $section, int $index): string
-    {
-        if (! empty($section['visual'])) {
-            return (string) $section['visual'];
+        if ($raw === '') {
+            return $empty;
         }
 
-        $eyebrow = strtolower((string) ($section['eyebrow'] ?? ''));
+        if (preg_match('/^(.*?)(\d+(?:\.\d+)?)(.*)$/u', $raw, $matches) !== 1) {
+            $empty['prefix'] = $raw;
 
-        if (str_contains($eyebrow, 'discover')) {
-            return 'discovery';
+            return $empty;
         }
 
-        if (str_contains($eyebrow, 'prepar') || str_contains($eyebrow, 'intel')) {
-            return 'preparation';
-        }
+        $number = $matches[2];
+        $decimals = str_contains($number, '.') ? strlen(explode('.', $number, 2)[1]) : 0;
+        $pad = ($decimals === 0 && strlen($number) > 1 && str_starts_with($number, '0'))
+            ? strlen($number)
+            : 0;
 
-        if (str_contains($eyebrow, 'pipeline') || str_contains($eyebrow, 'lead')) {
-            return 'pipeline';
-        }
-
-        return self::VISUALS[$index % count(self::VISUALS)];
+        return [
+            'raw' => $raw,
+            'numeric' => true,
+            'prefix' => $matches[1],
+            'end' => (float) $number,
+            'decimals' => $decimals,
+            'suffix' => $matches[3],
+            'pad' => $pad,
+        ];
     }
 
     /**
@@ -291,34 +256,6 @@ class CaseStudySupport
     }
 
     /**
-     * @param  array<string, mixed>  $case
-     * @return array<string, mixed>
-     */
-    protected static function pageData(array $case): array
-    {
-        $seoTitle = trim((string) ($case['meta_title'] ?? ''));
-        if ($seoTitle === '') {
-            $seoTitle = $case['title'].' | Case Study | Suave Creators';
-        }
-
-        $seoDescription = trim((string) ($case['meta_description'] ?? ''));
-        if ($seoDescription === '') {
-            $seoDescription = (string) ($case['short_description'] ?? '');
-        }
-
-        return [
-            'case' => $case,
-            'seoTitle' => $seoTitle,
-            'seoDescription' => $seoDescription,
-            'seoOgTitle' => trim((string) ($case['og_title'] ?? '')) ?: null,
-            'seoOgDescription' => trim((string) ($case['og_description'] ?? '')) ?: null,
-            'seoImage' => $case['image'] ?? null,
-            'seoRobots' => ! empty($case['is_draft']) ? 'noindex, nofollow' : null,
-            'isDraft' => ! empty($case['is_draft']),
-        ];
-    }
-
-    /**
      * @param  array<string, mixed>  $item
      * @return array<string, mixed>
      */
@@ -326,40 +263,20 @@ class CaseStudySupport
     {
         $slug = (string) ($item['slug'] ?? '');
         $status = (string) ($item['status'] ?? 'draft');
-        $image = self::publicImageUrl((string) ($item['image'] ?? ''));
-        $sections = [];
-
-        foreach (array_slice(is_array($item['sections'] ?? null) ? array_values($item['sections']) : [], 0, 2) as $section) {
-            if (! is_array($section)) {
-                continue;
-            }
-
-            $section['image'] = self::publicImageUrl((string) ($section['image'] ?? ''));
-            $sections[] = $section;
-        }
 
         return [
             'slug' => $slug,
             'title' => (string) ($item['title'] ?? ''),
             'status' => $status,
             'is_draft' => $status === 'draft',
-            'image' => $image,
+            'image' => self::publicImageUrl((string) ($item['image'] ?? '')),
             'short_description' => (string) ($item['short_description'] ?? ''),
             'listing_subtitle' => (string) ($item['listing_subtitle'] ?? ''),
             'industry' => (string) ($item['industry'] ?? ''),
             'service_slugs' => is_array($item['service_slugs'] ?? null) ? array_values($item['service_slugs']) : [],
             'industry_slugs' => is_array($item['industry_slugs'] ?? null) ? array_values($item['industry_slugs']) : [],
-            'year' => (string) ($item['year'] ?? ''),
             'technologies' => is_array($item['technologies'] ?? null) ? $item['technologies'] : [],
             'results' => is_array($item['results'] ?? null) ? $item['results'] : [],
-            'challenge' => (string) ($item['challenge'] ?? ''),
-            'solution' => (string) ($item['solution'] ?? ''),
-            'outcome' => (string) ($item['outcome'] ?? ''),
-            'sections' => $sections,
-            'meta_title' => (string) ($item['meta_title'] ?? ''),
-            'meta_description' => (string) ($item['meta_description'] ?? ''),
-            'og_title' => (string) ($item['og_title'] ?? ''),
-            'og_description' => (string) ($item['og_description'] ?? ''),
             'url' => self::urlForSlug($slug),
         ];
     }

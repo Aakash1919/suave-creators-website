@@ -5427,8 +5427,8 @@ html {
 @media (min-width: 1024px) {
   .case-studies-carousel__card {
     align-items: stretch;
-    gap: 2rem;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 1.75rem;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
     padding: 2rem;
   }
 
@@ -5522,23 +5522,31 @@ html {
 }
 
 .case-studies-carousel__media {
+  align-items: center;
+  aspect-ratio: 4 / 3;
   background: #0b1024;
   border-radius: 20px;
-  display: block;
-  min-height: 240px;
+  display: flex;
+  justify-content: center;
+  min-height: 0;
   overflow: hidden;
+  padding: 0.2rem;
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
   .case-studies-carousel__media {
-    min-height: 100%;
+    align-self: center;
+    max-height: 440px;
   }
 }
 
 .case-studies-carousel__media img {
   display: block;
   height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
   width: 100%;
 }
 
@@ -5604,8 +5612,8 @@ html {
   }
 
   .case-studies-carousel__media {
-    aspect-ratio: 16 / 11;
-    min-height: 0;
+    aspect-ratio: 4 / 3;
+    padding: 0.2rem;
   }
 }
 
@@ -5615,4 +5623,10 @@ html {
   }
 }
 /* ===== CASE STUDIES CAROUSEL END ===== */
+
+/* ===== CASE STUDY METRIC COUNTERS START ===== */
+[data-metric-counter] {
+  font-variant-numeric: tabular-nums;
+}
+/* ===== CASE STUDY METRIC COUNTERS END ===== */
 

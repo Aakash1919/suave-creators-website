@@ -355,7 +355,7 @@ class ProductSupport
                 'role' => 'Managing Director',
                 'company' => 'Turbo Trans Corporation',
                 'avatar' => [
-                    'src' => asset('assets/product/amit-rana-managing-director-portrait.svg'),
+                    'src' => asset('assets/product/generic-user-profile-avatar.png'),
                     'alt' => 'Amit Rana Managing Director Turbo Trans Corporation Suave AI CRM testimonial portrait',
                 ],
             ],

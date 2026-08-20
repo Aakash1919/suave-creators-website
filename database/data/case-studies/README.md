@@ -1,11 +1,11 @@
 # Case study static catalog
 
-Offline source used directly by frontend support classes for static case study pages.
+Offline source used by frontend support classes for **listing cards, carousels, and sitemap** — not for story detail pages.
 
 | Path | Purpose |
 |------|---------|
-| `cases.php` | All case study fields (hero, metrics, overview, two story sections) |
+| `cases.php` | Listing fields (title, image, tags, results, service/industry placement) |
 
-Hero images stay in `public/assets/case-studies/` and are referenced as `assets/case-studies/...` entries in this catalog.
+Each public story is an independent Blade page under `resources/views/frontend/case-studies/`. Hero images stay in `public/assets/case-studies/` and are referenced as `asset('assets/case-studies/...')` in those views.
 
 Case studies are **manual only** — there is no AI draft generation.
