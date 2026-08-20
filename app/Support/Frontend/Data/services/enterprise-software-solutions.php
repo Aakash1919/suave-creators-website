@@ -1,10 +1,10 @@
 <?php
 return array(
   'slug' => 'enterprise-software-solutions',
-  'pageTitle' => 'Enterprise Software Solutions, Examples & Management | Suave Creators',
-  'pageDescription' => 'Enterprise software solutions, definition, examples, and management support for growing teams. Build ERP, CRM, dashboards, and workflow systems with Suave Creators.',
-  'ogTitle' => 'Enterprise Software Solutions, Examples & Management | Suave Creators',
-  'ogDescription' => 'Explore enterprise software definition, examples, and management support. Suave Creators builds ERP, CRM, dashboards, integrations, and workflow systems.',
+  'pageTitle' => 'Enterprise Software That Improves Operations',
+  'pageDescription' => 'Planning enterprise software? Understand what it takes, what you get, and how the right system can improve teams, workflows, and growth.',
+  'ogTitle' => 'Enterprise Software That Improves Operations',
+  'ogDescription' => 'Planning enterprise software? Understand what it takes, what you get, and how the right system can improve teams, workflows, and growth.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',
   'heroTitle' =>
   array(

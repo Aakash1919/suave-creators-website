@@ -21,11 +21,11 @@ class EnterpriseSoftwareSeoTest extends TestCase
         ]);
 
         $this->assertSame(
-            'Enterprise Software Solutions, Examples & Management | Suave Creators',
+            'Enterprise Software That Improves Operations',
             $service['pageTitle'] ?? '',
         );
         $this->assertStringContainsString(
-            'Enterprise software solutions, definition, examples, and management support for growing teams.',
+            'Planning enterprise software? Understand what it takes, what you get, and how the right system can improve teams, workflows, and growth.',
             $service['pageDescription'] ?? '',
         );
         $this->assertContains('What is enterprise software?', $faqs);
