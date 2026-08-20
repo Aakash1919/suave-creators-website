@@ -219,7 +219,7 @@ return [
             'description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation',
             'og_title' => 'Success Story: Turbo Trans Corporation',
             'og_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation',
-            'og_image' => 'assets/case-studies/turbo-trans/turbo-trans-sales-crm-metrics-banner.png',
+            'og_image' => 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
         ],
         'ai-sales-coaching-case-study' => [
             'title' => 'AI Sales Coaching Platform Case Study | Suave Creators',

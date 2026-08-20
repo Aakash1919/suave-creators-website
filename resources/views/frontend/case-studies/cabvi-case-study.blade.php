@@ -55,19 +55,19 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~70%" />
+            <p class="case-study-metrics__value">~70%</p>
             <h3 class="case-study-metrics__label">Less time spent hunting look-alikes across supplier sites by hand</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~60%" />
+            <p class="case-study-metrics__value">~60%</p>
             <h3 class="case-study-metrics__label">Improvement in match qualification speed</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~75%" />
+            <p class="case-study-metrics__value">~75%</p>
             <h3 class="case-study-metrics__label">Less spreadsheet re-entry to keep match records</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~50%" />
+            <p class="case-study-metrics__value">~50%</p>
             <h3 class="case-study-metrics__label">Less manpower burned on the find–qualify–record loop</h3>
           </div>
     </div>

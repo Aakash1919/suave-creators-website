@@ -1,3 +1,14 @@
+@props([
+    'value' => '',
+    'tag' => 'span',
+])
+
+@php
+    $tag = in_array($tag, ['span', 'p', 'strong'], true) ? $tag : 'span';
+    $parsed = \App\Support\Frontend\CaseStudySupport::parseMetricValue((string) $value);
+    $initial = $parsed['initial'];
+@endphp
+
 @if ($parsed['numeric'])
   <{{ $tag }}
     {{ $attributes->merge([

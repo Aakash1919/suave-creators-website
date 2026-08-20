@@ -55,19 +55,19 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" :value="'<2m'" />
+            <p class="case-study-metrics__value">&lt;2m</p>
             <h3 class="case-study-metrics__label">Free Spiritual Energy Scan completion</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="6" />
+            <p class="case-study-metrics__value">6</p>
             <h3 class="case-study-metrics__label">Life areas with scored AI insight</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="4" />
+            <p class="case-study-metrics__value">4</p>
             <h3 class="case-study-metrics__label">Sacred sadhna paths (live catalog)</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="1" />
+            <p class="case-study-metrics__value">1</p>
             <h3 class="case-study-metrics__label">Prioritized “start here” practice</h3>
           </div>
     </div>

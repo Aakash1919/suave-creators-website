@@ -55,19 +55,19 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~50%" />
+            <p class="case-study-metrics__value">~50%</p>
             <h3 class="case-study-metrics__label">Less switching between separate Kanban and List views</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~45%" />
+            <p class="case-study-metrics__value">~45%</p>
             <h3 class="case-study-metrics__label">Faster answers to overdue and assigned task questions</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="1" />
+            <p class="case-study-metrics__value">1</p>
             <h3 class="case-study-metrics__label">Connected B2B CRM task management workspace from search to drawer</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="4" />
+            <p class="case-study-metrics__value">4</p>
             <h3 class="case-study-metrics__label">Focused drawer areas — Overview, Comments, Log Time, Attachments</h3>
           </div>
     </div>

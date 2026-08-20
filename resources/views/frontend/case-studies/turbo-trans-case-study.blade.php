@@ -68,7 +68,7 @@
             loading="lazy"
           >
         </div>
-        <x-frontend.case-study-metric-value class="product-case-study__metric-value" tag="p" value="42%" />
+        <p class="product-case-study__metric-value">42%</p>
         <p class="product-case-study__metric-label">More Qualified Leads</p>
         <p class="product-case-study__metric-caption">vs. Previous Quarter</p>
         <div
@@ -89,7 +89,7 @@
             loading="lazy"
           >
         </div>
-        <x-frontend.case-study-metric-value class="product-case-study__metric-value" tag="p" value="3.4x" />
+        <p class="product-case-study__metric-value">3.4x</p>
         <p class="product-case-study__metric-label">Faster Response Time</p>
         <p class="product-case-study__metric-caption">Average Lead Response</p>
         <div
@@ -131,7 +131,7 @@
             loading="lazy"
           >
         </div>
-        <x-frontend.case-study-metric-value class="product-case-study__metric-value" tag="p" value="68%" />
+        <p class="product-case-study__metric-value">68%</p>
         <p class="product-case-study__metric-label">Pipeline Visibility</p>
         <p class="product-case-study__metric-caption">Complete Deal Tracking</p>
         <div
@@ -152,7 +152,7 @@
             loading="lazy"
           >
         </div>
-        <x-frontend.case-study-metric-value class="product-case-study__metric-value" tag="p" value="2.8x" />
+        <p class="product-case-study__metric-value">2.8x</p>
         <p class="product-case-study__metric-label">Revenue Growth</p>
         <p class="product-case-study__metric-caption">Year-over-Year Increase</p>
         <div

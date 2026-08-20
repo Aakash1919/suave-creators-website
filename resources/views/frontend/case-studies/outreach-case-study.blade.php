@@ -52,19 +52,19 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~65%" />
+            <p class="case-study-metrics__value">~65%</p>
             <h3 class="case-study-metrics__label">Fewer steps for routine B2B CRM outbound sales prospecting</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~35%" />
+            <p class="case-study-metrics__value">~35%</p>
             <h3 class="case-study-metrics__label">Less effort to complete the same sales pipeline work</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="1" />
+            <p class="case-study-metrics__value">1</p>
             <h3 class="case-study-metrics__label">Connected CRM workspace from map discovery to cold email</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="3" />
+            <p class="case-study-metrics__value">3</p>
             <h3 class="case-study-metrics__label">Focused areas — Outreach, Targets, and Email automation</h3>
           </div>
     </div>

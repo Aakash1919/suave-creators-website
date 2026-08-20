@@ -52,19 +52,19 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~55%" />
+            <p class="case-study-metrics__value">~55%</p>
             <h3 class="case-study-metrics__label">Faster path from hire to confident customer calls</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~60%" />
+            <p class="case-study-metrics__value">~60%</p>
             <h3 class="case-study-metrics__label">Less manager time spent reviewing recordings for feedback</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~50%" />
+            <p class="case-study-metrics__value">~50%</p>
             <h3 class="case-study-metrics__label">Improvement in call quality consistency as the team expands</h3>
           </div>
           <div class="case-study-metrics__box">
-            <x-frontend.case-study-metric-value class="case-study-metrics__value" tag="p" value="~45%" />
+            <p class="case-study-metrics__value">~45%</p>
             <h3 class="case-study-metrics__label">Fewer opportunities lost waiting on delayed coaching</h3>
           </div>
     </div>

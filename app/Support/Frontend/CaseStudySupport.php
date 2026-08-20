@@ -2,6 +2,10 @@
 
 namespace App\Support\Frontend;
 
+/**
+ * Static marketing catalog for listing cards, carousels, and sitemap.
+ * Story copy lives in resources/views/frontend/case-studies/, not here.
+ */
 class CaseStudySupport
 {
     /**
@@ -180,7 +184,7 @@ class CaseStudySupport
     /**
      * Split a metric string such as "~55%", "3.4x", "~$261", or "01" for count-up animation.
      *
-     * @return array{raw: string, numeric: bool, prefix: string, end: float, decimals: int, suffix: string, pad: int}
+     * @return array{raw: string, numeric: bool, prefix: string, end: float, decimals: int, suffix: string, pad: int, initial: string}
      */
     public static function parseMetricValue(string $value): array
     {
@@ -193,6 +197,7 @@ class CaseStudySupport
             'decimals' => 0,
             'suffix' => '',
             'pad' => 0,
+            'initial' => '0',
         ];
 
         if ($raw === '') {
@@ -211,7 +216,7 @@ class CaseStudySupport
             ? strlen($number)
             : 0;
 
-        return [
+        $parsed = [
             'raw' => $raw,
             'numeric' => true,
             'prefix' => $matches[1],
@@ -220,6 +225,23 @@ class CaseStudySupport
             'suffix' => $matches[3],
             'pad' => $pad,
         ];
+        $parsed['initial'] = self::metricInitialNumber($parsed);
+
+        return $parsed;
+    }
+
+    /**
+     * @param  array{decimals: int, pad: int}  $parsed
+     */
+    protected static function metricInitialNumber(array $parsed): string
+    {
+        if (! empty($parsed['decimals'])) {
+            return number_format(0, (int) $parsed['decimals'], '.', '');
+        }
+
+        $pad = (int) ($parsed['pad'] ?? 0);
+
+        return $pad > 1 ? str_pad('0', $pad, '0', STR_PAD_LEFT) : '0';
     }
 
     /**
@@ -233,19 +255,10 @@ class CaseStudySupport
             return $hydrated;
         }
 
-        $file = base_path('database/data/case-studies/cases.php');
-        $catalog = file_exists($file) ? require $file : [];
-
-        if (! is_array($catalog)) {
-            $hydrated = [];
-
-            return $hydrated;
-        }
-
         $hydrated = [];
 
-        foreach ($catalog as $item) {
-            if (! is_array($item) || empty($item['slug'])) {
+        foreach (self::listingItems() as $item) {
+            if (empty($item['slug'])) {
                 continue;
             }
 
@@ -253,6 +266,187 @@ class CaseStudySupport
         }
 
         return $hydrated;
+    }
+
+    /**
+     * Listing cards, carousels, and sitemap only. Story copy lives in Blade.
+     *
+     * @return list<array<string, mixed>>
+     */
+    protected static function listingItems(): array
+    {
+        return [
+            [
+                'slug' => 'turbo-trans-corporation-case-study',
+                'title' => 'Success Story : The Turbo Trans Corporation',
+                'status' => 'published',
+                'image' => 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
+                'short_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation TurboTrans Corporation is a leading logistics and freight forwarding company specializing in air freight, ocean freight, land transportation, customs clearance, and end-to-end supply chain solutions.',
+                'listing_subtitle' => 'Global Operations',
+                'industry' => 'Logistics & Freight',
+                'service_slugs' => ['custom-crm-development'],
+                'industry_slugs' => ['logistics-supply-chain-apps'],
+                'results' => [
+                    ['value' => '42%', 'label' => 'More Qualified Leads vs. Previous Quarter'],
+                    ['value' => '3.4x', 'label' => 'Faster Response Time Average Lead Response'],
+                    ['value' => '68%', 'label' => 'Pipeline Visibility Complete Deal Tracking'],
+                    ['value' => '2.8x', 'label' => 'Revenue Growth Year-over-Year Increase'],
+                ],
+                'technologies' => [
+                    'AI-powered lead qualification',
+                    'Automated follow-up reminders',
+                    'Visual sales pipeline',
+                    'Real-time sales dashboard',
+                    'Team collaboration',
+                    'Smart reporting & analytics',
+                    'Customer activity timeline',
+                ],
+            ],
+            [
+                'slug' => 'ai-sales-coaching-platform-case-study',
+                'title' => 'An AI Sales Coach That Practices, Whispers, and Scores',
+                'status' => 'published',
+                'image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
+                'short_description' => 'An AI sales coaching platform that helps fast-growing teams keep performance consistent as they hire — with voice practice, live call coaching, and clear scores so new reps ramp faster and managers don’t wait on recordings.',
+                'listing_subtitle' => 'AI Sales Coaching Platform for Growing Teams',
+                'industry' => 'Sales Enablement',
+                'service_slugs' => ['enterprise-software-solutions'],
+                'industry_slugs' => ['it-software-solutions-for-startups'],
+                'results' => [
+                    ['value' => '~55%', 'label' => 'Faster path from hire to confident customer calls'],
+                    ['value' => '~60%', 'label' => 'Less manager time spent reviewing recordings for feedback'],
+                    ['value' => '~50%', 'label' => 'Improvement in call quality consistency as the team expands'],
+                    ['value' => '~45%', 'label' => 'Fewer opportunities lost waiting on delayed coaching'],
+                ],
+                'technologies' => [
+                    'AI sales coaching',
+                    'Voice practice',
+                    'Live call assist',
+                    'Call scoring',
+                    'Buyer personas',
+                    'Calendar sync',
+                ],
+            ],
+            [
+                'slug' => 'suave-crm-outreach-case-study',
+                'title' => 'The Suave App Outreach — From a Complex Process to a Clear B2B CRM Sales Workspace',
+                'status' => 'published',
+                'image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
+                'short_description' => 'We redesigned the suave app’s fragmented B2B CRM outbound sales workflow into one prospecting workspace — map-based company discovery, AI sales briefings, cold email automation, and pipeline tracking — with about 65% fewer steps.',
+                'listing_subtitle' => 'B2B CRM Outbound Sales Workflow Redesign',
+                'industry' => 'B2B SaaS / Sales CRM',
+                'service_slugs' => ['custom-crm-development'],
+                'industry_slugs' => ['it-software-solutions-for-startups'],
+                'results' => [
+                    ['value' => '~65%', 'label' => 'Fewer steps for routine B2B CRM outbound sales prospecting'],
+                    ['value' => '~35%', 'label' => 'Less effort to complete the same sales pipeline work'],
+                    ['value' => '1', 'label' => 'Connected CRM workspace from map discovery to cold email'],
+                    ['value' => '3', 'label' => 'Focused areas — Outreach, Targets, and Email automation'],
+                ],
+                'technologies' => [
+                    'Map-based company discovery',
+                    'AI sales prospecting briefings',
+                    'Cold email CRM automation',
+                    'B2B sales call practice',
+                    'Outbound sales pipeline CRM',
+                    'Territory distance planning',
+                ],
+            ],
+            [
+                'slug' => 'suave-crm-tasks-case-study',
+                'title' => 'The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace',
+                'status' => 'draft',
+                'image' => 'assets/case-studies/suave-crm-tasks/tasks-list-view.png',
+                'short_description' => 'We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.',
+                'listing_subtitle' => 'B2B CRM Task Management Workflow Redesign',
+                'industry' => 'B2B SaaS / Work Management',
+                'service_slugs' => ['custom-crm-development'],
+                'industry_slugs' => ['it-software-solutions-for-startups'],
+                'results' => [
+                    ['value' => '~50%', 'label' => 'Less switching between separate Kanban and List views'],
+                    ['value' => '~45%', 'label' => 'Faster answers to overdue and assigned task questions'],
+                    ['value' => '1', 'label' => 'Connected B2B CRM task management workspace from search to drawer'],
+                    ['value' => '4', 'label' => 'Focused drawer areas — Overview, Comments, Log Time, Attachments'],
+                ],
+                'technologies' => [
+                    'Kanban and List view integration',
+                    'Automated task assistant AI',
+                    'B2B CRM task management',
+                    'AI project management software',
+                    'Searchable project sidebar',
+                    'Inline & bulk create',
+                ],
+            ],
+            [
+                'slug' => 'teerrath-spiritual-commerce',
+                'title' => 'Teerrath — From Stuck to a Clear Sacred Path',
+                'status' => 'draft',
+                'image' => 'assets/case-studies/teerrath/spiritual-energy-scan-hero.png',
+                'short_description' => 'A free Spiritual Energy Scan in under 2 minutes becomes AI-personalized Vedic insight across six life areas — then a clear Dev, Mantra, Yantra, or Daan path to buy, gift, or fulfill.',
+                'listing_subtitle' => 'Spiritual Energy Scan to Sacred Commerce',
+                'industry' => 'Spiritual Wellness / Ecommerce',
+                'service_slugs' => ['e-commerce-development'],
+                'industry_slugs' => ['retail-ecommerce-solutions'],
+                'results' => [
+                    ['value' => '<2m', 'label' => 'Free Spiritual Energy Scan completion'],
+                    ['value' => '6', 'label' => 'Life areas with scored AI insight'],
+                    ['value' => '4', 'label' => 'Sacred sadhna paths (live catalog)'],
+                    ['value' => '1', 'label' => 'Prioritized “start here” practice'],
+                ],
+                'technologies' => [
+                    'AI spiritual guidance',
+                    'Vedic energy scan',
+                    'Razorpay payments',
+                    'WhatsApp via Fast2SMS',
+                    'Zoho Books sync',
+                    'Teerrath Kamals',
+                    'Sacred ecommerce',
+                    'Order fulfillment',
+                ],
+            ],
+            [
+                'slug' => 'appointment-insurance-platform-case-study',
+                'title' => 'Appointment Insurance That Makes Showing Up the Default',
+                'status' => 'published',
+                'image' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
+                'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
+                'industry' => 'Appointment Scheduling / Fintech',
+                'service_slugs' => ['web-development-services', 'enterprise-software-solutions'],
+                'industry_slugs' => ['healthcare', 'finance-banking-software-development'],
+                'results' => [
+                    ['value' => '~$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
+                    ['value' => '~90%', 'label' => 'Less card-fee waste on unused deposit money that comes back'],
+                    ['value' => '~70%', 'label' => 'Less manual chasing for confirmations, deposits, and “are you coming?”'],
+                    ['value' => '~65%', 'label' => 'Improvement in recovering value from no-shows instead of treating them as pure loss'],
+                ],
+                'technologies' => [
+                    'Appointment insurance',
+                    'No-show protection',
+                    'Deposit scheduling',
+                    'Stripe smart refunds',
+                    'SMS invites',
+                    'Location check-in',
+                ],
+            ],
+            [
+                'slug' => 'cabvi-product-matching',
+                'title' => 'CABVI — From Manual Product Matching to an Automated AI Workspace',
+                'status' => 'draft',
+                'image' => 'assets/case-studies/cabvi/cabvi-logo.png',
+                'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
+                'listing_subtitle' => 'Automated AI Product Matching',
+                'industry' => 'Nonprofit / Procurement',
+                'service_slugs' => ['enterprise-software-solutions'],
+                'industry_slugs' => ['it-software-solutions-for-startups', 'education-elearning-platforms'],
+                'results' => [
+                    ['value' => '~70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],
+                    ['value' => '~60%', 'label' => 'Improvement in match qualification speed'],
+                    ['value' => '~75%', 'label' => 'Less spreadsheet re-entry to keep match records'],
+                    ['value' => '~50%', 'label' => 'Less manpower burned on the find–qualify–record loop'],
+                ],
+            ],
+        ];
     }
 
     /**
