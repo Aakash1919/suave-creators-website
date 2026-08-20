@@ -42,14 +42,19 @@
           </p>
         </div>
       </div>
-      <button type="button" class="suave-agent__close" data-suave-agent-close aria-label="Close chat">
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-      </button>
+      <div class="suave-agent__actions">
+        <button type="button" class="suave-agent__action-btn suave-agent__new-chat" data-suave-agent-new-chat title="New chat" aria-label="Start new chat">
+          <i class="fa-solid fa-plus" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="suave-agent__action-btn suave-agent__close" data-suave-agent-close title="Close chat" aria-label="Close chat">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
     </header>
 
     <div class="suave-agent__body" data-suave-agent-body>
       <form class="suave-agent__lead" data-suave-agent-lead>
-        <p class="suave-agent__intro">Hi! I’m SuaveAgent, your sales assistant. Share your name and email to get started.</p>
+        <p class="suave-agent__intro">Hi! Welcome to Suave Creators. Share your name and email to chat about your project.</p>
         <label class="suave-agent__label" for="suave-agent-name">Name</label>
         <input id="suave-agent-name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Your name">
         <label class="suave-agent__label" for="suave-agent-email">Email</label>
@@ -285,6 +290,13 @@
           }
         });
 
+        var newChatBtn = root.querySelector('[data-suave-agent-new-chat]');
+        if (newChatBtn) {
+          newChatBtn.addEventListener('click', function () {
+            clearSession();
+          });
+        }
+
         closeBtn.addEventListener('click', function () {
           setOpen(false);
         });
@@ -470,6 +482,79 @@
 
         messageInput.addEventListener('input', resizeComposer);
         // Do not call resizeComposer() on load — chat starts hidden and it forced a reflow.
+
+        async function startWithSession(data) {
+          if (!data || !data.conversation_id) return;
+          session = {
+            lead_uuid: data.lead_uuid,
+            session_token: data.session_token,
+            conversation_id: data.conversation_id
+          };
+          saveSession();
+          setOpen(true);
+          showChat();
+          messagesEl.innerHTML = '';
+          await ensureMarked();
+          if (data.greeting) appendMessage('assistant', data.greeting, true);
+          historyLoaded = true;
+          messageInput.disabled = false;
+          setStatus('');
+          setTimeout(function () {
+            if (messageInput) messageInput.focus();
+          }, 150);
+        }
+
+        window.SuaveAgent = {
+          open: function () {
+            setOpen(true);
+            ensureMarked();
+            resumeIfPossible(false);
+          },
+          close: function () {
+            setOpen(false);
+          },
+          startWithSession: startWithSession,
+          startWithContact: async function (contact, name) {
+            setOpen(true);
+            showChat();
+            messagesEl.innerHTML = '';
+            setStatus('Starting conversation…');
+            try {
+              var res = await fetch(startUrl, {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'X-CSRF-TOKEN': csrf,
+                  'X-Requested-With': 'XMLHttpRequest'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({
+                  contact: contact,
+                  name: name || ''
+                })
+              });
+              var data = await res.json();
+              if (!res.ok || !data.conversation_id) {
+                throw new Error(data.message || 'Unable to start chat.');
+              }
+              await startWithSession(data);
+            } catch (err) {
+              setStatus('');
+              showLead();
+              leadError.textContent = err.message || 'Unable to start chat.';
+              leadError.hidden = false;
+            }
+          }
+        };
+
+        window.addEventListener('suave-agent:start', function (e) {
+          if (e.detail && e.detail.chat_session) {
+            startWithSession(e.detail.chat_session);
+          } else if (e.detail && e.detail.contact) {
+            window.SuaveAgent.startWithContact(e.detail.contact, e.detail.name);
+          }
+        });
       })();
     </script>
   @endpush

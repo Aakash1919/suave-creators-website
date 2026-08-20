@@ -24,21 +24,13 @@
                 </h1>
                 <p class="mb-2 mt-2 text-[13px] leading-[18px] text-[#B1B9DF] sm:text-sm sm:leading-5">{{ $industry['heroDescription'] ?? '' }}
                 </p>
-                <div class="mt-8 flex items-center gap-4 sm:gap-7">
-                    <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-                        class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 whitespace-nowrap">
-                        Let's Connect to Discuss
-                        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1">
-                            <path d="M18 8L22 12L18 16" />
-                            <path d="M2 12H22" />
-                        </svg>
-                    </a>
-
-                    <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-                        class="banner-text-link items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
-                        Book a Call </a>
+                <div class="mt-8">
+                    <x-frontend.inline-consultation-form
+                        theme="dark"
+                        placeholder="Enter your phone or email"
+                        button-text="Get Free Consultation"
+                        :secondary-href="$demoHref"
+                        secondary-label="Schedule a discovery call" />
                 </div>
             </div>
             <div

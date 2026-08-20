@@ -23,15 +23,13 @@
         We are a trusted Custom Software Development Company that specializes in CRM Development, Web Application, &
         Enterprise Software Solutions to help businesses grow.
       </p>
-      <div class="mt-8 flex items-center gap-4 sm:gap-7">
-        <x-frontend.cta-button :href="$demoHref" class="whitespace-nowrap">
-          Get Free Consultation
-        </x-frontend.cta-button>
-
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center border-b border-white/70 text-[13px] sm:text-sm font-semibold text-white whitespace-nowrap">
-          Schedule a discovery call
-        </a>
+      <div class="mt-8">
+        <x-frontend.inline-consultation-form
+          theme="dark"
+          placeholder="Enter your phone or email"
+          button-text="Get Free Consultation"
+          :secondary-href="$demoHref"
+          secondary-label="Schedule a discovery call" />
       </div>
     </div>
 

@@ -21,17 +21,23 @@ class ContactRequestDataTable
 
         return DataTables::eloquent($query)
             ->editColumn('name', function (ContactRequest $contact): string {
+                $meta = trim((string) $contact->email) !== ''
+                    ? $contact->email
+                    : (trim((string) $contact->phone) !== '' ? $contact->phone : 'Left the form before sending');
+
                 return '<div class="admin-table__person">'
-                    .'<span class="admin-table__avatar" aria-hidden="true">'.e(self::initials($contact->name)).'</span>'
+                    .'<span class="admin-table__avatar" aria-hidden="true">'.e(self::initials((string) ($contact->name ?? ''))).'</span>'
                     .'<div>'
-                    .'<div class="admin-table__title">'.e($contact->name).'</div>'
-                    .'<div class="admin-table__meta">'.e($contact->email).'</div>'
+                    .'<div class="admin-table__title">'.e($contact->displayName()).'</div>'
+                    .'<div class="admin-table__meta">'.e($meta).'</div>'
                     .'</div>'
                     .'</div>';
             })
+            ->editColumn('phone', fn (ContactRequest $contact): string => e(trim((string) $contact->phone) !== '' ? $contact->phone : '—'))
             ->editColumn('service', fn (ContactRequest $contact): string => e($contact->serviceLabel()))
             ->editColumn('status', function (ContactRequest $contact): string {
                 return match ($contact->status) {
+                    ContactRequest::STATUS_DRAFT => '<span class="admin-badge admin-badge--warning">Incomplete</span>',
                     ContactRequest::STATUS_READ => '<span class="admin-badge admin-badge--muted">Read</span>',
                     ContactRequest::STATUS_ARCHIVED => '<span class="admin-badge">Archived</span>',
                     default => '<span class="admin-badge admin-badge--success">New</span>',
@@ -49,6 +55,7 @@ class ContactRequestDataTable
             ->filter(function (EloquentBuilder $query) use ($request): void {
                 $status = (string) $request->input('status', '');
                 if (in_array($status, [
+                    ContactRequest::STATUS_DRAFT,
                     ContactRequest::STATUS_NEW,
                     ContactRequest::STATUS_READ,
                     ContactRequest::STATUS_ARCHIVED,
