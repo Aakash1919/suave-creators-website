@@ -1,5 +1,7 @@
 @extends('layouts.frontend')
 
+@php($siteUrl = rtrim((string) config('app.url'), '/'))
+
 @section('content')
 <!-- Privacy Policy Hero Start -->
 <section class="legal-hero relative z-10 w-full pb-10 pt-8 md:pb-12 md:pt-10 lg:pb-14 lg:pt-[52px] site-container">
@@ -160,7 +162,7 @@
         </p>
         <ul class="legal-page__contact">
           <li><a href="mailto:info@suavecreators.com">info@suavecreators.com</a></li>
-          <li><a href="https://www.suavecreators.com" target="_blank" rel="noopener noreferrer">https://www.suavecreators.com</a></li>
+          <li><a href="{{ $siteUrl }}" target="_blank" rel="noopener noreferrer">{{ $siteUrl }}</a></li>
         </ul>
       </section>
     </article>

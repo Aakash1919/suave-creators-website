@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\EnsureAdminUser;
 use App\Http\Middleware\EnsurePermission;
+use App\Http\Middleware\RedirectCanonicalHost;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -21,6 +22,10 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->web(append: [
+            RedirectCanonicalHost::class,
+        ]);
+
         $middleware->alias([
             'admin' => EnsureAdminUser::class,
             'permission' => EnsurePermission::class,

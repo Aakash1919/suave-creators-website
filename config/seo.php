@@ -146,10 +146,10 @@ return [
 
     'pages' => [
         'home' => [
-            'title' => 'Custom Software & Web Development Company | Suave Creators',
-            'description' => 'Suave Creators builds custom software, CRM systems, and scalable web applications for startups & enterprises. Boost growth with secure, future-ready solutions.',
-            'og_title' => 'Custom Software & Web Development Company | Suave Creators',
-            'og_description' => 'Suave Creators builds custom software, CRM systems, and scalable web applications. Grow faster with secure, future-ready digital solutions.',
+            'title' => 'Build Software That Creates Real Business Results',
+            'description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
+            'og_title' => 'Build Software That Creates Real Business Results',
+            'og_description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
             'json_ld_name' => 'Suave Creators — Web Development, CRM & Digital Growth Experts',
             'json_ld_description' => 'Suave Creators offers custom web development, CRM solutions, e-commerce development, enterprise software, mobile apps, digital marketing and SEO services.',
         ],
@@ -160,16 +160,16 @@ return [
             'og_description' => 'Learn about Suave Creators, a trusted IT company delivering innovative web development, AI solutions, and digital growth services for businesses worldwide.',
         ],
         'contact-us' => [
-            'title' => 'Contact Suave Creators | Let’s Discuss Your Digital Project',
-            'description' => 'Get in touch with Suave Creators to discuss your web development, app, or custom digital solution. Our team responds within 3 hours on business days.',
-            'og_title' => 'Contact Suave Creators | Let’s Discuss Your Digital Project',
-            'og_description' => 'Have a project in mind? Contact Suave Creators to discuss web development, apps, and custom digital solutions with our expert team.',
+            'title' => 'Ready to Build? Get a Free Project Consultation',
+            'description' => 'Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.',
+            'og_title' => 'Ready to Build? Get a Free Project Consultation',
+            'og_description' => 'Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.',
         ],
         'services' => [
-            'title' => 'Offshore Web & Software Development Company | Suave Creators',
-            'description' => 'Get offshore web, software, CRM & AI development from Suave Creators. We build scalable, secure digital solutions for global businesses.',
-            'og_title' => 'Offshore Web & Software Development Company | Suave Creators',
-            'og_description' => 'We provide offshore web development, software development, CRM, enterprise solutions, UI/UX, e-commerce, and AI services for startups & enterprises globally.',
+            'title' => 'Software Development Services for Serious Growth',
+            'description' => 'Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.',
+            'og_title' => 'Software Development Services for Serious Growth',
+            'og_description' => 'Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.',
         ],
         'industries' => [
             'title' => 'Industry Solutions | Suave Creators',

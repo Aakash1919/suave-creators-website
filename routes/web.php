@@ -28,9 +28,12 @@ Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('p
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301));
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
 
-Route::redirect('industry', 'industries');
+Route::redirect('/industry', '/industries', 301);
+Route::get('/main/public/{path}', fn (string $path) => redirect('/'.ltrim($path, '/'), 301))
+    ->where('path', '.*');
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
