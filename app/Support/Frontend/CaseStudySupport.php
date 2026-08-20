@@ -113,7 +113,7 @@ class CaseStudySupport
             }
         }
 
-        return $items;
+         return $items;
     }
 
     /**
@@ -276,32 +276,7 @@ class CaseStudySupport
     protected static function listingItems(): array
     {
         return [
-            [
-                'slug' => 'turbo-trans-corporation-case-study',
-                'title' => 'Success Story : The Turbo Trans Corporation',
-                'status' => 'published',
-                'image' => 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
-                'short_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation TurboTrans Corporation is a leading logistics and freight forwarding company specializing in air freight, ocean freight, land transportation, customs clearance, and end-to-end supply chain solutions.',
-                'listing_subtitle' => 'Global Operations',
-                'industry' => 'Logistics & Freight',
-                'service_slugs' => ['custom-crm-development'],
-                'industry_slugs' => ['logistics-supply-chain-apps'],
-                'results' => [
-                    ['value' => '42%', 'label' => 'More Qualified Leads vs. Previous Quarter'],
-                    ['value' => '3.4x', 'label' => 'Faster Response Time Average Lead Response'],
-                    ['value' => '68%', 'label' => 'Pipeline Visibility Complete Deal Tracking'],
-                    ['value' => '2.8x', 'label' => 'Revenue Growth Year-over-Year Increase'],
-                ],
-                'technologies' => [
-                    'AI-powered lead qualification',
-                    'Automated follow-up reminders',
-                    'Visual sales pipeline',
-                    'Real-time sales dashboard',
-                    'Team collaboration',
-                    'Smart reporting & analytics',
-                    'Customer activity timeline',
-                ],
-            ],
+            
             [
                 'slug' => 'ai-sales-coaching-platform-case-study',
                 'title' => 'An AI Sales Coach That Practices, Whispers, and Scores',
@@ -444,6 +419,32 @@ class CaseStudySupport
                     ['value' => '~60%', 'label' => 'Improvement in match qualification speed'],
                     ['value' => '~75%', 'label' => 'Less spreadsheet re-entry to keep match records'],
                     ['value' => '~50%', 'label' => 'Less manpower burned on the find–qualify–record loop'],
+                ],
+            ],
+            [
+                'slug' => 'turbo-trans-corporation-case-study',
+                'title' => 'Success Story : The Turbo Trans Corporation',
+                'status' => 'published',
+                'image' => 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
+                'short_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation TurboTrans Corporation is a leading logistics and freight forwarding company specializing in air freight, ocean freight, land transportation, customs clearance, and end-to-end supply chain solutions.',
+                'listing_subtitle' => 'Global Operations',
+                'industry' => 'Logistics & Freight',
+                'service_slugs' => ['custom-crm-development'],
+                'industry_slugs' => ['logistics-supply-chain-apps'],
+                'results' => [
+                    ['value' => '42%', 'label' => 'More Qualified Leads vs. Previous Quarter'],
+                    ['value' => '3.4x', 'label' => 'Faster Response Time Average Lead Response'],
+                    ['value' => '68%', 'label' => 'Pipeline Visibility Complete Deal Tracking'],
+                    ['value' => '2.8x', 'label' => 'Revenue Growth Year-over-Year Increase'],
+                ],
+                'technologies' => [
+                    'AI-powered lead qualification',
+                    'Automated follow-up reminders',
+                    'Visual sales pipeline',
+                    'Real-time sales dashboard',
+                    'Team collaboration',
+                    'Smart reporting & analytics',
+                    'Customer activity timeline',
                 ],
             ],
         ];
