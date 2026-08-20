@@ -29,6 +29,18 @@ class ConsultationCtaLabelTest extends TestCase
         }
     }
 
+    public function test_inline_consultation_form_saves_drafts_while_typing_and_before_window_close(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertSee('data-draft-url="'.route('contact-us.draft').'"', false);
+        $response->assertSee('data-consultation-draft-token', false);
+        $response->assertSee('function scheduleDraftSave()', false);
+        $response->assertSee('flushDraftSave(true);', false);
+        $response->assertSee('window.addEventListener(\'pagehide\', function ()', false);
+    }
+
     public function test_quick_consultation_submits_successfully_with_email(): void
     {
         $response = $this->postJson(route('consultation.store'), [
@@ -88,6 +100,39 @@ class ConsultationCtaLabelTest extends TestCase
         ]);
     }
 
+    public function test_quick_consultation_submit_upgrades_existing_inline_draft(): void
+    {
+        $token = '44444444-4444-4444-8444-444444444444';
+
+        $this->postJson(route('contact-us.draft'), [
+            'draft_token' => $token,
+            'phone' => '+1 (555) 234-5678',
+            'message' => 'Inline consultation started for: +1 (555) 234-5678',
+        ])->assertOk();
+
+        $this->assertDatabaseHas('contact_requests', [
+            'draft_token' => $token,
+            'phone' => '+1 (555) 234-5678',
+            'status' => ContactRequest::STATUS_DRAFT,
+        ]);
+
+        $response = $this->postJson(route('consultation.store'), [
+            'draft_token' => $token,
+            'contact' => '+1 (555) 234-5678',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertOk();
+        $this->assertDatabaseCount('contact_requests', 1);
+        $this->assertDatabaseHas('contact_requests', [
+            'draft_token' => $token,
+            'name' => 'Consultation Lead',
+            'phone' => '+1 (555) 234-5678',
+            'service' => 'Free Consultation',
+            'status' => ContactRequest::STATUS_NEW,
+        ]);
+    }
+
     public function test_quick_consultation_validates_contact_input(): void
     {
         $response = $this->postJson(route('consultation.store'), [
@@ -97,5 +142,36 @@ class ConsultationCtaLabelTest extends TestCase
 
         $response->assertStatus(422);
         $response->assertJsonPath('errors.contact.0', 'Please enter a valid phone number or email address.');
+    }
+
+    public function test_quick_consultation_silently_ignores_ip_after_recent_lead_burst(): void
+    {
+        for ($i = 0; $i < 6; $i++) {
+            ContactRequest::query()->create([
+                'name' => 'Consultation Lead',
+                'email' => 'burst'.$i.'@company.com',
+                'phone' => '',
+                'service' => 'Free Consultation',
+                'message' => 'Existing burst lead used to trip fake lead protection.',
+                'status' => ContactRequest::STATUS_NEW,
+                'ip_address' => '203.0.113.20',
+                'user_agent' => 'Feature test',
+            ]);
+        }
+
+        $response = $this
+            ->withServerVariables(['REMOTE_ADDR' => '203.0.113.20'])
+            ->postJson(route('consultation.store'), [
+                'contact' => 'too-many@company.com',
+                'form_started_at' => time() - 10,
+            ]);
+
+        $response->assertOk();
+        $response->assertJson(['success' => true]);
+        $response->assertJsonMissingPath('chat_session');
+        $this->assertDatabaseMissing('contact_requests', [
+            'email' => 'too-many@company.com',
+        ]);
+        $this->assertDatabaseCount('contact_requests', 6);
     }
 }
