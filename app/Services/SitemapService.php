@@ -26,7 +26,6 @@ class SitemapService
         $entries = [];
 
         foreach ($this->staticPages() as $page) {
-            logger($page);
             $entries[] = $this->entry(
                 route($page['route']),
                 $page['title'],
@@ -249,15 +248,15 @@ class SitemapService
     {
         return [
             ['route' => 'home', 'title' => 'Home', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '1.0'],
-            ['route' => 'about-us', 'title' => 'About us', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['route' => 'about-us', 'title' => 'About Suave Creators', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['route' => 'services', 'title' => 'Services', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['route' => 'industries', 'title' => 'Industries', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
-            ['route' => 'product', 'title' => 'Product', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
-            ['route' => 'case-studies', 'title' => 'Case studies', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.8'],
+            ['route' => 'product', 'title' => 'AI Outreach CRM', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['route' => 'case-studies', 'title' => 'Case Studies', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['route' => 'blogs', 'title' => 'Blog', 'group' => 'Primary', 'changefreq' => 'daily', 'priority' => '0.8'],
-            ['route' => 'contact-us', 'title' => 'Contact us', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.7'],
-            ['route' => 'privacy-policy', 'title' => 'Privacy policy', 'group' => 'Legal', 'changefreq' => 'yearly', 'priority' => '0.3'],
-            ['route' => 'terms-and-conditions', 'title' => 'Terms & conditions', 'group' => 'Legal', 'changefreq' => 'yearly', 'priority' => '0.3'],
+            ['route' => 'contact-us', 'title' => 'Contact Us', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.7'],
+            ['route' => 'privacy-policy', 'title' => 'Privacy Policy', 'group' => 'Legal', 'changefreq' => 'yearly', 'priority' => '0.3'],
+            ['route' => 'terms-and-conditions', 'title' => 'Terms & Conditions', 'group' => 'Legal', 'changefreq' => 'yearly', 'priority' => '0.3'],
         ];
     }
 

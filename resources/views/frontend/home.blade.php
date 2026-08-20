@@ -25,7 +25,7 @@
       </p>
       <div class="mt-8 flex items-center gap-4 sm:gap-7">
         <x-frontend.cta-button :href="$demoHref" class="whitespace-nowrap">
-          Start your Project
+          Get Free Consultation
         </x-frontend.cta-button>
 
         <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"

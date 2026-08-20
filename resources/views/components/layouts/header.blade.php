@@ -12,7 +12,7 @@
                 @if ($isNavActive('about-us')) aria-current="page" @endif>About</a>
             <a href="{{ route('product') }}"
                 class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('product') ? 'is-active' : '' }}"
-                @if ($isNavActive('product')) aria-current="page" @endif>Our Product</a>
+                @if ($isNavActive('product')) aria-current="page" @endif>AI Outreach CRM</a>
 
             @foreach ($dropdowns as $dropdown)
                 @php($dropdownActive = $isDropdownActive($dropdown))
@@ -103,7 +103,7 @@
                         @if ($isNavActive('about-us')) aria-current="page" @endif>About</a>
                     <a class="mobile-nav__link {{ $isNavActive('product') ? 'is-active' : '' }}"
                         href="{{ route('product') }}"
-                        @if ($isNavActive('product')) aria-current="page" @endif>Our Product</a>
+                        @if ($isNavActive('product')) aria-current="page" @endif>AI Outreach CRM</a>
 
                     @foreach ($dropdowns as $dropdown)
                         @php($dropdownActive = $isDropdownActive($dropdown))
