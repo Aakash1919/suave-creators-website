@@ -320,7 +320,9 @@
               return;
             }
 
-            if (typeof window.suaveTrackEvent === 'function') {
+            var shouldTrackLead = data.lead_tracked !== false;
+
+            if (shouldTrackLead && typeof window.suaveTrackEvent === 'function') {
               window.suaveTrackEvent('generate_lead', {
                 lead_type: 'consultation_inline',
                 form_name: 'inline_consultation_form',
@@ -334,13 +336,13 @@
             if (input) input.value = '';
 
             // Start Suave Agent chat session with the entered contact details
-            if (data.chat_session) {
+            if (shouldTrackLead && data.chat_session) {
               if (window.SuaveAgent && typeof window.SuaveAgent.startWithSession === 'function') {
                 window.SuaveAgent.startWithSession(data.chat_session);
               } else {
                 window.dispatchEvent(new CustomEvent('suave-agent:start', { detail: { chat_session: data.chat_session } }));
               }
-            } else {
+            } else if (shouldTrackLead) {
               if (window.SuaveAgent && typeof window.SuaveAgent.startWithContact === 'function') {
                 window.SuaveAgent.startWithContact(value);
               } else {
