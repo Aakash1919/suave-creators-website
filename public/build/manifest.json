@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-C-FJSAOx.css",
+    "file": "assets/app-D-r5PxaC.css",
     "name": "app",
     "names": [
       "app.css"
@@ -12,6 +12,12 @@
     "file": "assets/app-BvRk9kiK.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/bento.js": {
+    "file": "assets/bento-KCpa7vM2.js",
+    "name": "bento",
+    "src": "resources/js/bento.js",
     "isEntry": true
   }
 }

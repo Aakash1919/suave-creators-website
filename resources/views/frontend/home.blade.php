@@ -34,51 +34,7 @@
     </div>
 
     <div class="relative z-10 flex w-full min-w-0 items-center justify-start lg:justify-end">
-      <div class="hero-media-grid" aria-hidden="true">
-        <div
-          class="hero-media-grid__tile col-start-1 row-span-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img
-            src="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }}"
-            srcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
-            sizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
-            alt="Team brainstorming software strategy documents with Suave Creators"
-            title="Team brainstorming software strategy documents with Suave Creators"
-            class="block h-full w-full max-w-none object-cover"
-            width="628"
-            height="1024"
-            decoding="async"
-            loading="eager"
-            fetchpriority="high">
-        </div>
-        <div
-          class="hero-media-grid__tile col-start-2 row-start-1 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img
-            src="{{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }}"
-            srcset="{{ asset('assets/hero/hero-professionals-office-meeting-320.webp') }} 320w, {{ asset('assets/hero/hero-professionals-office-meeting-480.webp') }} 480w, {{ asset('assets/hero/hero-professionals-office-meeting-640.webp') }} 640w, {{ asset('assets/hero/hero-professionals-office-meeting.webp') }} 688w"
-            sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
-            alt="Software professionals collaborating in a modern office meeting"
-            title="Software professionals collaborating in a modern office meeting"
-            class="block h-full w-full max-w-none object-cover"
-            width="688"
-            height="248"
-            decoding="async"
-            loading="lazy">
-        </div>
-        <div
-          class="hero-media-grid__tile col-start-2 row-start-2 overflow-hidden rounded-[22px] [clip-path:inset(0_round_22px)]">
-          <img
-            src="{{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }}"
-            srcset="{{ asset('assets/hero/hero-team-conference-collaboration-320.webp') }} 320w, {{ asset('assets/hero/hero-team-conference-collaboration-480.webp') }} 480w, {{ asset('assets/hero/hero-team-conference-collaboration-640.webp') }} 640w, {{ asset('assets/hero/hero-team-conference-collaboration.webp') }} 688w"
-            sizes="(min-width: 1024px) 344px, (min-width: 768px) 287px, 51vw"
-            alt="Cross-functional team collaborating on custom software development"
-            title="Cross-functional team collaborating on custom software development"
-            class="block h-full w-full max-w-none object-cover"
-            width="688"
-            height="736"
-            decoding="async"
-            loading="lazy">
-        </div>
-      </div>
+      <x-frontend.bento :bento="$heroBento" />
     </div>
   </div>
 </section>
@@ -568,25 +524,6 @@
   justify-items: center;
   place-items: center;
   width: 58px;
-}
-
-.hero-media-grid {
-  aspect-ratio: 670 / 512;
-  column-gap: calc(12 / 670 * 100%);
-  display: grid;
-  flex-shrink: 0;
-  grid-template-columns: 314fr 344fr;
-  grid-template-rows: 124fr 368fr;
-  max-width: 670px;
-  row-gap: calc(20 / 512 * 100%);
-  width: 100%;
-}
-
-.hero-media-grid__tile {
-  height: 100%;
-  min-height: 0;
-  min-width: 0;
-  width: 100%;
 }
 
 .about-collage {
@@ -1189,12 +1126,6 @@
     width: 48px;
   }
 
-  .hero-media-grid {
-    border-radius: 16px;
-    max-width: 100% !important;
-    width: 100%;
-  }
-
   .digital-marketing-card__number {
     font-size: 28px;
     height: auto;
@@ -1282,11 +1213,6 @@
 
   .about-collage__tile--meeting-sm {
     aspect-ratio: 124 / 94;
-  }
-
-  .hero-media-grid {
-    max-width: 100% !important;
-    width: 100%;
   }
 
   .digital-marketing-card {

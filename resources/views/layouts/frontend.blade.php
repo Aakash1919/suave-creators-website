@@ -142,9 +142,9 @@
         .site-main>.site-container.relative h1{color:#fff;display:flex;flex-direction:column;font-size:36px;font-weight:600;line-height:1;margin:.5rem 0}
         .site-main>.single-blog-top h1{display:block;font-size:clamp(1.75rem,4vw,2.75rem);line-height:1.2;margin:.625rem 0 0}
         .site-main>.site-container.relative h1+p{color:#b1b9df;font-size:12px;line-height:1.25rem;margin:.5rem 0}
-        .hero-media-grid{aspect-ratio:670/512;display:grid;flex-shrink:0;grid-template-columns:314fr 344fr;grid-template-rows:124fr 368fr;max-width:670px;width:100%}
-        .hero-media-grid__tile{height:100%;min-height:0;min-width:0;overflow:hidden;width:100%}
-        .hero-media-grid__tile img{display:block;height:100%;max-width:none;object-fit:cover;width:100%}
+        .bento{aspect-ratio:670/540;display:grid;flex-shrink:0;gap:12px;grid-template-columns:1fr 1fr;max-width:670px;width:100%}
+        .bento__col{display:flex;flex-direction:column;gap:12px;min-height:0;min-width:0}
+        .bento__card{min-height:0;min-width:0;overflow:hidden}
         .about-stat__icon{display:inline-flex;flex-shrink:0;height:40px;width:40px}
         .about-stat__icon-image{aspect-ratio:1/1;display:block;height:40px;width:40px}
         .about-stat__value [data-counter-end]{display:inline-block;font-variant-numeric:tabular-nums}
@@ -227,13 +227,11 @@
     @endif
     @if ($usesHomeHeroPattern)
         <link rel="preload" as="image" href="{{ asset('assets/hero/hero-pattern-left.svg') }}">
-        {{-- Home LCP collage tile — discoverable early; must not be lazy-loaded. --}}
+        {{-- Home LCP bento portrait — discoverable early; must not be lazy-loaded. --}}
         <link
             rel="preload"
             as="image"
-            href="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }}"
-            imagesrcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
-            imagesizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
+            href="{{ asset('assets/team/professional-man-navy-blazer-portrait.png') }}"
             fetchpriority="high"
         >
     @endif

@@ -88,9 +88,9 @@ if (Test-Path $layout) {
 }
 
 # 4) Section component naming drift (Frontend classes without Section postfix)
-# Shared CTA chrome helpers are allowed without Section (see suave-frontend skill).
+# Shared chrome helpers are allowed without Section (see suave-frontend skill).
 $frontendDir = Join-Path $root 'app\View\Components\Frontend'
-$nonSectionAllowlist = @('CtaArrow', 'CtaButton')
+$nonSectionAllowlist = @('Bento', 'CtaArrow', 'CtaButton')
 if (Test-Path $frontendDir) {
     Get-ChildItem $frontendDir -Filter *.php -File | ForEach-Object {
         if ($_.BaseName -notmatch 'Section$' -and $nonSectionAllowlist -notcontains $_.BaseName) {
