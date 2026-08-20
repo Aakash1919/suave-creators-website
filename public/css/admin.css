@@ -2683,6 +2683,13 @@ table.dataTable.no-footer {
   white-space: nowrap;
 }
 
+table.dataTable.admin-table tbody tr:last-child .admin-table__actions details > div {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 0.375rem;
+}
+
 /* Processing overlay: center over the table body, hide DT 1.13 empty dots */
 .dataTables_wrapper .dataTables_processing {
   position: absolute !important;

@@ -5,7 +5,7 @@
 @section('content')
   <x-admin.datatable
     title="Contact requests"
-    description="Inquiries submitted from the public contact form."
+    description="Inquiries submitted from the public contact form, including people who left before sending."
     :columns="$columns"
     :sort-options="[
       ['label' => 'Newest', 'column' => 4, 'dir' => 'desc'],
@@ -21,6 +21,7 @@
     <x-slot:filters>
       <select id="contact-status-filter" class="admin-select admin-select--sm" aria-label="Filter by status">
         <option value="">All statuses</option>
+        <option value="draft">Incomplete</option>
         <option value="new">New</option>
         <option value="read">Read</option>
         <option value="archived">Archived</option>

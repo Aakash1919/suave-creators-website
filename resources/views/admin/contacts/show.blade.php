@@ -1,16 +1,18 @@
 @extends('layouts.admin')
 
-@section('title', 'Contact — '.$contact->name)
+@section('title', 'Contact — '.$contact->displayName())
 
 @section('content')
   <div class="admin-page-head">
     <div class="admin-page-head__copy">
-      <h1 class="admin-page-title">{{ $contact->name }}</h1>
+      <h1 class="admin-page-title">{{ $contact->displayName() }}</h1>
       <p class="admin-page-desc">
-        {{ $contact->email }}
+        {{ $contact->email ?: 'No email yet' }}
         · {{ $contact->serviceLabel() }}
         ·
-        @if ($contact->status === 'new')
+        @if ($contact->isDraft())
+          <span class="admin-badge admin-badge--warning">Incomplete</span>
+        @elseif ($contact->status === 'new')
           <span class="admin-badge admin-badge--success">New</span>
         @elseif ($contact->status === 'read')
           <span class="admin-badge admin-badge--muted">Read</span>
@@ -41,7 +43,14 @@
     <div class="admin-card__header">
       <div>
         <h2 class="admin-card__title">Inquiry details</h2>
-        <p>Received {{ optional($contact->created_at)->format('M j, Y · g:i A') }}</p>
+        <p>
+          @if ($contact->isDraft())
+            Left the form before sending
+            · Last updated {{ optional($contact->updated_at)->format('M j, Y · g:i A') }}
+          @else
+            Received {{ optional($contact->created_at)->format('M j, Y · g:i A') }}
+          @endif
+        </p>
       </div>
     </div>
     <div class="admin-card__body space-y-5">
@@ -49,13 +58,21 @@
         <div>
           <p class="admin-label">Phone</p>
           <p class="text-sm text-[var(--admin-text)]">
-            <a href="tel:{{ preg_replace('/\s+/', '', $contact->phone) }}" class="text-[var(--admin-primary)] hover:underline">{{ $contact->phone }}</a>
+            @if (trim((string) $contact->phone) !== '')
+              <a href="tel:{{ preg_replace('/\s+/', '', $contact->phone) }}" class="text-[var(--admin-primary)] hover:underline">{{ $contact->phone }}</a>
+            @else
+              —
+            @endif
           </p>
         </div>
         <div>
           <p class="admin-label">Email</p>
           <p class="text-sm text-[var(--admin-text)]">
-            <a href="mailto:{{ $contact->email }}" class="text-[var(--admin-primary)] hover:underline">{{ $contact->email }}</a>
+            @if (trim((string) $contact->email) !== '')
+              <a href="mailto:{{ $contact->email }}" class="text-[var(--admin-primary)] hover:underline">{{ $contact->email }}</a>
+            @else
+              —
+            @endif
           </p>
         </div>
         <div>
@@ -70,7 +87,7 @@
 
       <div>
         <p class="admin-label">Message</p>
-        <div class="admin-contact-message">{{ $contact->message }}</div>
+        <div class="admin-contact-message">{{ $contact->message ?: '—' }}</div>
       </div>
 
       @if ($contact->user_agent)

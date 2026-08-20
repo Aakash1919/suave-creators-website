@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Frontend\ContactDraftRequest;
 use App\Http\Requests\Frontend\ContactStoreRequest;
 use App\Models\ContactRequest;
 use Illuminate\Http\Request;
@@ -18,8 +19,7 @@ class ContactRequestService
      */
     public function isBotSubmission(Request $request): bool
     {
-        $honeypot = trim((string) $request->input('website', ''));
-        if ($honeypot !== '') {
+        if ($this->isHoneypotFilled($request)) {
             return true;
         }
 
@@ -34,18 +34,80 @@ class ContactRequestService
     }
 
     /**
+     * Whether the honeypot field was filled (bot).
+     */
+    public function isHoneypotFilled(Request $request): bool
+    {
+        return trim((string) $request->input('website', '')) !== '';
+    }
+
+    /**
      * Persist a legitimate contact request (validation happens in ContactStoreRequest).
      */
     public function store(ContactStoreRequest $request): ContactRequest
     {
         $data = $request->validated();
-        $agent = $request->userAgent();
+        $token = $this->nullableString($data['draft_token'] ?? null);
+        unset($data['draft_token']);
 
-        return ContactRequest::query()->create([
+        $attributes = [
             ...$data,
             'status' => ContactRequest::STATUS_NEW,
             'ip_address' => $request->ip(),
-            'user_agent' => $agent ? Str::limit($agent, 500, '') : null,
+            'user_agent' => $this->userAgent($request),
+        ];
+
+        $draft = $this->findDraft($token);
+        if ($draft !== null) {
+            $draft->fill($attributes)->save();
+
+            return $draft->fresh();
+        }
+
+        $attributes['draft_token'] = $token;
+
+        return ContactRequest::query()->create($attributes);
+    }
+
+    /**
+     * Create or update an incomplete contact row as the visitor fills fields.
+     */
+    public function saveDraft(ContactDraftRequest $request): ?ContactRequest
+    {
+        if ($this->isHoneypotFilled($request)) {
+            return null;
+        }
+
+        $data = $request->validated();
+        $token = $this->nullableString($data['draft_token'] ?? null) ?? (string) Str::uuid();
+        unset($data['draft_token']);
+
+        $attributes = $this->draftFieldAttributes($data);
+        if ($this->isEmptyDraft($attributes)) {
+            return null;
+        }
+
+        $existing = ContactRequest::query()->where('draft_token', $token)->first();
+        if ($existing !== null) {
+            if (! $existing->isDraft()) {
+                return $existing;
+            }
+
+            $existing->fill([
+                ...$attributes,
+                'ip_address' => $request->ip(),
+                'user_agent' => $this->userAgent($request),
+            ])->save();
+
+            return $existing->fresh();
+        }
+
+        return ContactRequest::query()->create([
+            ...$attributes,
+            'draft_token' => $token,
+            'status' => ContactRequest::STATUS_DRAFT,
+            'ip_address' => $request->ip(),
+            'user_agent' => $this->userAgent($request),
         ]);
     }
 
@@ -67,5 +129,58 @@ class ContactRequestService
         $contact->markArchived();
 
         return $contact->fresh();
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array{name: ?string, email: ?string, phone: ?string, service: ?string, message: ?string}
+     */
+    private function draftFieldAttributes(array $data): array
+    {
+        return [
+            'name' => $this->nullableString($data['name'] ?? null),
+            'email' => $this->nullableString($data['email'] ?? null),
+            'phone' => $this->nullableString($data['phone'] ?? null),
+            'service' => $this->nullableString($data['service'] ?? null),
+            'message' => $this->nullableString($data['message'] ?? null),
+        ];
+    }
+
+    /**
+     * @param  array{name: ?string, email: ?string, phone: ?string, service: ?string, message: ?string}  $attributes
+     */
+    private function isEmptyDraft(array $attributes): bool
+    {
+        return $attributes['name'] === null
+            && $attributes['email'] === null
+            && $attributes['phone'] === null
+            && $attributes['service'] === null
+            && $attributes['message'] === null;
+    }
+
+    private function findDraft(?string $token): ?ContactRequest
+    {
+        if ($token === null) {
+            return null;
+        }
+
+        return ContactRequest::query()
+            ->where('draft_token', $token)
+            ->where('status', ContactRequest::STATUS_DRAFT)
+            ->first();
+    }
+
+    private function nullableString(mixed $value): ?string
+    {
+        $value = trim((string) $value);
+
+        return $value === '' ? null : $value;
+    }
+
+    private function userAgent(Request $request): ?string
+    {
+        $agent = $request->userAgent();
+
+        return $agent ? Str::limit($agent, 500, '') : null;
     }
 }
