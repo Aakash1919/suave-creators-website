@@ -68,7 +68,7 @@ class Footer extends Component
                 ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software'],
                 ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Software'],
             ],
-            'Industry' => [
+            'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'IT Solutions'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Banking'],
@@ -80,10 +80,13 @@ class Footer extends Component
                 ['route' => 'home', 'label' => 'Home'],
                 ['route' => 'about-us', 'label' => 'About Us'],
                 ['route' => 'services', 'label' => 'Services'],
+                ['route' => 'industries', 'label' => 'Industries'],
+                ['route' => 'product', 'label' => 'AI Outreach CRM'],
+                ['route' => 'case-studies', 'label' => 'Case Studies'],
                 ['route' => 'blogs', 'label' => 'Blog'],
                 ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact Us'],
             ],
-            'Product' => [
+            'AI Outreach CRM' => [
                 ['route' => 'product', 'fragment' => 'how-it-works', 'label' => 'How it Works'],
                 ['route' => 'product', 'fragment' => 'add-ons', 'label' => 'Add Ons'],
                 ['route' => 'product', 'fragment' => 'business-works', 'label' => 'The-Suave AI'],

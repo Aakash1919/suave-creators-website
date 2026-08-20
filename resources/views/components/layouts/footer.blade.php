@@ -69,10 +69,10 @@
                 @endforeach
               </ul>
 
-              @if ($title === 'Product')
+              @if ($title === 'AI Outreach CRM')
                 <a href="{{ route('product') }}"
                   class="mt-2 inline-flex !min-h-0 items-center text-[12px] font-semibold text-white underline underline-offset-4 sm:mt-4 sm:text-[13px]">
-                  Explore Suave Outreach CRM
+                  Explore AI Outreach CRM
                 </a>
               @endif
             </div>
