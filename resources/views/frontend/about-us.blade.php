@@ -22,11 +22,14 @@
           Fortune 500 companies.</span>
       </p>
 
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-        class="group mt-8 inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-[3px_7px_22px_-6px_#2A4DFB24] transition hover:brightness-110 whitespace-nowrap sm:mt-10 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
-        Let's Discuss
-        <x-frontend.cta-arrow />
-      </a>
+      <div class="mx-auto mt-8 flex w-full max-w-[560px] flex-col items-center sm:mt-10">
+        <x-frontend.inline-consultation-form
+          theme="light"
+          placeholder="Enter your phone or email"
+          button-text="Get Free Consultation"
+          :secondary-href="$demoHref"
+          secondary-label="Schedule a discovery call" />
+      </div>
     </div>
 
     <div class="order-1 mx-auto w-full overflow-hidden rounded-xl border-[6px] border-white sm:order-2 sm:mt-8 sm:rounded-2xl sm:border-[10px]">

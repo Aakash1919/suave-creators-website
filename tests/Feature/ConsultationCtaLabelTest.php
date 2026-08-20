@@ -14,6 +14,7 @@ class ConsultationCtaLabelTest extends TestCase
     {
         foreach ([
             '/',
+            '/about-us',
             '/industries',
             '/industries/healthcare',
             '/services/enterprise-software-solutions',
