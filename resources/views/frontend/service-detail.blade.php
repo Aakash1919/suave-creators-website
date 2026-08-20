@@ -281,7 +281,7 @@
     <div class="portfolio-hero-pagination"></div>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-5">
       <x-frontend.cta-button>
-        Start your Project
+        Get Free Consultation
       </x-frontend.cta-button>
       <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book a Call</a>
     </div>

@@ -1,5 +1,7 @@
 @extends('layouts.frontend')
 
+@php($siteUrl = rtrim((string) config('app.url'), '/'))
+
 @section('content')
 <!-- Terms & Conditions Hero Start -->
 <section class="legal-hero relative z-10 w-full pb-10 pt-8 md:pb-12 md:pt-10 lg:pb-14 lg:pt-[52px] site-container">
@@ -21,7 +23,7 @@
     <article class="legal-page" id="terms-heading">
       <section class="legal-page__section">
         <h2>Terms &amp; Conditions – Suave Creators</h2>
-        <p>These terms and conditions consist of the rules and regulations for using or accessing our website at <a href="https://www.suavecreators.com" target="_blank" rel="noopener noreferrer">https://www.suavecreators.com/</a></p>
+        <p>These terms and conditions consist of the rules and regulations for using or accessing our website at <a href="{{ $siteUrl }}" target="_blank" rel="noopener noreferrer">{{ $siteUrl }}/</a></p>
         <p>If you do not agree to these terms of service stated here, you are advised not to use this website. If you access this website freely with your consent, we assume that you accept these terms and conditions.</p>
       </section>
 
@@ -79,7 +81,7 @@
         <p>If you have any questions regarding our website, services, terms, privacy policy, or any other concerns, please <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">contact us</a>.</p>
         <ul class="legal-page__contact">
           <li><a href="mailto:info@suavecreators.com">info@suavecreators.com</a></li>
-          <li><a href="https://www.suavecreators.com" target="_blank" rel="noopener noreferrer">https://www.suavecreators.com</a></li>
+          <li><a href="{{ $siteUrl }}" target="_blank" rel="noopener noreferrer">{{ $siteUrl }}</a></li>
         </ul>
       </section>
     </article>

@@ -28,7 +28,7 @@ class FaqSection extends Component
         public string $description = 'Here are the most asked questions based on feedback from our users.',
         public string $headingId = 'faq-heading',
         public string $ctaHref = '',
-        public string $ctaLabel = 'Start your Project',
+        public string $ctaLabel = 'Get Free Consultation',
         public bool $showCta = true,
     ) {
         $this->media = filled($this->media) ? $this->normalizeAssetPath($this->media) : null;

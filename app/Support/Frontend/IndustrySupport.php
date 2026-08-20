@@ -267,7 +267,7 @@ class IndustrySupport
         return [
             'eyebrow' => 'Have questions about our Industry Solutions?',
             'description' => 'Here are the most asked questions about industry software and digital solutions.',
-            'ctaLabel' => 'Start your Project',
+            'ctaLabel' => 'Get Free Consultation',
         ];
     }
 }

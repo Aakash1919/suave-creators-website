@@ -320,7 +320,7 @@ class HomeSupport
     {
         return [
             'faqCtaHref' => ContactSupport::demoHref(),
-            'faqCtaLabel' => 'Start your Project',
+            'faqCtaLabel' => 'Get Free Consultation',
             'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',
             'faqMediaType' => 'image',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
