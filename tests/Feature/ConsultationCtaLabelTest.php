@@ -12,7 +12,13 @@ class ConsultationCtaLabelTest extends TestCase
 
     public function test_primary_project_ctas_use_inline_consultation_form_with_placeholder_and_label(): void
     {
-        foreach (['/', '/industries', '/services/enterprise-software-solutions', '/services'] as $path) {
+        foreach ([
+            '/',
+            '/industries',
+            '/industries/healthcare',
+            '/services/enterprise-software-solutions',
+            '/services',
+        ] as $path) {
             $response = $this->get($path);
 
             $response->assertOk();
