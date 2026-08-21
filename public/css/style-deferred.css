@@ -7064,7 +7064,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.case-study-detail-hero__media {
+/* .case-study-detail-hero__media {
   position: relative;
   margin: 0;
   overflow: hidden;
@@ -7074,7 +7074,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   box-shadow:
     0 24px 60px rgba(3, 6, 30, 0.45),
     0 0 0 1px rgba(122, 95, 248, 0.12);
-}
+} */
 
 .case-study-detail-hero__media img {
   display: block;
