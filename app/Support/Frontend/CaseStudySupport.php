@@ -36,6 +36,180 @@ class CaseStudySupport
         ));
     }
 
+    /**
+     * Per-case mosaic scenes for the homepage hero (one scene = one published case).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function heroVisualScenes(int $limit = 4): array
+    {
+        $scenes = [];
+
+        foreach (self::cases() as $case) {
+            $slug = (string) ($case['slug'] ?? '');
+            $title = trim((string) ($case['title'] ?? ''));
+            $industry = trim((string) ($case['industry'] ?? ''));
+            $listingImage = (string) ($case['image'] ?? '');
+
+            if ($slug === '' || $title === '' || $listingImage === '') {
+                continue;
+            }
+
+            $results = is_array($case['results'] ?? null) ? $case['results'] : [];
+            $primaryResult = is_array($results[0] ?? null) ? $results[0] : [];
+            $secondaryResult = is_array($results[1] ?? null) ? $results[1] : $primaryResult;
+            $primaryLabel = (string) ($primaryResult['label'] ?? '');
+            $secondaryLabel = (string) ($secondaryResult['label'] ?? '');
+            $subtitle = trim((string) ($case['listing_subtitle'] ?? ''));
+            $altBase = $industry !== '' ? "{$title} — {$industry}" : $title;
+            $alt = trim($altBase.' case study by Suave Creators');
+
+            $gallery = self::heroGalleryForSlug($slug, $listingImage);
+            $brandImage = $gallery[0];
+            $photoImage = $gallery[1] ?? $gallery[0];
+            $extraImage = $gallery[2] ?? null;
+
+            $scenes[] = [
+                'slug' => $slug,
+                'title' => $title,
+                'url' => (string) ($case['url'] ?? self::urlForSlug($slug)),
+                'alt' => $alt,
+                'tag' => $subtitle !== '' ? $subtitle : ($industry !== '' ? $industry : 'Case Study'),
+                'primary' => [
+                    'value' => (string) ($primaryResult['value'] ?? ''),
+                    'label' => $primaryLabel,
+                    'label_short' => self::shortHeroLabel($primaryLabel),
+                ],
+                'secondary' => [
+                    'value' => (string) ($secondaryResult['value'] ?? ''),
+                    'label' => $secondaryLabel,
+                    'label_short' => self::shortHeroLabel($secondaryLabel),
+                ],
+                'brand_image' => $brandImage,
+                'photo_image' => $photoImage,
+                'chart_image' => $extraImage,
+                'bars' => self::heroBarsFromResults($results),
+            ];
+
+            if (count($scenes) >= max(1, $limit)) {
+                break;
+            }
+        }
+
+        return $scenes;
+    }
+
+    /**
+     * @deprecated Use heroVisualScenes(); kept as a thin alias for HomeSupport callers.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function heroVisualItems(int $limit = 4): array
+    {
+        return self::heroVisualScenes($limit);
+    }
+
+    /**
+     * Relative asset paths for a case-study hero gallery (brand, photo, optional chart image).
+     *
+     * @return list<string> Hydrated public URLs
+     */
+    protected static function heroGalleryForSlug(string $slug, string $fallbackImage): array
+    {
+        $map = [
+            'turbo-trans-corporation-case-study' => [
+                'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
+            ],
+            'ai-sales-coaching-platform-case-study' => [
+                'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
+                'assets/case-studies/ai-sales-coaching/ai_sales_right.webp',
+                'assets/case-studies/ai-sales-coaching/ai_sales_left.webp',
+            ],
+            'suave-crm-outreach-case-study' => [
+                'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
+                'assets/case-studies/suave-crm-outreach/outreach_right.webp',
+                'assets/case-studies/suave-crm-outreach/outreach_left.webp',
+            ],
+            'appointment-insurance-platform-case-study' => [
+                'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'assets/case-studies/shownoshow/show_no-show right.webp',
+                'assets/case-studies/shownoshow/show_no_show left.webp',
+            ],
+        ];
+
+        $paths = $map[$slug] ?? [];
+
+        if ($paths === []) {
+            $paths = [$fallbackImage];
+        }
+
+        $urls = [];
+
+        foreach ($paths as $path) {
+            $url = str_starts_with($path, 'http://') || str_starts_with($path, 'https://')
+                ? $path
+                : self::publicImageUrl($path);
+
+            if ($url !== '') {
+                $urls[] = $url;
+            }
+        }
+
+        if ($urls === []) {
+            $urls[] = $fallbackImage;
+        }
+
+        return $urls;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $results
+     * @return list<int>
+     */
+    protected static function heroBarsFromResults(array $results): array
+    {
+        $defaults = [42, 68, 92, 58, 76];
+        $heights = [];
+
+        foreach (array_slice($results, 0, 5) as $index => $result) {
+            $parsed = self::parseMetricValue((string) ($result['value'] ?? ''));
+            if (! empty($parsed['numeric']) && $parsed['end'] > 0) {
+                $end = (float) $parsed['end'];
+                // Percent-like values stay in range; multipliers (3.4x) scale up.
+                $height = $end <= 100 ? max(28, min(96, (int) round($end))) : max(40, min(96, (int) round(28 + ($end * 12))));
+                $heights[] = $height;
+            } else {
+                $heights[] = $defaults[$index] ?? 55;
+            }
+        }
+
+        while (count($heights) < 5) {
+            $heights[] = $defaults[count($heights)] ?? 55;
+        }
+
+        return $heights;
+    }
+
+    /**
+     * Keep mosaic metric captions readable (GrowthNatives-style short lines).
+     */
+    protected static function shortHeroLabel(string $label, int $maxWords = 5): string
+    {
+        $label = trim(preg_replace('/\s+/u', ' ', $label) ?? '');
+
+        if ($label === '') {
+            return '';
+        }
+
+        $words = preg_split('/\s+/u', $label, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+        if (count($words) <= $maxWords) {
+            return $label;
+        }
+
+        return implode(' ', array_slice($words, 0, $maxWords));
+    }
+
     public static function routeName(string $slug): ?string
     {
         return self::ROUTES[$slug] ?? null;

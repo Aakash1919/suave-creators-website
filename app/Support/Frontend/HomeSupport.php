@@ -14,6 +14,7 @@ class HomeSupport
         return array_merge(self::faqData(), [
             'heroShellClass' => 'bg-[#00003f]',
             'heroBackgroundImage' => 'assets/background/home-hero-cover-bg.png',
+            'heroCaseStudies' => CaseStudySupport::heroVisualScenes(4),
             'stats' => self::stats(),
             'offerings' => self::offerings(),
             'coreValues' => self::coreValues(),
