@@ -41,11 +41,10 @@ return [
         'google_site_verification' => '8gnHTv-hWNxTIE6HmJwKSMZH5v_ryZuDVQRbAinOpAQ',
         'google_analytics_id' => 'G-5HX7B8X9QP',
         'google_tag_manager_id' => 'GTM-THXXRSV6',
+        // One English site: only en + x-default. Extra locales pointing at the
+        // same URL (en-in, en-us, en-gb) are invalid hreflang.
         'hreflang' => [
             'en',
-            'en-in',
-            'en-us',
-            'en-gb',
             'x-default',
         ],
         'organization' => [
