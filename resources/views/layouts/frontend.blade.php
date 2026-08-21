@@ -231,15 +231,20 @@
     @endif
     @if ($usesHomeHeroPattern)
         <link rel="preload" as="image" href="{{ asset('assets/hero/hero-pattern-left.svg') }}">
-        {{-- Home LCP collage tile — discoverable early; must not be lazy-loaded. --}}
-        <link
-            rel="preload"
-            as="image"
-            href="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }}"
-            imagesrcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
-            imagesizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
-            fetchpriority="high"
-        >
+        @php
+            $heroCsPoster = is_array($heroCaseStudies[0] ?? null)
+                ? trim((string) (($heroCaseStudies[0]['photo_image'] ?? $heroCaseStudies[0]['brand_image'] ?? '')))
+                : '';
+        @endphp
+        {{-- Home LCP: case-studies mosaic poster (replaces retired collage tile). --}}
+        @if ($heroCsPoster !== '')
+            <link
+                rel="preload"
+                as="image"
+                href="{{ str_starts_with($heroCsPoster, 'http') ? $heroCsPoster : asset($heroCsPoster) }}"
+                fetchpriority="high"
+            >
+        @endif
     @endif
 
     {{-- media="print" sheets download at low priority; preload keeps the design CSS on a high-priority fetch. --}}

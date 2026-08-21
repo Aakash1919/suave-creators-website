@@ -55,11 +55,11 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~50%</p>
+            <p class="case-study-metrics__value">+50%</p>
             <h3 class="case-study-metrics__label">Less switching between separate Kanban and List views</h3>
           </div>
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~45%</p>
+            <p class="case-study-metrics__value">+45%</p>
             <h3 class="case-study-metrics__label">Faster answers to overdue and assigned task questions</h3>
           </div>
           <div class="case-study-metrics__box">

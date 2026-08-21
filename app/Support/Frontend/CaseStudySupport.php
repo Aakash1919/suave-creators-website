@@ -356,7 +356,7 @@ class CaseStudySupport
     }
 
     /**
-     * Split a metric string such as "~55%", "3.4x", "~$261", or "01" for count-up animation.
+     * Split a metric string such as "+55%", "3.4x", "+$261", or "01" for count-up animation.
      *
      * @return array{raw: string, numeric: bool, prefix: string, end: float, decimals: int, suffix: string, pad: int, initial: string}
      */
@@ -487,10 +487,10 @@ class CaseStudySupport
                 'service_slugs' => ['enterprise-software-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
-                    ['value' => '~55%', 'label' => 'Faster path from hire to confident customer calls'],
-                    ['value' => '~60%', 'label' => 'Less manager time spent reviewing recordings for feedback'],
-                    ['value' => '~50%', 'label' => 'Improvement in call quality consistency as the team expands'],
-                    ['value' => '~45%', 'label' => 'Fewer opportunities lost waiting on delayed coaching'],
+                    ['value' => '+55%', 'label' => 'Faster path from hire to confident customer calls'],
+                    ['value' => '+60%', 'label' => 'Less manager time spent reviewing recordings for feedback'],
+                    ['value' => '+50%', 'label' => 'Improvement in call quality consistency as the team expands'],
+                    ['value' => '+45%', 'label' => 'Fewer opportunities lost waiting on delayed coaching'],
                 ],
                 'technologies' => [
                     'AI sales coaching',
@@ -512,8 +512,8 @@ class CaseStudySupport
                 'service_slugs' => ['custom-crm-development'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
-                    ['value' => '~65%', 'label' => 'Fewer steps for routine B2B CRM outbound sales prospecting'],
-                    ['value' => '~35%', 'label' => 'Less effort to complete the same sales pipeline work'],
+                    ['value' => '+65%', 'label' => 'Fewer steps for routine B2B CRM outbound sales prospecting'],
+                    ['value' => '+35%', 'label' => 'Less effort to complete the same sales pipeline work'],
                     ['value' => '1', 'label' => 'Connected CRM workspace from map discovery to cold email'],
                     ['value' => '3', 'label' => 'Focused areas — Outreach, Targets, and Email automation'],
                 ],
@@ -537,8 +537,8 @@ class CaseStudySupport
                 'service_slugs' => ['custom-crm-development'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
-                    ['value' => '~50%', 'label' => 'Less switching between separate Kanban and List views'],
-                    ['value' => '~45%', 'label' => 'Faster answers to overdue and assigned task questions'],
+                    ['value' => '+50%', 'label' => 'Less switching between separate Kanban and List views'],
+                    ['value' => '+45%', 'label' => 'Faster answers to overdue and assigned task questions'],
                     ['value' => '1', 'label' => 'Connected B2B CRM task management workspace from search to drawer'],
                     ['value' => '4', 'label' => 'Focused drawer areas — Overview, Comments, Log Time, Attachments'],
                 ],
@@ -589,10 +589,10 @@ class CaseStudySupport
                 'service_slugs' => ['web-development-services', 'enterprise-software-solutions'],
                 'industry_slugs' => ['healthcare', 'finance-banking-software-development'],
                 'results' => [
-                    ['value' => '~$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
-                    ['value' => '~90%', 'label' => 'Less card-fee waste on unused deposit money that comes back'],
-                    ['value' => '~70%', 'label' => 'Less manual chasing for confirmations, deposits, and “are you coming?”'],
-                    ['value' => '~65%', 'label' => 'Improvement in recovering value from no-shows instead of treating them as pure loss'],
+                    ['value' => '+$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
+                    ['value' => '+90%', 'label' => 'Less card-fee waste on unused deposit money that comes back'],
+                    ['value' => '+70%', 'label' => 'Less manual chasing for confirmations, deposits, and “are you coming?”'],
+                    ['value' => '+65%', 'label' => 'Improvement in recovering value from no-shows instead of treating them as pure loss'],
                 ],
                 'technologies' => [
                     'Appointment insurance',
@@ -614,10 +614,10 @@ class CaseStudySupport
                 'service_slugs' => ['enterprise-software-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups', 'education-elearning-platforms'],
                 'results' => [
-                    ['value' => '~70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],
-                    ['value' => '~60%', 'label' => 'Improvement in match qualification speed'],
-                    ['value' => '~75%', 'label' => 'Less spreadsheet re-entry to keep match records'],
-                    ['value' => '~50%', 'label' => 'Less manpower burned on the find–qualify–record loop'],
+                    ['value' => '+70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],
+                    ['value' => '+60%', 'label' => 'Improvement in match qualification speed'],
+                    ['value' => '+75%', 'label' => 'Less spreadsheet re-entry to keep match records'],
+                    ['value' => '+50%', 'label' => 'Less manpower burned on the find–qualify–record loop'],
                 ],
             ],
         ];

@@ -139,26 +139,28 @@
       </div>
 
       <div class="hero-cs-visual__cursor" data-hero-cs-cursor aria-hidden="true">
-        <svg viewBox="0 0 24 28" width="28" height="32" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="heroCsCursorFill" x1="3" y1="2" x2="20" y2="26" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#2F69FB"/>
-              <stop offset="1" stop-color="#C56BFF"/>
-            </linearGradient>
-          </defs>
-          <path
-            d="M4.2 2.2 19.5 12.4c.7.45.35 1.55-.5 1.55h-6.1l3.25 8.2c.25.65-.15 1.35-.85 1.5l-2.35.5c-.7.15-1.4-.3-1.55-.95L8.2 15.3 4.55 19.6c-.55.6-1.55.2-1.55-.6V3.35c0-.85.95-1.35 1.2-1.15Z"
-            fill="url(#heroCsCursorFill)"
-            stroke="#00003f"
-            stroke-width="1.35"
-            stroke-linejoin="round"/>
-          <path
-            d="M6.4 4.8 14.8 10.4"
-            stroke="#ffffff"
-            stroke-opacity=".5"
-            stroke-width="1.35"
-            stroke-linecap="round"/>
-        </svg>
+        <span class="hero-cs-visual__cursor-hand">
+          <svg viewBox="0 0 24 28" width="28" height="32" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="heroCsCursorFill" x1="3" y1="2" x2="20" y2="26" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2F69FB"/>
+                <stop offset="1" stop-color="#C56BFF"/>
+              </linearGradient>
+            </defs>
+            <path
+              d="M4.2 2.2 19.5 12.4c.7.45.35 1.55-.5 1.55h-6.1l3.25 8.2c.25.65-.15 1.35-.85 1.5l-2.35.5c-.7.15-1.4-.3-1.55-.95L8.2 15.3 4.55 19.6c-.55.6-1.55.2-1.55-.6V3.35c0-.85.95-1.35 1.2-1.15Z"
+              fill="url(#heroCsCursorFill)"
+              stroke="#00003f"
+              stroke-width="1.35"
+              stroke-linejoin="round"/>
+            <path
+              d="M6.4 4.8 14.8 10.4"
+              stroke="#ffffff"
+              stroke-opacity=".5"
+              stroke-width="1.35"
+              stroke-linecap="round"/>
+          </svg>
+        </span>
       </div>
     </div>
   </div>
@@ -167,12 +169,97 @@
   @push('scripts')
   <script>
     (function () {
-      var HOLD_MS = 2800;
-      var MOVE_MS = 850;
-      var PRESS_MS = 220;
-      var DRAG_MS = 520;
-      var EXIT_MS = 620;
-      var ENTER_MS = 720;
+      // Smooth cycle — longer hold + eased motion (about 3s hold + 3.4s motion)
+      var HOLD_MS = 3000;
+      var MOVE_MS = 920;
+      var PRESS_MS = 180;
+      var DRAG_MS = 620;
+      var EXIT_MS = 820;
+      var ENTER_MS = 980;
+      var SETTLE_MS = 480;
+      var CURSOR_EASE = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
+
+      var PATTERNS = [
+        {
+          id: 'lift',
+          grab: 'up',
+          offsets: [
+            { x: -8, y: -70, r: -3, s: 0.94 },
+            { x: 10, y: -78, r: 2, s: 0.92 },
+            { x: -12, y: -64, r: -2, s: 0.95 },
+            { x: 6, y: -72, r: 3, s: 0.93 },
+            { x: -4, y: -60, r: -1, s: 0.96 }
+          ]
+        },
+        {
+          id: 'drop',
+          grab: 'down',
+          offsets: [
+            { x: 6, y: 70, r: 2, s: 0.94 },
+            { x: -8, y: 78, r: -3, s: 0.92 },
+            { x: 10, y: 64, r: 2, s: 0.95 },
+            { x: -6, y: 72, r: -2, s: 0.93 },
+            { x: 4, y: 60, r: 1, s: 0.96 }
+          ]
+        },
+        {
+          id: 'cascade',
+          grab: 'side',
+          offsets: [
+            { x: -90, y: -8, r: -6, s: 0.94 },
+            { x: 90, y: -6, r: 6, s: 0.93 },
+            { x: -85, y: 10, r: -5, s: 0.95 },
+            { x: 88, y: 8, r: 5, s: 0.94 },
+            { x: -70, y: 12, r: -4, s: 0.96 }
+          ]
+        },
+        {
+          id: 'fan',
+          grab: 'center',
+          offsets: [
+            { x: -55, y: -45, r: -12, s: 0.86 },
+            { x: 58, y: -42, r: 12, s: 0.86 },
+            { x: -52, y: 48, r: -10, s: 0.88 },
+            { x: 50, y: 38, r: 10, s: 0.88 },
+            { x: 8, y: 62, r: 4, s: 0.9 }
+          ]
+        },
+        {
+          id: 'flip',
+          grab: 'photo',
+          offsets: [
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 }
+          ]
+        },
+        {
+          id: 'wave',
+          grab: 'up',
+          offsets: [
+            { x: -6, y: -55, r: -2, s: 0.95 },
+            { x: 6, y: 55, r: 2, s: 0.95 },
+            { x: -8, y: -48, r: -3, s: 0.94 },
+            { x: 8, y: 52, r: 3, s: 0.94 },
+            { x: -4, y: -42, r: -1, s: 0.96 }
+          ]
+        },
+        {
+          id: 'zoom',
+          grab: 'photo',
+          offsets: [
+            { x: -20, y: -10, r: -4, s: 0.72 },
+            { x: 0, y: 0, r: 0, s: 1.18 },
+            { x: 18, y: 12, r: 4, s: 0.7 },
+            { x: -14, y: 16, r: -3, s: 0.74 },
+            { x: 16, y: 20, r: 3, s: 0.76 }
+          ]
+        }
+      ];
+
+      var PATTERN_CLASSES = PATTERNS.map(function (p) { return 'is-pattern-' + p.id; });
 
       function prefersReducedMotion() {
         return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -194,106 +281,24 @@
         [scene.brand_image, scene.photo_image, scene.chart_image].forEach(function (src) {
           if (!src) return;
           var img = new Image();
+          img.decoding = 'async';
           img.src = src;
         });
       }
 
       function setImg(el, src, alt) {
-        if (!el || !src) return;
+        if (!el || !src || el.getAttribute('src') === src) {
+          if (el && alt) {
+            el.alt = alt;
+            el.title = alt;
+          }
+          return;
+        }
         el.src = src;
         if (alt) {
           el.alt = alt;
           el.title = alt;
         }
-      }
-
-      function applyScene(root, scene) {
-        if (!scene) return;
-        var url = scene.url || '#';
-        var alt = scene.alt || scene.title || '';
-        var primary = scene.primary || {};
-        var secondary = scene.secondary || {};
-        var bars = Array.isArray(scene.bars) ? scene.bars : [42, 68, 92, 58, 76];
-        var hasChartImage = !!scene.chart_image;
-
-        root.querySelectorAll('[data-hero-cs-link]').forEach(function (link) {
-          link.setAttribute('href', url);
-        });
-
-        var primaryValue = root.querySelector('[data-hero-cs-primary-value]');
-        var primaryLabel = root.querySelector('[data-hero-cs-primary-label]');
-        var secondaryValue = root.querySelector('[data-hero-cs-secondary-value]');
-        var secondaryLabel = root.querySelector('[data-hero-cs-secondary-label]');
-        var tag = root.querySelector('[data-hero-cs-tag]');
-        var metricTile = root.querySelector('[data-hero-cs-tile="0"]');
-        var photoTile = root.querySelector('[data-hero-cs-tile="1"]');
-        var chartTile = root.querySelector('[data-hero-cs-chart-tile]');
-        var secondaryTile = root.querySelector('[data-hero-cs-tile="3"]');
-        var tagTile = root.querySelector('[data-hero-cs-tile="4"]');
-
-        if (primaryValue) primaryValue.textContent = primary.value || '';
-        if (primaryLabel) primaryLabel.textContent = primary.label_short || '';
-        if (secondaryValue) secondaryValue.textContent = secondary.value || '';
-        if (secondaryLabel) secondaryLabel.textContent = secondary.label_short || '';
-        if (tag) tag.textContent = scene.tag || '';
-
-        if (metricTile) {
-          metricTile.setAttribute('aria-label', (scene.title || '') + ': ' + (primary.value || '') + ' ' + (primary.label_short || ''));
-        }
-        if (photoTile) photoTile.setAttribute('aria-label', scene.title || '');
-        if (chartTile) {
-          chartTile.setAttribute('aria-label', (scene.title || '') + ' results chart');
-          chartTile.classList.toggle('has-chart-image', hasChartImage);
-        }
-        if (secondaryTile) {
-          secondaryTile.setAttribute('aria-label', (scene.title || '') + ': ' + (secondary.value || '') + ' ' + (secondary.label_short || ''));
-        }
-        if (tagTile) tagTile.setAttribute('aria-label', scene.tag || '');
-
-        setImg(root.querySelector('[data-hero-cs-brand]'), scene.brand_image, alt);
-        setImg(root.querySelector('[data-hero-cs-photo]'), scene.photo_image, alt);
-
-        var chartImg = root.querySelector('[data-hero-cs-chart-img]');
-        if (chartImg) {
-          if (hasChartImage) {
-            setImg(chartImg, scene.chart_image, alt);
-            chartImg.hidden = false;
-          } else {
-            chartImg.hidden = true;
-          }
-        }
-
-        root.querySelectorAll('[data-hero-cs-bar]').forEach(function (bar, index) {
-          var height = bars[index] != null ? bars[index] : 55;
-          bar.style.setProperty('--hero-cs-bar', height + '%');
-          bar.classList.toggle('is-active', index === 2);
-        });
-      }
-
-      function tileCenter(stage, tile) {
-        var stageBox = stage.getBoundingClientRect();
-        var tileBox = tile.getBoundingClientRect();
-        return {
-          x: tileBox.left - stageBox.left + tileBox.width * 0.58,
-          y: tileBox.top - stageBox.top + tileBox.height * 0.48
-        };
-      }
-
-      function moveCursor(cursor, point, durationMs) {
-        if (!cursor) return Promise.resolve();
-        cursor.style.transitionDuration = (durationMs || MOVE_MS) + 'ms';
-        cursor.style.setProperty('--hero-cs-cx', point.x + 'px');
-        cursor.style.setProperty('--hero-cs-cy', point.y + 'px');
-        return wait(durationMs || MOVE_MS);
-      }
-
-      function snapCursor(cursor, point) {
-        if (!cursor) return;
-        cursor.style.transition = 'none';
-        cursor.style.setProperty('--hero-cs-cx', point.x + 'px');
-        cursor.style.setProperty('--hero-cs-cy', point.y + 'px');
-        cursor.offsetHeight;
-        cursor.style.transition = '';
       }
 
       function wait(ms) {
@@ -310,12 +315,118 @@
         var scenes = parseScenes(root);
         var index = 0;
         var tileIndex = 1;
-        var pushUp = true;
+        var patternIndex = 0;
         var running = false;
         var visible = true;
         var busy = false;
 
         if (!stage || !mosaic || scenes.length === 0) return;
+
+        var refs = {
+          links: root.querySelectorAll('[data-hero-cs-link]'),
+          tiles: root.querySelectorAll('[data-hero-cs-tile]'),
+          primaryValue: root.querySelector('[data-hero-cs-primary-value]'),
+          primaryLabel: root.querySelector('[data-hero-cs-primary-label]'),
+          secondaryValue: root.querySelector('[data-hero-cs-secondary-value]'),
+          secondaryLabel: root.querySelector('[data-hero-cs-secondary-label]'),
+          tag: root.querySelector('[data-hero-cs-tag]'),
+          metricTile: root.querySelector('[data-hero-cs-tile="0"]'),
+          photoTile: root.querySelector('[data-hero-cs-tile="1"]'),
+          chartTile: root.querySelector('[data-hero-cs-chart-tile]'),
+          secondaryTile: root.querySelector('[data-hero-cs-tile="3"]'),
+          tagTile: root.querySelector('[data-hero-cs-tile="4"]'),
+          brand: root.querySelector('[data-hero-cs-brand]'),
+          photo: root.querySelector('[data-hero-cs-photo]'),
+          chartImg: root.querySelector('[data-hero-cs-chart-img]'),
+          bars: root.querySelectorAll('[data-hero-cs-bar]')
+        };
+
+        var tileCenters = [];
+
+        function measureCenters() {
+          var stageBox = stage.getBoundingClientRect();
+          tileCenters = Array.prototype.map.call(refs.tiles, function (tile) {
+            var box = tile.getBoundingClientRect();
+            return {
+              x: box.left - stageBox.left + box.width * 0.58,
+              y: box.top - stageBox.top + box.height * 0.48
+            };
+          });
+        }
+
+        function applyScene(scene) {
+          if (!scene) return;
+          var url = scene.url || '#';
+          var alt = scene.alt || scene.title || '';
+          var primary = scene.primary || {};
+          var secondary = scene.secondary || {};
+          var bars = Array.isArray(scene.bars) ? scene.bars : [42, 68, 92, 58, 76];
+          var hasChartImage = !!scene.chart_image;
+
+          refs.links.forEach(function (link) {
+            link.setAttribute('href', url);
+          });
+
+          if (refs.primaryValue) refs.primaryValue.textContent = primary.value || '';
+          if (refs.primaryLabel) refs.primaryLabel.textContent = primary.label_short || '';
+          if (refs.secondaryValue) refs.secondaryValue.textContent = secondary.value || '';
+          if (refs.secondaryLabel) refs.secondaryLabel.textContent = secondary.label_short || '';
+          if (refs.tag) refs.tag.textContent = scene.tag || '';
+
+          if (refs.metricTile) {
+            refs.metricTile.setAttribute('aria-label', (scene.title || '') + ': ' + (primary.value || '') + ' ' + (primary.label_short || ''));
+          }
+          if (refs.photoTile) refs.photoTile.setAttribute('aria-label', scene.title || '');
+          if (refs.chartTile) {
+            refs.chartTile.setAttribute('aria-label', (scene.title || '') + ' results chart');
+            refs.chartTile.classList.toggle('has-chart-image', hasChartImage);
+          }
+          if (refs.secondaryTile) {
+            refs.secondaryTile.setAttribute('aria-label', (scene.title || '') + ': ' + (secondary.value || '') + ' ' + (secondary.label_short || ''));
+          }
+          if (refs.tagTile) refs.tagTile.setAttribute('aria-label', scene.tag || '');
+
+          setImg(refs.brand, scene.brand_image, alt);
+          setImg(refs.photo, scene.photo_image, alt);
+
+          if (refs.chartImg) {
+            if (hasChartImage) {
+              setImg(refs.chartImg, scene.chart_image, alt);
+              refs.chartImg.hidden = false;
+            } else {
+              refs.chartImg.hidden = true;
+            }
+          }
+
+          refs.bars.forEach(function (bar, i) {
+            bar.style.setProperty('--hero-cs-bar', (bars[i] != null ? bars[i] : 55) + '%');
+            bar.classList.toggle('is-active', i === 2);
+          });
+        }
+
+        function moveCursor(point, durationMs) {
+          if (!cursor) return Promise.resolve();
+          var ms = durationMs || MOVE_MS;
+          cursor.classList.remove('is-idle');
+          cursor.style.transitionProperty = 'transform, opacity';
+          cursor.style.transitionDuration = ms + 'ms';
+          cursor.style.transitionTimingFunction = CURSOR_EASE;
+          cursor.style.setProperty('--hero-cs-cx', point.x + 'px');
+          cursor.style.setProperty('--hero-cs-cy', point.y + 'px');
+          return wait(ms);
+        }
+
+        function snapCursor(point) {
+          if (!cursor) return;
+          cursor.style.transition = 'none';
+          cursor.style.setProperty('--hero-cs-cx', point.x + 'px');
+          cursor.style.setProperty('--hero-cs-cy', point.y + 'px');
+          cursor.offsetHeight;
+          cursor.style.transition = '';
+          cursor.style.transitionProperty = '';
+          cursor.style.transitionDuration = '';
+          cursor.style.transitionTimingFunction = '';
+        }
 
         function showStage() {
           root.classList.add('is-ready', 'is-intro');
@@ -325,41 +436,53 @@
             poster.classList.add('is-hidden');
             window.setTimeout(function () {
               poster.setAttribute('hidden', '');
-            }, 500);
+            }, 320);
           }
           window.setTimeout(function () {
             root.classList.remove('is-intro');
-          }, 900);
+            measureCenters();
+          }, 520);
         }
 
         if (prefersReducedMotion()) {
           showStage();
           if (cursor) cursor.setAttribute('hidden', '');
-          applyScene(root, scenes[0]);
+          applyScene(scenes[0]);
           return;
         }
 
         showStage();
-        applyScene(root, scenes[0]);
-        preloadScene(scenes[1] || scenes[0]);
+        applyScene(scenes[0]);
+        scenes.forEach(preloadScene);
+        measureCenters();
 
         if (cursor) {
-          var photoTile = root.querySelector('[data-hero-cs-tile="1"]');
-          if (photoTile) snapCursor(cursor, tileCenter(stage, photoTile));
+          if (tileCenters[1]) snapCursor(tileCenters[1]);
+          else if (refs.photoTile) {
+            var stageBox = stage.getBoundingClientRect();
+            var box = refs.photoTile.getBoundingClientRect();
+            snapCursor({
+              x: box.left - stageBox.left + box.width * 0.58,
+              y: box.top - stageBox.top + box.height * 0.48
+            });
+          }
           cursor.classList.add('is-visible', 'is-idle');
         }
 
         function clearMotionClasses() {
-          root.classList.remove(
+          root.classList.remove.apply(root.classList, [
             'is-pressing',
             'is-dragging',
             'is-exiting',
-            'is-entering',
-            'is-push-up',
-            'is-push-down'
-          );
-          root.querySelectorAll('[data-hero-cs-tile]').forEach(function (tile) {
+            'is-entering'
+          ].concat(PATTERN_CLASSES));
+          refs.tiles.forEach(function (tile) {
             tile.classList.remove('is-grabbed', 'is-cursor-target');
+            tile.style.removeProperty('--hero-cs-ox');
+            tile.style.removeProperty('--hero-cs-oy');
+            tile.style.removeProperty('--hero-cs-rot');
+            tile.style.removeProperty('--hero-cs-scale');
+            tile.style.removeProperty('--hero-cs-delay');
             tile.style.removeProperty('--hero-cs-drag-y');
           });
           if (cursor) {
@@ -368,29 +491,64 @@
           }
         }
 
+        function applyPatternOffsets(pattern, reverse) {
+          refs.tiles.forEach(function (tile, i) {
+            var offset = pattern.offsets[i] || pattern.offsets[0];
+            var mul = reverse ? -1 : 1;
+            tile.style.setProperty('--hero-cs-ox', (offset.x * mul) + '%');
+            tile.style.setProperty('--hero-cs-oy', (offset.y * mul) + '%');
+            tile.style.setProperty('--hero-cs-rot', (offset.r * mul) + 'deg');
+            tile.style.setProperty('--hero-cs-scale', String(offset.s));
+            tile.style.setProperty('--hero-cs-delay', (i * 0.07) + 's');
+          });
+        }
+
+        function grabPointFor(pattern, fallbackIndex) {
+          var prefer = fallbackIndex;
+          if (pattern.grab === 'photo') prefer = 1;
+          else if (pattern.grab === 'center') prefer = 1;
+          else if (pattern.grab === 'side') prefer = patternIndex % 2 === 0 ? 0 : 1;
+          else if (pattern.grab === 'down') prefer = 2;
+          prefer = prefer % refs.tiles.length;
+          return {
+            index: prefer,
+            point: tileCenters[prefer] || { x: 180, y: 180 }
+          };
+        }
+
+        function dragDelta(pattern) {
+          if (pattern.grab === 'up') return { x: -4, y: -34 };
+          if (pattern.grab === 'down') return { x: 4, y: 34 };
+          if (pattern.grab === 'side') return { x: patternIndex % 2 === 0 ? -42 : 42, y: -6 };
+          if (pattern.grab === 'center' || pattern.grab === 'photo') return { x: 0, y: -22 };
+          return { x: 0, y: -28 };
+        }
+
         async function cycleOnce() {
           if (!running || busy || !visible || document.hidden || scenes.length < 2) return;
           busy = true;
           clearMotionClasses();
 
-          var tiles = Array.prototype.slice.call(root.querySelectorAll('[data-hero-cs-tile]'));
-          if (!tiles.length) {
+          if (!tileCenters.length) measureCenters();
+          if (!refs.tiles.length) {
             busy = false;
             return;
           }
 
-          tileIndex = tileIndex % tiles.length;
-          var target = tiles[tileIndex];
-          tileIndex = (tileIndex + 2) % tiles.length;
-          var directionUp = pushUp;
-          pushUp = !pushUp;
-          var exitClass = directionUp ? 'is-push-up' : 'is-push-down';
-          var dragSign = directionUp ? -1 : 1;
+          var pattern = PATTERNS[patternIndex % PATTERNS.length];
+          patternIndex += 1;
+          var patternClass = 'is-pattern-' + pattern.id;
+          var grab = grabPointFor(pattern, tileIndex);
+          tileIndex = (grab.index + 2) % refs.tiles.length;
+          var target = refs.tiles[grab.index];
+          var grabPoint = grab.point;
+          var delta = dragDelta(pattern);
 
+          applyPatternOffsets(pattern, false);
+          root.classList.add(patternClass);
           if (cursor) cursor.classList.remove('is-idle');
 
-          var grabPoint = tileCenter(stage, target);
-          await moveCursor(cursor, grabPoint, MOVE_MS);
+          await moveCursor(grabPoint, MOVE_MS);
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
@@ -408,26 +566,30 @@
           }
 
           root.classList.remove('is-pressing');
-          root.classList.add('is-dragging', exitClass);
+          root.classList.add('is-dragging');
           if (cursor) {
             cursor.classList.remove('is-pressing');
             cursor.classList.add('is-dragging');
           }
 
-          var dragPoint = {
-            x: grabPoint.x + (directionUp ? -6 : 6),
-            y: grabPoint.y + dragSign * 54
-          };
-          target.style.setProperty('--hero-cs-drag-y', (dragSign * 28) + 'px');
-          await moveCursor(cursor, dragPoint, DRAG_MS);
+          target.style.setProperty('--hero-cs-drag-y', delta.y + 'px');
+          await moveCursor({
+            x: grabPoint.x + delta.x,
+            y: grabPoint.y + delta.y
+          }, DRAG_MS);
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
             return;
           }
 
+          // Drop drag state before exit so CSS animation:none cannot zero exit duration
+          root.classList.remove('is-dragging', 'is-pressing');
+          if (cursor) cursor.classList.remove('is-dragging', 'is-pressing');
+          target.style.removeProperty('--hero-cs-drag-y');
+
           root.classList.add('is-exiting');
-          await wait(EXIT_MS * 0.55);
+          await wait(EXIT_MS * 0.52);
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
@@ -435,21 +597,20 @@
           }
 
           index = (index + 1) % scenes.length;
-          applyScene(root, scenes[index]);
-          preloadScene(scenes[(index + 1) % scenes.length]);
+          applyScene(scenes[index]);
+          // Keep the same per-tile vectors so enter travels back from the exit destinations
+          applyPatternOffsets(pattern, false);
 
-          root.classList.remove('is-exiting', 'is-dragging');
+          root.classList.remove('is-exiting');
           root.classList.add('is-entering');
           target.classList.remove('is-grabbed');
-          target.style.removeProperty('--hero-cs-drag-y');
 
-          var settlePoint = tileCenter(stage, target);
-          await moveCursor(cursor, {
-            x: settlePoint.x,
-            y: settlePoint.y + dragSign * -18
-          }, ENTER_MS * 0.45);
+          moveCursor({
+            x: grabPoint.x - delta.x * 0.35,
+            y: grabPoint.y - delta.y * 0.35
+          }, ENTER_MS * 0.55);
 
-          await wait(ENTER_MS * 0.55);
+          await wait(ENTER_MS);
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
@@ -458,7 +619,7 @@
 
           clearMotionClasses();
           if (cursor) {
-            await moveCursor(cursor, tileCenter(stage, target), 420);
+            await moveCursor(grabPoint, SETTLE_MS);
             cursor.classList.add('is-idle');
           }
           busy = false;
@@ -470,7 +631,7 @@
             await wait(HOLD_MS);
             if (!running) break;
             if (!visible || document.hidden || busy) {
-              await wait(350);
+              await wait(200);
               continue;
             }
             try {
@@ -485,15 +646,15 @@
         if ('IntersectionObserver' in window) {
           var observer = new IntersectionObserver(function (entries) {
             visible = entries.some(function (entry) { return entry.isIntersecting; });
-          }, { threshold: 0.2 });
+          }, { threshold: 0.15 });
           observer.observe(root);
         }
 
-        document.addEventListener('visibilitychange', function () {
-          if (!document.hidden && visible && scenes.length > 1) {
-            preloadScene(scenes[(index + 1) % scenes.length]);
-          }
-        });
+        var resizeTimer = null;
+        window.addEventListener('resize', function () {
+          window.clearTimeout(resizeTimer);
+          resizeTimer = window.setTimeout(measureCenters, 120);
+        }, { passive: true });
 
         if (scenes.length > 1) {
           loop();

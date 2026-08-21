@@ -117,9 +117,13 @@
 
 .hero-cs-visual__stage {
   inset: 0;
-  overflow: hidden;
   position: absolute;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.45s ease;
+}
+
+.hero-cs-visual.is-exiting .hero-cs-visual__stage,
+.hero-cs-visual.is-entering .hero-cs-visual__stage {
+  overflow: hidden;
 }
 
 .hero-cs-visual__mosaic {
@@ -129,6 +133,7 @@
   grid-template-rows: minmax(150px, 1.15fr) minmax(150px, 1fr);
   height: 100%;
   min-height: 399px;
+  perspective: 900px;
   width: 100%;
 }
 
@@ -158,16 +163,16 @@
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile:hover:not(.is-grabbed) {
-  opacity: 0.88;
-  transform: translateY(calc(var(--hero-cs-drag-y, -28px) * 0.28));
+  opacity: 0.9;
+  transform: translateY(calc(var(--hero-cs-drag-y, -18px) * 0.22));
 }
 
 .hero-cs-visual.is-pressing .hero-cs-visual__tile:hover.is-grabbed {
-  transform: scale(0.965) translateY(4px);
+  transform: scale(0.97) translateY(3px);
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile:hover.is-grabbed {
-  transform: translateY(var(--hero-cs-drag-y, -28px)) scale(1.03) rotate(-1.5deg);
+  transform: translateY(var(--hero-cs-drag-y, -18px)) scale(1.025) rotate(-1deg);
 }
 
 .hero-cs-visual__tile--metric {
@@ -379,42 +384,109 @@
 }
 
 .hero-cs-visual.is-pressing .hero-cs-visual__tile.is-grabbed {
-  transform: scale(0.965) translateY(4px);
-  transition: transform 0.22s cubic-bezier(0.34, 1.2, 0.64, 1);
+  transform: scale(0.97) translateY(3px);
+  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile.is-grabbed {
-  box-shadow: 0 22px 48px rgba(47, 105, 251, 0.28), 0 12px 28px rgba(0, 0, 40, 0.28);
-  transform: translateY(var(--hero-cs-drag-y, -28px)) scale(1.03) rotate(-1.5deg);
-  transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 16px 36px rgba(47, 105, 251, 0.28), 0 10px 22px rgba(0, 0, 40, 0.24);
+  transform: translateY(var(--hero-cs-drag-y, -18px)) scale(1.03) rotate(-1deg);
+  transition: transform 0.48s cubic-bezier(0.33, 0.9, 0.28, 1);
   z-index: 12;
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile:not(.is-grabbed) {
-  filter: saturate(0.92);
-  opacity: 0.88;
-  transform: translateY(calc(var(--hero-cs-drag-y, -28px) * 0.28));
-  transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+  opacity: 0.92;
+  transform: translateY(calc(var(--hero-cs-drag-y, 0px) * 0.18)) scale(0.985);
+  transition: transform 0.48s cubic-bezier(0.33, 0.9, 0.28, 1), opacity 0.35s ease;
 }
 
-.hero-cs-visual.is-push-up.is-exiting .hero-cs-visual__tile {
-  animation: hero-cs-exit-up 0.62s cubic-bezier(0.4, 0, 0.2, 1) both;
-  animation-delay: calc(var(--hero-cs-i, 0) * 0.055s);
+.hero-cs-visual.is-exiting .hero-cs-visual__tile,
+.hero-cs-visual.is-entering .hero-cs-visual__tile {
+  animation-duration: 0.82s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.33, 0.9, 0.28, 1);
+  animation-delay: var(--hero-cs-delay, 0s);
 }
 
-.hero-cs-visual.is-push-down.is-exiting .hero-cs-visual__tile {
-  animation: hero-cs-exit-down 0.62s cubic-bezier(0.4, 0, 0.2, 1) both;
-  animation-delay: calc(var(--hero-cs-i, 0) * 0.055s);
+.hero-cs-visual.is-entering .hero-cs-visual__tile {
+  animation-duration: 0.98s;
 }
 
-.hero-cs-visual.is-push-up.is-entering .hero-cs-visual__tile {
-  animation: hero-cs-enter-up 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--hero-cs-i, 0) * 0.06s);
+/* Idle / settled tiles must stay fully visible after motion classes clear */
+.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-intro):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile {
+  opacity: 1;
 }
 
-.hero-cs-visual.is-push-down.is-entering .hero-cs-visual__tile {
-  animation: hero-cs-enter-down 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--hero-cs-i, 0) * 0.06s);
+/* Pattern: lift — shove mosaic upward */
+.hero-cs-visual.is-pattern-lift.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-vector;
+}
+
+.hero-cs-visual.is-pattern-lift.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-vector;
+}
+
+/* Pattern: drop — shove mosaic downward */
+.hero-cs-visual.is-pattern-drop.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-vector;
+}
+
+.hero-cs-visual.is-pattern-drop.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-vector;
+}
+
+/* Pattern: cascade — left/right peel */
+.hero-cs-visual.is-pattern-cascade.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-vector;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-cs-visual.is-pattern-cascade.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-vector;
+}
+
+/* Pattern: fan — scatter outward then reform */
+.hero-cs-visual.is-pattern-fan.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-fan;
+}
+
+.hero-cs-visual.is-pattern-fan.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-fan;
+}
+
+/* Pattern: flip — card flip */
+.hero-cs-visual.is-pattern-flip.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-flip;
+  transform-origin: center center;
+}
+
+.hero-cs-visual.is-pattern-flip.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-flip;
+  transform-origin: center center;
+}
+
+/* Pattern: wave — alternating vertical lanes */
+.hero-cs-visual.is-pattern-wave.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-vector;
+}
+
+.hero-cs-visual.is-pattern-wave.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-vector;
+}
+
+/* Pattern: zoom — photo punches forward, others shrink away */
+.hero-cs-visual.is-pattern-zoom.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-zoom;
+}
+
+.hero-cs-visual.is-pattern-zoom.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-zoom;
+}
+
+.hero-cs-visual.is-pattern-zoom.is-exiting .hero-cs-visual__tile--photo,
+.hero-cs-visual.is-pattern-zoom.is-entering .hero-cs-visual__tile--photo {
+  z-index: 14;
 }
 
 .hero-cs-visual__cursor {
@@ -426,9 +498,10 @@
   pointer-events: none;
   position: absolute;
   top: 0;
-  transform: translate(var(--hero-cs-cx), var(--hero-cs-cy)) translate(-18%, -8%);
-  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+  transform: translate3d(var(--hero-cs-cx), var(--hero-cs-cy), 0);
+  transition: transform 0.92s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.35s ease;
   width: 28px;
+  will-change: transform;
   z-index: 40;
 }
 
@@ -436,125 +509,188 @@
   opacity: 1;
 }
 
-.hero-cs-visual__cursor.is-idle {
-  animation: hero-cs-cursor-idle 2.4s ease-in-out infinite;
+.hero-cs-visual__cursor-hand {
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 63, 0.28));
+  transform: translate(-18%, -8%);
+  transform-origin: 20% 10%;
+  transition: transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
 }
 
-.hero-cs-visual__cursor.is-pressing {
-  transform: translate(var(--hero-cs-cx), var(--hero-cs-cy)) translate(-18%, -8%) scale(0.86);
-  transition-duration: 0.2s;
+.hero-cs-visual__cursor.is-idle .hero-cs-visual__cursor-hand {
+  animation: hero-cs-cursor-idle 2.8s ease-in-out infinite;
 }
 
-.hero-cs-visual__cursor.is-dragging {
-  filter: drop-shadow(0 10px 18px rgba(47, 105, 251, 0.45));
-  transform: translate(var(--hero-cs-cx), var(--hero-cs-cy)) translate(-18%, -8%) scale(0.94) rotate(-8deg);
-  transition-duration: 0.52s;
+.hero-cs-visual__cursor.is-pressing .hero-cs-visual__cursor-hand {
+  animation: none;
+  transform: translate(-18%, -8%) scale(0.88);
+  transition-duration: 0.18s;
+}
+
+.hero-cs-visual__cursor.is-dragging .hero-cs-visual__cursor-hand {
+  animation: none;
+  transform: translate(-18%, -8%) scale(0.94) rotate(-7deg);
+  transition-duration: 0.28s;
 }
 
 .hero-cs-visual__cursor svg {
   display: block;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 63, 0.35));
 }
 
 .hero-cs-visual.is-intro .hero-cs-visual__tile {
-  animation: hero-cs-settle 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-cs-settle 0.75s cubic-bezier(0.33, 0.9, 0.28, 1) both;
   animation-delay: calc(var(--hero-cs-i, 0) * 0.07s);
 }
 
-.hero-cs-visual.is-exiting .hero-cs-visual__tile,
-.hero-cs-visual.is-entering .hero-cs-visual__tile,
-.hero-cs-visual.is-dragging .hero-cs-visual__tile,
-.hero-cs-visual.is-pressing .hero-cs-visual__tile {
+/* Kill settle/idle animations during grab — must NOT apply while exiting/entering
+   or the shorthand resets duration to 0 and tiles snap to opacity:0 (fill-mode both). */
+.hero-cs-visual.is-dragging:not(.is-exiting):not(.is-entering) .hero-cs-visual__tile,
+.hero-cs-visual.is-pressing:not(.is-exiting):not(.is-entering) .hero-cs-visual__tile {
   animation: none;
 }
 
 @keyframes hero-cs-settle {
   from {
     opacity: 0;
-    transform: translateY(22px) scale(0.94);
+    transform: translate3d(0, 16px, 0) scale(0.96);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
 @keyframes hero-cs-cursor-idle {
   0%,
   100% {
-    transform: translate(var(--hero-cs-cx), var(--hero-cs-cy)) translate(-18%, -8%);
+    transform: translate(-18%, -8%);
   }
 
   50% {
-    transform: translate(var(--hero-cs-cx), var(--hero-cs-cy)) translate(-18%, calc(-8% - 5px));
+    transform: translate(-18%, calc(-8% - 5px));
   }
 }
 
-@keyframes hero-cs-exit-up {
+@keyframes hero-cs-exit-vector {
   0% {
     opacity: 1;
-    transform: translateY(var(--hero-cs-drag-y, 0)) scale(1);
+    transform: translate3d(0, var(--hero-cs-drag-y, 0px), 0) scale(1) rotate(0deg);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-118%) scale(0.92) rotate(-2deg);
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0)
+      scale(var(--hero-cs-scale, 0.94))
+      rotate(var(--hero-cs-rot, 0deg));
   }
 }
 
-@keyframes hero-cs-exit-down {
-  0% {
-    opacity: 1;
-    transform: translateY(var(--hero-cs-drag-y, 0)) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(118%) scale(0.92) rotate(2deg);
-  }
-}
-
-@keyframes hero-cs-enter-up {
+@keyframes hero-cs-enter-vector {
   0% {
     opacity: 0;
-    transform: translateY(110%) scale(0.94) rotate(2deg);
-  }
-
-  70% {
-    opacity: 1;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0)
+      scale(var(--hero-cs-scale, 0.94))
+      rotate(var(--hero-cs-rot, 0deg));
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
   }
 }
 
-@keyframes hero-cs-enter-down {
+@keyframes hero-cs-exit-fan {
   0% {
-    opacity: 0;
-    transform: translateY(-110%) scale(0.94) rotate(-2deg);
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
   }
 
-  70% {
-    opacity: 1;
+  60% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0)
+      scale(var(--hero-cs-scale, 0.86))
+      rotate(var(--hero-cs-rot, 0deg));
+  }
+}
+
+@keyframes hero-cs-enter-fan {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0)
+      scale(calc(var(--hero-cs-scale, 0.86) * 0.92))
+      rotate(var(--hero-cs-rot, 0deg));
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes hero-cs-exit-flip {
+  0% {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotateY(88deg) scale(0.96);
+  }
+}
+
+@keyframes hero-cs-enter-flip {
+  0% {
+    opacity: 0;
+    transform: rotateY(-88deg) scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes hero-cs-exit-zoom {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0)
+      scale(var(--hero-cs-scale, 0.8))
+      rotate(var(--hero-cs-rot, 0deg));
+  }
+}
+
+@keyframes hero-cs-enter-zoom {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0)
+      scale(calc(var(--hero-cs-scale, 0.8) * 0.9))
+      rotate(var(--hero-cs-rot, 0deg));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-cs-visual.is-intro .hero-cs-visual__tile,
-  .hero-cs-visual.is-push-up.is-exiting .hero-cs-visual__tile,
-  .hero-cs-visual.is-push-down.is-exiting .hero-cs-visual__tile,
-  .hero-cs-visual.is-push-up.is-entering .hero-cs-visual__tile,
-  .hero-cs-visual.is-push-down.is-entering .hero-cs-visual__tile,
+  .hero-cs-visual.is-exiting .hero-cs-visual__tile,
+  .hero-cs-visual.is-entering .hero-cs-visual__tile,
   .hero-cs-visual__cursor.is-idle {
-    animation: none;
+    animation: none !important;
   }
 
   .hero-cs-visual__cursor {
