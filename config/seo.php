@@ -240,8 +240,7 @@ return [
             'description' => 'How we unified B2B CRM task management in the suave app — Kanban and List view integration, AI project management, and an automated task assistant in one workspace.',
             'og_title' => 'B2B CRM Task Management | the suave app',
             'og_description' => 'Kanban and List view integration plus an automated task assistant AI — one AI project management workspace with 50% less view switching.',
-            'og_image' => 'assets/case-studies/suave-crm-tasks/tasks-list-view.png',
-            'robots' => 'noindex, nofollow',
+            'og_image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
         ],
         'teerrath-case-study' => [
             'title' => 'Teerrath — From Stuck to a Clear Sacred Path | Case Study | Suave Creators',

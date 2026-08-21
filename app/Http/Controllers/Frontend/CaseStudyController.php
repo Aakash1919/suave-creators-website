@@ -31,7 +31,7 @@ class CaseStudyController extends FrontendController
 
     public function tasksCaseStudy(): View
     {
-        return $this->draftView('frontend.case-studies.tasks-case-study');
+        return $this->view('frontend.case-studies.tasks-case-study');
     }
 
     public function teerrathCaseStudy(): View

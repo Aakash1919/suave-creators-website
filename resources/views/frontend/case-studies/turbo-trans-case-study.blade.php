@@ -27,13 +27,13 @@
       </div>
     </div>
 
-      <figure class="case-study-detail-hero__media case-study-detail-hero__media--client-logo">
+      <figure class="case-study-detail-hero__media">
         <img
-          src="{{ asset('assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png') }}"
-          alt="Turbo Trans Corp TTC logo partner of Suave Creators logistics CRM"
-          title="Turbo Trans Corp TTC logo partner of Suave Creators logistics CRM"
-          width="248"
-          height="108"
+          src="{{ asset('assets/case-studies/turbo-trans/ttc_caseStudy.webp') }}"
+          alt="Success Story : The Turbo Trans Corporation logistics CRM case study"
+          title="Success Story : The Turbo Trans Corporation logistics CRM case study"
+          width="960"
+          height="720"
           loading="eager"
           decoding="async"
         >
