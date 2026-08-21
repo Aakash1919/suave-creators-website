@@ -5,8 +5,9 @@
     $bars = is_array($scene['bars'] ?? null) ? $scene['bars'] : [42, 68, 92, 58, 76];
   @endphp
   <div
-    class="hero-cs-visual"
-    data-hero-cs-visual>
+    class="hero-cs-visual{{ $wrapperClass !== '' ? ' '.$wrapperClass : '' }}"
+    data-hero-cs-visual
+    @unless ($animate) data-hero-cs-static @endunless>
     <script type="application/json" data-hero-cs-scenes-json>{!! json_encode($scenes, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) !!}</script>
     <div class="hero-cs-visual__poster" data-hero-cs-poster>
       <img
@@ -308,6 +309,9 @@
       }
 
       function activate(root) {
+        if (!root || root.dataset.heroCsBound === '1') return;
+        root.dataset.heroCsBound = '1';
+
         var poster = root.querySelector('[data-hero-cs-poster]');
         var stage = root.querySelector('[data-hero-cs-stage]');
         var mosaic = root.querySelector('[data-hero-cs-mosaic]');
@@ -319,6 +323,7 @@
         var running = false;
         var visible = true;
         var busy = false;
+        var allowAnimate = !root.hasAttribute('data-hero-cs-static');
 
         if (!stage || !mosaic || scenes.length === 0) return;
 
@@ -444,7 +449,7 @@
           }, 520);
         }
 
-        if (prefersReducedMotion()) {
+        if (prefersReducedMotion() || !allowAnimate) {
           showStage();
           if (cursor) cursor.setAttribute('hidden', '');
           applyScene(scenes[0]);

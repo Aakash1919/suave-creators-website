@@ -37,15 +37,45 @@ class CaseStudySupport
     }
 
     /**
-     * Per-case mosaic scenes for the homepage hero (one scene = one published case).
+     * Per-case mosaic scenes for the case-studies visual (one scene = one published case).
      *
+     * @param  list<string>|null  $slugs  Optional catalog slug allowlist (order preserved when provided)
      * @return list<array<string, mixed>>
      */
-    public static function heroVisualScenes(int $limit = 4): array
+    public static function heroVisualScenes(int $limit = 4, ?array $slugs = null): array
     {
         $scenes = [];
+        $allow = null;
 
-        foreach (self::cases() as $case) {
+        if (is_array($slugs) && $slugs !== []) {
+            $allow = array_values(array_filter(array_map(
+                static fn ($slug): string => trim((string) $slug),
+                $slugs
+            ), static fn (string $slug): bool => $slug !== ''));
+            $allow = $allow === [] ? null : $allow;
+        }
+
+        $cases = self::cases();
+
+        if (is_array($allow)) {
+            $bySlug = [];
+            foreach ($cases as $case) {
+                $slug = (string) ($case['slug'] ?? '');
+                if ($slug !== '') {
+                    $bySlug[$slug] = $case;
+                }
+            }
+
+            $ordered = [];
+            foreach ($allow as $slug) {
+                if (isset($bySlug[$slug])) {
+                    $ordered[] = $bySlug[$slug];
+                }
+            }
+            $cases = $ordered;
+        }
+
+        foreach ($cases as $case) {
             $slug = (string) ($case['slug'] ?? '');
             $title = trim((string) ($case['title'] ?? ''));
             $industry = trim((string) ($case['industry'] ?? ''));

@@ -185,7 +185,7 @@
 .hero-cs-visual__metric-value {
   color: var(--hero-cs-ink);
   font-size: clamp(2rem, 5vw, 2.65rem);
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1;
 }

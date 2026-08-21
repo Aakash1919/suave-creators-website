@@ -2,10 +2,21 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Support\Frontend\CaseStudySupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
+/**
+ * Animated case-study mosaic (metric + photo + chart tiles + cursor).
+ *
+ * Drop-in on any marketing page — defaults to published catalog scenes:
+ *
+ *   <x-frontend.hero-case-studies-visual />
+ *   <x-frontend.hero-case-studies-visual :limit="3" />
+ *   <x-frontend.hero-case-studies-visual :slugs="['ai-sales-coaching-platform-case-study']" />
+ *   <x-frontend.hero-case-studies-visual :items="$scenes" class="max-w-[360px]" />
+ */
 class HeroCaseStudiesVisual extends Component
 {
     /** @var list<array<string, mixed>> */
@@ -14,14 +25,29 @@ class HeroCaseStudiesVisual extends Component
     /** @var array<string, mixed>|null */
     public ?array $scene = null;
 
+    public string $wrapperClass;
+
+    public bool $animate;
+
     /**
-     * @param  list<array<string, mixed>>  $items  Scene list from CaseStudySupport::heroVisualScenes()
+     * @param  list<array<string, mixed>>  $items  Optional scenes; empty loads from CaseStudySupport
+     * @param  list<string>  $slugs  Optional catalog slug filter (ignored when $items is non-empty)
+     * @param  string  $class  Extra classes on the root `.hero-cs-visual` element
      */
-    public function __construct(array $items = [])
-    {
+    public function __construct(
+        array $items = [],
+        int $limit = 4,
+        array $slugs = [],
+        string $class = '',
+        bool $animate = true,
+    ) {
+        $source = $items !== []
+            ? $items
+            : CaseStudySupport::heroVisualScenes($limit, $slugs !== [] ? $slugs : null);
+
         $scenes = [];
 
-        foreach ($items as $item) {
+        foreach ($source as $item) {
             if (! is_array($item)) {
                 continue;
             }
@@ -67,6 +93,8 @@ class HeroCaseStudiesVisual extends Component
 
         $this->scenes = $scenes;
         $this->scene = $scenes[0] ?? null;
+        $this->wrapperClass = trim($class);
+        $this->animate = $animate;
     }
 
     public function render(): View|Closure|string

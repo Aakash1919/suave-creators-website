@@ -33,7 +33,7 @@
     </div>
 
     <div class="relative z-10 flex w-full min-w-0 items-center justify-start lg:justify-end">
-      <x-frontend.hero-case-studies-visual :items="$heroCaseStudies ?? []" />
+      <x-frontend.hero-case-studies-visual />
     </div>
   </div>
 </section>
