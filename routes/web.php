@@ -38,8 +38,12 @@ Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.sh
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
 
 Route::redirect('/industry', '/industries', 301);
-Route::get('/main/public/{path}', fn (string $path) => redirect('/'.ltrim($path, '/'), 301))
-    ->where('path', '.*');
+Route::redirect('/main/public', '/', 301);
+Route::get('/main/public/{path}', function (string $path) {
+    $clean = trim($path, '/');
+
+    return redirect($clean === '' ? '/' : '/'.$clean, 301);
+})->where('path', '.*');
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
