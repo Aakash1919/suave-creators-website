@@ -48,8 +48,6 @@
           @foreach ($cases as $item)
             @php
               $itemHref = $item['url'] ?? \App\Support\Frontend\CaseStudySupport::urlForSlug((string) ($item['slug'] ?? ''));
-              $tags = array_slice($item['technologies'] ?? [], 0, 5);
-              $tagLine = implode(' | ', $tags);
               $stats = array_slice($item['results'] ?? [], 0, 3);
             @endphp
             <article class="case-studies-grid__item">
@@ -67,9 +65,6 @@
                 @endif
               </a>
               <div class="case-studies-grid__copy">
-                @if ($tagLine !== '')
-                  <p class="case-studies-grid__tags">{{ $tagLine }}</p>
-                @endif
                 <h3 class="case-studies-grid__title">
                   <a href="{{ $itemHref }}">{{ $item['title'] }}</a>
                 </h3>
