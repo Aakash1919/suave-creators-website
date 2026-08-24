@@ -455,8 +455,8 @@
         </button>
       </div>
       <p class="digital-marketing-services__more">
-        <span>Discuss your project</span>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Discuss your Vision</a>
+        <span>Want to discuss about your project</span>
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Click Here</a>
       </p>
     </div>
   </div>

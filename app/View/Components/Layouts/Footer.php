@@ -54,7 +54,7 @@ class Footer extends Component
 
         $this->phone = $phone ?? (string) ($org['telephone'] ?? '+91 88949 00142');
         $this->phoneHref = $phoneHref ?? (string) ($org['telephone_href'] ?? 'tel:+918894900142');
-        $this->email = $email ?? (string) ($org['email'] ?? 'Info@suavecreators.com');
+        $this->email = $email ?? (string) ($org['email'] ?? 'info@suavecreators.com');
         $this->offices = ContactSupport::offices();
 
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
@@ -67,6 +67,8 @@ class Footer extends Component
                 ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development'],
                 ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software'],
                 ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Software'],
+                ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design'],
+                ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions'],
             ],
             'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare'],

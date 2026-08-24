@@ -12,7 +12,7 @@ class ThreeCardSection extends Component
     use NormalizesAssetPaths;
 
     /**
-     * @param  array<int, array{0?: string, 1?: string, 2?: string, 3?: string, 4?: string, icon?: string, category?: string, title?: string, description?: string, tone?: string}>  $items
+     * @param  array<int, array{0?: string, 1?: string, 2?: string, 3?: string, 4?: string, icon?: string, category?: string, title?: string, description?: string, tone?: string, href?: string, iconAlt?: string}>  $items
      */
     public function __construct(
         public string $eyebrow = 'Web Development Services',
@@ -32,12 +32,12 @@ class ThreeCardSection extends Component
 
         if ($this->items === []) {
             $this->items = [
-                ['assets/icons/web-development-icon.svg', '01 - Development', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'blue', 'Custom web development services icon for scalable business websites'],
-                ['assets/icons/enterprise-software-icon.svg', '02 - Enterprise Software', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'orange', 'Enterprise software solutions icon for secure business platforms'],
-                ['assets/icons/ui-ux-design-icon.svg', '03 - Design Service', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'cyan', 'UI UX design services icon for user-focused product interfaces'],
-                ['assets/icons/custom-crm-icon.svg', '04 - Custom CRM', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'mint', 'Custom CRM development icon for sales and customer management software'],
-                ['assets/icons/ecommerce-development-icon.svg', '05 - E-commerce Development', 'E-commerce Development', 'Choosing e-commerce development with us is the best option for you. Try our best development services and get a reliable solution for your digital business needs.', 'rose', 'Ecommerce development icon for online store and shopping platforms'],
-                ['assets/icons/ai-solutions-icon.svg', '06 - AI Solutions', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'amber', 'AI solutions icon for intelligent software and automation features'],
+                ['assets/icons/web-development-icon.svg', '01 - Development', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'blue', 'Custom web development services icon for scalable business websites', route('service.show', ['slug' => 'web-development-services'])],
+                ['assets/icons/enterprise-software-icon.svg', '02 - Enterprise Software', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'orange', 'Enterprise software solutions icon for secure business platforms', route('service.show', ['slug' => 'enterprise-software-solutions'])],
+                ['assets/icons/ui-ux-design-icon.svg', '03 - Design Service', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'cyan', 'UI UX design services icon for user-focused product interfaces', route('service.show', ['slug' => 'ui-ux-design-services'])],
+                ['assets/icons/custom-crm-icon.svg', '04 - Custom CRM', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'mint', 'Custom CRM development icon for sales and customer management software', route('service.show', ['slug' => 'custom-crm-development'])],
+                ['assets/icons/ecommerce-development-icon.svg', '05 - E-commerce Development', 'E-commerce Development', 'Choosing e-commerce development with us is the best option for you. Try our best development services and get a reliable solution for your digital business needs.', 'rose', 'Ecommerce development icon for online store and shopping platforms', route('service.show', ['slug' => 'e-commerce-development'])],
+                ['assets/icons/ai-solutions-icon.svg', '06 - AI Solutions', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'amber', 'AI solutions icon for intelligent software and automation features', route('service.show', ['slug' => 'ai-solutions'])],
             ];
         }
 
@@ -51,6 +51,7 @@ class ThreeCardSection extends Component
                 'description' => (string) ($item['description'] ?? $item[3] ?? ''),
                 'tone' => (string) ($item['tone'] ?? $item[4] ?? 'blue'),
                 'iconAlt' => (string) ($item['iconAlt'] ?? $item[5] ?? ($title !== '' ? $title.' service icon' : 'Suave Creators service icon')),
+                'href' => (string) ($item['href'] ?? $item[6] ?? route('services')),
             ];
         }, $this->items));
     }
