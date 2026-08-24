@@ -85,22 +85,24 @@ def gen_turbo_trans():
     
     img.convert('RGB').save(os.path.join(out_dir, 'turbo-trans-dispatch-fleet-tile.webp'), 'WEBP', quality=95)
     
-    # 2. Chart Tile: 410x330
+    # 2. Chart Tile: 410x330 (Revenue Growth & Automation)
     W_c, H_c = 410, 330
     img_c = Image.new('RGBA', (W_c, H_c), (11, 17, 32, 255))
     draw_c = ImageDraw.Draw(img_c)
     draw_c.rounded_rectangle([10, 10, W_c-10, H_c-10], radius=24, fill=(15, 23, 42, 255), outline=(30, 41, 59, 255), width=2)
     
-    draw_c.text((32, 32), "Pipeline Visibility", font=get_font(26, bold=True), fill=(248, 250, 252, 255))
-    draw_c.text((32, 70), "Real-time fleet tracking & dispatch rate", font=get_font(15, semibold=True), fill=(148, 163, 184, 255))
+    draw_pill_badge(draw_c, 32, 28, "SALES AUTOMATION", get_font(13, bold=True), (59, 130, 246, 45), (96, 165, 250, 255), px=12, py=5)
     
-    draw_c.text((32, 120), "Fleet On-Time Rate", font=get_font(16, semibold=True), fill=(226, 232, 240, 255))
-    draw_c.text((W_c-75, 120), "98%", font=get_font(17, bold=True), fill=(52, 211, 153, 255))
-    draw_progress_bar(draw_c, 32, 150, W_c-64, 18, 98, (52, 211, 153, 255))
+    draw_c.text((32, 72), "2.8x Revenue Growth", font=get_font(28, bold=True), fill=(248, 250, 252, 255))
+    draw_c.text((32, 112), "Year-over-Year sales operations increase", font=get_font(15, semibold=True), fill=(148, 163, 184, 255))
     
-    draw_c.text((32, 205), "Automated Dispatch", font=get_font(16, semibold=True), fill=(226, 232, 240, 255))
-    draw_c.text((W_c-75, 205), "92%", font=get_font(17, bold=True), fill=(96, 165, 250, 255))
-    draw_progress_bar(draw_c, 32, 235, W_c-64, 18, 92, (59, 130, 246, 255))
+    draw_c.text((32, 160), "AI Lead Qualification", font=get_font(16, semibold=True), fill=(226, 232, 240, 255))
+    draw_c.text((W_c-75, 160), "94%", font=get_font(17, bold=True), fill=(52, 211, 153, 255))
+    draw_progress_bar(draw_c, 32, 190, W_c-64, 18, 94, (52, 211, 153, 255))
+    
+    draw_c.text((32, 240), "Automated Follow-ups", font=get_font(16, semibold=True), fill=(226, 232, 240, 255))
+    draw_c.text((W_c-75, 240), "98%", font=get_font(17, bold=True), fill=(96, 165, 250, 255))
+    draw_progress_bar(draw_c, 32, 270, W_c-64, 18, 98, (59, 130, 246, 255))
     
     img_c.convert('RGB').save(os.path.join(out_dir, 'turbo-trans-pipeline-chart-tile.webp'), 'WEBP', quality=95)
     print("Turbo Trans generated.")
