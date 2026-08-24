@@ -12,9 +12,6 @@
         <span aria-current="page">The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace</span>
       </nav>
 
-      <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-semibold text-amber-800" role="status">
-        Draft preview — only visible while logged in
-      </p>
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">B2B SaaS / Work Management</p>
       <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace</h1>
       <p class="case-study-detail-hero__lead">We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.</p>
@@ -35,7 +32,7 @@
 
       <figure class="case-study-detail-hero__media">
         <img
-          src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-list-view.png') }}"
+          src="{{ asset('assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp') }}"
           alt="The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace"
           title="The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace"
           width="960"
@@ -118,20 +115,17 @@
               <li><span>3</span>Create tasks inline or in bulk without opening a separate page</li>
           </ol>
     </div>
-        <div class="case-study-visual case-study-visual--discovery" aria-hidden="true">
-          <div class="case-study-visual__glow"></div>
-          <div class="case-study-visual__map">
-            <span class="case-study-visual__pin case-study-visual__pin--a"></span>
-            <span class="case-study-visual__pin case-study-visual__pin--b"></span>
-            <span class="case-study-visual__pin case-study-visual__pin--c"></span>
-            <div class="case-study-visual__radar"></div>
-          </div>
-          <div class="case-study-visual__stack">
-            <span>Place search</span>
-            <span>Business types</span>
-            <span>Map browse</span>
-          </div>
-        </div>
+        <figure class="case-study-visual case-study-visual--photo">
+          <img
+            src="{{ asset('assets/case-studies/suave-crm-tasks/the-suave-app-task-right.webp') }}"
+            alt="Kanban and List view integration in the suave app CRM task workspace"
+            title="Kanban and List view integration in the suave app CRM task workspace"
+            width="960"
+            height="720"
+            loading="eager"
+            decoding="async"
+          >
+        </figure>
   </div>
 </section>
 
@@ -147,21 +141,17 @@
               <li><span>3</span>Create tasks by typing — pick the project, approve the description, and land in the backlog</li>
           </ol>
     </div>
-        <div class="case-study-visual case-study-visual--preparation" aria-hidden="true">
-          <div class="case-study-visual__glow"></div>
-          <div class="case-study-visual__doc">
-            <div class="case-study-visual__doc-bar"></div>
-            <div class="case-study-visual__doc-lines">
-              <i></i><i></i><i></i><i></i>
-            </div>
-            <div class="case-study-visual__chips">
-              <span>Summary</span>
-              <span>Highlights</span>
-              <span>SPIN</span>
-            </div>
-          </div>
-          <div class="case-study-visual__pulse">AI</div>
-        </div>
+        <figure class="case-study-visual case-study-visual--photo">
+          <img
+            src="{{ asset('assets/case-studies/suave-crm-tasks/the-suave-app-task-banner-left.webp') }}"
+            alt="Automated task assistant AI beside the suave app CRM workspace"
+            title="Automated task assistant AI beside the suave app CRM workspace"
+            width="960"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          >
+        </figure>
   </div>
 </section>
 
