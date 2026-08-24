@@ -126,6 +126,27 @@
   --hero-cs-tile-border: rgba(56, 189, 248, 0.18);
 }
 
+.hero-cs-visual[data-hero-cs-theme="tasks"] {
+  --hero-cs-accent: #3b82f6;
+  --hero-cs-accent-2: #10b981;
+  --hero-cs-glow: rgba(59, 130, 246, 0.32);
+  --hero-cs-tile-border: rgba(59, 130, 246, 0.18);
+}
+
+.hero-cs-visual[data-hero-cs-theme="teerrath"] {
+  --hero-cs-accent: #f59e0b;
+  --hero-cs-accent-2: #fbbf24;
+  --hero-cs-glow: rgba(245, 158, 11, 0.32);
+  --hero-cs-tile-border: rgba(245, 158, 11, 0.2);
+}
+
+.hero-cs-visual[data-hero-cs-theme="cabvi"] {
+  --hero-cs-accent: #0ea5e9;
+  --hero-cs-accent-2: #10b981;
+  --hero-cs-glow: rgba(14, 165, 233, 0.32);
+  --hero-cs-tile-border: rgba(14, 165, 233, 0.2);
+}
+
 .hero-cs-visual__poster {
   aspect-ratio: 1 / 1;
   border-radius: var(--hero-cs-radius);

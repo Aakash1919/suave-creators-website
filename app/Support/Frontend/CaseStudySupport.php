@@ -162,10 +162,25 @@ class CaseStudySupport
                 'assets/case-studies/suave-crm-outreach/outreach-map-discovery-tile.webp',
                 'assets/case-studies/suave-crm-outreach/outreach-ai-analysis-tile.webp',
             ],
+            'suave-crm-tasks-case-study' => [
+                'assets/case-studies/suave-crm-tasks/tasks-crm-brand-mark.webp',
+                'assets/case-studies/suave-crm-tasks/tasks-kanban-board-tile.webp',
+                'assets/case-studies/suave-crm-tasks/tasks-drawer-metric-tile.webp',
+            ],
             'appointment-insurance-platform-case-study' => [
                 'assets/case-studies/shownoshow/show-check-brand-mark.webp',
                 'assets/case-studies/shownoshow/show-check-confirmed-tile.webp',
                 'assets/case-studies/shownoshow/show-check-savings-chart-tile.webp',
+            ],
+            'teerrath-spiritual-commerce' => [
+                'assets/case-studies/teerrath/teerrath-brand-mark.webp',
+                'assets/case-studies/teerrath/teerrath-energy-scan-tile.webp',
+                'assets/case-studies/teerrath/teerrath-insight-chart-tile.webp',
+            ],
+            'cabvi-product-matching' => [
+                'assets/case-studies/cabvi/cabvi-brand-mark.webp',
+                'assets/case-studies/cabvi/cabvi-product-matching-tile.webp',
+                'assets/case-studies/cabvi/cabvi-efficiency-chart-tile.webp',
             ],
         ];
 

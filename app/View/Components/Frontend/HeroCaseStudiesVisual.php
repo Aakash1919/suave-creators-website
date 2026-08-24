@@ -36,7 +36,7 @@ class HeroCaseStudiesVisual extends Component
      */
     public function __construct(
         array $items = [],
-        int $limit = 4,
+        int $limit = 10,
         array $slugs = [],
         string $class = '',
         bool $animate = true,

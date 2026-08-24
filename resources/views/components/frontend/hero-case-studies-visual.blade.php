@@ -185,7 +185,13 @@
           theme: 'outreach',
           pattern: 'radar',
           grabIndex: 1,
-          delta: { x: -32, y: -14 }
+          delta: { x: -30, y: -16 }
+        },
+        'suave-crm-tasks-case-study': {
+          theme: 'tasks',
+          pattern: 'radar',
+          grabIndex: 1,
+          delta: { x: -28, y: -18 }
         },
         'ai-sales-coaching-platform-case-study': {
           theme: 'ai-coach',
@@ -204,6 +210,18 @@
           pattern: 'glide',
           grabIndex: 1,
           delta: { x: 36, y: -8 }
+        },
+        'teerrath-spiritual-commerce': {
+          theme: 'teerrath',
+          pattern: 'wave',
+          grabIndex: 1,
+          delta: { x: 0, y: -22 }
+        },
+        'cabvi-product-matching': {
+          theme: 'cabvi',
+          pattern: 'glide',
+          grabIndex: 1,
+          delta: { x: 32, y: -10 }
         }
       };
 
