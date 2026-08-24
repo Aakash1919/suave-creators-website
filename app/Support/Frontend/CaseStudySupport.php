@@ -149,21 +149,23 @@ class CaseStudySupport
         $map = [
             'turbo-trans-corporation-case-study' => [
                 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
+                'assets/case-studies/turbo-trans/turbo-trans-dispatch-fleet-tile.webp',
+                'assets/case-studies/turbo-trans/turbo-trans-pipeline-chart-tile.webp',
             ],
             'ai-sales-coaching-platform-case-study' => [
-                'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
-                'assets/case-studies/ai-sales-coaching/ai_sales_right.webp',
-                'assets/case-studies/ai-sales-coaching/ai_sales_left.webp',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coach-brand-mark.webp',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coach-live-practice-tile.webp',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coach-score-chart-tile.webp',
             ],
             'suave-crm-outreach-case-study' => [
-                'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
-                'assets/case-studies/suave-crm-outreach/outreach_right.webp',
-                'assets/case-studies/suave-crm-outreach/outreach_left.webp',
+                'assets/case-studies/suave-crm-outreach/outreach-crm-brand-mark.webp',
+                'assets/case-studies/suave-crm-outreach/outreach-map-discovery-tile.webp',
+                'assets/case-studies/suave-crm-outreach/outreach-ai-analysis-tile.webp',
             ],
             'appointment-insurance-platform-case-study' => [
-                'assets/case-studies/shownoshow/show_no _show banner.webp',
-                'assets/case-studies/shownoshow/show_no-show right.webp',
-                'assets/case-studies/shownoshow/show_no_show left.webp',
+                'assets/case-studies/shownoshow/show-check-brand-mark.webp',
+                'assets/case-studies/shownoshow/show-check-confirmed-tile.webp',
+                'assets/case-studies/shownoshow/show-check-savings-chart-tile.webp',
             ],
         ];
 
