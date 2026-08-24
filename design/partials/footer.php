@@ -64,7 +64,7 @@ $footerColumns = [
             <a href="tel:+918894900142" class="inline-flex !min-h-0 items-center hover:text-white">+91 88949 00142</a>
           </li>
           <li>
-            <a href="mailto:info@suavecreators.com" class="inline-flex !min-h-0 max-w-full items-center break-all hover:text-white">Info@suavecreators.com</a>
+            <a href="mailto:info@suavecreators.com" class="inline-flex !min-h-0 max-w-full items-center break-all hover:text-white">info@suavecreators.com</a>
           </li>
           <li class="leading-5">
             <span class="inline-block max-w-[280px] sm:max-w-none">30 N Gould St, STE R Sheridan, WY 82801, USA</span>

@@ -14,6 +14,8 @@ class ServiceSupport
         'custom-crm-development',
         'enterprise-software-solutions',
         'e-commerce-development',
+        'ui-ux-design-services',
+        'ai-solutions',
     ];
 
     /**
@@ -69,10 +71,10 @@ class ServiceSupport
         return [
             ['assets/icons/service-icon-1.svg', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'Explore Web Development', route('service.show', ['slug' => 'web-development-services']), 'blue'],
             ['assets/icons/service-icon-2.svg', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'Explore Enterprise Solutions', route('service.show', ['slug' => 'enterprise-software-solutions']), 'orange'],
-            ['assets/icons/service-icon-3.svg', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'See UI/UX Services', route('services'), 'cyan'],
+            ['assets/icons/service-icon-3.svg', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'See UI/UX Services', route('service.show', ['slug' => 'ui-ux-design-services']), 'cyan'],
             ['assets/icons/service-icon-4.svg', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'Learn More About CRM', route('service.show', ['slug' => 'custom-crm-development']), 'mint'],
             ['assets/icons/service-icon-5.svg', 'E-commerce Development', 'Choosing e-commerce development with us is the best option for you. Try our best development services and get a reliable solution for your digital business needs.', 'Explore E-commerce Services', route('service.show', ['slug' => 'e-commerce-development']), 'rose'],
-            ['assets/icons/service-icon-6.svg', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'Explore AI Services', route('services'), 'amber'],
+            ['assets/icons/service-icon-6.svg', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'Explore AI Services', route('service.show', ['slug' => 'ai-solutions']), 'amber'],
         ];
     }
 
@@ -205,6 +207,15 @@ class ServiceSupport
             'seoDescription' => (string) ($service['pageDescription'] ?? 'Suave Creators service details.'),
             'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
+            'seoFaqs' => array_values(array_filter(
+                array_map(static function (array $faq): array {
+                    return [
+                        'question' => (string) ($faq['question'] ?? ''),
+                        'answer' => (string) ($faq['answer'] ?? ''),
+                    ];
+                }, is_array($service['faqs'] ?? null) ? $service['faqs'] : []),
+                static fn (array $faq): bool => $faq['question'] !== '' && $faq['answer'] !== '',
+            )),
             'bannerBg' => asset(self::mapDesignPath((string) ($service['bannerBg'] ?? '/assets/background/service-banner-bg.webp'))),
             'introBg' => asset(self::mapDesignPath('/assets/background/technology-section-bg.png')),
             'collabBackground' => asset(self::mapDesignPath((string) ($service['collabBackground'] ?? '/assets/media/collaboration-back-visual.png'))),
@@ -296,6 +307,7 @@ class ServiceSupport
             $path === 'contact-us' => ContactSupport::demoHref(),
             $path === 'blogs' => route('blogs'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),
+            str_starts_with($path, 'services/') => route('service.show', ['slug' => (string) str($path)->after('services/')]),
             str_starts_with($path, 'service/') => route('service.show', ['slug' => (string) str($path)->after('service/')]),
             default => $href,
         };

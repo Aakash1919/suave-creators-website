@@ -198,7 +198,7 @@ class SitemapService
             }
         }
 
-        $email = (string) ($org['email'] ?? 'Info@suavecreators.com');
+        $email = (string) ($org['email'] ?? 'info@suavecreators.com');
         $phone = (string) ($org['telephone'] ?? '');
         $lines[] = '';
         $lines[] = '## Contact';
