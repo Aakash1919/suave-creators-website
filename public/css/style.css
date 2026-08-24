@@ -86,6 +86,8 @@
   --hero-cs-muted: #6b7280;
   --hero-cs-accent: #2f69fb;
   --hero-cs-accent-2: #c56bff;
+  --hero-cs-glow: rgba(47, 105, 251, 0.28);
+  --hero-cs-tile-border: rgba(47, 105, 251, 0.12);
   flex-shrink: 0;
   isolation: isolate;
   margin-inline: auto;
@@ -93,6 +95,35 @@
   min-height: 399px;
   position: relative;
   width: 100%;
+}
+
+/* Case Study Themes */
+.hero-cs-visual[data-hero-cs-theme="outreach"] {
+  --hero-cs-accent: #2f69fb;
+  --hero-cs-accent-2: #00d2ff;
+  --hero-cs-glow: rgba(47, 105, 251, 0.32);
+  --hero-cs-tile-border: rgba(0, 210, 255, 0.18);
+}
+
+.hero-cs-visual[data-hero-cs-theme="ai-coach"] {
+  --hero-cs-accent: #7a5ff8;
+  --hero-cs-accent-2: #c56bff;
+  --hero-cs-glow: rgba(197, 107, 255, 0.32);
+  --hero-cs-tile-border: rgba(197, 107, 255, 0.18);
+}
+
+.hero-cs-visual[data-hero-cs-theme="shownoshow"] {
+  --hero-cs-accent: #10b981;
+  --hero-cs-accent-2: #2f69fb;
+  --hero-cs-glow: rgba(16, 185, 129, 0.32);
+  --hero-cs-tile-border: rgba(16, 185, 129, 0.18);
+}
+
+.hero-cs-visual[data-hero-cs-theme="turbo-trans"] {
+  --hero-cs-accent: #2563eb;
+  --hero-cs-accent-2: #38bdf8;
+  --hero-cs-glow: rgba(37, 99, 235, 0.32);
+  --hero-cs-tile-border: rgba(56, 189, 248, 0.18);
 }
 
 .hero-cs-visual__poster {
@@ -139,20 +170,21 @@
 
 .hero-cs-visual__tile {
   border-radius: var(--hero-cs-radius);
-  box-shadow: 0 14px 32px rgba(0, 0, 40, 0.22);
+  box-shadow: 0 14px 32px rgba(0, 0, 40, 0.22), 0 0 0 1px var(--hero-cs-tile-border, transparent);
   display: flex;
   min-height: 0;
   min-width: 0;
   overflow: hidden;
   position: relative;
   text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .hero-cs-visual__tile:hover,
 .hero-cs-visual__tile:focus-visible {
-  box-shadow: 0 18px 40px rgba(0, 0, 40, 0.32);
-  transform: translateY(-3px);
+  box-shadow: 0 18px 42px var(--hero-cs-glow, rgba(0, 0, 40, 0.32)), 0 0 0 2px var(--hero-cs-accent);
+  transform: translateY(-4px) scale(1.015);
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile:hover,
@@ -188,6 +220,11 @@
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.hero-cs-visual.is-entering .hero-cs-visual__metric-value {
+  animation: hero-cs-metric-bounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .hero-cs-visual__metric-value--sm {
@@ -217,7 +254,12 @@
   max-width: 96px;
   object-fit: contain;
   object-position: left center;
+  transition: transform 0.35s ease;
   width: auto;
+}
+
+.hero-cs-visual__tile:hover .hero-cs-visual__brand-mark {
+  transform: scale(1.05);
 }
 
 .hero-cs-visual__tile--photo {
@@ -229,7 +271,12 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
   width: 100%;
+}
+
+.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--photo:hover .hero-cs-visual__photo-img {
+  transform: scale(1.035);
 }
 
 .hero-cs-visual__tile--photo .hero-cs-visual__fade {
@@ -268,10 +315,11 @@
   min-height: 18%;
   opacity: 0.72;
   position: relative;
-  transition: height 0.45s ease;
+  transition: height 0.55s cubic-bezier(0.34, 1.3, 0.64, 1), opacity 0.3s ease;
 }
 
 .hero-cs-visual__bar.is-active {
+  box-shadow: 0 0 12px var(--hero-cs-glow);
   opacity: 1;
 }
 
@@ -292,7 +340,12 @@
   display: none;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
+}
+
+.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--chart:hover .hero-cs-visual__chart-img {
+  transform: scale(1.035);
 }
 
 .hero-cs-visual__tile--chart.has-chart-image {
@@ -336,6 +389,11 @@
   color: var(--hero-cs-accent);
   display: inline-flex;
   flex-shrink: 0;
+  transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.hero-cs-visual__tile--tag:hover .hero-cs-visual__tag-icon {
+  transform: rotate(8deg) scale(1.1);
 }
 
 .hero-cs-visual__tag-text {
@@ -374,43 +432,39 @@
   justify-content: center;
 }
 
-.hero-cs-visual__tile {
-  will-change: transform, opacity;
-}
-
 .hero-cs-visual__tile.is-cursor-target {
-  box-shadow: 0 0 0 2px rgba(47, 105, 251, 0.65), 0 18px 40px rgba(0, 0, 40, 0.34);
+  box-shadow: 0 0 0 2px var(--hero-cs-accent, #2f69fb), 0 18px 40px var(--hero-cs-glow, rgba(0, 0, 40, 0.34));
   z-index: 8;
 }
 
 .hero-cs-visual.is-pressing .hero-cs-visual__tile.is-grabbed {
-  transform: scale(0.97) translateY(3px);
-  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(0.965) translateY(3px);
+  transition: transform 0.14s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile.is-grabbed {
-  box-shadow: 0 16px 36px rgba(47, 105, 251, 0.28), 0 10px 22px rgba(0, 0, 40, 0.24);
-  transform: translateY(var(--hero-cs-drag-y, -18px)) scale(1.03) rotate(-1deg);
-  transition: transform 0.48s cubic-bezier(0.33, 0.9, 0.28, 1);
+  box-shadow: 0 16px 36px var(--hero-cs-glow, rgba(47, 105, 251, 0.28)), 0 10px 22px rgba(0, 0, 40, 0.24);
+  transform: translateY(var(--hero-cs-drag-y, -18px)) scale(1.035) rotate(-1deg);
+  transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 12;
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile:not(.is-grabbed) {
   opacity: 0.92;
   transform: translateY(calc(var(--hero-cs-drag-y, 0px) * 0.18)) scale(0.985);
-  transition: transform 0.48s cubic-bezier(0.33, 0.9, 0.28, 1), opacity 0.35s ease;
+  transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
 }
 
 .hero-cs-visual.is-exiting .hero-cs-visual__tile,
 .hero-cs-visual.is-entering .hero-cs-visual__tile {
   animation-duration: 0.82s;
   animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.33, 0.9, 0.28, 1);
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-delay: var(--hero-cs-delay, 0s);
 }
 
 .hero-cs-visual.is-entering .hero-cs-visual__tile {
-  animation-duration: 0.98s;
+  animation-duration: 0.96s;
 }
 
 /* Idle / settled tiles must stay fully visible after motion classes clear */
@@ -418,35 +472,57 @@
   opacity: 1;
 }
 
-/* Pattern: lift — shove mosaic upward */
-.hero-cs-visual.is-pattern-lift.is-exiting .hero-cs-visual__tile {
-  animation-name: hero-cs-exit-vector;
+/* Pattern: radar (Suave Outreach) */
+.hero-cs-visual.is-pattern-radar.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-radar;
 }
 
-.hero-cs-visual.is-pattern-lift.is-entering .hero-cs-visual__tile {
-  animation-name: hero-cs-enter-vector;
+.hero-cs-visual.is-pattern-radar.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-radar;
 }
 
-/* Pattern: drop — shove mosaic downward */
-.hero-cs-visual.is-pattern-drop.is-exiting .hero-cs-visual__tile {
-  animation-name: hero-cs-exit-vector;
+/* Pattern: wave (AI Sales Coaching) */
+.hero-cs-visual.is-pattern-wave.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-wave;
 }
 
-.hero-cs-visual.is-pattern-drop.is-entering .hero-cs-visual__tile {
-  animation-name: hero-cs-enter-vector;
+.hero-cs-visual.is-pattern-wave.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-wave;
 }
 
-/* Pattern: cascade — left/right peel */
+/* Pattern: vault (Show No Show) */
+.hero-cs-visual.is-pattern-vault.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-vault;
+  transform-origin: center center;
+}
+
+.hero-cs-visual.is-pattern-vault.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-vault;
+  transform-origin: center center;
+}
+
+/* Pattern: glide (Turbo Trans) */
+.hero-cs-visual.is-pattern-glide.is-exiting .hero-cs-visual__tile {
+  animation-name: hero-cs-exit-glide;
+}
+
+.hero-cs-visual.is-pattern-glide.is-entering .hero-cs-visual__tile {
+  animation-name: hero-cs-enter-glide;
+}
+
+/* Generic Fallback Patterns */
+.hero-cs-visual.is-pattern-lift.is-exiting .hero-cs-visual__tile,
+.hero-cs-visual.is-pattern-drop.is-exiting .hero-cs-visual__tile,
 .hero-cs-visual.is-pattern-cascade.is-exiting .hero-cs-visual__tile {
   animation-name: hero-cs-exit-vector;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.hero-cs-visual.is-pattern-lift.is-entering .hero-cs-visual__tile,
+.hero-cs-visual.is-pattern-drop.is-entering .hero-cs-visual__tile,
 .hero-cs-visual.is-pattern-cascade.is-entering .hero-cs-visual__tile {
   animation-name: hero-cs-enter-vector;
 }
 
-/* Pattern: fan — scatter outward then reform */
 .hero-cs-visual.is-pattern-fan.is-exiting .hero-cs-visual__tile {
   animation-name: hero-cs-exit-fan;
 }
@@ -455,7 +531,6 @@
   animation-name: hero-cs-enter-fan;
 }
 
-/* Pattern: flip — card flip */
 .hero-cs-visual.is-pattern-flip.is-exiting .hero-cs-visual__tile {
   animation-name: hero-cs-exit-flip;
   transform-origin: center center;
@@ -466,27 +541,12 @@
   transform-origin: center center;
 }
 
-/* Pattern: wave — alternating vertical lanes */
-.hero-cs-visual.is-pattern-wave.is-exiting .hero-cs-visual__tile {
-  animation-name: hero-cs-exit-vector;
-}
-
-.hero-cs-visual.is-pattern-wave.is-entering .hero-cs-visual__tile {
-  animation-name: hero-cs-enter-vector;
-}
-
-/* Pattern: zoom — photo punches forward, others shrink away */
 .hero-cs-visual.is-pattern-zoom.is-exiting .hero-cs-visual__tile {
   animation-name: hero-cs-exit-zoom;
 }
 
 .hero-cs-visual.is-pattern-zoom.is-entering .hero-cs-visual__tile {
   animation-name: hero-cs-enter-zoom;
-}
-
-.hero-cs-visual.is-pattern-zoom.is-exiting .hero-cs-visual__tile--photo,
-.hero-cs-visual.is-pattern-zoom.is-entering .hero-cs-visual__tile--photo {
-  z-index: 14;
 }
 
 .hero-cs-visual__cursor {
@@ -499,7 +559,7 @@
   position: absolute;
   top: 0;
   transform: translate3d(var(--hero-cs-cx), var(--hero-cs-cy), 0);
-  transition: transform 0.92s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.35s ease;
+  transition: transform 0.92s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
   width: 28px;
   will-change: transform;
   z-index: 40;
@@ -511,10 +571,10 @@
 
 .hero-cs-visual__cursor-hand {
   display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 63, 0.28));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 63, 0.32));
   transform: translate(-18%, -8%);
   transform-origin: 20% 10%;
-  transition: transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
@@ -524,13 +584,13 @@
 
 .hero-cs-visual__cursor.is-pressing .hero-cs-visual__cursor-hand {
   animation: none;
-  transform: translate(-18%, -8%) scale(0.88);
-  transition-duration: 0.18s;
+  transform: translate(-18%, -8%) scale(0.86);
+  transition-duration: 0.16s;
 }
 
 .hero-cs-visual__cursor.is-dragging .hero-cs-visual__cursor-hand {
   animation: none;
-  transform: translate(-18%, -8%) scale(0.94) rotate(-7deg);
+  transform: translate(-18%, -8%) scale(0.92) rotate(-8deg);
   transition-duration: 0.28s;
 }
 
@@ -539,12 +599,10 @@
 }
 
 .hero-cs-visual.is-intro .hero-cs-visual__tile {
-  animation: hero-cs-settle 0.75s cubic-bezier(0.33, 0.9, 0.28, 1) both;
+  animation: hero-cs-settle 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--hero-cs-i, 0) * 0.07s);
 }
 
-/* Kill settle/idle animations during grab — must NOT apply while exiting/entering
-   or the shorthand resets duration to 0 and tiles snap to opacity:0 (fill-mode both). */
 .hero-cs-visual.is-dragging:not(.is-exiting):not(.is-entering) .hero-cs-visual__tile,
 .hero-cs-visual.is-pressing:not(.is-exiting):not(.is-entering) .hero-cs-visual__tile {
   animation: none;
@@ -553,12 +611,26 @@
 @keyframes hero-cs-settle {
   from {
     opacity: 0;
-    transform: translate3d(0, 16px, 0) scale(0.96);
+    transform: translate3d(0, 18px, 0) scale(0.95);
   }
 
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes hero-cs-metric-bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.92);
+  }
+  60% {
+    transform: translateY(-2px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -569,7 +641,99 @@
   }
 
   50% {
-    transform: translate(-18%, calc(-8% - 5px));
+    transform: translate(-18%, calc(-8% - 6px));
+  }
+}
+
+/* Radar Keyframes */
+@keyframes hero-cs-exit-radar {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, var(--hero-cs-drag-y, 0px), 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0) scale(var(--hero-cs-scale, 0.88)) rotate(var(--hero-cs-rot, 0deg));
+  }
+}
+
+@keyframes hero-cs-enter-radar {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0) scale(var(--hero-cs-scale, 0.88)) rotate(var(--hero-cs-rot, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+/* Wave Keyframes */
+@keyframes hero-cs-exit-wave {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0) scale(var(--hero-cs-scale, 0.92)) rotate(var(--hero-cs-rot, 0deg));
+  }
+}
+
+@keyframes hero-cs-enter-wave {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0) scale(var(--hero-cs-scale, 0.92)) rotate(var(--hero-cs-rot, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+/* Vault Keyframes (3D Perspective Flip) */
+@keyframes hero-cs-exit-vault {
+  0% {
+    opacity: 1;
+    transform: perspective(800px) rotateY(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(800px) rotateY(70deg) scale(0.92);
+  }
+}
+
+@keyframes hero-cs-enter-vault {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateY(-70deg) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) rotateY(0deg) scale(1);
+  }
+}
+
+/* Glide Keyframes (Logistics Momentum Swipe) */
+@keyframes hero-cs-exit-glide {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--hero-cs-ox), var(--hero-cs-oy), 0) scale(var(--hero-cs-scale, 0.92)) rotate(var(--hero-cs-rot, 0deg));
+  }
+}
+
+@keyframes hero-cs-enter-glide {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(var(--hero-cs-ox) * -0.8), var(--hero-cs-oy), 0) scale(var(--hero-cs-scale, 0.92)) rotate(calc(var(--hero-cs-rot, 0deg) * -1));
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
   }
 }
 
