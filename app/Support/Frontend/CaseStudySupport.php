@@ -285,7 +285,7 @@ class CaseStudySupport
                 'short_description' => 'An AI sales coaching platform that helps fast-growing teams keep performance consistent as they hire — with voice practice, live call coaching, and clear scores so new reps ramp faster and managers don’t wait on recordings.',
                 'listing_subtitle' => 'AI Sales Coaching Platform for Growing Teams',
                 'industry' => 'Sales Enablement',
-                'service_slugs' => ['enterprise-software-solutions'],
+                'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
                     ['value' => '~55%', 'label' => 'Faster path from hire to confident customer calls'],
@@ -310,7 +310,7 @@ class CaseStudySupport
                 'short_description' => 'We redesigned the suave app’s fragmented B2B CRM outbound sales workflow into one prospecting workspace — map-based company discovery, AI sales briefings, cold email automation, and pipeline tracking — with about 65% fewer steps.',
                 'listing_subtitle' => 'B2B CRM Outbound Sales Workflow Redesign',
                 'industry' => 'B2B SaaS / Sales CRM',
-                'service_slugs' => ['custom-crm-development'],
+                'service_slugs' => ['custom-crm-development', 'ui-ux-design-services'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
                     ['value' => '~65%', 'label' => 'Fewer steps for routine B2B CRM outbound sales prospecting'],
@@ -412,7 +412,7 @@ class CaseStudySupport
                 'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
                 'listing_subtitle' => 'Automated AI Product Matching',
                 'industry' => 'Nonprofit / Procurement',
-                'service_slugs' => ['enterprise-software-solutions'],
+                'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups', 'education-elearning-platforms'],
                 'results' => [
                     ['value' => '~70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],

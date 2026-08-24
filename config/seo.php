@@ -108,6 +108,7 @@ return [
                 'Answer Engine Optimization',
                 'Generative Engine Optimization',
                 'Branding & Identity',
+                'AI Solutions',
                 'AI-Integrated Applications',
                 'SaaS Development',
             ],
@@ -115,7 +116,7 @@ return [
         'default_faqs' => [
             [
                 'question' => 'What services do you offer?',
-                'answer' => 'We offer web development, CRM development, e-commerce solutions, CMS development, enterprise software, SEO, digital marketing, and UI/UX design.',
+                'answer' => 'We offer web development, CRM development, e-commerce solutions, enterprise software, UI/UX design, AI solutions, SEO, and digital marketing.',
             ],
             [
                 'question' => 'Do you provide ongoing support?',
@@ -145,12 +146,12 @@ return [
 
     'pages' => [
         'home' => [
-            'title' => 'Build Software That Creates Real Business Results',
+            'title' => 'Build Software That Creates Real Business Results | Suave Creators',
             'description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
             'og_title' => 'Build Software That Creates Real Business Results',
             'og_description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
             'json_ld_name' => 'Suave Creators — Web Development, CRM & Digital Growth Experts',
-            'json_ld_description' => 'Suave Creators offers custom web development, CRM solutions, e-commerce development, enterprise software, mobile apps, digital marketing and SEO services.',
+            'json_ld_description' => 'Suave Creators offers custom web development, CRM solutions, e-commerce development, enterprise software, UI/UX design, AI solutions, mobile apps, digital marketing and SEO services.',
         ],
         'about-us' => [
             'title' => 'About Suave Creators | Leading IT Company, Digital Solutions',
@@ -159,15 +160,15 @@ return [
             'og_description' => 'Learn about Suave Creators, a trusted IT company delivering innovative web development, AI solutions, and digital growth services for businesses worldwide.',
         ],
         'contact-us' => [
-            'title' => 'Ready to Build? Get a Free Project Consultation',
+            'title' => 'Ready to Build? Get a Free Project Consultation | Suave Creators',
             'description' => 'Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.',
-            'og_title' => 'Ready to Build? Get a Free Project Consultation',
+            'og_title' => 'Ready to Build? Get a Free Project Consultation | Suave Creators',
             'og_description' => 'Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.',
         ],
         'services' => [
-            'title' => 'Software Development Services for Serious Growth',
+            'title' => 'Software Development Services for Serious Growth | Suave Creators',
             'description' => 'Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.',
-            'og_title' => 'Software Development Services for Serious Growth',
+            'og_title' => 'Software Development Services for Serious Growth | Suave Creators',
             'og_description' => 'Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.',
         ],
         'industries' => [

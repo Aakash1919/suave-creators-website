@@ -35,6 +35,8 @@ class Header extends Component
                 ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development Service', 'icon' => 'fa-solid fa-users'],
                 ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software Solutions', 'icon' => 'fa-solid fa-building'],
                 ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Development Service', 'icon' => 'fa-solid fa-cart-shopping'],
+                ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design Services', 'icon' => 'fa-solid fa-pen-ruler'],
+                ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions', 'icon' => 'fa-solid fa-robot'],
             ],
             'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
