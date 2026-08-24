@@ -170,17 +170,105 @@
   @push('scripts')
   <script>
     (function () {
-      // Smooth cycle — longer hold + eased motion (about 3s hold + 3.4s motion)
-      var HOLD_MS = 3000;
-      var MOVE_MS = 920;
+      // Silky-smooth organic motion curve (Apple/Framer-style spring ease)
+      var HOLD_MS = 2800;
+      var MOVE_MS = 980;
       var PRESS_MS = 180;
       var DRAG_MS = 620;
-      var EXIT_MS = 820;
-      var ENTER_MS = 980;
-      var SETTLE_MS = 480;
-      var CURSOR_EASE = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
+      var EXIT_MS = 720;
+      var ENTER_MS = 920;
+      var CURSOR_EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+      var SCENE_PROFILES = {
+        'ai-sales-coaching-platform-case-study': {
+          theme: 'ai-coach',
+          pattern: 'wave',
+          grabIndex: 1,
+          delta: { x: -16, y: -20 }
+        },
+        'suave-crm-outreach-case-study': {
+          theme: 'outreach',
+          pattern: 'radar',
+          grabIndex: 0,
+          delta: { x: -24, y: -16 }
+        },
+        'turbo-trans-corporation-case-study': {
+          theme: 'turbo-trans',
+          pattern: 'glide',
+          grabIndex: 2,
+          delta: { x: -20, y: 22 }
+        },
+        'suave-crm-tasks-case-study': {
+          theme: 'tasks',
+          pattern: 'cascade',
+          grabIndex: 3,
+          delta: { x: 24, y: -14 }
+        },
+        'appointment-insurance-platform-case-study': {
+          theme: 'shownoshow',
+          pattern: 'vault',
+          grabIndex: 4,
+          delta: { x: 22, y: 16 }
+        },
+        'teerrath-spiritual-commerce': {
+          theme: 'teerrath',
+          pattern: 'fan',
+          grabIndex: 0,
+          delta: { x: -20, y: -16 }
+        },
+        'cabvi-product-matching': {
+          theme: 'cabvi',
+          pattern: 'lift',
+          grabIndex: 3,
+          delta: { x: 24, y: -12 }
+        }
+      };
 
       var PATTERNS = [
+        {
+          id: 'radar',
+          grab: 'photo',
+          offsets: [
+            { x: -55, y: -45, r: -8, s: 0.88 },
+            { x: 65, y: -40, r: 8, s: 0.88 },
+            { x: -50, y: 48, r: -6, s: 0.90 },
+            { x: 52, y: 40, r: 6, s: 0.90 },
+            { x: 10, y: 55, r: 3, s: 0.92 }
+          ]
+        },
+        {
+          id: 'wave',
+          grab: 'photo',
+          offsets: [
+            { x: -10, y: -65, r: -4, s: 0.92 },
+            { x: 12, y: 65, r: 4, s: 0.92 },
+            { x: -12, y: -55, r: -3, s: 0.93 },
+            { x: 14, y: 55, r: 3, s: 0.93 },
+            { x: -6, y: -45, r: -2, s: 0.95 }
+          ]
+        },
+        {
+          id: 'vault',
+          grab: 'chart',
+          offsets: [
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 },
+            { x: 0, y: 0, r: 0, s: 1 }
+          ]
+        },
+        {
+          id: 'glide',
+          grab: 'photo',
+          offsets: [
+            { x: -95, y: -6, r: -5, s: 0.92 },
+            { x: 95, y: -4, r: 5, s: 0.92 },
+            { x: -90, y: 8, r: -4, s: 0.94 },
+            { x: 92, y: 6, r: 4, s: 0.94 },
+            { x: -75, y: 10, r: -3, s: 0.95 }
+          ]
+        },
         {
           id: 'lift',
           grab: 'up',
@@ -237,17 +325,6 @@
           ]
         },
         {
-          id: 'wave',
-          grab: 'up',
-          offsets: [
-            { x: -6, y: -55, r: -2, s: 0.95 },
-            { x: 6, y: 55, r: 2, s: 0.95 },
-            { x: -8, y: -48, r: -3, s: 0.94 },
-            { x: 8, y: 52, r: 3, s: 0.94 },
-            { x: -4, y: -42, r: -1, s: 0.96 }
-          ]
-        },
-        {
           id: 'zoom',
           grab: 'photo',
           offsets: [
@@ -260,6 +337,8 @@
         }
       ];
 
+      var PATTERN_MAP = {};
+      PATTERNS.forEach(function (p) { PATTERN_MAP[p.id] = p; });
       var PATTERN_CLASSES = PATTERNS.map(function (p) { return 'is-pattern-' + p.id; });
 
       function prefersReducedMotion() {
@@ -318,8 +397,6 @@
         var cursor = root.querySelector('[data-hero-cs-cursor]');
         var scenes = parseScenes(root);
         var index = 0;
-        var tileIndex = 1;
-        var patternIndex = 0;
         var running = false;
         var visible = true;
         var busy = false;
@@ -367,6 +444,14 @@
           var secondary = scene.secondary || {};
           var bars = Array.isArray(scene.bars) ? scene.bars : [42, 68, 92, 58, 76];
           var hasChartImage = !!scene.chart_image;
+          var profile = SCENE_PROFILES[scene.slug] || {
+            theme: 'outreach',
+            pattern: 'radar',
+            grabIndex: 1,
+            delta: { x: 0, y: -24 }
+          };
+
+          root.setAttribute('data-hero-cs-theme', profile.theme);
 
           refs.links.forEach(function (link) {
             link.setAttribute('href', url);
@@ -409,13 +494,14 @@
           });
         }
 
-        function moveCursor(point, durationMs) {
+        function moveCursor(point, durationMs, easing) {
           if (!cursor) return Promise.resolve();
           var ms = durationMs || MOVE_MS;
+          var ease = easing || CURSOR_EASE;
           cursor.classList.remove('is-idle');
           cursor.style.transitionProperty = 'transform, opacity';
           cursor.style.transitionDuration = ms + 'ms';
-          cursor.style.transitionTimingFunction = CURSOR_EASE;
+          cursor.style.transitionTimingFunction = ease;
           cursor.style.setProperty('--hero-cs-cx', point.x + 'px');
           cursor.style.setProperty('--hero-cs-cy', point.y + 'px');
           return wait(ms);
@@ -462,10 +548,12 @@
         measureCenters();
 
         if (cursor) {
-          if (tileCenters[1]) snapCursor(tileCenters[1]);
-          else if (refs.photoTile) {
+          var firstProfile = SCENE_PROFILES[scenes[0] && scenes[0].slug] || { grabIndex: 0 };
+          var firstGrab = firstProfile.grabIndex < refs.tiles.length ? firstProfile.grabIndex : 0;
+          if (tileCenters[firstGrab]) snapCursor(tileCenters[firstGrab]);
+          else if (refs.tiles[firstGrab]) {
             var stageBox = stage.getBoundingClientRect();
-            var box = refs.photoTile.getBoundingClientRect();
+            var box = refs.tiles[firstGrab].getBoundingClientRect();
             snapCursor({
               x: box.left - stageBox.left + box.width * 0.58,
               y: box.top - stageBox.top + box.height * 0.48
@@ -488,6 +576,7 @@
             tile.style.removeProperty('--hero-cs-rot');
             tile.style.removeProperty('--hero-cs-scale');
             tile.style.removeProperty('--hero-cs-delay');
+            tile.style.removeProperty('--hero-cs-drag-x');
             tile.style.removeProperty('--hero-cs-drag-y');
           });
           if (cursor) {
@@ -504,29 +593,8 @@
             tile.style.setProperty('--hero-cs-oy', (offset.y * mul) + '%');
             tile.style.setProperty('--hero-cs-rot', (offset.r * mul) + 'deg');
             tile.style.setProperty('--hero-cs-scale', String(offset.s));
-            tile.style.setProperty('--hero-cs-delay', (i * 0.07) + 's');
+            tile.style.setProperty('--hero-cs-delay', (i * 0.065) + 's');
           });
-        }
-
-        function grabPointFor(pattern, fallbackIndex) {
-          var prefer = fallbackIndex;
-          if (pattern.grab === 'photo') prefer = 1;
-          else if (pattern.grab === 'center') prefer = 1;
-          else if (pattern.grab === 'side') prefer = patternIndex % 2 === 0 ? 0 : 1;
-          else if (pattern.grab === 'down') prefer = 2;
-          prefer = prefer % refs.tiles.length;
-          return {
-            index: prefer,
-            point: tileCenters[prefer] || { x: 180, y: 180 }
-          };
-        }
-
-        function dragDelta(pattern) {
-          if (pattern.grab === 'up') return { x: -4, y: -34 };
-          if (pattern.grab === 'down') return { x: 4, y: 34 };
-          if (pattern.grab === 'side') return { x: patternIndex % 2 === 0 ? -42 : 42, y: -6 };
-          if (pattern.grab === 'center' || pattern.grab === 'photo') return { x: 0, y: -22 };
-          return { x: 0, y: -28 };
         }
 
         async function cycleOnce() {
@@ -540,26 +608,36 @@
             return;
           }
 
-          var pattern = PATTERNS[patternIndex % PATTERNS.length];
-          patternIndex += 1;
+          var currentScene = scenes[index];
+          var nextIndex = (index + 1) % scenes.length;
+          var nextScene = scenes[nextIndex];
+          var profile = SCENE_PROFILES[currentScene.slug] || {
+            theme: 'outreach',
+            pattern: 'radar',
+            grabIndex: (index % refs.tiles.length),
+            delta: { x: -20, y: -16 }
+          };
+
+          var pattern = PATTERN_MAP[profile.pattern] || PATTERNS[0];
           var patternClass = 'is-pattern-' + pattern.id;
-          var grab = grabPointFor(pattern, tileIndex);
-          tileIndex = (grab.index + 2) % refs.tiles.length;
-          var target = refs.tiles[grab.index];
-          var grabPoint = grab.point;
-          var delta = dragDelta(pattern);
+          var grabIndex = profile.grabIndex < refs.tiles.length ? profile.grabIndex : 0;
+          var target = refs.tiles[grabIndex];
+          var grabPoint = tileCenters[grabIndex] || { x: 180, y: 180 };
+          var delta = profile.delta || { x: 0, y: -24 };
 
           applyPatternOffsets(pattern, false);
           root.classList.add(patternClass);
           if (cursor) cursor.classList.remove('is-idle');
 
-          await moveCursor(grabPoint, MOVE_MS);
+          // Smooth approach to target tile
+          await moveCursor(grabPoint, MOVE_MS, CURSOR_EASE);
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
             return;
           }
 
+          // Gentle click & press
           target.classList.add('is-cursor-target', 'is-grabbed');
           root.classList.add('is-pressing');
           if (cursor) cursor.classList.add('is-pressing');
@@ -570,6 +648,7 @@
             return;
           }
 
+          // Fluid drag
           root.classList.remove('is-pressing');
           root.classList.add('is-dragging');
           if (cursor) {
@@ -577,45 +656,50 @@
             cursor.classList.add('is-dragging');
           }
 
-          target.style.setProperty('--hero-cs-drag-y', delta.y + 'px');
+          target.style.setProperty('--hero-cs-drag-x', (delta.x || 0) + 'px');
+          target.style.setProperty('--hero-cs-drag-y', (delta.y || -18) + 'px');
           await moveCursor({
             x: grabPoint.x + delta.x,
             y: grabPoint.y + delta.y
-          }, DRAG_MS);
+          }, DRAG_MS, 'cubic-bezier(0.25, 0.9, 0.3, 1)');
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
             return;
           }
 
-          // Drop drag state before exit so CSS animation:none cannot zero exit duration
+          // Release drag
           root.classList.remove('is-dragging', 'is-pressing');
           if (cursor) cursor.classList.remove('is-dragging', 'is-pressing');
+          target.style.removeProperty('--hero-cs-drag-x');
           target.style.removeProperty('--hero-cs-drag-y');
 
+          // Scene exit transition
           root.classList.add('is-exiting');
-          await wait(EXIT_MS * 0.52);
+          await wait(EXIT_MS * 0.46);
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
             return;
           }
 
-          index = (index + 1) % scenes.length;
-          applyScene(scenes[index]);
-          // Keep the same per-tile vectors so enter travels back from the exit destinations
+          // Switch scene
+          index = nextIndex;
+          applyScene(nextScene);
           applyPatternOffsets(pattern, false);
 
           root.classList.remove('is-exiting');
           root.classList.add('is-entering');
           target.classList.remove('is-grabbed');
 
-          moveCursor({
-            x: grabPoint.x - delta.x * 0.35,
-            y: grabPoint.y - delta.y * 0.35
-          }, ENTER_MS * 0.55);
+          var nextProfile = SCENE_PROFILES[nextScene.slug] || {
+            grabIndex: (nextIndex % refs.tiles.length)
+          };
+          var nextGrabIndex = nextProfile.grabIndex < refs.tiles.length ? nextProfile.grabIndex : 0;
+          var nextGrabPoint = tileCenters[nextGrabIndex] || grabPoint;
 
-          await wait(ENTER_MS);
+          // Seamless fluid glide to next target tile
+          await moveCursor(nextGrabPoint, ENTER_MS, CURSOR_EASE);
           if (!running || !visible || document.hidden) {
             clearMotionClasses();
             busy = false;
@@ -624,7 +708,6 @@
 
           clearMotionClasses();
           if (cursor) {
-            await moveCursor(grabPoint, SETTLE_MS);
             cursor.classList.add('is-idle');
           }
           busy = false;
