@@ -508,6 +508,41 @@ main button.rounded-full.bg-gradient-to-r {
   opacity: 1;
 }
 
+/* ===== SERVICES CORE SERVICES HOVER START ===== */
+#core-services .web-service-card,
+#core-services .web-service-card:nth-child(n) {
+  --web-service-accent:#1F51FF;
+}
+
+#core-services .web-service-card::before {
+  background: #1F51FF;
+}
+
+#core-services .web-service-card::after {
+  background: radial-gradient(circle at top right,
+      color-mix(in srgb, 	#1F51FF 12%, transparent),
+      transparent 68%);
+}
+/* ===== SERVICES CORE SERVICES HOVER END ===== */
+
+/* ===== WEB DEV / CRM TECH CARDS HOVER START ===== */
+.web-services--brown-hover .web-service-card,
+.web-services--brown-hover .web-service-card:nth-child(n),
+.web-services--brown-hover .serviceCapabilitiesSwiper .swiper-slide:nth-child(n) .web-service-card {
+  --web-service-accent:#967969;
+}
+
+.web-services--brown-hover .web-service-card::before {
+  background:	#967969;
+}
+
+.web-services--brown-hover .web-service-card::after {
+  background: radial-gradient(circle at top left,
+      color-mix(in srgb, #967969 12%, transparent),
+      transparent 68%);
+}
+/* ===== WEB DEV / CRM TECH CARDS HOVER END ===== */
+
 .web-service-card__icon {
   align-items: center;
   border: 1px solid transparent;

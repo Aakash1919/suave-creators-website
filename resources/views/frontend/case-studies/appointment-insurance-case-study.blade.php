@@ -30,17 +30,112 @@
       </div>
     </div>
 
-      <figure class="case-study-detail-hero__media">
-        <img
-          src="{{ asset('assets/case-studies/shownoshow/show_no _show banner.webp') }}"
-          alt="Appointment Insurance That Makes Showing Up the Default"
-          title="Appointment Insurance That Makes Showing Up the Default"
-          width="960"
-          height="720"
-          loading="eager"
-          decoding="async"
-        >
+      <figure
+        class="case-study-detail-hero__media appoint-hero"
+        data-appoint-hero
+        aria-label="Appointment confirmation on a phone with schedule, deposit, reminder, check-in, refund, and no-show workflow cards"
+      >
+        @php
+          $appointAsset = 'assets/case-studies/shownoshow';
+        @endphp
+        <div class="appoint-hero__scene" data-ah-scene>
+          <svg class="appoint-hero__connectors" viewBox="0 0 1000 800" preserveAspectRatio="none" aria-hidden="true">
+            <path data-ah-line="schedule" class="appoint-hero__line appoint-hero__line--1"/>
+            <path data-ah-line="deposit" class="appoint-hero__line appoint-hero__line--2"/>
+            <path data-ah-line="reminder" class="appoint-hero__line appoint-hero__line--3"/>
+            <path data-ah-line="checkin" class="appoint-hero__line appoint-hero__line--4"/>
+            <path data-ah-line="refunds" class="appoint-hero__line appoint-hero__line--5"/>
+            <path data-ah-line="noshows" class="appoint-hero__line appoint-hero__line--6"/>
+          </svg>
+
+          <article class="appoint-hero__feat appoint-hero__feat--schedule" data-ah-card="schedule" data-ah-side="left">
+            <div class="appoint-hero__feat-inner">
+              <span class="appoint-hero__feat-icon">
+                <img src="{{ asset($appointAsset.'/appoint-hero-schedule-icon.webp') }}" alt="Schedule icon for appointment insurance booking software" title="Schedule icon for appointment insurance booking software" width="32" height="32" loading="eager" decoding="async">
+              </span>
+              <p class="appoint-hero__feat-title">Schedule</p>
+            </div>
+          </article>
+          <article class="appoint-hero__feat appoint-hero__feat--deposit" data-ah-card="deposit" data-ah-side="left">
+            <div class="appoint-hero__feat-inner">
+              <span class="appoint-hero__feat-icon">
+                <img src="{{ asset($appointAsset.'/appoint-hero-deposit-icon.webp') }}" alt="Deposit secured icon for appointment insurance payments" title="Deposit secured icon for appointment insurance payments" width="32" height="32" loading="eager" decoding="async">
+              </span>
+              <p class="appoint-hero__feat-title">Deposit Secured</p>
+            </div>
+          </article>
+          <article class="appoint-hero__feat appoint-hero__feat--reminder" data-ah-card="reminder" data-ah-side="left">
+            <div class="appoint-hero__feat-inner">
+              <span class="appoint-hero__feat-icon">
+                <img src="{{ asset($appointAsset.'/appoint-hero-reminder-icon.webp') }}" alt="Text reminder icon for appointment insurance SMS invites" title="Text reminder icon for appointment insurance SMS invites" width="32" height="32" loading="eager" decoding="async">
+              </span>
+              <p class="appoint-hero__feat-title">Text Reminder</p>
+            </div>
+          </article>
+
+          <div class="appoint-hero__phone">
+            <div class="appoint-hero__phone-shell" data-ah-phone>
+              <img
+                src="{{ asset($appointAsset.'/appoint-hero-phone.webp') }}"
+                alt="SHOW CHECK appointment insurance confirmation on a mobile phone"
+                title="SHOW CHECK appointment insurance confirmation on a mobile phone"
+                width="366"
+                height="496"
+                loading="eager"
+                decoding="async"
+              >
+              <div class="appoint-hero__screen">
+                <div class="appoint-hero__confirm">
+                  <p class="appoint-hero__appt">Hair Appointment</p>
+                  <p class="appoint-hero__when">January 03, 2017 • 4:59 PM</p>
+                  <div class="appoint-hero__success">
+                    <span class="appoint-hero__success-glow"></span>
+                    <svg class="appoint-hero__success-mark" viewBox="0 0 72 72" aria-hidden="true">
+                      <circle class="appoint-hero__success-fill" cx="36" cy="36" r="36"></circle>
+                      <path class="appoint-hero__success-check" d="M21.5 37.2l9.4 9.4L51.2 25.4"></path>
+                    </svg>
+                  </div>
+                  <p class="appoint-hero__confirmed">Confirmed!</p>
+                  <p class="appoint-hero__set">Your appointment is all set.</p>
+                </div>
+                <span class="appoint-hero__cta">Check In Now</span>
+              </div>
+            </div>
+          </div>
+
+          <article class="appoint-hero__feat appoint-hero__feat--checkin" data-ah-card="checkin" data-ah-side="right">
+            <div class="appoint-hero__feat-inner">
+              <span class="appoint-hero__feat-icon">
+                <img src="{{ asset($appointAsset.'/appoint-hero-checkin-icon.webp') }}" alt="Arrival check-in icon for appointment insurance location proof" title="Arrival check-in icon for appointment insurance location proof" width="32" height="32" loading="eager" decoding="async">
+              </span>
+              <p class="appoint-hero__feat-title">Arrival Check-In</p>
+            </div>
+          </article>
+          <article class="appoint-hero__feat appoint-hero__feat--refunds" data-ah-card="refunds" data-ah-side="right">
+            <div class="appoint-hero__feat-inner">
+              <span class="appoint-hero__feat-icon">
+                <img src="{{ asset($appointAsset.'/appoint-hero-refund-icon.webp') }}" alt="Smart refunds icon for appointment insurance Stripe returns" title="Smart refunds icon for appointment insurance Stripe returns" width="32" height="32" loading="eager" decoding="async">
+              </span>
+              <p class="appoint-hero__feat-title">Smart Refunds</p>
+            </div>
+          </article>
+          <article class="appoint-hero__feat appoint-hero__feat--noshows" data-ah-card="noshows" data-ah-side="right">
+            <div class="appoint-hero__feat-inner">
+              <span class="appoint-hero__feat-icon">
+                <img src="{{ asset($appointAsset.'/appoint-hero-noshow-icon.webp') }}" alt="No-shows pay icon for appointment insurance fair payouts" title="No-shows pay icon for appointment insurance fair payouts" width="32" height="32" loading="eager" decoding="async">
+              </span>
+              <p class="appoint-hero__feat-title">No-Shows Pay</p>
+            </div>
+          </article>
+        </div>
       </figure>
+      <script>
+        (function () {
+          var el = document.querySelector('[data-appoint-hero]');
+          if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          el.classList.add('is-armed');
+        })();
+      </script>
   </div>
 </section>
 
@@ -173,3 +268,122 @@
   </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+  (function () {
+    var root = document.querySelector('[data-appoint-hero]');
+    if (!root) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var idleTimer = 0;
+    var started = false;
+    var resizeTimer = 0;
+
+    function layoutConnectors() {
+      var scene = root.querySelector('[data-ah-scene]');
+      var phone = root.querySelector('[data-ah-phone]');
+      var svg = root.querySelector('.appoint-hero__connectors');
+      if (!scene || !phone || !svg) return;
+
+      var sr = scene.getBoundingClientRect();
+      var pr = phone.getBoundingClientRect();
+      var w = Math.max(1, Math.round(sr.width));
+      var h = Math.max(1, Math.round(sr.height));
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+
+      var pad = Math.max(10, pr.height * 0.05);
+      var phoneTop = pr.top - sr.top + pad;
+      var phoneBot = pr.bottom - sr.top - pad;
+
+      [].forEach.call(root.querySelectorAll('[data-ah-card]'), function (card) {
+        var id = card.getAttribute('data-ah-card');
+        var side = card.getAttribute('data-ah-side');
+        var path = svg.querySelector('[data-ah-line="' + id + '"]');
+        if (!path) return;
+
+        var cr = card.getBoundingClientRect();
+        var fromY = cr.top + cr.height / 2 - sr.top;
+        var toY = Math.max(phoneTop, Math.min(phoneBot, fromY));
+        var fromX;
+        var toX;
+
+        if (side === 'left') {
+          fromX = cr.right - sr.left;
+          toX = pr.left - sr.left;
+        } else {
+          fromX = cr.left - sr.left;
+          toX = pr.right - sr.left;
+        }
+
+        var spread = (toX - fromX) * 0.52;
+        var bow = fromY < h * 0.38 ? -16 : (fromY > h * 0.62 ? 16 : 0);
+        var d = 'M' + fromX.toFixed(1) + ' ' + fromY.toFixed(1)
+          + ' C' + (fromX + spread).toFixed(1) + ' ' + (fromY + bow).toFixed(1)
+          + ' ' + (toX - spread).toFixed(1) + ' ' + (toY + bow).toFixed(1)
+          + ' ' + toX.toFixed(1) + ' ' + toY.toFixed(1);
+
+        path.setAttribute('d', d);
+      });
+    }
+
+    function play() {
+      if (started) return;
+      started = true;
+      if (idleTimer) clearTimeout(idleTimer);
+      root.classList.remove('is-playing', 'is-idle');
+      void root.offsetWidth;
+      layoutConnectors();
+      root.classList.add('is-playing');
+      window.setTimeout(layoutConnectors, 2800);
+      idleTimer = window.setTimeout(function () {
+        root.classList.add('is-idle');
+        layoutConnectors();
+      }, 4300);
+    }
+
+    function onResize() {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(layoutConnectors, 80);
+    }
+
+    function boot() {
+      if (!reduced) root.classList.add('is-armed');
+      layoutConnectors();
+      window.addEventListener('resize', onResize);
+
+      var phoneImg = root.querySelector('.appoint-hero__phone-shell > img');
+      if (phoneImg) {
+        if (phoneImg.complete) layoutConnectors();
+        else phoneImg.addEventListener('load', layoutConnectors);
+      }
+
+      if (reduced) return;
+
+      if (!('IntersectionObserver' in window)) {
+        play();
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          play();
+        });
+      }, { threshold: 0.28 });
+
+      observer.observe(root);
+      window.setTimeout(function () {
+        if (!started) play();
+      }, 900);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
+  })();
+</script>
+@endpush

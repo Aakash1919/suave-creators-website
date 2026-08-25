@@ -30,17 +30,242 @@
       </div>
     </div>
 
-      <figure class="case-study-detail-hero__media">
-        <img
-          src="{{ asset('assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp') }}"
-          alt="The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace"
-          title="The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace"
-          width="960"
-          height="720"
-          loading="eager"
-          decoding="async"
-        >
+      <figure
+        class="case-study-detail-hero__media tasks-hero"
+        data-tasks-hero
+        aria-label="The Suave App Tasks — from a complex process to a clear B2B CRM task management workspace with about 50% less switching"
+      >
+        <div class="tasks-hero__board">
+          <header class="tasks-hero__header">
+            <p class="tasks-hero__logo">Suave.App</p>
+            <div class="tasks-hero__stats">
+              <article class="tasks-hero__stat">
+                <span class="tasks-hero__stat-icon tasks-hero__stat-icon--blue" aria-hidden="true"></span>
+                <div>
+                  <p class="tasks-hero__stat-label">Total Threats</p>
+                  <p class="tasks-hero__stat-value">2,845</p>
+                  <p class="tasks-hero__stat-trend tasks-hero__stat-trend--up">▲ 8.4% vs Q2 2025</p>
+                </div>
+              </article>
+              <article class="tasks-hero__stat">
+                <span class="tasks-hero__stat-icon tasks-hero__stat-icon--red" aria-hidden="true"></span>
+                <div>
+                  <p class="tasks-hero__stat-label">Critical Incidents</p>
+                  <p class="tasks-hero__stat-value">142</p>
+                  <p class="tasks-hero__stat-trend tasks-hero__stat-trend--down">▼ 12.1% vs Q2 2025</p>
+                </div>
+              </article>
+              <article class="tasks-hero__stat">
+                <span class="tasks-hero__stat-icon tasks-hero__stat-icon--green" aria-hidden="true"></span>
+                <div>
+                  <p class="tasks-hero__stat-label">Avg MTTR (Mins)</p>
+                  <p class="tasks-hero__stat-value">18.4m</p>
+                  <p class="tasks-hero__stat-trend tasks-hero__stat-trend--down">▼ 4.2m vs Q2 2025</p>
+                </div>
+              </article>
+              <article class="tasks-hero__stat">
+                <span class="tasks-hero__stat-icon tasks-hero__stat-icon--orange" aria-hidden="true"></span>
+                <div>
+                  <p class="tasks-hero__stat-label">Phishing Blocked</p>
+                  <p class="tasks-hero__stat-value">98.6%</p>
+                  <p class="tasks-hero__stat-trend tasks-hero__stat-trend--up">▲ 1.2% vs Q2 2025</p>
+                </div>
+              </article>
+              <article class="tasks-hero__stat tasks-hero__stat--offset">
+                <span class="tasks-hero__stat-icon tasks-hero__stat-icon--blue" aria-hidden="true"></span>
+                <div>
+                  <p class="tasks-hero__stat-label">Loss Prevented</p>
+                  <p class="tasks-hero__stat-value">$6.4M</p>
+                  <p class="tasks-hero__stat-trend tasks-hero__stat-trend--up">▲ 91.1% vs Q2 2025</p>
+                </div>
+              </article>
+            </div>
+            <p class="tasks-hero__title">The Suave App: B2B CRM Task Redesign</p>
+          </header>
+
+          <div class="tasks-hero__story">
+            <div class="tasks-hero__col tasks-hero__col--before">
+              <p class="tasks-hero__col-label">Before: Complex Process</p>
+              <div class="tasks-hero__panel tasks-hero__panel--before">
+                <span class="tasks-hero__dot tasks-hero__dot--before" aria-hidden="true"></span>
+                <div class="tasks-hero__before-grid">
+                  <span class="tasks-hero__before-item tasks-hero__before-item--1">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-checklist-icon.webp') }}"
+                      alt="Checklist icon for the previous Suave CRM task workflow"
+                      title="Checklist icon for the previous Suave CRM task workflow"
+                      width="48"
+                      height="48"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                  <span class="tasks-hero__before-item tasks-hero__before-item--2">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-grid-icon.webp') }}"
+                      alt="Grid icon for fragmented Suave CRM task boards"
+                      title="Grid icon for fragmented Suave CRM task boards"
+                      width="48"
+                      height="48"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                  <span class="tasks-hero__before-item tasks-hero__before-item--3">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-calendar-icon.webp') }}"
+                      alt="Calendar icon for disconnected Suave CRM scheduling"
+                      title="Calendar icon for disconnected Suave CRM scheduling"
+                      width="48"
+                      height="48"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                  <span class="tasks-hero__before-item tasks-hero__before-item--4">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-spreadsheet-icon.webp') }}"
+                      alt="Spreadsheet icon for scattered Suave CRM task tracking"
+                      title="Spreadsheet icon for scattered Suave CRM task tracking"
+                      width="48"
+                      height="48"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                </div>
+                <span class="tasks-hero__nub" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <span class="tasks-hero__arrow tasks-hero__arrow--left" aria-hidden="true">
+              <svg viewBox="0 0 24 12" fill="none">
+                <path d="M1 6h20M16 1.5 22 6l-6 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+
+            <div class="tasks-hero__center">
+              <div class="tasks-hero__center-float">
+                <div class="tasks-hero__center-frame">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-center.webp') }}"
+                    alt="Suave CRM task workspace on a phone during the B2B task redesign"
+                    title="Suave CRM task workspace on a phone during the B2B task redesign"
+                    width="360"
+                    height="420"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <span class="tasks-hero__arrow tasks-hero__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 24 12" fill="none">
+                <path d="M1 6h20M16 1.5 22 6l-6 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+
+            <div class="tasks-hero__col tasks-hero__col--after">
+              <p class="tasks-hero__col-label">After: Clear Workspace</p>
+              <div class="tasks-hero__panel tasks-hero__panel--after">
+                <span class="tasks-hero__dot tasks-hero__dot--after" aria-hidden="true"></span>
+                <ol class="tasks-hero__tasks">
+                  <li class="tasks-hero__task tasks-hero__task--1"><span>1.</span> Follow up</li>
+                  <li class="tasks-hero__task tasks-hero__task--2"><span>2.</span> Proposal</li>
+                  <li class="tasks-hero__task tasks-hero__task--3"><span>3.</span> Prepare Proposal</li>
+                  <li class="tasks-hero__task tasks-hero__task--4"><span>4.</span> Requirement rev....</li>
+                  <li class="tasks-hero__task tasks-hero__task--5"><span>5.</span> NDA signed</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="tasks-hero__features">
+            <svg class="tasks-hero__connectors" viewBox="0 0 400 52" preserveAspectRatio="none" aria-hidden="true">
+              <path class="tasks-hero__connector-path tasks-hero__connector-path--left" pathLength="1" d="M200 2 L200 18 L40 18 L40 50"/>
+              <path class="tasks-hero__connector-path tasks-hero__connector-path--mid-left" pathLength="1" d="M200 18 L145 18 L145 50"/>
+              <path class="tasks-hero__connector-path tasks-hero__connector-path--mid-right" pathLength="1" d="M200 18 L255 18 L255 50"/>
+              <path class="tasks-hero__connector-path tasks-hero__connector-path--right" pathLength="1" d="M200 2 L200 18 L360 18 L360 50"/>
+              <path class="tasks-hero__connector-glow" pathLength="1" d="M40 18 H360"/>
+            </svg>
+            <p class="tasks-hero__features-label">Key features (Integrated)</p>
+            <div class="tasks-hero__feature-row">
+              <article class="tasks-hero__feature tasks-hero__feature--1">
+                <span class="tasks-hero__feature-icon">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-inline-create-icon.webp') }}"
+                    alt="Inline create icon for Suave CRM task management"
+                    title="Inline create icon for Suave CRM task management"
+                    width="48"
+                    height="48"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <p class="tasks-hero__feature-title">+Inline Create</p>
+                <p class="tasks-hero__feature-copy">Create tasks in context, instantly.</p>
+              </article>
+              <article class="tasks-hero__feature tasks-hero__feature--2">
+                <span class="tasks-hero__feature-icon">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-task-drawer-icon.webp') }}"
+                    alt="Task drawer icon for Suave CRM collaboration details"
+                    title="Task drawer icon for Suave CRM collaboration details"
+                    width="48"
+                    height="48"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <p class="tasks-hero__feature-title">Task Drawer</p>
+                <p class="tasks-hero__feature-copy">Details &amp; collaboration within reach.</p>
+              </article>
+              <article class="tasks-hero__feature tasks-hero__feature--3">
+                <span class="tasks-hero__feature-icon">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-ai-assistant-icon.webp') }}"
+                    alt="AI task assistant icon for Suave CRM project management"
+                    title="AI task assistant icon for Suave CRM project management"
+                    width="48"
+                    height="48"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <p class="tasks-hero__feature-title">AI Task Assistant</p>
+                <p class="tasks-hero__feature-copy">Prioritizes and optimizes, integrated.</p>
+              </article>
+              <article class="tasks-hero__feature tasks-hero__feature--4">
+                <span class="tasks-hero__feature-icon">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-tasks/tasks-hero-fewer-switches-icon.webp') }}"
+                    alt="Fewer switches icon for streamlined Suave CRM task work"
+                    title="Fewer switches icon for streamlined Suave CRM task work"
+                    width="48"
+                    height="48"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <p class="tasks-hero__feature-title">50% Fewer Switches</p>
+                <p class="tasks-hero__feature-copy">Streamlined work, more focus.</p>
+              </article>
+            </div>
+          </div>
+        </div>
       </figure>
+      <script>
+        (function () {
+          var el = document.querySelector('[data-tasks-hero]');
+          if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          el.classList.add('is-armed');
+        })();
+      </script>
   </div>
 </section>
 
@@ -173,3 +398,52 @@
   </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+  (function () {
+    var root = document.querySelector('[data-tasks-hero]');
+    if (!root) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    var idleTimer = 0;
+
+    function play() {
+      if (idleTimer) clearTimeout(idleTimer);
+      root.classList.remove('is-playing', 'is-idle');
+      void root.offsetWidth;
+      root.classList.add('is-playing');
+      idleTimer = setTimeout(function () {
+        root.classList.add('is-idle');
+      }, 5000);
+    }
+
+    function boot() {
+      root.classList.add('is-armed');
+
+      if (!('IntersectionObserver' in window)) {
+        play();
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          play();
+        });
+      }, { threshold: 0.35 });
+
+      observer.observe(root);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
+  })();
+</script>
+@endpush
