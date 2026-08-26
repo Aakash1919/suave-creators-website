@@ -6657,7 +6657,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 
 .case-studies-fan__card {
   background: #0b1024;
-  border: 0;
+  border:9px solid  #00003f;;
   border-radius: 0.8rem;
   box-shadow:
     0 10px 28px rgba(4, 8, 28, 0.28),
@@ -6681,7 +6681,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 .case-studies-fan__card img {
   display: block;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
   object-position: top center;
   width: 100%;
 }
@@ -7049,18 +7049,23 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 
 .case-study-detail-hero__copy {
   min-width: 0;
-  max-width: 36rem;
 }
 
 .case-study-detail-hero__title {
   margin: 0;
-  font-size: clamp(1.85rem, 4vw, 2.65rem);
+  max-width: 48rem;
+  font-size: clamp(1.85rem, 4vw, 2.4rem);
   font-weight: 650;
   line-height: 1.18;
   letter-spacing: -0.02em;
   color: #fff;
-  text-wrap: balance;
   overflow-wrap: break-word;
+}
+
+.case-study-detail-hero__lead,
+.case-study-detail-hero__meta,
+.case-study-detail-hero__actions {
+  max-width: 36rem;
 }
 
 .case-study-detail-hero__lead {
@@ -7087,7 +7092,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 .case-study-detail-hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7rem;
+  gap: 3rem;
   margin-top: 1.35rem;
 }
 
@@ -7100,6 +7105,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   font-size: 0.875rem;
   font-weight: 700;
   text-decoration: none;
+  margin-top:65px;
 }
 
 .case-study-detail-hero__btn--primary {

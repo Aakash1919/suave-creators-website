@@ -20,7 +20,7 @@
           @foreach ($fanImages as $item)
             <li
               class="case-studies-fan__item{{ ! empty($item['featured']) ? ' case-studies-fan__item--center' : '' }}"
-              style="--fan-rotate: {{ $item['fan_rotate'] }}deg; --fan-y: {{ $item['fan_y'] }}px; --fan-scale: {{ $item['fan_scale'] }}; --fan-z: {{ $item['fan_z'] }};"
+              
             >
               <figure class="case-studies-fan__card">
                   <img
