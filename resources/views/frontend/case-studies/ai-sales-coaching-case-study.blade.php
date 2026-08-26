@@ -4,13 +4,13 @@
 <section class="case-study-detail-hero site-container" aria-labelledby="case-study-detail-heading">
   <div class="case-study-detail-hero__grid">
     <div class="case-study-detail-hero__copy">
-      <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
+      {{-- <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}">Home</a>
         <span aria-hidden="true">/</span>
         <a href="{{ route('case-studies') }}">Case Studies</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">An AI Sales Coach That Practices, Whispers, and Scores</span>
-      </nav>
+      </nav> --}}
 
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">Sales Enablement</p>
       <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">An AI Sales Coach That Practices, Whispers, and Scores</h1>

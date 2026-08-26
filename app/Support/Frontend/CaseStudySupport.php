@@ -304,7 +304,7 @@ class CaseStudySupport
             ],
             [
                 'slug' => 'suave-crm-outreach-case-study',
-                'title' => 'The Suave App Outreach — From a Complex Process to a Clear B2B CRM Sales Workspace',
+                'title' => 'The Suave App Outreach - From a Complex Process to a Clear B2B CRM Sales Workspace',
                 'status' => 'published',
                 'image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
                 'short_description' => 'We redesigned the suave app’s fragmented B2B CRM outbound sales workflow into one prospecting workspace — map-based company discovery, AI sales briefings, cold email automation, and pipeline tracking — with about 65% fewer steps.',
@@ -329,7 +329,7 @@ class CaseStudySupport
             ],
             [
                 'slug' => 'suave-crm-tasks-case-study',
-                'title' => 'The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace',
+                'title' => 'The Suave App Tasks - From a Complex Process to a Clear B2B CRM Task Management Workspace',
                 'status' => 'published',
                 'image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
                 'short_description' => 'We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.',

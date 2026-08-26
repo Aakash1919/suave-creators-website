@@ -4,16 +4,16 @@
 <section class="case-study-detail-hero site-container" aria-labelledby="case-study-detail-heading">
   <div class="case-study-detail-hero__grid">
     <div class="case-study-detail-hero__copy">
-      <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
+      {{-- <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}">Home</a>
         <span aria-hidden="true">/</span>
         <a href="{{ route('case-studies') }}">Case Studies</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace</span>
-      </nav>
+      </nav> --}}
 
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">B2B SaaS / Work Management</p>
-      <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace</h1>
+      <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">The Suave App Tasks - From a Complex Process to a Clear B2B CRM Task Management Workspace</h1>
       <p class="case-study-detail-hero__lead">We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.</p>
 
       <div class="case-study-detail-hero__meta">
@@ -33,11 +33,11 @@
       <figure
         class="case-study-detail-hero__media tasks-hero"
         data-tasks-hero
-        aria-label="The Suave App Tasks — from a complex process to a clear B2B CRM task management workspace with about 50% less switching"
+        aria-label="The Suave App Tasks - from a complex process to a clear B2B CRM task management workspace with about 50% less switching"
       >
         <div class="tasks-hero__board">
           <header class="tasks-hero__header">
-            <p class="tasks-hero__logo">Suave.App</p>
+            <p class="tasks-hero__logo"> The Suave.App</p>
             <div class="tasks-hero__stats">
               <article class="tasks-hero__stat">
                 <span class="tasks-hero__stat-icon tasks-hero__stat-icon--blue" aria-hidden="true"></span>
@@ -193,7 +193,7 @@
               <path class="tasks-hero__connector-path tasks-hero__connector-path--right" pathLength="1" d="M200 2 L200 18 L360 18 L360 50"/>
               <path class="tasks-hero__connector-glow" pathLength="1" d="M40 18 H360"/>
             </svg>
-            <p class="tasks-hero__features-label">Key features (Integrated)</p>
+            {{-- <p class="tasks-hero__features-label">Key features (Integrated)</p> --}}
             <div class="tasks-hero__feature-row">
               <article class="tasks-hero__feature tasks-hero__feature--1">
                 <span class="tasks-hero__feature-icon">
@@ -237,7 +237,7 @@
                     decoding="async"
                   >
                 </span>
-                <p class="tasks-hero__feature-title">AI Task Assistant</p>
+                <p class="tasks-hero__feature-title">AI Assistant</p>
                 <p class="tasks-hero__feature-copy">Prioritizes and optimizes, integrated.</p>
               </article>
               <article class="tasks-hero__feature tasks-hero__feature--4">

@@ -4,13 +4,13 @@
 <section class="case-study-detail-hero site-container" aria-labelledby="case-study-detail-heading">
   <div class="case-study-detail-hero__grid">
     <div class="case-study-detail-hero__copy">
-      <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
+      {{-- <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}">Home</a>
         <span aria-hidden="true">/</span>
         <a href="{{ route('case-studies') }}">Case Studies</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">Success Story : The Turbo Trans Corporation</span>
-      </nav>
+      </nav> --}}
 
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">Logistics &amp; Freight</p>
       <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">Success Story : The Turbo Trans Corporation</h1>
@@ -71,11 +71,7 @@
         <p class="product-case-study__metric-value">42%</p>
         <p class="product-case-study__metric-label">More Qualified Leads</p>
         <p class="product-case-study__metric-caption">vs. Previous Quarter</p>
-        <div
-          class="product-case-study__metric-chart product-case-study__metric-chart--image product-case-study__metric-chart--strip"
-          aria-hidden="true"
-          style="background-image: url('{{ asset('assets/product/graph_vector1.png') }}')"
-        ></div>
+        <x-frontend.case-study-metric-chart tone="blue" />
       </article>
       <article class="product-case-study__metric product-case-study__metric--purple product-case-study__metric--has-chart product-case-study__metric--has-chart-strip">
         <div class="product-case-study__metric-icon">
@@ -92,17 +88,13 @@
         <p class="product-case-study__metric-value">3.4x</p>
         <p class="product-case-study__metric-label">Faster Response Time</p>
         <p class="product-case-study__metric-caption">Average Lead Response</p>
-        <div
-          class="product-case-study__metric-chart product-case-study__metric-chart--image product-case-study__metric-chart--strip"
-          aria-hidden="true"
-          style="background-image: url('{{ asset('assets/product/graph_vector2.png') }}')"
-        ></div>
+        <x-frontend.case-study-metric-chart tone="purple" />
       </article>
         </div>
   </div>
 </section>
 
-<section id="section-2" class="full-bleed case-study-split case-study-split--right case-study-split--alt case-study-split--stack-tight bg-white" aria-labelledby="section-2-title">
+<section id="section-2" class="full-bleed case-study-split case-study-split--left case-study-split--alt case-study-split--stack-tight bg-white" aria-labelledby="section-2-title">
   <div class="section-inner case-study-split__inner">
     <div class="case-study-split__copy">
         
@@ -134,11 +126,7 @@
         <p class="product-case-study__metric-value">68%</p>
         <p class="product-case-study__metric-label">Pipeline Visibility</p>
         <p class="product-case-study__metric-caption">Complete Deal Tracking</p>
-        <div
-          class="product-case-study__metric-chart product-case-study__metric-chart--image product-case-study__metric-chart--strip"
-          aria-hidden="true"
-          style="background-image: url('{{ asset('assets/product/graph_vector3.png') }}')"
-        ></div>
+        <x-frontend.case-study-metric-chart tone="teal" />
       </article>
       <article class="product-case-study__metric product-case-study__metric--orange product-case-study__metric--has-chart product-case-study__metric--has-chart-strip">
         <div class="product-case-study__metric-icon">
@@ -155,11 +143,7 @@
         <p class="product-case-study__metric-value">2.8x</p>
         <p class="product-case-study__metric-label">Revenue Growth</p>
         <p class="product-case-study__metric-caption">Year-over-Year Increase</p>
-        <div
-          class="product-case-study__metric-chart product-case-study__metric-chart--image product-case-study__metric-chart--strip"
-          aria-hidden="true"
-          style="background-image: url('{{ asset('assets/product/graph_vector4.png') }}')"
-        ></div>
+        <x-frontend.case-study-metric-chart tone="orange" />
       </article>
         </div>
   </div>

@@ -4,13 +4,13 @@
 <section class="case-study-detail-hero site-container" aria-labelledby="case-study-detail-heading">
   <div class="case-study-detail-hero__grid">
     <div class="case-study-detail-hero__copy">
-      <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
+      {{-- <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}">Home</a>
         <span aria-hidden="true">/</span>
         <a href="{{ route('case-studies') }}">Case Studies</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">Appointment Insurance That Makes Showing Up the Default</span>
-      </nav>
+      </nav> --}}
 
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">Appointment Scheduling / Fintech</p>
       <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">Appointment Insurance That Makes Showing Up the Default</h1>
@@ -33,7 +33,7 @@
       <figure
         class="case-study-detail-hero__media appoint-hero"
         data-appoint-hero
-        aria-label="Appointment confirmation on a phone with schedule, deposit, reminder, check-in, refund, and no-show workflow cards"
+        aria-label="Appointment booking then confirmation on a phone with schedule, deposit, reminder, check-in, refund, and no-show workflow cards"
       >
         @php
           $appointAsset = 'assets/case-studies/shownoshow';
@@ -77,28 +77,50 @@
             <div class="appoint-hero__phone-shell" data-ah-phone>
               <img
                 src="{{ asset($appointAsset.'/appoint-hero-phone.webp') }}"
-                alt="SHOW CHECK appointment insurance confirmation on a mobile phone"
-                title="SHOW CHECK appointment insurance confirmation on a mobile phone"
+                alt="SHOW CHECK appointment insurance booking and confirmation on a mobile phone"
+                title="SHOW CHECK appointment insurance booking and confirmation on a mobile phone"
                 width="366"
                 height="496"
                 loading="eager"
                 decoding="async"
               >
               <div class="appoint-hero__screen">
-                <div class="appoint-hero__confirm">
-                  <p class="appoint-hero__appt">Hair Appointment</p>
-                  <p class="appoint-hero__when">January 03, 2017 • 4:59 PM</p>
-                  <div class="appoint-hero__success">
-                    <span class="appoint-hero__success-glow"></span>
-                    <svg class="appoint-hero__success-mark" viewBox="0 0 72 72" aria-hidden="true">
-                      <circle class="appoint-hero__success-fill" cx="36" cy="36" r="36"></circle>
-                      <path class="appoint-hero__success-check" d="M21.5 37.2l9.4 9.4L51.2 25.4"></path>
-                    </svg>
+                <div class="appoint-hero__slide appoint-hero__slide--booking">
+                  <div class="appoint-hero__booking">
+                    <p class="appoint-hero__booking-title">Book Your Appointment</p>
+                    <div class="appoint-hero__step">
+                      <span class="appoint-hero__step-number">1</span>
+                      <div class="appoint-hero__step-content">
+                        <p class="appoint-hero__step-title">Select Date</p>
+                        <p class="appoint-hero__step-value">January 03, 2017</p>
+                      </div>
+                    </div>
+                    <div class="appoint-hero__step">
+                      <span class="appoint-hero__step-number">2</span>
+                      <div class="appoint-hero__step-content">
+                        <p class="appoint-hero__step-title">Select Time</p>
+                        <p class="appoint-hero__step-value">4:59 PM</p>
+                      </div>
+                    </div>
                   </div>
-                  <p class="appoint-hero__confirmed">Confirmed!</p>
-                  <p class="appoint-hero__set">Your appointment is all set.</p>
+                  <span class="appoint-hero__cta">Book Appointment</span>
                 </div>
-                <span class="appoint-hero__cta">Check In Now</span>
+                <div class="appoint-hero__slide appoint-hero__slide--confirm">
+                  <div class="appoint-hero__confirm">
+                    <p class="appoint-hero__appt">Hair Appointment</p>
+                    <p class="appoint-hero__when">January 03, 2017 • 4:59 PM</p>
+                    <div class="appoint-hero__success">
+                      <span class="appoint-hero__success-glow"></span>
+                      <svg class="appoint-hero__success-mark" viewBox="0 0 72 72" aria-hidden="true">
+                        <circle class="appoint-hero__success-fill" cx="36" cy="36" r="36"></circle>
+                        <path class="appoint-hero__success-check" d="M21.5 37.2l9.4 9.4L51.2 25.4"></path>
+                      </svg>
+                    </div>
+                    <p class="appoint-hero__confirmed">Confirmed!</p>
+                    <p class="appoint-hero__set">Your appointment is all set.</p>
+                  </div>
+                  <span class="appoint-hero__cta">Check In Now</span>
+                </div>
               </div>
             </div>
           </div>
