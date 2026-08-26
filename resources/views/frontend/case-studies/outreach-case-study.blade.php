@@ -332,11 +332,11 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~65%</p>
+            <p class="case-study-metrics__value">+65%</p>
             <h3 class="case-study-metrics__label">Fewer steps for routine B2B CRM outbound sales prospecting</h3>
           </div>
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~35%</p>
+            <p class="case-study-metrics__value">+35%</p>
             <h3 class="case-study-metrics__label">Less effort to complete the same sales pipeline work</h3>
           </div>
           <div class="case-study-metrics__box">

@@ -169,19 +169,19 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~$261</p>
+            <p class="case-study-metrics__value">+$261</p>
             <h3 class="case-study-metrics__label">Card fees saved on a $10k example by returning unused money the smart way</h3>
           </div>
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~90%</p>
+            <p class="case-study-metrics__value">+90%</p>
             <h3 class="case-study-metrics__label">Less card-fee waste on unused deposit money that comes back</h3>
           </div>
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~70%</p>
+            <p class="case-study-metrics__value">+70%</p>
             <h3 class="case-study-metrics__label">Less manual chasing for confirmations, deposits, and “are you coming?”</h3>
           </div>
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~65%</p>
+            <p class="case-study-metrics__value">+65%</p>
             <h3 class="case-study-metrics__label">Improvement in recovering value from no-shows instead of treating them as pure loss</h3>
           </div>
     </div>

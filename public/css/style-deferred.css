@@ -2065,7 +2065,7 @@
 }
 
 .product-case-study__metric-chart--svg {
-  overflow: hidden;
+  overflow: visible;
   opacity: 1;
 }
 
@@ -2075,8 +2075,9 @@
   height: 100%;
 }
 
-.product-case-study__metric-chart-line--glow {
-  opacity: 0.22;
+.product-case-study__metric-chart-dot {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .product-case-study__metric-chart--svg.is-armed .product-case-study__metric-chart-line {
@@ -2092,6 +2093,10 @@
   animation: product-metric-chart-fill 1.35s ease-out forwards;
 }
 
+.product-case-study__metric-chart--svg.is-glowing .product-case-study__metric-chart-dot {
+  opacity: 1;
+}
+
 @keyframes product-metric-chart-fill {
   to { clip-path: inset(0 0 0 0); }
 }
@@ -2101,6 +2106,11 @@
   .product-case-study__metric-chart--svg.is-armed .product-case-study__metric-chart-area {
     clip-path: none;
     stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .product-case-study__metric-chart-dot {
+    opacity: 0;
     animation: none;
   }
 }

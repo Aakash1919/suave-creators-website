@@ -60,16 +60,8 @@
       <path class="product-case-study__metric-chart-fill" d="{{ $chart['fill'] }}" fill="url(#{{ $fillId }})"/>
     </g>
     <path
-      class="product-case-study__metric-chart-line product-case-study__metric-chart-line--glow"
-      d="{{ $chart['line'] }}"
-      pathLength="1"
-      stroke="{{ $color }}"
-      stroke-width="6"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <path
       class="product-case-study__metric-chart-line"
+      data-metric-line
       d="{{ $chart['line'] }}"
       pathLength="1"
       stroke="{{ $color }}"
@@ -77,6 +69,9 @@
       stroke-linecap="round"
       stroke-linejoin="round"
     />
+    <g class="product-case-study__metric-chart-dot">
+      <circle r="4.2" fill="{{ $color }}"/>
+    </g>
   </svg>
 </div>
 
@@ -89,6 +84,7 @@
 
     var timers = [];
     var dashFrames = [];
+    var dotFrames = [];
 
     function later(fn, delay) {
       timers.push(setTimeout(fn, delay));
@@ -112,6 +108,29 @@
       }, delay);
     }
 
+    function runDot(el) {
+      var path = el.querySelector('[data-metric-line]');
+      var dot = el.querySelector('.product-case-study__metric-chart-dot');
+      if (!path || !dot || typeof path.getTotalLength !== 'function') return;
+
+      var length = path.getTotalLength();
+      if (!length) return;
+
+      var duration = 8000;
+      var start = null;
+
+      function step(ts) {
+        if (!start) start = ts;
+        var t = ((ts - start) % duration) / duration;
+        var point = path.getPointAtLength(t * length);
+        dot.setAttribute('transform', 'translate(' + point.x + ',' + point.y + ')');
+        dotFrames.push(requestAnimationFrame(step));
+      }
+
+      el.classList.add('is-glowing');
+      dotFrames.push(requestAnimationFrame(step));
+    }
+
     function play(root) {
       var charts = root.matches('[data-metric-chart]')
         ? [root]
@@ -123,6 +142,9 @@
           el.querySelectorAll('.product-case-study__metric-chart-line').forEach(function (path) {
             animateDash(path, 1350, 0);
           });
+          later(function () {
+            runDot(el);
+          }, 1350);
         }, index * 160);
       });
     }
