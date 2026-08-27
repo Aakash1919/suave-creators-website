@@ -407,8 +407,8 @@ class CaseStudySupport
             [
                 'slug' => 'cabvi-product-matching',
                 'title' => 'CABVI — From Manual Product Matching to an Automated AI Workspace',
-                'status' => 'draft',
-                'image' => 'assets/case-studies/cabvi/cabvi-logo.png',
+                'status' => 'published',
+                'image' => 'assets/case-studies/cabvi/cabvi-logo.webp',
                 'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
                 'listing_subtitle' => 'Automated AI Product Matching',
                 'industry' => 'Nonprofit / Procurement',

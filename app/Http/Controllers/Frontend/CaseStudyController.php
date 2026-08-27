@@ -46,7 +46,7 @@ class CaseStudyController extends FrontendController
 
     public function cabviCaseStudy(): View
     {
-        return $this->draftView('frontend.case-studies.cabvi-case-study');
+        return $this->View('frontend.case-studies.cabvi-case-study');
     }
 
     public function show(string $slug): RedirectResponse

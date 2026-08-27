@@ -1,5 +1,6 @@
 @props([
     'tone' => 'blue',
+    'delay' => 0,
 ])
 
 @php
@@ -37,6 +38,7 @@
 
     $color = $palettes[$tone];
     $chart = $charts[$tone];
+    $delayMs = max(0, (int) $delay);
     $fillId = 'pcs-metric-fill-'.$tone.'-'.bin2hex(random_bytes(3));
 @endphp
 
@@ -47,6 +49,7 @@
     'product-case-study__metric-chart--strip',
   ]) }}
   data-metric-chart
+  data-metric-delay="{{ $delayMs }}"
   aria-hidden="true"
 >
   <svg viewBox="{{ $chart['viewBox'] }}" preserveAspectRatio="none" fill="none" focusable="false">
@@ -137,6 +140,7 @@
         : Array.prototype.slice.call(root.querySelectorAll('[data-metric-chart]'));
 
       charts.forEach(function (el, index) {
+        var delay = parseInt(el.getAttribute('data-metric-delay'), 10) || 0;
         later(function () {
           el.classList.add('is-playing');
           el.querySelectorAll('.product-case-study__metric-chart-line').forEach(function (path) {
@@ -145,7 +149,7 @@
           later(function () {
             runDot(el);
           }, 1350);
-        }, index * 160);
+        }, delay + index * 160);
       });
     }
 
@@ -153,7 +157,7 @@
       var seen = [];
       document.querySelectorAll('[data-metric-chart]').forEach(function (el) {
         el.classList.add('is-armed');
-        var root = el.closest('.case-study-visual--metrics') || el;
+        var root = el.closest('.case-study-visual--metrics, [data-outreach-hero]') || el;
         if (seen.indexOf(root) !== -1) return;
         seen.push(root);
 
