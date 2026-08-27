@@ -50,9 +50,17 @@
         aria-label="Technologies">
         <div class="swiper-wrapper">
           @foreach ($service['bannerLogos'] as $logo)
+            @php
+              $logoLabel = is_array($logo) ? trim((string) ($logo['label'] ?? '')) : '';
+              $logoAlt = is_array($logo) ? (string) ($logo['alt'] ?? $logoLabel) : '';
+              $logoSrc = is_array($logo) ? ($logo['src'] ?? '') : $logo;
+            @endphp
             <div class="swiper-slide">
-              <div class="service-banner-logo">
-                <img src="{{ $logo['src'] ?? $logo }}" alt="{{ $logo['alt'] ?? '' }}" title="{{ $logo['alt'] ?? '' }}" class="service-banner-logo__img" loading="lazy">
+              <div class="service-banner-logo{{ $logoLabel !== '' ? ' service-banner-logo--labeled' : '' }}">
+                <img src="{{ $logoSrc }}" alt="{{ $logoAlt }}" title="{{ $logoAlt }}" class="service-banner-logo__img" loading="lazy" width="64" height="64" decoding="async">
+                @if ($logoLabel !== '')
+                  <span class="service-banner-logo__label">{{ $logoLabel }}</span>
+                @endif
               </div>
             </div>
           @endforeach
@@ -941,6 +949,50 @@ $n = $index + 1;
   opacity: 1;
 }
 
+.service-banner-logo--labeled {
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.service-banner-logo--labeled .service-banner-logo__img {
+  max-width: 48px;
+  max-height: 36px;
+}
+
+.service-banner-logo__label {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .service-banner-logo__label {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-banner-logo--labeled .service-banner-logo__img {
+    max-width: 64px;
+    max-height: 44px;
+  }
+
+  .service-banner-logo__label {
+    font-size: 12px;
+  }
+}
+
 .development-process-section {
   background: linear-gradient(5deg, #edf0ff 0%, #ffffff 100%);
   padding: 80px 0;
@@ -1171,6 +1223,11 @@ $n = $index + 1;
   .service-banner-logo__img {
     max-width: 110px;
     max-height: 64px;
+  }
+
+  .service-banner-logo--labeled .service-banner-logo__img {
+    max-width: 64px;
+    max-height: 44px;
   }
 }
 

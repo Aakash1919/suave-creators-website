@@ -14,6 +14,8 @@ class ServiceSupport
         'custom-crm-development',
         'enterprise-software-solutions',
         'e-commerce-development',
+        'ui-ux-design-services',
+        'ai-solutions',
     ];
 
     /**
@@ -205,6 +207,15 @@ class ServiceSupport
             'seoDescription' => (string) ($service['pageDescription'] ?? 'Suave Creators service details.'),
             'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
+            'seoFaqs' => array_values(array_filter(
+                array_map(static function (array $faq): array {
+                    return [
+                        'question' => (string) ($faq['question'] ?? ''),
+                        'answer' => (string) ($faq['answer'] ?? ''),
+                    ];
+                }, is_array($service['faqs'] ?? null) ? $service['faqs'] : []),
+                static fn (array $faq): bool => $faq['question'] !== '' && $faq['answer'] !== '',
+            )),
             'bannerBg' => asset(self::mapDesignPath((string) ($service['bannerBg'] ?? '/assets/background/service-banner-bg.webp'))),
             'introBg' => asset(self::mapDesignPath('/assets/background/technology-section-bg.png')),
             'collabBackground' => asset(self::mapDesignPath((string) ($service['collabBackground'] ?? '/assets/media/collaboration-back-visual.png'))),
@@ -296,6 +307,7 @@ class ServiceSupport
             $path === 'contact-us' => ContactSupport::demoHref(),
             $path === 'blogs' => route('blogs'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),
+            str_starts_with($path, 'services/') => route('service.show', ['slug' => (string) str($path)->after('services/')]),
             str_starts_with($path, 'service/') => route('service.show', ['slug' => (string) str($path)->after('service/')]),
             default => $href,
         };

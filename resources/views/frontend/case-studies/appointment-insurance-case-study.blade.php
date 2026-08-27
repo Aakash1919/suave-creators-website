@@ -214,7 +214,7 @@
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 16l5-5 3.5 3.5L20 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <h3>Outcome</h3>
-          <p>Organizers protect calendars with clear commitment rules and far less manual chasing. Showing up returns unused deposit money without taxing the full amount; no-shows fund who waited instead of becoming pure loss. On a simple $10,000 example where $9,000 returns, card fees stay near ~$29 instead of ~$290 — about $261 saved versus charging everything then refunding.</p>
+          <p>Organizers protect calendars with clear commitment rules and far less manual chasing. Showing up returns unused deposit money without taxing the full amount; no-shows fund who waited instead of becoming pure loss. On a simple $10,000 example where $9,000 returns, card fees stay near +$29 instead of +$290 — about $261 saved versus charging everything then refunding.</p>
         </article>
     </div>
   </div>
@@ -225,7 +225,7 @@
     <div class="case-study-split__copy">
           <p class="case-study-story__eyebrow">Smart refunds</p>
           <h2 id="section-1-title">Return unused deposit money — without wasting card fees.</h2>
-          <p>The main money move isn’t “charge the whole deposit.” When only part was earned, Stripe returns the unused amount so card fees apply to what stayed charged. Simple example on a $10,000 deposit where $9,000 comes back (typical 2.9% + $0.30 fees): charge-everything-then-refund costs ~$290; keeping $1,000 charged costs ~$29 — about $261 saved.</p>
+          <p>The main money move isn’t “charge the whole deposit.” When only part was earned, Stripe returns the unused amount so card fees apply to what stayed charged. Simple example on a $10,000 deposit where $9,000 comes back (typical 2.9% + $0.30 fees): charge-everything-then-refund costs +$290; keeping $1,000 charged costs +$29 — about $261 saved.</p>
           <ol class="case-study-split__steps">
               <li><span>1</span>Return unused deposit money instead of charging everything first</li>
               <li><span>2</span>$10,000 example: about $261 in card fees saved</li>

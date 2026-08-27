@@ -39,7 +39,7 @@ class SuaveAgentKnowledge
         return array_map(static function (array $row): array {
             $url = (string) ($row[4] ?? '');
             $slug = null;
-            if (preg_match('#/service/([^/?#]+)#', $url, $matches) === 1) {
+            if (preg_match('#/services?/([^/?#]+)#', $url, $matches) === 1) {
                 $slug = $matches[1];
             }
 
