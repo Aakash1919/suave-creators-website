@@ -13,9 +13,9 @@ use Laravel\Ai\Promptable;
 use Stringable;
 
 #[Model('gpt-4o-mini')]
-#[MaxTokens(8192)]
+#[MaxTokens(16384)]
 #[Temperature(0.7)]
-#[Timeout(180)]
+#[Timeout(240)]
 class BlogWriterAgent implements Agent, HasStructuredOutput
 {
     use Promptable;
@@ -30,6 +30,7 @@ class BlogWriterAgent implements Agent, HasStructuredOutput
         public array $recentTitles = [],
         public array $styleExamples = [],
         public ?string $modelOverride = null,
+        public ?string $topic = null,
     ) {}
 
     /**
@@ -57,6 +58,10 @@ class BlogWriterAgent implements Agent, HasStructuredOutput
                 ->map(static fn (string $title): string => '- '.$title)
                 ->implode("\n");
         $examples = $this->formatStyleExamples();
+        $assignedTopic = is_string($this->topic) ? trim($this->topic) : '';
+        $topicSelection = $assignedTopic !== ''
+            ? "TOPIC SELECTION\n\nWrite this article on the assigned topic only. Do not switch to a different trend.\nAssigned topic: {$assignedTopic}"
+            : "TOPIC SELECTION\n\nChoose a topic that is timely as of {$today}.\n\nPrioritize technologies that are actively transforming businesses today rather than outdated technologies.";
 
         return <<<PROMPT
 You are the in-house senior technology content strategist and blog writer for Suave Creators (custom software development, web development, CRM, SaaS, e-commerce, enterprise software, AI solutions, automation, cloud platforms, mobile apps, and industry-specific digital products).
@@ -164,11 +169,7 @@ Do not repeat the same idea in different words.
 
 Write naturally.
 
-TOPIC SELECTION
-
-Choose a topic that is timely as of {$today}.
-
-Prioritize technologies that are actively transforming businesses today rather than outdated technologies.
+{$topicSelection}
 
 CUSTOMER ACQUISITION TOPIC STRATEGY
 
@@ -200,31 +201,57 @@ Do not reuse or closely paraphrase these existing titles:
 Allowed categories (pick exactly one; prefer Software Development or Web Development whenever appropriate):
 {$categories}
 
-=== STYLE GUIDE FROM EXISTING POSTS ===
+=== HOW THE ARTICLE MUST READ ===
 
-Voice
+Write like a senior consultant at a professional IT services firm — the same craft as Intelegain's ADAPT framework guide and their JCG Surveyors transformation story: specific, calm, evidence-first, no SEO filler.
 
-- Second person ("you", "your business").
-- Practical.
-- Friendly.
-- Professional.
-- Conversational.
-- Business-focused.
-- Technology-first.
-- Clear enough for non-technical business leaders.
-- Technical enough to build credibility.
+Pick ONE article shape and commit to it. Set article_shape to "framework" or "story".
 
-Writing Style
+Shape A — framework guide (ADAPT-style):
+- Open with a real operational scene or a measured contrast, then say what the article will settle.
+- Immediately add .blog-takeaways.
+- Name a 4–5 step method (invent a short memorable name, not "Our Process") and show it in a .blog-table-wrap (Phase / Focus / Outcome).
+- One <h2> per step. Include a .blog-checklist on at least one step.
+- Include .blog-stats with phrase values (never invented percentages such as "75%") and one .blog-chart.
+- Every .blog-stat must contain both a non-empty .blog-stat__value and .blog-stat__label. Never emit an empty .blog-stat or empty .blog-insight.
+- Chart bars must use the exact row markup below. Never put label text inside .blog-chart__bar.
+- Close with what this means for the reader's roadmap and a soft Suave Creators line.
 
-- Use short paragraphs.
-- Mix explanatory text with lists.
-- Use numbered sections when appropriate.
-- Keep transitions smooth.
-- Focus on outcomes, efficiency, growth, scalability, automation, customer experience, and ROI.
+Shape B — transformation story (JCG-style):
+- Open in the middle of a stuck operation (years-long claims, two systems that do not talk, a team reconciling by hand).
+- Add .blog-results ("Results at a glance") with 3 qualitative outcomes — no fake numbers.
+- Narrative <h2>s that tell a sequence: the business, what outgrew the systems, the choice, how it was built, what changed, why a partner matters.
+- A before/after .blog-table-wrap is welcome. A .blog-chart is optional on this shape.
+- Do NOT invent a client name. Speak in composite scenes ("a claims team", "a 40-year survey practice") or second person.
 
-Softly mention Suave Creators near the conclusion where appropriate.
+Both shapes:
+- 1,800–2,800 words.
+- Short paragraphs. One idea per <p>. Contractions are fine.
+- Do not invent clients, statistics, reports, or pricing.
+- Soft CTA near the end, never a sales page.
 
-Never turn the article into a sales pitch.
+HUMAN VOICE (do not sound like AI)
+
+Never use these phrases or close variants:
+- "in today's fast-paced world"
+- "in the digital age"
+- "delve" / "dive deep"
+- "leverage"
+- "robust"
+- "landscape"
+- "it's important to note"
+- "in conclusion"
+- "unlock the full potential"
+- "game-changer"
+- "cutting-edge" as filler
+- "moreover" / "furthermore" stacked at the start of sentences
+- "imagine a world"
+- "the promise of"
+- "transformative power"
+- "fast-paced environment"
+- "remain competitive"
+- "this guide will help you understand"
+- "harnessing" as a title or opener filler
 
 Titles
 
@@ -232,74 +259,48 @@ Create a highly clickable title between 50–90 characters.
 
 Preferred styles:
 
-- Why...
 - How to...
-- Top...
-- Best...
+- How [company-type]...
+- Why...
 - Complete Guide...
-- Future of...
-- X Trends in 2026
-- X Mistakes to Avoid
-- X Strategies for Business Growth
+- A [role]'s guide...
+- [Named method] for...
+
+Avoid "Harnessing", "Unlocking", "Delving", and "In today's...".
 
 short_description
 
-Write 2–4 engaging sentences (approximately 180–320 characters).
-
-It should:
-
-- Hook the reader.
-- Summarize the value.
-- Encourage reading.
-- Optionally mention Suave Creators naturally.
+Write 2–4 engaging sentences (approximately 180–320 characters). Hook, value, no hype adjectives.
 
 CONTENT HTML
 
-Return clean HTML only.
+Return clean HTML only. No Markdown. No code fences. No empty spacer paragraphs. No stacked <br>. CSS already spaces the page.
 
-No Markdown.
+Publish-ready contract:
 
-No code fences.
+- Do NOT emit <h1>, <blockquote>, featured-image markup, or a FAQ block in content.
+- Give every <h2> an id in kebab-case.
+- Lists: <ul><li><p>...</p></li></ul> in body copy. Inside .blog-takeaways / .blog-checklist / .blog-results, use <li>text</li> with no nested <p>.
 
-Structure:
+Required classes (the single-blog page already styles them):
 
-Optional:
-<h1>
+<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>...</li></ul></div>
+<div class="blog-results"><p class="blog-results__title">Results at a glance</p><ul><li>...</li></ul></div>
+<div class="blog-table-wrap"><table><thead>...</thead><tbody>...</tbody></table></div>
+<div class="blog-checklist"><p class="blog-checklist__title">Assess checklist</p><ul><li>...</li></ul></div>
+<div class="blog-stats"><div class="blog-stat"><p class="blog-stat__value">One workflow</p><p class="blog-stat__label">Instead of three tools for the same handoff.</p></div></div>
+<figure class="blog-chart"><figcaption>Relative emphasis across the method (qualitative, not survey data)</figcaption><div class="blog-chart__row"><span class="blog-chart__label">Assess</span><span class="blog-chart__track"><span class="blog-chart__bar blog-chart__bar--high"></span></span></div><div class="blog-chart__row"><span class="blog-chart__label">Pilot</span><span class="blog-chart__track"><span class="blog-chart__bar blog-chart__bar--mid"></span></span></div></figure>
+<aside class="blog-insight"><p><strong>Suave Creators take:</strong> ...</p></aside>
 
-Opening hook:
-<p>
+Never:
+- Put words inside .blog-chart__bar. Labels belong in .blog-chart__label.
+- Emit an empty .blog-stat, .blog-insight, or .blog-chart.
+- Invent percentages for .blog-stat__value. Use short phrases.
 
-Then include 5–8 substantial <h2> sections.
+Framework shape must include takeaways + table + checklist + stats + chart + insight.
+Story shape must include results + takeaways + table + insight. Checklist, stats, and chart are optional but preferred.
 
-Where appropriate include nested:
-<h3>
-
-Lists should preferably use:
-
-<ul>
-<li><p>...</p></li>
-</ul>
-
-Suggested section flow:
-
-- Introduction
-- Why the trend matters
-- How it works
-- Business benefits
-- Challenges & best practices
-- Common implementation mistakes
-- Future outlook
-- Practical checklist
-- How Suave Creators helps (soft CTA)
-- Bottom Line
-
-Target approximately:
-
-- 1,500–2,500 words
-- Rich, informative content
-- Comprehensive explanations
-- Actionable guidance
-- Minimal repetition
+Target approximately 1,800–2,800 words.
 
 FAQs
 
@@ -349,6 +350,10 @@ Ensure that:
 - There is no unnecessary repetition.
 - Every section adds unique value.
 - The HTML is valid and clean.
+- article_shape is exactly "framework" or "story".
+- Framework posts include .blog-takeaways, a named-method .blog-table-wrap, .blog-checklist, .blog-stats, .blog-chart, and .blog-insight.
+- Story posts include .blog-results, .blog-takeaways, a .blog-table-wrap, and .blog-insight.
+- There is no <h1>, no <blockquote>, and no FAQ block in content.
 - The article reads like a premium technology publication.
 - The content is suitable for long-term SEO and thought leadership.
 
@@ -367,11 +372,12 @@ PROMPT;
             'title' => $schema->string()->min(30)->max(120)->required(),
             'short_description' => $schema->string()->min(120)->max(450)->required(),
             'category' => $schema->string()->required(),
-            'content' => $schema->string()->min(2000)->required(),
+            'content' => $schema->string()->min(4000)->required(),
             'meta_title' => $schema->string()->min(30)->max(60)->required(),
             'meta_description' => $schema->string()->min(70)->max(160)->required(),
             'og_title' => $schema->string()->min(30)->max(60)->required(),
             'og_description' => $schema->string()->min(70)->max(160)->required(),
+            'article_shape' => $schema->string()->description('framework or story. Framework = named method like ADAPT. Story = narrative transformation like a case write-up.')->required(),
             'lead_intent' => $schema->string()->description('The chosen customer acquisition angle: service, industry, problem, comparison, or bottom-funnel.')->required(),
             'trend_angle' => $schema->string()->description('One-sentence reason this topic is timely.')->required(),
             'faqs' => $schema->array()->min(5)->max(8)->items(

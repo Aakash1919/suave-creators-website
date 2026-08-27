@@ -7,9 +7,9 @@ return [
     | AI trend draft generation
     |--------------------------------------------------------------------------
     |
-    | Scheduled artisan command blogs:generate-trend-drafts writes draft posts
-    | from customer-acquisition content angles and current industry trends
-    | (Tuesday + Friday by default). Requires a configured AI provider
+    | Scheduled artisan command generate:blog writes draft posts from an
+    | optional --topic, or a customer-acquisition angle and current industry
+    | trend (Tuesday + Friday by default). Requires a configured AI provider
     | (OPENAI_API_KEY / AI_DEFAULT_*).
     |
     */

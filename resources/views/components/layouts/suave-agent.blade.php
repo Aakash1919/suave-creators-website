@@ -14,7 +14,7 @@
     aria-expanded="false"
     aria-controls="suave-agent-panel"
   >
-    <x-layouts.chat-widget-icon :alt="$alt" :width="56" :height="56" />
+    <x-layouts.chat-widget-icon :alt="$alt" :width="48" :height="48" />
   </button>
 
   <div

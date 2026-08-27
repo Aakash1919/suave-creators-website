@@ -7,28 +7,29 @@ use App\Services\BlogDraftGenerationService;
 use Illuminate\Console\Command;
 use Throwable;
 
-class GenerateTrendBlogDraftsCommand extends Command
+class GenerateBlog extends Command
 {
     /**
      * @var string
      */
-    protected $signature = 'blogs:generate-trend-drafts
+    protected $signature = 'generate:blog
                             {--count= : Number of draft posts to generate (default from config)}
+                            {--topic= : Topic to write about; omit to let the writer pick a timely IT topic}
                             {--force : Run even when BLOG_TREND_DRAFTS_ENABLED is false}';
 
     /**
      * @var string
      */
-    protected $description = 'Generate AI customer-acquisition blog posts and save them as drafts';
+    protected $description = 'Generate an AI blog draft (assigned --topic, or a timely customer-acquisition topic)';
 
     /**
-     * Generate one or more lead-focused draft blogs from current trends via Laravel AI.
+     * Generate one or more lead-focused draft blogs via Laravel AI.
      */
     public function handle(BlogDraftGenerationService $generator): int
     {
         $enabled = (bool) config('blogs.trend_drafts.enabled', true);
         if (! $enabled && ! $this->option('force')) {
-            $this->warn('Trend draft generation is disabled (BLOG_TREND_DRAFTS_ENABLED=false). Use --force to run anyway.');
+            $this->warn('Blog generation is disabled (BLOG_TREND_DRAFTS_ENABLED=false). Use --force to run anyway.');
 
             return self::SUCCESS;
         }
@@ -41,14 +42,25 @@ class GenerateTrendBlogDraftsCommand extends Command
 
         $count = (int) ($this->option('count') ?: config('blogs.trend_drafts.count', 1));
         $count = max(1, $count);
+        $topic = trim((string) $this->option('topic'));
+        $topic = $topic !== '' ? $topic : null;
 
-        $this->info("Generating {$count} customer-acquisition blog draft(s)…");
+        if ($topic !== null) {
+            $this->info("Using assigned topic: {$topic}");
+        } else {
+            $this->info('No --topic given. The writer will pick one timely IT topic that:');
+            $this->line('  • matches a lead angle (service, industry, problem, comparison, or buyer-ready)');
+            $this->line('  • prefers Software Development or Web Development');
+            $this->line('  • does not overlap recent blog titles');
+        }
+
+        $this->info("Generating {$count} blog draft(s)…");
 
         $created = [];
 
         try {
             for ($i = 0; $i < $count; $i++) {
-                $blog = $generator->generateDraft();
+                $blog = $generator->generateDraft($topic);
                 $created[] = $blog;
                 $this->line(sprintf(
                     '  [%d/%d] draft #%d — %s',

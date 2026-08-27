@@ -360,16 +360,17 @@ Ensure `php artisan storage:link` exists so `/storage/…` URLs resolve. Safe to
 Console command generates trend-based posts with Laravel AI and always saves them as **drafts** (never auto-publishes):
 
 ```bash
-php artisan blogs:generate-trend-drafts
-php artisan blogs:generate-trend-drafts --count=2
-php artisan blogs:generate-trend-drafts --force   # ignore BLOG_TREND_DRAFTS_ENABLED=false
+php artisan generate:blog
+php artisan generate:blog --count=2
+php artisan generate:blog --topic="How clinics should brief a custom CRM"
+php artisan generate:blog --force   # ignore BLOG_TREND_DRAFTS_ENABLED=false
 ```
 
 Schedule (`routes/console.php`): Tuesdays + Fridays at `BLOG_TREND_DRAFTS_TIME` (default `09:00`, app timezone). Requires server cron: `* * * * * php artisan schedule:run`.
 
 Config: `config/blogs.php` + `.env` (`BLOG_TREND_DRAFTS_*`, `OPENAI_API_KEY`). Agent: `App\Ai\Agents\BlogWriterAgent`.
 
-Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + sample FAQ) and instructs the model to match that craft: long benefit-led titles, second-person voice, `<h2>`/`<h3>` + `<ul><li><p>` HTML, 5–8 FAQs, `meta_title` ending with `| Suave Creators Blog`, always `status=draft`.
+Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + sample FAQ) and instructs the model to write publish-ready HTML for `.single-blog-content` in one of two shapes: **framework** (named method, takeaways, table, checklist, stats, chart) or **story** (results at a glance, narrative sections). Human consultant voice, no page `<h1>`, `id` on each `<h2>`, never invent statistics, 6–8 FAQs in the `faqs` field only, always `status=draft`. `normalizeHtmlContent()` wraps bare tables, rewrites chart bars into labelled `.blog-chart__row` tracks, and drops empty `.blog-stat` / `.blog-insight` boxes. Single-blog CSS uses Intelegain-like 16px/28px body rhythm; the page includes LinkedIn/Facebook/X/WhatsApp/copy share buttons.
 
 ## Edit-form SEO meta (manual save)
 

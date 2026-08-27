@@ -152,5 +152,157 @@ class BlogDraftGenerationServiceTest extends TestCase
         $this->assertStringContainsString('Comparison-intent posts', $instructions);
         $this->assertStringContainsString('Buyer-ready / bottom-funnel posts', $instructions);
         $this->assertStringContainsString('The draft must help Suave Creators attract qualified organic leads', $instructions);
+        $this->assertStringContainsString('Shape A — framework guide', $instructions);
+        $this->assertStringContainsString('Shape B — transformation story', $instructions);
+        $this->assertStringContainsString('blog-results', $instructions);
+        $this->assertStringContainsString('blog-checklist', $instructions);
+        $this->assertStringContainsString('blog-stats', $instructions);
+        $this->assertStringContainsString('imagine a world', $instructions);
+        $this->assertStringContainsString('HUMAN VOICE', $instructions);
+        $this->assertStringContainsString("in today's fast-paced world", $instructions);
+        $this->assertStringContainsString('blog-chart__row', $instructions);
+        $this->assertStringContainsString('Never put label text inside .blog-chart__bar', $instructions);
+        $this->assertStringContainsString('Do NOT emit <h1>', $instructions);
+    }
+
+    public function test_blog_writer_prompt_uses_assigned_topic_when_provided(): void
+    {
+        $agent = new BlogWriterAgent(
+            categories: ['Software Development'],
+            topic: 'How clinics should brief a custom CRM',
+        );
+
+        $instructions = (string) $agent->instructions();
+
+        $this->assertStringContainsString('Assigned topic: How clinics should brief a custom CRM', $instructions);
+        $this->assertStringContainsString('Write this article on the assigned topic only', $instructions);
+    }
+
+    public function test_persist_draft_wraps_bare_tables_and_demotes_h1(): void
+    {
+        User::factory()->create([
+            'email' => SiteAdmin::EMAIL,
+            'name' => SiteAdmin::NAME,
+        ]);
+
+        BlogCategory::query()->create([
+            'name' => 'Software Development',
+            'slug' => 'software-development',
+            'sort_order' => 1,
+        ]);
+
+        /** @var BlogDraftGenerationService $service */
+        $service = $this->app->make(BlogDraftGenerationService::class);
+
+        $blog = $service->persistDraft([
+            'title' => 'Custom CRM Versus Off The Shelf Tools For Growing Teams',
+            'short_description' => 'A practical comparison of when custom software beats a packaged CRM, and when it does not.',
+            'category' => 'Software Development',
+            'content' => '<h1>Intro</h1><p>Start with the buying question.</p><table><thead><tr><th>Factor</th><th>Custom</th></tr></thead><tbody><tr><td>Fit</td><td>High</td></tr></tbody></table><div class="blog-table-wrap"><table><thead><tr><th>Kept</th></tr></thead><tbody><tr><td>Yes</td></tr></tbody></table></div>',
+            'meta_title' => 'Custom CRM Versus Packaged Tools',
+            'meta_description' => 'When custom CRM work is worth it for growing teams.',
+            'og_title' => 'Custom CRM Versus Packaged Tools',
+            'og_description' => 'When custom CRM work is worth it for growing teams.',
+            'faqs' => [
+                [
+                    'question' => 'Should we start custom?',
+                    'answer' => 'Only if the packaged tools cannot hold your workflow.',
+                ],
+            ],
+        ]);
+
+        $this->assertStringNotContainsString('<h1', (string) $blog->content);
+        $this->assertStringContainsString('<h2>Intro</h2>', (string) $blog->content);
+        $this->assertSame(2, substr_count((string) $blog->content, 'class="blog-table-wrap"'));
+        $this->assertStringNotContainsString(
+            '<div class="blog-table-wrap"><div class="blog-table-wrap">',
+            (string) $blog->content
+        );
+    }
+
+    public function test_persist_draft_strips_trailing_faq_html_from_content(): void
+    {
+        User::factory()->create([
+            'email' => SiteAdmin::EMAIL,
+            'name' => SiteAdmin::NAME,
+        ]);
+
+        BlogCategory::query()->create([
+            'name' => 'Web Development',
+            'slug' => 'web-development',
+            'sort_order' => 1,
+        ]);
+
+        /** @var BlogDraftGenerationService $service */
+        $service = $this->app->make(BlogDraftGenerationService::class);
+
+        $blog = $service->persistDraft([
+            'title' => 'How To Brief A Web Development Partner Without Wasting A Month',
+            'short_description' => 'A straightforward brief that gets a web project moving without a month of back and forth.',
+            'category' => 'Web Development',
+            'content' => '<h2>The Bottom Line</h2><p>Ship the first slice, then decide what to rebuild.</p><h2>FAQs</h2><ul><li><p>What belongs in the brief?</p></li></ul>',
+            'meta_title' => 'Brief A Web Development Partner',
+            'meta_description' => 'What to put in a web development brief so work can start.',
+            'og_title' => 'Brief A Web Development Partner',
+            'og_description' => 'What to put in a web development brief so work can start.',
+            'faqs' => [
+                [
+                    'question' => 'What belongs in the brief?',
+                    'answer' => 'Outcomes, users, constraints, and the first release.',
+                ],
+            ],
+        ]);
+
+        $this->assertStringContainsString('The Bottom Line', (string) $blog->content);
+        $this->assertStringNotContainsString('<h2>FAQs</h2>', (string) $blog->content);
+        $this->assertIsArray($blog->faqs);
+        $this->assertCount(1, $blog->faqs);
+    }
+
+    public function test_persist_draft_rewrites_chart_bars_and_drops_empty_stat_boxes(): void
+    {
+        User::factory()->create([
+            'email' => SiteAdmin::EMAIL,
+            'name' => SiteAdmin::NAME,
+        ]);
+
+        BlogCategory::query()->create([
+            'name' => 'Software Development',
+            'slug' => 'software-development',
+            'sort_order' => 1,
+        ]);
+
+        /** @var BlogDraftGenerationService $service */
+        $service = $this->app->make(BlogDraftGenerationService::class);
+
+        $blog = $service->persistDraft([
+            'title' => 'How To Sequence An Api First Migration Without Inventing Metrics',
+            'short_description' => 'A practical sequence for moving a product to API-first delivery without dressing the plan in fake percentages.',
+            'category' => 'Software Development',
+            'content' => '<h2>Chart</h2><figure class="blog-chart"><div class="blog-chart__bar blog-chart__bar--high">Assessment</div><div class="blog-chart__bar blog-chart__bar--mid">Strategy</div></figure><div class="blog-stats"><div class="blog-stat"><p class="blog-stat__value">One contract</p><p class="blog-stat__label">Shared by product and ops.</p></div><div class="blog-stat"><p class="blog-stat__value"></p><p class="blog-stat__label"></p></div></div><aside class="blog-insight"><p></p></aside><p>Keep the rollout honest.</p>',
+            'meta_title' => 'Sequence An Api First Migration',
+            'meta_description' => 'How to sequence an API-first migration without fake metrics.',
+            'og_title' => 'Sequence An Api First Migration',
+            'og_description' => 'How to sequence an API-first migration without fake metrics.',
+            'faqs' => [
+                [
+                    'question' => 'Where should an API-first migration start?',
+                    'answer' => 'With the workflow that currently needs the most handoffs.',
+                ],
+            ],
+        ]);
+
+        $content = (string) $blog->content;
+        $this->assertStringContainsString('blog-chart__row', $content);
+        $this->assertStringContainsString('blog-chart__label', $content);
+        $this->assertStringContainsString('Assessment', $content);
+        $this->assertStringContainsString('blog-chart__track', $content);
+        $this->assertDoesNotMatchRegularExpression(
+            '/class="[^"]*\bblog-chart__bar\b[^"]*"[^>]*>\s*Assessment/i',
+            $content
+        );
+        $this->assertStringContainsString('One contract', $content);
+        $this->assertSame(1, substr_count($content, 'class="blog-stat"'));
+        $this->assertStringNotContainsString('blog-insight', $content);
     }
 }

@@ -9,7 +9,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('blogs:generate-trend-drafts')
+Schedule::command('generate:blog')
     ->days([ScheduleDefinition::TUESDAY, ScheduleDefinition::FRIDAY])
     ->at((string) config('blogs.trend_drafts.time', '09:00'))
     ->timezone((string) config('app.timezone', 'Asia/Kolkata'))

@@ -129,7 +129,7 @@
         .site-header__menu-btn{align-items:center;display:inline-flex;height:2.75rem;justify-content:center;width:2.75rem}
         .site-header__cta{display:none}
         .mobile-nav[hidden]{display:none!important}
-        .floating-chat{bottom:24px;height:64px;position:fixed;right:24px;width:64px;z-index:9999}
+        .floating-chat{bottom:24px;height:48px;position:fixed;right:24px;width:48px;z-index:9999}
         .site-hero-bg{background-color:var(--color-navy);height:min(100%,920px);inset-inline:0;overflow:hidden;pointer-events:none;position:absolute;top:0;z-index:0}
         .site-hero-bg__image{height:100%;left:50%;max-width:none;object-fit:cover;object-position:top center;position:absolute;top:0;transform:translateX(-50%);width:max(100%,1920px)}
         .site-hero-bg__pattern{height:100%;inset:0;mix-blend-mode:soft-light;object-fit:cover;object-position:top center;opacity:.2;position:absolute;width:100%}
@@ -335,7 +335,8 @@
     </div>
 
     <x-layouts.footer />
-    {{-- Body-level so position:fixed is not captured by footer overflow-x:clip / content-visibility. --}}
+    {{-- Body-level so position:fixed is not captured by main/footer overflow or stacking. --}}
+    @stack('fixed-widgets')
     <x-layouts.suave-agent />
     <x-layouts.analytics-events />
     {{-- Defer GTM/gtag + fonts + Swiper; stub queues carousel inits until deferred.js runs. --}}

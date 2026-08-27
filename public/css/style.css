@@ -1911,8 +1911,8 @@ main button.rounded-full.bg-gradient-to-r {
   position: fixed;
   right: 24px;
   bottom: 24px;
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   z-index: 9999;
 }
 
@@ -3621,9 +3621,9 @@ body.mobile-nav-open {
 
   .floating-chat {
     bottom: 16px;
-    height: 56px;
+    height: 44px;
     right: 16px;
-    width: 56px;
+    width: 44px;
   }
 
   .web-service-card {

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Ai\Agents\BlogWriterAgent;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Support\Frontend\BlogSupport;
 use App\Support\SiteAdmin;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -21,8 +22,10 @@ class BlogDraftGenerationService
      *
      * @throws RuntimeException
      */
-    public function generateDraft(): Blog
+    public function generateDraft(?string $topic = null): Blog
     {
+        $topic = is_string($topic) ? trim($topic) : '';
+        $topic = $topic !== '' ? $topic : null;
         $categories = $this->preferredCategoryNames();
         $recentTitles = $this->recentTitles();
         $styleExamples = $this->styleExamples();
@@ -34,10 +37,11 @@ class BlogDraftGenerationService
                 recentTitles: $recentTitles,
                 styleExamples: $styleExamples,
                 modelOverride: $model,
+                topic: $topic,
             ))->prompt(
-                $this->userPrompt($styleExamples),
+                $this->userPrompt($styleExamples, $topic),
                 model: $model !== '' ? $model : null,
-                timeout: 180,
+                timeout: 240,
             );
         } catch (Throwable $e) {
             throw new RuntimeException('AI blog draft generation failed: '.$e->getMessage(), 0, $e);
@@ -53,13 +57,13 @@ class BlogDraftGenerationService
      *
      * @throws RuntimeException
      */
-    public function generateDrafts(int $count = 1): array
+    public function generateDrafts(int $count = 1, ?string $topic = null): array
     {
         $count = max(1, $count);
         $created = [];
 
         for ($i = 0; $i < $count; $i++) {
-            $created[] = $this->generateDraft();
+            $created[] = $this->generateDraft($topic);
         }
 
         return $created;
@@ -309,7 +313,7 @@ class BlogDraftGenerationService
     }
 
     /**
-     * Strip fences / scripts the model may accidentally emit.
+     * Strip fences / scripts and make HTML safe to drop into .single-blog-content.
      */
     protected function normalizeHtmlContent(string $html): string
     {
@@ -317,8 +321,82 @@ class BlogDraftGenerationService
         $html = (string) preg_replace('/^```(?:html)?\s*/i', '', $html);
         $html = (string) preg_replace('/\s*```$/', '', $html);
         $html = (string) preg_replace('#<script\b[^>]*>.*?</script>#is', '', $html);
+        $html = $this->demoteHeadingOnes($html);
+        $html = $this->stripEmptySpacerParagraphs($html);
+        $html = $this->stripTrailingFaqHtml($html);
+        $html = $this->wrapBareTables($html);
+        $html = BlogSupport::normalizeVisualHtml($html);
 
         return trim($html);
+    }
+
+    /**
+     * Page title is the only H1; leftover model headings become H2.
+     */
+    protected function demoteHeadingOnes(string $html): string
+    {
+        $html = (string) preg_replace('/<h1(\b[^>]*)>/i', '<h2$1>', $html);
+
+        return (string) preg_replace('/<\/h1>/i', '</h2>', $html);
+    }
+
+    /**
+     * Remove empty paragraphs used as fake vertical spacing.
+     */
+    protected function stripEmptySpacerParagraphs(string $html): string
+    {
+        $html = (string) preg_replace('/<p>\s*(?:&nbsp;|<br\s*\/?>)*\s*<\/p>/i', '', $html);
+        $html = (string) preg_replace('/(?:<br\s*\/?>\s*){2,}/i', '', $html);
+
+        return $html;
+    }
+
+    /**
+     * FAQs belong in the faqs field; drop a trailing FAQ heading and its body.
+     */
+    protected function stripTrailingFaqHtml(string $html): string
+    {
+        if (! preg_match('/<h2\b[^>]*>\s*(?:frequently asked questions|faqs?)\s*<\/h2>/i', $html, $match, PREG_OFFSET_CAPTURE)) {
+            return $html;
+        }
+
+        $heading = $match[0][0];
+        $pos = (int) $match[0][1];
+        $afterHeading = substr($html, $pos + strlen($heading));
+
+        if (preg_match('/<h2\b/i', $afterHeading)) {
+            return $html;
+        }
+
+        return trim(substr($html, 0, $pos));
+    }
+
+    /**
+     * Ensure every table is wrapped for horizontal scroll styling.
+     */
+    protected function wrapBareTables(string $html): string
+    {
+        if (! preg_match_all('/<table\b[^>]*>.*?<\/table>/is', $html, $matches, PREG_OFFSET_CAPTURE)) {
+            return $html;
+        }
+
+        $shift = 0;
+
+        foreach ($matches[0] as [$tableHtml, $pos]) {
+            $pos += $shift;
+            $prefixLength = min(120, $pos);
+            $before = substr($html, $pos - $prefixLength, $prefixLength);
+
+            if (preg_match('/<div\b[^>]*class="[^"]*\bblog-table-wrap\b[^"]*"[^>]*>\s*$/i', $before)) {
+                continue;
+            }
+
+            $wrapped = '<div class="blog-table-wrap">'.$tableHtml.'</div>';
+            $html = substr_replace($html, $wrapped, $pos, strlen($tableHtml));
+            $shift += strlen($wrapped) - strlen($tableHtml);
+        }
+
+        return $html;
     }
 
     protected function nullableLimit(mixed $value, int $limit): ?string
@@ -335,7 +413,7 @@ class BlogDraftGenerationService
     /**
      * @param  list<array<string, mixed>>  $styleExamples
      */
-    protected function userPrompt(array $styleExamples): string
+    protected function userPrompt(array $styleExamples, ?string $topic = null): string
     {
         $exampleTitles = collect($styleExamples)
             ->pluck('title')
@@ -347,10 +425,15 @@ class BlogDraftGenerationService
             ? 'Match the Suave Creators blog voice described in your instructions.'
             : "Study these live exemplars closely and write a NEW post that would sit beside them:\n{$exampleTitles}";
 
+        $topicLine = $topic !== null
+            ? "Write this draft on this exact topic (do not switch subjects): {$topic}"
+            : 'Pick one timely topic yourself using the TOPIC SELECTION and CUSTOMER ACQUISITION rules. Do not overlap recent titles.';
+
         return <<<PROMPT
-Write one new trend-based draft blog post for Suave Creators now.
+Write one new draft blog post for Suave Creators now.
+{$topicLine}
 {$hint}
-Return only the structured fields. The HTML content must follow the same structural habits as the examples (h2/h3 sections, ul/li/p lists, closing bottom-line or Suave Creators help section).
+Return only the structured fields. Pick article_shape "framework" (named method, takeaways, table, checklist, stats, chart) or "story" (results at a glance, narrative sections, before/after table). No h1, no FAQ block, no blockquote. Write like a premium IT services article — specific scenes, calm professional voice, no invented statistics.
 PROMPT;
     }
 
