@@ -613,6 +613,7 @@
 .blog-chart__bar {
   display: block;
   height: 100%;
+  min-height: 12px;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--color-brand-start), #7a5ff8);
 }

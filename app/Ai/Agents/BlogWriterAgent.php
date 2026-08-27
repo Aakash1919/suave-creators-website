@@ -212,9 +212,9 @@ Shape A — framework guide (ADAPT-style):
 - Immediately add .blog-takeaways.
 - Name a 4–5 step method (invent a short memorable name, not "Our Process") and show it in a .blog-table-wrap (Phase / Focus / Outcome).
 - One <h2> per step. Include a .blog-checklist on at least one step.
-- Include .blog-stats with phrase values (never invented percentages such as "75%") and one .blog-chart.
+- Include .blog-stats with concrete phrase values (never invented survey percentages such as "73% of companies") and one .blog-chart completion bar.
 - Every .blog-stat must contain both a non-empty .blog-stat__value and .blog-stat__label. Never emit an empty .blog-stat or empty .blog-insight.
-- Chart bars must use the exact row markup below. Never put label text inside .blog-chart__bar.
+- Chart bars must use the exact row markup below, including a visible .blog-chart__value and an inline width. Never put label text inside .blog-chart__bar.
 - Close with what this means for the reader's roadmap and a soft Suave Creators line.
 
 Shape B — transformation story (JCG-style):
@@ -289,16 +289,35 @@ Required classes (the single-blog page already styles them):
 <div class="blog-table-wrap"><table><thead>...</thead><tbody>...</tbody></table></div>
 <div class="blog-checklist"><p class="blog-checklist__title">Assess checklist</p><ul><li>...</li></ul></div>
 <div class="blog-stats"><div class="blog-stat"><p class="blog-stat__value">One workflow</p><p class="blog-stat__label">Instead of three tools for the same handoff.</p></div></div>
-<figure class="blog-chart"><figcaption>Relative emphasis across the method (qualitative, not survey data)</figcaption><div class="blog-chart__row"><span class="blog-chart__label">Assess</span><span class="blog-chart__track"><span class="blog-chart__bar blog-chart__bar--high"></span></span></div><div class="blog-chart__row"><span class="blog-chart__label">Pilot</span><span class="blog-chart__track"><span class="blog-chart__bar blog-chart__bar--mid"></span></span></div></figure>
+<figure class="blog-chart"><figcaption>Relative emphasis across the method (illustrative weights, not survey data)</figcaption><div class="blog-chart__row"><span class="blog-chart__label">Assess</span><span class="blog-chart__track"><span class="blog-chart__bar blog-chart__bar--high" data-width="90" style="width: 90%;"></span></span><span class="blog-chart__value">90%</span></div><div class="blog-chart__row"><span class="blog-chart__label">Pilot</span><span class="blog-chart__track"><span class="blog-chart__bar blog-chart__bar--mid" data-width="62" style="width: 62%;"></span></span><span class="blog-chart__value">62%</span></div><div class="blog-chart__row"><span class="blog-chart__label">Harden</span><span class="blog-chart__track"><span class="blog-chart__bar blog-chart__bar--low" data-width="34" style="width: 34%;"></span></span><span class="blog-chart__value">34%</span></div></figure>
 <aside class="blog-insight"><p><strong>Suave Creators take:</strong> ...</p></aside>
 
+COMPLETION BARS (required visual data)
+
+.blog-chart is the public completion / status bar. Every row MUST have:
+- .blog-chart__label with the phase or workstream name
+- .blog-chart__track > .blog-chart__bar with data-width AND style="width: N%;"
+- .blog-chart__value with the same N% (or a short status such as "Highest")
+- 4–6 rows with distinct widths between 25 and 95. Do not make every bar the same length.
+- A figcaption that says these are relative emphasis weights for this method, not a survey.
+
 Never:
-- Put words inside .blog-chart__bar. Labels belong in .blog-chart__label.
-- Emit an empty .blog-stat, .blog-insight, or .blog-chart.
-- Invent percentages for .blog-stat__value. Use short phrases.
+- Put words inside .blog-chart__bar. Labels belong in .blog-chart__label. Values belong in .blog-chart__value.
+- Emit an empty .blog-stat, .blog-insight, .blog-chart, or a chart row without a value.
+- Invent research statistics ("73% of companies…") for body copy or .blog-stat__value.
+
+STAT + TABLE DATA QUALITY
+
+.blog-stat__value must be a concrete artifact, timebox, or operating change: "One shared backlog", "Two-week pilot", "Weekly ops review". Never "N/A", "TBD", or a lone percentage from fake research.
+
+.blog-table-wrap tables need a header row plus 4–5 body rows. Each cell must be specific (named phase, actual focus, observable outcome). No placeholder copy.
+
+.blog-checklist needs 5–7 actions a buyer can take this week.
+
+.blog-takeaways / .blog-results need 3–5 specific bullets that could not be copied onto a different article.
 
 Framework shape must include takeaways + table + checklist + stats + chart + insight.
-Story shape must include results + takeaways + table + insight. Checklist, stats, and chart are optional but preferred.
+Story shape must include results + takeaways + table + insight + chart. Checklist and stats are preferred.
 
 Target approximately 1,800–2,800 words.
 
@@ -352,7 +371,8 @@ Ensure that:
 - The HTML is valid and clean.
 - article_shape is exactly "framework" or "story".
 - Framework posts include .blog-takeaways, a named-method .blog-table-wrap, .blog-checklist, .blog-stats, .blog-chart, and .blog-insight.
-- Story posts include .blog-results, .blog-takeaways, a .blog-table-wrap, and .blog-insight.
+- Story posts include .blog-results, .blog-takeaways, a .blog-table-wrap, .blog-chart, and .blog-insight.
+- Every .blog-chart__row includes label, inline bar width, and .blog-chart__value.
 - There is no <h1>, no <blockquote>, and no FAQ block in content.
 - The article reads like a premium technology publication.
 - The content is suitable for long-term SEO and thought leadership.
@@ -372,7 +392,7 @@ PROMPT;
             'title' => $schema->string()->min(30)->max(120)->required(),
             'short_description' => $schema->string()->min(120)->max(450)->required(),
             'category' => $schema->string()->required(),
-            'content' => $schema->string()->min(4000)->required(),
+            'content' => $schema->string()->min(5000)->description('Publish-ready HTML for .single-blog-content, including filled takeaways, table, checklist, stats, completion-bar chart with values, and insight.')->required(),
             'meta_title' => $schema->string()->min(30)->max(60)->required(),
             'meta_description' => $schema->string()->min(70)->max(160)->required(),
             'og_title' => $schema->string()->min(30)->max(60)->required(),
@@ -414,6 +434,8 @@ FALLBACK;
             $faqQ = (string) ($example['sample_faq_question'] ?? '');
             $faqA = (string) ($example['sample_faq_answer'] ?? '');
             $metaTitle = (string) ($example['meta_title'] ?? '');
+            $visual = (string) ($example['visual_html'] ?? '');
+            $visualBlock = $visual !== '' ? "visual_html:\n{$visual}" : 'visual_html: (none)';
 
             $blocks[] = <<<BLOCK
 --- Example {$n} ---
@@ -425,6 +447,7 @@ heading_outline:
 {$headings}
 opening_html:
 {$opening}
+{$visualBlock}
 sample_faq:
 Q: {$faqQ}
 A: {$faqA}

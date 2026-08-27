@@ -525,7 +525,7 @@ class BlogSupport
 
             if ($rows !== []) {
                 foreach ($rows as $row) {
-                    self::ensureChartTrack($dom, $xpath, $row);
+                    self::enrichChartRow($dom, $xpath, $row);
                 }
 
                 continue;
@@ -567,7 +567,12 @@ class BlogSupport
             }
 
             foreach ($rowData as $row) {
-                $chart->appendChild(self::makeChartRow($dom, $row['label'], $row['level']));
+                $chart->appendChild(self::makeChartRow(
+                    $dom,
+                    $row['label'],
+                    $row['level'],
+                    self::chartWidthFromLevel($row['level']).'%'
+                ));
             }
         }
     }
@@ -612,8 +617,31 @@ class BlogSupport
         $track->appendChild($bar);
     }
 
-    protected static function makeChartRow(DOMDocument $dom, string $label, string $level): DOMElement
+    /**
+     * Make a chart row match the public single-blog markup: label, track, bar, value.
+     */
+    protected static function enrichChartRow(DOMDocument $dom, DOMXPath $xpath, DOMElement $row): void
     {
+        self::ensureChartTrack($dom, $xpath, $row);
+
+        $bars = self::elementsWithClass($xpath, $row, 'blog-chart__bar');
+        if ($bars === []) {
+            return;
+        }
+
+        $bar = $bars[0];
+        $level = self::chartBarLevel($bar->getAttribute('class'));
+        $width = self::chartBarWidth($bar, $level);
+        $level = self::chartLevelFromWidth($width);
+        $class = trim((string) preg_replace('/\bblog-chart__bar--(?:high|mid|low)\b/', '', $bar->getAttribute('class')));
+        $bar->setAttribute('class', trim($class.' blog-chart__bar blog-chart__bar--'.$level));
+        self::applyChartBarWidth($bar, $width);
+        self::ensureChartValue($dom, $xpath, $row, $width);
+    }
+
+    protected static function makeChartRow(DOMDocument $dom, string $label, string $level, ?string $value = null): DOMElement
+    {
+        $width = self::chartWidthFromLevel($level);
         $row = $dom->createElement('div');
         $row->setAttribute('class', 'blog-chart__row');
 
@@ -626,12 +654,83 @@ class BlogSupport
 
         $bar = $dom->createElement('span');
         $bar->setAttribute('class', 'blog-chart__bar blog-chart__bar--'.$level);
+        self::applyChartBarWidth($bar, $width);
+
+        $valueEl = $dom->createElement('span');
+        $valueEl->setAttribute('class', 'blog-chart__value');
+        $valueEl->appendChild($dom->createTextNode($value ?: $width.'%'));
 
         $track->appendChild($bar);
         $row->appendChild($labelEl);
         $row->appendChild($track);
+        $row->appendChild($valueEl);
 
         return $row;
+    }
+
+    protected static function ensureChartValue(DOMDocument $dom, DOMXPath $xpath, DOMElement $row, int $width): void
+    {
+        $values = self::elementsWithClass($xpath, $row, 'blog-chart__value');
+        $text = $width.'%';
+
+        if ($values === []) {
+            $valueEl = $dom->createElement('span');
+            $valueEl->setAttribute('class', 'blog-chart__value');
+            $valueEl->appendChild($dom->createTextNode($text));
+            $row->appendChild($valueEl);
+
+            return;
+        }
+
+        if (trim($values[0]->textContent) === '') {
+            $values[0]->appendChild($dom->createTextNode($text));
+        }
+    }
+
+    protected static function applyChartBarWidth(DOMElement $bar, int $width): void
+    {
+        $width = max(8, min(100, $width));
+        $bar->setAttribute('data-width', (string) $width);
+
+        $style = trim((string) $bar->getAttribute('style'));
+        $style = trim((string) preg_replace('/(?:^|;)\s*width\s*:[^;]*/i', '', $style), "; \t\n\r\0\x0B");
+        $bar->setAttribute('style', ($style !== '' ? $style.'; ' : '').'width: '.$width.'%;');
+    }
+
+    protected static function chartBarWidth(DOMElement $bar, string $level): int
+    {
+        $data = trim($bar->getAttribute('data-width'));
+        if ($data !== '' && is_numeric($data)) {
+            return max(8, min(100, (int) $data));
+        }
+
+        if (preg_match('/width\s*:\s*(\d+)\s*%/i', $bar->getAttribute('style'), $match)) {
+            return max(8, min(100, (int) $match[1]));
+        }
+
+        return self::chartWidthFromLevel($level);
+    }
+
+    protected static function chartWidthFromLevel(string $level): int
+    {
+        return match ($level) {
+            'high' => 90,
+            'low' => 28,
+            default => 58,
+        };
+    }
+
+    protected static function chartLevelFromWidth(int $width): string
+    {
+        if ($width >= 75) {
+            return 'high';
+        }
+
+        if ($width <= 40) {
+            return 'low';
+        }
+
+        return 'mid';
     }
 
     protected static function chartBarLevel(string $class): string

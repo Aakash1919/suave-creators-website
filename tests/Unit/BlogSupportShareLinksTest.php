@@ -33,8 +33,10 @@ class BlogSupportShareLinksTest extends TestCase
             '<figure class="blog-chart"><div class="blog-chart__bar blog-chart__bar--high">Assessment</div><div class="blog-chart__bar blog-chart__bar--low">Monitoring</div></figure>'
         );
 
-        $this->assertStringContainsString('class="blog-chart__row"', $html);
-        $this->assertStringContainsString('class="blog-chart__label"', $html);
+        $this->assertStringContainsString('blog-chart__row', $html);
+        $this->assertStringContainsString('blog-chart__label', $html);
+        $this->assertStringContainsString('blog-chart__value', $html);
+        $this->assertStringContainsString('data-width="90"', $html);
         $this->assertStringContainsString('Assessment', $html);
         $this->assertStringContainsString('Monitoring', $html);
         $this->assertStringContainsString('blog-chart__bar--high', $html);

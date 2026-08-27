@@ -41,7 +41,7 @@ description: >-
 
 | Service | Responsibility |
 |---------|----------------|
-| `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads |
+| `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads, `normalizeVisualHtml()` on save |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization, service/industry placement slug lists. **No AI drafts** — content is editor-filled only |
@@ -246,12 +246,14 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 - Do **not** load the editor globally — include styles/scripts only on pages that need it:
   - `@include('layouts.admin.partials.richtexteditor-styles')` in `@push('styles')`
   - `@include('layouts.admin.partials.richtexteditor-scripts')` in `@push('scripts')`
-- Blog toolbar preset `toolbar_blog` (set in the scripts partial): formatting, headings/size, lists, quote, link, image/video, HR, table, HTML source, fullscreen, undo/redo
+- Blog toolbar preset `toolbar_blog` (set in the scripts partial): **undo/redo first**, then formatting, headings/size, lists, quote, **public-page blocks** (takeaways, results, checklist, stats, completion bars, insight, comparison table), link, image/video, HR, HTML source, fullscreen
+- Block insert commands live in `public/js/admin/blog-blocks-plugin.js` (`plugin_blogblocks`) — labeled **Undo / Redo / Remove block** plus insert buttons above Content (`data-blog-block-toolbar`), matching toolbar icons, and `/` slash menu under **Blog layout**. Completion-bar fills are edited in the article (label + percent), not in the publish sidebar.
 - Explicitly **omitted**: template, delete, insert comment, save/new/print, cut/copy/paste, find, spellcheck, AI, emoji, gallery, document, revision history, TOC, page break, help, togglemore
-- Init via `SuaveAdmin.initRichTextEditor('#blog-content', { height: 640, toolbar: 'blog' })`
+- Init via `SuaveAdmin.initRichTextEditor('#blog-content', { height: 640, toolbar: 'blog', wordCountGoal: 1800 })`
   - Seeds textarea value into the editor after construct (API variants: `setHTMLCode` / fallbacks)
   - Periodically syncs editor HTML back into the textarea; `syncRichTextEditors()` also runs before AJAX `FormData`
-- Blog form layout: main composer + sticky publish/image sidebar; SEO in a collapsible `<details>` (`admin/blogs/form.blade.php`, `.admin-blog-form*` in `admin.css`)
+  - `SuaveAdmin.initBlogEditForm()` paints the frontend completeness meter (Article body counts as done at 120+ words), injects `public/css/admin-blog-content.css` into the RTE so visual blocks match the public page, and keeps chart bar widths in sync when percents are edited in the article
+- Blog form layout: main composer + sticky publish/image sidebar; **Publish** card starts with a frontend completeness bar (title, body, image, SEO, FAQs, takeaways, table, completion bars, stats, insight) plus the Draft/Published status select; chart percents are edited in the article; SEO in a collapsible `<details>` (`admin/blogs/form.blade.php`, `.admin-blog-form*` / `.admin-blog-complete*` in `admin.css`)
 - FAQ repeater rows (`data-admin-repeater` via `SuaveAdmin.bindRepeaters`) — question + answer; every submitted row is **required**. `BlogService::normalizeFaqItems()`
 - **TOC admin UI is commented out** for now (not used on frontend single-blog); existing `blogs.toc` is left unchanged on save. Re-enable form block + `toc` validation / `normalizeTocItems()` together when the frontend needs it
 - Override `RTE_DefaultConfig.url_base` is set to `asset('richtexteditor')` in the scripts partial
@@ -370,7 +372,7 @@ Schedule (`routes/console.php`): Tuesdays + Fridays at `BLOG_TREND_DRAFTS_TIME` 
 
 Config: `config/blogs.php` + `.env` (`BLOG_TREND_DRAFTS_*`, `OPENAI_API_KEY`). Agent: `App\Ai\Agents\BlogWriterAgent`.
 
-Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + sample FAQ) and instructs the model to write publish-ready HTML for `.single-blog-content` in one of two shapes: **framework** (named method, takeaways, table, checklist, stats, chart) or **story** (results at a glance, narrative sections). Human consultant voice, no page `<h1>`, `id` on each `<h2>`, never invent statistics, 6–8 FAQs in the `faqs` field only, always `status=draft`. `normalizeHtmlContent()` wraps bare tables, rewrites chart bars into labelled `.blog-chart__row` tracks, and drops empty `.blog-stat` / `.blog-insight` boxes. Single-blog CSS uses Intelegain-like 16px/28px body rhythm; the page includes LinkedIn/Facebook/X/WhatsApp/copy share buttons.
+Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + a visual-block excerpt + sample FAQ) and instructs the model to write publish-ready HTML for `.single-blog-content` in one of two shapes: **framework** (named method, takeaways, table, checklist, stats, chart, insight) or **story** (results at a glance, narrative sections, chart). Human consultant voice, no page `<h1>`, `id` on each `<h2>`, never invent survey statistics, 6–8 FAQs in the `faqs` field only, always `status=draft`. Charts must include labelled `.blog-chart__row` tracks, inline `data-width` / `style="width: N%"`, and `.blog-chart__value`. `normalizeHtmlContent()` / `BlogSupport::normalizeVisualHtml()` wraps bare tables, rewrites chart bars into labelled rows with values, and drops empty `.blog-stat` / `.blog-insight` boxes. Admin edit shows a completeness meter; editors change completion-bar labels and percents in the article body. Single-blog CSS uses Intelegain-like 16px/28px body rhythm; the page includes LinkedIn/Facebook/X/WhatsApp/copy share buttons.
 
 ## Edit-form SEO meta (manual save)
 

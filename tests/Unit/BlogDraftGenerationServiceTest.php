@@ -130,6 +130,7 @@ class BlogDraftGenerationServiceTest extends TestCase
         $this->assertArrayHasKey('title', $examples[0]);
         $this->assertArrayHasKey('headings', $examples[0]);
         $this->assertArrayHasKey('opening_html', $examples[0]);
+        $this->assertArrayHasKey('visual_html', $examples[0]);
         $this->assertStringContainsString('h2', (string) $examples[0]['headings']);
 
         $preferred = $service->preferredCategoryNames();
@@ -161,6 +162,8 @@ class BlogDraftGenerationServiceTest extends TestCase
         $this->assertStringContainsString('HUMAN VOICE', $instructions);
         $this->assertStringContainsString("in today's fast-paced world", $instructions);
         $this->assertStringContainsString('blog-chart__row', $instructions);
+        $this->assertStringContainsString('blog-chart__value', $instructions);
+        $this->assertStringContainsString('COMPLETION BARS', $instructions);
         $this->assertStringContainsString('Never put label text inside .blog-chart__bar', $instructions);
         $this->assertStringContainsString('Do NOT emit <h1>', $instructions);
     }
@@ -295,6 +298,8 @@ class BlogDraftGenerationServiceTest extends TestCase
         $content = (string) $blog->content;
         $this->assertStringContainsString('blog-chart__row', $content);
         $this->assertStringContainsString('blog-chart__label', $content);
+        $this->assertStringContainsString('blog-chart__value', $content);
+        $this->assertStringContainsString('data-width="90"', $content);
         $this->assertStringContainsString('Assessment', $content);
         $this->assertStringContainsString('blog-chart__track', $content);
         $this->assertDoesNotMatchRegularExpression(

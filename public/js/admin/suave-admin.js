@@ -1308,6 +1308,292 @@
       });
   }
 
+  function editorDocument(editor) {
+    if (editor && typeof editor.getDocument === 'function') {
+      try {
+        const doc = editor.getDocument();
+        if (doc) {
+          return doc;
+        }
+      } catch (e) {
+        /* ignore */
+      }
+    }
+
+    const iframe = document.querySelector('.admin-rte--blog iframe');
+    return iframe && iframe.contentDocument ? iframe.contentDocument : null;
+  }
+
+  function blogContentRoot(editor) {
+    const doc = editorDocument(editor);
+    if (doc && doc.body) {
+      return doc.body;
+    }
+
+    return document.querySelector(
+      '.admin-rte--blog [contenteditable="true"], .admin-rte--blog rte-content, .admin-rte--blog .rte-editable'
+    );
+  }
+
+  function injectBlogContentStyles(editor, href) {
+    if (!href) {
+      return;
+    }
+
+    const apply = function () {
+      const doc = editorDocument(editor);
+      if (!doc || !doc.head || doc.getElementById('suave-blog-content-css')) {
+        return;
+      }
+      const link = doc.createElement('link');
+      link.id = 'suave-blog-content-css';
+      link.rel = 'stylesheet';
+      link.href = href;
+      doc.head.appendChild(link);
+    };
+
+    apply();
+    window.setTimeout(apply, 250);
+    window.setTimeout(apply, 1000);
+  }
+
+  function applyChartBarLevel(bar, width) {
+    bar.classList.remove('blog-chart__bar--high', 'blog-chart__bar--mid', 'blog-chart__bar--low');
+    let level = 'mid';
+    if (width >= 75) {
+      level = 'high';
+    } else if (width <= 40) {
+      level = 'low';
+    }
+    bar.classList.add('blog-chart__bar--' + level);
+  }
+
+  function setChartBarWidth(bar, width, valueEl) {
+    const next = Math.max(8, Math.min(100, parseInt(width, 10) || 50));
+    bar.setAttribute('data-width', String(next));
+    bar.style.width = next + '%';
+    applyChartBarLevel(bar, next);
+    if (valueEl && (/^\s*\d+\s*%?\s*$/.test(valueEl.textContent || '') || (valueEl.textContent || '').trim() === '')) {
+      valueEl.textContent = next + '%';
+    }
+    return next;
+  }
+
+  /**
+   * Completeness meter + in-article chart percent sync on the blog form.
+   */
+  function initBlogEditForm(root = document) {
+    const form = root.querySelector ? root.querySelector('.admin-blog-form') : null;
+    if (!form) {
+      return;
+    }
+
+    const completeRoot = form.querySelector('[data-blog-completeness]');
+    const editor = getRichTextEditor('#blog-content');
+    const contentCss = form.getAttribute('data-blog-content-css') || '';
+    const bodyWordMinimum = 120;
+
+    if (editor && contentCss) {
+      injectBlogContentStyles(editor, contentCss);
+    }
+
+    const wordCountFromText = function (text) {
+      const clean = String(text || '')
+        .replace(/\u00a0/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      return clean === '' ? 0 : clean.split(' ').length;
+    };
+
+    const wordCountFromHtml = function (html) {
+      const text = String(html || '')
+        .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+        .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/&[a-z]+;/gi, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      return wordCountFromText(text);
+    };
+
+    const contentHtml = function () {
+      const ed = getRichTextEditor('#blog-content') || editor;
+      if (ed) {
+        const live = readRichTextHtml(ed);
+        if (live) {
+          return live;
+        }
+      }
+      return document.getElementById('blog-content')?.value || '';
+    };
+
+    const articleWordCount = function () {
+      const ed = getRichTextEditor('#blog-content') || editor;
+      const rootEl = blogContentRoot(ed);
+      if (rootEl) {
+        const liveText = (rootEl.innerText || rootEl.textContent || '').trim();
+        if (liveText) {
+          return wordCountFromText(liveText);
+        }
+      }
+      return wordCountFromHtml(contentHtml());
+    };
+
+    const faqCount = function () {
+      let count = 0;
+      form.querySelectorAll('[data-repeater-row]').forEach(function (row) {
+        const question = row.querySelector('input[name*="[question]"]')?.value?.trim() || '';
+        const answer = row.querySelector('textarea[name*="[answer]"]')?.value?.trim() || '';
+        if (question && answer) {
+          count += 1;
+        }
+      });
+      return count;
+    };
+
+    const hasFeaturedImage = function () {
+      const input = document.getElementById('blog-featured-image');
+      if (input && input.files && input.files.length > 0) {
+        return true;
+      }
+      return Boolean(form.querySelector('.admin-blog-form__image-preview'));
+    };
+
+    const evaluate = function () {
+      const html = contentHtml();
+      return [
+        { key: 'title', done: (document.getElementById('blog-title')?.value || '').trim().length >= 8 },
+        { key: 'short_description', done: (document.getElementById('blog-short-description')?.value || '').trim().length >= 80 },
+        { key: 'content', done: articleWordCount() >= bodyWordMinimum },
+        { key: 'category', done: (document.getElementById('blog-category')?.value || '') !== '' },
+        { key: 'featured_image', done: hasFeaturedImage() },
+        {
+          key: 'seo',
+          done:
+            (document.getElementById('blog-meta-title')?.value || '').trim() !== '' &&
+            (document.getElementById('blog-meta-description')?.value || '').trim() !== '',
+        },
+        { key: 'faqs', done: faqCount() >= 4 },
+        { key: 'takeaways', done: html.indexOf('blog-takeaways') !== -1 },
+        { key: 'table', done: html.indexOf('blog-table-wrap') !== -1 || /<table[\s>]/i.test(html) },
+        { key: 'chart', done: html.indexOf('blog-chart__row') !== -1 && html.indexOf('blog-chart__value') !== -1 },
+        { key: 'stats', done: html.indexOf('blog-stat__value') !== -1 },
+        { key: 'insight', done: html.indexOf('blog-insight') !== -1 },
+      ];
+    };
+
+    const paintCompleteness = function () {
+      if (!completeRoot) {
+        return;
+      }
+
+      const items = evaluate();
+      const done = items.filter(function (item) { return item.done; }).length;
+      const percent = items.length ? Math.round((done / items.length) * 100) : 0;
+      const fill = completeRoot.querySelector('[data-complete-fill]');
+      const meta = completeRoot.querySelector('[data-complete-meta]');
+      const bar = completeRoot.querySelector('[data-complete-bar]');
+
+      if (fill) {
+        fill.style.width = percent + '%';
+      }
+      if (bar) {
+        bar.setAttribute('aria-valuenow', String(percent));
+      }
+      if (meta) {
+        meta.innerHTML = '<strong>' + percent + '%</strong> ready for the public blog page (' + done + ' of ' + items.length + ')';
+      }
+
+      items.forEach(function (item) {
+        const li = completeRoot.querySelector('[data-complete-key="' + item.key + '"]');
+        if (li) {
+          li.classList.toggle('is-done', item.done);
+        }
+      });
+    };
+
+    const bindChartEditing = function () {
+      const doc = editorDocument(getRichTextEditor('#blog-content') || editor);
+      if (!doc || doc.documentElement?.getAttribute('data-blog-chart-bound') === '1') {
+        return;
+      }
+      if (doc.documentElement) {
+        doc.documentElement.setAttribute('data-blog-chart-bound', '1');
+      }
+      const onEdit = function (event) {
+        const valueEl = event.target && event.target.closest ? event.target.closest('.blog-chart__value') : null;
+        if (!valueEl) {
+          return;
+        }
+        const row = valueEl.closest('.blog-chart__row');
+        const bar = row ? row.querySelector('.blog-chart__bar') : null;
+        const parsed = parseInt(String(valueEl.textContent || '').replace(/[^\d]/g, ''), 10);
+        if (!bar || isNaN(parsed)) {
+          return;
+        }
+        setChartBarWidth(bar, parsed, null);
+      };
+      doc.addEventListener('input', onEdit);
+      doc.addEventListener('keyup', onEdit);
+      doc.addEventListener('blur', onEdit, true);
+    };
+
+    const activeEditor = function () {
+      return getRichTextEditor('#blog-content') || editor;
+    };
+
+    form.querySelectorAll('[data-blog-editor]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const action = btn.getAttribute('data-blog-editor');
+        const ed = activeEditor();
+        const api = window.SuaveBlogBlocks;
+        if (!action || !ed || !api) {
+          return;
+        }
+        if (action === 'undo' && typeof api.undo === 'function') {
+          api.undo(ed);
+        } else if (action === 'redo' && typeof api.redo === 'function') {
+          api.redo(ed);
+        } else if (action === 'removeblock' && typeof api.removeNearest === 'function') {
+          if (!api.removeNearest(ed)) {
+            createFlashMessage('info', 'Click inside a layout block first, then click Remove block.');
+          }
+        }
+        window.setTimeout(paintCompleteness, 50);
+      });
+    });
+
+    form.querySelectorAll('[data-blog-block]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const cmd = btn.getAttribute('data-blog-block');
+        const ed = activeEditor();
+        if (!cmd || !ed) {
+          return;
+        }
+        if (window.SuaveBlogBlocks && typeof window.SuaveBlogBlocks.insert === 'function') {
+          window.SuaveBlogBlocks.insert(ed, cmd);
+        } else if (typeof ed.execCommand === 'function') {
+          ed.execCommand(cmd);
+        }
+        window.setTimeout(paintCompleteness, 50);
+      });
+    });
+
+    form.addEventListener('input', paintCompleteness);
+    form.addEventListener('change', paintCompleteness);
+
+    paintCompleteness();
+    bindChartEditing();
+    window.setTimeout(bindChartEditing, 400);
+    window.setTimeout(paintCompleteness, 400);
+
+    window.setInterval(function () {
+      bindChartEditing();
+      paintCompleteness();
+    }, 1500);
+  }
+
   function boot(flash = {}) {
     configureToastr();
     toast.fromFlash(flash);
@@ -1342,6 +1628,7 @@
     openAdminModal,
     closeAdminModal,
     bindAdminModals,
+    initBlogEditForm,
     boot,
   };
 })(window, window.jQuery);

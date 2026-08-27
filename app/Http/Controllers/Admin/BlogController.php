@@ -10,6 +10,8 @@ use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Services\BlogService;
 use App\Services\BlogSeoMetaGenerationService;
+use App\Support\Admin\BlogCompleteness;
+use App\Support\Frontend\BlogSupport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -46,9 +48,13 @@ class BlogController extends Controller
      */
     public function create(): View
     {
+        $blog = $this->blogs->newDraft();
+
         return view('admin.blogs.form', [
-            'blog' => $this->blogs->newDraft(),
+            'blog' => $blog,
             'categories' => $this->blogs->categories(),
+            'editorContent' => '',
+            'completeness' => BlogCompleteness::evaluate($blog),
         ]);
     }
 
@@ -74,9 +80,13 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog): View
     {
+        $blog->content = BlogSupport::normalizeVisualHtml((string) $blog->content);
+
         return view('admin.blogs.form', [
             'blog' => $blog,
             'categories' => $this->blogs->categories(),
+            'editorContent' => (string) $blog->content,
+            'completeness' => BlogCompleteness::evaluate($blog),
         ]);
     }
 

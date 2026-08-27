@@ -184,6 +184,7 @@ class BlogDraftGenerationService
             'meta_title' => Str::limit(trim((string) $blog->meta_title), 60, ''),
             'headings' => $headings,
             'opening_html' => $opening,
+            'visual_html' => $this->extractVisualHtml($content),
             'sample_faq_question' => Str::limit(trim((string) ($firstFaq['question'] ?? '')), 500, ''),
             'sample_faq_answer' => Str::limit(trim((string) ($firstFaq['answer'] ?? '')), 500, ''),
         ];
@@ -433,7 +434,7 @@ class BlogDraftGenerationService
 Write one new draft blog post for Suave Creators now.
 {$topicLine}
 {$hint}
-Return only the structured fields. Pick article_shape "framework" (named method, takeaways, table, checklist, stats, chart) or "story" (results at a glance, narrative sections, before/after table). No h1, no FAQ block, no blockquote. Write like a premium IT services article — specific scenes, calm professional voice, no invented statistics.
+Return only the structured fields. Pick article_shape "framework" (named method, takeaways, table, checklist, stats, completion-bar chart with values) or "story" (results at a glance, narrative sections, before/after table, completion-bar chart). No h1, no FAQ block, no blockquote. Write like a premium IT services article — specific scenes, filled visual data, calm professional voice, no invented survey statistics.
 PROMPT;
     }
 
@@ -469,5 +470,19 @@ PROMPT;
         $slice = Str::limit($html, 900, '');
 
         return $slice === '' ? '(empty)' : $slice;
+    }
+
+    /**
+     * First filled visual block so the model copies real chart / table / stats markup.
+     */
+    protected function extractVisualHtml(string $html): string
+    {
+        $pattern = '/<(?:figure|div|aside)\b[^>]*class="[^"]*\b(?:blog-chart|blog-table-wrap|blog-stats|blog-takeaways|blog-results|blog-checklist|blog-insight)\b[^"]*"[^>]*>.*?<\/(?:figure|div|aside)>/is';
+
+        if (! preg_match($pattern, $html, $match)) {
+            return '';
+        }
+
+        return Str::limit(trim($match[0]), 1600, '');
     }
 }
