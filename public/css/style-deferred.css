@@ -7105,7 +7105,10 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   font-size: 0.875rem;
   font-weight: 700;
   text-decoration: none;
-  margin-top:65px;
+}
+
+.case-study-detail-hero__actions .case-study-detail-hero__btn {
+  margin-top: 65px;
 }
 
 .case-study-detail-hero__btn--primary {

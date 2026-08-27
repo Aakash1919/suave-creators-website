@@ -256,8 +256,8 @@ return [
             'og_image' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
         ],
         'cabvi-case-study' => [
-            'title' => 'CABVI AI Product Matching Case Study | Case Study | Suave Creators',
-            'description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
+            'title' => 'AI Product Matching Case Study | Case Study | Suave Creators',
+            'description' => 'AI Product Matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
             'og_image' => 'assets/case-studies/cabvi/cabvi-logo.png',
             'robots' => 'noindex, nofollow',
         ],

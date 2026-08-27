@@ -6,8 +6,8 @@
     <div class="case-study-detail-hero__copy">
 
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">Nonprofit / Procurement</p>
-      <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">CABVI — From Manual Product Matching to an Automated AI Workspace</h1>
-      <p class="case-study-detail-hero__lead">CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.</p>
+      <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">From Manual Workflows to Intelligent Product Matching</h1>
+      <p class="case-study-detail-hero__lead"> Intelligent Product Matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.</p>
 
       <div class="case-study-detail-hero__meta">
         <span><strong>Year</strong> 2026</span>
@@ -299,7 +299,7 @@
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>
           </div>
           <h3>Challenge</h3>
-          <p>CABVI’s matching work was almost entirely manual: staff checked look-alike products on other supplier sites one by one, judged by hand whether each item qualified, then typed the results into spreadsheets. That loop burned time and headcount — and still depended on who remembered which tab. Supplier sites also each work differently, so one-size-fits-all hunting kept missing products or pushing people straight back to copy-paste.</p>
+          <p>The matching work was almost entirely manual: staff checked look-alike products on other supplier sites one by one, judged by hand whether each item qualified, then typed the results into spreadsheets. That loop burned time and headcount — and still depended on who remembered which tab. Supplier sites also each work differently, so one-size-fits-all hunting kept missing products or pushing people straight back to copy-paste.</p>
         </article>
         <article>
           <div class="case-study-story__icon">
@@ -324,7 +324,7 @@
     <div class="case-study-split__copy">
           <p class="case-study-story__eyebrow">Automate</p>
           <h2 id="section-1-title">Stop opening every supplier site by hand.</h2>
-          <p>Some catalogs are simple lists. Others only show products once the live site is open. Some need a direct supplier connection. Big retail sites hide items across huge store maps. CABVI searches eight catalogs automatically — each the way it actually works — so the first pass no longer burns people hours.</p>
+          <p>Some catalogs are simple lists. Others only show products once the live site is open. Some need a direct supplier connection. Big retail sites hide items across huge store maps. It searches eight catalogs automatically — each the way it actually works — so the first pass no longer burns people hours.</p>
           <ol class="case-study-split__steps">
               <li><span>1</span>Search eight supplier catalogs together automatically</li>
               <li><span>2</span>Read each catalog the way it actually works</li>
@@ -348,8 +348,8 @@
         <figure class="case-study-visual case-study-visual--photo">
           <img
             src="{{ asset('assets/case-studies/cabvi/cabvi_left.webp') }}"
-            alt="Clear deposits, proven arrival, fair no-show payouts. product screenshot for Suave Creators software development"
-            title="Clear deposits, proven arrival, fair no-show payouts. product screenshot for Suave Creators software development"
+            alt="CABVI automated supplier catalog search screenshot for product matching software"
+            title="CABVI automated supplier catalog search screenshot for product matching software"
             width="960"
             height="720"
             loading="eager"
@@ -389,15 +389,14 @@
         <figure class="case-study-visual case-study-visual--photo">
           <img
             src="{{ asset('assets/case-studies/cabvi/cabvi_right.webp') }}"
-            alt="Confident customer calls — without weeks of waiting. product screenshot for Suave Creators software development"
-            title="Confident customer calls — without weeks of waiting. product screenshot for Suave Creators software development"
+            alt="CABVI AI close-call review screenshot for product matching software"
+            title="CABVI AI close-call review screenshot for product matching software"
             width="960"
             height="720"
             loading="eager"
             decoding="async"
           >
         </figure>
-  </div>
   </div>
 </section>
 
