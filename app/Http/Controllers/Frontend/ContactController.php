@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Requests\Frontend\ContactDraftRequest;
 use App\Http\Requests\Frontend\ContactStoreRequest;
 use App\Http\Requests\Frontend\QuickConsultationRequest;
+use App\Models\ChatLead;
 use App\Services\ContactRequestService;
+use App\Services\CrmLeadSyncService;
 use App\Support\Frontend\ContactSupport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +17,7 @@ class ContactController extends FrontendController
 {
     public function __construct(
         private readonly ContactRequestService $contacts,
+        private readonly CrmLeadSyncService $crmLeads,
     ) {}
 
     /**
@@ -48,7 +51,8 @@ class ContactController extends FrontendController
             return redirect()->route('contact-us')->withFragment('contact-id');
         }
 
-        $this->contacts->store($request);
+        $contact = $this->contacts->store($request);
+        $this->crmLeads->queueContact($contact);
 
         if ($wantsJson) {
             return response()->json([
@@ -93,10 +97,14 @@ class ContactController extends FrontendController
             return back();
         }
 
-        $this->contacts->storeQuickConsultation($request);
+        $consultation = $this->contacts->storeQuickConsultation($request);
 
         $contact = (string) $request->input('contact');
         $chatSession = SuaveAgentController::createLeadSession('', $contact);
+        $lead = ChatLead::query()->where('uuid', $chatSession['lead_uuid'])->first();
+        if ($lead !== null) {
+            $this->crmLeads->queueChat($lead, $consultation->message);
+        }
 
         if ($wantsJson) {
             return response()->json([
