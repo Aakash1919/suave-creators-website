@@ -16,14 +16,16 @@ return array(
   'heroImage2' => '/assets/icons/build-icon.png',
   'bannerLogos' =>
   array(
-    0 => array('src' => '/assets/icons/tech/openai-logo.svg', 'alt' => 'OpenAI logo for Suave Creators AI solutions', 'label' => 'OpenAI'),
-    1 => array('src' => '/assets/icons/tech/anthropic-logo.svg', 'alt' => 'Anthropic logo for Suave Creators Claude AI integrations', 'label' => 'Anthropic'),
+
+    0 => array('src' => '/assets/icons/tech/Open-AI.png', 'alt' => 'OpenAI logo for Suave Creators AI solutions', 'label' => 'OpenAI'),
+    1 => array('src' => '/assets/icons/tech/.svg', 'alt' => 'Anthropic logo for Suave Creators Claude AI integrations', 'label' => 'Anthropic'),
     2 => array('src' => '/assets/icons/tech/vapi-logo.svg', 'alt' => 'Vapi logo for Suave Creators voice AI agents', 'label' => 'Vapi'),
     3 => array('src' => '/assets/icons/voice-agents-icon.svg', 'alt' => 'Voice agents icon for Suave Creators conversational AI', 'label' => 'Voice Agents'),
     4 => array('src' => '/assets/icons/chatbots-icon.svg', 'alt' => 'Chatbots icon for Suave Creators AI assistant development', 'label' => 'Chatbots'),
     5 => array('src' => '/assets/icons/tech/gemini-logo.svg', 'alt' => 'Google Gemini logo for Suave Creators multimodal AI solutions', 'label' => 'Gemini'),
   ),
-  'bannerBg' => '/assets/background/service-banner-bg.webp',
+  'bannerBg' => '/assets/background/banner-ai-solutions.png',
+
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'AI Software Solutions',
