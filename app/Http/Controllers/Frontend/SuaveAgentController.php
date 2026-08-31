@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Ai\Agents\SuaveAgent;
 use App\Models\ChatLead;
+use App\Services\CrmLeadSyncService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -124,7 +125,10 @@ class SuaveAgentController extends FrontendController
 
         return (new SuaveAgent($lead))
             ->continue($validated['conversation_id'], as: $lead)
-            ->stream($validated['message']);
+            ->stream($validated['message'])
+            ->then(function () use ($lead): void {
+                app(CrmLeadSyncService::class)->queueChat($lead->fresh() ?? $lead);
+            });
     }
 
     /**
