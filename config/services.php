@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'crm_leads' => [
+        'webhook_url' => env('CRM_LEADS_WEBHOOK_URL'),
+        'webhook_token' => env('CRM_LEADS_WEBHOOK_TOKEN'),
+    ],
+
 ];
