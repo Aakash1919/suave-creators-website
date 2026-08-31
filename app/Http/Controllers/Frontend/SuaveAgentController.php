@@ -127,7 +127,7 @@ class SuaveAgentController extends FrontendController
             ->continue($validated['conversation_id'], as: $lead)
             ->stream($validated['message'])
             ->then(function () use ($lead): void {
-                app(CrmLeadSyncService::class)->queueChat($lead->fresh() ?? $lead);
+                app(CrmLeadSyncService::class)->syncChat($lead->fresh() ?? $lead);
             });
     }
 

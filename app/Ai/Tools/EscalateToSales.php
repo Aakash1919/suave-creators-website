@@ -27,7 +27,7 @@ class EscalateToSales implements Tool
     public function handle(Request $request): Stringable|string
     {
         $this->lead->markEscalated();
-        app(CrmLeadSyncService::class)->queueChat($this->lead->fresh() ?? $this->lead);
+        app(CrmLeadSyncService::class)->syncChat($this->lead->fresh() ?? $this->lead);
 
         $reason = trim((string) ($request['reason'] ?? 'Request requires a human sales follow-up.'));
 
