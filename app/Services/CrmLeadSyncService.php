@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\Jobs\SyncWebsiteLeadToCrmJob;
 use App\Models\ChatLead;
 use App\Models\ContactRequest;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -27,31 +25,31 @@ class CrmLeadSyncService
     }
 
     /**
-     * Queue a contact-form lead sync after a final submit.
+     * POST a contact-form lead to CRM after a final submit (best-effort, inline).
      */
-    public function queueContact(ContactRequest $contact): void
+    public function syncContact(ContactRequest $contact): void
     {
         if (! $this->isConfigured() || $contact->isDraft()) {
             return;
         }
 
-        SyncWebsiteLeadToCrmJob::dispatch(self::SOURCE_CONTACT, (string) $contact->id);
+        $this->sync(self::SOURCE_CONTACT, (string) $contact->id);
     }
 
     /**
-     * Queue a SuaveAgent chat transcript sync.
+     * POST a SuaveAgent chat transcript to CRM (best-effort, inline).
      */
-    public function queueChat(ChatLead $lead, ?string $firstInboundBody = null): void
+    public function syncChat(ChatLead $lead, ?string $firstInboundBody = null): void
     {
         if (! $this->isConfigured()) {
             return;
         }
 
-        SyncWebsiteLeadToCrmJob::dispatch(self::SOURCE_CHAT, $lead->uuid, $firstInboundBody);
+        $this->sync(self::SOURCE_CHAT, $lead->uuid, $firstInboundBody);
     }
 
     /**
-     * Build and POST the CRM payload (best-effort; 4xx is logged, 5xx retries).
+     * Build and POST the CRM payload without blocking the visitor on CRM errors.
      */
     public function sync(string $source, string $sourceId, ?string $firstInboundBody = null): void
     {
@@ -76,22 +74,14 @@ class CrmLeadSyncService
                 ->timeout(15)
                 ->post($url, $payload);
 
-            if ($response->clientError()) {
-                Log::warning('CRM website lead webhook client error', [
+            if ($response->failed()) {
+                Log::warning('CRM website lead webhook failed', [
                     'status' => $response->status(),
                     'source' => $source,
                     'source_id' => $sourceId,
                     'body' => $response->body(),
                 ]);
-
-                return;
             }
-
-            if ($response->failed()) {
-                $response->throw();
-            }
-        } catch (RequestException $exception) {
-            throw $exception;
         } catch (Throwable $exception) {
             report($exception);
         }

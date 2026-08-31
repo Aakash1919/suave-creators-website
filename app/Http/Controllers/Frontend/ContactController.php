@@ -52,7 +52,7 @@ class ContactController extends FrontendController
         }
 
         $contact = $this->contacts->store($request);
-        $this->crmLeads->queueContact($contact);
+        $this->crmLeads->syncContact($contact);
 
         if ($wantsJson) {
             return response()->json([
@@ -103,7 +103,7 @@ class ContactController extends FrontendController
         $chatSession = SuaveAgentController::createLeadSession('', $contact);
         $lead = ChatLead::query()->where('uuid', $chatSession['lead_uuid'])->first();
         if ($lead !== null) {
-            $this->crmLeads->queueChat($lead, $consultation->message);
+            $this->crmLeads->syncChat($lead, $consultation->message);
         }
 
         if ($wantsJson) {
