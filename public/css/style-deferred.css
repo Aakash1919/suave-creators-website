@@ -7100,7 +7100,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.7rem 1.15rem;
+  padding: 0.5rem 0.45rem;
   border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 700;
@@ -7108,7 +7108,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 }
 
 .case-study-detail-hero__actions .case-study-detail-hero__btn {
-  margin-top: 65px;
+  margin-top: 10px;
 }
 
 .case-study-detail-hero__btn--primary {
@@ -7259,7 +7259,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 /* Overview */
 .case-study-overview {
   background: #fff;
-  padding-block: 3rem 1.5rem;
+  padding-block: 1rem 1rem;
 }
 
 .case-study-story__brief {
@@ -7394,6 +7394,12 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 .case-study-split--alt {
   padding-block: 2.75rem;
   background: #fff;
+}
+@media (max-width: 800px) {
+  .case-study-split,
+  .case-study-split--alt {
+    padding-block: 0.2rem;
+  }
 }
 
 .case-study-split--stack-tight:has(+ .case-study-split--stack-tight) {
@@ -11097,7 +11103,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 
 .ai-product-matching-hero__rec-title {
   margin: 0;
-  font-size: clamp(0.62rem, 1.2vw, 0.88rem);
+  font-size: clamp(0.50rem, 1.2vw, 0.88rem);
   font-weight: 750;
   color: #0f172a;
 }
