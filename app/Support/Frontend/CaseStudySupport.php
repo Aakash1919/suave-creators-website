@@ -359,7 +359,7 @@ class CaseStudySupport
     {
         return [
             [
-                'src' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'src' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
                 'alt' => 'Show No Show event booking product banner by Suave Creators',
                 'fan_rotate' => -1.6,
                 'fan_y' => -18,
@@ -604,7 +604,8 @@ class CaseStudySupport
                 'slug' => 'appointment-insurance-platform-case-study',
                 'title' => 'Appointment Insurance That Makes Showing Up the Default',
                 'status' => 'published',
-                'image' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'image' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
+
                 'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
                 'industry' => 'Appointment Scheduling / Fintech',
@@ -626,11 +627,11 @@ class CaseStudySupport
                 ],
             ],
             [
-                'slug' => 'cabvi-product-matching',
+                'slug' => 'AI-product-matching',
                 'title' => 'AI Product Matching to an Automated AI Workspace',
                 'status' => 'published',
                 'image' => 'assets/case-studies/cabvi/cabvi-logo.webp',
-                'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
+                'short_description' => 'AI product matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
                 'listing_subtitle' => 'Automated AI Product Matching',
                 'industry' => 'Nonprofit / Procurement',
                 'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],
