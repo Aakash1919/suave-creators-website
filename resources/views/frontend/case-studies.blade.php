@@ -90,10 +90,23 @@
     </section>
   @endif
 
-  <x-frontend.consultation-section
+  {{-- <x-frontend.consultation-section
     title='Have an Idea? Let''s Turn It<br class="hidden sm:block"> Into a Digital Product'
     description="Whatever stage your business is at, our team is ready to help you plan, design, and build the right solution."
     cta-label="Get a Free Quote"
     secondary-cta-label="Contact us Today"
-  />
+  /> --}}
+  @if (! empty($faqs))
+<x-frontend.faq-section
+  :qa="$faqs"
+  heading-id="blog-faq-heading"
+  eyebrow="Questions before you get started?"
+  description="Here are the most asked questions based on feedback from our readers."
+  cta-label="Book a Consultation"
+  class="faq-section--align faq-section--contact bg-cover bg-top bg-no-repeat"
+  style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}')"
+/>
+@endif
+
+<x-frontend.consultation-section />
 @endsection
