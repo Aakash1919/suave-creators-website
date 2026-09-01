@@ -204,6 +204,10 @@
             .site-main>.single-blog-top{min-height:0;padding-bottom:1rem;padding-top:.5rem}
             .site-main>.site-container.relative>.grid>div:first-child{min-height:18rem}
             .site-main>.site-container.relative h1+p{font-size:.875rem;line-height:1.5rem}
+            .site-main>.home-hero.relative>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+            .hero-cs-visual{margin-inline:auto 0}
+            .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+            .md\:justify-end{justify-content:flex-end}
         }
         @media (min-width:1024px){
             .site-main>.site-container.relative{min-height:200px;padding-bottom:5rem;padding-top:52px}

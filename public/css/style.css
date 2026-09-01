@@ -883,9 +883,13 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
+  .site-main > .home-hero.relative > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .hero-cs-visual {
-    margin-inline: 0;
+    margin-inline: auto 0;
   }
 }
 /* ===== HERO CASE STUDIES VISUAL END ===== */
@@ -1554,7 +1558,6 @@ main button.rounded-full.bg-gradient-to-r {
 
 .core-value-card__image {
   aspect-ratio: 0.84;
-  background: #11142b;
   border-radius: 8px;
   box-shadow: 0 18px 35px rgb(0 0 0 / 18%);
   margin-top: auto;
@@ -1567,6 +1570,61 @@ main button.rounded-full.bg-gradient-to-r {
   object-fit: cover;
   width: 100%;
 }
+
+@media (max-width: 767px) {
+  .core-value-card {
+    height: auto;
+  }
+
+  .core-value-card__image,
+  .core-values__grid--2 .core-value-card__image,
+  .core-values__grid--3 .core-value-card__image {
+    aspect-ratio: auto;
+    box-shadow: none;
+    height: 160px;
+    margin-left: 38px;
+    margin-top: 8px;
+    max-width: none;
+    width: calc(100% - 38px);
+  }
+
+  .core-value-card__image img {
+    border-radius: 7px;
+    display: block;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .core-values__grid,
+  .core-values__grid--2,
+  .core-values__grid--3 {
+    align-items: start;
+  }
+
+  .core-value-card {
+    height: auto;
+  }
+
+  .core-value-card__image,
+  .core-values__grid--2 .core-value-card__image,
+  .core-values__grid--3 .core-value-card__image {
+    aspect-ratio: auto;
+    height: 180px;
+    margin-top: 10px;
+  }
+
+  .core-value-card__image img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
 
 .digitalMarketingSwiper .swiper-slide {
   height: auto;
@@ -3498,12 +3556,18 @@ body.mobile-nav-open {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.core-values__grid--2 .core-value-card__image {
-  aspect-ratio: 2 / 1;
-}
-
 .core-values__grid--3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .core-values__grid--2 .core-value-card__image {
+    aspect-ratio: 2 / 1;
+  }
+
+  .core-values__grid--3 .core-value-card__image {
+    aspect-ratio: 1.68;
+  }
 }
 
 .core-values__slider {
@@ -4910,9 +4974,10 @@ body.mobile-nav-open {
   }
 
   .core-values__grid {
-    gap: 14px;
+    gap: 10px;
     grid-template-columns: 1fr;
     margin-top: 20px;
+    row-gap: 10px;
   }
 
   .core-values__slider {
@@ -5208,24 +5273,6 @@ body.mobile-nav-open {
 
   .core-value-card__content::before {
     display: none !important;
-  }
-
-  .core-value-card__image img {
-    display: block;
-    height: 132px;
-    width: 100%;
-    max-width: 100%;
-    object-fit: cover;
-    border-radius: 7px;
-  }
-
-  .core-value-card__image {
-    aspect-ratio: auto;
-    border-radius: 7px;
-    margin-left: 38px;
-    margin-top: 8px;
-    max-width: none;
-    width: calc(100% - 38px);
   }
 
   .core-value-card h3 {
@@ -6726,6 +6773,40 @@ html {
 
 .consultation-inline-form.has-error {
   border-color: #ff4d4f !important;
+}
+
+@media (max-width: 1100px) {
+  .consultation-inline-form {
+    border-radius: 16px;
+    flex-direction: column;
+  }
+
+  .consultation-inline-form__divider,
+  .consultation-inline-form--light .consultation-inline-form__divider {
+    display: none;
+  }
+
+  .consultation-inline-form__input {
+    flex: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .consultation-inline-form__btn {
+    border-radius: 0;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .consultation-inline-form--dark .consultation-inline-form__btn {
+    border-left: none;
+    border-top: 1px solid #1a2254;
+    text-align: center;
+  }
+
+  .consultation-inline-form--light .consultation-inline-form__btn {
+    border-top: 1px solid #d2d8f9;
+  }
 }
 
 /* ===== INLINE CONSULTATION FORM END ===== */

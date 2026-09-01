@@ -34,11 +34,11 @@
                 </div>
             </div>
             <div
-                class="industry-hero-media relative z-10 order-1 mx-auto hidden w-full max-w-[360px] min-w-0 items-center justify-center sm:max-w-[420px] lg:order-2 lg:mx-0 lg:flex lg:max-w-[480px] lg:justify-end">
+                class="industry-hero-media relative z-10 mx-auto hidden w-full max-w-[360px] min-w-0 items-center justify-center lg:flex lg:mx-0 lg:max-w-[480px] lg:justify-end">
                 @if (!empty($industry['heroImage']))
                     <img src="{{ $industry['heroImage'] }}" alt="{{ $industry['pageTitle'] ?? '' }}"
                         title="{{ $industry['pageTitle'] ?? '' }}" width="560" height="560"
-                        class="block h-auto w-full rounded-[20px] object-cover shadow-[0_24px_60px_rgba(0,0,63,0.35)] sm:rounded-[28px]"
+                        class="hidden h-auto w-full max-w-[360px] rounded-[20px] object-cover shadow-[0_24px_60px_rgba(0,0,63,0.35)] lg:ml-auto lg:block lg:max-w-[480px] lg:rounded-[28px]"
                         loading="eager">
                 @endif
             </div>

@@ -6018,6 +6018,34 @@ right: max(0px, calc(50% - 580px));
 }
 /* ===== LEGAL PAGES END ===== */
 
+/* ===== INDUSTRY DETAIL HERO START ===== */
+.industry-hero-media {
+  display: none !important;
+}
+
+.industry-hero-media img {
+  display: none !important;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .industry-hero-media {
+    display: flex !important;
+    justify-content: flex-end;
+    margin-inline: 0;
+    margin-left: auto;
+  }
+
+  .industry-hero-media img {
+    display: block !important;
+    margin-left: auto;
+  }
+}
+/* ===== INDUSTRY DETAIL HERO END ===== */
+
 /* ===== INDUSTRY DETAIL SERVICES START ===== */
   /* Why Us: mobile-friendly background (avoid cover crop on tall stacked cards) */
   .industry-why-section__bg {
@@ -6201,12 +6229,6 @@ right: max(0px, calc(50% - 580px));
 .agile-process-tabs__pagination .swiper-pagination-bullet-active {
   background: #00003f;
   border-color: #00003f;
-}
-
-@media (max-width: 1023px) {
-  .industry-hero-media {
-    display: none !important;
-  }
 }
 
 @media (min-width: 768px) {
