@@ -20,7 +20,7 @@ class CaseStudySupport
         'suave-crm-tasks-case-study' => 'tasks-case-study',
         'teerrath-spiritual-commerce' => 'teerrath-case-study',
         'appointment-insurance-platform-case-study' => 'appointment-insurance-case-study',
-        'cabvi-product-matching' => 'cabvi-case-study',
+        'AI-product-matching' => 'cabvi-case-study',
     ];
 
     /**
