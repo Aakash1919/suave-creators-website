@@ -424,9 +424,9 @@ def gen_teerrath():
 
 
 # -------------------------------------------------------------
-# 7. CABVI
+# 7. AI PRODUCT MATCHING
 # -------------------------------------------------------------
-def gen_cabvi():
+def gen_ai_product_matching():
     out_dir = 'public/assets/case-studies/cabvi'
     os.makedirs(out_dir, exist_ok=True)
     
@@ -473,7 +473,7 @@ def gen_cabvi():
     draw_progress_bar(draw_c, 32, 235, W_c-64, 18, 75, (59, 130, 246, 255))
     
     img_c.convert('RGB').save(os.path.join(out_dir, 'cabvi-efficiency-chart-tile.webp'), 'WEBP', quality=95)
-    print("CABVI generated.")
+    print("AI Product Matching generated.")
 
 
 if __name__ == '__main__':
@@ -483,5 +483,5 @@ if __name__ == '__main__':
     gen_tasks()
     gen_shownoshow()
     gen_teerrath()
-    gen_cabvi()
+    gen_ai_product_matching()
     print("All 14 case study hero tiles regenerated successfully.")

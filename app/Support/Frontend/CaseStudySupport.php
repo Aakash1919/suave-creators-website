@@ -20,7 +20,9 @@ class CaseStudySupport
         'suave-crm-tasks-case-study' => 'tasks-case-study',
         'teerrath-spiritual-commerce' => 'teerrath-case-study',
         'appointment-insurance-platform-case-study' => 'appointment-insurance-case-study',
-        'AI-product-matching' => 'cabvi-case-study',
+        'ai-product-matching' => 'ai-product-matching-case-study',
+        'cabvi-product-matching' => 'ai-product-matching-case-study',
+        'AI-product-matching' => 'ai-product-matching-case-study',
     ];
 
     /**
@@ -177,7 +179,7 @@ class CaseStudySupport
                 'assets/case-studies/teerrath/teerrath-energy-scan-tile.webp',
                 'assets/case-studies/teerrath/teerrath-insight-chart-tile.webp',
             ],
-            'cabvi-product-matching' => [
+            'ai-product-matching' => [
                 'assets/case-studies/cabvi/cabvi-brand-mark.webp',
                 'assets/case-studies/cabvi/cabvi-product-matching-tile.webp',
                 'assets/case-studies/cabvi/cabvi-efficiency-chart-tile.webp',
@@ -627,7 +629,7 @@ class CaseStudySupport
                 ],
             ],
             [
-                'slug' => 'AI-product-matching',
+                'slug' => 'ai-product-matching',
                 'title' => 'AI Product Matching to an Automated AI Workspace',
                 'status' => 'published',
                 'image' => 'assets/case-studies/cabvi/cabvi-logo.webp',

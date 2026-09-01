@@ -255,10 +255,10 @@ return [
             'og_description' => 'See how appointment insurance turns no-shows into fair payouts — clear deposits, arrival check-in, and smart Stripe refunds that save card fees.',
             'og_image' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
         ],
-        'cabvi-case-study' => [
+        'ai-product-matching-case-study' => [
             'title' => 'AI Product Matching Case Study | Case Study | Suave Creators',
             'description' => 'AI Product Matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
-            'og_image' => 'assets/case-studies/cabvi/cabvi-logo.png',
+            'og_image' => 'assets/case-studies/cabvi/cabvi-logo.webp',
             'robots' => 'noindex, nofollow',
         ],
     ],
