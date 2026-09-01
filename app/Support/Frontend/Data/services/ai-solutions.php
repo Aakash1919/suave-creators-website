@@ -16,14 +16,14 @@ return array(
   'heroImage2' => '/assets/icons/build-icon.png',
   'bannerLogos' =>
   array(
-    0 => array('src' => '/assets/icons/tech/openai-logo.svg', 'alt' => 'OpenAI logo for Suave Creators AI solutions', 'label' => 'OpenAI'),
-    1 => array('src' => '/assets/icons/tech/anthropic-logo.svg', 'alt' => 'Anthropic logo for Suave Creators Claude AI integrations', 'label' => 'Anthropic'),
-    2 => array('src' => '/assets/icons/tech/vapi-logo.svg', 'alt' => 'Vapi logo for Suave Creators voice AI agents', 'label' => 'Vapi'),
-    3 => array('src' => '/assets/icons/voice-agents-icon.svg', 'alt' => 'Voice agents icon for Suave Creators conversational AI', 'label' => 'Voice Agents'),
-    4 => array('src' => '/assets/icons/chatbots-icon.svg', 'alt' => 'Chatbots icon for Suave Creators AI assistant development', 'label' => 'Chatbots'),
-    5 => array('src' => '/assets/icons/tech/gemini-logo.svg', 'alt' => 'Google Gemini logo for Suave Creators multimodal AI solutions', 'label' => 'Gemini'),
+    0 => array('src' => '/assets/icons/tech/Open-AI.png', 'alt' => 'OpenAI logo for Suave Creators AI solutions', 'label' => 'OpenAI'),
+    1 => array('src' => '/assets/icons/tech/anthropic.png', 'alt' => 'Anthropic logo for Suave Creators Claude AI integrations', 'label' => 'Anthropic'),
+    2 => array('src' => '/assets/icons/tech/Vapi.png', 'alt' => 'Vapi logo for Suave Creators voice AI agents', 'label' => 'Vapi'),
+    3 => array('src' => '/assets/icons/tech/voice-assistant.png', 'alt' => 'Voice agents icon for Suave Creators conversational AI', 'label' => 'Voice Agents'),
+    4 => array('src' => '/assets/icons/robot.png', 'alt' => 'Chatbots icon for Suave Creators AI assistant development', 'label' => 'Chatbots'),
+    5 => array('src' => '/assets/icons/tech/google-gemini-icon.png', 'alt' => 'Google Gemini logo for Suave Creators multimodal AI solutions', 'label' => 'Gemini'),
   ),
-  'bannerBg' => '/assets/background/service-banner-bg.webp',
+  'bannerBg' => '/assets/background/banner-ai-solution.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'AI Software Solutions',
@@ -57,7 +57,7 @@ return array(
   array(
     0 => array(
       'title' => 'AI Chatbots & Virtual Assistants',
-      'image' => '/assets/icons/ai-solutions-icon.svg',
+      'image' => '/assets/icons/crm-service-icon-1.svg',
       'tags' => array('Chatbot', 'Support', 'Sales', 'Automation'),
       'desc' => 'Customer and internal assistants that answer questions, qualify leads, and route requests—trained on your knowledge base and brand voice.',
     ),
@@ -69,7 +69,7 @@ return array(
     ),
     2 => array(
       'title' => 'AI-Powered CRM & Sales Tools',
-      'image' => '/assets/icons/custom-crm-icon.svg',
+      'image' => '/assets/icons/crm-service-icon-6.svg',
       'tags' => array('CRM', 'Lead Scoring', 'Outreach', 'Sales AI'),
       'desc' => 'Enhance CRM platforms with AI lead scoring, personalized outreach suggestions, call insights, and coaching features that help teams close more deals.',
     ),
@@ -170,21 +170,21 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/assets/media/ai-service-visual-1.webp',
+      'image' => 'assets/blog/blogs-hero/02-laptop.jpg',
       'title' => 'Business-First AI Roadmaps',
       'tags' => array('Use Cases', 'ROI', 'Strategy'),
       'text' => 'We start with workflows and goals, then recommend AI features that save time or revenue—so investment maps to clear outcomes.',
       'features' => array('Use-Case Discovery', 'ROI Prioritization', 'Pilot Planning'),
     ),
     1 => array(
-      'image' => '/assets/media/ai-service-visual-2.webp',
+      'image' => 'assets/media/generative-engine-dev-team-coding.webp',
       'title' => 'Production-Ready Engineering',
       'tags' => array('APIs', 'Integration', 'Scale'),
       'text' => 'Our team builds AI into real systems with reliable APIs, monitoring, and fallbacks—so features stay useful after launch day.',
       'features' => array('Secure Integrations', 'Model Orchestration', 'Observability'),
     ),
     2 => array(
-      'image' => '/assets/media/ai-service-visual-5.webp',
+      'image' => 'assets/media/content-strategy-team-planning.webp',
       'title' => 'Privacy & Trust Built In',
       'tags' => array('Security', 'Governance', 'Compliance'),
       'text' => 'Data handling, permissions, and auditability are part of the design—critical for CRM, healthcare, finance, and enterprise use cases.',

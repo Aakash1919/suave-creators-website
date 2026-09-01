@@ -17,13 +17,13 @@ return array(
   'bannerLogos' =>
   array(
     0 => array('src' => '/assets/icons/tech/figma-color-logo.svg', 'alt' => 'Figma logo for Suave Creators UI UX design services', 'label' => 'Figma'),
-    1 => array('src' => '/assets/icons/tech/adobe-photoshop-logo.svg', 'alt' => 'Adobe Photoshop logo for Suave Creators UI design', 'label' => 'Photoshop'),
-    2 => array('src' => '/assets/icons/tech/adobe-illustrator-logo.svg', 'alt' => 'Adobe Illustrator logo for Suave Creators visual design', 'label' => 'Illustrator'),
+    1 => array('src' => '/assets/icons/tech/photoshop-logo.png', 'alt' => 'Adobe Photoshop logo for Suave Creators UI design', 'label' => 'Photoshop'),
+    2 => array('src' => '/assets/icons/tech/illustrator.png', 'alt' => 'Adobe Illustrator logo for Suave Creators visual design', 'label' => 'Illustrator'),
     3 => array('src' => '/assets/icons/tech/sketch-logo.svg', 'alt' => 'Sketch logo for Suave Creators interface design', 'label' => 'Sketch'),
     4 => array('src' => '/assets/icons/tech/framer-logo.svg', 'alt' => 'Framer logo for Suave Creators interactive prototyping', 'label' => 'Framer'),
-    5 => array('src' => '/assets/icons/tech/adobe-xd-logo.svg', 'alt' => 'Adobe XD logo for Suave Creators UX wireframing', 'label' => 'Adobe XD'),
+    5 => array('src' => '/assets/icons/tech/adobe-xd-logo.png', 'alt' => 'Adobe XD logo for Suave Creators UX wireframing', 'label' => 'Adobe XD'),
   ),
-  'bannerBg' => '/assets/background/service-banner-bg.webp',
+  'bannerBg' => '/assets/background/ui-ux banner.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'UI/UX Design Company',
@@ -57,37 +57,37 @@ return array(
   array(
     0 => array(
       'title' => 'User Research & UX Strategy',
-      'image' => '/assets/icons/agile-icon-1.svg',
+      'image' => 'assets/icons/enterprise-technology-icon-1.svg',
       'tags' => array('Research', 'Personas', 'Journey Maps', 'Strategy'),
       'desc' => 'We uncover user goals, pain points, and business constraints through interviews, competitor audits, and journey mapping—then turn insights into a clear UX strategy.',
     ),
     1 => array(
       'title' => 'Wireframing & Information Architecture',
-      'image' => '/assets/icons/agile-icon-2.svg',
+      'image' => 'assets/icons/enterprise-technology-icon-2.svg',
       'tags' => array('Wireframes', 'Flows', 'Sitemaps', 'IA'),
       'desc' => 'We structure content and user flows so navigation feels natural. Low-fidelity wireframes validate layout and hierarchy before visual design begins.',
     ),
     2 => array(
       'title' => 'UI Design & Design Systems',
-      'image' => '/assets/icons/ui-ux-design-icon.svg',
+      'image' => 'assets/icons/enterprise-technology-icon-3.svg',
       'tags' => array('UI Design', 'Brand', 'Components', 'Design System'),
       'desc' => 'Pixel-precise interface design with reusable components, typography, and color systems that keep your product consistent as it scales.',
     ),
     3 => array(
       'title' => 'Interactive Prototyping',
-      'image' => '/assets/icons/agile-icon-3.svg',
+      'image' => 'assets/icons/enterprise-technology-icon-4.svg',
       'tags' => array('Figma', 'Prototype', 'Usability', 'Testing'),
       'desc' => 'Clickable Figma prototypes help stakeholders and users experience the product early—so we refine UX before expensive development cycles.',
     ),
     4 => array(
       'title' => 'Website & Landing Page UX',
-      'image' => '/assets/icons/service-icon-3.svg',
+      'image' => 'assets/icons/crm-service-icon-2.svg',
       'tags' => array('Website', 'Landing Page', 'Conversion', 'CRO'),
       'desc' => 'Conversion-focused website and landing page design that balances brand storytelling with clear CTAs, scannable layout, and mobile-first usability.',
     ),
     5 => array(
       'title' => 'Developer Handoff & Design QA',
-      'image' => '/assets/icons/agile-icon-4.svg',
+      'image' => 'assets/icons/crm-service-icon-1.svg',
       'tags' => array('Handoff', 'Specs', 'QA', 'Collaboration'),
       'desc' => 'We deliver annotated specs, assets, and responsive guidelines, then partner with engineers during build to protect design quality in production.',
     ),
@@ -170,21 +170,21 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/assets/media/startup-mvp-wireframe-planning-session.webp',
+      'image' => 'assets/blog/blogs-hero/03-creative.jpg',
       'title' => 'Research-Led Design Decisions',
       'tags' => array('UX Research', 'Testing', 'Insights'),
       'text' => 'Every layout and interaction is grounded in user needs and business priorities—not guesswork—so your interface solves real problems.',
       'features' => array('User Interviews', 'Usability Testing', 'Competitive Analysis'),
     ),
     1 => array(
-      'image' => '/assets/media/build-strategy-visual.png',
+      'image' => 'assets/media/social-media-marketing-mobile.webp',
       'title' => 'Conversion-Focused Interfaces',
       'tags' => array('CRO', 'CTA', 'Mobile-First'),
       'text' => 'We design for clarity and action: scannable hierarchy, strong CTAs, and mobile-first patterns that guide users toward key outcomes.',
       'features' => array('Landing Page UX', 'Funnel Design', 'Accessibility Basics'),
     ),
     2 => array(
-      'image' => '/assets/media/dev-team-collaborative-coding-session.webp',
+      'image' => 'assets/media/online-reputation-admin-dashboard.webp',
       'title' => 'Design That Developers Can Ship',
       'tags' => array('Handoff', 'Specs', 'Collaboration'),
       'text' => 'Clean Figma files, component systems, and collaborative handoff keep engineering aligned—so the live product matches the approved design.',
