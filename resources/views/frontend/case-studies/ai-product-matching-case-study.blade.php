@@ -24,17 +24,17 @@
     </div>
 
       <figure
-        class="case-study-detail-hero__media cabvi-hero"
-        data-cabvi-hero
-        aria-label="CABVI automated product matching from supplier websites, spreadsheets, and manual checking into an AI workspace"
+        class="case-study-detail-hero__media ai-product-matching-hero"
+        data-ai-product-matching-hero
+        aria-label="AI product matching from supplier websites, spreadsheets, and manual checking into an AI workspace"
       >
         @php
-          $cabviAsset = 'assets/case-studies/cabvi';
+          $aiProductMatchingAsset = 'assets/case-studies/cabvi';
         @endphp
-        <div class="cabvi-hero__scene">
-          <svg class="cabvi-hero__connectors" viewBox="0 0 1540 1140" preserveAspectRatio="none" aria-hidden="true">
+        <div class="ai-product-matching-hero__scene">
+          <svg class="ai-product-matching-hero__connectors" viewBox="0 0 1540 1140" preserveAspectRatio="none" aria-hidden="true">
             <defs>
-              <filter id="cabvi-hero-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="ai-product-matching-hero-glow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3.2" result="blur"/>
                 <feMerge>
                   <feMergeNode in="blur"/>
@@ -42,149 +42,149 @@
                 </feMerge>
               </filter>
             </defs>
-            <path id="cabvi-flow-1" class="cabvi-hero__line cabvi-hero__line--src cabvi-hero__line--src-1" d="M250 250 H 320 V 430"/>
-            <path id="cabvi-flow-2" class="cabvi-hero__line cabvi-hero__line--src cabvi-hero__line--src-2" d="M250 430 H 430"/>
-            <path id="cabvi-flow-3" class="cabvi-hero__line cabvi-hero__line--src cabvi-hero__line--src-3" d="M250 610 H 320 V 430"/>
-            <path id="cabvi-flow-ai" class="cabvi-hero__line cabvi-hero__line--ai" d="M860 430 H 980 V 275 H 1045"/>
-            <path id="cabvi-flow-rec" class="cabvi-hero__line cabvi-hero__line--rec" d="M1100 350 V 455"/>
-            <circle class="cabvi-hero__particle cabvi-hero__particle--1" r="5" cx="0" cy="0" fill="#7dd3fc" filter="url(#cabvi-hero-glow)">
-              <animateMotion dur="2.1s" repeatCount="indefinite" begin="0s"><mpath href="#cabvi-flow-1"/></animateMotion>
+            <path id="ai-product-matching-flow-1" class="ai-product-matching-hero__line ai-product-matching-hero__line--src ai-product-matching-hero__line--src-1" d="M250 250 H 320 V 430"/>
+            <path id="ai-product-matching-flow-2" class="ai-product-matching-hero__line ai-product-matching-hero__line--src ai-product-matching-hero__line--src-2" d="M250 430 H 430"/>
+            <path id="ai-product-matching-flow-3" class="ai-product-matching-hero__line ai-product-matching-hero__line--src ai-product-matching-hero__line--src-3" d="M250 610 H 320 V 430"/>
+            <path id="ai-product-matching-flow-ai" class="ai-product-matching-hero__line ai-product-matching-hero__line--ai" d="M860 430 H 980 V 275 H 1045"/>
+            <path id="ai-product-matching-flow-rec" class="ai-product-matching-hero__line ai-product-matching-hero__line--rec" d="M1100 350 V 455"/>
+            <circle class="ai-product-matching-hero__particle ai-product-matching-hero__particle--1" r="5" cx="0" cy="0" fill="#7dd3fc" filter="url(#ai-product-matching-hero-glow)">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="0s"><mpath href="#ai-product-matching-flow-1"/></animateMotion>
             </circle>
-            <circle class="cabvi-hero__particle cabvi-hero__particle--2" r="3.8" cx="0" cy="0" fill="#93c5fd" filter="url(#cabvi-hero-glow)">
-              <animateMotion dur="2.1s" repeatCount="indefinite" begin="1.05s"><mpath href="#cabvi-flow-1"/></animateMotion>
+            <circle class="ai-product-matching-hero__particle ai-product-matching-hero__particle--2" r="3.8" cx="0" cy="0" fill="#93c5fd" filter="url(#ai-product-matching-hero-glow)">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="1.05s"><mpath href="#ai-product-matching-flow-1"/></animateMotion>
             </circle>
-            <circle class="cabvi-hero__particle cabvi-hero__particle--3" r="5" cx="0" cy="0" fill="#7dd3fc" filter="url(#cabvi-hero-glow)">
-              <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.2s"><mpath href="#cabvi-flow-2"/></animateMotion>
+            <circle class="ai-product-matching-hero__particle ai-product-matching-hero__particle--3" r="5" cx="0" cy="0" fill="#7dd3fc" filter="url(#ai-product-matching-hero-glow)">
+              <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.2s"><mpath href="#ai-product-matching-flow-2"/></animateMotion>
             </circle>
-            <circle class="cabvi-hero__particle cabvi-hero__particle--4" r="3.6" cx="0" cy="0" fill="#93c5fd" filter="url(#cabvi-hero-glow)">
-              <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.1s"><mpath href="#cabvi-flow-2"/></animateMotion>
+            <circle class="ai-product-matching-hero__particle ai-product-matching-hero__particle--4" r="3.6" cx="0" cy="0" fill="#93c5fd" filter="url(#ai-product-matching-hero-glow)">
+              <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.1s"><mpath href="#ai-product-matching-flow-2"/></animateMotion>
             </circle>
-            <circle class="cabvi-hero__particle cabvi-hero__particle--5" r="5" cx="0" cy="0" fill="#7dd3fc" filter="url(#cabvi-hero-glow)">
-              <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.35s"><mpath href="#cabvi-flow-3"/></animateMotion>
+            <circle class="ai-product-matching-hero__particle ai-product-matching-hero__particle--5" r="5" cx="0" cy="0" fill="#7dd3fc" filter="url(#ai-product-matching-hero-glow)">
+              <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.35s"><mpath href="#ai-product-matching-flow-3"/></animateMotion>
             </circle>
-            <circle class="cabvi-hero__particle cabvi-hero__particle--6" r="3.8" cx="0" cy="0" fill="#93c5fd" filter="url(#cabvi-hero-glow)">
-              <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.45s"><mpath href="#cabvi-flow-3"/></animateMotion>
+            <circle class="ai-product-matching-hero__particle ai-product-matching-hero__particle--6" r="3.8" cx="0" cy="0" fill="#93c5fd" filter="url(#ai-product-matching-hero-glow)">
+              <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.45s"><mpath href="#ai-product-matching-flow-3"/></animateMotion>
             </circle>
-            <circle class="cabvi-hero__particle cabvi-hero__particle--ai" r="4.4" cx="0" cy="0" fill="#60a5fa" filter="url(#cabvi-hero-glow)">
-              <animateMotion dur="1.6s" repeatCount="indefinite" begin="0.8s"><mpath href="#cabvi-flow-ai"/></animateMotion>
+            <circle class="ai-product-matching-hero__particle ai-product-matching-hero__particle--ai" r="4.4" cx="0" cy="0" fill="#60a5fa" filter="url(#ai-product-matching-hero-glow)">
+              <animateMotion dur="1.6s" repeatCount="indefinite" begin="0.8s"><mpath href="#ai-product-matching-flow-ai"/></animateMotion>
             </circle>
           </svg>
 
-          <article class="cabvi-hero__source cabvi-hero__source--1">
-            <span class="cabvi-hero__source-icon">
+          <article class="ai-product-matching-hero__source ai-product-matching-hero__source--1">
+            <span class="ai-product-matching-hero__source-icon">
               <img
-                src="{{ asset($cabviAsset.'/cabvi-hero-supplier-icon.webp') }}"
-                alt="Supplier websites icon for CABVI automated product matching"
-                title="Supplier websites icon for CABVI automated product matching"
+                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-supplier-icon.webp') }}"
+                alt="Supplier websites icon for AI product matching"
+                title="Supplier websites icon for AI product matching"
                 width="48"
                 height="48"
                 loading="eager"
                 decoding="async"
               >
             </span>
-            <p class="cabvi-hero__source-label">Supplier<br>Websites</p>
+            <p class="ai-product-matching-hero__source-label">Supplier<br>Websites</p>
           </article>
-          <article class="cabvi-hero__source cabvi-hero__source--2">
-            <span class="cabvi-hero__source-icon">
+          <article class="ai-product-matching-hero__source ai-product-matching-hero__source--2">
+            <span class="ai-product-matching-hero__source-icon">
               <img
-                src="{{ asset($cabviAsset.'/cabvi-hero-spreadsheet-icon.webp') }}"
-                alt="Spreadsheets and records icon for CABVI product matching software"
-                title="Spreadsheets and records icon for CABVI product matching software"
+                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-spreadsheet-icon.webp') }}"
+                alt="Spreadsheets and records icon for AI product matching software"
+                title="Spreadsheets and records icon for AI product matching software"
                 width="48"
                 height="48"
                 loading="eager"
                 decoding="async"
               >
             </span>
-            <p class="cabvi-hero__source-label">Spreadsheets<br>&amp; Records</p>
+            <p class="ai-product-matching-hero__source-label">Spreadsheets<br>&amp; Records</p>
           </article>
-          <article class="cabvi-hero__source cabvi-hero__source--3">
-            <span class="cabvi-hero__source-icon">
+          <article class="ai-product-matching-hero__source ai-product-matching-hero__source--3">
+            <span class="ai-product-matching-hero__source-icon">
               <img
-                src="{{ asset($cabviAsset.'/cabvi-hero-manual-checking-icon.webp') }}"
-                alt="Manual checking icon for CABVI procurement review workflow"
-                title="Manual checking icon for CABVI procurement review workflow"
+                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-manual-checking-icon.webp') }}"
+                alt="Manual checking icon for AI product matching procurement review workflow"
+                title="Manual checking icon for AI product matching procurement review workflow"
                 width="48"
                 height="48"
                 loading="eager"
                 decoding="async"
               >
             </span>
-            <p class="cabvi-hero__source-label">Manual<br>Checking</p>
+            <p class="ai-product-matching-hero__source-label">Manual<br>Checking</p>
           </article>
 
-          <div class="cabvi-hero__dashboard">
-            <header class="cabvi-hero__search">
-              <span class="cabvi-hero__search-icon">
+          <div class="ai-product-matching-hero__dashboard">
+            <header class="ai-product-matching-hero__search">
+              <span class="ai-product-matching-hero__search-icon">
                 <img
-                  src="{{ asset($cabviAsset.'/cabvi-hero-search-field-icon.webp') }}"
-                  alt="Search field icon for the CABVI product matching dashboard"
-                  title="Search field icon for the CABVI product matching dashboard"
+                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-search-field-icon.webp') }}"
+                  alt="Search field icon for the AI product matching dashboard"
+                  title="Search field icon for the AI product matching dashboard"
                   width="20"
                   height="20"
                   loading="eager"
                   decoding="async"
                 >
               </span>
-              <span class="cabvi-hero__search-line" aria-hidden="true"></span>
+              <span class="ai-product-matching-hero__search-line" aria-hidden="true"></span>
             </header>
-            <div class="cabvi-hero__rows">
-              <div class="cabvi-hero__row cabvi-hero__row--1">
-                <span class="cabvi-hero__thumb">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for CABVI catalog matching" title="Product row placeholder icon for CABVI catalog matching" width="24" height="24" loading="eager" decoding="async">
+            <div class="ai-product-matching-hero__rows">
+              <div class="ai-product-matching-hero__row ai-product-matching-hero__row--1">
+                <span class="ai-product-matching-hero__thumb">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
-                <span class="cabvi-hero__bars" aria-hidden="true"><i></i><i></i></span>
-                <span class="cabvi-hero__tick">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for CABVI product matching" title="Match confirmed placeholder icon for CABVI product matching" width="24" height="24" loading="eager" decoding="async">
-                </span>
-              </div>
-              <div class="cabvi-hero__row cabvi-hero__row--2">
-                <span class="cabvi-hero__thumb">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for CABVI catalog matching" title="Product row placeholder icon for CABVI catalog matching" width="24" height="24" loading="eager" decoding="async">
-                </span>
-                <span class="cabvi-hero__bars" aria-hidden="true"><i></i><i></i></span>
-                <span class="cabvi-hero__tick">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for CABVI product matching" title="Match confirmed placeholder icon for CABVI product matching" width="24" height="24" loading="eager" decoding="async">
+                <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
+                <span class="ai-product-matching-hero__tick">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
-              <div class="cabvi-hero__row cabvi-hero__row--3 cabvi-hero__row--review">
-                <span class="cabvi-hero__thumb">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for CABVI catalog matching" title="Product row placeholder icon for CABVI catalog matching" width="24" height="24" loading="eager" decoding="async">
+              <div class="ai-product-matching-hero__row ai-product-matching-hero__row--2">
+                <span class="ai-product-matching-hero__thumb">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
-                <span class="cabvi-hero__bars" aria-hidden="true"><i></i><i></i></span>
-                <span class="cabvi-hero__query">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-query-icon.png') }}" alt="Close-call review placeholder icon for CABVI AI matching" title="Close-call review placeholder icon for CABVI AI matching" width="24" height="24" loading="eager" decoding="async">
-                </span>
-              </div>
-              <div class="cabvi-hero__row cabvi-hero__row--4">
-                <span class="cabvi-hero__thumb">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for CABVI catalog matching" title="Product row placeholder icon for CABVI catalog matching" width="24" height="24" loading="eager" decoding="async">
-                </span>
-                <span class="cabvi-hero__bars" aria-hidden="true"><i></i><i></i></span>
-                <span class="cabvi-hero__tick">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for CABVI product matching" title="Match confirmed placeholder icon for CABVI product matching" width="24" height="24" loading="eager" decoding="async">
+                <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
+                <span class="ai-product-matching-hero__tick">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
-              <div class="cabvi-hero__row cabvi-hero__row--5">
-                <span class="cabvi-hero__thumb">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for CABVI catalog matching" title="Product row placeholder icon for CABVI catalog matching" width="24" height="24" loading="eager" decoding="async">
+              <div class="ai-product-matching-hero__row ai-product-matching-hero__row--3 ai-product-matching-hero__row--review">
+                <span class="ai-product-matching-hero__thumb">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
-                <span class="cabvi-hero__bars" aria-hidden="true"><i></i><i></i></span>
-                <span class="cabvi-hero__tick">
-                  <img src="{{ asset($cabviAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for CABVI product matching" title="Match confirmed placeholder icon for CABVI product matching" width="24" height="24" loading="eager" decoding="async">
+                <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
+                <span class="ai-product-matching-hero__query">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-query-icon.png') }}" alt="Close-call review placeholder icon for AI product matching" title="Close-call review placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                </span>
+              </div>
+              <div class="ai-product-matching-hero__row ai-product-matching-hero__row--4">
+                <span class="ai-product-matching-hero__thumb">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                </span>
+                <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
+                <span class="ai-product-matching-hero__tick">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                </span>
+              </div>
+              <div class="ai-product-matching-hero__row ai-product-matching-hero__row--5">
+                <span class="ai-product-matching-hero__thumb">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                </span>
+                <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
+                <span class="ai-product-matching-hero__tick">
+                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
             </div>
           </div>
 
-          <div class="cabvi-hero__ai">
-            {{-- <span class="cabvi-hero__ai-glow" aria-hidden="true"></span> --}}
-            {{-- <span class="cabvi-hero__ai-scan" aria-hidden="true"></span> --}}
-            <span class="cabvi-hero__ai-icon">
+          <div class="ai-product-matching-hero__ai">
+            {{-- <span class="ai-product-matching-hero__ai-glow" aria-hidden="true"></span> --}}
+            {{-- <span class="ai-product-matching-hero__ai-scan" aria-hidden="true"></span> --}}
+            <span class="ai-product-matching-hero__ai-icon">
               <img
-                src="{{ asset($cabviAsset.'/cabvi-hero-ai-icon.webp') }}"
-                alt="AI processing icon for CABVI close-call product matching"
-                title="AI processing icon for CABVI close-call product matching"
+                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-ai-icon.webp') }}"
+                alt="AI processing icon for AI product matching close-call review"
+                title="AI processing icon for AI product matching close-call review"
                 width="120"
                 height="120"
                 loading="eager"
@@ -193,66 +193,66 @@
             </span>
           </div>
 
-          <article class="cabvi-hero__rec">
-            <p class="cabvi-hero__rec-title">Recommendation</p>
-            <span class="cabvi-hero__rec-lines" aria-hidden="true"><i></i><i></i></span>
-            <p class="cabvi-hero__match">
-              <span class="cabvi-hero__match-icon">
-                <img src="{{ asset($cabviAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match result placeholder icon for CABVI product recommendation" title="Match result placeholder icon for CABVI product recommendation" width="20" height="20" loading="eager" decoding="async">
+          <article class="ai-product-matching-hero__rec">
+            <p class="ai-product-matching-hero__rec-title">Recommendation</p>
+            <span class="ai-product-matching-hero__rec-lines" aria-hidden="true"><i></i><i></i></span>
+            <p class="ai-product-matching-hero__match">
+              <span class="ai-product-matching-hero__match-icon">
+                <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match result placeholder icon for AI product matching recommendation" title="Match result placeholder icon for AI product matching recommendation" width="20" height="20" loading="eager" decoding="async">
               </span>
               Match
             </p>
           </article>
 
-          <div class="cabvi-hero__features">
-            <article class="cabvi-hero__feature cabvi-hero__feature--1">
-              <span class="cabvi-hero__feature-icon">
+          <div class="ai-product-matching-hero__features">
+            <article class="ai-product-matching-hero__feature ai-product-matching-hero__feature--1">
+              <span class="ai-product-matching-hero__feature-icon">
                 <img
-                  src="{{ asset($cabviAsset.'/cabvi-hero-search-icon.png') }}"
-                  alt="Automated search icon for CABVI catalog matching software"
-                  title="Automated search icon for CABVI catalog matching software"
+                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-search-icon.png') }}"
+                  alt="Automated search icon for AI product matching software"
+                  title="Automated search icon for AI product matching software"
                   width="32"
                   height="32"
                   loading="eager"
                   decoding="async"
                 >
               </span>
-              <p class="cabvi-hero__feature-label">Automated search</p>
+              <p class="ai-product-matching-hero__feature-label">Automated search</p>
             </article>
-            <article class="cabvi-hero__feature cabvi-hero__feature--2">
-              <span class="cabvi-hero__feature-icon">
+            <article class="ai-product-matching-hero__feature ai-product-matching-hero__feature--2">
+              <span class="ai-product-matching-hero__feature-icon">
                 <img
-                  src="{{ asset($cabviAsset.'/cabvi-hero-robot-icon.png') }}"
-                  alt="AI on close calls icon for CABVI product qualification"
-                  title="AI on close calls icon for CABVI product qualification"
+                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-robot-icon.png') }}"
+                  alt="AI on close calls icon for AI product matching qualification"
+                  title="AI on close calls icon for AI product matching qualification"
                   width="32"
                   height="32"
                   loading="eager"
                   decoding="async"
                 >
               </span>
-              <p class="cabvi-hero__feature-label">AI on Close Calls</p>
+              <p class="ai-product-matching-hero__feature-label">AI on Close Calls</p>
             </article>
-            <article class="cabvi-hero__feature cabvi-hero__feature--3">
-              <span class="cabvi-hero__feature-icon">
+            <article class="ai-product-matching-hero__feature ai-product-matching-hero__feature--3">
+              <span class="ai-product-matching-hero__feature-icon">
                 <img
-                  src="{{ asset($cabviAsset.'/cabvi-hero-shield-icon.png') }}"
-                  alt="Proof and decision icon for CABVI procurement workspace"
-                  title="Proof and decision icon for CABVI procurement workspace"
+                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-shield-icon.png') }}"
+                  alt="Proof and decision icon for AI product matching procurement workspace"
+                  title="Proof and decision icon for AI product matching procurement workspace"
                   width="32"
                   height="32"
                   loading="eager"
                   decoding="async"
                 >
               </span>
-              <p class="cabvi-hero__feature-label">One Place to Decide with Proof</p>
+              <p class="ai-product-matching-hero__feature-label">One Place to Decide with Proof</p>
             </article>
           </div>
         </div>
       </figure>
       <script>
         (function () {
-          var el = document.querySelector('[data-cabvi-hero]');
+          var el = document.querySelector('[data-ai-product-matching-hero]');
           if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
           el.classList.add('is-armed');
         })();
@@ -348,8 +348,8 @@
         <figure class="case-study-visual case-study-visual--photo">
           <img
             src="{{ asset('assets/case-studies/cabvi/cabvi_left.webp') }}"
-            alt="CABVI automated supplier catalog search screenshot for product matching software"
-            title="CABVI automated supplier catalog search screenshot for product matching software"
+            alt="AI product matching automated supplier catalog search screenshot for product matching software"
+            title="AI product matching automated supplier catalog search screenshot for product matching software"
             width="960"
             height="720"
             loading="eager"
@@ -389,8 +389,8 @@
         <figure class="case-study-visual case-study-visual--photo">
           <img
             src="{{ asset('assets/case-studies/cabvi/cabvi_right.webp') }}"
-            alt="CABVI AI close-call review screenshot for product matching software"
-            title="CABVI AI close-call review screenshot for product matching software"
+            alt="AI product matching close-call review screenshot for product matching software"
+            title="AI product matching close-call review screenshot for product matching software"
             width="960"
             height="720"
             loading="eager"
@@ -422,16 +422,16 @@
 @push('scripts')
 <script>
   (function () {
-    var root = document.querySelector('[data-cabvi-hero]');
+    var root = document.querySelector('[data-ai-product-matching-hero]');
     if (!root) return;
 
-    var svg = root.querySelector('.cabvi-hero__connectors');
+    var svg = root.querySelector('.ai-product-matching-hero__connectors');
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var started = false;
     var resizeTimer = 0;
 
     function point(el, side) {
-      var scene = root.querySelector('.cabvi-hero__scene');
+      var scene = root.querySelector('.ai-product-matching-hero__scene');
       var sr = scene.getBoundingClientRect();
       var r = el.getBoundingClientRect();
       var x = r.left - sr.left;
@@ -474,7 +474,7 @@
     }
 
     function layoutConnectors() {
-      var scene = root.querySelector('.cabvi-hero__scene');
+      var scene = root.querySelector('.ai-product-matching-hero__scene');
       if (!scene || !svg) return;
 
       var sr = scene.getBoundingClientRect();
@@ -482,13 +482,13 @@
       var h = Math.max(1, Math.round(sr.height));
       svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
 
-      var dash = root.querySelector('.cabvi-hero__dashboard');
-      var review = root.querySelector('.cabvi-hero__row--review');
-      var ai = root.querySelector('.cabvi-hero__ai-icon');
-      var rec = root.querySelector('.cabvi-hero__rec');
-      var src1 = root.querySelector('.cabvi-hero__source--1 .cabvi-hero__source-icon');
-      var src2 = root.querySelector('.cabvi-hero__source--2 .cabvi-hero__source-icon');
-      var src3 = root.querySelector('.cabvi-hero__source--3 .cabvi-hero__source-icon');
+      var dash = root.querySelector('.ai-product-matching-hero__dashboard');
+      var review = root.querySelector('.ai-product-matching-hero__row--review');
+      var ai = root.querySelector('.ai-product-matching-hero__ai-icon');
+      var rec = root.querySelector('.ai-product-matching-hero__rec');
+      var src1 = root.querySelector('.ai-product-matching-hero__source--1 .ai-product-matching-hero__source-icon');
+      var src2 = root.querySelector('.ai-product-matching-hero__source--2 .ai-product-matching-hero__source-icon');
+      var src3 = root.querySelector('.ai-product-matching-hero__source--3 .ai-product-matching-hero__source-icon');
       if (!dash || !review || !ai || !rec || !src1 || !src2 || !src3) return;
 
       var from1 = point(src1, 'right');
@@ -498,18 +498,18 @@
       var busX = from2.x + Math.max(14, w * 0.03);
       var joinY = from2.y;
 
-      svg.querySelector('#cabvi-flow-1').setAttribute('d', elbowHV(from1, { x: busX, y: joinY }));
-      svg.querySelector('#cabvi-flow-2').setAttribute('d', elbowHV(from2, { x: dashIn.x, y: joinY }));
-      svg.querySelector('#cabvi-flow-3').setAttribute('d', elbowHV(from3, { x: busX, y: joinY }));
+      svg.querySelector('#ai-product-matching-flow-1').setAttribute('d', elbowHV(from1, { x: busX, y: joinY }));
+      svg.querySelector('#ai-product-matching-flow-2').setAttribute('d', elbowHV(from2, { x: dashIn.x, y: joinY }));
+      svg.querySelector('#ai-product-matching-flow-3').setAttribute('d', elbowHV(from3, { x: busX, y: joinY }));
 
       var fromReview = point(review, 'right');
       var aiIn = point(ai, 'left');
-      svg.querySelector('#cabvi-flow-ai').setAttribute('d', elbowHVH(fromReview, aiIn));
+      svg.querySelector('#ai-product-matching-flow-ai').setAttribute('d', elbowHVH(fromReview, aiIn));
 
       var fromAi = point(ai, 'bottom');
       var toRec = point(rec, 'top');
       toRec.x = fromAi.x;
-      svg.querySelector('#cabvi-flow-rec').setAttribute(
+      svg.querySelector('#ai-product-matching-flow-rec').setAttribute(
         'd',
         'M' + fromAi.x.toFixed(1) + ' ' + fromAi.y.toFixed(1) + ' V' + toRec.y.toFixed(1)
       );

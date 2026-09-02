@@ -704,24 +704,14 @@ img, video, canvas{
 
 .core-value-card__image{
   aspect-ratio: 0.84;
-  background: #11142b;
+  /* background: #11142b; */
   border-radius: 8px;
-  box-shadow: 0 18px 35px rgb(0 0 0 / 18%);
+  /* box-shadow: 0 18px 35px rgb(0 0 0 / 18%); */
   margin-top: auto;
   overflow: hidden;
 }
 
 .core-value-card__image img{
-  display: block;
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-core-value-card__image1{
-  height: 50%;
-
-}
-.core-value-card__image1 img{
   display: block;
   height: 100%;
   object-fit: cover;
@@ -2389,6 +2379,10 @@ body.mobile-nav-open{
 
 .core-values__grid--3{
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.core-values__grid--3 .core-value-card__image{
+  aspect-ratio: 1.68;
 }
 
 .core-values__slider{

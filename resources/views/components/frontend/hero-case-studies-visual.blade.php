@@ -216,8 +216,8 @@
           grabIndex: 0,
           delta: { x: -20, y: -16 }
         },
-        'cabvi-product-matching': {
-          theme: 'cabvi',
+        'ai-product-matching': {
+          theme: 'ai-product-matching',
           pattern: 'lift',
           grabIndex: 3,
           delta: { x: 24, y: -12 }

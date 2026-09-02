@@ -20,7 +20,7 @@ return array(
     1 => array('src' => '/assets/icons/tech/anthropic.png', 'alt' => 'Anthropic logo for Suave Creators Claude AI integrations', 'label' => 'Anthropic'),
     2 => array('src' => '/assets/icons/tech/Vapi.png', 'alt' => 'Vapi logo for Suave Creators voice AI agents', 'label' => 'Vapi'),
     3 => array('src' => '/assets/icons/tech/voice-assistant.png', 'alt' => 'Voice agents icon for Suave Creators conversational AI', 'label' => 'Voice Agents'),
-    4 => array('src' => '/assets/icons/robot.png', 'alt' => 'Chatbots icon for Suave Creators AI assistant development', 'label' => 'Chatbots'),
+    4 => array('src' => '/assets/case-studies/cabvi/cabvi-hero-robot-icon.png', 'alt' => 'Chatbots icon for Suave Creators AI assistant development', 'label' => 'Chatbots'),
     5 => array('src' => '/assets/icons/tech/google-gemini-icon.png', 'alt' => 'Google Gemini logo for Suave Creators multimodal AI solutions', 'label' => 'Gemini'),
   ),
   'bannerBg' => '/assets/background/banner-ai-solution.png',
