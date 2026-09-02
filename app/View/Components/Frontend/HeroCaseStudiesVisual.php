@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 /**
- * Animated case-study mosaic (metric + photo + chart tiles + cursor).
+ * Animated case-study mosaic (metric image + photo + chart tiles + cursor).
  *
  * Drop-in on any marketing page — defaults to published catalog scenes:
  *
@@ -69,6 +69,7 @@ class HeroCaseStudiesVisual extends Component
             $secondary = is_array($item['secondary'] ?? null) ? $item['secondary'] : [];
             $bars = is_array($item['bars'] ?? null) ? array_values($item['bars']) : [42, 68, 92, 58, 76];
             $chartImage = trim((string) ($item['chart_image'] ?? ''));
+            $metricImage = trim((string) ($item['metric_image'] ?? ''));
 
             $scenes[] = [
                 'slug' => (string) ($item['slug'] ?? ''),
@@ -87,6 +88,7 @@ class HeroCaseStudiesVisual extends Component
                 'brand_image' => $brand !== '' ? $brand : $photo,
                 'photo_image' => $photo,
                 'chart_image' => $chartImage !== '' ? $chartImage : null,
+                'metric_image' => $metricImage !== '' ? $metricImage : $photo,
                 'bars' => array_map(static fn ($h): int => (int) $h, array_slice(array_pad($bars, 5, 55), 0, 5)),
             ];
         }

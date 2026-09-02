@@ -20,7 +20,7 @@ class CaseStudySupport
         'suave-crm-tasks-case-study' => 'tasks-case-study',
         'teerrath-spiritual-commerce' => 'teerrath-case-study',
         'appointment-insurance-platform-case-study' => 'appointment-insurance-case-study',
-        'cabvi-product-matching' => 'cabvi-case-study',
+        'AI-product-matching' => 'ai-product-matching-case-study',
     ];
 
     /**
@@ -118,6 +118,7 @@ class CaseStudySupport
                 'brand_image' => $brandImage,
                 'photo_image' => $photoImage,
                 'chart_image' => $extraImage,
+                'metric_image' => self::heroMetricImageForSlug($slug),
                 'bars' => self::heroBarsFromResults($results),
             ];
 
@@ -148,39 +149,35 @@ class CaseStudySupport
     {
         $map = [
             'turbo-trans-corporation-case-study' => [
-                'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
-                'assets/case-studies/turbo-trans/turbo-trans-dispatch-fleet-tile.webp',
-                'assets/case-studies/turbo-trans/turbo-trans-pipeline-chart-tile.webp',
+               'assets/case-studies/turbo-trans/turbo-trans-corporation-banner1.webp',
+                'assets/case-studies/turbo-trans/turbo-banner2.png',
+                'assets/case-studies/turbo-trans/Turbo-banner03.webp',
             ],
             'ai-sales-coaching-platform-case-study' => [
-                'assets/case-studies/ai-sales-coaching/ai-sales-coach-brand-mark.webp',
-                'assets/case-studies/ai-sales-coaching/ai-sales-coach-live-practice-tile.webp',
-                'assets/case-studies/ai-sales-coaching/ai-sales-coach-score-chart-tile.webp',
+                'assets/case-studies/ai-sales-coaching/AI-sales-coaching1.webp',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coaching2 copy.png',
+                'assets/case-studies/ai-sales-coaching/ai-salesCoaching3.webp',
             ],
             'suave-crm-outreach-case-study' => [
-                'assets/case-studies/suave-crm-outreach/outreach-crm-brand-mark.webp',
-                'assets/case-studies/suave-crm-outreach/outreach-map-discovery-tile.webp',
-                'assets/case-studies/suave-crm-outreach/outreach-ai-analysis-tile.webp',
+                'assets/case-studies/suave-crm-outreach/outbound-banner1.webp',
+                'assets/case-studies/suave-crm-outreach/b2b-outreach-crm.webp',
+                'assets/case-studies/suave-crm-outreach/B2B-crm-outreach3.webp',
             ],
             'suave-crm-tasks-case-study' => [
-                'assets/case-studies/suave-crm-tasks/tasks-crm-brand-mark.webp',
-                'assets/case-studies/suave-crm-tasks/tasks-kanban-board-tile.webp',
-                'assets/case-studies/suave-crm-tasks/tasks-drawer-metric-tile.webp',
+                'assets/case-studies/suave-crm-tasks/suave-crm-banner1.webp',
+                'assets/case-studies/suave-crm-tasks/suave-crm-banner2.webp',
+                'assets/case-studies/suave-crm-tasks/suave-crm-banner30.png',
             ],
             'appointment-insurance-platform-case-study' => [
-                'assets/case-studies/shownoshow/show-check-brand-mark.webp',
-                'assets/case-studies/shownoshow/show-check-confirmed-tile.webp',
-                'assets/case-studies/shownoshow/show-check-savings-chart-tile.webp',
+                'assets/case-studies/shownoshow/appointment-banner1.webp',
+                'assets/case-studies/shownoshow/appointment-banner2.webp',
+                'assets/case-studies/shownoshow/appointment-banner6.png',
             ],
-            'teerrath-spiritual-commerce' => [
-                'assets/case-studies/teerrath/teerrath-brand-mark.webp',
-                'assets/case-studies/teerrath/teerrath-energy-scan-tile.webp',
-                'assets/case-studies/teerrath/teerrath-insight-chart-tile.webp',
-            ],
-            'cabvi-product-matching' => [
-                'assets/case-studies/cabvi/cabvi-brand-mark.webp',
-                'assets/case-studies/cabvi/cabvi-product-matching-tile.webp',
-                'assets/case-studies/cabvi/cabvi-efficiency-chart-tile.webp',
+         
+            'AI-product-matching' => [
+                'assets/case-studies/cabvi/product-matching-banner1.webp',
+                'assets/case-studies/cabvi/AI-product-automation.webp',
+                'assets/case-studies/cabvi/Automated-ai3.webp',
             ],
         ];
 
@@ -207,6 +204,26 @@ class CaseStudySupport
         }
 
         return $urls;
+    }
+
+    /**
+     * Full-bleed image for the large mosaic metric tile. Swap placeholder paths per slug.
+     */
+    protected static function heroMetricImageForSlug(string $slug): string
+    {
+        $placeholder = 'assets/case-studies/hero-cs-metric-placeholder.svg';
+
+        $map = [
+            'turbo-trans-corporation-case-study' =>'assets/case-studies/turbo-trans/turbo-trans-corporation-banner1.webp',
+            'ai-sales-coaching-platform-case-study' => 'assets/case-studies/ai-sales-coaching/AI-sales-coaching1.webp',
+            'suave-crm-outreach-case-study' => 'assets/case-studies/suave-crm-outreach/outbound-banner.webp',
+            'suave-crm-tasks-case-study' =>  'assets/case-studies/suave-crm-tasks/suave-crm-banner1.webp',
+            'appointment-insurance-platform-case-study' =>'assets/case-studies/shownoshow/appointment-banner1.webp',
+            'teerrath-spiritual-commerce' => $placeholder,
+            'AI-product-matching' =>'assets/case-studies/cabvi/product-matching-banner1.webp',
+        ];
+
+        return self::publicImageUrl($map[$slug] ?? $placeholder);
     }
 
     /**
@@ -359,7 +376,7 @@ class CaseStudySupport
     {
         return [
             [
-                'src' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'src' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
                 'alt' => 'Show No Show event booking product banner by Suave Creators',
                 'fan_rotate' => -1.6,
                 'fan_y' => -18,
@@ -604,7 +621,8 @@ class CaseStudySupport
                 'slug' => 'appointment-insurance-platform-case-study',
                 'title' => 'Appointment Insurance That Makes Showing Up the Default',
                 'status' => 'published',
-                'image' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'image' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
+
                 'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
                 'industry' => 'Appointment Scheduling / Fintech',
@@ -626,11 +644,11 @@ class CaseStudySupport
                 ],
             ],
             [
-                'slug' => 'cabvi-product-matching',
-                'title' => 'CABVI — From Manual Product Matching to an Automated AI Workspace',
+                'slug' => 'AI-product-matching',
+                'title' => 'AI Product Matching to an Automated AI Workspace',
                 'status' => 'published',
                 'image' => 'assets/case-studies/cabvi/cabvi-logo.webp',
-                'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
+                'short_description' => 'AI product matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
                 'listing_subtitle' => 'Automated AI Product Matching',
                 'industry' => 'Nonprofit / Procurement',
                 'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],

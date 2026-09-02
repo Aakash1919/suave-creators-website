@@ -35,20 +35,16 @@
           style="--hero-cs-i: 0"
           aria-label="{{ $scene['title'] }}: {{ $scene['primary']['value'] }} {{ $scene['primary']['label_short'] }}">
           <span class="hero-cs-visual__fade" data-hero-cs-fade>
-            <span class="hero-cs-visual__metric-value" data-hero-cs-primary-value>{{ $scene['primary']['value'] }}</span>
-            <span class="hero-cs-visual__metric-label" data-hero-cs-primary-label>{{ $scene['primary']['label_short'] }}</span>
-            <span class="hero-cs-visual__brand">
-              <img
-                src="{{ $scene['brand_image'] }}"
-                alt="{{ $scene['alt'] }}"
-                title="{{ $scene['alt'] }}"
-                class="hero-cs-visual__brand-mark"
-                data-hero-cs-brand
-                width="72"
-                height="28"
-                decoding="async"
-                loading="eager">
-            </span>
+            <img
+              src="{{ $scene['metric_image'] }}"
+              alt="{{ $scene['alt'] }}"
+              title="{{ $scene['alt'] }}"
+              class="hero-cs-visual__metric-img"
+              data-hero-cs-metric-img
+              width="200"
+              height="220"
+              decoding="async"
+              loading="eager">
           </span>
         </a>
 
@@ -141,26 +137,15 @@
 
       <div class="hero-cs-visual__cursor" data-hero-cs-cursor aria-hidden="true">
         <span class="hero-cs-visual__cursor-hand">
-          <svg viewBox="0 0 24 28" width="28" height="32" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="heroCsCursorFill" x1="3" y1="2" x2="20" y2="26" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#2F69FB"/>
-                <stop offset="1" stop-color="#C56BFF"/>
-              </linearGradient>
-            </defs>
-            <path
-              d="M4.2 2.2 19.5 12.4c.7.45.35 1.55-.5 1.55h-6.1l3.25 8.2c.25.65-.15 1.35-.85 1.5l-2.35.5c-.7.15-1.4-.3-1.55-.95L8.2 15.3 4.55 19.6c-.55.6-1.55.2-1.55-.6V3.35c0-.85.95-1.35 1.2-1.15Z"
-              fill="url(#heroCsCursorFill)"
-              stroke="#00003f"
-              stroke-width="1.35"
-              stroke-linejoin="round"/>
-            <path
-              d="M6.4 4.8 14.8 10.4"
-              stroke="#ffffff"
-              stroke-opacity=".5"
-              stroke-width="1.35"
-              stroke-linecap="round"/>
-          </svg>
+          <img
+            src="{{ asset('assets/hero/hero-cursor-sparkle-arrow.webp') }}"
+            alt="Sparkle cursor arrow for Suave Creators homepage hero case study animation"
+            title="Sparkle cursor arrow for Suave Creators homepage hero case study animation"
+            class="hero-cs-visual__cursor-img"
+            width="28"
+            height="32"
+            decoding="async"
+            loading="eager">
         </span>
       </div>
     </div>
@@ -216,8 +201,8 @@
           grabIndex: 0,
           delta: { x: -20, y: -16 }
         },
-        'cabvi-product-matching': {
-          theme: 'cabvi',
+        'ai-product-matching': {
+          theme: 'ai-product-matching',
           pattern: 'lift',
           grabIndex: 3,
           delta: { x: 24, y: -12 }
@@ -358,7 +343,7 @@
 
       function preloadScene(scene) {
         if (!scene) return;
-        [scene.brand_image, scene.photo_image, scene.chart_image].forEach(function (src) {
+        [scene.metric_image, scene.photo_image, scene.chart_image].forEach(function (src) {
           if (!src) return;
           var img = new Image();
           img.decoding = 'async';
@@ -417,7 +402,7 @@
           chartTile: root.querySelector('[data-hero-cs-chart-tile]'),
           secondaryTile: root.querySelector('[data-hero-cs-tile="3"]'),
           tagTile: root.querySelector('[data-hero-cs-tile="4"]'),
-          brand: root.querySelector('[data-hero-cs-brand]'),
+          metricImg: root.querySelector('[data-hero-cs-metric-img]'),
           photo: root.querySelector('[data-hero-cs-photo]'),
           chartImg: root.querySelector('[data-hero-cs-chart-img]'),
           bars: root.querySelectorAll('[data-hero-cs-bar]')
@@ -476,7 +461,7 @@
           }
           if (refs.tagTile) refs.tagTile.setAttribute('aria-label', scene.tag || '');
 
-          setImg(refs.brand, scene.brand_image, alt);
+          setImg(refs.metricImg, scene.metric_image || scene.photo_image, alt);
           setImg(refs.photo, scene.photo_image, alt);
 
           if (refs.chartImg) {

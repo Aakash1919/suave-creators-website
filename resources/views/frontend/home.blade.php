@@ -3,8 +3,8 @@
 @section('content')
 <!-- Hero Section Start -->
 <section
-  class="relative z-10 w-full pb-12 pt-8 md:min-h-[440px] md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container">
-  <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
+  class="home-hero relative z-10 w-full pb-12 pt-8 md:min-h-[440px] md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container">
+  <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-8 lg:gap-12">
     <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[520px]">
       <p
         class="inline-block mb-2 bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent text-sm font-bold uppercase tracking-wide pragati-narrow-regular">
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="relative z-10 flex w-full min-w-0 items-center justify-start lg:justify-end">
+    <div class="relative z-10 flex w-full min-w-0 items-center justify-start md:justify-end">
       <x-frontend.hero-case-studies-visual />
     </div>
   </div>
