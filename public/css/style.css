@@ -229,10 +229,23 @@
 }
 
 .hero-cs-visual__tile--metric {
-  background: #fff;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 18px 16px 14px;
+  background: #010640;
+  padding: 0;
+}
+
+.hero-cs-visual__metric-img {
+  display: block;
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--metric:hover .hero-cs-visual__metric-img {
+  transform: scale(1.035);
 }
 
 .hero-cs-visual__metric-value {
@@ -284,14 +297,17 @@
 }
 
 .hero-cs-visual__tile--photo {
-  background: var(--hero-cs-cream);
+  background: #010640;
+  padding: 0;
 }
 
 .hero-cs-visual__photo-img {
   display: block;
   height: 100%;
+  inset: 0;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
+  position: absolute;
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
   width: 100%;
 }
@@ -302,6 +318,10 @@
 
 .hero-cs-visual__tile--photo .hero-cs-visual__fade {
   display: block;
+  height: 100%;
+  /* Keep static so the absolute image positions against the tile. */
+  position: static;
+  width: 100%;
 }
 
 .hero-cs-visual__tile--chart {
@@ -357,10 +377,13 @@
 }
 
 .hero-cs-visual__chart-img {
-  border-radius: 16px;
+  border-radius: 0;
   display: none;
   height: 100%;
+  inset: 0;
   object-fit: cover;
+  object-position: center;
+  position: absolute;
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
 }
@@ -370,7 +393,19 @@
 }
 
 .hero-cs-visual__tile--chart.has-chart-image {
+  align-items: stretch;
+  background: #010640;
+  justify-content: flex-start;
   padding: 0;
+}
+
+.hero-cs-visual__tile--chart.has-chart-image .hero-cs-visual__fade {
+  display: block;
+  height: 100%;
+  min-height: 100%;
+  /* Keep static so the absolute image positions against the tile. */
+  position: static;
+  width: 100%;
 }
 
 .hero-cs-visual__tile--chart.has-chart-image .hero-cs-visual__chart-panel {
@@ -444,9 +479,12 @@
   gap: 10px;
 }
 
-.hero-cs-visual__tile--metric .hero-cs-visual__fade,
-.hero-cs-visual__tile--metric-sm .hero-cs-visual__fade {
-  justify-content: space-between;
+.hero-cs-visual__tile--metric .hero-cs-visual__fade {
+  display: block;
+  height: 100%;
+  /* Keep static so the absolute image positions against the tile. */
+  position: static;
+  width: 100%;
 }
 
 .hero-cs-visual__tile--metric-sm .hero-cs-visual__fade {
@@ -615,8 +653,11 @@
   transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hero-cs-visual__cursor svg {
+.hero-cs-visual__cursor-img {
   display: block;
+  height: 32px;
+  width: 28px;
+  object-fit: contain;
 }
 
 .hero-cs-visual.is-intro .hero-cs-visual__tile {
