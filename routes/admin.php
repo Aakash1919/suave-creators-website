@@ -38,6 +38,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::middleware('permission:blogs.create')->group(function () {
         Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
         Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
+        Route::post('/blogs/generate-draft', [BlogController::class, 'generateDraft'])->name('blogs.generate-draft');
     });
 
     Route::middleware('permission:blogs.update')->group(function () {

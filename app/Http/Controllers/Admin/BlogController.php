@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BlogStoreRequest;
 use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
+use App\Services\BlogDraftGenerationService;
 use App\Services\BlogService;
 use App\Services\BlogSeoMetaGenerationService;
 use App\Support\Admin\BlogCompleteness;
@@ -127,6 +128,31 @@ class BlogController extends Controller
         $this->blogs->delete($blog);
 
         return $this->adminSuccess($request, 'Blog', 'deleted', 'admin.blogs.index');
+    }
+
+    /**
+     * Generate one blog draft manually from the blogs index page.
+     */
+    public function generateDraft(Request $request, BlogDraftGenerationService $drafts): JsonResponse|RedirectResponse
+    {
+        try {
+            $blog = $drafts->generateDraft();
+        } catch (RuntimeException $e) {
+            return $this->adminError($request, $e->getMessage());
+        } catch (Throwable $e) {
+            report($e);
+
+            return $this->adminError($request, 'Unable to generate blog draft right now. Please try again.');
+        }
+
+        return $this->adminSuccess(
+            $request,
+            'Blog',
+            'created',
+            'admin.blogs.edit',
+            $blog,
+            ['blog' => ['id' => $blog->id, 'slug' => $blog->slug]]
+        );
     }
 
     /**
