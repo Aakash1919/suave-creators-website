@@ -308,6 +308,41 @@
                 <section class="admin-card admin-blog-form__side-card">
                     <div class="admin-card__header">
                         <div>
+                            <h2 class="admin-card__title">Internal links</h2>
+                            <p>Suggested services, industries, and related posts to weave in before publish.</p>
+                        </div>
+                    </div>
+                    <div class="admin-card__body">
+                        @php
+                            $internalLinkSuggestions = $internalLinkSuggestions ?? [];
+                        @endphp
+                        @if ($internalLinkSuggestions === [])
+                            <p class="admin-blog-form__links-hint">Add a title or body, then reopen this page to refresh suggestions.</p>
+                        @else
+                            <p class="admin-blog-form__links-hint">Copy a URL into the article as a natural anchor (aim for 2–3).</p>
+                            <ul class="admin-blog-form__links">
+                                @foreach ($internalLinkSuggestions as $link)
+                                    <li class="admin-blog-form__link">
+                                        <span class="admin-blog-form__link-type">{{ $link['type'] ?? 'page' }}</span>
+                                        <strong class="admin-blog-form__link-title">{{ $link['title'] ?? '' }}</strong>
+                                        @if (! empty($link['summary']))
+                                            <span class="admin-blog-form__link-summary">{{ $link['summary'] }}</span>
+                                        @endif
+                                        <div class="admin-blog-form__link-row">
+                                            <code class="admin-blog-form__link-url" data-copy-value="{{ $link['url'] ?? '' }}">{{ $link['url'] ?? '' }}</code>
+                                            <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm"
+                                                data-copy-link="{{ $link['url'] ?? '' }}">Copy</button>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                </section>
+
+                <section class="admin-card admin-blog-form__side-card">
+                    <div class="admin-card__header">
+                        <div>
                             <h2 class="admin-card__title">Featured image</h2>
                             <p>Shown on cards and social previews.</p>
                         </div>
@@ -363,11 +398,30 @@
                 height: 640,
                 toolbar: 'blog',
                 placeholder: 'Write your blog content…',
-                wordCountGoal: 1800,
+                wordCountGoal: 2000,
             });
 
             SuaveAdmin.bindRepeaters(document.querySelector('.admin-blog-form'));
             SuaveAdmin.initBlogEditForm(document);
+
+            document.querySelectorAll('[data-copy-link]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const value = btn.getAttribute('data-copy-link') || '';
+                    if (!value) {
+                        return;
+                    }
+                    const done = function() {
+                        SuaveAdmin.createFlashMessage('success', 'Link copied. Paste it into the article as an anchor.');
+                    };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(value).then(done).catch(function() {
+                            window.prompt('Copy this link:', value);
+                        });
+                    } else {
+                        window.prompt('Copy this link:', value);
+                    }
+                });
+            });
 
             const imageInput = document.getElementById('blog-featured-image');
             const imageLabel = imageInput?.closest('.admin-blog-form__image');

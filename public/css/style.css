@@ -4617,7 +4617,7 @@ body.mobile-nav-open {
     line-height: 40px !important;
   }
 
-  .site-main>.site-container.relative:not(.section-pad-m) h1 {
+  .site-main>.site-container.relative:not(.section-pad-m):not(.single-blog-top) h1 {
     font-size: 40px !important;
     line-height: 44px !important;
   }
@@ -4658,6 +4658,7 @@ body.mobile-nav-open {
     min-height: 0 !important;
   }
 
+  .single-blog-top.site-container.relative .single-blog-main__title,
   .single-blog-main__title {
     font-size: 34px !important;
     line-height: 40px !important;
@@ -4727,6 +4728,7 @@ body.mobile-nav-open {
     padding-block: 24px !important;
   }
 
+  .single-blog-top.site-container.relative .single-blog-main__title,
   .single-blog-main__title {
     font-size: 26px !important;
     line-height: 28px !important;

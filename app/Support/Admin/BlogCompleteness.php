@@ -29,10 +29,8 @@ class BlogCompleteness
             ['key' => 'seo', 'label' => 'SEO meta', 'done' => trim((string) $blog->meta_title) !== '' && trim((string) $blog->meta_description) !== ''],
             ['key' => 'faqs', 'label' => 'FAQs (4+)', 'done' => self::filledFaqCount($blog->faqs) >= 4],
             ['key' => 'takeaways', 'label' => 'Key takeaways', 'done' => str_contains($content, 'blog-takeaways')],
-            ['key' => 'table', 'label' => 'Comparison table', 'done' => str_contains($content, 'blog-table-wrap') || str_contains($content, '<table')],
-            ['key' => 'chart', 'label' => 'Completion bars', 'done' => str_contains($content, 'blog-chart__row') && str_contains($content, 'blog-chart__value')],
-            ['key' => 'stats', 'label' => 'Stat boxes', 'done' => str_contains($content, 'blog-stat__value')],
             ['key' => 'insight', 'label' => 'Insight callout', 'done' => str_contains($content, 'blog-insight')],
+            ['key' => 'internal_links', 'label' => 'Internal links (2+)', 'done' => self::internalLinkCount($content) >= 2],
         ];
 
         $done = count(array_filter($items, static fn (array $item): bool => $item['done']));
@@ -63,6 +61,42 @@ class BlogCompleteness
             }
 
             if (trim((string) ($faq['question'] ?? '')) !== '' && trim((string) ($faq['answer'] ?? '')) !== '') {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * Count same-site anchors in the article body (services, industries, blogs, hubs).
+     */
+    public static function internalLinkCount(string $html): int
+    {
+        if ($html === '' || ! preg_match_all('/<a\b[^>]*href=(["\'])(.*?)\1[^>]*>/i', $html, $matches)) {
+            return 0;
+        }
+
+        $count = 0;
+        foreach ($matches[2] as $href) {
+            $href = trim((string) $href);
+            if ($href === '' || str_starts_with($href, '#') || str_starts_with($href, 'mailto:')) {
+                continue;
+            }
+            if (preg_match('#^https?://#i', $href) === 1) {
+                $host = parse_url($href, PHP_URL_HOST);
+                $appHost = parse_url((string) config('app.url'), PHP_URL_HOST);
+                if (is_string($host) && is_string($appHost) && strcasecmp($host, $appHost) === 0) {
+                    $count++;
+                } elseif (is_string($host) && str_contains(strtolower($host), 'suavecreators')) {
+                    $count++;
+                }
+
+                continue;
+            }
+
+            // Root-relative marketing paths.
+            if (preg_match('#^/(services|industries|blogs?|blog)(/|$)#i', $href) === 1) {
                 $count++;
             }
         }

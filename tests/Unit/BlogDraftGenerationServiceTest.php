@@ -153,8 +153,11 @@ class BlogDraftGenerationServiceTest extends TestCase
         $this->assertStringContainsString('Comparison-intent posts', $instructions);
         $this->assertStringContainsString('Buyer-ready / bottom-funnel posts', $instructions);
         $this->assertStringContainsString('The draft must help Suave Creators attract qualified organic leads', $instructions);
-        $this->assertStringContainsString('Shape A — framework guide', $instructions);
-        $this->assertStringContainsString('Shape B — transformation story', $instructions);
+        $this->assertStringContainsString('UNIQUENESS IS MANDATORY', $instructions);
+        $this->assertStringContainsString('REQUIRED ARTICLE PATTERN', $instructions);
+        $this->assertStringContainsString('REQUIRED OPENING', $instructions);
+        $this->assertStringContainsString('INTERNAL LINKS', $instructions);
+        $this->assertStringContainsString('TABLES, CHARTS, AND STATS ARE OPTIONAL', $instructions);
         $this->assertStringContainsString('blog-results', $instructions);
         $this->assertStringContainsString('blog-checklist', $instructions);
         $this->assertStringContainsString('blog-stats', $instructions);
@@ -163,9 +166,38 @@ class BlogDraftGenerationServiceTest extends TestCase
         $this->assertStringContainsString("in today's fast-paced world", $instructions);
         $this->assertStringContainsString('blog-chart__row', $instructions);
         $this->assertStringContainsString('blog-chart__value', $instructions);
-        $this->assertStringContainsString('COMPLETION BARS', $instructions);
+        $this->assertStringContainsString('WHEN YOU DO INCLUDE A CHART', $instructions);
         $this->assertStringContainsString('Never put label text inside .blog-chart__bar', $instructions);
         $this->assertStringContainsString('Do NOT emit <h1>', $instructions);
+    }
+
+    public function test_blog_writer_prompt_forces_required_pattern(): void
+    {
+        $agent = new BlogWriterAgent(
+            categories: ['Software Development'],
+            requiredPattern: 'checklist',
+            recentPatterns: ['framework', 'story'],
+            requiredOpening: 'question',
+            recentOpenings: ['scene'],
+            internalLinks: [
+                [
+                    'type' => 'service',
+                    'title' => 'Custom CRM Development',
+                    'url' => 'https://example.com/services/custom-crm-development',
+                    'summary' => 'Tailored CRM builds.',
+                ],
+            ],
+        );
+
+        $instructions = (string) $agent->instructions();
+
+        $this->assertStringContainsString('article_shape: checklist', $instructions);
+        $this->assertStringContainsString('Action checklist deep-dive', $instructions);
+        $this->assertStringContainsString('opening_style: question', $instructions);
+        $this->assertStringContainsString('Buyer question', $instructions);
+        $this->assertStringContainsString('custom-crm-development', $instructions);
+        $this->assertStringContainsString('- framework', $instructions);
+        $this->assertStringContainsString('- story', $instructions);
     }
 
     public function test_blog_writer_prompt_uses_assigned_topic_when_provided(): void
@@ -309,5 +341,139 @@ class BlogDraftGenerationServiceTest extends TestCase
         $this->assertStringContainsString('One contract', $content);
         $this->assertSame(1, substr_count($content, 'class="blog-stat"'));
         $this->assertStringNotContainsString('blog-insight', $content);
+    }
+
+    public function test_assert_unique_draft_rejects_similar_title(): void
+    {
+        User::factory()->create([
+            'email' => SiteAdmin::EMAIL,
+            'name' => SiteAdmin::NAME,
+        ]);
+
+        $authorId = (int) User::query()->first()->id;
+        $category = BlogCategory::query()->create([
+            'name' => 'Software Development',
+            'slug' => 'software-development',
+            'sort_order' => 1,
+        ]);
+
+        Blog::query()->create([
+            'blog_category_id' => $category->id,
+            'created_by_id' => $authorId,
+            'slug' => 'how-clinics-should-brief-a-custom-crm',
+            'title' => 'How Clinics Should Brief A Custom CRM',
+            'short_description' => 'A practical brief for clinic operators choosing a custom CRM partner.',
+            'content' => '<p>'.str_repeat('Clinic teams lose leads when handoffs stall between desks and tools. ', 40).'</p>',
+            'status' => Blog::STATUS_DRAFT,
+            'published_at' => null,
+        ]);
+
+        /** @var BlogDraftGenerationService $service */
+        $service = $this->app->make(BlogDraftGenerationService::class);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('too similar');
+
+        $service->assertUniqueDraft([
+            'title' => 'How Clinics Should Brief a Custom CRM System',
+            'article_shape' => 'framework',
+            'opening_style' => 'scene',
+            'content' => '<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>One</li></ul></div>'
+                .'<div class="blog-checklist"><p class="blog-checklist__title">List</p><ul><li>Do</li></ul></div>'
+                .'<aside class="blog-insight"><p>Take</p></aside>'
+                .'<p>'.str_repeat('Completely different body about warehouse routing software and carrier APIs. ', 40).'</p>',
+        ], 'framework', 'scene');
+    }
+
+    public function test_framework_pattern_does_not_require_table_chart_or_stats(): void
+    {
+        $frameworkHtml = '<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>One</li></ul></div>'
+            .'<div class="blog-checklist"><p class="blog-checklist__title">List</p><ul><li>Do</li></ul></div>'
+            .'<aside class="blog-insight"><p>Take</p></aside>';
+
+        $this->assertTrue(\App\Support\Blogs\BlogArticlePatterns::htmlMatches('framework', $frameworkHtml));
+
+        $comparisonWithoutTable = '<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>One</li></ul></div>'
+            .'<aside class="blog-insight"><p>Take</p></aside>';
+
+        $this->assertFalse(\App\Support\Blogs\BlogArticlePatterns::htmlMatches('comparison', $comparisonWithoutTable));
+    }
+
+    public function test_opening_rotation_avoids_recent_usage(): void
+    {
+        $next = \App\Support\Blogs\BlogArticleOpenings::chooseNext(
+            ['scene', 'question'],
+            []
+        );
+
+        $this->assertContains($next, ['contrast', 'checklist-first']);
+        $this->assertNotContains($next, ['scene', 'question']);
+    }
+
+    public function test_internal_links_suggest_service_or_industry_matches(): void
+    {
+        $links = \App\Support\Blogs\BlogInternalLinks::suggest(
+            title: 'How clinics should brief a custom CRM before hiring a partner',
+            content: '<p>Healthcare operators need intake, reporting, and a shared CRM workflow.</p>',
+            limit: 3,
+        );
+
+        $this->assertGreaterThanOrEqual(2, count($links));
+        $this->assertLessThanOrEqual(3, count($links));
+        $types = array_column($links, 'type');
+        $this->assertTrue(
+            in_array('service', $types, true) || in_array('industry', $types, true) || in_array('hub', $types, true)
+        );
+        foreach ($links as $link) {
+            $this->assertNotEmpty($link['url']);
+            $this->assertNotEmpty($link['title']);
+        }
+    }
+
+    public function test_assert_unique_draft_rejects_wrong_pattern_blocks(): void
+    {
+        /** @var BlogDraftGenerationService $service */
+        $service = $this->app->make(BlogDraftGenerationService::class);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('missing required visual blocks');
+
+        $service->assertUniqueDraft([
+            'title' => 'A Completely Unique Title About Warehouse Routing Software Partners',
+            'article_shape' => 'story',
+            'content' => '<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>One</li></ul></div><p>Missing results block for story pattern.</p>',
+        ], 'story');
+    }
+
+    public function test_choose_next_pattern_avoids_recent_usage(): void
+    {
+        $next = \App\Support\Blogs\BlogArticlePatterns::chooseNext(
+            ['framework', 'story', 'comparison'],
+            []
+        );
+
+        $this->assertContains($next, ['checklist', 'stats-led', 'roadmap']);
+        $this->assertNotContains($next, ['framework', 'story', 'comparison']);
+    }
+
+    public function test_assert_unique_draft_rejects_stock_phase_headings(): void
+    {
+        /** @var BlogDraftGenerationService $service */
+        $service = $this->app->make(BlogDraftGenerationService::class);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('stock phase headings');
+
+        $service->assertUniqueDraft([
+            'title' => 'A Completely Unique Title About Warehouse Routing Partners In 2026',
+            'article_shape' => 'roadmap',
+            'opening_style' => 'scene',
+            'content' => '<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>One</li></ul></div>'
+                .'<h2>Discover</h2><p>'.str_repeat('Warehouse teams need clearer routing ownership before software work starts. ', 20).'</p>'
+                .'<h2>Pilot</h2><p>'.str_repeat('A short pilot on one lane beats a full rebuild. ', 20).'</p>'
+                .'<h2>Harden</h2><p>'.str_repeat('Lock the handoff rules before you scale the workflow. ', 20).'</p>'
+                .'<div class="blog-checklist"><p class="blog-checklist__title">List</p><ul><li>Do</li></ul></div>'
+                .'<aside class="blog-insight"><p>Take</p></aside>',
+        ], 'roadmap', 'scene');
     }
 }

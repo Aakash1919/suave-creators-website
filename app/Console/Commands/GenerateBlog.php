@@ -51,8 +51,10 @@ class GenerateBlog extends Command
             $this->info('No --topic given. The writer will pick one timely IT topic that:');
             $this->line('  • matches a lead angle (service, industry, problem, comparison, or buyer-ready)');
             $this->line('  • prefers Software Development or Web Development');
-            $this->line('  • does not overlap recent blog titles');
+            $this->line('  • does not overlap recent blog titles or content');
         }
+
+        $this->line('Each draft uses a unique layout pattern + opening style, optional table/stats/chart only when useful, 2–3 internal links, and title/content uniqueness checks.');
 
         $this->info("Generating {$count} blog draft(s)…");
 

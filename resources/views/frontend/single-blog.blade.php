@@ -268,11 +268,15 @@
   }
 }
 
+.single-blog-top.site-container.relative .single-blog-main__title,
 .single-blog-top .single-blog-main__title {
   display: block;
   margin-top: 10px;
   max-width: 920px;
   color: #fff;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 .single-blog-main__title-accent {
@@ -414,7 +418,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin: 16px 0 0 1.15rem;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
 .single-blog-content p + ul,
@@ -428,11 +434,45 @@
 }
 
 .single-blog-content li {
+  position: relative;
+  padding-left: 1.35rem;
   line-height: 1.75;
 }
 
 .single-blog-content li > p {
   margin: 0;
+}
+
+/* Blue markers for body lists (Tailwind resets native bullets). */
+.single-blog-content ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-brand-start, #2a4dfb);
+}
+
+.single-blog-content ol {
+  counter-reset: blog-ol;
+}
+
+.single-blog-content ol > li {
+  padding-left: 1.75rem;
+  counter-increment: blog-ol;
+}
+
+.single-blog-content ol > li::before {
+  content: counter(blog-ol) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-brand-start, #2a4dfb);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.75;
 }
 
 .single-blog-content a {
@@ -722,6 +762,8 @@
   position: relative;
 }
 
+.single-blog-content .blog-takeaways li::before,
+.single-blog-content .blog-results li::before,
 .blog-takeaways li::before,
 .blog-results li::before {
   content: "";
@@ -731,17 +773,23 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--color-brand-start);
+  background: var(--color-brand-start, #2a4dfb);
 }
 
+.single-blog-content .blog-checklist li::before,
 .blog-checklist li::before {
   content: "\2713";
   position: absolute;
   left: 0;
   top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
   font-size: 13px;
   font-weight: 800;
-  color: var(--color-brand-start);
+  line-height: 1.75;
+  color: var(--color-brand-start, #2a4dfb);
 }
 
 .blog-stats {

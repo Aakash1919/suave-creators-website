@@ -26,10 +26,8 @@ class BlogCompletenessTest extends TestCase
             'short_description' => str_repeat('A practical brief for clinic operators choosing software. ', 3),
             'content' => str_repeat('<p>Detail for the public article about clinic software intake. </p>', 160)
                 .'<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>Start with intake.</li></ul></div>'
-                .'<div class="blog-table-wrap"><table><thead><tr><th>Phase</th></tr></thead><tbody><tr><td>Assess</td></tr></tbody></table></div>'
-                .'<figure class="blog-chart"><div class="blog-chart__row"><span class="blog-chart__label">Assess</span><span class="blog-chart__value">90%</span></div></figure>'
-                .'<div class="blog-stats"><div class="blog-stat"><p class="blog-stat__value">Two-week pilot</p><p class="blog-stat__label">One workflow.</p></div></div>'
-                .'<aside class="blog-insight"><p>Keep the rollout honest.</p></aside>',
+                .'<aside class="blog-insight"><p>Keep the rollout honest.</p></aside>'
+                .'<p>See our <a href="/services/custom-crm-development">custom CRM development</a> and <a href="/industries/healthcare">healthcare</a> pages.</p>',
             'blog_category_id' => 1,
             'featured_image' => 'blogs/demo.webp',
             'meta_title' => 'How Clinics Should Brief A Custom CRM',

@@ -2988,6 +2988,67 @@ span.flatpickr-weekday {
   gap: 0.65rem;
 }
 
+.admin-blog-form__links-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--admin-muted, #667085);
+}
+
+.admin-blog-form__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.admin-blog-form__link {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.75rem;
+  border: 1px solid var(--admin-border);
+  border-radius: 0.65rem;
+  background: #fafbfc;
+}
+
+.admin-blog-form__link-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--admin-primary, #7539FF);
+}
+
+.admin-blog-form__link-title {
+  font-size: 0.9rem;
+  color: var(--admin-text);
+}
+
+.admin-blog-form__link-summary {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--admin-muted, #667085);
+}
+
+.admin-blog-form__link-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.admin-blog-form__link-url {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.72rem;
+  color: var(--admin-text);
+  background: transparent;
+}
+
 .admin-repeater {
   display: grid;
   gap: 0.75rem;

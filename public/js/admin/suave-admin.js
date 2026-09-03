@@ -1476,11 +1476,34 @@
         },
         { key: 'faqs', done: faqCount() >= 4 },
         { key: 'takeaways', done: html.indexOf('blog-takeaways') !== -1 },
-        { key: 'table', done: html.indexOf('blog-table-wrap') !== -1 || /<table[\s>]/i.test(html) },
-        { key: 'chart', done: html.indexOf('blog-chart__row') !== -1 && html.indexOf('blog-chart__value') !== -1 },
-        { key: 'stats', done: html.indexOf('blog-stat__value') !== -1 },
         { key: 'insight', done: html.indexOf('blog-insight') !== -1 },
+        { key: 'internal_links', done: internalLinkCount(html) >= 2 },
       ];
+    };
+
+    const internalLinkCount = function (html) {
+      const matches = html.match(/<a\b[^>]*href=(["'])(.*?)\1[^>]*>/gi) || [];
+      let count = 0;
+      matches.forEach(function (tag) {
+        const hrefMatch = tag.match(/href=(["'])(.*?)\1/i);
+        if (!hrefMatch) {
+          return;
+        }
+        const href = String(hrefMatch[2] || '').trim();
+        if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0) {
+          return;
+        }
+        if (/^https?:\/\//i.test(href)) {
+          if (/suavecreators/i.test(href) || href.indexOf(window.location.origin) === 0) {
+            count += 1;
+          }
+          return;
+        }
+        if (/^\/(services|industries|blogs?|blog)(\/|$)/i.test(href)) {
+          count += 1;
+        }
+      });
+      return count;
     };
 
     const paintCompleteness = function () {

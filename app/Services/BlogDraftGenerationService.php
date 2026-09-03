@@ -5,6 +5,9 @@ namespace App\Services;
 use App\Ai\Agents\BlogWriterAgent;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Support\Blogs\BlogArticleOpenings;
+use App\Support\Blogs\BlogArticlePatterns;
+use App\Support\Blogs\BlogInternalLinks;
 use App\Support\Frontend\BlogSupport;
 use App\Support\SiteAdmin;
 use Illuminate\Support\Str;
@@ -13,12 +16,29 @@ use Throwable;
 
 class BlogDraftGenerationService
 {
+    /**
+     * Patterns already assigned during the current multi-draft run.
+     *
+     * @var list<string>
+     */
+    protected array $patternsUsedThisRun = [];
+
+    /**
+     * Openings already assigned during the current multi-draft run.
+     *
+     * @var list<string>
+     */
+    protected array $openingsUsedThisRun = [];
+
     public function __construct(
         protected BlogService $blogs,
     ) {}
 
     /**
      * Generate and persist one AI trend blog as a draft, styled like existing posts.
+     *
+     * Enforces a unique article layout pattern + opening style versus recent posts,
+     * weaves suggested internal links, and rejects near-duplicate titles/content.
      *
      * @throws RuntimeException
      */
@@ -29,29 +49,67 @@ class BlogDraftGenerationService
         $categories = $this->preferredCategoryNames();
         $recentTitles = $this->recentTitles();
         $styleExamples = $this->styleExamples();
+        $recentPatterns = $this->recentPatterns();
+        $recentOpenings = $this->recentOpenings();
+        $requiredPattern = BlogArticlePatterns::chooseNext($recentPatterns, $this->patternsUsedThisRun);
+        $requiredOpening = BlogArticleOpenings::chooseNext($recentOpenings, $this->openingsUsedThisRun);
+        $internalLinks = BlogInternalLinks::suggest(
+            title: $topic ?? 'custom software web development CRM AI',
+            content: '',
+            topic: $topic,
+            limit: 3,
+        );
         $model = (string) config('blogs.trend_drafts.model', 'gpt-4o-mini');
+        $maxAttempts = max(1, (int) config('blogs.trend_drafts.uniqueness_max_attempts', 3));
+        $uniquenessHints = [];
+        $lastError = null;
 
-        try {
-            $response = (new BlogWriterAgent(
-                categories: $categories,
-                recentTitles: $recentTitles,
-                styleExamples: $styleExamples,
-                modelOverride: $model,
-                topic: $topic,
-            ))->prompt(
-                $this->userPrompt($styleExamples, $topic),
-                model: $model !== '' ? $model : null,
-                timeout: 240,
-            );
-        } catch (Throwable $e) {
-            throw new RuntimeException('AI blog draft generation failed: '.$e->getMessage(), 0, $e);
+        for ($attempt = 1; $attempt <= $maxAttempts; $attempt++) {
+            try {
+                $response = (new BlogWriterAgent(
+                    categories: $categories,
+                    recentTitles: $recentTitles,
+                    styleExamples: $styleExamples,
+                    modelOverride: $model,
+                    topic: $topic,
+                    requiredPattern: $requiredPattern,
+                    recentPatterns: $recentPatterns,
+                    uniquenessHints: $uniquenessHints,
+                    requiredOpening: $requiredOpening,
+                    recentOpenings: $recentOpenings,
+                    internalLinks: $internalLinks,
+                ))->prompt(
+                    $this->userPrompt($styleExamples, $topic, $requiredPattern, $requiredOpening, $uniquenessHints),
+                    model: $model !== '' ? $model : null,
+                    timeout: 240,
+                );
+
+                $payload = $this->structuredPayload($response);
+                $this->assertUniqueDraft($payload, $requiredPattern, $requiredOpening);
+
+                $blog = $this->persistDraft($payload);
+                $this->patternsUsedThisRun[] = $requiredPattern;
+                $this->openingsUsedThisRun[] = $requiredOpening;
+
+                return $blog;
+            } catch (Throwable $e) {
+                $lastError = $e instanceof RuntimeException
+                    ? $e
+                    : new RuntimeException('AI blog draft generation failed: '.$e->getMessage(), 0, $e);
+
+                if ($attempt >= $maxAttempts || ! $this->isRetryableUniquenessFailure($lastError)) {
+                    throw $lastError;
+                }
+
+                $uniquenessHints[] = $lastError->getMessage();
+            }
         }
 
-        return $this->persistDraft($this->structuredPayload($response));
+        throw $lastError ?? new RuntimeException('AI blog draft generation failed after uniqueness retries.');
     }
 
     /**
-     * Generate multiple drafts sequentially.
+     * Generate multiple drafts sequentially (each gets a different layout pattern + opening).
      *
      * @return list<Blog>
      *
@@ -61,6 +119,8 @@ class BlogDraftGenerationService
     {
         $count = max(1, $count);
         $created = [];
+        $this->patternsUsedThisRun = [];
+        $this->openingsUsedThisRun = [];
 
         for ($i = 0; $i < $count; $i++) {
             $created[] = $this->generateDraft($topic);
@@ -117,6 +177,48 @@ class BlogDraftGenerationService
             ->limit((int) config('blogs.trend_drafts.recent_title_limit', 40))
             ->pluck('title')
             ->filter(static fn (mixed $title): bool => is_string($title) && trim($title) !== '')
+            ->values()
+            ->all();
+    }
+
+    /**
+     * Detected layout patterns from the newest posts (newest first).
+     *
+     * @return list<string>
+     */
+    public function recentPatterns(): array
+    {
+        $limit = max(1, (int) config('blogs.trend_drafts.recent_pattern_limit', 12));
+
+        return Blog::query()
+            ->orderByDesc('id')
+            ->limit($limit)
+            ->get(['content'])
+            ->map(static function (Blog $blog): ?string {
+                return BlogArticlePatterns::detectFromHtml((string) $blog->content);
+            })
+            ->filter(static fn (mixed $pattern): bool => is_string($pattern) && $pattern !== '')
+            ->values()
+            ->all();
+    }
+
+    /**
+     * Detected opening styles from the newest posts (newest first).
+     *
+     * @return list<string>
+     */
+    public function recentOpenings(): array
+    {
+        $limit = max(1, (int) config('blogs.trend_drafts.recent_opening_limit', 12));
+
+        return Blog::query()
+            ->orderByDesc('id')
+            ->limit($limit)
+            ->get(['content'])
+            ->map(static function (Blog $blog): ?string {
+                return BlogArticleOpenings::detectFromHtml((string) $blog->content);
+            })
+            ->filter(static fn (mixed $opening): bool => is_string($opening) && $opening !== '')
             ->values()
             ->all();
     }
@@ -188,6 +290,110 @@ class BlogDraftGenerationService
             'sample_faq_question' => Str::limit(trim((string) ($firstFaq['question'] ?? '')), 500, ''),
             'sample_faq_answer' => Str::limit(trim((string) ($firstFaq['answer'] ?? '')), 500, ''),
         ];
+    }
+
+    /**
+     * Reject drafts that miss required pattern/opening blocks or closely duplicate existing content.
+     *
+     * @param  array<string, mixed>  $payload
+     *
+     * @throws RuntimeException
+     */
+    public function assertUniqueDraft(
+        array $payload,
+        ?string $requiredPattern = null,
+        ?string $requiredOpening = null,
+    ): void {
+        $title = trim((string) ($payload['title'] ?? ''));
+        $content = trim((string) ($payload['content'] ?? ''));
+        $shape = trim((string) ($payload['article_shape'] ?? ''));
+        $opening = trim((string) ($payload['opening_style'] ?? ''));
+
+        if ($title === '' || $content === '') {
+            throw new RuntimeException('AI returned an incomplete blog draft (missing title or content).');
+        }
+
+        if ($requiredPattern !== null && $requiredPattern !== '') {
+            if ($shape !== '' && $shape !== $requiredPattern) {
+                throw new RuntimeException(
+                    "Draft used article_shape \"{$shape}\" but must use required pattern \"{$requiredPattern}\"."
+                );
+            }
+
+            if (! BlogArticlePatterns::htmlMatches($requiredPattern, $content)) {
+                throw new RuntimeException(
+                    "Draft HTML is missing required visual blocks for pattern \"{$requiredPattern}\"."
+                );
+            }
+        }
+
+        if ($requiredOpening !== null && $requiredOpening !== '') {
+            if ($opening !== '' && $opening !== $requiredOpening) {
+                throw new RuntimeException(
+                    "Draft used opening_style \"{$opening}\" but must use required opening \"{$requiredOpening}\"."
+                );
+            }
+
+            if ($requiredOpening === 'checklist-first'
+                && ! preg_match('/class="[^"]*\bblog-checklist\b/i', substr($content, 0, 1500))) {
+                throw new RuntimeException(
+                    'Draft HTML is missing an early checklist for opening "checklist-first".'
+                );
+            }
+        }
+
+        $stockHeadings = $this->stockPhaseHeadings($content);
+        if ($stockHeadings !== []) {
+            throw new RuntimeException(
+                'Draft uses stock phase headings ('.implode(', ', $stockHeadings).'). Replace them with topic-specific <h2> titles.'
+            );
+        }
+
+        $titleThreshold = (float) config('blogs.trend_drafts.title_similarity_threshold', 72);
+        $contentThreshold = (float) config('blogs.trend_drafts.content_similarity_threshold', 0.42);
+        $compareLimit = max(20, (int) config('blogs.trend_drafts.uniqueness_compare_limit', 80));
+
+        $existing = Blog::query()
+            ->orderByDesc('id')
+            ->limit($compareLimit)
+            ->get(['id', 'title', 'content']);
+
+        $normalizedTitle = $this->normalizeForSimilarity($title);
+
+        foreach ($existing as $blog) {
+            $existingTitle = trim((string) $blog->title);
+            if ($existingTitle === '') {
+                continue;
+            }
+
+            similar_text($normalizedTitle, $this->normalizeForSimilarity($existingTitle), $percent);
+            if ($percent >= $titleThreshold) {
+                throw new RuntimeException(
+                    "Draft title is too similar to existing blog \"{$existingTitle}\" ({$percent}% match). Choose a clearly different title and angle."
+                );
+            }
+        }
+
+        $draftTokens = $this->contentTokenSet($content);
+        if ($draftTokens === []) {
+            return;
+        }
+
+        foreach ($existing as $blog) {
+            $existingContent = trim((string) $blog->content);
+            if ($existingContent === '') {
+                continue;
+            }
+
+            $overlap = $this->tokenOverlapRatio($draftTokens, $this->contentTokenSet($existingContent));
+            if ($overlap >= $contentThreshold) {
+                $existingTitle = trim((string) $blog->title) ?: ('#'.$blog->id);
+                $pct = (int) round($overlap * 100);
+                throw new RuntimeException(
+                    "Draft content overlaps too much with existing blog \"{$existingTitle}\" (~{$pct}% token overlap). Rewrite with a unique outline and examples."
+                );
+            }
+        }
     }
 
     /**
@@ -413,9 +619,15 @@ class BlogDraftGenerationService
 
     /**
      * @param  list<array<string, mixed>>  $styleExamples
+     * @param  list<string>  $uniquenessHints
      */
-    protected function userPrompt(array $styleExamples, ?string $topic = null): string
-    {
+    protected function userPrompt(
+        array $styleExamples,
+        ?string $topic = null,
+        ?string $requiredPattern = null,
+        ?string $requiredOpening = null,
+        array $uniquenessHints = [],
+    ): string {
         $exampleTitles = collect($styleExamples)
             ->pluck('title')
             ->filter()
@@ -424,17 +636,29 @@ class BlogDraftGenerationService
 
         $hint = $exampleTitles === ''
             ? 'Match the Suave Creators blog voice described in your instructions.'
-            : "Study these live exemplars closely and write a NEW post that would sit beside them:\n{$exampleTitles}";
+            : "Study these live exemplars for craft only — do NOT copy their topic, outline, or wording:\n{$exampleTitles}";
 
         $topicLine = $topic !== null
             ? "Write this draft on this exact topic (do not switch subjects): {$topic}"
             : 'Pick one timely topic yourself using the TOPIC SELECTION and CUSTOMER ACQUISITION rules. Do not overlap recent titles.';
 
+        $pattern = is_string($requiredPattern) && $requiredPattern !== ''
+            ? $requiredPattern
+            : 'one unused pattern from the catalog';
+        $opening = is_string($requiredOpening) && $requiredOpening !== ''
+            ? $requiredOpening
+            : 'one unused opening from the catalog';
+
+        $retry = $uniquenessHints === []
+            ? ''
+            : "\nPrevious attempt failed uniqueness checks. Produce a clearly different title, outline, and body.";
+
         return <<<PROMPT
 Write one new draft blog post for Suave Creators now.
 {$topicLine}
 {$hint}
-Return only the structured fields. Pick article_shape "framework" (named method, takeaways, table, checklist, stats, completion-bar chart with values) or "story" (results at a glance, narrative sections, before/after table, completion-bar chart). No h1, no FAQ block, no blockquote. Write like a premium IT services article — specific scenes, filled visual data, calm professional voice, no invented survey statistics.
+REQUIRED: set article_shape to "{$pattern}" and opening_style to "{$opening}". Follow both exactly. Include 2–3 internal links from the provided candidate list. Tables, stats, and charts are optional unless the pattern requires them. Target 2,000–2,500 words of body copy.{$retry}
+Return only the structured fields. No h1, no FAQ block, no blockquote. Write like a premium IT services article — specific scenes, calm professional voice, no invented survey statistics.
 PROMPT;
     }
 
@@ -484,5 +708,111 @@ PROMPT;
         }
 
         return Str::limit(trim($match[0]), 1600, '');
+    }
+
+    protected function isRetryableUniquenessFailure(RuntimeException $error): bool
+    {
+        $message = strtolower($error->getMessage());
+
+        return str_contains($message, 'too similar')
+            || str_contains($message, 'overlaps too much')
+            || str_contains($message, 'missing required visual blocks')
+            || str_contains($message, 'must use required pattern')
+            || str_contains($message, 'must use required opening')
+            || str_contains($message, 'missing an early checklist')
+            || str_contains($message, 'stock phase headings');
+    }
+
+    /**
+     * Bare generic phase titles that make consecutive roadmaps look identical.
+     *
+     * @return list<string>
+     */
+    protected function stockPhaseHeadings(string $html): array
+    {
+        if (! preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>/is', $html, $matches)) {
+            return [];
+        }
+
+        $banned = [
+            'discover', 'discovery', 'pilot', 'harden', 'scale', 'assess',
+            'strategy', 'implementation', 'conclusion', 'introduction', 'overview',
+        ];
+
+        $found = [];
+        foreach ($matches[1] as $raw) {
+            $text = strtolower(trim(html_entity_decode(strip_tags($raw), ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+            $text = (string) preg_replace('/[^a-z0-9\s]+/u', '', $text);
+            $text = trim((string) preg_replace('/\s+/u', ' ', $text));
+            if ($text !== '' && in_array($text, $banned, true)) {
+                $found[$text] = ucfirst($text);
+            }
+        }
+
+        return array_values($found);
+    }
+
+    protected function normalizeForSimilarity(string $value): string
+    {
+        $value = strtolower(trim($value));
+        $value = (string) preg_replace('/[^a-z0-9\s]+/u', ' ', $value);
+        $value = (string) preg_replace('/\s+/u', ' ', $value);
+
+        return trim($value);
+    }
+
+    /**
+     * Significant content tokens for overlap checks (first ~220 words of body copy).
+     *
+     * @return list<string>
+     */
+    protected function contentTokenSet(string $html): array
+    {
+        $plain = strtolower(trim(html_entity_decode(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+        if ($plain === '') {
+            return [];
+        }
+
+        $words = preg_split('/\s+/u', $plain, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        $words = array_slice($words, 0, 220);
+
+        $stop = [
+            'a' => true, 'an' => true, 'the' => true, 'and' => true, 'or' => true, 'but' => true,
+            'in' => true, 'on' => true, 'at' => true, 'to' => true, 'for' => true, 'of' => true,
+            'with' => true, 'by' => true, 'from' => true, 'as' => true, 'is' => true, 'are' => true,
+            'was' => true, 'were' => true, 'be' => true, 'been' => true, 'being' => true, 'it' => true,
+            'this' => true, 'that' => true, 'these' => true, 'those' => true, 'you' => true, 'your' => true,
+            'we' => true, 'our' => true, 'they' => true, 'their' => true, 'can' => true, 'will' => true,
+            'not' => true, 'if' => true, 'then' => true, 'than' => true, 'into' => true, 'about' => true,
+        ];
+
+        $tokens = [];
+        foreach ($words as $word) {
+            $word = (string) preg_replace('/[^a-z0-9]+/u', '', $word);
+            if ($word === '' || isset($stop[$word]) || strlen($word) < 4) {
+                continue;
+            }
+            $tokens[$word] = true;
+        }
+
+        return array_keys($tokens);
+    }
+
+    /**
+     * @param  list<string>  $a
+     * @param  list<string>  $b
+     */
+    protected function tokenOverlapRatio(array $a, array $b): float
+    {
+        if ($a === [] || $b === []) {
+            return 0.0;
+        }
+
+        $setA = array_fill_keys($a, true);
+        $setB = array_fill_keys($b, true);
+        $intersection = count(array_intersect_key($setA, $setB));
+        $union = count($setA + $setB);
+
+        return $union === 0 ? 0.0 : $intersection / $union;
     }
 }

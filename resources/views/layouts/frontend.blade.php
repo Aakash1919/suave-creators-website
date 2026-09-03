@@ -140,7 +140,7 @@
         .site-main>.site-container.relative>.grid>div:first-child{max-width:36rem;min-height:17rem}
         .pragati-narrow-regular{font-family:"Pragati Narrow",ui-sans-serif,system-ui,sans-serif}
         .site-main>.site-container.relative h1{color:#fff;display:flex;flex-direction:column;font-size:36px;font-weight:600;line-height:1;margin:.5rem 0}
-        .site-main>.single-blog-top h1{display:block;font-size:clamp(1.75rem,4vw,2.75rem);line-height:1.2;margin:.625rem 0 0}
+        .site-main>.single-blog-top.site-container.relative h1{color:#fff;display:block;font-size:clamp(1.75rem,4vw,2.75rem);font-weight:800;line-height:1.2;margin:.625rem 0 0}
         .site-main>.site-container.relative h1+p{color:#b1b9df;font-size:12px;line-height:1.25rem;margin:.5rem 0}
         .hero-cs-visual{flex-shrink:0;isolation:isolate;margin-inline:auto;max-width:400px;min-height:399px;position:relative;width:100%}
         .hero-cs-visual__poster{aspect-ratio:1/1;border-radius:22px;overflow:hidden;width:100%}
@@ -192,7 +192,7 @@
             .site-main>.site-container.relative{min-height:13rem}
             .site-main>.single-blog-top{min-height:0}
             .site-main>.site-container.relative h1{font-size:3rem}
-            .site-main>.single-blog-top h1{font-size:clamp(1.75rem,4vw,2.75rem)}
+            .site-main>.single-blog-top.site-container.relative h1{font-size:clamp(1.75rem,4vw,2.75rem)}
             .sm\:gap-2{gap:.5rem}
             .sm\:gap-4{gap:1rem}
             .sm\:gap-7{gap:1.75rem}
@@ -215,7 +215,7 @@
             .site-main>.site-container.relative>.grid{gap:3rem;grid-template-columns:repeat(2,minmax(0,1fr))}
             .site-main>.site-container.relative>.grid>div:first-child{max-width:520px;min-height:22rem}
             .site-main>.site-container.relative h1{font-size:60px}
-            .site-main>.single-blog-top h1{font-size:clamp(1.75rem,4vw,2.75rem)}
+            .site-main>.single-blog-top.site-container.relative h1{font-size:clamp(1.75rem,4vw,2.75rem)}
             .lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
             .lg\:justify-end{justify-content:flex-end}
             .lg\:max-w-\[520px\]{max-width:520px}

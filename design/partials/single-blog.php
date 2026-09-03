@@ -443,9 +443,13 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 .single-blog-top .single-blog-main__title {
+  display: block;
   margin-top: 18px;
   max-width: 920px;
   color: #fff;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 .single-blog-main__title-accent {
