@@ -10,6 +10,9 @@ use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Services\BlogService;
 use App\Services\BlogSeoMetaGenerationService;
+use App\Support\Admin\BlogCompleteness;
+use App\Support\Blogs\BlogInternalLinks;
+use App\Support\Frontend\BlogSupport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -46,9 +49,18 @@ class BlogController extends Controller
      */
     public function create(): View
     {
+        $blog = $this->blogs->newDraft();
+
         return view('admin.blogs.form', [
-            'blog' => $this->blogs->newDraft(),
+            'blog' => $blog,
             'categories' => $this->blogs->categories(),
+            'editorContent' => '',
+            'completeness' => BlogCompleteness::evaluate($blog),
+            'internalLinkSuggestions' => BlogInternalLinks::suggest(
+                title: (string) $blog->title,
+                content: '',
+                limit: 3,
+            ),
         ]);
     }
 
@@ -74,9 +86,19 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog): View
     {
+        $blog->content = BlogSupport::normalizeVisualHtml((string) $blog->content);
+
         return view('admin.blogs.form', [
             'blog' => $blog,
             'categories' => $this->blogs->categories(),
+            'editorContent' => (string) $blog->content,
+            'completeness' => BlogCompleteness::evaluate($blog),
+            'internalLinkSuggestions' => BlogInternalLinks::suggest(
+                title: (string) $blog->title,
+                content: (string) $blog->content,
+                excludeBlogId: $blog->id,
+                limit: 3,
+            ),
         ]);
     }
 

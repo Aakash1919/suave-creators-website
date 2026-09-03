@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Support\Blogs\BlogHtmlSupport;
+use App\Support\Frontend\BlogSupport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -111,6 +112,10 @@ class BlogService
     {
         $data['faqs'] = $this->normalizeFaqItems($data['faqs'] ?? null);
         unset($data['featured_image']);
+
+        if (isset($data['content']) && is_string($data['content'])) {
+            $data['content'] = BlogSupport::normalizeVisualHtml($data['content']);
+        }
 
         if (($data['status'] ?? null) === Blog::STATUS_PUBLISHED && empty($data['published_at'])) {
             $data['published_at'] = now();

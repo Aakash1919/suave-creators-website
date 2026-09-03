@@ -2858,8 +2858,8 @@ main button.rounded-full.bg-gradient-to-r {
   position: fixed;
   right: 24px;
   bottom: 24px;
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   z-index: 9999;
 }
 
@@ -4574,9 +4574,9 @@ body.mobile-nav-open {
 
   .floating-chat {
     bottom: 16px;
-    height: 56px;
+    height: 44px;
     right: 16px;
-    width: 56px;
+    width: 44px;
   }
 
   .web-service-card {
@@ -4658,7 +4658,7 @@ body.mobile-nav-open {
     line-height: 40px !important;
   }
 
-  .site-main>.site-container.relative:not(.section-pad-m) h1 {
+  .site-main>.site-container.relative:not(.section-pad-m):not(.single-blog-top) h1 {
     font-size: 40px !important;
     line-height: 44px !important;
   }
@@ -4699,6 +4699,7 @@ body.mobile-nav-open {
     min-height: 0 !important;
   }
 
+  .single-blog-top.site-container.relative .single-blog-main__title,
   .single-blog-main__title {
     font-size: 34px !important;
     line-height: 40px !important;
@@ -4768,6 +4769,7 @@ body.mobile-nav-open {
     padding-block: 24px !important;
   }
 
+  .single-blog-top.site-container.relative .single-blog-main__title,
   .single-blog-main__title {
     font-size: 26px !important;
     line-height: 28px !important;

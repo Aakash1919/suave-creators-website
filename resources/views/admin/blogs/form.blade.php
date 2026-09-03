@@ -26,6 +26,7 @@
 
     <form method="POST" action="{{ $blog->exists ? route('admin.blogs.update', $blog) : route('admin.blogs.store') }}"
         enctype="multipart/form-data" class="admin-blog-form" data-ajax-form
+        data-blog-content-css="{{ asset('css/admin-blog-content.css') }}"
         data-success-message="{{ $blog->exists ? 'Blog has been updated successfully.' : 'Blog has been created successfully.' }}">
         @csrf
         @if ($blog->exists)
@@ -50,7 +51,21 @@
 
                         <div class="admin-rte admin-rte--blog">
                             <label class="admin-label" for="blog-content">Content</label>
-                            <textarea id="blog-content" name="content" rows="18" class="admin-textarea">{{ old('content', $blog->content) }}</textarea>
+                            <p class="admin-repeater__hint" style="margin: 0 0 0.55rem;">Insert a layout block, then edit it in the article. Undo / Redo reverse the last change. Remove block deletes the block the cursor is in. Completion-bar labels and percents are edited in the article, not the sidebar.</p>
+                            <div class="admin-blog-blocks" data-blog-block-toolbar role="toolbar" aria-label="Blog editor actions">
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-editor="undo" title="Undo last change">Undo</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-editor="redo" title="Redo last change">Redo</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-editor="removeblock" title="Remove the layout block the cursor is in">Remove block</button>
+                                <span class="admin-blog-blocks__split" aria-hidden="true"></span>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="inserttakeaways" title="Insert key takeaways">Takeaways</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertresults" title="Insert results list">Results</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertchecklist" title="Insert checklist">Checklist</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertstats" title="Insert stat boxes">Stat boxes</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertchart" title="Insert completion bars">Completion bars</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertinsight" title="Insert insight callout">Insight</button>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertblogtable" title="Insert comparison table">Comparison table</button>
+                            </div>
+                            <textarea id="blog-content" name="content" rows="18" class="admin-textarea">{{ old('content', $editorContent ?? $blog->content) }}</textarea>
                         </div>
                     </div>
                 </section>
@@ -229,10 +244,34 @@
                     <div class="admin-card__header">
                         <div>
                             <h2 class="admin-card__title">Publish</h2>
-                            <p>Status, schedule, and taxonomy.</p>
+                            <p>Ready checklist, status, schedule, and taxonomy.</p>
                         </div>
                     </div>
                     <div class="admin-card__body space-y-4">
+                        @php
+                            $completeness = $completeness ?? ['percent' => 0, 'done' => 0, 'total' => 0, 'items' => []];
+                        @endphp
+                        <div class="admin-blog-complete" data-blog-completeness>
+                            <div class="admin-blog-complete__bar" data-complete-bar role="progressbar"
+                                aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ (int) $completeness['percent'] }}"
+                                aria-label="Frontend completeness">
+                                <span class="admin-blog-complete__fill" data-complete-fill
+                                    style="width: {{ (int) $completeness['percent'] }}%"></span>
+                            </div>
+                            <p class="admin-blog-complete__meta" data-complete-meta>
+                                <strong>{{ (int) $completeness['percent'] }}%</strong>
+                                ready for the public blog page
+                                ({{ (int) $completeness['done'] }} of {{ (int) $completeness['total'] }})
+                            </p>
+                            <ul class="admin-blog-complete__list">
+                                @foreach ($completeness['items'] as $item)
+                                    <li data-complete-key="{{ $item['key'] }}" @class(['is-done' => ! empty($item['done'])])>
+                                        {{ $item['label'] }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
                         <div>
                             <label class="admin-label" for="blog-status">Status</label>
                             <select id="blog-status" name="status" class="admin-select">
@@ -263,6 +302,41 @@
                             <input id="blog-slug" type="text" name="slug" value="{{ old('slug', $blog->slug) }}"
                                 class="admin-input" placeholder="Auto from title if empty">
                         </div>
+                    </div>
+                </section>
+
+                <section class="admin-card admin-blog-form__side-card">
+                    <div class="admin-card__header">
+                        <div>
+                            <h2 class="admin-card__title">Internal links</h2>
+                            <p>Suggested services, industries, and related posts to weave in before publish.</p>
+                        </div>
+                    </div>
+                    <div class="admin-card__body">
+                        @php
+                            $internalLinkSuggestions = $internalLinkSuggestions ?? [];
+                        @endphp
+                        @if ($internalLinkSuggestions === [])
+                            <p class="admin-blog-form__links-hint">Add a title or body, then reopen this page to refresh suggestions.</p>
+                        @else
+                            <p class="admin-blog-form__links-hint">Copy a URL into the article as a natural anchor (aim for 2–3).</p>
+                            <ul class="admin-blog-form__links">
+                                @foreach ($internalLinkSuggestions as $link)
+                                    <li class="admin-blog-form__link">
+                                        <span class="admin-blog-form__link-type">{{ $link['type'] ?? 'page' }}</span>
+                                        <strong class="admin-blog-form__link-title">{{ $link['title'] ?? '' }}</strong>
+                                        @if (! empty($link['summary']))
+                                            <span class="admin-blog-form__link-summary">{{ $link['summary'] }}</span>
+                                        @endif
+                                        <div class="admin-blog-form__link-row">
+                                            <code class="admin-blog-form__link-url" data-copy-value="{{ $link['url'] ?? '' }}">{{ $link['url'] ?? '' }}</code>
+                                            <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm"
+                                                data-copy-link="{{ $link['url'] ?? '' }}">Copy</button>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </section>
 
@@ -313,6 +387,7 @@
 
 @push('styles')
     @include('layouts.admin.partials.richtexteditor-styles')
+    <link rel="stylesheet" href="{{ asset('css/admin-blog-content.css') }}">
 @endpush
 
 @push('scripts')
@@ -323,9 +398,30 @@
                 height: 640,
                 toolbar: 'blog',
                 placeholder: 'Write your blog content…',
+                wordCountGoal: 2000,
             });
 
             SuaveAdmin.bindRepeaters(document.querySelector('.admin-blog-form'));
+            SuaveAdmin.initBlogEditForm(document);
+
+            document.querySelectorAll('[data-copy-link]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const value = btn.getAttribute('data-copy-link') || '';
+                    if (!value) {
+                        return;
+                    }
+                    const done = function() {
+                        SuaveAdmin.createFlashMessage('success', 'Link copied. Paste it into the article as an anchor.');
+                    };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(value).then(done).catch(function() {
+                            window.prompt('Copy this link:', value);
+                        });
+                    } else {
+                        window.prompt('Copy this link:', value);
+                    }
+                });
+            });
 
             const imageInput = document.getElementById('blog-featured-image');
             const imageLabel = imageInput?.closest('.admin-blog-form__image');
