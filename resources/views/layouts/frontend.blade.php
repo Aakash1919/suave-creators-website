@@ -134,7 +134,7 @@
         .site-hero-bg__image{height:100%;left:50%;max-width:none;object-fit:cover;object-position:top center;position:absolute;top:0;transform:translateX(-50%);width:max(100%,1920px)}
         .site-hero-bg__pattern{height:100%;inset:0;mix-blend-mode:soft-light;object-fit:cover;object-position:top center;opacity:.2;position:absolute;width:100%}
         /* Reserve hero shell so deferred Tailwind/style.css cannot shove site-main. */
-        .site-main>.site-container.relative{box-sizing:border-box;min-height:36rem;padding-bottom:3rem;padding-top:2rem}
+        .site-main>.site-container.relative{box-sizing:border-box;min-height:13rem;padding-bottom:3rem;padding-top:2rem}
         .site-main>.single-blog-top{min-height:0;padding-bottom:.75rem;padding-top:.25rem}
         .site-main>.site-container.relative>.grid{align-items:center;display:grid;gap:2.5rem;grid-template-columns:minmax(0,1fr)}
         .site-main>.site-container.relative>.grid>div:first-child{max-width:36rem;min-height:17rem}
@@ -142,12 +142,13 @@
         .site-main>.site-container.relative h1{color:#fff;display:flex;flex-direction:column;font-size:36px;font-weight:600;line-height:1;margin:.5rem 0}
         .site-main>.single-blog-top h1{display:block;font-size:clamp(1.75rem,4vw,2.75rem);line-height:1.2;margin:.625rem 0 0}
         .site-main>.site-container.relative h1+p{color:#b1b9df;font-size:12px;line-height:1.25rem;margin:.5rem 0}
-        .hero-media-grid{aspect-ratio:670/512;column-gap:calc(12 / 670 * 100%);display:grid;flex-shrink:0;grid-template-columns:314fr 344fr;grid-template-rows:124fr 368fr;max-width:670px;row-gap:calc(20 / 512 * 100%);width:100%}
-        .hero-media-grid__tile{border-radius:22px;height:100%;min-height:0;min-width:0;overflow:hidden;width:100%}
-        .hero-media-grid__tile:nth-child(1){grid-column:1;grid-row:1 / span 2}
-        .hero-media-grid__tile:nth-child(2){grid-column:2;grid-row:1}
-        .hero-media-grid__tile:nth-child(3){grid-column:2;grid-row:2}
-        .hero-media-grid__tile img{display:block;height:100%;max-width:none;object-fit:cover;width:100%}
+        .hero-cs-visual{flex-shrink:0;isolation:isolate;margin-inline:auto;max-width:400px;min-height:399px;position:relative;width:100%}
+        .hero-cs-visual__poster{aspect-ratio:1/1;border-radius:22px;overflow:hidden;width:100%}
+        .hero-cs-visual__poster-img{display:block;height:100%;object-fit:cover;width:100%}
+        .hero-cs-visual__stage{inset:0;position:absolute}
+        .hero-cs-visual__mosaic{display:grid;gap:10px;grid-template-columns:1.05fr .95fr;grid-template-rows:minmax(150px,1.15fr) minmax(150px,1fr);height:100%;min-height:399px;width:100%}
+        .hero-cs-visual__tile{border-radius:22px;overflow:hidden}
+        .hero-cs-visual__stack{display:flex;flex-direction:column;gap:10px}
         .about-stat__icon{display:inline-flex;flex-shrink:0;height:40px;width:40px}
         .about-stat__icon-image{aspect-ratio:1/1;display:block;height:40px;width:40px}
         .about-stat__value [data-counter-end]{display:inline-block;font-variant-numeric:tabular-nums}
@@ -188,7 +189,7 @@
             .site-topbar img{height:.875rem;width:.875rem}
             .site-topbar__chevron{height:12px;width:12px}
             .site-header__logo img{height:2.5rem}
-            .site-main>.site-container.relative{min-height:38rem}
+            .site-main>.site-container.relative{min-height:13rem}
             .site-main>.single-blog-top{min-height:0}
             .site-main>.site-container.relative h1{font-size:3rem}
             .site-main>.single-blog-top h1{font-size:clamp(1.75rem,4vw,2.75rem)}
@@ -199,13 +200,17 @@
         }
         @media (min-width:768px){
             .site-header__cta{display:inline-flex;align-items:center}
-            .site-main>.site-container.relative{min-height:440px;padding-bottom:4rem;padding-top:2.5rem}
+            .site-main>.site-container.relative{min-height:180x;padding-bottom:4rem;padding-top:2.5rem}
             .site-main>.single-blog-top{min-height:0;padding-bottom:1rem;padding-top:.5rem}
             .site-main>.site-container.relative>.grid>div:first-child{min-height:18rem}
             .site-main>.site-container.relative h1+p{font-size:.875rem;line-height:1.5rem}
+            .site-main>.home-hero.relative>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+            .hero-cs-visual{margin-inline:auto 0}
+            .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+            .md\:justify-end{justify-content:flex-end}
         }
         @media (min-width:1024px){
-            .site-main>.site-container.relative{min-height:640px;padding-bottom:5rem;padding-top:52px}
+            .site-main>.site-container.relative{min-height:200px;padding-bottom:5rem;padding-top:52px}
             .site-main>.single-blog-top{min-height:0;padding-bottom:1.5rem;padding-top:.75rem}
             .site-main>.site-container.relative>.grid{gap:3rem;grid-template-columns:repeat(2,minmax(0,1fr))}
             .site-main>.site-container.relative>.grid>div:first-child{max-width:520px;min-height:22rem}
@@ -230,15 +235,20 @@
     @endif
     @if ($usesHomeHeroPattern)
         <link rel="preload" as="image" href="{{ asset('assets/hero/hero-pattern-left.svg') }}">
-        {{-- Home LCP collage tile — discoverable early; must not be lazy-loaded. --}}
-        <link
-            rel="preload"
-            as="image"
-            href="{{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }}"
-            imagesrcset="{{ asset('assets/hero/hero-team-brainstorm-overhead-320.webp') }} 320w, {{ asset('assets/hero/hero-team-brainstorm-overhead-480.webp') }} 480w, {{ asset('assets/hero/hero-team-brainstorm-overhead.webp') }} 628w"
-            imagesizes="(min-width: 1024px) 314px, (min-width: 768px) 262px, 47vw"
-            fetchpriority="high"
-        >
+        @php
+            $heroCsPoster = is_array($heroCaseStudies[0] ?? null)
+                ? trim((string) (($heroCaseStudies[0]['photo_image'] ?? $heroCaseStudies[0]['brand_image'] ?? '')))
+                : '';
+        @endphp
+        {{-- Home LCP: case-studies mosaic poster (replaces retired collage tile). --}}
+        @if ($heroCsPoster !== '')
+            <link
+                rel="preload"
+                as="image"
+                href="{{ str_starts_with($heroCsPoster, 'http') ? $heroCsPoster : asset($heroCsPoster) }}"
+                fetchpriority="high"
+            >
+        @endif
     @endif
 
     {{-- media="print" sheets download at low priority; preload keeps the design CSS on a high-priority fetch. --}}

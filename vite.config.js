@@ -9,8 +9,11 @@ export default defineConfig({
         }),
     ],
     server: {
+        // Prefer IPv4 — Windows browsers often refuse [::1]:5173 from public/hot.
+        host: '127.0.0.1',
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },
     },
 });
+

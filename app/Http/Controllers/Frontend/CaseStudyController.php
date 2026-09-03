@@ -44,9 +44,9 @@ class CaseStudyController extends FrontendController
         return $this->view('frontend.case-studies.appointment-insurance-case-study');
     }
 
-    public function cabviCaseStudy(): View
+    public function aiProductMatchingCaseStudy(): View
     {
-        return $this->draftView('frontend.case-studies.cabvi-case-study');
+        return $this->view('frontend.case-studies.ai-product-matching-case-study');
     }
 
     public function show(string $slug): RedirectResponse

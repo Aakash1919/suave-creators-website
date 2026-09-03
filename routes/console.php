@@ -9,8 +9,8 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('generate:blog')
-    ->days([ScheduleDefinition::TUESDAY, ScheduleDefinition::FRIDAY])
+Schedule::command('blogs:generate-trend-drafts')
+    ->days([ScheduleDefinition::TUESDAY, ScheduleDefinition::THURSDAY])
     ->at((string) config('blogs.trend_drafts.time', '09:00'))
     ->timezone((string) config('app.timezone', 'Asia/Kolkata'))
     ->when(fn (): bool => (bool) config('blogs.trend_drafts.enabled', true))

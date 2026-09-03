@@ -4,13 +4,13 @@
 <section class="case-study-detail-hero site-container" aria-labelledby="case-study-detail-heading">
   <div class="case-study-detail-hero__grid">
     <div class="case-study-detail-hero__copy">
-      <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
+      {{-- <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}">Home</a>
         <span aria-hidden="true">/</span>
         <a href="{{ route('case-studies') }}">Case Studies</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">Teerrath — From Stuck to a Clear Sacred Path</span>
-      </nav>
+      </nav> --}}
 
       <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-semibold text-amber-800" role="status">
         Draft preview — only visible while logged in

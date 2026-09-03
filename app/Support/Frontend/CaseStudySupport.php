@@ -20,7 +20,9 @@ class CaseStudySupport
         'suave-crm-tasks-case-study' => 'tasks-case-study',
         'teerrath-spiritual-commerce' => 'teerrath-case-study',
         'appointment-insurance-platform-case-study' => 'appointment-insurance-case-study',
-        'cabvi-product-matching' => 'cabvi-case-study',
+        'ai-product-matching' => 'ai-product-matching-case-study',
+        'cabvi-product-matching' => 'ai-product-matching-case-study',
+        'AI-product-matching' => 'ai-product-matching-case-study',
     ];
 
     /**
@@ -34,6 +36,227 @@ class CaseStudySupport
             self::catalog(),
             static fn (array $case): bool => ($case['status'] ?? '') === 'published'
         ));
+    }
+
+    /**
+     * Per-case mosaic scenes for the case-studies visual (one scene = one published case).
+     *
+     * @param  list<string>|null  $slugs  Optional catalog slug allowlist (order preserved when provided)
+     * @return list<array<string, mixed>>
+     */
+    public static function heroVisualScenes(int $limit = 4, ?array $slugs = null): array
+    {
+        $scenes = [];
+        $allow = null;
+
+        if (is_array($slugs) && $slugs !== []) {
+            $allow = array_values(array_filter(array_map(
+                static fn ($slug): string => trim((string) $slug),
+                $slugs
+            ), static fn (string $slug): bool => $slug !== ''));
+            $allow = $allow === [] ? null : $allow;
+        }
+
+        $cases = self::cases();
+
+        if (is_array($allow)) {
+            $bySlug = [];
+            foreach ($cases as $case) {
+                $slug = (string) ($case['slug'] ?? '');
+                if ($slug !== '') {
+                    $bySlug[$slug] = $case;
+                }
+            }
+
+            $ordered = [];
+            foreach ($allow as $slug) {
+                if (isset($bySlug[$slug])) {
+                    $ordered[] = $bySlug[$slug];
+                }
+            }
+            $cases = $ordered;
+        }
+
+        foreach ($cases as $case) {
+            $slug = (string) ($case['slug'] ?? '');
+            $title = trim((string) ($case['title'] ?? ''));
+            $industry = trim((string) ($case['industry'] ?? ''));
+            $listingImage = (string) ($case['image'] ?? '');
+
+            if ($slug === '' || $title === '' || $listingImage === '') {
+                continue;
+            }
+
+            $results = is_array($case['results'] ?? null) ? $case['results'] : [];
+            $primaryResult = is_array($results[0] ?? null) ? $results[0] : [];
+            $secondaryResult = is_array($results[1] ?? null) ? $results[1] : $primaryResult;
+            $primaryLabel = (string) ($primaryResult['label'] ?? '');
+            $secondaryLabel = (string) ($secondaryResult['label'] ?? '');
+            $subtitle = trim((string) ($case['listing_subtitle'] ?? ''));
+            $altBase = $industry !== '' ? "{$title} — {$industry}" : $title;
+            $alt = trim($altBase.' case study by Suave Creators');
+
+            $gallery = self::heroGalleryForSlug($slug, $listingImage);
+            $brandImage = $gallery[0];
+            $photoImage = $gallery[1] ?? $gallery[0];
+            $extraImage = $gallery[2] ?? null;
+
+            $scenes[] = [
+                'slug' => $slug,
+                'title' => $title,
+                'url' => (string) ($case['url'] ?? self::urlForSlug($slug)),
+                'alt' => $alt,
+                'tag' => $subtitle !== '' ? $subtitle : ($industry !== '' ? $industry : 'Case Study'),
+                'primary' => [
+                    'value' => (string) ($primaryResult['value'] ?? ''),
+                    'label' => $primaryLabel,
+                    'label_short' => self::shortHeroLabel($primaryLabel),
+                ],
+                'secondary' => [
+                    'value' => (string) ($secondaryResult['value'] ?? ''),
+                    'label' => $secondaryLabel,
+                    'label_short' => self::shortHeroLabel($secondaryLabel),
+                ],
+                'brand_image' => $brandImage,
+                'photo_image' => $photoImage,
+                'chart_image' => $extraImage,
+                'bars' => self::heroBarsFromResults($results),
+            ];
+
+            if (count($scenes) >= max(1, $limit)) {
+                break;
+            }
+        }
+
+        return $scenes;
+    }
+
+    /**
+     * @deprecated Use heroVisualScenes(); kept as a thin alias for HomeSupport callers.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function heroVisualItems(int $limit = 4): array
+    {
+        return self::heroVisualScenes($limit);
+    }
+
+    /**
+     * Relative asset paths for a case-study hero gallery (brand, photo, optional chart image).
+     *
+     * @return list<string> Hydrated public URLs
+     */
+    protected static function heroGalleryForSlug(string $slug, string $fallbackImage): array
+    {
+        $map = [
+            'turbo-trans-corporation-case-study' => [
+                'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
+                'assets/case-studies/turbo-trans/turbo-trans-dispatch-fleet-tile.webp',
+                'assets/case-studies/turbo-trans/turbo-trans-pipeline-chart-tile.webp',
+            ],
+            'ai-sales-coaching-platform-case-study' => [
+                'assets/case-studies/ai-sales-coaching/ai-sales-coach-brand-mark.webp',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coach-live-practice-tile.webp',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coach-score-chart-tile.webp',
+            ],
+            'suave-crm-outreach-case-study' => [
+                'assets/case-studies/suave-crm-outreach/outreach-crm-brand-mark.webp',
+                'assets/case-studies/suave-crm-outreach/outreach-map-discovery-tile.webp',
+                'assets/case-studies/suave-crm-outreach/outreach-ai-analysis-tile.webp',
+            ],
+            'suave-crm-tasks-case-study' => [
+                'assets/case-studies/suave-crm-tasks/tasks-crm-brand-mark.webp',
+                'assets/case-studies/suave-crm-tasks/tasks-kanban-board-tile.webp',
+                'assets/case-studies/suave-crm-tasks/tasks-drawer-metric-tile.webp',
+            ],
+            'appointment-insurance-platform-case-study' => [
+                'assets/case-studies/shownoshow/show-check-brand-mark.webp',
+                'assets/case-studies/shownoshow/show-check-confirmed-tile.webp',
+                'assets/case-studies/shownoshow/show-check-savings-chart-tile.webp',
+            ],
+            'teerrath-spiritual-commerce' => [
+                'assets/case-studies/teerrath/teerrath-brand-mark.webp',
+                'assets/case-studies/teerrath/teerrath-energy-scan-tile.webp',
+                'assets/case-studies/teerrath/teerrath-insight-chart-tile.webp',
+            ],
+            'ai-product-matching' => [
+                'assets/case-studies/cabvi/cabvi-brand-mark.webp',
+                'assets/case-studies/cabvi/cabvi-product-matching-tile.webp',
+                'assets/case-studies/cabvi/cabvi-efficiency-chart-tile.webp',
+            ],
+        ];
+
+        $paths = $map[$slug] ?? [];
+
+        if ($paths === []) {
+            $paths = [$fallbackImage];
+        }
+
+        $urls = [];
+
+        foreach ($paths as $path) {
+            $url = str_starts_with($path, 'http://') || str_starts_with($path, 'https://')
+                ? $path
+                : self::publicImageUrl($path);
+
+            if ($url !== '') {
+                $urls[] = $url;
+            }
+        }
+
+        if ($urls === []) {
+            $urls[] = $fallbackImage;
+        }
+
+        return $urls;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $results
+     * @return list<int>
+     */
+    protected static function heroBarsFromResults(array $results): array
+    {
+        $defaults = [42, 68, 92, 58, 76];
+        $heights = [];
+
+        foreach (array_slice($results, 0, 5) as $index => $result) {
+            $parsed = self::parseMetricValue((string) ($result['value'] ?? ''));
+            if (! empty($parsed['numeric']) && $parsed['end'] > 0) {
+                $end = (float) $parsed['end'];
+                // Percent-like values stay in range; multipliers (3.4x) scale up.
+                $height = $end <= 100 ? max(28, min(96, (int) round($end))) : max(40, min(96, (int) round(28 + ($end * 12))));
+                $heights[] = $height;
+            } else {
+                $heights[] = $defaults[$index] ?? 55;
+            }
+        }
+
+        while (count($heights) < 5) {
+            $heights[] = $defaults[count($heights)] ?? 55;
+        }
+
+        return $heights;
+    }
+
+    /**
+     * Keep mosaic metric captions readable (GrowthNatives-style short lines).
+     */
+    protected static function shortHeroLabel(string $label, int $maxWords = 5): string
+    {
+        $label = trim(preg_replace('/\s+/u', ' ', $label) ?? '');
+
+        if ($label === '') {
+            return '';
+        }
+
+        $words = preg_split('/\s+/u', $label, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+        if (count($words) <= $maxWords) {
+            return $label;
+        }
+
+        return implode(' ', array_slice($words, 0, $maxWords));
     }
 
     public static function routeName(string $slug): ?string
@@ -138,7 +361,7 @@ class CaseStudySupport
     {
         return [
             [
-                'src' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'src' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
                 'alt' => 'Show No Show event booking product banner by Suave Creators',
                 'fan_rotate' => -1.6,
                 'fan_y' => -18,
@@ -182,7 +405,7 @@ class CaseStudySupport
     }
 
     /**
-     * Split a metric string such as "~55%", "3.4x", "~$261", or "01" for count-up animation.
+     * Split a metric string such as "+55%", "3.4x", "+$261", or "01" for count-up animation.
      *
      * @return array{raw: string, numeric: bool, prefix: string, end: float, decimals: int, suffix: string, pad: int, initial: string}
      */
@@ -288,10 +511,10 @@ class CaseStudySupport
                 'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
-                    ['value' => '~55%', 'label' => 'Faster path from hire to confident customer calls'],
-                    ['value' => '~60%', 'label' => 'Less manager time spent reviewing recordings for feedback'],
-                    ['value' => '~50%', 'label' => 'Improvement in call quality consistency as the team expands'],
-                    ['value' => '~45%', 'label' => 'Fewer opportunities lost waiting on delayed coaching'],
+                    ['value' => '+55%', 'label' => 'Faster path from hire to confident customer calls'],
+                    ['value' => '+60%', 'label' => 'Less manager time spent reviewing recordings for feedback'],
+                    ['value' => '+50%', 'label' => 'Improvement in call quality consistency as the team expands'],
+                    ['value' => '+45%', 'label' => 'Fewer opportunities lost waiting on delayed coaching'],
                 ],
                 'technologies' => [
                     'AI sales coaching',
@@ -304,7 +527,7 @@ class CaseStudySupport
             ],
             [
                 'slug' => 'suave-crm-outreach-case-study',
-                'title' => 'The Suave App Outreach — From a Complex Process to a Clear B2B CRM Sales Workspace',
+                'title' => 'The Suave App Outreach - From a Complex Process to a Clear B2B CRM Sales Workspace',
                 'status' => 'published',
                 'image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
                 'short_description' => 'We redesigned the suave app’s fragmented B2B CRM outbound sales workflow into one prospecting workspace — map-based company discovery, AI sales briefings, cold email automation, and pipeline tracking — with about 65% fewer steps.',
@@ -313,8 +536,8 @@ class CaseStudySupport
                 'service_slugs' => ['custom-crm-development', 'ui-ux-design-services'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
-                    ['value' => '~65%', 'label' => 'Fewer steps for routine B2B CRM outbound sales prospecting'],
-                    ['value' => '~35%', 'label' => 'Less effort to complete the same sales pipeline work'],
+                    ['value' => '+65%', 'label' => 'Fewer steps for routine B2B CRM outbound sales prospecting'],
+                    ['value' => '+35%', 'label' => 'Less effort to complete the same sales pipeline work'],
                     ['value' => '1', 'label' => 'Connected CRM workspace from map discovery to cold email'],
                     ['value' => '3', 'label' => 'Focused areas — Outreach, Targets, and Email automation'],
                 ],
@@ -329,7 +552,7 @@ class CaseStudySupport
             ],
             [
                 'slug' => 'suave-crm-tasks-case-study',
-                'title' => 'The Suave App Tasks — From a Complex Process to a Clear B2B CRM Task Management Workspace',
+                'title' => 'The Suave App Tasks - From a Complex Process to a Clear B2B CRM Task Management Workspace',
                 'status' => 'published',
                 'image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
                 'short_description' => 'We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.',
@@ -338,8 +561,8 @@ class CaseStudySupport
                 'service_slugs' => ['custom-crm-development'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
-                    ['value' => '~50%', 'label' => 'Less switching between separate Kanban and List views'],
-                    ['value' => '~45%', 'label' => 'Faster answers to overdue and assigned task questions'],
+                    ['value' => '+50%', 'label' => 'Less switching between separate Kanban and List views'],
+                    ['value' => '+45%', 'label' => 'Faster answers to overdue and assigned task questions'],
                     ['value' => '1', 'label' => 'Connected B2B CRM task management workspace from search to drawer'],
                     ['value' => '4', 'label' => 'Focused drawer areas — Overview, Comments, Log Time, Attachments'],
                 ],
@@ -383,17 +606,18 @@ class CaseStudySupport
                 'slug' => 'appointment-insurance-platform-case-study',
                 'title' => 'Appointment Insurance That Makes Showing Up the Default',
                 'status' => 'published',
-                'image' => 'assets/case-studies/shownoshow/show_no _show banner.webp',
+                'image' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
+
                 'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
                 'industry' => 'Appointment Scheduling / Fintech',
                 'service_slugs' => ['web-development-services', 'enterprise-software-solutions'],
                 'industry_slugs' => ['healthcare', 'finance-banking-software-development'],
                 'results' => [
-                    ['value' => '~$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
-                    ['value' => '~90%', 'label' => 'Less card-fee waste on unused deposit money that comes back'],
-                    ['value' => '~70%', 'label' => 'Less manual chasing for confirmations, deposits, and “are you coming?”'],
-                    ['value' => '~65%', 'label' => 'Improvement in recovering value from no-shows instead of treating them as pure loss'],
+                    ['value' => '+$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
+                    ['value' => '+90%', 'label' => 'Less card-fee waste on unused deposit money that comes back'],
+                    ['value' => '+70%', 'label' => 'Less manual chasing for confirmations, deposits, and “are you coming?”'],
+                    ['value' => '+65%', 'label' => 'Improvement in recovering value from no-shows instead of treating them as pure loss'],
                 ],
                 'technologies' => [
                     'Appointment insurance',
@@ -405,20 +629,20 @@ class CaseStudySupport
                 ],
             ],
             [
-                'slug' => 'cabvi-product-matching',
-                'title' => 'CABVI — From Manual Product Matching to an Automated AI Workspace',
-                'status' => 'draft',
-                'image' => 'assets/case-studies/cabvi/cabvi-logo.png',
-                'short_description' => 'CABVI replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
+                'slug' => 'ai-product-matching',
+                'title' => 'AI Product Matching to an Automated AI Workspace',
+                'status' => 'published',
+                'image' => 'assets/case-studies/cabvi/cabvi-logo.webp',
+                'short_description' => 'AI product matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
                 'listing_subtitle' => 'Automated AI Product Matching',
                 'industry' => 'Nonprofit / Procurement',
                 'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups', 'education-elearning-platforms'],
                 'results' => [
-                    ['value' => '~70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],
-                    ['value' => '~60%', 'label' => 'Improvement in match qualification speed'],
-                    ['value' => '~75%', 'label' => 'Less spreadsheet re-entry to keep match records'],
-                    ['value' => '~50%', 'label' => 'Less manpower burned on the find–qualify–record loop'],
+                    ['value' => '+70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],
+                    ['value' => '+60%', 'label' => 'Improvement in match qualification speed'],
+                    ['value' => '+75%', 'label' => 'Less spreadsheet re-entry to keep match records'],
+                    ['value' => '+50%', 'label' => 'Less manpower burned on the find–qualify–record loop'],
                 ],
             ],
             [

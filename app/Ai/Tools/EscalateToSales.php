@@ -3,6 +3,7 @@
 namespace App\Ai\Tools;
 
 use App\Models\ChatLead;
+use App\Services\CrmLeadSyncService;
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Ai\Contracts\Tool;
 use Laravel\Ai\Tools\Request;
@@ -26,6 +27,7 @@ class EscalateToSales implements Tool
     public function handle(Request $request): Stringable|string
     {
         $this->lead->markEscalated();
+        app(CrmLeadSyncService::class)->syncChat($this->lead->fresh() ?? $this->lead);
 
         $reason = trim((string) ($request['reason'] ?? 'Request requires a human sales follow-up.'));
 

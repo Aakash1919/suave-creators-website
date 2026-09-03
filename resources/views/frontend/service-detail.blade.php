@@ -163,7 +163,7 @@
 <!-- 5. Service Move Marquee Section End -->
 
 <!-- 6. Capabilities Section Start -->
-<section class="full-bleed web-services{{ $capabilitiesAsSlider ? ' web-services--capabilities-slider' : '' }} bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="service-capabilities-heading">
+<section class="full-bleed web-services{{ $capabilitiesAsSlider ? ' web-services--capabilities-slider' : '' }}{{ in_array($service['slug'] ?? '', ['web-development-services', 'custom-crm-development', 'enterprise-software-solutions','e-commerce-development','ui-ux-design-services','ai-solutions'], true) ? ' web-services--brown-hover' : '' }} bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" style="background-image: url('{{ asset('assets/background/web-services-section-bg.png') }}')" aria-labelledby="service-capabilities-heading">
   <div class="web-services__inner section-inner">
     <header class="web-services__header">
       <div class="mb-4 flex items-center gap-2">

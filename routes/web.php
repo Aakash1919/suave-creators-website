@@ -56,7 +56,8 @@ Route::get('/case-studies/outreach-case-study', [CaseStudyController::class, 'ou
 Route::get('/case-studies/tasks-case-study', [CaseStudyController::class, 'tasksCaseStudy'])->name('tasks-case-study');
 Route::get('/case-studies/teerrath-case-study', [CaseStudyController::class, 'teerrathCaseStudy'])->name('teerrath-case-study');
 Route::get('/case-studies/appointment-insurance-case-study', [CaseStudyController::class, 'appointmentInsuranceCaseStudy'])->name('appointment-insurance-case-study');
-Route::get('/case-studies/cabvi-case-study', [CaseStudyController::class, 'cabviCaseStudy'])->name('cabvi-case-study');
+Route::redirect('/case-studies/cabvi-case-study', '/case-studies/ai-product-matching-case-study', 301);
+Route::get('/case-studies/ai-product-matching-case-study', [CaseStudyController::class, 'aiProductMatchingCaseStudy'])->name('ai-product-matching-case-study');
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');

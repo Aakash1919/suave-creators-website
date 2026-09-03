@@ -4,16 +4,16 @@
 <section class="case-study-detail-hero site-container" aria-labelledby="case-study-detail-heading">
   <div class="case-study-detail-hero__grid">
     <div class="case-study-detail-hero__copy">
-      <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
+      {{-- <nav class="case-studies-hero__breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}">Home</a>
         <span aria-hidden="true">/</span>
         <a href="{{ route('case-studies') }}">Case Studies</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">The Suave App Outreach — From a Complex Process to a Clear B2B CRM Sales Workspace</span>
-      </nav>
+      </nav> --}}
 
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">B2B SaaS / Sales CRM</p>
-      <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">The Suave App Outreach — From a Complex Process to a Clear B2B CRM Sales Workspace</h1>
+      <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">The Suave App Outreach - From a Complex Process to a Clear B2B CRM Sales Workspace</h1>
       <p class="case-study-detail-hero__lead">We redesigned the suave app’s fragmented B2B CRM outbound sales workflow into one prospecting workspace — map-based company discovery, AI sales briefings, cold email automation, and pipeline tracking — with about 65% fewer steps.</p>
 
       <div class="case-study-detail-hero__meta">
@@ -30,17 +30,284 @@
       </div>
     </div>
 
-      <figure class="case-study-detail-hero__media">
-        <img
-          src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png') }}"
-          alt="The Suave App Outreach — From a Complex Process to a Clear B2B CRM Sales Workspace"
-          title="The Suave App Outreach — From a Complex Process to a Clear B2B CRM Sales Workspace"
-          width="960"
-          height="720"
-          loading="eager"
-          decoding="async"
-        >
+      <figure
+        class="case-study-detail-hero__media outreach-hero"
+        data-outreach-hero
+        aria-label="The Suave App Outreach — from a fragmented manual process to a unified B2B CRM sales workspace with about 65% fewer steps"
+      >
+        <div class="outreach-hero__board">
+          <div class="outreach-hero__top">
+            <article class="outreach-hero__card outreach-hero__card--before">
+              <span class="outreach-hero__badge">Before</span>
+              <p class="outreach-hero__headline">Fragmented. Manual. Too many steps.</p>
+              <div class="outreach-hero__before-flow">
+                <span class="outreach-hero__node outreach-hero__node--1">
+                  <span class="outreach-hero__node-disc">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-email-icon.webp') }}"
+                      alt="Email outreach icon for Suave CRM sales workflow"
+                      title="Email outreach icon for Suave CRM sales workflow"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                </span>
+                <span class="outreach-hero__before-line outreach-hero__before-line--h-top" aria-hidden="true"></span>
+                <span class="outreach-hero__node outreach-hero__node--2">
+                  <span class="outreach-hero__node-disc">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-phone-icon.webp') }}"
+                      alt="Phone call icon for Suave CRM outbound sales"
+                      title="Phone call icon for Suave CRM outbound sales"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                </span>
+                <span class="outreach-hero__before-line outreach-hero__before-line--v-mid" aria-hidden="true"></span>
+                <span class="outreach-hero__node outreach-hero__node--3">
+                  <span class="outreach-hero__node-disc">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-table-icon.webp') }}"
+                      alt="Spreadsheet table icon for Suave CRM prospecting steps"
+                      title="Spreadsheet table icon for Suave CRM prospecting steps"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                </span>
+                <span class="outreach-hero__before-line outreach-hero__before-line--v-bot" aria-hidden="true"></span>
+                <span class="outreach-hero__node outreach-hero__node--4">
+                  <span class="outreach-hero__node-disc">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-clipboard-icon.webp') }}"
+                      alt="Document checklist icon for Suave CRM outbound sales"
+                      title="Document checklist icon for Suave CRM outbound sales"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                </span>
+                <span class="outreach-hero__before-line outreach-hero__before-line--h-bot" aria-hidden="true"></span>
+                <span class="outreach-hero__node outreach-hero__node--5">
+                  <span class="outreach-hero__node-disc">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-document-icon.webp') }}"
+                      alt="Clipboard task icon for Suave CRM sales workflow"
+                      title="Clipboard task icon for Suave CRM sales workflow"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                </span>
+              </div>
+            </article>
+
+            <div class="outreach-hero__transition" aria-hidden="true">
+              <span class="outreach-hero__transition-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </span>
+            </div>
+
+            <article class="outreach-hero__card outreach-hero__card--after">
+              <span class="outreach-hero__badge outreach-hero__badge--after">After</span>
+              <p class="outreach-hero__headline">Unified. Intelligent. Effortless Outreach.</p>
+
+              <div class="outreach-hero__after-flow">
+                <div class="outreach-hero__step outreach-hero__step--1">
+                  <span class="outreach-hero__step-icon">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-map-discovery-icon.webp') }}"
+                      alt="Map discovery icon for Suave CRM company search"
+                      title="Map discovery icon for Suave CRM company search"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                  <span class="outreach-hero__step-label">Map Discovery</span>
+                </div>
+                <span class="outreach-hero__chevron outreach-hero__chevron--1" aria-hidden="true">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/Arrow.webp') }}"
+                    alt="Next step arrow for Suave CRM outreach workflow"
+                    title="Next step arrow for Suave CRM outreach workflow"
+                    width="8"
+                    height="10"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <div class="outreach-hero__step outreach-hero__step--2">
+                  <span class="outreach-hero__step-icon">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-unified-leads-icon.webp') }}"
+                      alt="Unified leads icon for Suave CRM sales pipeline"
+                      title="Unified leads icon for Suave CRM sales pipeline"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                  <span class="outreach-hero__step-label">Unified Leads</span>
+                </div>
+                <span class="outreach-hero__chevron outreach-hero__chevron--2" aria-hidden="true">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/Arrow.webp') }}"
+                    alt="Next step arrow for Suave CRM outreach workflow"
+                    title="Next step arrow for Suave CRM outreach workflow"
+                    width="8"
+                    height="10"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <div class="outreach-hero__step outreach-hero__step--3">
+                  <span class="outreach-hero__step-icon">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-ai-briefings-icon.webp') }}"
+                      alt="AI briefings icon for Suave CRM sales prospecting"
+                      title="AI briefings icon for Suave CRM sales prospecting"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                  <span class="outreach-hero__step-label">AI Briefings</span>
+                </div>
+                <span class="outreach-hero__chevron outreach-hero__chevron--3" aria-hidden="true">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/Arrow.webp') }}"
+                    alt="Next step arrow for Suave CRM outreach workflow"
+                    title="Next step arrow for Suave CRM outreach workflow"
+                    width="8"
+                    height="10"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <div class="outreach-hero__step outreach-hero__step--4">
+                  <span class="outreach-hero__step-icon">
+                    <img
+                      src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-take-action-icon.webp') }}"
+                      alt="Take action icon for Suave CRM outreach workflow"
+                      title="Take action icon for Suave CRM outreach workflow"
+                      width="24"
+                      height="24"
+                      loading="eager"
+                      decoding="async"
+                    >
+                  </span>
+                  <span class="outreach-hero__step-label">Take Action</span>
+                </div>
+              </div>
+
+              <div class="outreach-hero__metric">
+                <span class="outreach-hero__metric-icon">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-fewer-steps-icon.png') }}"
+                    alt="Trend icon for fewer Suave CRM prospecting steps"
+                    title="Trend icon for fewer Suave CRM prospecting steps"
+                    width="24"
+                    height="24"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                <p class="outreach-hero__metric-text">~<span data-outreach-count>65</span>% fewer steps</p>
+              </div>
+
+              <div class="outreach-hero__graph">
+                <x-frontend.case-study-metric-chart tone="blue" :delay="4550" />
+              </div>
+            </article>
+          </div>
+
+          <article class="outreach-hero__card outreach-hero__card--actions">
+            <p class="outreach-hero__actions-title">Next Actions</p>
+            <div class="outreach-hero__actions">
+              <span class="outreach-hero__action">
+                <span class="outreach-hero__action-icon outreach-hero__action-icon--email">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-send-email-icon.png') }}"
+                    alt="Send email action icon for Suave CRM outreach"
+                    title="Send email action icon for Suave CRM outreach"
+                    width="24"
+                    height="24"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                Send Email
+              </span>
+              <span class="outreach-hero__action">
+                <span class="outreach-hero__action-icon outreach-hero__action-icon--call">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-call-icon.png') }}"
+                    alt="Call action icon for Suave CRM sales workspace"
+                    title="Call action icon for Suave CRM sales workspace"
+                    width="24"
+                    height="24"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                Call
+              </span>
+              <span class="outreach-hero__action">
+                <span class="outreach-hero__action-icon outreach-hero__action-icon--task">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-create-task-icon.png') }}"
+                    alt="Create task action icon for Suave CRM workspace"
+                    title="Create task action icon for Suave CRM workspace"
+                    width="24"
+                    height="24"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                Create Task
+              </span>
+              <span class="outreach-hero__action">
+                <span class="outreach-hero__action-icon outreach-hero__action-icon--sequence">
+                  <img
+                    src="{{ asset('assets/case-studies/suave-crm-outreach/outreach-add-sequence-icon.png') }}"
+                    alt="Add to sequence icon for Suave CRM email automation"
+                    title="Add to sequence icon for Suave CRM email automation"
+                    width="24"
+                    height="24"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+                Add to Sequence
+              </span>
+            </div>
+          </article>
+        </div>
       </figure>
+      <script>
+        (function () {
+          var el = document.querySelector('[data-outreach-hero]');
+          if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          el.classList.add('is-armed');
+        })();
+      </script>
   </div>
 </section>
 
@@ -52,11 +319,11 @@
     </header>
     <div class="case-study-metrics__row">
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~65%</p>
+            <p class="case-study-metrics__value">+65%</p>
             <h3 class="case-study-metrics__label">Fewer steps for routine B2B CRM outbound sales prospecting</h3>
           </div>
           <div class="case-study-metrics__box">
-            <p class="case-study-metrics__value">~35%</p>
+            <p class="case-study-metrics__value">+35%</p>
             <h3 class="case-study-metrics__label">Less effort to complete the same sales pipeline work</h3>
           </div>
           <div class="case-study-metrics__box">
@@ -173,3 +440,78 @@
   </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+  (function () {
+    var root = document.querySelector('[data-outreach-hero]');
+    if (!root) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    var countEl = root.querySelector('[data-outreach-count]');
+    var countFrame = 0;
+    var timers = [];
+
+    function later(fn, delay) {
+      timers.push(setTimeout(fn, delay));
+    }
+
+    function countUp() {
+      if (!countEl) return;
+      if (countFrame) cancelAnimationFrame(countFrame);
+      var end = 65;
+      var duration = 700;
+      var start = null;
+      countEl.textContent = '0';
+
+      function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        countEl.textContent = String(Math.round(end * eased));
+        if (progress < 1) countFrame = requestAnimationFrame(step);
+      }
+
+      countFrame = requestAnimationFrame(step);
+    }
+
+    function play() {
+      timers.forEach(clearTimeout);
+      timers = [];
+      if (countFrame) cancelAnimationFrame(countFrame);
+      root.classList.remove('is-playing');
+      if (countEl) countEl.textContent = '0';
+      void root.offsetWidth;
+      root.classList.add('is-playing');
+      later(countUp, 4150);
+    }
+
+    function boot() {
+      root.classList.add('is-armed');
+
+      if (!('IntersectionObserver' in window)) {
+        play();
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          play();
+        });
+      }, { threshold: 0.35 });
+
+      observer.observe(root);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
+  })();
+</script>
+@endpush
