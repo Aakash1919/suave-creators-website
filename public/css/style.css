@@ -228,12 +228,41 @@
   transform: translate(var(--hero-cs-drag-x, 0px), var(--hero-cs-drag-y, -18px)) scale(1.025) rotate(-1deg);
 }
 
-.hero-cs-visual__tile--metric {
-  background: #010640;
+.hero-cs-visual__tile--metric,
+.hero-cs-visual__tile--photo,
+.hero-cs-visual__tile--chart.has-chart-image {
+  background: none;
+  box-shadow: none;
   padding: 0;
 }
 
-.hero-cs-visual__metric-img {
+.hero-cs-visual__tile--metric:hover,
+.hero-cs-visual__tile--metric:focus-visible,
+.hero-cs-visual__tile--photo:hover,
+.hero-cs-visual__tile--photo:focus-visible,
+.hero-cs-visual__tile--chart.has-chart-image:hover,
+.hero-cs-visual__tile--chart.has-chart-image:focus-visible,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--metric,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--metric,
+.hero-cs-visual.is-exiting .hero-cs-visual__tile--metric,
+.hero-cs-visual.is-entering .hero-cs-visual__tile--metric,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--photo,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--photo,
+.hero-cs-visual.is-exiting .hero-cs-visual__tile--photo,
+.hero-cs-visual.is-entering .hero-cs-visual__tile--photo,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--chart.has-chart-image,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--chart.has-chart-image,
+.hero-cs-visual.is-exiting .hero-cs-visual__tile--chart.has-chart-image,
+.hero-cs-visual.is-entering .hero-cs-visual__tile--chart.has-chart-image,
+.hero-cs-visual__tile--metric.is-cursor-target,
+.hero-cs-visual__tile--photo.is-cursor-target,
+.hero-cs-visual__tile--chart.has-chart-image.is-cursor-target {
+  box-shadow: none;
+}
+
+.hero-cs-visual__metric-img,
+.hero-cs-visual__photo-img,
+.hero-cs-visual__tile--chart.has-chart-image .hero-cs-visual__chart-img {
   display: block;
   height: 100%;
   inset: 0;
@@ -244,7 +273,9 @@
   width: 100%;
 }
 
-.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--metric:hover .hero-cs-visual__metric-img {
+.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--metric:hover .hero-cs-visual__metric-img,
+.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--photo:hover .hero-cs-visual__photo-img,
+.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--chart:hover .hero-cs-visual__chart-img {
   transform: scale(1.035);
 }
 
@@ -294,26 +325,6 @@
 
 .hero-cs-visual__tile:hover .hero-cs-visual__brand-mark {
   transform: scale(1.05);
-}
-
-.hero-cs-visual__tile--photo {
-  background: #010640;
-  padding: 0;
-}
-
-.hero-cs-visual__photo-img {
-  display: block;
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  object-position: center;
-  position: absolute;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-  width: 100%;
-}
-
-.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--photo:hover .hero-cs-visual__photo-img {
-  transform: scale(1.035);
 }
 
 .hero-cs-visual__tile--photo .hero-cs-visual__fade {
@@ -379,24 +390,11 @@
 .hero-cs-visual__chart-img {
   border-radius: 0;
   display: none;
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  object-position: center;
-  position: absolute;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  width: 100%;
-}
-
-.hero-cs-visual.is-ready:not(.is-exiting):not(.is-entering):not(.is-dragging):not(.is-pressing) .hero-cs-visual__tile--chart:hover .hero-cs-visual__chart-img {
-  transform: scale(1.035);
 }
 
 .hero-cs-visual__tile--chart.has-chart-image {
   align-items: stretch;
-  background: #010640;
   justify-content: flex-start;
-  padding: 0;
 }
 
 .hero-cs-visual__tile--chart.has-chart-image .hero-cs-visual__fade {
@@ -464,6 +462,9 @@
 }
 
 .hero-cs-visual__fade {
+  background: none;
+  border: none;
+  box-shadow: none;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -506,6 +507,25 @@
   transform: translate(var(--hero-cs-drag-x, 0px), var(--hero-cs-drag-y, -18px)) scale(1.035) rotate(-1deg);
   transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 12;
+}
+
+/* Image tiles keep no border/bg even during cursor/drag states. */
+.hero-cs-visual__tile--metric.is-cursor-target,
+.hero-cs-visual__tile--photo.is-cursor-target,
+.hero-cs-visual__tile--chart.has-chart-image.is-cursor-target,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--metric,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--metric,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--photo,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--photo,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--chart.has-chart-image,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--chart.has-chart-image,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--metric.is-grabbed,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--metric.is-grabbed,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--photo.is-grabbed,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--photo.is-grabbed,
+.hero-cs-visual.is-dragging .hero-cs-visual__tile--chart.has-chart-image.is-grabbed,
+.hero-cs-visual.is-pressing .hero-cs-visual__tile--chart.has-chart-image.is-grabbed {
+  box-shadow: none;
 }
 
 .hero-cs-visual.is-dragging .hero-cs-visual__tile:not(.is-grabbed) {
