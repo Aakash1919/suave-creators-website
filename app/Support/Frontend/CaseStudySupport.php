@@ -118,7 +118,8 @@ class CaseStudySupport
                 'brand_image' => $brandImage,
                 'photo_image' => $photoImage,
                 'chart_image' => $extraImage,
-                'metric_image' => self::heroMetricImageForSlug($slug),
+                'metric_image' => $brandImage,
+                'theme' => self::heroVisualThemeForSlug($slug),
                 'bars' => self::heroBarsFromResults($results),
             ];
 
@@ -156,17 +157,17 @@ class CaseStudySupport
             'ai-sales-coaching-platform-case-study' => [
                 'assets/case-studies/ai-sales-coaching/AI-sales-coaching1.webp',
                 'assets/case-studies/ai-sales-coaching/ai-sales-coaching2 copy.png',
-                'assets/case-studies/ai-sales-coaching/ai-salesCoaching3.webp',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coaching-03.webp',
             ],
             'suave-crm-outreach-case-study' => [
-                'assets/case-studies/suave-crm-outreach/outbound-banner1.webp',
+                'assets/case-studies/suave-crm-outreach/outbound-banner.webp',
                 'assets/case-studies/suave-crm-outreach/b2b-outreach-crm.webp',
                 'assets/case-studies/suave-crm-outreach/B2B-crm-outreach3.webp',
             ],
             'suave-crm-tasks-case-study' => [
                 'assets/case-studies/suave-crm-tasks/suave-crm-banner1.webp',
                 'assets/case-studies/suave-crm-tasks/suave-crm-banner2.webp',
-                'assets/case-studies/suave-crm-tasks/suave-crm-banner30.png',
+                'assets/case-studies/suave-crm-tasks/suave-crm-task3.png',
             ],
             'appointment-insurance-platform-case-study' => [
                 'assets/case-studies/appointment-insurance/appointment-banner1.webp',
@@ -177,7 +178,7 @@ class CaseStudySupport
             'AI-product-matching' => [
                 'assets/case-studies/ai-product-matching/product-matching-banner1.webp',
                 'assets/case-studies/ai-product-matching/AI-product-automation.webp',
-                'assets/case-studies/ai-product-matching/ai-product-matching-procurement-speed-tile.webp',
+                'assets/case-studies/ai-product-matching/ai-product-matching03.webp',
             ],
         ];
 
@@ -204,6 +205,27 @@ class CaseStudySupport
         }
 
         return $urls;
+    }
+
+    /**
+     * CSS theme token for hero mosaic cards (unique per case-study scene).
+     */
+    public static function heroVisualThemeForSlug(string $slug): string
+    {
+        $map = [
+            'ai-sales-coaching-platform-case-study' => 'ai-coach',
+            'suave-crm-outreach-case-study' => 'outreach',
+            'turbo-trans-corporation-case-study' => 'turbo-trans',
+            'suave-crm-tasks-case-study' => 'tasks',
+            'appointment-insurance-platform-case-study' => 'appointment-insurance',
+            'teerrath-spiritual-commerce' => 'teerrath',
+            'AI-product-matching' => 'ai-product-matching',
+            'ai-product-matching' => 'ai-product-matching',
+        ];
+
+        $theme = $map[$slug] ?? 'outreach';
+
+        return preg_replace('/[^a-z0-9-]+/', '-', strtolower($theme)) ?: 'outreach';
     }
 
     /**

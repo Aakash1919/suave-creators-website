@@ -70,9 +70,15 @@ class HeroCaseStudiesVisual extends Component
             $bars = is_array($item['bars'] ?? null) ? array_values($item['bars']) : [42, 68, 92, 58, 76];
             $chartImage = trim((string) ($item['chart_image'] ?? ''));
             $metricImage = trim((string) ($item['metric_image'] ?? ''));
+            $slug = (string) ($item['slug'] ?? '');
+            $theme = trim((string) ($item['theme'] ?? ''));
+
+            if ($theme === '') {
+                $theme = CaseStudySupport::heroVisualThemeForSlug($slug);
+            }
 
             $scenes[] = [
-                'slug' => (string) ($item['slug'] ?? ''),
+                'slug' => $slug,
                 'title' => $title,
                 'url' => (string) ($item['url'] ?? ''),
                 'alt' => $alt,
@@ -89,6 +95,7 @@ class HeroCaseStudiesVisual extends Component
                 'photo_image' => $photo,
                 'chart_image' => $chartImage !== '' ? $chartImage : null,
                 'metric_image' => $metricImage !== '' ? $metricImage : $photo,
+                'theme' => $theme,
                 'bars' => array_map(static fn ($h): int => (int) $h, array_slice(array_pad($bars, 5, 55), 0, 5)),
             ];
         }
