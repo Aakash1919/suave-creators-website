@@ -169,15 +169,15 @@ class CaseStudySupport
                 'assets/case-studies/suave-crm-tasks/suave-crm-banner30.png',
             ],
             'appointment-insurance-platform-case-study' => [
-                'assets/case-studies/shownoshow/appointment-banner1.webp',
-                'assets/case-studies/shownoshow/appointment-banner2.webp',
-                'assets/case-studies/shownoshow/appointment-banner6.png',
+                'assets/case-studies/appointment-insurance/appointment-banner1.webp',
+                'assets/case-studies/appointment-insurance/appointment-banner2.webp',
+                'assets/case-studies/appointment-insurance/appointment-banner6.png',
             ],
          
             'AI-product-matching' => [
-                'assets/case-studies/cabvi/product-matching-banner1.webp',
-                'assets/case-studies/cabvi/AI-product-automation.webp',
-                'assets/case-studies/cabvi/Automated-ai3.webp',
+                'assets/case-studies/ai-product-matching/product-matching-banner1.webp',
+                'assets/case-studies/ai-product-matching/AI-product-automation.webp',
+                'assets/case-studies/ai-product-matching/ai-product-matching-procurement-speed-tile.webp',
             ],
         ];
 
@@ -218,9 +218,9 @@ class CaseStudySupport
             'ai-sales-coaching-platform-case-study' => 'assets/case-studies/ai-sales-coaching/AI-sales-coaching1.webp',
             'suave-crm-outreach-case-study' => 'assets/case-studies/suave-crm-outreach/outbound-banner.webp',
             'suave-crm-tasks-case-study' =>  'assets/case-studies/suave-crm-tasks/suave-crm-banner1.webp',
-            'appointment-insurance-platform-case-study' =>'assets/case-studies/shownoshow/appointment-banner1.webp',
+            'appointment-insurance-platform-case-study' =>'assets/case-studies/appointment-insurance/appointment-banner1.webp',
             'teerrath-spiritual-commerce' => $placeholder,
-            'AI-product-matching' =>'assets/case-studies/cabvi/product-matching-banner1.webp',
+            'AI-product-matching' =>'assets/case-studies/ai-product-matching/product-matching-banner1.webp',
         ];
 
         return self::publicImageUrl($map[$slug] ?? $placeholder);
@@ -376,8 +376,8 @@ class CaseStudySupport
     {
         return [
             [
-                'src' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
-                'alt' => 'Show No Show event booking product banner by Suave Creators',
+                'src' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
+                'alt' => 'Appointment insurance product banner by Suave Creators',
                 'fan_rotate' => -1.6,
                 'fan_y' => -18,
                 'fan_scale' => 0.96,
@@ -409,8 +409,8 @@ class CaseStudySupport
                 'fan_z' => 3,
             ],
             [
-                'src' => 'assets/case-studies/shownoshow/show_no_show left.webp',
-                'alt' => 'Show No Show booking features designed by Suave Creators',
+                'src' => 'assets/case-studies/appointment-insurance/appointment-insurance-left.webp',
+                'alt' => 'Appointment insurance booking features designed by Suave Creators',
                 'fan_rotate' => 1.5,
                 'fan_y' => -14,
                 'fan_scale' => 0.96,
@@ -621,7 +621,7 @@ class CaseStudySupport
                 'slug' => 'appointment-insurance-platform-case-study',
                 'title' => 'Appointment Insurance That Makes Showing Up the Default',
                 'status' => 'published',
-                'image' => 'assets/case-studies/shownoshow/show_no_show_banner.webp',
+                'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
 
                 'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
@@ -647,7 +647,7 @@ class CaseStudySupport
                 'slug' => 'AI-product-matching',
                 'title' => 'AI Product Matching to an Automated AI Workspace',
                 'status' => 'published',
-                'image' => 'assets/case-studies/cabvi/cabvi-logo.webp',
+                'image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo.webp',
                 'short_description' => 'AI product matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
                 'listing_subtitle' => 'Automated AI Product Matching',
                 'industry' => 'Nonprofit / Procurement',

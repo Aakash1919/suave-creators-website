@@ -190,7 +190,7 @@
           delta: { x: 24, y: -14 }
         },
         'appointment-insurance-platform-case-study': {
-          theme: 'shownoshow',
+          theme: 'appointment-insurance',
           pattern: 'vault',
           grabIndex: 4,
           delta: { x: 22, y: 16 }

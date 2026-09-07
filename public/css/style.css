@@ -112,7 +112,7 @@
   --hero-cs-tile-border: rgba(197, 107, 255, 0.18);
 }
 
-.hero-cs-visual[data-hero-cs-theme="shownoshow"] {
+.hero-cs-visual[data-hero-cs-theme="appointment-insurance"] {
   --hero-cs-accent: #10b981;
   --hero-cs-accent-2: #2f69fb;
   --hero-cs-glow: rgba(16, 185, 129, 0.32);
@@ -569,7 +569,7 @@
   animation-name: hero-cs-enter-wave;
 }
 
-/* Pattern: vault (Show No Show) */
+/* Pattern: vault (Appointment Insurance) */
 .hero-cs-visual.is-pattern-vault.is-exiting .hero-cs-visual__tile {
   animation-name: hero-cs-exit-vault;
   transform-origin: center center;
