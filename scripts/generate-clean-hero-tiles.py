@@ -314,10 +314,10 @@ def gen_tasks():
 
 
 # -------------------------------------------------------------
-# 5. ShowNoShow
+# 5. Appointment Insurance
 # -------------------------------------------------------------
-def gen_shownoshow():
-    out_dir = 'public/assets/case-studies/shownoshow'
+def gen_appointment_insurance():
+    out_dir = 'public/assets/case-studies/appointment-insurance'
     os.makedirs(out_dir, exist_ok=True)
     
     # 1. Photo Tile: 400x440
@@ -342,7 +342,7 @@ def gen_shownoshow():
     draw.rounded_rectangle([40, 340, W-40, 405], radius=16, fill=(37, 99, 235, 255))
     draw.text((W//2, 372), "Check In Now", font=get_font(20, bold=True), fill=(255, 255, 255, 255), anchor="mm")
     
-    img.convert('RGB').save(os.path.join(out_dir, 'show-check-confirmed-tile.webp'), 'WEBP', quality=95)
+    img.convert('RGB').save(os.path.join(out_dir, 'appointment-insurance-confirmed-tile.webp'), 'WEBP', quality=95)
     
     # 2. Chart Tile: 410x330
     W_c, H_c = 410, 330
@@ -359,8 +359,8 @@ def gen_shownoshow():
     draw_c.text((50, 195), "Traditional Processing: $290 Fees", font=get_font(16, semibold=True), fill=(248, 113, 113, 255))
     draw_c.text((50, 240), "ShowCheck Smart Refund: $29 Fees", font=get_font(18, bold=True), fill=(52, 211, 153, 255))
     
-    img_c.convert('RGB').save(os.path.join(out_dir, 'show-check-savings-chart-tile.webp'), 'WEBP', quality=95)
-    print("ShowNoShow generated.")
+    img_c.convert('RGB').save(os.path.join(out_dir, 'appointment-insurance-savings-chart-tile.webp'), 'WEBP', quality=95)
+    print("Appointment Insurance generated.")
 
 
 # -------------------------------------------------------------
@@ -427,7 +427,7 @@ def gen_teerrath():
 # 7. AI PRODUCT MATCHING
 # -------------------------------------------------------------
 def gen_ai_product_matching():
-    out_dir = 'public/assets/case-studies/cabvi'
+    out_dir = 'public/assets/case-studies/ai-product-matching'
     os.makedirs(out_dir, exist_ok=True)
     
     # 1. Photo Tile: 400x440
@@ -453,7 +453,7 @@ def gen_ai_product_matching():
     draw.text((50, 325), "Instant 1-Click Verification & Sync", font=get_font(16, semibold=True), fill=(226, 232, 240, 255))
     draw.text((50, 365), "Eliminates Manual Order Errors", font=get_font(15, semibold=True), fill=(148, 163, 184, 255))
     
-    img.convert('RGB').save(os.path.join(out_dir, 'cabvi-product-matching-tile.webp'), 'WEBP', quality=95)
+    img.convert('RGB').save(os.path.join(out_dir, 'ai-product-matching-tile.webp'), 'WEBP', quality=95)
     
     # 2. Chart Tile: 410x330
     W_c, H_c = 410, 330
@@ -472,7 +472,7 @@ def gen_ai_product_matching():
     draw_c.text((W_c-75, 205), "+75%", font=get_font(17, bold=True), fill=(96, 165, 250, 255))
     draw_progress_bar(draw_c, 32, 235, W_c-64, 18, 75, (59, 130, 246, 255))
     
-    img_c.convert('RGB').save(os.path.join(out_dir, 'cabvi-efficiency-chart-tile.webp'), 'WEBP', quality=95)
+    img_c.convert('RGB').save(os.path.join(out_dir, 'ai-product-matching-efficiency-chart-tile.webp'), 'WEBP', quality=95)
     print("AI Product Matching generated.")
 
 
@@ -481,7 +481,7 @@ if __name__ == '__main__':
     gen_ai_sales_coaching()
     gen_outreach()
     gen_tasks()
-    gen_shownoshow()
+    gen_appointment_insurance()
     gen_teerrath()
     gen_ai_product_matching()
     print("All 14 case study hero tiles regenerated successfully.")

@@ -36,7 +36,7 @@
         aria-label="Appointment booking then confirmation on a phone with schedule, deposit, reminder, check-in, refund, and no-show workflow cards"
       >
         @php
-          $appointAsset = 'assets/case-studies/shownoshow';
+          $appointAsset = 'assets/case-studies/appointment-insurance';
         @endphp
         <div class="appoint-hero__scene" data-ah-scene>
           <svg class="appoint-hero__connectors" viewBox="0 0 1000 800" preserveAspectRatio="none" aria-hidden="true">
@@ -234,7 +234,7 @@
     </div>
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/shownoshow/show_no-show right.webp') }}"
+            src="{{ asset('assets/case-studies/appointment-insurance/appointment-insurance-right.webp') }}"
             alt="Return unused deposit money — without wasting card fees. product screenshot for Suave Creators software development"
             title="Return unused deposit money — without wasting card fees. product screenshot for Suave Creators software development"
             width="960"
@@ -260,7 +260,7 @@
     </div>
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/shownoshow/show_no_show left.webp') }}"
+            src="{{ asset('assets/case-studies/appointment-insurance/appointment-insurance-left.webp') }}"
             alt="Clear deposits, proven arrival, fair no-show payouts. product screenshot for Suave Creators software development"
             title="Clear deposits, proven arrival, fair no-show payouts. product screenshot for Suave Creators software development"
             width="960"

@@ -29,7 +29,7 @@
         aria-label="AI product matching from supplier websites, spreadsheets, and manual checking into an AI workspace"
       >
         @php
-          $aiProductMatchingAsset = 'assets/case-studies/cabvi';
+          $aiProductMatchingAsset = 'assets/case-studies/ai-product-matching';
         @endphp
         <div class="ai-product-matching-hero__scene">
           <svg class="ai-product-matching-hero__connectors" viewBox="0 0 1540 1140" preserveAspectRatio="none" aria-hidden="true">
@@ -73,7 +73,7 @@
           <article class="ai-product-matching-hero__source ai-product-matching-hero__source--1">
             <span class="ai-product-matching-hero__source-icon">
               <img
-                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-supplier-icon.webp') }}"
+                src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-supplier-icon.webp') }}"
                 alt="Supplier websites icon for AI product matching"
                 title="Supplier websites icon for AI product matching"
                 width="48"
@@ -87,7 +87,7 @@
           <article class="ai-product-matching-hero__source ai-product-matching-hero__source--2">
             <span class="ai-product-matching-hero__source-icon">
               <img
-                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-spreadsheet-icon.webp') }}"
+                src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-spreadsheet-icon.webp') }}"
                 alt="Spreadsheets and records icon for AI product matching software"
                 title="Spreadsheets and records icon for AI product matching software"
                 width="48"
@@ -101,7 +101,7 @@
           <article class="ai-product-matching-hero__source ai-product-matching-hero__source--3">
             <span class="ai-product-matching-hero__source-icon">
               <img
-                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-manual-checking-icon.webp') }}"
+                src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-manual-checking-icon.webp') }}"
                 alt="Manual checking icon for AI product matching procurement review workflow"
                 title="Manual checking icon for AI product matching procurement review workflow"
                 width="48"
@@ -117,7 +117,7 @@
             <header class="ai-product-matching-hero__search">
               <span class="ai-product-matching-hero__search-icon">
                 <img
-                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-search-field-icon.webp') }}"
+                  src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-search-field-icon.webp') }}"
                   alt="Search field icon for the AI product matching dashboard"
                   title="Search field icon for the AI product matching dashboard"
                   width="20"
@@ -131,47 +131,47 @@
             <div class="ai-product-matching-hero__rows">
               <div class="ai-product-matching-hero__row ai-product-matching-hero__row--1">
                 <span class="ai-product-matching-hero__thumb">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
                 <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
                 <span class="ai-product-matching-hero__tick">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
               <div class="ai-product-matching-hero__row ai-product-matching-hero__row--2">
                 <span class="ai-product-matching-hero__thumb">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
                 <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
                 <span class="ai-product-matching-hero__tick">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
               <div class="ai-product-matching-hero__row ai-product-matching-hero__row--3 ai-product-matching-hero__row--review">
                 <span class="ai-product-matching-hero__thumb">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
                 <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
                 <span class="ai-product-matching-hero__query">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-query-icon.png') }}" alt="Close-call review placeholder icon for AI product matching" title="Close-call review placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-query-icon.png') }}" alt="Close-call review placeholder icon for AI product matching" title="Close-call review placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
               <div class="ai-product-matching-hero__row ai-product-matching-hero__row--4">
                 <span class="ai-product-matching-hero__thumb">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
                 <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
                 <span class="ai-product-matching-hero__tick">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
               <div class="ai-product-matching-hero__row ai-product-matching-hero__row--5">
                 <span class="ai-product-matching-hero__thumb">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-row-icon.png') }}" alt="Product row placeholder icon for AI product matching" title="Product row placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
                 <span class="ai-product-matching-hero__bars" aria-hidden="true"><i></i><i></i></span>
                 <span class="ai-product-matching-hero__tick">
-                  <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
+                  <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-tick-icon.png') }}" alt="Match confirmed placeholder icon for AI product matching" title="Match confirmed placeholder icon for AI product matching" width="24" height="24" loading="eager" decoding="async">
                 </span>
               </div>
             </div>
@@ -182,7 +182,7 @@
             {{-- <span class="ai-product-matching-hero__ai-scan" aria-hidden="true"></span> --}}
             <span class="ai-product-matching-hero__ai-icon">
               <img
-                src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-ai-icon.webp') }}"
+                src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-ai-icon.webp') }}"
                 alt="AI processing icon for AI product matching close-call review"
                 title="AI processing icon for AI product matching close-call review"
                 width="120"
@@ -198,7 +198,7 @@
             <span class="ai-product-matching-hero__rec-lines" aria-hidden="true"><i></i><i></i></span>
             <p class="ai-product-matching-hero__match">
               <span class="ai-product-matching-hero__match-icon">
-                <img src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-tick-icon.png') }}" alt="Match result placeholder icon for AI product matching recommendation" title="Match result placeholder icon for AI product matching recommendation" width="20" height="20" loading="eager" decoding="async">
+                <img src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-tick-icon.png') }}" alt="Match result placeholder icon for AI product matching recommendation" title="Match result placeholder icon for AI product matching recommendation" width="20" height="20" loading="eager" decoding="async">
               </span>
               Match
             </p>
@@ -208,7 +208,7 @@
             <article class="ai-product-matching-hero__feature ai-product-matching-hero__feature--1">
               <span class="ai-product-matching-hero__feature-icon">
                 <img
-                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-search-icon.png') }}"
+                  src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-search-icon.png') }}"
                   alt="Automated search icon for AI product matching software"
                   title="Automated search icon for AI product matching software"
                   width="32"
@@ -222,7 +222,7 @@
             <article class="ai-product-matching-hero__feature ai-product-matching-hero__feature--2">
               <span class="ai-product-matching-hero__feature-icon">
                 <img
-                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-robot-icon.png') }}"
+                  src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-robot-icon.png') }}"
                   alt="AI on close calls icon for AI product matching qualification"
                   title="AI on close calls icon for AI product matching qualification"
                   width="32"
@@ -236,7 +236,7 @@
             <article class="ai-product-matching-hero__feature ai-product-matching-hero__feature--3">
               <span class="ai-product-matching-hero__feature-icon">
                 <img
-                  src="{{ asset($aiProductMatchingAsset.'/cabvi-hero-shield-icon.png') }}"
+                  src="{{ asset($aiProductMatchingAsset.'/ai-product-matching-hero-shield-icon.png') }}"
                   alt="Proof and decision icon for AI product matching procurement workspace"
                   title="Proof and decision icon for AI product matching procurement workspace"
                   width="32"
@@ -347,7 +347,7 @@
         </div> --}}
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/cabvi/cabvi_left.webp') }}"
+            src="{{ asset('assets/case-studies/ai-product-matching/ai-product-matching-left.webp') }}"
             alt="AI product matching automated supplier catalog search screenshot for product matching software"
             title="AI product matching automated supplier catalog search screenshot for product matching software"
             width="960"
@@ -388,7 +388,7 @@
         </div> --}}
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/cabvi/cabvi_right.webp') }}"
+            src="{{ asset('assets/case-studies/ai-product-matching/ai-product-matching-right.webp') }}"
             alt="AI product matching close-call review screenshot for product matching software"
             title="AI product matching close-call review screenshot for product matching software"
             width="960"

@@ -146,7 +146,7 @@
         .hero-cs-visual__poster{aspect-ratio:1/1;border-radius:22px;overflow:hidden;width:100%}
         .hero-cs-visual__poster-img{display:block;height:100%;object-fit:cover;width:100%}
         .hero-cs-visual__stage{inset:0;position:absolute}
-        .hero-cs-visual__mosaic{display:grid;gap:10px;grid-template-columns:1.05fr .95fr;grid-template-rows:minmax(150px,1.15fr) minmax(150px,1fr);height:100%;min-height:399px;width:100%}
+        .hero-cs-visual__mosaic{display:grid;gap:10px;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;height:100%;min-height:399px;width:100%}
         .hero-cs-visual__tile{border-radius:22px;overflow:hidden}
         .hero-cs-visual__stack{display:flex;flex-direction:column;gap:10px}
         .about-stat__icon{display:inline-flex;flex-shrink:0;height:40px;width:40px}

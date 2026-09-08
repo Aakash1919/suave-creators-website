@@ -3,10 +3,15 @@
     $caseHref = ($scene['url'] ?? '') !== '' ? (string) $scene['url'] : route('case-studies');
     $hasChartImage = ! empty($scene['chart_image']);
     $bars = is_array($scene['bars'] ?? null) ? $scene['bars'] : [42, 68, 92, 58, 76];
+    $sceneTheme = preg_replace('/[^a-z0-9-]+/', '-', strtolower((string) ($scene['theme'] ?? ''))) ?: '';
+    $themeClass = function (string $prefix) use ($sceneTheme): string {
+      return $sceneTheme !== '' ? ' '.$prefix.'--'.$sceneTheme : '';
+    };
   @endphp
   <div
     class="hero-cs-visual{{ $wrapperClass !== '' ? ' '.$wrapperClass : '' }}"
     data-hero-cs-visual
+    @if ($sceneTheme !== '') data-hero-cs-theme="{{ $sceneTheme }}" @endif
     @unless ($animate) data-hero-cs-static @endunless>
     <script type="application/json" data-hero-cs-scenes-json>{!! json_encode($scenes, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) !!}</script>
     <div class="hero-cs-visual__poster" data-hero-cs-poster>
@@ -29,82 +34,76 @@
       <div class="hero-cs-visual__mosaic" data-hero-cs-mosaic>
         <a
           href="{{ $caseHref }}"
-          class="hero-cs-visual__tile hero-cs-visual__tile--metric"
+          class="hero-cs-visual__tile hero-cs-visual__tile--metric hero-cs-visual__card-metric{{ $themeClass('hero-cs-visual__card-metric') }}"
           data-hero-cs-tile="0"
           data-hero-cs-link
           style="--hero-cs-i: 0"
           aria-label="{{ $scene['title'] }}: {{ $scene['primary']['value'] }} {{ $scene['primary']['label_short'] }}">
-          <span class="hero-cs-visual__fade" data-hero-cs-fade>
-            <img
-              src="{{ $scene['metric_image'] }}"
-              alt="{{ $scene['alt'] }}"
-              title="{{ $scene['alt'] }}"
-              class="hero-cs-visual__metric-img"
-              data-hero-cs-metric-img
-              width="200"
-              height="220"
-              decoding="async"
-              loading="eager">
-          </span>
+          <img
+            src="{{ $scene['metric_image'] }}"
+            alt="{{ $scene['alt'] }}"
+            title="{{ $scene['alt'] }}"
+            class="hero-cs-visual__metric-img hero-cs-visual__card-metric-img{{ $themeClass('hero-cs-visual__card-metric-img') }}"
+            data-hero-cs-metric-img
+            width="200"
+            height="200"
+            decoding="async"
+            loading="eager">
         </a>
 
         <a
           href="{{ $caseHref }}"
-          class="hero-cs-visual__tile hero-cs-visual__tile--photo"
+          class="hero-cs-visual__tile hero-cs-visual__tile--photo hero-cs-visual__card-photo{{ $themeClass('hero-cs-visual__card-photo') }}"
           data-hero-cs-tile="1"
           data-hero-cs-link
           style="--hero-cs-i: 1"
           aria-label="{{ $scene['title'] }}"
           data-hero-cs-photo-label>
-          <span class="hero-cs-visual__fade" data-hero-cs-fade>
-            <img
-              src="{{ $scene['photo_image'] }}"
-              alt="{{ $scene['alt'] }}"
-              title="{{ $scene['alt'] }}"
-              class="hero-cs-visual__photo-img"
-              data-hero-cs-photo
-              width="200"
-              height="220"
-              decoding="async"
-              loading="eager">
-          </span>
+          <img
+            src="{{ $scene['photo_image'] }}"
+            alt="{{ $scene['alt'] }}"
+            title="{{ $scene['alt'] }}"
+            class="hero-cs-visual__photo-img hero-cs-visual__card-photo-img{{ $themeClass('hero-cs-visual__card-photo-img') }}"
+            data-hero-cs-photo
+            width="200"
+            height="200"
+            decoding="async"
+            loading="eager">
         </a>
 
         <a
           href="{{ $caseHref }}"
-          class="hero-cs-visual__tile hero-cs-visual__tile--chart{{ $hasChartImage ? ' has-chart-image' : '' }}"
+          class="hero-cs-visual__tile hero-cs-visual__tile--chart hero-cs-visual__card-chart{{ $hasChartImage ? ' has-chart-image' : '' }}{{ $themeClass('hero-cs-visual__card-chart') }}"
           data-hero-cs-tile="2"
           data-hero-cs-link
           data-hero-cs-chart-tile
           style="--hero-cs-i: 2"
           aria-label="{{ $scene['title'] }} results chart">
-          <span class="hero-cs-visual__fade" data-hero-cs-fade>
-            <span class="hero-cs-visual__chart-panel" data-hero-cs-bars aria-hidden="true">
-              @foreach ($bars as $index => $height)
-                <span
-                  class="hero-cs-visual__bar{{ $index === 2 ? ' is-active' : '' }}"
-                  data-hero-cs-bar
-                  style="--hero-cs-bar: {{ (int) $height }}%"></span>
-              @endforeach
-            </span>
-            <img
-              src="{{ $hasChartImage ? $scene['chart_image'] : $scene['photo_image'] }}"
-              alt="{{ $scene['alt'] }}"
-              title="{{ $scene['alt'] }}"
-              class="hero-cs-visual__chart-img"
-              data-hero-cs-chart-img
-              width="200"
-              height="160"
-              decoding="async"
-              loading="lazy"
-              @if (! $hasChartImage) hidden @endif>
+          <span class="hero-cs-visual__chart-panel" data-hero-cs-bars aria-hidden="true">
+            @foreach ($bars as $index => $height)
+              <span
+                class="hero-cs-visual__bar{{ $index === 2 ? ' is-active' : '' }}"
+                data-hero-cs-bar
+                style="--hero-cs-bar: {{ (int) $height }}%"></span>
+            @endforeach
           </span>
+          <img
+            src="{{ $hasChartImage ? $scene['chart_image'] : $scene['photo_image'] }}"
+            alt="{{ $scene['alt'] }}"
+            title="{{ $scene['alt'] }}"
+            class="hero-cs-visual__chart-img hero-cs-visual__card-chart-img{{ $themeClass('hero-cs-visual__card-chart-img') }}"
+            data-hero-cs-chart-img
+            width="200"
+            height="200"
+            decoding="async"
+            loading="lazy"
+            @if (! $hasChartImage) hidden @endif>
         </a>
 
         <div class="hero-cs-visual__stack">
           <a
             href="{{ $caseHref }}"
-            class="hero-cs-visual__tile hero-cs-visual__tile--metric-sm"
+            class="hero-cs-visual__tile hero-cs-visual__tile--metric-sm hero-cs-visual__card-metric-sm{{ $themeClass('hero-cs-visual__card-metric-sm') }}"
             data-hero-cs-tile="3"
             data-hero-cs-link
             style="--hero-cs-i: 3"
@@ -117,7 +116,7 @@
 
           <a
             href="{{ $caseHref }}"
-            class="hero-cs-visual__tile hero-cs-visual__tile--tag"
+            class="hero-cs-visual__tile hero-cs-visual__tile--tag hero-cs-visual__card-tag{{ $themeClass('hero-cs-visual__card-tag') }}"
             data-hero-cs-tile="4"
             data-hero-cs-link
             style="--hero-cs-i: 4"
@@ -190,7 +189,7 @@
           delta: { x: 24, y: -14 }
         },
         'appointment-insurance-platform-case-study': {
-          theme: 'shownoshow',
+          theme: 'appointment-insurance',
           pattern: 'vault',
           grabIndex: 4,
           delta: { x: 22, y: 16 }
@@ -202,6 +201,12 @@
           delta: { x: -20, y: -16 }
         },
         'ai-product-matching': {
+          theme: 'ai-product-matching',
+          pattern: 'lift',
+          grabIndex: 3,
+          delta: { x: 24, y: -12 }
+        },
+        'AI-product-matching': {
           theme: 'ai-product-matching',
           pattern: 'lift',
           grabIndex: 3,
@@ -355,15 +360,27 @@
         if (!el || !src || el.getAttribute('src') === src) {
           if (el && alt) {
             el.alt = alt;
-            el.title = alt;
+            el.removeAttribute('title');
           }
           return;
         }
         el.src = src;
         if (alt) {
           el.alt = alt;
-          el.title = alt;
         }
+        el.removeAttribute('title');
+      }
+
+      function sanitizeTheme(theme) {
+        return String(theme || '').toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+      }
+
+      function replacePrefixedClass(el, prefix, theme) {
+        if (!el) return;
+        Array.prototype.slice.call(el.classList).forEach(function (name) {
+          if (name.indexOf(prefix) === 0) el.classList.remove(name);
+        });
+        if (theme) el.classList.add(prefix + theme);
       }
 
       function wait(ms) {
@@ -408,6 +425,10 @@
           bars: root.querySelectorAll('[data-hero-cs-bar]')
         };
 
+        [refs.metricImg, refs.photo, refs.chartImg].forEach(function (el) {
+          if (el) el.removeAttribute('title');
+        });
+
         var tileCenters = [];
 
         function measureCenters() {
@@ -435,8 +456,17 @@
             grabIndex: 1,
             delta: { x: 0, y: -24 }
           };
+          var theme = sanitizeTheme(scene.theme || profile.theme || 'outreach');
 
-          root.setAttribute('data-hero-cs-theme', profile.theme);
+          root.setAttribute('data-hero-cs-theme', theme);
+          replacePrefixedClass(refs.metricTile, 'hero-cs-visual__card-metric--', theme);
+          replacePrefixedClass(refs.photoTile, 'hero-cs-visual__card-photo--', theme);
+          replacePrefixedClass(refs.chartTile, 'hero-cs-visual__card-chart--', theme);
+          replacePrefixedClass(refs.secondaryTile, 'hero-cs-visual__card-metric-sm--', theme);
+          replacePrefixedClass(refs.tagTile, 'hero-cs-visual__card-tag--', theme);
+          replacePrefixedClass(refs.metricImg, 'hero-cs-visual__card-metric-img--', theme);
+          replacePrefixedClass(refs.photo, 'hero-cs-visual__card-photo-img--', theme);
+          replacePrefixedClass(refs.chartImg, 'hero-cs-visual__card-chart-img--', theme);
 
           refs.links.forEach(function (link) {
             link.setAttribute('href', url);
@@ -577,7 +607,7 @@
             tile.style.setProperty('--hero-cs-ox', (offset.x * mul) + '%');
             tile.style.setProperty('--hero-cs-oy', (offset.y * mul) + '%');
             tile.style.setProperty('--hero-cs-rot', (offset.r * mul) + 'deg');
-            tile.style.setProperty('--hero-cs-scale', String(offset.s));
+            tile.style.setProperty('--hero-cs-scale', '1');
             tile.style.setProperty('--hero-cs-delay', (i * 0.065) + 's');
           });
         }
