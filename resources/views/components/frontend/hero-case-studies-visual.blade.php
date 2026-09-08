@@ -3,10 +3,15 @@
     $caseHref = ($scene['url'] ?? '') !== '' ? (string) $scene['url'] : route('case-studies');
     $hasChartImage = ! empty($scene['chart_image']);
     $bars = is_array($scene['bars'] ?? null) ? $scene['bars'] : [42, 68, 92, 58, 76];
+    $sceneTheme = preg_replace('/[^a-z0-9-]+/', '-', strtolower((string) ($scene['theme'] ?? ''))) ?: '';
+    $themeClass = function (string $prefix) use ($sceneTheme): string {
+      return $sceneTheme !== '' ? ' '.$prefix.'--'.$sceneTheme : '';
+    };
   @endphp
   <div
     class="hero-cs-visual{{ $wrapperClass !== '' ? ' '.$wrapperClass : '' }}"
     data-hero-cs-visual
+    @if ($sceneTheme !== '') data-hero-cs-theme="{{ $sceneTheme }}" @endif
     @unless ($animate) data-hero-cs-static @endunless>
     <script type="application/json" data-hero-cs-scenes-json>{!! json_encode($scenes, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) !!}</script>
     <div class="hero-cs-visual__poster" data-hero-cs-poster>
@@ -29,86 +34,76 @@
       <div class="hero-cs-visual__mosaic" data-hero-cs-mosaic>
         <a
           href="{{ $caseHref }}"
-          class="hero-cs-visual__tile hero-cs-visual__tile--metric"
+          class="hero-cs-visual__tile hero-cs-visual__tile--metric hero-cs-visual__card-metric{{ $themeClass('hero-cs-visual__card-metric') }}"
           data-hero-cs-tile="0"
           data-hero-cs-link
           style="--hero-cs-i: 0"
           aria-label="{{ $scene['title'] }}: {{ $scene['primary']['value'] }} {{ $scene['primary']['label_short'] }}">
-          <span class="hero-cs-visual__fade" data-hero-cs-fade>
-            <span class="hero-cs-visual__metric-value" data-hero-cs-primary-value>{{ $scene['primary']['value'] }}</span>
-            <span class="hero-cs-visual__metric-label" data-hero-cs-primary-label>{{ $scene['primary']['label_short'] }}</span>
-            <span class="hero-cs-visual__brand">
-              <img
-                src="{{ $scene['brand_image'] }}"
-                alt="{{ $scene['alt'] }}"
-                title="{{ $scene['alt'] }}"
-                class="hero-cs-visual__brand-mark"
-                data-hero-cs-brand
-                width="72"
-                height="28"
-                decoding="async"
-                loading="eager">
-            </span>
-          </span>
+          <img
+            src="{{ $scene['metric_image'] }}"
+            alt="{{ $scene['alt'] }}"
+            title="{{ $scene['alt'] }}"
+            class="hero-cs-visual__metric-img hero-cs-visual__card-metric-img{{ $themeClass('hero-cs-visual__card-metric-img') }}"
+            data-hero-cs-metric-img
+            width="200"
+            height="200"
+            decoding="async"
+            loading="eager">
         </a>
 
         <a
           href="{{ $caseHref }}"
-          class="hero-cs-visual__tile hero-cs-visual__tile--photo"
+          class="hero-cs-visual__tile hero-cs-visual__tile--photo hero-cs-visual__card-photo{{ $themeClass('hero-cs-visual__card-photo') }}"
           data-hero-cs-tile="1"
           data-hero-cs-link
           style="--hero-cs-i: 1"
           aria-label="{{ $scene['title'] }}"
           data-hero-cs-photo-label>
-          <span class="hero-cs-visual__fade" data-hero-cs-fade>
-            <img
-              src="{{ $scene['photo_image'] }}"
-              alt="{{ $scene['alt'] }}"
-              title="{{ $scene['alt'] }}"
-              class="hero-cs-visual__photo-img"
-              data-hero-cs-photo
-              width="200"
-              height="220"
-              decoding="async"
-              loading="eager">
-          </span>
+          <img
+            src="{{ $scene['photo_image'] }}"
+            alt="{{ $scene['alt'] }}"
+            title="{{ $scene['alt'] }}"
+            class="hero-cs-visual__photo-img hero-cs-visual__card-photo-img{{ $themeClass('hero-cs-visual__card-photo-img') }}"
+            data-hero-cs-photo
+            width="200"
+            height="200"
+            decoding="async"
+            loading="eager">
         </a>
 
         <a
           href="{{ $caseHref }}"
-          class="hero-cs-visual__tile hero-cs-visual__tile--chart{{ $hasChartImage ? ' has-chart-image' : '' }}"
+          class="hero-cs-visual__tile hero-cs-visual__tile--chart hero-cs-visual__card-chart{{ $hasChartImage ? ' has-chart-image' : '' }}{{ $themeClass('hero-cs-visual__card-chart') }}"
           data-hero-cs-tile="2"
           data-hero-cs-link
           data-hero-cs-chart-tile
           style="--hero-cs-i: 2"
           aria-label="{{ $scene['title'] }} results chart">
-          <span class="hero-cs-visual__fade" data-hero-cs-fade>
-            <span class="hero-cs-visual__chart-panel" data-hero-cs-bars aria-hidden="true">
-              @foreach ($bars as $index => $height)
-                <span
-                  class="hero-cs-visual__bar{{ $index === 2 ? ' is-active' : '' }}"
-                  data-hero-cs-bar
-                  style="--hero-cs-bar: {{ (int) $height }}%"></span>
-              @endforeach
-            </span>
-            <img
-              src="{{ $hasChartImage ? $scene['chart_image'] : $scene['photo_image'] }}"
-              alt="{{ $scene['alt'] }}"
-              title="{{ $scene['alt'] }}"
-              class="hero-cs-visual__chart-img"
-              data-hero-cs-chart-img
-              width="200"
-              height="160"
-              decoding="async"
-              loading="lazy"
-              @if (! $hasChartImage) hidden @endif>
+          <span class="hero-cs-visual__chart-panel" data-hero-cs-bars aria-hidden="true">
+            @foreach ($bars as $index => $height)
+              <span
+                class="hero-cs-visual__bar{{ $index === 2 ? ' is-active' : '' }}"
+                data-hero-cs-bar
+                style="--hero-cs-bar: {{ (int) $height }}%"></span>
+            @endforeach
           </span>
+          <img
+            src="{{ $hasChartImage ? $scene['chart_image'] : $scene['photo_image'] }}"
+            alt="{{ $scene['alt'] }}"
+            title="{{ $scene['alt'] }}"
+            class="hero-cs-visual__chart-img hero-cs-visual__card-chart-img{{ $themeClass('hero-cs-visual__card-chart-img') }}"
+            data-hero-cs-chart-img
+            width="200"
+            height="200"
+            decoding="async"
+            loading="lazy"
+            @if (! $hasChartImage) hidden @endif>
         </a>
 
         <div class="hero-cs-visual__stack">
           <a
             href="{{ $caseHref }}"
-            class="hero-cs-visual__tile hero-cs-visual__tile--metric-sm"
+            class="hero-cs-visual__tile hero-cs-visual__tile--metric-sm hero-cs-visual__card-metric-sm{{ $themeClass('hero-cs-visual__card-metric-sm') }}"
             data-hero-cs-tile="3"
             data-hero-cs-link
             style="--hero-cs-i: 3"
@@ -121,7 +116,7 @@
 
           <a
             href="{{ $caseHref }}"
-            class="hero-cs-visual__tile hero-cs-visual__tile--tag"
+            class="hero-cs-visual__tile hero-cs-visual__tile--tag hero-cs-visual__card-tag{{ $themeClass('hero-cs-visual__card-tag') }}"
             data-hero-cs-tile="4"
             data-hero-cs-link
             style="--hero-cs-i: 4"
@@ -141,26 +136,15 @@
 
       <div class="hero-cs-visual__cursor" data-hero-cs-cursor aria-hidden="true">
         <span class="hero-cs-visual__cursor-hand">
-          <svg viewBox="0 0 24 28" width="28" height="32" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="heroCsCursorFill" x1="3" y1="2" x2="20" y2="26" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#2F69FB"/>
-                <stop offset="1" stop-color="#C56BFF"/>
-              </linearGradient>
-            </defs>
-            <path
-              d="M4.2 2.2 19.5 12.4c.7.45.35 1.55-.5 1.55h-6.1l3.25 8.2c.25.65-.15 1.35-.85 1.5l-2.35.5c-.7.15-1.4-.3-1.55-.95L8.2 15.3 4.55 19.6c-.55.6-1.55.2-1.55-.6V3.35c0-.85.95-1.35 1.2-1.15Z"
-              fill="url(#heroCsCursorFill)"
-              stroke="#00003f"
-              stroke-width="1.35"
-              stroke-linejoin="round"/>
-            <path
-              d="M6.4 4.8 14.8 10.4"
-              stroke="#ffffff"
-              stroke-opacity=".5"
-              stroke-width="1.35"
-              stroke-linecap="round"/>
-          </svg>
+          <img
+            src="{{ asset('assets/hero/hero-cursor-sparkle-arrow.webp') }}"
+            alt="Sparkle cursor arrow for Suave Creators homepage hero case study animation"
+            title="Sparkle cursor arrow for Suave Creators homepage hero case study animation"
+            class="hero-cs-visual__cursor-img"
+            width="28"
+            height="32"
+            decoding="async"
+            loading="eager">
         </span>
       </div>
     </div>
@@ -205,7 +189,7 @@
           delta: { x: 24, y: -14 }
         },
         'appointment-insurance-platform-case-study': {
-          theme: 'shownoshow',
+          theme: 'appointment-insurance',
           pattern: 'vault',
           grabIndex: 4,
           delta: { x: 22, y: 16 }
@@ -217,6 +201,12 @@
           delta: { x: -20, y: -16 }
         },
         'ai-product-matching': {
+          theme: 'ai-product-matching',
+          pattern: 'lift',
+          grabIndex: 3,
+          delta: { x: 24, y: -12 }
+        },
+        'AI-product-matching': {
           theme: 'ai-product-matching',
           pattern: 'lift',
           grabIndex: 3,
@@ -358,7 +348,7 @@
 
       function preloadScene(scene) {
         if (!scene) return;
-        [scene.brand_image, scene.photo_image, scene.chart_image].forEach(function (src) {
+        [scene.metric_image, scene.photo_image, scene.chart_image].forEach(function (src) {
           if (!src) return;
           var img = new Image();
           img.decoding = 'async';
@@ -370,15 +360,27 @@
         if (!el || !src || el.getAttribute('src') === src) {
           if (el && alt) {
             el.alt = alt;
-            el.title = alt;
+            el.removeAttribute('title');
           }
           return;
         }
         el.src = src;
         if (alt) {
           el.alt = alt;
-          el.title = alt;
         }
+        el.removeAttribute('title');
+      }
+
+      function sanitizeTheme(theme) {
+        return String(theme || '').toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+      }
+
+      function replacePrefixedClass(el, prefix, theme) {
+        if (!el) return;
+        Array.prototype.slice.call(el.classList).forEach(function (name) {
+          if (name.indexOf(prefix) === 0) el.classList.remove(name);
+        });
+        if (theme) el.classList.add(prefix + theme);
       }
 
       function wait(ms) {
@@ -417,11 +419,15 @@
           chartTile: root.querySelector('[data-hero-cs-chart-tile]'),
           secondaryTile: root.querySelector('[data-hero-cs-tile="3"]'),
           tagTile: root.querySelector('[data-hero-cs-tile="4"]'),
-          brand: root.querySelector('[data-hero-cs-brand]'),
+          metricImg: root.querySelector('[data-hero-cs-metric-img]'),
           photo: root.querySelector('[data-hero-cs-photo]'),
           chartImg: root.querySelector('[data-hero-cs-chart-img]'),
           bars: root.querySelectorAll('[data-hero-cs-bar]')
         };
+
+        [refs.metricImg, refs.photo, refs.chartImg].forEach(function (el) {
+          if (el) el.removeAttribute('title');
+        });
 
         var tileCenters = [];
 
@@ -450,8 +456,17 @@
             grabIndex: 1,
             delta: { x: 0, y: -24 }
           };
+          var theme = sanitizeTheme(scene.theme || profile.theme || 'outreach');
 
-          root.setAttribute('data-hero-cs-theme', profile.theme);
+          root.setAttribute('data-hero-cs-theme', theme);
+          replacePrefixedClass(refs.metricTile, 'hero-cs-visual__card-metric--', theme);
+          replacePrefixedClass(refs.photoTile, 'hero-cs-visual__card-photo--', theme);
+          replacePrefixedClass(refs.chartTile, 'hero-cs-visual__card-chart--', theme);
+          replacePrefixedClass(refs.secondaryTile, 'hero-cs-visual__card-metric-sm--', theme);
+          replacePrefixedClass(refs.tagTile, 'hero-cs-visual__card-tag--', theme);
+          replacePrefixedClass(refs.metricImg, 'hero-cs-visual__card-metric-img--', theme);
+          replacePrefixedClass(refs.photo, 'hero-cs-visual__card-photo-img--', theme);
+          replacePrefixedClass(refs.chartImg, 'hero-cs-visual__card-chart-img--', theme);
 
           refs.links.forEach(function (link) {
             link.setAttribute('href', url);
@@ -476,7 +491,7 @@
           }
           if (refs.tagTile) refs.tagTile.setAttribute('aria-label', scene.tag || '');
 
-          setImg(refs.brand, scene.brand_image, alt);
+          setImg(refs.metricImg, scene.metric_image || scene.photo_image, alt);
           setImg(refs.photo, scene.photo_image, alt);
 
           if (refs.chartImg) {
@@ -592,7 +607,7 @@
             tile.style.setProperty('--hero-cs-ox', (offset.x * mul) + '%');
             tile.style.setProperty('--hero-cs-oy', (offset.y * mul) + '%');
             tile.style.setProperty('--hero-cs-rot', (offset.r * mul) + 'deg');
-            tile.style.setProperty('--hero-cs-scale', String(offset.s));
+            tile.style.setProperty('--hero-cs-scale', '1');
             tile.style.setProperty('--hero-cs-delay', (i * 0.065) + 's');
           });
         }
