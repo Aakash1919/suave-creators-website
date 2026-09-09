@@ -14,7 +14,7 @@
 
       <p class="case-studies-hero__eyebrow pragati-narrow-regular">Logistics &amp; Freight</p>
       <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">Success Story : The Turbo Trans Corporation</h1>
-      <p class="case-study-detail-hero__lead">See how a logistics leader transformed their sales operations with AI-powered CRM automation TurboTrans Corporation is a leading logistics and freight forwarding company specializing in air freight, ocean freight, land transportation, customs clearance, and end-to-end supply chain solutions.</p>
+      <p class="case-study-detail-hero__lead">Explore how Suave Creators delivered a custom software solution for Turbo Trans Corporation, addressing business workflows, usability, and operational needs.</p>
 
       <div class="case-study-detail-hero__actions">
         <a href="#overview" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
