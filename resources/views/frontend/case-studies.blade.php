@@ -12,7 +12,7 @@
       Built in the open. <span class="case-studies-hero__title-accent">Proven in product.</span>
     </h1>
     <p class="case-studies-hero__lead">
-      Stories from the software we design and ship — how we turn messy workflows into clear product experiences.
+      Explore software development case studies showcasing CRM, AI, automation, web and custom software projects built to solve real business challenges.
     </p>
     @if (! empty($fanImages))
       <div class="case-studies-fan">
