@@ -31,20 +31,20 @@ class Header extends Component
     ) {
         $dropdowns ??= [
             'Services' => [
-                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development Service', 'icon' => 'fa-solid fa-laptop-code'],
-                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development Service', 'icon' => 'fa-solid fa-users'],
-                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software Solutions', 'icon' => 'fa-solid fa-building'],
-                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Development Service', 'icon' => 'fa-solid fa-cart-shopping'],
-                ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design Services', 'icon' => 'fa-solid fa-pen-ruler'],
+                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development', 'icon' => 'fa-solid fa-laptop-code'],
+                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development', 'icon' => 'fa-solid fa-users'],
+                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software', 'icon' => 'fa-solid fa-building'],
+                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce', 'icon' => 'fa-solid fa-cart-shopping'],
+                ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design', 'icon' => 'fa-solid fa-pen-ruler'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions', 'icon' => 'fa-solid fa-robot'],
             ],
             'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'IT & Software Solutions for Startups', 'icon' => 'fa-solid fa-rocket'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Finance & Banking', 'icon' => 'fa-solid fa-building-columns'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'Retail & E-commerce', 'icon' => 'fa-solid fa-store'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'logistics-supply-chain-apps'], 'label' => 'Logistics & Supply Chain', 'icon' => 'fa-solid fa-truck'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'education-elearning-platforms'], 'label' => 'Education & E-learning', 'icon' => 'fa-solid fa-graduation-cap'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'Startups & SaaS', 'icon' => 'fa-solid fa-rocket'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => ' FinTech & Banking', 'icon' => 'fa-solid fa-building-columns'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'Retail & E-Commerce', 'icon' => 'fa-solid fa-store'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'logistics-supply-chain-apps'], 'label' => 'Logistics & Fleet', 'icon' => 'fa-solid fa-truck'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'education-elearning-platforms'], 'label' => ' EdTech', 'icon' => 'fa-solid fa-graduation-cap'],
             ],
         ];
 
