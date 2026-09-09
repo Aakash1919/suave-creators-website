@@ -12,7 +12,6 @@ use App\Services\BlogDraftGenerationService;
 use App\Services\BlogService;
 use App\Services\BlogSeoMetaGenerationService;
 use App\Support\Admin\BlogCompleteness;
-use App\Support\Blogs\BlogInternalLinks;
 use App\Support\Frontend\BlogSupport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -57,11 +56,6 @@ class BlogController extends Controller
             'categories' => $this->blogs->categories(),
             'editorContent' => '',
             'completeness' => BlogCompleteness::evaluate($blog),
-            'internalLinkSuggestions' => BlogInternalLinks::suggest(
-                title: (string) $blog->title,
-                content: '',
-                limit: 3,
-            ),
         ]);
     }
 
@@ -94,12 +88,6 @@ class BlogController extends Controller
             'categories' => $this->blogs->categories(),
             'editorContent' => (string) $blog->content,
             'completeness' => BlogCompleteness::evaluate($blog),
-            'internalLinkSuggestions' => BlogInternalLinks::suggest(
-                title: (string) $blog->title,
-                content: (string) $blog->content,
-                excludeBlogId: $blog->id,
-                limit: 3,
-            ),
         ]);
     }
 

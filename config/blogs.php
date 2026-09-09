@@ -7,10 +7,11 @@ return [
     | AI trend draft generation
     |--------------------------------------------------------------------------
     |
-    | Scheduled artisan command generate:blog writes draft posts from an
-    | optional --topic, or a customer-acquisition angle and current industry
-    | trend (Tuesday + Friday by default). Requires a configured AI provider
-    | (OPENAI_API_KEY / AI_DEFAULT_*).
+    | Artisan command generate:blog writes draft posts from an optional
+    | --topic, or a customer-acquisition angle and current industry trend.
+    | The Tue/Fri schedule in routes/console.php is commented out by default;
+    | run manually or uncomment the schedule. Requires a configured AI
+    | provider (OPENAI_API_KEY / AI_DEFAULT_*).
     |
     */
 
