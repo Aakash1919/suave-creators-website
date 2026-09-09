@@ -20,11 +20,7 @@
         for Global Businesses
       </h1>
       <p class="mb-0 mt-1 max-w-xl text-[14px] leading-5 text-[#4D4D4D]">
-        Let&rsquo;s transform your business with custom software and digital development services. At Suave Creators,
-        we build websites and trust by developing top-notch digital products. Our custom offshore development
-        services are a merger of cost-effective and innovative design solutions that drive digital transformation.
-        Our expert team focuses on reducing operational costs and enhancing mobile and cloud capabilities for
-        businesses of all sizes.
+        Explore custom B2B &amp; SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, &amp; more.
       </p>
       <div class="mt-5 flex flex-col items-start gap-4">
         <x-frontend.inline-consultation-form

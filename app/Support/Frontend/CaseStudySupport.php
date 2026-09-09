@@ -687,7 +687,7 @@ class CaseStudySupport
                 'title' => 'Success Story : The Turbo Trans Corporation',
                 'status' => 'published',
                 'image' => 'assets/case-studies/turbo-trans/ttc_caseStudy.webp',
-                'short_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation TurboTrans Corporation is a leading logistics and freight forwarding company specializing in air freight, ocean freight, land transportation, customs clearance, and end-to-end supply chain solutions.',
+                'short_description' => 'Explore how Suave Creators delivered a custom software solution for Turbo Trans Corporation, addressing business workflows, usability, and operational needs.',
                 'listing_subtitle' => 'Global Operations',
                 'industry' => 'Logistics & Freight',
                 'service_slugs' => ['custom-crm-development'],

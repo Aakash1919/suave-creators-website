@@ -27,9 +27,7 @@
                 </h1>
 
                 <p class="mb-2 mt-2 max-w-[610px] text-[13px] leading-[18px] text-[#B1B9DF] md:text-sm md:leading-5">
-                    We always love to hear from you! Whether you’re looking to develop a business website, app, or custom
-                    digital
-                    solution, our professional team is here to help you turn your ideas into reality.
+                    Have a software, web, CRM, ERP or AI project in mind? Contact Suave Creators for a free consultation and discuss your business requirements with our experts.
                 </p>
 
                 <div class="mt-8 flex flex-wrap items-center gap-4 sm:gap-7">

@@ -22,9 +22,7 @@
         <span>&amp; AI Solutions</span>
       </h1>
       <p class="mb-2 mt-2 text-[13px] leading-[18px] text-[#B1B9DF] sm:text-sm sm:leading-5">
-        Industry solutions are the need of every business nowadays. Our focus industries include financial services,
-        healthcare, logistics, retail, and education. We transform operations with solutions designed to enhance customer
-        interactions and automate CRM with cost-effective development services.
+        Explore custom software development solutions for healthcare, startups, finance, e-commerce, logistics, and education, built by Suave Creators.
       </p>
       <div class="mt-6 flex flex-col items-start gap-3 sm:mt-8 sm:gap-4">
         <x-frontend.inline-consultation-form
