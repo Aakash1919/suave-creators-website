@@ -138,11 +138,13 @@
         .site-main>.single-blog-top{min-height:0;padding-bottom:.75rem;padding-top:.25rem}
         .site-main>.site-container.relative>.grid{align-items:center;display:grid;gap:2.5rem;grid-template-columns:minmax(0,1fr)}
         .site-main>.site-container.relative>.grid>div:first-child{max-width:36rem;min-height:17rem}
+        .site-main>.home-hero.relative>.grid>div:first-child{max-width:42rem}
         .pragati-narrow-regular{font-family:"Pragati Narrow",ui-sans-serif,system-ui,sans-serif}
         .site-main>.site-container.relative h1{color:#fff;display:flex;flex-direction:column;font-size:36px;font-weight:600;line-height:1;margin:.5rem 0}
+        .site-main>.home-hero.relative h1{display:block;line-height:1.1;min-width:0;overflow-wrap:break-word}
         .site-main>.single-blog-top h1{display:block;font-size:clamp(1.75rem,4vw,2.75rem);line-height:1.2;margin:.625rem 0 0}
         .site-main>.site-container.relative h1+p{color:#b1b9df;font-size:12px;line-height:1.25rem;margin:.5rem 0}
-        .hero-cs-visual{flex-shrink:0;isolation:isolate;margin-inline:auto;max-width:400px;min-height:399px;position:relative;width:100%}
+        .hero-cs-visual{flex-shrink:1;isolation:isolate;margin-inline:auto;max-width:400px;min-height:399px;min-width:0;position:relative;width:100%}
         .hero-cs-visual__poster{aspect-ratio:1/1;border-radius:22px;overflow:hidden;width:100%}
         .hero-cs-visual__poster-img{display:block;height:100%;object-fit:cover;width:100%}
         .hero-cs-visual__stage{inset:0;position:absolute}
@@ -214,11 +216,16 @@
             .site-main>.single-blog-top{min-height:0;padding-bottom:1.5rem;padding-top:.75rem}
             .site-main>.site-container.relative>.grid{gap:3rem;grid-template-columns:repeat(2,minmax(0,1fr))}
             .site-main>.site-container.relative>.grid>div:first-child{max-width:520px;min-height:22rem}
+            .site-main>.home-hero.relative>.grid{grid-template-columns:minmax(0,1.3fr) minmax(0,0.7fr)}
+            .site-main>.home-hero.relative>.grid>div:first-child{max-width:800px}
             .site-main>.site-container.relative h1{font-size:60px}
+            .site-main>.home-hero.relative h1{font-size:56px}
             .site-main>.single-blog-top h1{font-size:clamp(1.75rem,4vw,2.75rem)}
             .lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+            .lg\:grid-cols-\[minmax\(0\,1\.3fr\)_minmax\(0\,0\.7fr\)\]{grid-template-columns:minmax(0,1.3fr) minmax(0,0.7fr)}
             .lg\:justify-end{justify-content:flex-end}
             .lg\:max-w-\[520px\]{max-width:520px}
+            .lg\:max-w-\[800px\]{max-width:800px}
         }
         @media (min-width:1280px){
             .xl\:flex{display:flex}

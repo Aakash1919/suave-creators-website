@@ -25,7 +25,7 @@ class Header extends Component
         public string $usPhoneHref = 'tel:+13074359605',
         public string $ctaRoute = 'contact-us',
         public string $ctaFragment = 'contact-id',
-        public string $ctaLabel = 'Talk to an expert',
+        public string $ctaLabel = 'Talk to a Solution Architect',
         public string $ctaLabelShort = 'Talk to us',
         ?array $dropdowns = null,
     ) {

@@ -410,6 +410,15 @@ img, video, canvas{
   font-weight: 600;
 }
 
+.smart-together-cta__actions{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 100%;
+}
+
 .web-services__header{
   align-items: start;
   display: grid;
@@ -838,7 +847,7 @@ img, video, canvas{
 
 .portfolio-showcase__image{
   aspect-ratio: 1.23 / 1;
-  background: #eceef5;
+  background: #030f38;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -3095,10 +3104,11 @@ body.mobile-nav-open{
       
     
   .smart-together-cta__actions{
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 10px;
+        align-items: flex-start;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 12px;
+        max-width: 100%;
       }
   
     
@@ -3697,10 +3707,11 @@ body.mobile-nav-open{
       
     
   .smart-together-cta__actions{
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 10px;
+        align-items: flex-start;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 12px;
+        max-width: 100%;
       }
   
     

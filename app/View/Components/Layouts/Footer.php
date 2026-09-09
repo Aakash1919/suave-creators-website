@@ -19,7 +19,7 @@ class Footer extends Component
 
     public string $email;
 
-    /** @var array<int, array{label: string, display: string, lines: array<int, string>}> */
+    /** @var array<int, array{label: string, display: string, lines: array<int, string>, phone: string, phone_href: string, email: string}> */
     public array $offices;
 
     public string $emailHref;
@@ -52,8 +52,8 @@ class Footer extends Component
     ) {
         $org = (array) config('seo.site.organization', []);
 
-        $this->phone = $phone ?? (string) ($org['telephone'] ?? '+91 88949 00142');
-        $this->phoneHref = $phoneHref ?? (string) ($org['telephone_href'] ?? 'tel:+918894900142');
+        $this->phone = $phone ?? (string) ($org['telephone'] ?? '+1 (307) 435-9605');
+        $this->phoneHref = $phoneHref ?? (string) ($org['telephone_href'] ?? 'tel:+13074359605');
         $this->email = $email ?? (string) ($org['email'] ?? 'info@suavecreators.com');
         $this->offices = ContactSupport::offices();
 

@@ -158,6 +158,12 @@
               @foreach ($office['lines'] as $line)
                 {{ $line }}@if (! $loop->last)<br>@endif
               @endforeach
+              @if (($office['phone'] ?? '') !== '')
+                <br>Phone: <a href="{{ $office['phone_href'] }}">{{ $office['phone'] }}</a>
+              @endif
+              @if (($office['email'] ?? '') !== '')
+                <br>Email: <a href="mailto:{{ $office['email'] }}">{{ $office['email'] }}</a>
+              @endif
             </span>
           @endforeach
         </p>

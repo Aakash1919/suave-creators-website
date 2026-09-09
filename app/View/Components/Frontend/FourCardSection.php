@@ -16,14 +16,14 @@ class FourCardSection extends Component
      * @param  array<int, array{0?: string, 1?: string, 2?: string, 3?: string, title?: string, description?: string, icon?: string, color?: string}>  $items
      */
     public function __construct(
-        public string $eyebrow = 'Industries We Serve',
-        public string $title = 'The Technology Behind Our Solutions',
-        public string $subtitle = 'We use modern development frameworks to create smart software solutions that are fast, flexible, and designed for long-term growth. From AI to cloud computing, we integrate technologies that help businesses stay ahead of the curve.',
+        public string $eyebrow = 'TECH ECOSYSTEM',
+        public string $title = 'Modern Technologies, Frameworks & Cloud Infrastructure',
+        public string $subtitle = 'We engineer digital solutions using modern, scalable, and battle-tested frameworks tailored to your platform long-term performance and maintainability.',
         public array $items = [],
         public string $headingId = 'four-card-title',
         public string $backgroundImage = 'assets/background/technology-section-bg.png',
         public string $ctaHref = '',
-        public string $ctaLabel = 'Book a Consultation',
+        public string $ctaLabel = 'Book a Technical Consultation →',
     ) {
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
 
@@ -33,14 +33,14 @@ class FourCardSection extends Component
 
         if ($this->items === []) {
             $this->items = [
-                ['Laravel', 'Laravel is ideal for high-performing, data-driven, enterprise-level web solutions.', 'fa-laravel', '#FF2D20'],
-                ['React', 'We create responsive user experiences for modern web and mobile applications.', 'fa-react', '#149ECA'],
-                ['Angular', 'We build dynamic, modular architectures with strong performance and security.', 'fa-angular', '#DD0031'],
-                ['Node.js', 'It powers real-time data processing and scalable server-side applications.', 'fa-node-js', '#68A063'],
-                ['Vue.js', 'We create flexible user interfaces and fast single-page applications.', 'fa-vuejs', '#42B883'],
-                ['WordPress', 'The popular CMS for websites, blogs, and e-commerce solutions.', 'fa-wordpress', '#21759B'],
-                ['Shopify', 'Secure payments and inventory management for high-converting online stores.', 'fa-shopify', '#7AB55C'],
-                ['Magento', 'Robust catalog management, multi-store setups, and personalized shopping.', 'fa-magento', '#F26322'],
+                ['Laravel (PHP)', ' Our primary backend framework for robust, secure APIs, complex database migrations, and high-performance enterprise applications.', 'fa-laravel', '#FF2D20'],
+                ['React & React Native', ' Building responsive web frontends and cross-platform mobile apps with sub-second rendering and shared component logic.', 'fa-react', '#149ECA'],
+                ['Angular', 'Structured, enterprise-grade TypeScript frontend architectures for complex administration portals requiring modular dependency injection.', 'fa-angular', '#DD0031'],
+                ['Node.js', 'Event-driven, high-concurrency microservices, real-time websocket integrations, and lightweight streaming API backends.', 'fa-node-js', '#68A063'],
+                ['Vue.js', ' Lightweight, reactive web interfaces and progressive single-page applications optimized for seamless user interaction.', 'fa-vuejs', '#42B883'],
+                ['WordPress & Headless CMS', 'Custom theme engineering, decoupled publishing environments, and secure enterprise content management setups.', 'fa-wordpress', '#21759B'],
+                [' Shopify Plus', 'Custom Shopify theme development, private app integrations, and headless storefronts for high-volume merchants.', 'fa-shopify', '#7AB55C'],
+                ['Magento (Adobe Commerce)', 'Enterprise B2B digital commerce, complex multi-store catalogs, and multi-currency global retail platforms.', 'fa-magento', '#F26322'],
             ];
         }
 

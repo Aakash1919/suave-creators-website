@@ -5,14 +5,14 @@
 
     <!-- Hero Section Start -->
     <section
-        class="industry-detail-banner relative z-10 w-full overflow-x-clip section-pad-m pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[600px] lg:pb-20 lg:pt-[52px] site-container">
-        <div class="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
-            <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[560px]">
+        class="industry-detail-banner relative z-10 w-full overflow-visible section-pad-m pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[600px] lg:pb-20 lg:pt-[52px]">
+        <div class="industry-detail-banner__inner grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-10">
+            <div class="industry-detail-banner__copy relative z-20 flex w-full min-w-0 flex-col overflow-visible text-left">
                 <p
                     class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold uppercase tracking-wide text-transparent sm:text-sm">
                     {{ $industry['eyebrow'] ?? 'Industry Solutions' }}</p>
                 <h1
-                    class="page-hero-title mb-2 mt-1 flex flex-col text-[26px] font-semibold leading-[28px] text-white sm:mt-2 sm:text-5xl lg:text-[52px] lg:leading-none">
+                    class="page-hero-title mb-2 mt-1 flex flex-col text-[26px] font-semibold leading-[28px] text-white sm:mt-2 sm:text-5xl lg:text-[52px] lg:leading-[1.15]">
                     @foreach ($industry['heroTitle'] ?? [] as $i => $line)
                         @if ($i === 0)
                             <span
@@ -34,11 +34,11 @@
                 </div>
             </div>
             <div
-                class="industry-hero-media relative z-10 mx-auto hidden w-full max-w-[360px] min-w-0 items-center justify-center lg:flex lg:mx-0 lg:max-w-[480px] lg:justify-end">
+                class="industry-hero-media relative z-0 mx-auto hidden w-full min-w-0 items-center justify-center lg:flex lg:mx-0 lg:justify-end">
                 @if (!empty($industry['heroImage']))
                     <img src="{{ $industry['heroImage'] }}" alt="{{ $industry['pageTitle'] ?? '' }}"
                         title="{{ $industry['pageTitle'] ?? '' }}" width="560" height="560"
-                        class="hidden h-auto w-full max-w-[360px] rounded-[20px] object-cover shadow-[0_24px_60px_rgba(0,0,63,0.35)] lg:ml-auto lg:block lg:max-w-[480px] lg:rounded-[28px]"
+                        class="hidden h-auto w-full rounded-[20px] object-cover shadow-[0_24px_60px_rgba(0,0,63,0.35)] lg:ml-auto lg:block lg:rounded-[28px]"
                         loading="eager">
                 @endif
             </div>
@@ -342,9 +342,9 @@
                     </div>
                 </div>
             @endforeach
-            <div class="mt-10 flex flex-nowrap items-center justify-center gap-3 sm:gap-5">
+            <div class="mt-10 flex flex-col items-center gap-3 md:flex-row md:flex-wrap md:justify-center md:gap-5">
                 <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-                    class="u-btn-cta group inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:px-5">Let's
+                    class="u-btn-cta group inline-flex max-w-full items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:px-5">Let's
                     Connect to Discuss<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round"
@@ -353,7 +353,7 @@
                         <path d="M2 12H22" />
                     </svg></a>
                 <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-                    class="inline-flex shrink-0 items-center border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book
+                    class="inline-flex max-w-full items-center border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book
                     a Call</a>
             </div>
         </div>
