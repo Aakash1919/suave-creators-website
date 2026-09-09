@@ -46,7 +46,13 @@ jobs:
         run: composer install --no-dev --optimize-autoloader --no-interaction
 
       - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync sshpass
+        run: |
+          # GitHub Ubuntu runners ship Google Chrome's apt repo. That repo
+          # often fails apt-get update with "Hash Sum mismatch" and we do not need Chrome.
+          sudo rm -f /etc/apt/sources.list.d/google-chrome.list \
+                     /etc/apt/sources.list.d/google-chrome.list.save
+          sudo apt-get update
+          sudo apt-get install -y rsync sshpass
 
       - name: Upload only necessary files
         run: |
@@ -131,7 +137,13 @@ jobs:
         run: composer install --no-dev --optimize-autoloader --no-interaction
       
       - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync sshpass
+        run: |
+          # GitHub Ubuntu runners ship Google Chrome's apt repo. That repo
+          # often fails apt-get update with "Hash Sum mismatch" and we do not need Chrome.
+          sudo rm -f /etc/apt/sources.list.d/google-chrome.list \
+                     /etc/apt/sources.list.d/google-chrome.list.save
+          sudo apt-get update
+          sudo apt-get install -y rsync sshpass
 
       - name: Upload only necessary files
         run: |
