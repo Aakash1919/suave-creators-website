@@ -13,13 +13,13 @@ class FivePageSeoMetaTest extends TestCase
         $enterprise = ServiceSupport::service('enterprise-software-solutions');
         $crm = ServiceSupport::service('custom-crm-development');
 
-        $this->assertSame('Custom Software, CRM & Web App Development | Suave Creators', $pages['home']['title']);
-        $this->assertSame('Engineer custom software, bespoke CRM systems, and AI-driven web applications. Explore verified engineering case studies, tech stack, and ROI blueprints.', $pages['home']['description']);
+        $this->assertSame('Web & Software Development Company | Suave Creators', $pages['home']['title']);
+        $this->assertSame('Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.', $pages['home']['description']);
 
-        $this->assertSame('Software Development Services for Serious Growth | Suave Creators', $pages['services']['title']);
+        $this->assertSame('Software Development Services for B2B & SaaS Businesses', $pages['services']['title']);
         $this->assertSame('Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.', $pages['services']['description']);
 
-        $this->assertSame('Ready to Build? Get a Free Project Consultation | Suave Creators', $pages['contact-us']['title']);
+        $this->assertSame('Contact Suave Creators | Get a Free Software Consultation', $pages['contact-us']['title']);
         $this->assertSame('Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.', $pages['contact-us']['description']);
 
         $this->assertSame('Enterprise Software That Improves Operations', $enterprise['pageTitle']);
