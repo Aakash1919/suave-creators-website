@@ -56,24 +56,31 @@ return [
             'area_served' => 'Worldwide',
             'available_language' => ['en', 'en-IN', 'en-US'],
             'address_display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',
-            'address_secondary_display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, Himachal Pradesh 176102',
+            'address_secondary_display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, HP 176102, India',
             'offices' => [
                 [
-                    'label' => 'First office',
+                    'label' => 'United States Headquarters',
                     'display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',
                     'lines' => [
                         '30 N Gould St, STE R,',
                         'Sheridan, WY 82801, USA',
                     ],
+                    'phone' => '+1 (307) 435-9605',
+                    'phone_href' => 'tel:+13074359605',
+                    'email' => 'info@suavecreators.com',
+                    'country' => 'US',
                 ],
                 [
-                    'label' => 'Second office',
-                    'display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, Himachal Pradesh 176102',
+                    'label' => 'India Engineering Center',
+                    'display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, HP 176102, India',
                     'lines' => [
                         '3M Plaza, Second Floor,',
                         'Maranda, Kasoti, Palampur,',
-                        'Himachal Pradesh 176102',
+                        'HP 176102, India',
                     ],
+                    'phone' => '+91 88949 00142',
+                    'phone_href' => 'tel:+918894900142',
+                    'country' => 'IN',
                 ],
             ],
             'address' => [

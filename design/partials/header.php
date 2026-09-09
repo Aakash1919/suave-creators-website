@@ -1,10 +1,10 @@
 <?php
 $dropdowns = [
     'Services' => [
-        ['href' => '/service/web-development-services', 'label' => 'Web Development Service', 'icon' => 'fa-solid fa-laptop-code'],
-        ['href' => '/service/custom-crm-development', 'label' => 'CRM Development Service', 'icon' => 'fa-solid fa-users'],
-        ['href' => '/service/enterprise-software-solutions', 'label' => 'Enterprise Software Solutions', 'icon' => 'fa-solid fa-building'],
-        ['href' => '/service/e-commerce-development', 'label' => 'E-commerce Development Service', 'icon' => 'fa-solid fa-cart-shopping'],
+        ['href' => '/service/web-development-services', 'label' => 'Web Development', 'icon' => 'fa-solid fa-laptop-code'],
+        ['href' => '/service/custom-crm-development', 'label' => 'CRM Development', 'icon' => 'fa-solid fa-users'],
+        ['href' => '/service/enterprise-software-solutions', 'label' => 'Enterprise Software', 'icon' => 'fa-solid fa-building'],
+        ['href' => '/service/e-commerce-development', 'label' => 'E-commerce', 'icon' => 'fa-solid fa-cart-shopping'],
     ],
     'Industry' => [
         ['href' => '/industries/healthcare', 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],

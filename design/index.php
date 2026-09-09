@@ -384,7 +384,7 @@ require __DIR__ . '/layout/start.php';
 
     <?php
     $webDevelopmentServices = [
-      ['dev-icon-1.svg', '01 - Development', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'blue'],
+      ['dev-icon-1.svg', '01 - Development', 'Web Development', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'blue'],
       ['dev-icon-2.svg', '02 - Enterprise Software', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'orange'],
       ['dev-icon-3.svg', '03 - Design Service', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'cyan'],
       ['dev-icon-4.svg', '04 - Custom CRM', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'mint'],

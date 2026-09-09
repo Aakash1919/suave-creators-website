@@ -25,26 +25,6 @@
           Web &amp; Software Development<br>
           <span class="mt-1 inline-block bg-gradient-to-b from-[#2F69FB] to-[#D078FE] bg-clip-text font-extrabold text-transparent">Solutions</span>
         </p>
-        <ul class="site-footer__contact mt-4 space-y-1.5 text-[12px] font-medium text-[#E4E9F8] sm:mt-6 sm:space-y-3 sm:text-[13px]">
-          <li>
-            <a href="{{ $phoneHref }}" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">{{ $phone }}</a>
-          </li>
-          <li>
-            <a href="mailto:{{ $emailHref }}" class="inline-flex !min-h-0 max-w-full items-center break-all py-1 hover:text-white sm:py-0">{{ $email }}</a>
-          </li>
-          <li class="leading-5">
-            <div class="inline-block max-w-[280px] space-y-2 sm:max-w-none">
-              @foreach ($offices as $office)
-              @if($office['label'] != 'First office') 
-              @else
-                <p>
-                  <span>{{ $office['display'] }}</span>
-                </p>
-                @endif
-              @endforeach
-            </div>
-          </li>
-        </ul>
       </div>
 
       <div class="min-w-0">
@@ -77,6 +57,35 @@
             </div>
           @endforeach
         </div>
+      </div>
+    </div>
+
+    <div class="site-footer__offices">
+      <h2 class="site-footer__offices-title">Corporate Office Information</h2>
+      <div class="site-footer__offices-grid">
+        @foreach ($offices as $office)
+          <div class="site-footer__office">
+            <h3 class="site-footer__office-name">{{ $office['label'] }}</h3>
+            <ul class="site-footer__office-list">
+              <li>
+                <span class="site-footer__office-label">Address:</span>
+                <span>{{ $office['display'] }}</span>
+              </li>
+              @if (($office['phone'] ?? '') !== '')
+                <li>
+                  <span class="site-footer__office-label">Phone:</span>
+                  <a href="{{ $office['phone_href'] }}" class="inline-flex !min-h-0 items-center py-1 hover:text-white sm:py-0">{{ $office['phone'] }}</a>
+                </li>
+              @endif
+              @if (($office['email'] ?? '') !== '')
+                <li>
+                  <span class="site-footer__office-label">Email:</span>
+                  <a href="mailto:{{ $office['email'] }}" class="inline-flex !min-h-0 max-w-full items-center break-all py-1 hover:text-white sm:py-0">{{ $office['email'] }}</a>
+                </li>
+              @endif
+            </ul>
+          </div>
+        @endforeach
       </div>
     </div>
   </div>

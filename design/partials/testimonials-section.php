@@ -21,10 +21,10 @@ $testimonials = [
             Testimonial
           </span>
         </div>
-        <h2 id="testimonials-title" class="mt-4 text-2xl font-semibold text-white">Words That Inspire Us</h2>
+        <h2 id="testimonials-title" class="mt-4 text-2xl font-semibold text-white">CLIENT FEEDBACK
+        </h2>
         <p class="mt-5 max-w-sm text-sm leading-[22px] text-[#B1B9DF]">
-          Our clients' feedback reflects the trust, partnership, and measurable results we deliver—from ambitious
-          startups to established organizations.
+        Verified Feedback from Founders & Engineering Partners
         </p>
       </div>
     </div>

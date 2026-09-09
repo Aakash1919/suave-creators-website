@@ -120,8 +120,8 @@ Classic circular chat brand mark (dark disc + gradient ring SVG).
 Keep contact details consistent across SEO, footer, contact page, privacy, and SuaveAgent:
 
 - Source of truth: `config/seo.php` organization + `ContactSupport::offices()` / phones
-- Offices: Sheridan, WY (USA) and Palampur, Himachal Pradesh (India)
-- Phones: `+91 88949 00142`, `+91 18944 55019`
+- Offices: United States Headquarters (Sheridan, WY) and India Engineering Center (Palampur, HP)
+- Phones: `+1 (307) 435-9605`, `+91 88949 00142`, `+91 18944 55019`
 - Email: `info@suavecreators.com`
 - When contacts change, update SEO config, ContactSupport, Footer, privacy copy, and `SuaveAgentKnowledge` consumers together
 

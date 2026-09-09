@@ -43,9 +43,9 @@ class ContactSupport
     }
 
     /**
-     * Dual offices from SEO config (Sheridan WY + Palampur), with legacy address fallbacks.
+     * Dual offices from SEO config (US Headquarters + India Engineering Center), with legacy address fallbacks.
      *
-     * @return array<int, array{label: string, display: string, lines: array<int, string>, country: string, flag: string, map_embed: string, map_link: string}>
+     * @return array<int, array{label: string, display: string, lines: array<int, string>, phone: string, phone_href: string, email: string, country: string, flag: string, map_embed: string, map_link: string}>
      */
     public static function offices(): array
     {
@@ -57,9 +57,10 @@ class ContactSupport
         ];
 
         if ($offices !== []) {
-            return array_values(array_map(static function (array $office, int $index) use ($countryByIndex): array {
+            return array_values(array_map(static function (array $office, int $index) use ($org, $countryByIndex): array {
                 $country = strtoupper((string) ($office['country'] ?? $countryByIndex[$index] ?? 'US'));
                 $display = (string) ($office['display'] ?? '');
+                $phone = (string) ($office['phone'] ?? self::defaultOfficePhone($country, $org));
 
                 return [
                     'label' => (string) ($office['label'] ?? 'Office'),
@@ -68,6 +69,9 @@ class ContactSupport
                         (array) ($office['lines'] ?? []),
                         static fn (mixed $line): bool => is_string($line) && $line !== ''
                     )),
+                    'phone' => $phone,
+                    'phone_href' => (string) ($office['phone_href'] ?? self::telHref($phone)),
+                    'email' => strtolower((string) ($office['email'] ?? '')),
                     'country' => $country,
                     'flag' => self::flagCode($country),
                     'map_embed' => (string) ($office['map_embed'] ?? self::mapEmbedUrl($display, $country)),
@@ -78,32 +82,77 @@ class ContactSupport
 
         $primary = (string) ($org['address_display'] ?? '30 N Gould St, STE R, Sheridan, WY 82801, USA');
         $secondary = (string) ($org['address_secondary_display'] ?? '');
+        $email = strtolower((string) ($org['email'] ?? 'info@suavecreators.com'));
 
         $result = [
-            [
-                'label' => 'First office',
-                'display' => $primary,
-                'lines' => array_values(array_filter(array_map('trim', explode(',', $primary)))),
-                'country' => $countryByIndex[0],
-                'flag' => self::flagCode($countryByIndex[0]),
-                'map_embed' => self::mapEmbedUrl($primary, $countryByIndex[0]),
-                'map_link' => self::mapLinkUrl($primary),
-            ],
+            self::fallbackOffice(
+                'United States Headquarters',
+                $primary,
+                $countryByIndex[0],
+                (string) ($org['telephone'] ?? '+1 (307) 435-9605'),
+                (string) ($org['telephone_href'] ?? 'tel:+13074359605'),
+                $email,
+            ),
         ];
 
         if ($secondary !== '') {
-            $result[] = [
-                'label' => 'Second office',
-                'display' => $secondary,
-                'lines' => array_values(array_filter(array_map('trim', explode(',', $secondary)))),
-                'country' => $countryByIndex[1],
-                'flag' => self::flagCode($countryByIndex[1]),
-                'map_embed' => self::mapEmbedUrl($secondary, $countryByIndex[1]),
-                'map_link' => self::mapLinkUrl($secondary),
-            ];
+            $result[] = self::fallbackOffice(
+                'India Engineering Center',
+                $secondary,
+                $countryByIndex[1],
+                '+91 88949 00142',
+                'tel:+918894900142',
+            );
         }
 
         return $result;
+    }
+
+    /**
+     * Build a tel: href from a display phone number.
+     */
+    public static function telHref(string $phone): string
+    {
+        $normalized = preg_replace('/[^\d+]/', '', $phone) ?? '';
+
+        return 'tel:'.$normalized;
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     */
+    protected static function defaultOfficePhone(string $country, array $org): string
+    {
+        if (self::flagCode($country) === 'in') {
+            return '+91 88949 00142';
+        }
+
+        return (string) ($org['telephone'] ?? '+1 (307) 435-9605');
+    }
+
+    /**
+     * @return array{label: string, display: string, lines: array<int, string>, phone: string, phone_href: string, email: string, country: string, flag: string, map_embed: string, map_link: string}
+     */
+    protected static function fallbackOffice(
+        string $label,
+        string $display,
+        string $country,
+        string $phone,
+        string $phoneHref,
+        string $email = '',
+    ): array {
+        return [
+            'label' => $label,
+            'display' => $display,
+            'lines' => array_values(array_filter(array_map('trim', explode(',', $display)))),
+            'phone' => $phone,
+            'phone_href' => $phoneHref !== '' ? $phoneHref : self::telHref($phone),
+            'email' => $email,
+            'country' => $country,
+            'flag' => self::flagCode($country),
+            'map_embed' => self::mapEmbedUrl($display, $country),
+            'map_link' => self::mapLinkUrl($display),
+        ];
     }
 
     /**
@@ -125,7 +174,7 @@ class ContactSupport
         $q = trim($query);
         if ($q === '') {
             $q = self::flagCode($country) === 'in'
-                ? '3M Plaza, Maranda, Kasoti, Palampur, Himachal Pradesh 176102'
+                ? '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, HP 176102, India'
                 : '30 N Gould St, STE R, Sheridan, WY 82801, USA';
         }
 

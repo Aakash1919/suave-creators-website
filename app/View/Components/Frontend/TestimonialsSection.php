@@ -18,9 +18,9 @@ class TestimonialsSection extends Component
      */
     public function __construct(
         public ?array $items = null,
-        public string $eyebrow = 'Testimonial',
-        public string $title = 'Words That Inspire Us',
-        public string $subtitle = 'Our clients\' feedback reflects the trust, partnership, and measurable results we deliver—from ambitious startups to established organizations.',
+        public string $eyebrow = 'CLIENT FEEDBACK',
+        public string $title = 'Verified Feedback from Founders & Engineering Partners',
+        public string $subtitle = 'Read how our engineering teams have earned the trust of ambitious startups and established organizations worldwide.',
         public string $headingId = 'testimonials-title',
     ) {
         $this->items ??= app(TestimonialService::class)->cachedForFrontend();

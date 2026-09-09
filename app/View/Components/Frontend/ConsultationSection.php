@@ -16,8 +16,9 @@ class ConsultationSection extends Component
      * @param  array<int, array{src: string, alt: string, tone: string, column: string}>|null  $people
      */
     public function __construct(
-        public string $title = "Let's Build Your Next Digital<br class=\"hidden sm:block\"> Solution with us!",
-        public string $description = 'Book a consultation for your next digital project. Suave Creators delivers quality work, stays ahead of trends, and is here to help.',
+        public string $title = "Ready to Engineer Your Custom Platform or Modernize Your Software?
+",
+        public string $description = 'Schedule an architecture scoping call with our technical lead. We will review your product requirements, assess technical constraints, and deliver an actionable implementation roadmap with transparent sprint estimates.',
         public string $ctaLabel = 'Book a Free Consultation',
         public string $ctaHref = '',
         public string $secondaryCtaLabel = '',

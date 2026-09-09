@@ -24,7 +24,7 @@
           <x-frontend.inline-consultation-form
             theme="light"
             placeholder="Enter your phone or email"
-            button-text="Get Free Consultation"
+            button-text="Claim Free Architecture Scoping Session →"
             :secondary-href="$secondaryCtaLabel !== '' ? $secondaryCtaHref : ($ctaHref !== '' ? $ctaHref : '')"
             :secondary-label="$secondaryCtaLabel !== '' ? $secondaryCtaLabel : ''" />
         </div>

@@ -11,7 +11,7 @@ class Topbar extends Component
     public function __construct(
         public string $hrefRoute = 'https://the-suave.app/about-us',
         public string $title = 'Introducing The Suave App',
-        public string $subtitle = ' — Discover prospects and run AI-assisted outreach.',
+        public string $subtitle = ' — AI-Powered B2B Prospect Discovery & Multichannel Outreach CRM.',
         public string $icon = 'assets/icons/announcement-rocket-icon.svg',
         public string $iconAlt = 'Sales Outreach announcement icon for Suave Creators',
     ) {}

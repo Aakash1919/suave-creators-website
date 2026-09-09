@@ -4,19 +4,19 @@
 <!-- Hero Section Start -->
 <section
   class="home-hero relative z-10 w-full pb-12 pt-8 md:min-h-[440px] md:pb-16 md:pt-10 lg:min-h-[640px] lg:pb-20 lg:pt-[52px] site-container">
-  <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-8 lg:gap-12">
-    <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[520px]">
+  <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] lg:gap-12">
+    <div class="relative z-0 flex max-w-2xl min-w-0 flex-col text-left lg:max-w-[800px]">
       <p
         class="inline-block mb-2 bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent text-sm font-bold uppercase tracking-wide pragati-narrow-regular">
-        Software, Apps & AI • CRM • ERP • Since 2021
+        CUSTOM SOFTWARE • BESPOKE CRM • ENTERPRISE AI SOLUTIONS
+
       </p>
       <h1
-        class="mb-2 mt-2 flex flex-col text-[36px] font-semibold leading-none text-white min-[375px]:text-[42px] sm:text-5xl lg:text-[60px] leading-[100%]">
-        <span>Web &amp; Software</span>
-        <span>Development</span>
+        class="mb-2 mt-2 min-w-0 text-[36px] font-semibold leading-[1.1] text-white min-[375px]:text-[42px] sm:text-5xl lg:text-[56px]">
+        Custom Software, Bespoke CRM & Enterprise
         <span
-          class="bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text text-transparent font-extrabold inline-block">
-          Solutions
+          class="bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text text-transparent font-extrabold block">
+          Web App Development
         </span>
       </h1>
       <p class="mb-2 mt-2 text-[12px] leading-5 md:text-sm md:leading-6 text-[#B1B9DF]">
@@ -25,8 +25,8 @@
       <div class="mt-8">
         <x-frontend.inline-consultation-form
           theme="dark"
-          placeholder="Enter your phone or email"
-          button-text="Get Free Consultation"
+          placeholder="Enter your business email or phone number"
+          button-text="Get Architectural Consultation"
           :secondary-href="$demoHref"
           secondary-label="Schedule a discovery call" />
       </div>
@@ -69,23 +69,21 @@
 
             <span
               class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-              Have questions about our Web Services?
+              Company Overview & Value Pillars 
             </span>
           </div>
           <h2 class="mt-4 text-[clamp(2.2rem,5vw,3rem)] font-bold leading-[110%] text-[#171717] lg:text-[48px]">
-            We Build Digital Experiences That
+            We Build Resilient Digital Experiences That
             <span
               class="inline-block bg-[linear-gradient(180deg,_#2F69FB_49.52%,_#D078FE_100%)] bg-clip-text text-transparent">
-              Drive Growth
+              Drive Measurable Enterprise Growth
             </span>
           </h2>
           <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
-            We develop user-friendly web and mobile applications that enhance your overall growth and user experience.
-          </p>
+            Custom web, mobile, and software solutions designed to streamline complex business workflows and maximize user engagement.
+           </p>
           <p class="mt-4 hidden text-[14px] leading-5 text-[#4D4D4D] max-w-[520px] md:block">
-            We are a group of young talent who believe in teamwork and, with our expertise, deliver the best industry
-            solution according to the client's requirements. Being one of the most valued software development companies,
-            we design a range of AI-integrated smart software for this faster developing world.
+            Headquartered in the United States with an engineering center in India, Suave Creators builds mission-critical software for funded startups and scaling organizations. We bridge the gap between business strategy and deep engineering—delivering secure, scalable platforms that lower operational costs and unlock compounding growth.
           </p>
         <div class="about-values mt-8">
           <div class="about-values__item">
@@ -94,9 +92,8 @@
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
-              <strong class="text-sm font-semibold text-[#171717]">Teamwork First</strong>
-              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
-                We believe great things happen together.
+              <strong class="text-sm font-semibold text-[#171717]">Architecture First</strong>
+              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">Built to Scale. Built to Last.
               </p>
             </div>
           </div>
@@ -107,9 +104,9 @@
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
-              <strong class="text-sm font-semibold text-[#171717]">Client Focused</strong>
+              <strong class="text-sm font-semibold text-[#171717]">Business-Driven Outcomes</strong>
               <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
-                Your goals drive our solutions.
+                Driven by Data. Focused on Results.
               </p>
             </div>
           </div>
@@ -120,9 +117,9 @@
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
-              <strong class="text-sm font-semibold text-[#171717]">Future Ready</strong>
+              <strong class="text-sm font-semibold text-[#171717]"> AI & Future Ready</strong>
               <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
-                We build smart solutions for tomorrow.
+                Smart Automation, Seamlessly Integrated.
               </p>
             </div>
           </div>
@@ -174,11 +171,11 @@
         </div>
       </div>
 
-      <div class="mt-0 flex flex-wrap items-center gap-5">
-        <x-frontend.cta-button :href="route('about-us')" class="whitespace-nowrap">
-          Learn more About Us
+      <div class="mt-0 flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:items-center md:gap-5">
+        <x-frontend.cta-button :href="route('about-us')" class="max-w-full">
+          Learn More About Our Team 
         </x-frontend.cta-button>
-        <a href="{{ route('product') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">View Our Work</a>
+        <a href="{{ route('case-studies') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">Explore Client Case Studies</a>
       </div>
     </div>
   </div>
@@ -192,15 +189,15 @@
     <div class="mx-auto max-w-[660px] text-center">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-        What we Do
+        End-to-End Delivery Offerings
       </p>
       <h2
         class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
-        We are creating App Startups, not just Apps. You are our Partner, not just a Client!
+        From Architecture to Scale: Our End-to-End Product Engineering Lifecycle
       </h2>
       <p class="mx-auto mt-4 max-w-[605px] text-[13px] leading-[18px] sm:leading-5 text-[#4D4D4D] sm:text-[14px]">
-        Our clients mean everything to us. We combine Business Model Innovation, User Acquisition Strategy, and
-        Monetisation Strategy to make the Best Software solution for you.
+        We do not merely build apps , we engineer digital operating assets. We combine technical innovation, user acquisition strategy, and workflow optimization to build software that scales.
+
       </p>
     </div>
 
@@ -229,7 +226,7 @@
       </div>
     </div>
 
-    <div class="offerings-footer mt-8 flex items-center justify-between gap-6 lg:mt-10">
+    <div class="offerings-footer mt-8 flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between md:gap-6 lg:mt-10">
       <div class="offerings-controls hidden gap-2 md:flex">
         <button class="offerings-prev offerings-control" type="button" aria-label="Previous offering">
           <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
@@ -239,7 +236,7 @@
         </button>
       </div>
       <nav class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></nav>
-      <a class="offerings-expert-link" href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Talk to an Expert</a>
+      <a class="offerings-expert-link" href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Schedule a Technical Scoping Call →</a>
     </div>
   </div>
 </section>
@@ -248,7 +245,7 @@
 <x-frontend.connect-cta-section />
 
 <!-- Web Development Services Section Start -->
-<x-frontend.three-card-section />
+<x-frontend.three-card-section class="web-services--home" />
 <!-- Web Development Services Section End -->
 
 <!-- Core Values Section Start -->
@@ -279,13 +276,13 @@
         <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
         <span
           class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
-          Our Core Values
+          OUR PRINCIPLES
         </span>
       </div>
       <div class="core-values__heading">
-        <h2 class="home-type-h2">The Pillars Behind Our Excellence</h2>
-        <p>We believe in offering seamless, effective, and custom-made solutions, which cater for your specific future
-          goals</p>
+        <h2 class="home-type-h2">The Core Values That Guide Every Engineering Milestone</h2>
+        <p>We believe in transparent partnerships, robust code quality, and building software that directly serves your long-term business goals.
+        </p>
       </div>
     </header>
 
@@ -326,15 +323,14 @@
         <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
         <span
           class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
-          Digital Marketing Services
+          SEARCH & AI DISCOVERY
         </span>
       </div>
       <div class="digital-marketing-services__intro">
-        <h2 id="digital-marketing-title" class="home-type-h2 font-semibold text-[24px] text-[#171717] leading-[100%] mb-4">Transform
-          Online Engagement Into Real Business Results</h2>
-        <p class="text-[14px] text-[#4D4D4D] leading-5">By optimising your UX, leveraging SEO, writing quality
-          content, and integrating AI, chatbots, etc, for
-          unparalleled success.</p>
+        <h2 id="digital-marketing-title" class="home-type-h2 font-semibold text-[24px] text-[#171717] leading-[100%] mb-4">Transform Organic Discoverability into Qualified Inbound Leads
+        </h2>
+        <p class="text-[14px] text-[#4D4D4D] leading-5">We optimize your digital presence across Google Search, Answer Engines (AEO), and Generative AI platforms (GEO) to capture high-intent enterprise buyers.
+        </p>
       </div>
     </header>
 
@@ -383,8 +379,8 @@
       </div>
       <nav class="digital-marketing-pagination flex md:hidden" aria-label="Digital marketing pagination"></nav>
       <p class="digital-marketing-services__more">
-        <span class="digital-marketing-services__more-text">Need more services based on your demand?</span>
-        <a href="{{ route('services') }}">See All Services</a>
+        <span class="digital-marketing-services__more-text">Need a specialized growth or search strategy for your platform?</span>
+        <a href="{{ route('services') }}">See All Marketing Services →</a>
       </p>
     </div>
   </div>
@@ -396,6 +392,7 @@
   type="text"
   direction="left"
   position="full"
+  :speed="60"
   :items="$servicesMarqueeItems"
   aria-label="Web Development, Promotion Marketing, Advertising, and CRM Development"
 />
@@ -410,15 +407,16 @@
     <header class="portfolio-showcase__header">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-        Our Portfolio
+        OUR WORK
+
       </p>
       <h2 id="portfolio-showcase-title"
         class="home-type-h2 mt-1 sm:mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
-        Projects That Define Our Expertise</h2>
+        Proven Software Projects That Define Our Engineering Standards
+      </h2>
       <p
         class="portfolio-showcase__intro mx-auto mt-1 sm:mt-4 max-w-[605px] text-[13px] leading-[18px] sm:text-[14px] sm:leading-5 text-[#4D4D4D]">
-        Check out our best portfolio, which defines our expertise and different
-        industries.</p>
+        Explore verified case studies showcasing how we design, build, and deploy custom software across complex industries.</p>
     </header>
 
     <div class="swiper portfolioShowcaseSwiper">
@@ -426,17 +424,19 @@
         @foreach ($portfolioShowcaseProjects as $project)
           <div class="swiper-slide">
             <article class="portfolio-showcase__card">
-              <div class="portfolio-showcase__image">
-                <img src="{{ asset($project['image']) }}" alt="{{ $project['alt'] }}" title="{{ $project['alt'] }}" loading="lazy" draggable="false" decoding="async">
-              </div>
-              <div class="portfolio-showcase__copy">
-                <p
-                  class="inline-block text-[12px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent mb-2">
-                  {{ $project['category'] }}
-                </p>
-                <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2">{{ $project['title'] }}</h3>
-                <p class=" text-[14px] leading-5 text-[#4D4D4D] max-w-[360px] ">{{ $project['description'] }}</p>
-              </div>
+              <a href="{{ $project['url'] }}" class="portfolio-showcase__link" @if (!empty($project['external'])) target="_blank" rel="noopener noreferrer" @endif>
+                <div class="portfolio-showcase__image">
+                  <img src="{{ asset($project['image']) }}" alt="{{ $project['alt'] }}" title="{{ $project['alt'] }}" loading="lazy" draggable="false" decoding="async">
+                </div>
+                <div class="portfolio-showcase__copy">
+                  <p
+                    class="inline-block text-[12px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent mb-2">
+                    {{ $project['category'] }}
+                  </p>
+                  <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2">{{ $project['title'] }}</h3>
+                  <p class=" text-[14px] leading-5 text-[#4D4D4D] max-w-[360px] ">{{ $project['description'] }}</p>
+                </div>
+              </a>
             </article>
           </div>
         @endforeach
@@ -455,8 +455,9 @@
         </button>
       </div>
       <p class="digital-marketing-services__more">
-        <span>Want to discuss about your project</span>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Click Here</a>
+        <span>Ready to review requirements for your custom application?
+        </span>
+        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Schedule an Architectural Discovery Call →</a>
       </p>
     </div>
   </div>
@@ -486,9 +487,12 @@
 
 <x-frontend.articles-insights-section
   :items="$articles"
+  eyebrow="BLOGS & INSIGHTS"
+  title="Latest Engineering, CRM & AI Insights from Our Technical Team"
+  subtitle="Actionable guides, architecture teardowns, and industry analysis authored by our senior developers and digital strategists."
   heading-id="articles-insights-title"
   more-href="{{ route('blogs') }}"
-  more-label="View all blog articles"
+  more-label="View All Engineering & Search Articles →"
 />
 
 <x-frontend.consultation-section />
@@ -1029,9 +1033,9 @@
 
   .offerings-footer,
   .digital-marketing-services__footer {
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
     gap: 12px;
     margin-top: 16px;
   }
@@ -1042,8 +1046,21 @@
   }
 
   .offerings-expert-link {
-    flex-shrink: 0;
-    white-space: nowrap;
+    flex-shrink: 1;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .digital-marketing-services__more {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  .digital-marketing-services__more a {
+    margin-left: 0;
   }
 
   .digital-marketing-services__more-text {
