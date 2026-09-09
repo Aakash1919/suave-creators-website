@@ -129,7 +129,7 @@
         .site-header__menu-btn{align-items:center;display:inline-flex;height:2.75rem;justify-content:center;width:2.75rem}
         .site-header__cta{display:none}
         .mobile-nav[hidden]{display:none!important}
-        .floating-chat{bottom:24px;height:64px;position:fixed;right:24px;width:64px;z-index:9999}
+        .floating-chat{bottom:24px;height:48px;position:fixed;right:24px;width:48px;z-index:9999}
         .site-hero-bg{background-color:var(--color-navy);height:min(100%,920px);inset-inline:0;overflow:hidden;pointer-events:none;position:absolute;top:0;z-index:0}
         .site-hero-bg__image{height:100%;left:50%;max-width:none;object-fit:cover;object-position:top center;position:absolute;top:0;transform:translateX(-50%);width:max(100%,1920px)}
         .site-hero-bg__pattern{height:100%;inset:0;mix-blend-mode:soft-light;object-fit:cover;object-position:top center;opacity:.2;position:absolute;width:100%}
@@ -140,7 +140,7 @@
         .site-main>.site-container.relative>.grid>div:first-child{max-width:36rem;min-height:17rem}
         .pragati-narrow-regular{font-family:"Pragati Narrow",ui-sans-serif,system-ui,sans-serif}
         .site-main>.site-container.relative h1{color:#fff;display:flex;flex-direction:column;font-size:36px;font-weight:600;line-height:1;margin:.5rem 0}
-        .site-main>.single-blog-top h1{display:block;font-size:clamp(1.75rem,4vw,2.75rem);line-height:1.2;margin:.625rem 0 0}
+        .site-main>.single-blog-top.site-container.relative h1{color:#fff;display:block;font-size:clamp(1.75rem,4vw,2.75rem);font-weight:800;line-height:1.2;margin:.625rem 0 0}
         .site-main>.site-container.relative h1+p{color:#b1b9df;font-size:12px;line-height:1.25rem;margin:.5rem 0}
         .hero-cs-visual{flex-shrink:0;isolation:isolate;margin-inline:auto;max-width:400px;min-height:399px;position:relative;width:100%}
         .hero-cs-visual__poster{aspect-ratio:1/1;border-radius:22px;overflow:hidden;width:100%}
@@ -192,7 +192,7 @@
             .site-main>.site-container.relative{min-height:13rem}
             .site-main>.single-blog-top{min-height:0}
             .site-main>.site-container.relative h1{font-size:3rem}
-            .site-main>.single-blog-top h1{font-size:clamp(1.75rem,4vw,2.75rem)}
+            .site-main>.single-blog-top.site-container.relative h1{font-size:clamp(1.75rem,4vw,2.75rem)}
             .sm\:gap-2{gap:.5rem}
             .sm\:gap-4{gap:1rem}
             .sm\:gap-7{gap:1.75rem}
@@ -215,7 +215,7 @@
             .site-main>.site-container.relative>.grid{gap:3rem;grid-template-columns:repeat(2,minmax(0,1fr))}
             .site-main>.site-container.relative>.grid>div:first-child{max-width:520px;min-height:22rem}
             .site-main>.site-container.relative h1{font-size:60px}
-            .site-main>.single-blog-top h1{font-size:clamp(1.75rem,4vw,2.75rem)}
+            .site-main>.single-blog-top.site-container.relative h1{font-size:clamp(1.75rem,4vw,2.75rem)}
             .lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
             .lg\:justify-end{justify-content:flex-end}
             .lg\:max-w-\[520px\]{max-width:520px}
@@ -345,7 +345,8 @@
     </div>
 
     <x-layouts.footer />
-    {{-- Body-level so position:fixed is not captured by footer overflow-x:clip / content-visibility. --}}
+    {{-- Body-level so position:fixed is not captured by main/footer overflow or stacking. --}}
+    @stack('fixed-widgets')
     <x-layouts.suave-agent />
     <x-layouts.analytics-events />
     {{-- Defer GTM/gtag + fonts + Swiper; stub queues carousel inits until deferred.js runs. --}}

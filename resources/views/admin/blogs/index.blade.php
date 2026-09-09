@@ -17,6 +17,15 @@
     <x-slot:actions>
       @include('layouts.admin.partials.date-range-filter', ['id' => 'blog-date-range'])
       @if (Auth::user()->hasPermission('blogs.create'))
+        <form method="POST" action="{{ route('admin.blogs.generate-draft') }}" data-ajax-form data-redirect="false"
+          data-reload-table="#admin-datatable" data-loading-text="Generating draft…"
+          data-success-message="Blog has been created successfully.">
+          @csrf
+          <button type="submit" class="admin-btn admin-btn--secondary" data-loading-text="Generating draft…">
+            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+            Generate blog
+          </button>
+        </form>
         <a href="{{ route('admin.blogs.create') }}" class="admin-btn admin-btn--primary">
           <i class="fa-solid fa-plus" aria-hidden="true"></i>
           New blog

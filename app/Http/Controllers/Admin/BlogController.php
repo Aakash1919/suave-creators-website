@@ -8,8 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BlogStoreRequest;
 use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
+use App\Services\BlogDraftGenerationService;
 use App\Services\BlogService;
 use App\Services\BlogSeoMetaGenerationService;
+use App\Support\Admin\BlogCompleteness;
+use App\Support\Frontend\BlogSupport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -46,9 +49,13 @@ class BlogController extends Controller
      */
     public function create(): View
     {
+        $blog = $this->blogs->newDraft();
+
         return view('admin.blogs.form', [
-            'blog' => $this->blogs->newDraft(),
+            'blog' => $blog,
             'categories' => $this->blogs->categories(),
+            'editorContent' => '',
+            'completeness' => BlogCompleteness::evaluate($blog),
         ]);
     }
 
@@ -74,9 +81,13 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog): View
     {
+        $blog->content = BlogSupport::normalizeVisualHtml((string) $blog->content);
+
         return view('admin.blogs.form', [
             'blog' => $blog,
             'categories' => $this->blogs->categories(),
+            'editorContent' => (string) $blog->content,
+            'completeness' => BlogCompleteness::evaluate($blog),
         ]);
     }
 
@@ -105,6 +116,31 @@ class BlogController extends Controller
         $this->blogs->delete($blog);
 
         return $this->adminSuccess($request, 'Blog', 'deleted', 'admin.blogs.index');
+    }
+
+    /**
+     * Generate one blog draft manually from the blogs index page.
+     */
+    public function generateDraft(Request $request, BlogDraftGenerationService $drafts): JsonResponse|RedirectResponse
+    {
+        try {
+            $blog = $drafts->generateDraft();
+        } catch (RuntimeException $e) {
+            return $this->adminError($request, $e->getMessage());
+        } catch (Throwable $e) {
+            report($e);
+
+            return $this->adminError($request, 'Unable to generate blog draft right now. Please try again.');
+        }
+
+        return $this->adminSuccess(
+            $request,
+            'Blog',
+            'created',
+            'admin.blogs.edit',
+            $blog,
+            ['blog' => ['id' => $blog->id, 'slug' => $blog->slug]]
+        );
     }
 
     /**

@@ -29,7 +29,7 @@ class BlogSeoMetaGenerationService
             throw new RuntimeException('Add a blog title before generating SEO meta.');
         }
 
-        $model = (string) config('blogs.seo_meta.model', config('blogs.trend_drafts.model', 'gpt-4o-mini'));
+        $model = (string) config('blogs.seo_meta.model', 'gpt-4o-mini');
         $excerpt = $this->contentExcerpt($content);
 
         try {
