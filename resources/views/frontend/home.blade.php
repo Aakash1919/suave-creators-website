@@ -20,7 +20,7 @@
         </span>
       </h1>
       <p class="mb-2 mt-2 text-[12px] leading-5 md:text-sm md:leading-6 text-[#B1B9DF]">
-        Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.
+        Suave Creators builds custom web applications, software, CRM, ERP, AI and digital solutions that help businesses improve efficiency, scale faster and grow.
       </p>
       <div class="mt-8">
         <x-frontend.inline-consultation-form
