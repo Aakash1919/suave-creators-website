@@ -153,10 +153,10 @@ return [
 
     'pages' => [
         'home' => [
-            'title' => 'Build Software That Creates Real Business Results | Suave Creators',
-            'description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
-            'og_title' => 'Build Software That Creates Real Business Results',
-            'og_description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
+            'title' => 'Custom Software, CRM & Web App Development | Suave Creators',
+            'description' => 'Engineer custom software, bespoke CRM systems, and AI-driven web applications. Explore verified engineering case studies, tech stack, and ROI blueprints.',
+            'og_title' => 'Custom Software, CRM & Web App Development | Suave Creators',
+            'og_description' => 'Engineer custom software, bespoke CRM systems, and AI-driven web applications. Explore verified engineering case studies, tech stack, and ROI blueprints.',
             'json_ld_name' => 'Suave Creators — Web Development, CRM & Digital Growth Experts',
             'json_ld_description' => 'Suave Creators offers custom web development, CRM solutions, e-commerce development, enterprise software, UI/UX design, AI solutions, mobile apps, digital marketing and SEO services.',
         ],
