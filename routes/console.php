@@ -9,12 +9,13 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('blogs:generate-trend-drafts')
-    ->days([ScheduleDefinition::TUESDAY, ScheduleDefinition::THURSDAY])
-    ->at((string) config('blogs.trend_drafts.time', '09:00'))
-    ->timezone((string) config('app.timezone', 'Asia/Kolkata'))
-    ->when(fn (): bool => (bool) config('blogs.trend_drafts.enabled', true))
-    ->withoutOverlapping();
+// Automatic blog draft generation — disabled; run manually: php artisan generate:blog
+// Schedule::command('generate:blog')
+//     ->days([ScheduleDefinition::TUESDAY, ScheduleDefinition::FRIDAY])
+//     ->at((string) config('blogs.trend_drafts.time', '09:00'))
+//     ->timezone((string) config('app.timezone', 'Asia/Kolkata'))
+//     ->when(fn (): bool => (bool) config('blogs.trend_drafts.enabled', true))
+//     ->withoutOverlapping();
 
 Schedule::command('seo:audit-report')
     ->days([ScheduleDefinition::MONDAY])

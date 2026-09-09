@@ -45,7 +45,7 @@ class SuaveAgentKnowledge
         return array_map(static function (array $row): array {
             $url = (string) ($row[4] ?? '');
             $slug = null;
-            if (preg_match('#/services?/([^/?#]+)#', $url, $matches) === 1) {
+            if (preg_match('~/services?/([^/?#]+)~', $url, $matches) === 1) {
                 $slug = $matches[1];
             }
 
@@ -217,7 +217,7 @@ class SuaveAgentKnowledge
      */
     protected static function slugFromRouteUrl(string $url): string
     {
-        if (preg_match('#/industries/([^/?#]+)#', $url, $matches) === 1) {
+        if (preg_match('~/industries/([^/?#]+)~', $url, $matches) === 1) {
             return $matches[1];
         }
 
