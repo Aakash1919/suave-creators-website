@@ -345,7 +345,7 @@ class HomeSupport
     {
         return [
             'faqCtaHref' => ContactSupport::demoHref(),
-            'faqCtaLabel' => 'Get Free Architecture Consultation →',
+            'faqCtaLabel' => 'Get Free Architecture Consultation ',
             'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',
             'faqMediaType' => 'image',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
