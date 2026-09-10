@@ -400,7 +400,7 @@
 
 <!-- Portfolio Showcase Section Start -->
 <section
-  class="full-bleed portfolio-showcase !hidden bg-repeat py-6 md:!grid md:py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-pattern-bg.png') }}');"
+  class="full-bleed portfolio-showcase bg-repeat py-6 md:py-12 lg:py-[80px]" style="background-image: url('{{ asset('assets/background/portfolio-section-pattern-bg.png') }}');"
   aria-labelledby="portfolio-showcase-title">
   <div class="portfolio-showcase__pattern" aria-hidden="true"></div>
   <div class="portfolio-showcase__container section-inner">
@@ -469,7 +469,7 @@
   :show-support-aside="true"
 />
 <!-- Technology Section Start -->
-<x-frontend.four-card-section class="!hidden md:!grid" background-image="assets/background/technology-section-bg.png" />
+<x-frontend.four-card-section background-image="assets/background/technology-section-bg.png" />
 <!-- Technology Section End -->
 
 
@@ -1288,6 +1288,8 @@
   });
 
   window.suaveWhenSwiperReady(function () {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     new Swiper('.offeringsSwiper', {
       slidesPerView: 1,
       spaceBetween: 16,
@@ -1310,7 +1312,11 @@
       slidesPerView: 1,
       spaceBetween: 16,
       speed: 650,
+      rewind: true,
       watchOverflow: true,
+      autoplay: reduceMotion
+        ? false
+        : { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
       navigation: {
         nextEl: '.digital-marketing-next',
         prevEl: '.digital-marketing-prev'

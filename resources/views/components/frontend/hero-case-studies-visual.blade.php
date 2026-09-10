@@ -39,16 +39,23 @@
           data-hero-cs-link
           style="--hero-cs-i: 0"
           aria-label="{{ $scene['title'] }}: {{ $scene['primary']['value'] }} {{ $scene['primary']['label_short'] }}">
-          <img
-            src="{{ $scene['metric_image'] }}"
-            alt="{{ $scene['alt'] }}"
-            title="{{ $scene['alt'] }}"
-            class="hero-cs-visual__metric-img hero-cs-visual__card-metric-img{{ $themeClass('hero-cs-visual__card-metric-img') }}"
-            data-hero-cs-metric-img
-            width="200"
-            height="200"
-            decoding="async"
-            loading="eager">
+          <span class="hero-cs-visual__fade" data-hero-cs-fade>
+            <span class="hero-cs-visual__metric-value" data-hero-cs-primary-value>{{ $scene['primary']['value'] }}</span>
+            <span class="hero-cs-visual__metric-label" data-hero-cs-primary-label>{{ $scene['primary']['label_short'] }}</span>
+            <span class="hero-cs-visual__brand">
+              <img
+                src="{{ $scene['metric_image'] }}"
+                alt="{{ $scene['alt'] }}"
+                title="{{ $scene['alt'] }}"
+                class="hero-cs-visual__brand-mark hero-cs-visual__card-metric-img{{ $themeClass('hero-cs-visual__card-metric-img') }}"
+                data-hero-cs-metric-img
+                width="22"
+                height="22"
+                decoding="async"
+                loading="eager">
+              <span class="hero-cs-visual__brand-title" data-hero-cs-brand-title @if (($scene['brand_title'] ?? '') === '') hidden @endif>{{ $scene['brand_title'] ?? '' }}</span>
+            </span>
+          </span>
         </a>
 
         <a
@@ -414,6 +421,7 @@
           secondaryValue: root.querySelector('[data-hero-cs-secondary-value]'),
           secondaryLabel: root.querySelector('[data-hero-cs-secondary-label]'),
           tag: root.querySelector('[data-hero-cs-tag]'),
+          brandTitle: root.querySelector('[data-hero-cs-brand-title]'),
           metricTile: root.querySelector('[data-hero-cs-tile="0"]'),
           photoTile: root.querySelector('[data-hero-cs-tile="1"]'),
           chartTile: root.querySelector('[data-hero-cs-chart-tile]'),
@@ -477,6 +485,11 @@
           if (refs.secondaryValue) refs.secondaryValue.textContent = secondary.value || '';
           if (refs.secondaryLabel) refs.secondaryLabel.textContent = secondary.label_short || '';
           if (refs.tag) refs.tag.textContent = scene.tag || '';
+          if (refs.brandTitle) {
+            var brandTitle = scene.brand_title || '';
+            refs.brandTitle.textContent = brandTitle;
+            refs.brandTitle.hidden = brandTitle === '';
+          }
 
           if (refs.metricTile) {
             refs.metricTile.setAttribute('aria-label', (scene.title || '') + ': ' + (primary.value || '') + ' ' + (primary.label_short || ''));

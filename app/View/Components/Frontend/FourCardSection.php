@@ -18,7 +18,7 @@ class FourCardSection extends Component
     public function __construct(
         public string $eyebrow = 'TECH ECOSYSTEM',
         public string $title = 'Modern Technologies, Frameworks & Cloud Infrastructure',
-        public string $subtitle = 'We engineer digital solutions using modern, scalable, and battle-tested frameworks tailored to your platform long-term performance and maintainability.',
+        public string $subtitle = 'We engineer digital solutions using modern, scalable, and battle-tested frameworks tailored to your platform \'s long-term performance and maintainability.',
         public array $items = [],
         public string $headingId = 'four-card-title',
         public string $backgroundImage = 'assets/background/technology-section-bg.png',

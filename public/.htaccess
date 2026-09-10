@@ -33,9 +33,16 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# Long-lived cache for static assets (PageSpeed "efficient cache lifetimes").
-# Safe with ?v=filemtime and Vite hashed filenames — URL changes when content changes.
+# Security headers (crawl / browser hardening). Apache equivalent of common Nginx add_header rules.
 <IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Long-lived cache for static assets (PageSpeed "efficient cache lifetimes").
+    # Safe with ?v=filemtime and Vite hashed filenames — URL changes when content changes.
     <FilesMatch "(?i)\.(?:avif|bmp|css|eot|gif|ico|jpe?g|js|mjs|map|mp3|mp4|ogg|otf|pdf|png|svg|ttf|wav|webm|webp|woff2?)$">
         Header always set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
