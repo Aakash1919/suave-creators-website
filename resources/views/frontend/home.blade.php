@@ -29,7 +29,7 @@
           button-text="Get Architectural Consultation"
           :secondary-href="$demoHref"
           secondary-label="" />
-        <p class="mt-0 text-[11px] leading-4 text-[#F9F6EE]  sm:text-xs sm:leading-5">
+        <p class="home-hero__trust-line mt-3 text-[11px] leading-4 text-[#F9F6EE] sm:text-xs sm:leading-5">
           100% Codebase &amp; IP Ownership • Direct Senior Architect Access • Transparent 2-Week Sprints
         </p>
       </div>

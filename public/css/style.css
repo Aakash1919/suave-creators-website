@@ -991,6 +991,10 @@
   overflow-wrap: break-word;
 }
 
+.site-main > .home-hero .home-hero__trust-line {
+  margin-left: 20px;
+}
+
 /* ===== INDUSTRY DETAIL HERO START ===== */
 .site-main > .industry-detail-banner {
   grid-column: full;
