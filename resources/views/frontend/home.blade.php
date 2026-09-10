@@ -28,8 +28,8 @@
           placeholder="Enter your business email or phone number"
           button-text="Get Architectural Consultation"
           :secondary-href="$demoHref"
-          secondary-label="Schedule a discovery call" />
-        <p class="mt-3 text-[11px] leading-4 text-[#B1B9DF]/sm:text-xs sm:leading-5">
+          secondary-label="" />
+        <p class="mt-10  text-[11px] leading-4 text-[#F9F6EE]  sm:text-xs sm:leading-5">
           100% Codebase &amp; IP Ownership • Direct Senior Architect Access • Transparent 2-Week Sprints
         </p>
       </div>

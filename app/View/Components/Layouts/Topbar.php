@@ -11,10 +11,10 @@ class Topbar extends Component
 {
     public function __construct(
         public string $hrefRoute = 'https://the-suave.app/about-us',
-        public string $badge = 'NEW SOW / PRODUCT LAUNCH',
+        public string $badge = '',
         public string $title = 'Introducing The Suave App',
         public string $subtitle = ' — AI-Powered B2B Prospect Discovery & Multichannel Outreach CRM.',
-        public string $ctaLabel = 'Explore The Suave App →',
+        public string $ctaLabel = 'Explore The Suave App ',
         public string $icon = 'assets/icons/announcement-rocket-icon.svg',
         public string $iconAlt = 'Sales Outreach announcement icon for Suave Creators',
     ) {}
