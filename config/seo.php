@@ -148,7 +148,7 @@ return [
         'home' => [
             'title' => 'Web & Software Development Company | Suave Creators',
             'description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
-            'og_title' => 'Build Software That Creates Real Business Results',
+            'og_title' => 'Web & Software Development Company | Suave Creators',
             'og_description' => 'Ready to invest in custom software, CRM, ERP, web apps, or AI? See what it takes, what you get, and how Suave Creators can help.',
             'json_ld_name' => 'Suave Creators — Web Development, CRM & Digital Growth Experts',
             'json_ld_description' => 'Suave Creators offers custom web development, CRM solutions, e-commerce development, enterprise software, UI/UX design, AI solutions, mobile apps, digital marketing and SEO services.',
@@ -156,24 +156,26 @@ return [
         'about-us' => [
             'title' => 'About Suave Creators | Software & AI Development Company',
             'description' => 'Learn about Suave Creators, a software and AI development company delivering custom web, mobile, CRM, enterprise, and digital solutions for businesses worldwide.',
-            'og_title' => 'About Suave Creators | Innovation-Driven IT Company',
-            'og_description' => 'Learn about Suave Creators, a trusted IT company delivering innovative web development, AI solutions, and digital growth services for businesses worldwide.',
+            'og_title' => 'About Suave Creators | Software & AI Development Company',
+            'og_description' => 'Learn about Suave Creators, a software and AI development company delivering custom web, mobile, CRM, enterprise, and digital solutions for businesses worldwide.',
         ],
         'contact-us' => [
             'title' => 'Contact Suave Creators | Get a Free Software Consultation',
             'description' => 'Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.',
-            'og_title' => 'Ready to Build? Get a Free Project Consultation | Suave Creators',
+            'og_title' => 'Contact Suave Creators | Get a Free Software Consultation',
             'og_description' => 'Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.',
         ],
         'services' => [
             'title' => 'Software Development Services for B2B & SaaS Businesses',
             'description' => 'Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.',
-            'og_title' => 'Software Development Services for Serious Growth | Suave Creators',
+            'og_title' => 'Software Development Services for B2B & SaaS Businesses',
             'og_description' => 'Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.',
         ],
         'industries' => [
             'title' => 'Industry-Specific Software Development Solutions | Suave Creators',
             'description' => 'Industry-specific web design, software, and AI solutions for finance, healthcare, education, retail, logistics, and more.',
+            'og_title' => 'Industry-Specific Software Development Solutions | Suave Creators',
+            'og_description' => 'Industry-specific web design, software, and AI solutions for finance, healthcare, education, retail, logistics, and more.',
         ],
         'product' => [
             'title' => 'AI Outreach CRM & Sales Automation | Suave Creators',
@@ -213,33 +215,35 @@ return [
         'case-studies' => [
             'title' => 'Software Development Case Studies & Success Stories | Suave Creators',
             'description' => 'See how Suave Creators designs and ships real products — stories from the software we build for clients.',
+            'og_title' => 'Software Development Case Studies & Success Stories | Suave Creators',
+            'og_description' => 'See how Suave Creators designs and ships real products — stories from the software we build for clients.',
         ],
         'turbo-trans-case-study' => [
             'title' => 'Custom Software Development Case Study: Turbo Trans | Suave Creators',
             'description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation',
-            'og_title' => 'Success Story: Turbo Trans Corporation',
+            'og_title' => 'Custom Software Development Case Study: Turbo Trans | Suave Creators',
             'og_description' => 'See how a logistics leader transformed their sales operations with AI-powered CRM automation',
             'og_image' => 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
         ],
         'ai-sales-coaching-case-study' => [
             'title' => 'AI Sales Coaching Platform Case Study | Suave Creators',
             'description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
-            'og_title' => 'AI Sales Coaching Platform Case Study',
-            'og_description' => 'See how an AI sales coach practices with reps, whispers live tips, and scores calls so growing teams ramp faster without living in a recording queue.',
+            'og_title' => 'AI Sales Coaching Platform Case Study | Suave Creators',
+            'og_description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
             'og_image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
         ],
         'outreach-case-study' => [
             'title' => 'B2B CRM Sales Automation Case Study | Suave Creators',
             'description' => 'Explore how Suave Creators built a B2B CRM for lead discovery, AI prospecting, cold email, and sales pipeline management to streamline outbound sales.',
-            'og_title' => 'B2B CRM Outbound Sales Redesign | Case Study | Suave Creators',
-            'og_description' => 'Map-based company discovery, AI sales briefings, and cold email automation in one B2B CRM workspace — 65% fewer prospecting steps.',
+            'og_title' => 'B2B CRM Sales Automation Case Study | Suave Creators',
+            'og_description' => 'Explore how Suave Creators built a B2B CRM for lead discovery, AI prospecting, cold email, and sales pipeline management to streamline outbound sales.',
             'og_image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
         ],
         'tasks-case-study' => [
             'title' => 'B2B CRM Task Management Case Study | Suave Creators',
             'description' => 'See how Suave Creators redesigned B2B CRM task management with Kanban and List views, AI assistance, and automated workflows in one workspace.',
-            'og_title' => 'B2B CRM Task Management | Case Study | Suave Creators',
-            'og_description' => 'Kanban and List view integration plus an automated task assistant AI — one AI project management workspace with 50% less view switching.',
+            'og_title' => 'B2B CRM Task Management Case Study | Suave Creators',
+            'og_description' => 'See how Suave Creators redesigned B2B CRM task management with Kanban and List views, AI assistance, and automated workflows in one workspace.',
             'og_image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
         ],
         'teerrath-case-study' => [
@@ -251,8 +255,8 @@ return [
         'appointment-insurance-case-study' => [
             'title' => 'Appointment Insurance Platform Case Study | Suave Creators',
             'description' => 'Discover how Suave Creators built an appointment insurance platform with deposits, SMS invitations, check-in, and automated Stripe refund workflows.',
-            'og_title' => 'Appointment Insurance Platform Case Study | Case Study | Suave Creators',
-            'og_description' => 'See how appointment insurance turns no-shows into fair payouts — clear deposits, arrival check-in, and smart Stripe refunds that save card fees.',
+            'og_title' => 'Appointment Insurance Platform Case Study | Suave Creators',
+            'og_description' => 'Discover how Suave Creators built an appointment insurance platform with deposits, SMS invitations, check-in, and automated Stripe refund workflows.',
             'og_image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
         ],
         'ai-product-matching-case-study' => [

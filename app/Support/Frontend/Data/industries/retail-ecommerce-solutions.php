@@ -4,7 +4,7 @@ return array (
   'pageTitle' => 'Retail & E-commerce Software Solutions | Suave Creators',
   'pageDescription' => 'Explore custom retail and e-commerce software solutions for POS, inventory, mobile apps, AI-powered platforms, and scalable business operations.',
   'ogTitle' => 'Retail & E-commerce Software Solutions | Suave Creators',
-  'ogDescription' => 'AI-powered retail and e-commerce software solutions including POS, inventory, marketplaces, mobile apps, and scalable platforms.',
+  'ogDescription' => 'Explore custom retail and e-commerce software solutions for POS, inventory, mobile apps, AI-powered platforms, and scalable business operations.',
   'eyebrow' => 'We deliver Smart E-commerce Solutions',
   'heroTitle' => 
   array (
