@@ -20,7 +20,7 @@
         </span>
       </h1>
       <p class="mb-2 mt-2 text-[12px] leading-5 md:text-sm md:leading-6 text-[#B1B9DF]">
-        Suave Creators builds custom web applications, software, CRM, ERP, AI and digital solutions that help businesses improve efficiency, scale faster and grow.
+        Suave Creators engineers custom software, bespoke CRM/ERP platforms, and intelligent AI automation engines for growing enterprises. We replace rigid, expensive SaaS subscriptions with scalable, high-performance web systems tailored to your exact business operations and revenue workflows.
       </p>
       <div class="mt-8">
         <x-frontend.inline-consultation-form
@@ -29,6 +29,9 @@
           button-text="Get Architectural Consultation"
           :secondary-href="$demoHref"
           secondary-label="Schedule a discovery call" />
+        <p class="mt-3 text-[11px] leading-4 text-[#B1B9DF]/sm:text-xs sm:leading-5">
+          100% Codebase &amp; IP Ownership • Direct Senior Architect Access • Transparent 2-Week Sprints
+        </p>
       </div>
     </div>
 
@@ -69,7 +72,7 @@
 
             <span
               class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-              Company Overview & Value Pillars 
+              ABOUT SUAVE CREATORS
             </span>
           </div>
           <h2 class="mt-4 text-[clamp(2.2rem,5vw,3rem)] font-bold leading-[110%] text-[#171717] lg:text-[48px]">
@@ -82,8 +85,8 @@
           <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
             Custom web, mobile, and software solutions designed to streamline complex business workflows and maximize user engagement.
            </p>
-          <p class="mt-4 hidden text-[14px] leading-5 text-[#4D4D4D] max-w-[520px] md:block">
-            Headquartered in the United States with an engineering center in India, Suave Creators builds mission-critical software for funded startups and scaling organizations. We bridge the gap between business strategy and deep engineering—delivering secure, scalable platforms that lower operational costs and unlock compounding growth.
+          <p class="mt-4 text-[14px] leading-5 text-[#4D4D4D] max-w-[520px]">
+            Headquartered in the United States with an engineering center in India, Suave Creators builds mission-critical software for funded startups and scaling organizations. We bridge the gap between business strategy and deep engineering - delivering secure, scalable platforms that lower operational costs and unlock compounding growth.
           </p>
         <div class="about-values mt-8">
           <div class="about-values__item">
@@ -93,8 +96,7 @@
 
             <div class="flex min-w-0 flex-col gap-1">
               <strong class="text-sm font-semibold text-[#171717]">Architecture First</strong>
-              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">Built to Scale. Built to Last.
-              </p>
+              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">We construct modular, clean-code foundations built to scale securely without accumulating technical debt.</p>
             </div>
           </div>
 
@@ -106,7 +108,7 @@
             <div class="flex min-w-0 flex-col gap-1">
               <strong class="text-sm font-semibold text-[#171717]">Business-Driven Outcomes</strong>
               <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
-                Driven by Data. Focused on Results.
+                Every sprint deliverable is measured against operational throughput, conversion rates, and total cost of ownership.
               </p>
             </div>
           </div>
@@ -117,9 +119,9 @@
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
-              <strong class="text-sm font-semibold text-[#171717]"> AI & Future Ready</strong>
+              <strong class="text-sm font-semibold text-[#171717]">AI &amp; Future Ready</strong>
               <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
-                Smart Automation, Seamlessly Integrated.
+                We natively embed predictive models, LLM processing, and automated webhook pipelines directly into your operational stack.
               </p>
             </div>
           </div>
@@ -189,15 +191,14 @@
     <div class="mx-auto max-w-[660px] text-center">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-        End-to-End Delivery Offerings
+        PRODUCT LIFECYCLE
       </p>
       <h2
         class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
         From Architecture to Scale: Our End-to-End Product Engineering Lifecycle
       </h2>
       <p class="mx-auto mt-4 max-w-[605px] text-[13px] leading-[18px] sm:leading-5 text-[#4D4D4D] sm:text-[14px]">
-        We do not merely build apps , we engineer digital operating assets. We combine technical innovation, user acquisition strategy, and workflow optimization to build software that scales.
-
+        We do not merely build apps; we engineer digital operating assets. We combine technical innovation, user acquisition strategy, and workflow optimization to build software that scales.
       </p>
     </div>
 
@@ -480,6 +481,7 @@
   :media-alt="$faqMediaAlt"
   :cta-href="$faqCtaHref"
   :cta-label="$faqCtaLabel"
+  eyebrow=""
 />
 
 
@@ -495,7 +497,12 @@
   more-label="View All Engineering & Search Articles →"
 />
 
-<x-frontend.consultation-section />
+<x-frontend.consultation-section
+  title="Ready to Engineer Your Custom Platform or Modernize Your Software?"
+  cta-label="Claim Free Architecture Scoping Session"
+  secondary-cta-label="Book Direct via Google Calendar →"
+  :secondary-cta-href="$demoHref"
+/>
 
 <!-- Partnerships Section Start -->
 <x-frontend.partnerships-section :items="$partnerMarqueeItems" />
@@ -949,7 +956,6 @@
 
   .about-values {
     flex-direction: column;
-    display: none;
   }
 
   .offerings-showcase {

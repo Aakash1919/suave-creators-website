@@ -64,7 +64,7 @@ class Footer extends Component
         $columns ??= [
             'Services' => [
                 ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development'],
-                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development'],
+                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'Custom CRM'],
                 ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software'],
                 ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Software'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design'],

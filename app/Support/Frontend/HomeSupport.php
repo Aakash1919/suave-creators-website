@@ -198,7 +198,7 @@ class HomeSupport
             ],
             [
                 'icon' => 'assets/icons/online-reputation-icon.svg',
-                'title' =>'Online Reputation Management' ,
+                'title' => 'Online Reputation Management (ORM)',
                 'headline' => 'Trust & Entity Protection',
                 'description' => 'Monitoring and cultivating authentic third-party review profiles across G2, Clutch, and Google Business to reinforce domain credibility.',
                 'image' => 'assets/media/online-reputation-admin-dashboard.webp',

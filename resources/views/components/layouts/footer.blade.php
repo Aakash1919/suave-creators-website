@@ -21,9 +21,8 @@
         <a href="{{ route('home') }}" class="inline-flex max-w-full" aria-label="Suave Creators home">
           <x-layouts.logo variant="footer" />
         </a>
-        <p class="mt-3 text-[13px] font-medium leading-5 text-[#E4E9F8] sm:mt-5 sm:text-base">
-          Web &amp; Software Development<br>
-          <span class="mt-1 inline-block bg-gradient-to-b from-[#2F69FB] to-[#D078FE] bg-clip-text font-extrabold text-transparent">Solutions</span>
+        <p class="mt-3 text-[13px] font-medium leading-5 text-[#E4E9F8] sm:mt-5 sm:text-base sm:leading-6">
+          Suave Creators engineers custom software applications, tailored CRM/ERP systems, and scalable digital platforms that solve operational complexity and accelerate business growth.
         </p>
       </div>
 
