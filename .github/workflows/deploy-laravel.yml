@@ -46,7 +46,27 @@ jobs:
         run: composer install --no-dev --optimize-autoloader --no-interaction
 
       - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync sshpass
+        run: |
+          set -euo pipefail
+          # GitHub Ubuntu runners ship Google Chrome apt sources (.list and/or
+          # .sources). Chrome's CDN often fails apt-get update with Hash Sum
+          # mismatch. Drop every dl.google.com source, then refresh Ubuntu only.
+          sudo rm -f /etc/apt/sources.list.d/google-chrome.list \
+                     /etc/apt/sources.list.d/google-chrome.list.save \
+                     /etc/apt/sources.list.d/google-chrome.sources \
+                     /etc/apt/sources.list.d/google-chrome.sources.save
+          sudo grep -RIl --include='*.list' --include='*.sources' 'dl.google.com' /etc/apt/sources.list.d \
+            2>/dev/null | sudo xargs -r rm -f || true
+          sudo rm -rf /var/lib/apt/lists/partial /var/lib/apt/lists/dl.google.com*
+          if [ -f /etc/apt/sources.list.d/ubuntu.sources ]; then
+            sudo apt-get update \
+              -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/ubuntu.sources \
+              -o Dir::Etc::sourceparts=- \
+              -o APT::Get::List-Cleanup=0
+          else
+            sudo apt-get update
+          fi
+          sudo apt-get install -y rsync sshpass
 
       - name: Upload only necessary files
         run: |
@@ -131,7 +151,27 @@ jobs:
         run: composer install --no-dev --optimize-autoloader --no-interaction
       
       - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync sshpass
+        run: |
+          set -euo pipefail
+          # GitHub Ubuntu runners ship Google Chrome apt sources (.list and/or
+          # .sources). Chrome's CDN often fails apt-get update with Hash Sum
+          # mismatch. Drop every dl.google.com source, then refresh Ubuntu only.
+          sudo rm -f /etc/apt/sources.list.d/google-chrome.list \
+                     /etc/apt/sources.list.d/google-chrome.list.save \
+                     /etc/apt/sources.list.d/google-chrome.sources \
+                     /etc/apt/sources.list.d/google-chrome.sources.save
+          sudo grep -RIl --include='*.list' --include='*.sources' 'dl.google.com' /etc/apt/sources.list.d \
+            2>/dev/null | sudo xargs -r rm -f || true
+          sudo rm -rf /var/lib/apt/lists/partial /var/lib/apt/lists/dl.google.com*
+          if [ -f /etc/apt/sources.list.d/ubuntu.sources ]; then
+            sudo apt-get update \
+              -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/ubuntu.sources \
+              -o Dir::Etc::sourceparts=- \
+              -o APT::Get::List-Cleanup=0
+          else
+            sudo apt-get update
+          fi
+          sudo apt-get install -y rsync sshpass
 
       - name: Upload only necessary files
         run: |
