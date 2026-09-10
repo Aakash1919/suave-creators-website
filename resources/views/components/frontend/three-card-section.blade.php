@@ -38,6 +38,9 @@
                     </div>
 
                     <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $item['description'] }}</p>
+                    @if (filled($item['linkLabel']))
+                        <span class="web-service-card__link inline-block text-[13px] font-semibold text-[#2A4DFB]">{{ $item['linkLabel'] }}</span>
+                    @endif
                 </a>
             @endforeach
         </div>

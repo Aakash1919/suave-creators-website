@@ -40,6 +40,8 @@ class SeoGenerateService
             [
                 'title' => $site['default_title'] ?? ($site['name'] ?? 'Suave Creators'),
                 'description' => $site['default_description'] ?? ($site['name'] ?? 'Suave Creators'),
+                'keywords' => $site['default_keywords'] ?? null,
+                'author' => $site['author'] ?? ($site['name'] ?? 'Suave Creators'),
                 'og_title' => null,
                 'og_description' => null,
                 'image' => $site['default_og_image'] ?? null,
@@ -53,6 +55,8 @@ class SeoGenerateService
             array_filter([
                 'title' => $page['title'] ?? null,
                 'description' => $page['description'] ?? null,
+                'keywords' => $page['keywords'] ?? null,
+                'author' => $page['author'] ?? null,
                 'og_title' => $page['og_title'] ?? null,
                 'og_description' => $page['og_description'] ?? null,
                 'image' => $page['og_image'] ?? null,
@@ -79,6 +83,7 @@ class SeoGenerateService
         $canonical = $this->canonicalUrl($merged['canonical'] ?? null);
         $imageUrl = $this->resolveAssetUrl($merged['image'] ?? null);
         $siteName = (string) ($site['name'] ?? 'Suave Creators');
+        $imageAlt = (string) ($merged['og_image_alt'] ?? $siteName);
 
         $hreflang = [];
         foreach ((array) ($site['hreflang'] ?? []) as $locale) {
@@ -92,9 +97,14 @@ class SeoGenerateService
             $robots = 'noindex, nofollow';
         }
 
+        $twitterSite = (string) ($site['twitter_site'] ?? '');
+        $twitterCreator = (string) ($site['twitter_creator'] ?? $twitterSite);
+
         return [
             'title' => $title,
             'description' => $description,
+            'keywords' => (string) ($merged['keywords'] ?? ''),
+            'author' => (string) ($merged['author'] ?? $siteName),
             'canonical' => $canonical,
             'robots' => $robots,
             'verification' => (string) ($site['google_site_verification'] ?? ''),
@@ -105,16 +115,26 @@ class SeoGenerateService
                 'type' => (string) ($merged['type'] ?? 'website'),
                 'url' => $canonical,
                 'image' => $imageUrl,
+                'image_secure_url' => $imageUrl,
+                'image_type' => $this->imageMimeType($imageUrl),
                 'image_width' => (int) ($merged['og_image_width'] ?? 1200),
                 'image_height' => (int) ($merged['og_image_height'] ?? 630),
-                'image_alt' => (string) ($merged['og_image_alt'] ?? $siteName),
+                'image_alt' => $imageAlt,
                 'site_name' => $siteName,
+                'locale' => (string) ($site['og_locale'] ?? 'en_US'),
+                'locale_alternate' => array_values(array_filter(
+                    (array) ($site['og_locale_alternate'] ?? []),
+                    static fn (mixed $value): bool => is_string($value) && $value !== ''
+                )),
             ],
             'twitter' => [
                 'card' => 'summary_large_image',
+                'site' => $twitterSite,
+                'creator' => $twitterCreator,
                 'title' => $ogTitle,
                 'description' => $ogDescription,
                 'image' => $imageUrl,
+                'image_alt' => $imageAlt,
             ],
             'jsonLd' => $this->buildJsonLd(
                 $site,
@@ -157,45 +177,46 @@ class SeoGenerateService
         $pageUrl = rtrim($canonical, '/');
         $webPageId = $routeName === 'home' ? $baseUrl.'/#homepage' : $pageUrl.'/#webpage';
         $breadcrumbId = $routeName === 'home' ? $baseUrl.'/#breadcrumb' : $pageUrl.'/#breadcrumb';
+        $organizationId = $baseUrl.'/#organization';
+
+        $logo = $logoUrl === null ? null : [
+            '@type' => 'ImageObject',
+            '@id' => $baseUrl.'/#logo',
+            'url' => $logoUrl,
+            'caption' => (string) ($site['logo_caption'] ?? (($site['name'] ?? 'Suave Creators').' Logo')),
+        ];
+
+        $contactPoints = $this->contactPoints($org, $email, $telephone);
+        $aggregateRating = $this->aggregateRating($org);
 
         $organization = [
             '@type' => 'Organization',
-            '@id' => $baseUrl.'/#organization',
+            '@id' => $organizationId,
             'name' => (string) ($org['legal_name'] ?? $site['name'] ?? 'Suave Creators'),
             'url' => $baseUrl.'/',
-            'logo' => $logoUrl,
+            'logo' => $logo,
             'image' => $imageUrl,
-            'email' => $email !== '' ? 'mailto:'.$email : null,
+            'email' => $email !== '' ? $email : null,
             'telephone' => $telephone !== '' ? $telephone : null,
-            'contactPoint' => [
-                '@type' => 'ContactPoint',
-                'telephone' => $telephone !== '' ? $telephone : null,
-                'contactType' => 'customer service',
-                'email' => $email !== '' ? $email : null,
-                'areaServed' => (string) ($org['area_served'] ?? 'Worldwide'),
-                'availableLanguage' => array_values((array) ($org['available_language'] ?? ['en'])),
-            ],
+            'contactPoint' => $contactPoints,
             'address' => self::postalAddresses($org),
             'sameAs' => array_values((array) ($org['sameAs'] ?? [])),
             'knowsAbout' => array_values((array) ($org['knowsAbout'] ?? [])),
+            'aggregateRating' => $aggregateRating,
         ];
 
-        $organization['contactPoint'] = array_filter(
-            $organization['contactPoint'],
-            static fn (mixed $value): bool => $value !== null && $value !== ''
-        );
-
         $graph = [
-            array_filter($organization, static fn (mixed $value): bool => $value !== null),
+            array_filter($organization, static fn (mixed $value): bool => $value !== null && $value !== []),
             [
                 '@type' => 'WebSite',
                 '@id' => $baseUrl.'/#website',
                 'url' => $baseUrl.'/',
                 'name' => (string) ($site['name'] ?? 'Suave Creators'),
-                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
+                'description' => (string) ($site['website_description'] ?? ($site['default_description'] ?? '')),
                 'publisher' => [
-                    '@id' => $baseUrl.'/#organization',
+                    '@id' => $organizationId,
                 ],
+                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'potentialAction' => [
                     '@type' => 'SearchAction',
                     'target' => $baseUrl.'/?q={search_term}',
@@ -208,13 +229,16 @@ class SeoGenerateService
                 'url' => $canonical,
                 'name' => $title,
                 'description' => $description,
-                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
                 'isPartOf' => [
                     '@id' => $baseUrl.'/#website',
+                ],
+                'about' => [
+                    '@id' => $organizationId,
                 ],
                 'breadcrumb' => [
                     '@id' => $breadcrumbId,
                 ],
+                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
             ],
             [
                 '@type' => 'BreadcrumbList',
@@ -229,22 +253,19 @@ class SeoGenerateService
             $graph[] = [
                 '@type' => 'FAQPage',
                 '@id' => $faqPageUrl,
-                'mainEntity' => array_values(array_map(static function (array $faq, int $index) use ($faqPageUrl): array {
+                'mainEntity' => array_values(array_map(static function (array $faq): array {
                     $question = (string) ($faq['question'] ?? $faq['name'] ?? '');
                     $answer = (string) ($faq['answer'] ?? $faq['text'] ?? '');
-                    $answerUrl = $faqPageUrl.'-'.($index + 1);
 
                     return [
                         '@type' => 'Question',
                         'name' => $question,
-                        'answerCount' => 1,
                         'acceptedAnswer' => [
                             '@type' => 'Answer',
                             'text' => $answer,
-                            'url' => $answerUrl,
                         ],
                     ];
-                }, $faqs, array_keys($faqs))),
+                }, $faqs)),
             ];
         }
 
@@ -280,7 +301,7 @@ class SeoGenerateService
             '@type' => 'ListItem',
             'position' => $position,
             'name' => 'Home',
-            'item' => $baseUrl,
+            'item' => $baseUrl.'/',
         ];
 
         if (in_array($routeName, ['service.show', 'industry.show', 'blog.show'])) {
@@ -371,5 +392,94 @@ class SeoGenerateService
         }
 
         return count($addresses) === 1 ? $addresses[0] : $addresses;
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<int, array<string, mixed>>
+     */
+    protected function contactPoints(array $org, string $email, string $fallbackTelephone): array
+    {
+        $offices = array_values(array_filter(
+            (array) ($org['offices'] ?? []),
+            static fn (mixed $office): bool => is_array($office)
+        ));
+
+        if ($offices === []) {
+            $point = array_filter([
+                '@type' => 'ContactPoint',
+                'telephone' => $fallbackTelephone !== '' ? $fallbackTelephone : null,
+                'contactType' => 'customer service',
+                'email' => $email !== '' ? $email : null,
+                'areaServed' => (string) ($org['area_served'] ?? 'Worldwide'),
+                'availableLanguage' => array_values((array) ($org['available_language'] ?? ['en'])),
+            ], static fn (mixed $value): bool => $value !== null && $value !== '');
+
+            return $point === [] ? [] : [$point];
+        }
+
+        $points = [];
+
+        foreach ($offices as $office) {
+            $telephone = (string) ($office['phone_schema'] ?? $office['phone'] ?? '');
+            $officeEmail = strtolower((string) ($office['email'] ?? $email));
+            $areaServed = $office['area_served'] ?? [(string) ($office['country'] ?? 'Worldwide'), 'Worldwide'];
+            $availableLanguage = $office['available_language'] ?? ($org['available_language'] ?? ['en']);
+
+            $point = array_filter([
+                '@type' => 'ContactPoint',
+                'telephone' => $telephone !== '' ? $telephone : null,
+                'contactType' => (string) ($office['contact_type'] ?? 'customer service'),
+                'email' => $officeEmail !== '' ? $officeEmail : null,
+                'areaServed' => array_values((array) $areaServed),
+                'availableLanguage' => array_values((array) $availableLanguage),
+            ], static fn (mixed $value): bool => $value !== null && $value !== '' && $value !== []);
+
+            if ($point !== []) {
+                $points[] = $point;
+            }
+        }
+
+        return $points;
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<string, mixed>|null
+     */
+    protected function aggregateRating(array $org): ?array
+    {
+        $rating = (array) ($org['aggregateRating'] ?? []);
+        $ratingValue = (string) ($rating['ratingValue'] ?? '');
+        $reviewCount = (string) ($rating['reviewCount'] ?? '');
+
+        if ($ratingValue === '' || $reviewCount === '') {
+            return null;
+        }
+
+        return array_filter([
+            '@type' => 'AggregateRating',
+            'ratingValue' => $ratingValue,
+            'reviewCount' => $reviewCount,
+            'bestRating' => (string) ($rating['bestRating'] ?? '5'),
+            'worstRating' => (string) ($rating['worstRating'] ?? '1'),
+        ], static fn (mixed $value): bool => $value !== null && $value !== '');
+    }
+
+    protected function imageMimeType(?string $url): string
+    {
+        if (! is_string($url) || $url === '') {
+            return 'image/png';
+        }
+
+        $path = strtolower((string) (parse_url($url, PHP_URL_PATH) ?: $url));
+
+        return match (true) {
+            str_ends_with($path, '.jpg'), str_ends_with($path, '.jpeg') => 'image/jpeg',
+            str_ends_with($path, '.webp') => 'image/webp',
+            str_ends_with($path, '.gif') => 'image/gif',
+            str_ends_with($path, '.svg') => 'image/svg+xml',
+            default => 'image/png',
+        };
     }
 }

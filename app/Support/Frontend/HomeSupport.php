@@ -133,21 +133,21 @@ class HomeSupport
             [
                 'id' => 'quality',
                 'title' => 'Code Quality',
-                'description' => 'trict coding standards, peer code reviews, and automated CI/CD testing ensure production reliability on day one.',
+                'description' => 'Strict coding standards, peer code reviews, and automated CI/CD testing ensure production reliability on day one.',
                 'image' => 'assets/media/financial-dashboard-laptop-collaboration.webp',
                 'alt' => 'Quality-driven financial dashboard collaboration for software excellence',
             ],
             [
                 'id' => 'trust',
                 'title' => 'Mutual Trust',
-                'description' => 'WTransparent sprint tracking, direct developer communication, and complete client ownership of code repositories and IP.',
+                'description' => 'Transparent sprint tracking, direct developer communication, and complete client ownership of code repositories and IP.',
                 'image' => 'assets/media/diverse-team-data-meeting.webp',
                 'alt' => 'Trusted diverse team aligning on client requirements with data insights',
             ],
             [
                 'id' => 'customer',
                 'title' => 'Client Focus',
-                'description' => 'We evaluate every feature by its ability to solve operational bottlenecks and maximize return on investment',
+                'description' => 'We evaluate every feature by its ability to solve operational bottlenecks and maximize return on investment.',
                 'image' => 'assets/media/summary-report-team-meeting.webp',
                 'alt' => 'Customer focused team reviewing a summary report in a client meeting',
             ],
@@ -173,7 +173,7 @@ class HomeSupport
                 'icon' => 'assets/icons/ppc-advertising-icon.svg',
                 'title' => 'Pay-Per-Click Advertising (PPC)',
                 'headline' => 'Precision Paid Acquisition',
-                'description' => 'RLaser-focused Google and LinkedIn campaigns capturing high-intent enterprise searches with optimized conversion landing pages.',
+                'description' => 'Laser-focused Google and LinkedIn campaigns capturing high-intent enterprise searches with optimized conversion landing pages.',
                 'image' => 'assets/media/ppc-campaign-planning.webp',
                 'alt' => 'PPC advertising campaign planning for higher conversions',
                 'iconAlt' => 'Pay per click advertising PPC service icon',
@@ -198,7 +198,7 @@ class HomeSupport
             ],
             [
                 'icon' => 'assets/icons/online-reputation-icon.svg',
-                'title' =>'Online Reputation Management' ,
+                'title' => 'Online Reputation Management (ORM)',
                 'headline' => 'Trust & Entity Protection',
                 'description' => 'Monitoring and cultivating authentic third-party review profiles across G2, Clutch, and Google Business to reinforce domain credibility.',
                 'image' => 'assets/media/online-reputation-admin-dashboard.webp',
@@ -345,41 +345,11 @@ class HomeSupport
     {
         return [
             'faqCtaHref' => ContactSupport::demoHref(),
-            'faqCtaLabel' => 'Get Free Architecture Consultation →',
+            'faqCtaLabel' => 'Get Free Architecture Consultation ',
             'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',
             'faqMediaType' => 'image',
             'faqMediaAlt' => 'Business team collaborating on a custom software project with Suave Creators',
-            'faqs' => [
-                [
-                    'question' => ' What software engineering and digital growth services does Suave Creators offer?',
-                    'answer' => 'We specialize in custom web application development, bespoke CRM and ERP system engineering, enterprise software modernization, UI/UX product design, applied AI integrations, and full-funnel search visibility (SEO, AEO, and GEO).',
-                ],
-                [
-                    'question' => ' How long does a typical custom software or web application project take to complete?',
-                    'answer' => 'A production-ready MVP or targeted custom CRM typically takes 8 to 12 weeks from initial architectural discovery to live deployment. Larger enterprise modernization platforms or high-SKU commerce projects typically range between 14 to 20 weeks, executed in two-week agile sprints.',
-                ],
-                [
-                    'question' => ' Who owns the intellectual property (IP) and codebase once the project is completed?',
-                    'answer' => 'You own 100% of the intellectual property, codebase, design assets, and databases. Upon final milestone acceptance, all code repositories, documentation, and cloud environment credentials are fully transferred to your company with zero proprietary vendor lock-in.',
-                ],
-                [
-                    'question' => ' Do you provide dedicated post-launch support and ongoing SLA maintenance?',
-                    'answer' => 'Yes. We provide comprehensive post-deployment SLA maintenance packages covering 24/7 server uptime monitoring, continuous security patching, database optimization, framework updates, and dedicated monthly hours for new feature iterations.',
-                ],
-                [
-                    'question' => 'Can Suave Creators audit, refactor, or modernize an existing legacy codebase?',
-                    'answer' => 'Yes. We regularly conduct code audits on legacy systems (e.g., monolithic PHP, legacy Angular, or outdated Laravel codebases). We identify performance bottlenecks, security vulnerabilities, and architectural flaws, then execute phased refactoring without disrupting ongoing business operations.'
-                ],
-                [
-                    'question' => 'Are all web and software applications optimized for mobile devices and Core Web Vitals?',
-                    'answer' => 'Yes. Every application is built mobile-first, responsive across all screen sizes, and rigorously tested against Google Core Web Vitals metrics—consistently targeting an LCP under 2.5 seconds, CLS under 0.1, and an INP under 200 milliseconds.',
-                ],
-                [
-                    'question' => 'How does Suave Creators optimize websites for Answer Engines (AEO) and AI Search (GEO)?',
-                    'answer' => 'We implement semantic HTML5 hierarchies, valid Schema.org JSON-LD graphs (Organization, Service, FAQPage, TechArticle),answer-first modular text blocks, and llms.txt directories. This ensures your content is eligible for Google AI Overviews, Featured Snippets, and conversational citations across ChatGPT, Perplexity, and Gemini.',
-                ],
-            ],
-
+            'faqs' => array_values((array) config('seo.site.default_faqs', [])),
         ];
     }
 

@@ -118,7 +118,8 @@ class CaseStudySupport
                 'brand_image' => $brandImage,
                 'photo_image' => $photoImage,
                 'chart_image' => $extraImage,
-                'metric_image' => $brandImage,
+                'metric_image' => self::heroMetricImageForSlug($slug),
+                'brand_title' => self::heroBrandTitleForSlug($slug),
                 'theme' => self::heroVisualThemeForSlug($slug),
                 'bars' => self::heroBarsFromResults($results),
             ];
@@ -229,23 +230,42 @@ class CaseStudySupport
     }
 
     /**
-     * Full-bleed image for the large mosaic metric tile. Swap placeholder paths per slug.
+     * Logo for the mosaic metric tile. Swap placeholder paths per slug.
      */
     protected static function heroMetricImageForSlug(string $slug): string
     {
         $placeholder = 'assets/case-studies/hero-cs-metric-placeholder.svg';
 
         $map = [
-            'turbo-trans-corporation-case-study' =>'assets/case-studies/turbo-trans/turbo-trans-corporation-banner1.webp',
-            'ai-sales-coaching-platform-case-study' => 'assets/case-studies/ai-sales-coaching/AI-sales-coaching1.webp',
-            'suave-crm-outreach-case-study' => 'assets/case-studies/suave-crm-outreach/outbound-banner.webp',
-            'suave-crm-tasks-case-study' =>  'assets/case-studies/suave-crm-tasks/suave-crm-banner1.webp',
-            'appointment-insurance-platform-case-study' =>'assets/case-studies/appointment-insurance/appointment-banner1.webp',
+            'turbo-trans-corporation-case-study' => 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
+            'ai-sales-coaching-platform-case-study' => 'assets/product/logo-ai-sales-coach.png',
+            'suave-crm-outreach-case-study' => 'assets/case-studies/suave-crm-outreach/the-suave-s-mark.png',
+            'suave-crm-tasks-case-study' => 'assets/product/suave-tasks-logo.png',
+            'appointment-insurance-platform-case-study' => 'assets/product/show-check-logo.png',
             'teerrath-spiritual-commerce' => $placeholder,
-            'AI-product-matching' =>'assets/case-studies/ai-product-matching/product-matching-banner1.webp',
+            'AI-product-matching' => 'assets/product/matching-product-logo.png',
         ];
 
         return self::publicImageUrl($map[$slug] ?? $placeholder);
+    }
+
+    /**
+     * Short name shown after the mosaic logo, matching the previous metric cards.
+     * Empty when the lockup is logo-only (wordmark).
+     */
+    protected static function heroBrandTitleForSlug(string $slug): string
+    {
+        $map = [
+            'ai-sales-coaching-platform-case-study' => 'AI Sales Coach',
+            'suave-crm-outreach-case-study' => '',
+            'suave-crm-tasks-case-study' => 'Suave Tasks',
+            'appointment-insurance-platform-case-study' => 'Show check',
+            'AI-product-matching' => 'CABVI AI',
+            'turbo-trans-corporation-case-study' => '',
+            'teerrath-spiritual-commerce' => '',
+        ];
+
+        return $map[$slug] ?? '';
     }
 
     /**
@@ -543,12 +563,12 @@ class CaseStudySupport
                 'status' => 'published',
                 'image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
                 'short_description' => 'An AI sales coaching platform that helps fast-growing teams keep performance consistent as they hire — with voice practice, live call coaching, and clear scores so new reps ramp faster and managers don’t wait on recordings.',
-                'listing_subtitle' => 'AI Sales Coaching Platform for Growing Teams',
+                'listing_subtitle' => 'AI Sales Enablement Platform',
                 'industry' => 'Sales Enablement',
                 'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups'],
                 'results' => [
-                    ['value' => '+55%', 'label' => 'Faster path from hire to confident customer calls'],
+                    ['value' => '+55%', 'label' => 'Faster Ramp Time To Quota'],
                     ['value' => '+60%', 'label' => 'Less manager time spent reviewing recordings for feedback'],
                     ['value' => '+50%', 'label' => 'Improvement in call quality consistency as the team expands'],
                     ['value' => '+45%', 'label' => 'Fewer opportunities lost waiting on delayed coaching'],
@@ -671,13 +691,13 @@ class CaseStudySupport
                 'status' => 'published',
                 'image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo.webp',
                 'short_description' => 'AI product matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
-                'listing_subtitle' => 'Automated AI Product Matching',
+                'listing_subtitle' => 'Automated CRM pipeline analytics',
                 'industry' => 'Nonprofit / Procurement',
                 'service_slugs' => ['enterprise-software-solutions', 'ai-solutions'],
                 'industry_slugs' => ['it-software-solutions-for-startups', 'education-elearning-platforms'],
                 'results' => [
                     ['value' => '+70%', 'label' => 'Less time spent hunting look-alikes across supplier sites by hand'],
-                    ['value' => '+60%', 'label' => 'Improvement in match qualification speed'],
+                    ['value' => '+60%', 'label' => 'Less Management Review Time'],
                     ['value' => '+75%', 'label' => 'Less spreadsheet re-entry to keep match records'],
                     ['value' => '+50%', 'label' => 'Less manpower burned on the find–qualify–record loop'],
                 ],
@@ -688,12 +708,12 @@ class CaseStudySupport
                 'status' => 'published',
                 'image' => 'assets/case-studies/turbo-trans/ttc_caseStudy.webp',
                 'short_description' => 'Explore how Suave Creators delivered a custom software solution for Turbo Trans Corporation, addressing business workflows, usability, and operational needs.',
-                'listing_subtitle' => 'Global Operations',
+                'listing_subtitle' => 'Turbo trans Logistics Dispatch',
                 'industry' => 'Logistics & Freight',
                 'service_slugs' => ['custom-crm-development'],
                 'industry_slugs' => ['logistics-supply-chain-apps'],
                 'results' => [
-                    ['value' => '42%', 'label' => 'More Qualified Leads vs. Previous Quarter'],
+                    ['value' => '42%', 'label' => 'More Qualified Leads'],
                     ['value' => '3.4x', 'label' => 'Faster Response Time Average Lead Response'],
                     ['value' => '68%', 'label' => 'Pipeline Visibility Complete Deal Tracking'],
                     ['value' => '2.8x', 'label' => 'Revenue Growth Year-over-Year Increase'],

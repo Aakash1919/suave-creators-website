@@ -16,12 +16,11 @@ class ConsultationSection extends Component
      * @param  array<int, array{src: string, alt: string, tone: string, column: string}>|null  $people
      */
     public function __construct(
-        public string $title = "Ready to Engineer Your Custom Platform or Modernize Your Software?
-",
+        public string $title = 'Ready to Engineer Your Custom Platform or Modernize Your Software?',
         public string $description = 'Schedule an architecture scoping call with our technical lead. We will review your product requirements, assess technical constraints, and deliver an actionable implementation roadmap with transparent sprint estimates.',
-        public string $ctaLabel = 'Book a Free Consultation',
+        public string $ctaLabel = 'Claim Free Architecture Scoping Session',
         public string $ctaHref = '',
-        public string $secondaryCtaLabel = '',
+        public string $secondaryCtaLabel = 'Book Direct via Google Calendar →',
         public string $secondaryCtaHref = '',
         public string $backgroundImage = 'assets/background/consultation-section-bg.png',
         public string $eyebrow = '',

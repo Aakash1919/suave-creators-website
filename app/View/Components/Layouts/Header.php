@@ -32,7 +32,7 @@ class Header extends Component
         $dropdowns ??= [
             'Services' => [
                 ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development', 'icon' => 'fa-solid fa-laptop-code'],
-                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'CRM Development', 'icon' => 'fa-solid fa-users'],
+                ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'Custom CRM', 'icon' => 'fa-solid fa-users'],
                 ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software', 'icon' => 'fa-solid fa-building'],
                 ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce', 'icon' => 'fa-solid fa-cart-shopping'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design', 'icon' => 'fa-solid fa-pen-ruler'],

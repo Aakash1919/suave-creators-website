@@ -4,12 +4,14 @@
   aria-labelledby="{{ $headingId }}">
   <div class="faq-section__inner section-inner">
     <div class="faq-section__intro">
-      <p class="faq-section__eyebrow mb-4 flex items-center gap-2">
-        <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
-        <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
-          {{ $eyebrow }}
-        </span>
-      </p>
+      @if (filled($eyebrow))
+        <p class="faq-section__eyebrow mb-4 flex items-center gap-2">
+          <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"></span>
+          <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
+            {{ $eyebrow }}
+          </span>
+        </p>
+      @endif
       <h2 id="{{ $headingId }}">{{ $title }}</h2>
       @if (filled($description))
         <p class="faq-section__description">{{ $description }}</p>

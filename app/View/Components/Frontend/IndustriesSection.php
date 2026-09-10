@@ -28,7 +28,7 @@ class IndustriesSection extends Component
         public bool $showSupportAside = false,
         public string $supportText = 'The Services and Supports You Need for Online Platforms in Suave Creators',
         public string $supportHref = '',
-        public string $supportLabel = 'Schedule an Industry-Specific Consultation →',
+        public string $supportLabel = 'Schedule an Industry-Specific Consultation',
         public string $supportImage = 'assets/brand/chat-widget-icon.png',
         public string $supportImageAlt = 'Chat support widget for Suave Creators software development services',
     ) {
