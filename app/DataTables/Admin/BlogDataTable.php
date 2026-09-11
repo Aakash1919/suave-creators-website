@@ -19,8 +19,16 @@ class BlogDataTable
     {
         /** @var EloquentBuilder<Blog> $query */
         $query = Blog::query()
-            ->with(['category', 'createdBy'])
-            ->select('blogs.*');
+            ->select([
+                'blogs.id',
+                'blogs.blog_category_id',
+                'blogs.title',
+                'blogs.slug',
+                'blogs.status',
+                'blogs.published_at',
+                'blogs.updated_at',
+            ])
+            ->with(['category:id,name']);
 
         return DataTables::eloquent($query)
             ->addColumn('category_name', fn (Blog $blog): string => e($blog->category?->name ?? '—'))
@@ -48,16 +56,27 @@ class BlogDataTable
             ->editColumn('updated_at', fn (Blog $blog): string => optional($blog->updated_at)?->diffForHumans() ?? '—')
             ->addColumn('actions', function (Blog $blog): string {
                 $items = [];
+                $name = trim((string) $blog->title) !== '' ? (string) $blog->title : 'this blog';
 
                 if (Auth::user()?->hasPermission('blogs.update')) {
                     $items[] = [
                         'label' => 'Edit',
                         'url' => route('admin.blogs.edit', $blog),
                     ];
+
+                    if ($blog->status !== Blog::STATUS_PUBLISHED) {
+                        $items[] = [
+                            'label' => 'Publish',
+                            'url' => route('admin.blogs.publish', $blog),
+                            'method' => 'PATCH',
+                            'confirmTitle' => 'Publish blog?',
+                            'confirm' => 'Publish “'.$name.'” to the public site now?',
+                            'confirmLabel' => 'Publish',
+                        ];
+                    }
                 }
 
                 if (Auth::user()?->hasPermission('blogs.delete')) {
-                    $name = trim((string) $blog->title) !== '' ? (string) $blog->title : 'this blog';
                     $items[] = [
                         'label' => 'Delete',
                         'url' => route('admin.blogs.destroy', $blog),
