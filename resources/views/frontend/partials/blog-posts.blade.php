@@ -49,27 +49,30 @@
   </div>
 
   @if (isset($paginator) && $paginator->hasPages())
+    @php
+      $paginationHref = $listingUrl ?? route('blogs');
+    @endphp
     <nav class="blog-pagination" aria-label="Blog pagination">
       @if ($paginator->onFirstPage())
         <span class="blog-pagination__btn is-disabled" aria-disabled="true">Previous</span>
       @else
-        <a class="blog-pagination__btn" href="{{ $paginator->previousPageUrl() }}" data-blog-page="{{ $paginator->currentPage() - 1 }}">Previous</a>
+        <a class="blog-pagination__btn" href="{{ $paginationHref }}" data-blog-page="{{ $paginator->currentPage() - 1 }}">Previous</a>
       @endif
 
       <ul class="blog-pagination__pages">
-        @foreach ($paginator->getUrlRange(1, $paginator->lastPage()) as $page => $url)
+        @foreach (range(1, $paginator->lastPage()) as $page)
           <li>
             @if ($page == $paginator->currentPage())
               <span class="blog-pagination__page is-active" aria-current="page">{{ $page }}</span>
             @else
-              <a class="blog-pagination__page" href="{{ $url }}" data-blog-page="{{ $page }}">{{ $page }}</a>
+              <a class="blog-pagination__page" href="{{ $paginationHref }}" data-blog-page="{{ $page }}">{{ $page }}</a>
             @endif
           </li>
         @endforeach
       </ul>
 
       @if ($paginator->hasMorePages())
-        <a class="blog-pagination__btn" href="{{ $paginator->nextPageUrl() }}" data-blog-page="{{ $paginator->currentPage() + 1 }}">Next</a>
+        <a class="blog-pagination__btn" href="{{ $paginationHref }}" data-blog-page="{{ $paginator->currentPage() + 1 }}">Next</a>
       @else
         <span class="blog-pagination__btn is-disabled" aria-disabled="true">Next</span>
       @endif

@@ -278,14 +278,7 @@
                                 <option value="draft" @selected(old('status', $blog->status) === 'draft')>Draft</option>
                                 <option value="published" @selected(old('status', $blog->status) === 'published')>Published</option>
                             </select>
-                        </div>
-                        <div>
-                            <label class="admin-label" for="blog-published-at">Published at</label>
-                            <input id="blog-published-at" type="text" name="published_at"
-                                value="{{ old('published_at', optional($blog->published_at)->format('Y-m-d H:i')) }}"
-                                class="admin-input" placeholder="Select date & time" data-flatpickr
-                                data-flatpickr-enable-time="true" data-flatpickr-date-format="Y-m-d H:i"
-                                autocomplete="off">
+                            <p class="admin-help">Published at is set automatically when status is Published.</p>
                         </div>
                         <div>
                             <label class="admin-label" for="blog-category">Category</label>

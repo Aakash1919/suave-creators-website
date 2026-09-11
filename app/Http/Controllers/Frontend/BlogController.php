@@ -11,13 +11,17 @@ use Illuminate\View\View;
 
 class BlogController extends FrontendController
 {
-    public function index(Request $request): View
+    public function index(Request $request): View|RedirectResponse
     {
+        if ($redirect = $this->redirectAwayFromPageQuery($request)) {
+            return $redirect;
+        }
+
         return $this->view(
             'frontend.blogs',
             BlogSupport::indexData(
                 $this->categorySlugFromRequest($request),
-                max(1, (int) $request->query('page', 1)),
+                1,
                 $this->searchFromRequest($request),
                 $this->perPageFromRequest($request)
             )
@@ -37,11 +41,15 @@ class BlogController extends FrontendController
             return redirect()->route('blogs', status: 301);
         }
 
+        if ($redirect = $this->redirectAwayFromPageQuery($request)) {
+            return $redirect;
+        }
+
         return $this->view(
             'frontend.blogs',
             BlogSupport::indexData(
                 $slug,
-                max(1, (int) $request->query('page', 1)),
+                1,
                 $this->searchFromRequest($request),
                 $this->perPageFromRequest($request)
             )
@@ -70,6 +78,7 @@ class BlogController extends FrontendController
                 'paginator' => $data['paginator'],
                 'activeCategory' => $data['activeCategory'],
                 'search' => $data['search'],
+                'listingUrl' => $data['listingUrl'],
             ])->render(),
             'meta' => [
                 'total' => $data['paginator']->total(),
@@ -103,5 +112,26 @@ class BlogController extends FrontendController
     protected function perPageFromRequest(Request $request): int
     {
         return BlogSupport::perPage((int) $request->query('per_page', BlogSupport::PER_PAGE));
+    }
+
+    /**
+     * Drop crawlable ?page= URLs so paginated listings do not create duplicate SEO signals.
+     * Page changes stay AJAX-only via blogs.filter.
+     */
+    protected function redirectAwayFromPageQuery(Request $request): ?RedirectResponse
+    {
+        if (! $request->query->has('page')) {
+            return null;
+        }
+
+        $query = $request->query();
+        unset($query['page'], $query['per_page']);
+
+        $target = $request->url();
+        if ($query !== []) {
+            $target .= '?'.http_build_query($query);
+        }
+
+        return redirect()->to($target, 301);
     }
 }

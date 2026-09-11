@@ -14,7 +14,7 @@ use App\Http\Controllers\Frontend\SuaveAgentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap');
-Route::get('/llm.txt', [SitemapController::class, 'llmTxt'])->name('llm.txt');
+Route::redirect('/llm.txt', '/llms.txt', 301);
 Route::get('/llms.txt', [SitemapController::class, 'llmTxt'])->name('llms.txt');
 Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 

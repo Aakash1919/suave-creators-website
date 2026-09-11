@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 class SitemapService
 {
     /**
-     * Build every public indexable URL for sitemap / llm.txt.
+     * Build every public indexable URL for sitemap / llms.txt.
      *
      * @return list<array{loc: string, lastmod: ?string, changefreq: string, priority: string, title: string, group: string}>
      */
@@ -216,7 +216,7 @@ class SitemapService
         $lines[] = '## Machine-readable sitemap';
         $lines[] = '';
         $lines[] = '- XML sitemap: '.$this->siteUrl('/sitemap.xml');
-        $lines[] = '- This file: '.$this->siteUrl('/llm.txt');
+        $lines[] = '- This file: '.$this->siteUrl('/llms.txt');
         $lines[] = '';
 
         return implode("\n", $lines);
