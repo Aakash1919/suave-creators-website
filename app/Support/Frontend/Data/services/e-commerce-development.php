@@ -13,8 +13,8 @@ return array(
     2 => 'Boost Your Online Sales',
   ),
   'heroDescription' => 'We offer custom e-commerce development services to build secure and scalable online stores using Shopify, WooCommerce, and Magento for growth.',
-  'heroImage1' => '/assets/media/build-visual.png',
-  'heroImage2' => '/assets/icons/build-icon.png',
+  'bannerSideImage' => '/assets/media/e-commerce-banner.webp',
+  
   'bannerLogos' =>
   array(
     0 => array('src' => '/assets/icons/ecommerce-icon-1.svg', 'alt' => 'Client Logo 1'),
@@ -22,7 +22,7 @@ return array(
     2 => array('src' => '/assets/icons/ecommerce-icon-3.svg', 'alt' => 'Client Logo 3'),
     3 => array('src' => '/assets/icons/ecommerce-icon-4.svg', 'alt' => 'Client Logo 4'),
   ),
-  'bannerBg' => '/assets/media/ecommerce-banner.webp',
+  'bannerBg' => '/assets/media/e-commerce-dev-bg.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'Custom Web Development',

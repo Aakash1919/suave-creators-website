@@ -61,6 +61,9 @@ class SitemapService
         }
 
         BlogCategory::query()
+            ->whereHas('blogs', static function ($query): void {
+                $query->published();
+            })
             ->orderBy('sort_order')
             ->orderBy('name')
             ->get(['name', 'slug', 'updated_at'])

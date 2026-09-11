@@ -207,6 +207,7 @@ class ServiceSupport
             'seoDescription' => (string) ($service['pageDescription'] ?? 'Suave Creators service details.'),
             'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
+            'mainClass' => 'site-main site-main--service-detail',
             'seoFaqs' => array_values(array_filter(
                 array_map(static function (array $faq): array {
                     return [
@@ -216,7 +217,8 @@ class ServiceSupport
                 }, is_array($service['faqs'] ?? null) ? $service['faqs'] : []),
                 static fn (array $faq): bool => $faq['question'] !== '' && $faq['answer'] !== '',
             )),
-            'bannerBg' => asset(self::mapDesignPath((string) ($service['bannerBg'] ?? '/assets/background/service-banner-bg.webp'))),
+            'bannerBg' => (string) ($service['bannerBg'] ?? ''),
+            'bannerSideImage' => (string) ($service['bannerSideImage'] ?? ''),
             'introBg' => asset(self::mapDesignPath('/assets/background/technology-section-bg.png')),
             'collabBackground' => asset(self::mapDesignPath((string) ($service['collabBackground'] ?? '/assets/media/collaboration-back-visual.png'))),
             'collabImage' => asset(self::mapDesignPath((string) ($service['collabImage'] ?? '/assets/media/collaboration-front-visual.png'))),
