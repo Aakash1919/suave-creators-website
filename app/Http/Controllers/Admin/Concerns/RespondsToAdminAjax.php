@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Concerns;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ trait RespondsToAdminAjax
     /**
      * Whether the request expects a JSON admin response.
      */
-    protected function wantsAdminJson(Request $request): bool
+    protected function wantsAdminJson(Request|FormRequest $request): bool
     {
         return $request->ajax() || $request->expectsJson() || $request->boolean('_ajax');
     }
@@ -26,7 +27,7 @@ trait RespondsToAdminAjax
      * @param  array<string, mixed>  $extra
      */
     protected function adminSuccess(
-        Request $request,
+        Request|FormRequest $request,
         string $resource,
         string $action = 'created',
         ?string $redirectRoute = null,
@@ -55,7 +56,7 @@ trait RespondsToAdminAjax
      * @param  array<string, mixed>  $extra
      */
     protected function adminError(
-        Request $request,
+        Request|FormRequest $request,
         string $message,
         int $status = 422,
         array $extra = [],

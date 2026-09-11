@@ -711,22 +711,44 @@
   }
 
   function destroyRecord(url, options = {}) {
+    return confirmRequest(
+      url,
+      Object.assign(
+        {
+          confirm: 'Are you sure you want to delete this record?',
+          confirmTitle: 'Delete record?',
+          confirmLabel: 'Delete',
+          successMessage: 'Deleted successfully.',
+          reloadTable: null,
+          redirect: null,
+          method: 'DELETE',
+          danger: true,
+          failMessage: 'Unable to delete this record.',
+        },
+        options
+      )
+    );
+  }
+
+  function confirmRequest(url, options = {}) {
     const opts = Object.assign(
       {
-        confirm: 'Are you sure you want to delete this record?',
-        confirmTitle: 'Delete record?',
-        confirmLabel: 'Delete',
-        successMessage: 'Deleted successfully.',
+        confirm: null,
+        confirmTitle: 'Confirm?',
+        confirmLabel: 'Confirm',
+        successMessage: 'Done.',
         reloadTable: null,
         redirect: null,
-        method: 'DELETE',
+        method: 'POST',
+        danger: false,
+        failMessage: 'Unable to complete this action.',
       },
       options
     );
 
     const deferred = $.Deferred();
 
-    const runDelete = function () {
+    const runRequest = function () {
       ajax({
         url,
         method: 'POST',
@@ -750,25 +772,25 @@
           deferred.resolve(response);
         })
         .fail(function (xhr) {
-          toast.validation(xhr, 'Unable to delete this record.');
+          toast.validation(xhr, opts.failMessage);
           deferred.reject(xhr);
         });
     };
 
     if (!opts.confirm) {
-      runDelete();
+      runRequest();
       return deferred.promise();
     }
 
     confirmDialog({
       title: opts.confirmTitle || 'Are you sure?',
-      message: typeof opts.confirm === 'string' ? opts.confirm : 'This action cannot be undone.',
-      confirmText: opts.confirmLabel || 'Delete',
+      message: typeof opts.confirm === 'string' ? opts.confirm : 'Continue with this action?',
+      confirmText: opts.confirmLabel || 'Confirm',
       cancelText: 'Cancel',
-      danger: true,
+      danger: !!opts.danger,
     }).then(function (ok) {
       if (ok) {
-        runDelete();
+        runRequest();
       } else {
         deferred.reject();
       }
@@ -786,26 +808,52 @@
       });
   }
 
+  function resolveReloadTable($btn) {
+    const reloadAttr = $btn.attr('data-reload-table');
+    let reloadTable = '#admin-datatable';
+    if (reloadAttr === '') {
+      reloadTable = null;
+    } else if (typeof reloadAttr === 'string') {
+      reloadTable = reloadAttr;
+    }
+
+    return reloadTable;
+  }
+
   function bindDeleteButtons(root = document) {
     $(root)
       .off('click.suaveAdmin', '[data-admin-delete]')
       .on('click.suaveAdmin', '[data-admin-delete]', function (event) {
         event.preventDefault();
         const $btn = $(this);
-        const reloadAttr = $btn.attr('data-reload-table');
-        let reloadTable = '#admin-datatable';
-        if (reloadAttr === '') {
-          reloadTable = null;
-        } else if (typeof reloadAttr === 'string') {
-          reloadTable = reloadAttr;
-        }
 
         destroyRecord($btn.data('url'), {
           confirm: $btn.data('confirm') || 'This action cannot be undone.',
           confirmTitle: $btn.data('confirm-title') || 'Delete record?',
           confirmLabel: $btn.data('confirm-label') || 'Delete',
-          reloadTable,
+          reloadTable: resolveReloadTable($btn),
           successMessage: $btn.data('success-message') || 'Deleted successfully.',
+        });
+      });
+  }
+
+  function bindActionButtons(root = document) {
+    $(root)
+      .off('click.suaveAdmin', '[data-admin-action]')
+      .on('click.suaveAdmin', '[data-admin-action]', function (event) {
+        event.preventDefault();
+        const $btn = $(this);
+        const method = String($btn.data('method') || 'POST').toUpperCase();
+
+        confirmRequest($btn.data('url'), {
+          confirm: $btn.data('confirm') || 'Continue with this action?',
+          confirmTitle: $btn.data('confirm-title') || 'Confirm?',
+          confirmLabel: $btn.data('confirm-label') || 'Confirm',
+          reloadTable: resolveReloadTable($btn),
+          successMessage: $btn.data('success-message') || 'Updated successfully.',
+          method,
+          danger: $btn.data('danger') === true || $btn.data('danger') === 1,
+          failMessage: $btn.data('fail-message') || 'Unable to complete this action.',
         });
       });
   }
@@ -1622,6 +1670,7 @@
     toast.fromFlash(flash);
     bindAjaxForms();
     bindDeleteButtons();
+    bindActionButtons();
     bindFlatpickrs();
     bindDetailsOutsideClose();
     bindRepeaters();
@@ -1638,9 +1687,11 @@
     initDataTable,
     reloadDataTable,
     destroyRecord,
+    confirmRequest,
     confirmDialog,
     bindAjaxForms,
     bindDeleteButtons,
+    bindActionButtons,
     initRichTextEditor,
     getRichTextEditor,
     syncRichTextEditors,

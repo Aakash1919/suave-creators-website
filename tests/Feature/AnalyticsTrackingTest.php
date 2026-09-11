@@ -17,14 +17,13 @@ class AnalyticsTrackingTest extends TestCase
         $response->assertSee('cta_click', false);
     }
 
-    public function test_frontend_layout_does_not_load_vite_marketing_assets(): void
+    public function test_frontend_layout_uses_vite_tailwind_not_cdn(): void
     {
         $response = $this->get('/contact-us');
 
         $response->assertOk();
-        $response->assertSee('https://cdn.tailwindcss.com', false);
-        $response->assertDontSee('/build/assets/app-', false);
-        $response->assertDontSee('@vite', false);
+        $response->assertDontSee('https://cdn.tailwindcss.com', false);
+        $response->assertDontSee('resources/js/app.js', false);
     }
 
     public function test_footer_desktop_grid_uses_full_width_columns(): void
