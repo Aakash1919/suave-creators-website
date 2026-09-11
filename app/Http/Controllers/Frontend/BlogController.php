@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\BlogCategory;
 use App\Support\Frontend\BlogSupport;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -22,8 +24,19 @@ class BlogController extends FrontendController
         );
     }
 
-    public function category(Request $request, string $slug): View
+    public function category(Request $request, string $slug): View|RedirectResponse
     {
+        $hasPublishedPosts = BlogCategory::query()
+            ->where('slug', $slug)
+            ->whereHas('blogs', static function ($query): void {
+                $query->published();
+            })
+            ->exists();
+
+        if (! $hasPublishedPosts) {
+            return redirect()->route('blogs', status: 301);
+        }
+
         return $this->view(
             'frontend.blogs',
             BlogSupport::indexData(
