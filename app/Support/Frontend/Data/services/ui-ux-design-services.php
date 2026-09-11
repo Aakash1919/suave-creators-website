@@ -12,18 +12,12 @@ return array(
     1 => 'UI/UX Design Services',
   ),
   'heroDescription' => 'We design intuitive, conversion-focused interfaces for websites, SaaS products, and mobile apps—so your users enjoy every click and your business sees measurable growth.',
-  'heroImage1' => '/assets/media/build-visual.png',
-  'heroImage2' => '/assets/icons/build-icon.png',
+  'bannerSideImage' => '/assets/media/ui-ux-banner.png',
+  'bannerOrbit' =>
+  array(),
   'bannerLogos' =>
-  array(
-    0 => array('src' => '/assets/icons/tech/figma-color-logo.svg', 'alt' => 'Figma logo for Suave Creators UI UX design services', 'label' => 'Figma'),
-    1 => array('src' => '/assets/icons/tech/photoshop-logo.png', 'alt' => 'Adobe Photoshop logo for Suave Creators UI design', 'label' => 'Photoshop'),
-    2 => array('src' => '/assets/icons/tech/illustrator.png', 'alt' => 'Adobe Illustrator logo for Suave Creators visual design', 'label' => 'Illustrator'),
-    3 => array('src' => '/assets/icons/tech/sketch-logo.svg', 'alt' => 'Sketch logo for Suave Creators interface design', 'label' => 'Sketch'),
-    4 => array('src' => '/assets/icons/tech/framer-logo.svg', 'alt' => 'Framer logo for Suave Creators interactive prototyping', 'label' => 'Framer'),
-    5 => array('src' => '/assets/icons/tech/adobe-xd-logo.png', 'alt' => 'Adobe XD logo for Suave Creators UX wireframing', 'label' => 'Adobe XD'),
-  ),
-  'bannerBg' => '/assets/background/ui-ux banner.png',
+  array(),
+  'bannerBg' => '/assets/media/ui-ux-background.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'UI/UX Design Company',
