@@ -16,7 +16,7 @@ return array(
   
   'bannerLogos' =>
   array(),
-  'bannerBg' => '/assets/media/Ai-solution-bg.png',
+  'bannerBg' => '/assets/media/Ai-solutions-bg.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'AI Software Solutions',

@@ -13,47 +13,6 @@ return array(
   ),
   'heroDescription' => 'We specialize in custom web development services, building responsive and SEO-friendly websites that are perfect for boosting your online presence.',
   'bannerSideImage' => '/assets/media/web-developement-banner.webp',
-  // 'bannerOrbit' =>
-  // array(
-  //   'center' =>
-  //   array(
-  //     'src' => '/assets/icons/tech/laptop-image-icon.png',
-  //     'alt' => 'Web development stack hub illustration for Suave Creators',
-  //   ),
-  //   'nodes' =>
-  //   array(
-  //     0 => array(
-  //       'label' => 'ANGULAR',
-  //       'src' => '/assets/icons/tech/Angular-logo.png',
-  //       'alt' => 'Angular logo for Suave Creators web development services',
-  //     ),
-  //     1 => array(
-  //       'label' => 'PYTHON',
-  //       'src' => '/assets/icons/tech/python-logo.png',
-  //       'alt' => 'Python logo for Suave Creators web development services',
-  //     ),
-  //     2 => array(
-  //       'label' => 'LARAVEL',
-  //       'src' => '/assets/icons/tech/Laravel.png',
-  //       'alt' => 'Laravel logo for Suave Creators web development services',
-  //     ),
-  //     3 => array(
-  //       'label' => 'REACT.JS',
-  //       'src' => '/assets/icons/tech/React-js.png',
-  //       'alt' => 'React.js logo for Suave Creators web development services',
-  //     ),
-  //     4 => array(
-  //       'label' => 'PHP',
-  //       'src' => '/assets/icons/tech/php-logo.png',
-  //       'alt' => 'PHP logo for Suave Creators web development services',
-  //     ),
-  //     5 => array(
-  //       'label' => 'VUE.JS',
-  //       'src' => '/assets/icons/tech/Vue-js-logo.png',
-  //       'alt' => 'Vue.js logo for Suave Creators web development services',
-  //     ),
-  //   ),
-  // ),
   'bannerLogos' => array(),
   'bannerBg' => '/assets/media/web-deve-bg.png',
   'primaryCta' => 'Let’s Connect to Discuss',
