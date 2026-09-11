@@ -33,10 +33,9 @@
 <section class="full-bleed bg-white bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" aria-label="All blog posts"
   style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}');"
   data-blog-listing
-  data-filter-url="{{ route('blogs.filter') }}"
-  data-blogs-url="{{ route('blogs') }}">
+  data-filter-url="{{ route('blogs.filter') }}">
   <div class="section-inner">
-    <form class="blog-filters" role="search" aria-label="Filter blog posts" data-blog-filters>
+    <form class="blog-filters" role="search" aria-label="Filter blog posts" data-blog-filters method="get" action="{{ route('blogs') }}">
       <label class="blog-filters__search">
         <span class="sr-only">Search by title</span>
         <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -67,6 +66,7 @@
         'paginator' => $paginator,
         'activeCategory' => $activeCategory ?? null,
         'search' => $search ?? '',
+        'listingUrl' => $listingUrl ?? route('blogs'),
       ])
     </div>
   </div>
@@ -86,13 +86,12 @@
   if (!root) return;
 
   var filterUrl = root.getAttribute('data-filter-url');
-  var blogsUrl = root.getAttribute('data-blogs-url');
   var results = root.querySelector('[data-blog-results]');
   var searchInput = root.querySelector('[data-blog-search]');
   var categorySelect = root.querySelector('[data-blog-category-select]');
   var debounceTimer = null;
   var activeRequest = null;
-  var currentPage = parseInt(new URLSearchParams(window.location.search).get('page'), 10) || 1;
+  var currentPage = 1;
   var tabletQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
 
   function isTablet() {
@@ -110,14 +109,6 @@
     return params;
   }
 
-  function updateHistory(params) {
-    var historyParams = new URLSearchParams(params);
-    historyParams.delete('per_page');
-    var query = historyParams.toString();
-    var nextUrl = blogsUrl + (query ? ('?' + query) : '');
-    window.history.replaceState({}, '', nextUrl);
-  }
-
   function setLoading(isLoading) {
     root.classList.toggle('is-loading', !!isLoading);
     if (results) results.setAttribute('aria-busy', isLoading ? 'true' : 'false');
@@ -126,7 +117,6 @@
   function fetchResults(page) {
     currentPage = page || 1;
     var params = currentParams(currentPage);
-    updateHistory(params);
 
     if (activeRequest && typeof activeRequest.abort === 'function') {
       activeRequest.abort();

@@ -345,6 +345,12 @@ class SeoGenerateService
         $query = (string) (parse_url($currentUrl, PHP_URL_QUERY) ?: '');
         $path = '/'.ltrim($path, '/');
 
+        if ($query !== '') {
+            parse_str($query, $params);
+            unset($params['page'], $params['per_page']);
+            $query = http_build_query($params);
+        }
+
         return $baseUrl.$path.($query !== '' ? '?'.$query : '');
     }
 
