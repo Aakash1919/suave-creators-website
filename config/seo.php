@@ -259,7 +259,6 @@ return [
             'title' => 'AI Product Matching Case Study | Case Study | Suave Creators',
             'description' => 'AI Product Matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
             'og_image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo.webp',
-            'robots' => 'noindex, nofollow',
         ],
     ],
 
