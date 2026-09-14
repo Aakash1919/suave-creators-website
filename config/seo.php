@@ -17,6 +17,49 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Retired hosts (HTTP 410 Gone)
+    |--------------------------------------------------------------------------
+    |
+    | Point these DNS records at the same server as production, then every
+    | path on those Host headers returns 410 so Google drops them faster
+    | than NXDOMAIN / DNS errors (which burn crawl budget indefinitely).
+    |
+    */
+
+    'retired_hosts' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env('SEO_RETIRED_HOSTS', 'turbo.suavecreators.com'))
+    ))),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed public query parameters
+    |--------------------------------------------------------------------------
+    |
+    | GET/HEAD requests on the marketing site that include any other query
+    | key are 301-redirected to the same path with only these keys kept.
+    | Admin / SuaveAgent routes are excluded.
+    |
+    */
+
+    'allowed_query_params' => [
+        'page',
+        'per_page',
+        'category',
+        'q',
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'gclid',
+        'fbclid',
+        'msclkid',
+        '_ga',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Site-wide SEO defaults
     |--------------------------------------------------------------------------
     |
@@ -27,24 +70,16 @@ return [
 
     'site' => [
         'name' => 'Suave Creators',
-        'tagline' => 'Custom Software, CRM & Web App Development',
-        'default_title' => 'Custom Software, CRM & Web App Development | Suave Creators',
-        'default_description' => 'Engineer custom software, bespoke CRM systems, and AI-driven web applications. Explore verified engineering case studies, tech stack, and ROI blueprints.',
-        'default_keywords' => 'custom software development, bespoke CRM development, enterprise web application, AI solutions, Laravel development, React web apps, SaaS development company',
-        'author' => 'Suave Creators',
-        'website_description' => 'Enterprise Software Engineering, Custom CRM Architecture & Scalable Web Solutions',
+        'tagline' => 'Custom Software & Web Development Company',
+        'default_title' => 'Custom Software & Web Development Company | Suave Creators',
+        'default_description' => 'Suave Creators builds custom software, CRM systems, and scalable web applications for startups & enterprises. Boost growth with secure, future-ready solutions.',
         'default_og_image' => 'assets/brand/og-default.png',
         'default_og_image_width' => 1200,
         'default_og_image_height' => 630,
-        'default_og_image_alt' => 'Suave Creators - Custom Software, CRM and Web Development Company',
+        'default_og_image_alt' => 'Suave Creators - Custom Software & Web Development Company',
         'logo' => 'assets/brand/logo.png',
-        'logo_caption' => 'Suave Creators Logo',
         'favicon' => 'assets/brand/favicon-192.png',
         'in_language' => 'en-US',
-        'og_locale' => 'en_US',
-        'og_locale_alternate' => ['en_IN'],
-        'twitter_site' => '@suavecreators',
-        'twitter_creator' => '@suavecreators',
         'robots' => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
         'google_site_verification' => '8gnHTv-hWNxTIE6HmJwKSMZH5v_ryZuDVQRbAinOpAQ',
         'google_analytics_id' => 'G-5HX7B8X9QP',
@@ -64,40 +99,24 @@ return [
             'area_served' => 'Worldwide',
             'available_language' => ['en', 'en-IN', 'en-US'],
             'address_display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',
-            'address_secondary_display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, HP 176102, India',
+            'address_secondary_display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, Himachal Pradesh 176102',
             'offices' => [
                 [
-                    'label' => 'United States Headquarters',
+                    'label' => 'First office',
                     'display' => '30 N Gould St, STE R, Sheridan, WY 82801, USA',
                     'lines' => [
                         '30 N Gould St, STE R,',
                         'Sheridan, WY 82801, USA',
                     ],
-                    'phone' => '+1 (307) 435-9605',
-                    'phone_href' => 'tel:+13074359605',
-                    'phone_schema' => '+1-307-435-9605',
-                    'email' => 'info@suavecreators.com',
-                    'country' => 'US',
-                    'contact_type' => 'sales',
-                    'area_served' => ['US', 'Worldwide'],
-                    'available_language' => ['en', 'en-US'],
                 ],
                 [
-                    'label' => 'India Engineering Center',
-                    'display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, HP 176102, India',
+                    'label' => 'Second office',
+                    'display' => '3M Plaza, Second Floor, Maranda, Kasoti, Palampur, Himachal Pradesh 176102',
                     'lines' => [
                         '3M Plaza, Second Floor,',
                         'Maranda, Kasoti, Palampur,',
-                        'HP 176102, India',
+                        'Himachal Pradesh 176102',
                     ],
-                    'phone' => '+91 88949 00142',
-                    'phone_href' => 'tel:+918894900142',
-                    'phone_schema' => '+91-88949-00142',
-                    'email' => 'info@suavecreators.com',
-                    'country' => 'IN',
-                    'contact_type' => 'customer service',
-                    'area_served' => ['IN', 'Worldwide'],
-                    'available_language' => ['en', 'en-IN'],
                 ],
             ],
             'address' => [
@@ -120,52 +139,39 @@ return [
                 'https://www.instagram.com/suavecreators',
             ],
             'knowsAbout' => [
-                'Custom Software Development',
-                'Bespoke CRM Development',
-                'Enterprise Software Solutions',
-                'Web Application Development',
+                'Web Development',
+                'UI/UX Design',
+                'Custom CRM Development',
+                'CMS Development',
+                'E-commerce Development',
+                'Enterprise Software Development',
+                'Mobile App Development',
+                'Digital Marketing',
+                'SEO Services',
                 'Answer Engine Optimization',
                 'Generative Engine Optimization',
-                'Applied AI Solutions',
-                'Laravel Development',
-                'React and Angular Engineering',
-                'E-commerce Software Engineering',
-            ],
-            'aggregateRating' => [
-                'ratingValue' => '5.0',
-                'reviewCount' => '4',
-                'bestRating' => '5',
-                'worstRating' => '1',
+                'Branding & Identity',
+                'AI Solutions',
+                'AI-Integrated Applications',
+                'SaaS Development',
             ],
         ],
         'default_faqs' => [
             [
-                'question' => 'What software engineering and digital growth services does Suave Creators offer?',
-                'answer' => 'We specialize in custom web application development, bespoke CRM and ERP system engineering, enterprise software modernization, UI/UX product design, applied AI integrations, and full-funnel search visibility (SEO, AEO, and GEO).',
+                'question' => 'What services do you offer?',
+                'answer' => 'We offer web development, CRM development, e-commerce solutions, enterprise software, UI/UX design, AI solutions, SEO, and digital marketing.',
             ],
             [
-                'question' => 'How long does a typical custom software or web application project take to complete?',
-                'answer' => 'A production-ready MVP or targeted custom CRM typically takes 8 to 12 weeks from initial architectural discovery to live deployment. Larger enterprise modernization platforms or high-SKU commerce projects typically range between 14 to 20 weeks, executed in two-week agile sprints.',
+                'question' => 'Do you provide ongoing support?',
+                'answer' => 'Yes, we provide full maintenance, updates, and long-term support after launch.',
             ],
             [
-                'question' => 'Who owns the intellectual property (IP) and codebase once the project is completed?',
-                'answer' => 'You own 100% of the intellectual property, codebase, design assets, and databases. Upon final milestone acceptance, all code repositories, documentation, and cloud environment credentials are fully transferred to your company with zero proprietary vendor lock-in.',
+                'question' => 'Will my website be mobile-friendly?',
+                'answer' => 'Yes, all our websites are fully responsive and optimized for all devices.',
             ],
             [
-                'question' => 'Do you provide dedicated post-launch support and ongoing SLA maintenance?',
-                'answer' => 'Yes. We provide comprehensive post-deployment SLA maintenance packages covering 24/7 server uptime monitoring, continuous security patching, database optimization, framework updates, and dedicated monthly hours for new feature iterations.',
-            ],
-            [
-                'question' => 'Can Suave Creators audit, refactor, or modernize an existing legacy codebase?',
-                'answer' => 'Yes. We regularly conduct code audits on legacy systems (e.g., monolithic PHP, legacy Angular, or outdated Laravel codebases). We identify performance bottlenecks, security vulnerabilities, and architectural flaws, then execute phased refactoring without disrupting ongoing business operations.',
-            ],
-            [
-                'question' => 'Are all web and software applications optimized for mobile devices and Core Web Vitals?',
-                'answer' => 'Yes. Every application is built mobile-first, responsive across all screen sizes, and rigorously tested against Google\'s Core Web Vitals metrics - consistently targeting an LCP under 2.5 seconds, CLS under 0.1, and an INP under 200 milliseconds.',
-            ],
-            [
-                'question' => 'How does Suave Creators optimize websites for Answer Engines (AEO) and AI Search (GEO)?',
-                'answer' => 'We implement semantic HTML5 hierarchies, valid Schema.org JSON-LD graphs (Organization, Service, FAQPage, TechArticle), answer-first modular text blocks, and llms.txt directories. This ensures your content is eligible for Google AI Overviews, Featured Snippets, and conversational citations across ChatGPT, Perplexity, and Gemini.',
+                'question' => 'Do you offer SEO services?',
+                'answer' => 'Yes, we provide SEO, AEO, GEO, content marketing, and digital growth services.',
             ],
         ],
     ],
@@ -185,41 +191,39 @@ return [
         'home' => [
             'title' => 'Web & Software Development Company | Suave Creators',
             'description' => 'Suave Creators builds custom web applications, software, CRM, ERP, AI and digital solutions that help businesses improve efficiency, scale faster and grow.',
-            'keywords' => 'custom software development, bespoke CRM development, enterprise web application, AI solutions, Laravel development, React web apps, SaaS development company',
-            'og_title' => 'Web & Software Development Company | Suave Creators',
+            'og_title' => 'Build Software That Creates Real Business Results',
             'og_description' => 'Suave Creators builds custom web applications, software, CRM, ERP, AI and digital solutions that help businesses improve efficiency, scale faster and grow.',
-            'json_ld_name' => 'Web & Software Development Company | Suave Creators',
-            'json_ld_description' => 'Suave Creators builds custom web applications, software, CRM, ERP, AI and digital solutions that help businesses improve efficiency, scale faster and grow.',
+            'json_ld_name' => 'Suave Creators — Web Development, CRM & Digital Growth Experts',
+            'json_ld_description' => 'Suave Creators offers custom web development, CRM solutions, e-commerce development, enterprise software, UI/UX design, AI solutions, mobile apps, digital marketing and SEO services.',
         ],
         'about-us' => [
             'title' => 'About Suave Creators | Software & AI Development Company',
             'description' => 'Learn about Suave Creators, a software and AI development company delivering custom web, mobile, CRM, enterprise, and digital solutions for businesses worldwide.',
-            'og_title' => 'About Suave Creators | Software & AI Development Company',
+            'og_title' => 'About Suave Creators | Innovation-Driven IT Company',
             'og_description' => 'Learn about Suave Creators, a software and AI development company delivering custom web, mobile, CRM, enterprise, and digital solutions for businesses worldwide.',
         ],
         'contact-us' => [
             'title' => 'Contact Suave Creators | Get a Free Software Consultation',
             'description' => 'Have a software, web, CRM, ERP or AI project in mind? Contact Suave Creators for a free consultation and discuss your business requirements with our experts.',
-            'og_title' => 'Contact Suave Creators | Get a Free Software Consultation',
+            'og_title' => 'Ready to Build? Get a Free Project Consultation | Suave Creators',
             'og_description' => 'Have a software, web, CRM, ERP or AI project in mind? Contact Suave Creators for a free consultation and discuss your business requirements with our experts.',
         ],
         'services' => [
             'title' => 'Software Development Services for B2B & SaaS Businesses',
             'description' => 'Explore custom B2B & SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, & more.',
-            'og_title' => 'Software Development Services for B2B & SaaS Businesses',
+            'og_title' => 'Software Development Services for Serious Growth | Suave Creators',
             'og_description' => 'Explore custom B2B & SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, & more.',
         ],
         'industries' => [
             'title' => 'Industry-Specific Software Development Solutions | Suave Creators',
             'description' => 'Explore custom software development solutions for healthcare, startups, finance, e-commerce, logistics, and education, built by Suave Creators.',
-            'og_title' => 'Industry-Specific Software Development Solutions | Suave Creators',
             'og_description' => 'Explore custom software development solutions for healthcare, startups, finance, e-commerce, logistics, and education, built by Suave Creators.',
         ],
         'product' => [
             'title' => 'AI Outreach CRM & Sales Automation | Suave Creators',
             'description' => 'Automate outreach, capture leads, and close deals with Suave Creators AI Outreach CRM. Start free and scale sales with intelligent workflows.',
-            'og_title' => 'AI Outreach CRM & Sales Automation | Suave Creators',
-            'og_description' => 'Automate outreach, capture leads, and close deals with Suave Creators AI Outreach CRM. Start free and scale sales with intelligent workflows.',
+            'og_title' => 'AI-Powered Outreach CRM | Suave Creators',
+            'og_description' => 'Discover Suave AI Outreach CRM for lead management, automated sales outreach, and AI-driven business growth.',
             'og_image' => 'assets/product/product-og-banner.webp',
             'og_image_width' => 1200,
             'og_image_height' => 630,
@@ -232,88 +236,75 @@ return [
             'title' => 'Blog - Software Development Insights | Suave Creators',
             'description' => 'Explore Suave Creators blogs on custom software, web development, CRM, AI, and digital transformation. Practical insights for startups and enterprises.',
             'og_title' => 'Blog - Software Development Insights | Suave Creators',
-            'og_description' => 'Explore Suave Creators blogs on custom software, web development, CRM, AI, and digital transformation. Practical insights for startups and enterprises.',
+            'og_description' => 'Explore Suave Creators blogs on custom software, web development, CRM, AI, and digital transformation.',
         ],
         'privacy-policy' => [
             'title' => 'Privacy Policy | Suave Creators',
             'description' => 'Learn how Suave Creators collects, uses, and protects your personal information when you visit our website or contact our team.',
-            'og_title' => 'Privacy Policy | Suave Creators',
-            'og_description' => 'Learn how Suave Creators collects, uses, and protects your personal information when you visit our website or contact our team.',
         ],
         'terms-and-conditions' => [
             'title' => 'Terms & Conditions | Suave Creators',
             'description' => 'Read the terms and conditions for using the Suave Creators website and services at suavecreators.com.',
-            'og_title' => 'Terms & Conditions | Suave Creators',
-            'og_description' => 'Read the terms and conditions for using the Suave Creators website and services at suavecreators.com.',
         ],
         'service.show' => [
             'title' => 'Service | Suave Creators',
             'description' => 'Suave Creators service details.',
-            'og_title' => 'Service | Suave Creators',
-            'og_description' => 'Suave Creators service details.',
         ],
         'industry.show' => [
             'title' => 'Industry Solutions | Suave Creators',
             'description' => 'Industry-specific software development solutions from Suave Creators.',
-            'og_title' => 'Industry Solutions | Suave Creators',
-            'og_description' => 'Industry-specific software development solutions from Suave Creators.',
         ],
         'case-studies' => [
             'title' => 'Software Development Case Studies & Success Stories | Suave Creators',
             'description' => 'Explore software development case studies showcasing CRM, AI, automation, web and custom software projects built to solve real business challenges.',
-            'og_title' => 'Software Development Case Studies & Success Stories | Suave Creators',
             'og_description' => 'Explore software development case studies showcasing CRM, AI, automation, web and custom software projects built to solve real business challenges.',
         ],
         'turbo-trans-case-study' => [
             'title' => 'Custom Software Development Case Study: Turbo Trans | Suave Creators',
             'description' => 'Explore how Suave Creators delivered a custom software solution for Turbo Trans Corporation, addressing business workflows, usability, and operational needs.',
-            'og_title' => 'Custom Software Development Case Study: Turbo Trans | Suave Creators',
+            'og_title' => 'Success Story: Turbo Trans Corporation',
             'og_description' => 'Explore how Suave Creators delivered a custom software solution for Turbo Trans Corporation, addressing business workflows, usability, and operational needs.',
             'og_image' => 'assets/case-studies/turbo-trans/turbo-trans-corporation-logo.png',
         ],
         'ai-sales-coaching-case-study' => [
             'title' => 'AI Sales Coaching Platform Case Study | Suave Creators',
-            'description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
-            'og_title' => 'AI Sales Coaching Platform Case Study | Suave Creators',
-            'og_description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
+            'description' => 'See how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to improve sales team performance.',
+            'og_title' => 'AI Sales Coaching Platform Case Study',
+            'og_description' => 'See how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to improve sales team performance.',
             'og_image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
         ],
         'outreach-case-study' => [
             'title' => 'B2B CRM Sales Automation Case Study | Suave Creators',
             'description' => 'Explore how Suave Creators built a B2B CRM for lead discovery, AI prospecting, cold email, and sales pipeline management to streamline outbound sales.',
-            'og_title' => 'B2B CRM Sales Automation Case Study | Suave Creators',
+            'og_title' => 'B2B CRM Outbound Sales Redesign | Case Study | Suave Creators',
             'og_description' => 'Explore how Suave Creators built a B2B CRM for lead discovery, AI prospecting, cold email, and sales pipeline management to streamline outbound sales.',
             'og_image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
         ],
         'tasks-case-study' => [
             'title' => 'B2B CRM Task Management Case Study | Suave Creators',
             'description' => 'See how Suave Creators redesigned B2B CRM task management with Kanban and List views, AI assistance, and automated workflows in one workspace.',
-            'og_title' => 'B2B CRM Task Management Case Study | Suave Creators',
+            'og_title' => 'B2B CRM Task Management | Case Study | Suave Creators',
             'og_description' => 'See how Suave Creators redesigned B2B CRM task management with Kanban and List views, AI assistance, and automated workflows in one workspace.',
             'og_image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
         ],
         'teerrath-case-study' => [
             'title' => 'Teerrath Spiritual Energy Scan Case Study | Case Study | Suave Creators',
             'description' => 'A free Spiritual Energy Scan in under 2 minutes becomes AI-personalized Vedic insight across six life areas — then a clear Dev, Mantra, Yantra, or Daan path to buy, gift, or fulfill.',
-            'og_title' => 'Teerrath Spiritual Energy Scan Case Study | Case Study | Suave Creators',
-            'og_description' => 'A free Spiritual Energy Scan in under 2 minutes becomes AI-personalized Vedic insight across six life areas — then a clear Dev, Mantra, Yantra, or Daan path to buy, gift, or fulfill.',
             'og_image' => 'assets/case-studies/teerrath/spiritual-energy-scan-hero.png',
             'robots' => 'noindex, nofollow',
         ],
         'appointment-insurance-case-study' => [
             'title' => 'Appointment Insurance Platform Case Study | Suave Creators',
             'description' => 'Discover how Suave Creators built an appointment insurance platform with deposits, SMS invitations, check-in, and automated Stripe refund workflows.',
-            'og_title' => 'Appointment Insurance Platform Case Study | Suave Creators',
+            'og_title' => 'Appointment Insurance Platform Case Study | Case Study | Suave Creators',
             'og_description' => 'Discover how Suave Creators built an appointment insurance platform with deposits, SMS invitations, check-in, and automated Stripe refund workflows.',
             'og_image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
         ],
         'ai-product-matching-case-study' => [
             'title' => 'AI Product Matching Case Study | Case Study | Suave Creators',
             'description' => 'AI Product Matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
-            'og_title' => 'AI Product Matching Case Study | Case Study | Suave Creators',
             'og_description' => 'AI Product Matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
             'og_image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo.webp',
-            'robots' => 'noindex, nofollow',
         ],
     ],
 
