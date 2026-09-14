@@ -46,7 +46,7 @@
   @if ($secondaryLabel !== '' && $secondaryHref !== '')
     <div class="mt-3 flex items-center">
       <a href="{{ $secondaryHref }}" target="_blank" rel="noopener noreferrer"
-        class="inline-flex items-center border-b {{ $isDark ? 'border-white/70 text-white/80 hover:text-white' : 'border-[#00003F] text-[#00003F] hover:text-[#2A4DFB]' }} text-[13px] sm:text-sm font-semibold transition">
+        class="inline-flex items-center border-b {{ $isDark ? 'border-white/70 text-white/80 hover:text-white' : 'border-[#00003F] text-[#2A4DFB] hover:text-[#2A4DFB]' }} text-[13px] sm:text-sm font-semibold transition">
         {{ $secondaryLabel }}
       </a>
     </div>
