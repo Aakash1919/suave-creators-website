@@ -121,7 +121,7 @@ Design: `/images/tech-dev-N.svg` (was `technology-development-icon-N.svg`).
 | `scripts/rewrite-asset-paths.ps1` | Rewrite `images/...` refs to mapped `assets/...` |
 | `scripts/reclassify-assets.ps1` | Move misplaced tech logos / icons into the right category |
 | `scripts/rename-assets-by-content.ps1` | SEO content-based renames via `asset-rename-map.json` |
-| `scripts/import-home.ps1` | Import design home into Blade |
+| `scripts/import-home.ps1` | Historical — imported legacy design home into Blade (`design/` removed) |
 | `scripts/verify-frontend-conventions.ps1` | Fail on convention violations |
 | `scripts/asset-path-map.json` | Legacy/design path → current asset path |
 | `scripts/asset-rename-map.json` | Relative rename history |

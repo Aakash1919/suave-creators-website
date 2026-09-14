@@ -26,6 +26,7 @@ abstract class FrontendController extends Controller
                 'og_title' => $data['seoOgTitle'] ?? null,
                 'og_description' => $data['seoOgDescription'] ?? null,
                 'image' => $data['seoImage'] ?? null,
+                'canonical' => $data['seoCanonical'] ?? null,
                 'faqs' => $data['seoFaqs'] ?? null,
                 'robots' => $data['seoRobots'] ?? null,
                 'json_ld_graph' => $data['seoJsonLdGraph'] ?? null,

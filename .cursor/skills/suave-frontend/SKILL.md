@@ -1,22 +1,23 @@
 ---
 name: suave-frontend
 description: >-
-  Suave Creators marketing frontend and design-to-Blade imports. Use whenever
-  the user mentions homepage, landing page, Blade views, View Components,
-  testimonials section, HomeSupport, ContactSupport, design/ folder import,
-  public/assets, public/css/style.css, logos, hero images, SuaveAgent chat
-  widget, or verify-frontend-conventions. Requires categorized asset paths and
-  post-change verification. For admin panel / RBAC / Form Requests use
-  suave-admin instead. Read this skill before any frontend change.
+  Suave Creators marketing frontend. Use whenever the user mentions homepage,
+  landing page, Blade views, View Components, testimonials section, HomeSupport,
+  ContactSupport, public/assets, public/css/style.css, logos, hero images,
+  SuaveAgent chat widget, or verify-frontend-conventions. Requires categorized
+  asset paths and post-change verification. For admin panel / RBAC / Form
+  Requests use suave-admin instead. Read this skill before any frontend change.
 ---
 
 # Suave Frontend
 
 **Always read this skill** before marketing frontend work. Folder map + rename catalog: [reference.md](reference.md). Admin panel conventions: [suave-admin](../suave-admin/SKILL.md).
 
+The legacy `design/` static prototype folder was removed from the repo. Source of truth is Laravel Blade + `public/assets/` + `public/css/style.css`. Restore `design/` from git only if needed (see repo-root `changes-to-remove.md`).
+
 ## Required after every change set
 
-After importing a page or editing frontend code/assets/CSS:
+After editing frontend code/assets/CSS:
 
 1. Tell the user exactly:
 
@@ -33,21 +34,17 @@ After importing a page or editing frontend code/assets/CSS:
    - Tailwind CDN on marketing layout (use `@vite('resources/css/app.css')`); star-pearl only via `<x-layouts.the-suave-star-pearl />` (never directly in `layouts/frontend.blade.php`)
 5. Summarize what was verified and what was removed
 
-## Page import workflow (future pages)
+## New or updated marketing pages
 
-When importing from `design/` (path: `D:\suave-creators\design`, git branch `crm`) into Laravel:
+Work directly in Laravel (no `design/` import step):
 
-1. Source of truth for markup/CSS/assets: `design/` (keep Blade component structure)
-2. Page view: `resources/views/frontend/{page}.blade.php` using `layouts.frontend`
-3. Reuse existing Section / Layout components; create new ones only with `Section` postfix
-4. Convert design `/images/...` through the asset map:
-   - Prefer `scripts/import-home.ps1` patterns (map via `scripts/asset-path-map.json`)
-   - New media: place under the correct `public/assets/{category}/` folder first, then reference `asset('assets/...')`
-   - If design adds new flat images: copy into the right category (or run `scripts/organize-assets.ps1` then `scripts/rewrite-asset-paths.ps1`)
-5. Data props: Support classes (e.g. `app/Support/Frontend/...`), not fat controllers
-6. Controllers + named routes: follow **Controllers** and **Routing / links** below
-7. Path sanitization: PHP View Components + `NormalizesAssetPaths` — not Blade `str()->ltrim`
-8. Component JS: in the component via `@once` + `@push('scripts')`; page-only JS only for non-component blocks
+1. Page view: `resources/views/frontend/{page}.blade.php` using `layouts.frontend`
+2. Reuse existing Section / Layout components; create new ones only with `Section` postfix
+3. Media: place under the correct `public/assets/{category}/` folder, then reference `asset('assets/...')`
+4. Data props: Support classes (e.g. `app/Support/Frontend/...`), not fat controllers
+5. Controllers + named routes: follow **Controllers** and **Routing / links** below
+6. Path sanitization: PHP View Components + `NormalizesAssetPaths` — not Blade `str()->ltrim`
+7. Component JS: in the component via `@once` + `@push('scripts')`; page-only JS only for non-component blocks
 9. CSS: append to `public/css/style.css` under `/* ===== NAME START/END ===== */` markers — never new page CSS files
 10. Backgrounds: inline `style="background-image: url('{{ asset(...) }}')"` — never `bg-[url(...)]` inside `$attributes->merge`
 11. Finish with the **Required after every change set** verification above
@@ -62,7 +59,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - **Blogs:** one `BlogController` — `index` for `/blogs`, `show(string $slug)` for `/blog/{slug}` (abort 404 for unknown slugs; shared single-blog Blade)
 - **Case studies:** one `CaseStudyController` — `index` for `/case-studies`; dedicated static methods for each story (`/turbo-trans-case-study`, `/outreach-case-study`, `/ai-sales-coaching-case-study`, and the other catalog routes). Each story is an independent Blade page under `resources/views/frontend/case-studies/` (copy and images live in that view — not loaded from Support). Listing cards, carousels, and sitemap read the static catalog in `CaseStudySupport` — not `database/data/case-studies/cases.php` and not the `case_studies` table. Per-story SEO is in `config/seo.php` `pages`. Old `/case-studies/{slug}` URLs 301 to the static routes (`case-study.show`). Placement: `service_slugs` drive the light `<x-frontend.case-studies-carousel-section>` on `/services` (static `CaseStudySupport::servicesPageItems()`) and `/service/{slug}`; `industry_slugs` drive the same carousel on `/industries` (static `CaseStudySupport::industriesPageItems()`) and `/industries/{slug}`
 - **Contact:** `ContactController` — `index` for `/contact-us`, `store` for `POST /contact-us` (`contact-us.store`, throttled) and `draft` for `POST /contact-us/draft` (`contact-us.draft`, throttled) via `ContactRequestService`
-- **SEO discovery:** `SitemapController` + `App\Services\SitemapService` — `/sitemap.xml`, `/llm.txt` (+ `/llms.txt`), dynamic `/robots.txt` (do not put a static `public/robots.txt` in front of the route; point to llm.txt via a `#` comment only — never an `LLM:` directive)
+- **SEO discovery:** `SitemapController` + `App\Services\SitemapService` — `/sitemap.xml`, `/llms.txt` (legacy `/llm.txt` 301s here), dynamic `/robots.txt` (do not put a static `public/robots.txt` in front of the route; point to llms.txt via a `#` comment only — never an `LLM:` directive)
 - Full controller map: [reference.md](reference.md)
 
 ## Routing / links
@@ -75,7 +72,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - Same-page contact form anchors on `/contact-us` may still use `#contact-id`
 - Contact form: `POST` to `route('contact-us.store')` via AJAX (`novalidate` + custom field errors). Field `blur`/`change` also `POST`s to `route('contact-us.draft')` (silent; one `draft_token` row) so abandoned forms still save name/email/phone/service/message. On submit success: clear form and show “The request has been sent successfully.” Also includes `@csrf`, honeypot `website`, and `form_started_at` (bots get silent JSON success)
 - Legal pages: `PageController` methods `privacyPolicy` / `termsAndConditions` (`privacy-policy`, `terms-and-conditions`; Footer must use `route()`, not `url()`)
-- Sitemap / LLM: `route('sitemap')`, `route('llm.txt')`, `route('robots')` — generated from published blogs, case studies, services, industries, and static pages
+- Sitemap / LLM: `route('sitemap')`, `route('llms.txt')`, `route('robots')` — generated from published blogs, case studies, services, industries, and static pages
 - Assets: `asset('assets/...')`; external / `tel:` / `mailto:` stay as-is
 - When a named route lands, update Header, Footer, Topbar, SuaveAgent CTAs, and page CTAs that still use `url()`
 

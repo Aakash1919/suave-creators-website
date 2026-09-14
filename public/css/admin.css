@@ -2372,6 +2372,13 @@ body.admin-modal-open {
   overflow: hidden;
 }
 
+/* Row action menus escape the scroll clip while open (last-row upward flip). */
+.admin-dt__scroll:has(.admin-table__action-menu[open]),
+.admin-dt__card .dataTables_wrapper:has(.admin-table__action-menu[open]) .dataTables_scroll,
+.admin-dt__card .dataTables_wrapper:has(.admin-table__action-menu[open]) .dataTables_scrollBody {
+  overflow: visible !important;
+}
+
 .admin-dt__card .dataTables_wrapper {
   position: relative;
   width: 100% !important;
@@ -2681,13 +2688,95 @@ table.dataTable.no-footer {
   text-align: right !important;
   width: 1%;
   white-space: nowrap;
+  overflow: visible;
 }
 
-table.dataTable.admin-table tbody tr:last-child .admin-table__actions details > div {
+.admin-table__action-menu {
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-end;
+  vertical-align: middle;
+}
+
+.admin-table__action-menu[open] {
+  z-index: 50;
+}
+
+.admin-table__action-menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 9999px;
+  border: 1px solid var(--admin-border);
+  background: #fff;
+  color: var(--admin-gray);
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.admin-table__action-menu-trigger::-webkit-details-marker {
+  display: none;
+}
+
+.admin-table__action-menu-trigger:hover,
+.admin-table__action-menu[open] .admin-table__action-menu-trigger {
+  border-color: #cfcaff;
+  background: var(--admin-primary-soft);
+  color: var(--admin-primary);
+}
+
+.admin-table__action-menu-panel {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 40;
+  margin-top: 0.375rem;
+  min-width: 8.5rem;
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--admin-border);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+table.dataTable.admin-table tbody tr:last-child .admin-table__action-menu-panel {
   top: auto;
   bottom: 100%;
   margin-top: 0;
   margin-bottom: 0.375rem;
+}
+
+.admin-table__action-menu-item {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  color: var(--admin-text);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-table__action-menu-item:hover {
+  background: var(--admin-primary-soft);
+  color: var(--admin-primary);
+}
+
+.admin-table__action-menu-item--danger {
+  color: var(--admin-danger);
+}
+
+.admin-table__action-menu-item--danger:hover {
+  background: var(--admin-danger-soft);
+  color: var(--admin-danger);
 }
 
 /* Processing overlay: center over the table body, hide DT 1.13 empty dots */
@@ -2757,12 +2846,32 @@ table.dataTable.admin-table tbody tr:last-child .admin-table__actions details > 
   min-height: 360px;
 }
 
-.admin-rte .richtexteditor {
+.admin-rte .richtexteditor,
+.admin-rte .richtexteditor.rte-modern {
   border: 1px solid var(--admin-border-strong) !important;
   border-radius: 0.55rem !important;
-  overflow: hidden;
+  /* Vendor uses overflow:hidden for rounded corners; that clips toolbar menus. */
+  overflow: visible !important;
   background: #fff;
   min-height: 480px !important;
+}
+
+.admin-rte .richtexteditor rte-toolbar {
+  position: relative;
+  z-index: 6;
+  background-color: #fff;
+}
+
+.admin-rte .richtexteditor rte-content,
+.admin-rte .richtexteditor rte-precontent {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-rte rte-dropdown-panel,
+.admin-rte .rte-absolute,
+.admin-rte .rte-fixed {
+  z-index: 40 !important;
 }
 
 .admin-rte .rte-modern,
@@ -2900,6 +3009,11 @@ span.flatpickr-weekday {
 
 .admin-blog-form__composer .admin-card__body {
   padding-top: 1.25rem;
+  overflow: visible;
+}
+
+.admin-blog-form__composer {
+  overflow: visible;
 }
 
 .admin-blog-form__seo-toolbar {

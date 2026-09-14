@@ -87,6 +87,18 @@ if (Test-Path $layout) {
     }
 }
 
+# 3b) Admin layout: same Vite Tailwind entry; never Play CDN
+$adminLayout = Join-Path $root 'resources\views\layouts\admin.blade.php'
+if (Test-Path $adminLayout) {
+    $adminLayoutText = [IO.File]::ReadAllText($adminLayout)
+    if ($adminLayoutText -notmatch "@vite\('resources/css/app\.css'\)") {
+        Add-Fail "layouts/admin.blade.php missing @vite('resources/css/app.css')"
+    }
+    if ($adminLayoutText -match 'cdn\.tailwindcss\.com') {
+        Add-Fail 'layouts/admin.blade.php must not use Tailwind Play CDN'
+    }
+}
+
 # 4) Section component naming drift (Frontend classes without Section postfix)
 # Shared chrome helpers are allowed without Section (see suave-frontend skill).
 $frontendDir = Join-Path $root 'app\View\Components\Frontend'

@@ -12,18 +12,12 @@ return array(
     1 => 'Custom CRM Development Services',
   ),
   'heroDescription' => 'Grab our Custom CRM Development services to streamline your customer management, deliver measurable results, and achieve flawless business growth.',
-  'heroImage1' => '/assets/media/build-visual.png',
-  'heroImage2' => '/assets/icons/build-icon.png',
+  'bannerSideImage' => '/assets/media/crm-dev-banner.webp',
+  'bannerOrbit' =>
+  array(),
   'bannerLogos' =>
-  array(
-    0 => array('src' => '/assets/icons/crm-icon-1.svg', 'alt' => 'Client Logo 1'),
-    1 => array('src' => '/assets/icons/crm-icon-2.svg', 'alt' => 'Client Logo 2'),
-    2 => array('src' => '/assets/icons/crm-icon-3.svg', 'alt' => 'Client Logo 3'),
-    3 => array('src' => '/assets/icons/crm-icon-4.svg', 'alt' => 'Client Logo 4'),
-    4 => array('src' => '/assets/icons/crm-icon-5.svg', 'alt' => 'Client Logo 5'),
-    5 => array('src' => '/assets/icons/crm-icon-6.svg', 'alt' => 'Client Logo 6'),
-  ),
-  'bannerBg' => '/assets/media/crm-development-banner.webp',
+  array(),
+  'bannerBg' => '/assets/media/crm-dev-bg.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'Custom Web Development',

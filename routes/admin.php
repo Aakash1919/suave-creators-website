@@ -44,6 +44,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::middleware('permission:blogs.update')->group(function () {
         Route::get('/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
         Route::put('/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+        Route::patch('/blogs/{blog}/publish', [BlogController::class, 'publish'])->name('blogs.publish');
         Route::post('/blogs/{blog}/generate-seo', [BlogController::class, 'generateSeoMeta'])
             ->name('blogs.generate-seo');
     });

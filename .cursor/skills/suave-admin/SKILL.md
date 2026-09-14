@@ -71,6 +71,7 @@ Namespace: `App\Http\Requests\Admin\` (admin) and `App\Http\Requests\Frontend\` 
 |--------|---------|
 | Admin login | `AdminLoginRequest` |
 | Blog create/update | `BlogStoreRequest` / `BlogUpdateRequest` (`Concerns\ValidatesBlogFields`) |
+| Blog publish (index) | `BlogPublishRequest` |
 | Case study create/update | `CaseStudyStoreRequest` / `CaseStudyUpdateRequest` (`Concerns\ValidatesCaseStudyFields`) |
 | User create/update | `UserStoreRequest` / `UserUpdateRequest` |
 | Role create/update | `RoleStoreRequest` / `RoleUpdateRequest` |
@@ -94,7 +95,7 @@ Namespace: `App\Http\Controllers\Admin\`
 |------|------------|---------|
 | Auth | `AuthController` | — (`AdminLoginRequest` for login) |
 | Home | `DashboardController` | — (stats/links) |
-| Blogs | `BlogController` | `App\Services\BlogService` |
+| Blogs | `BlogController` | `App\Services\BlogService` (`publish()` for index Publish action) |
 | Case studies | `CaseStudyController` | `App\Services\CaseStudyService` |
 | Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store/draft via `ContactStoreRequest` / `ContactDraftRequest`) |
 | Profile | `ProfileController` | `App\Services\ProfileService` |
@@ -108,6 +109,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 ## Views & nav
 
 - Layout: `layouts.admin` — **white theme**: light sidebar (`240px`), white topbar, purple primary `#7539FF`, surface `#F7F8F9`; fonts match frontend (`PP Mori` + `Roboto Flex`)
+- **Tailwind:** compiled via Vite — `@vite('resources/css/app.css')` in `layouts/admin` (same entry as marketing). Pin `tailwindcss` **3.4.17** + `tailwind.config.js` content scan of Blade + `app/Support/Admin`, `app/DataTables`, `app/View/Components`. Do **not** use `cdn.tailwindcss.com`. Theme tokens `primary` / `surface` / `ink` live in `tailwind.config.js`. Row action menus use **admin.css** classes (`admin-table__action-menu*`), not Tailwind strings in PHP. Local: `npm run dev` or `npm run build` so `public/build` exists.
 - Partials under `resources/views/layouts/admin/partials/`:
   - `sidebar.blade.php` — light brand bar + soft active nav + user chip; collapses to mini (icons only, hover expands)
   - `header.blade.php` — search, icon actions, avatar dropdown (profile / sign out); hamburger toggles mini sidebar on desktop / overlay on mobile
@@ -123,7 +125,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - **Admin forms are full width by default** — do not add `max-width` / narrow card constraints on create/edit forms unless the user explicitly asks for a constrained layout
 - **Page vs modal (required before building UI):** When adding or changing create / edit / other mutation UX, **ask the user** whether they want a **full page** or a **modal** (unless they already specified). Do not assume. Testimonials use modal create/edit on the index page (`admin/testimonials/partials/form-modal.blade.php` + `.admin-modal*` in `admin.css` + `SuaveAdmin.openAdminModal` / `closeAdminModal`). Page forms stay under `admin/{feature}/form.blade.php`.
 - **List pages:** use `<x-admin.datatable>` (`App\View\Components\Admin\Datatable`) for the table shell — page head + Tailwind toolbar (search + always-visible `filters` slot / `<details>` sort & column menus) + table + rows-per-page footer. Slots: `actions`, `filters`. Pass `:columns`, optional `:sort-options`
-- Row kebab menus: `App\Support\Admin\DataTableActions::menu([...])` — native `<details>` + Tailwind (no dropdown JS)
+- Row kebab menus: `App\Support\Admin\DataTableActions::menu([...])` — native `<details>` + `.admin-table__action-menu*` in `admin.css` (no Tailwind-in-PHP strings; no dropdown JS). Open menus lift scroll overflow via `:has(.admin-table__action-menu[open])`; last row flips the panel upward
 - `SuaveAdmin.initDataTable` only wires search/sort/column visibility to Yajra; open/close is CSS/native
 - Gate sidebar links with `$user->hasPermission(...)`
 - Auth view: `admin.auth.login` (white card on light surface)
@@ -135,17 +137,23 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 
 - Package: `yajra/laravel-datatables-oracle`
 - Server classes: `app/DataTables/Admin/{Blog,CaseStudy,User,Role,Testimonial,Conversation}DataTable.php`
+- **Select only columns you use (required):** listing queries must `select([...])` the primary key + every column read by column renderers, filters, sorts, and row actions — never `table.*`. Eager-load relations with constrained columns (`with(['category:id,name'])`), and omit unused relations. Include FKs needed for those relations (e.g. `blog_category_id`). Soft-delete scopes still apply without selecting `deleted_at`.
+  - Example — blogs index: `id`, `blog_category_id`, `title`, `slug`, `status`, `published_at`, `updated_at` + `with(['category:id,name'])` — not `blogs.*`, not `createdBy`, not `content` / `faqs` / SEO blobs
+  - Same rule for other admin DataTables and list endpoints: if a column is not shown or needed for the row menu / filter, do not fetch it
 - Index controllers return Yajra JSON when `$request->ajax()` / `wantsAdminJson()`; otherwise the Blade list view
 - Mutations use `RespondsToAdminAjax` (`adminSuccess` / `adminError`) so store/update/destroy return JSON for AJAX or flash redirects otherwise
+- `adminSuccess` / `adminError` / `wantsAdminJson` accept `Request|FormRequest` (Form Requests are valid)
 - Client helpers in `public/js/admin/suave-admin.js` (`window.SuaveAdmin`):
   - `createFlashMessage` — see **Flash messages** below
   - `toast.*` — thin wrappers; prefer `createFlashMessage` in new code
   - `ajax`, `submitForm` (bind via `data-ajax-form`)
   - `initDataTable`, `reloadDataTable`
   - `initDateRangeFilter` (presets + Flatpickr custom range)
-  - `confirmDialog` / `destroyRecord` — see **Confirm dialogs** below
+  - `confirmDialog` / `destroyRecord` / `confirmRequest` — see **Confirm dialogs** below
+  - `data-admin-action` — confirmed non-delete AJAX (`method` via `_method`, e.g. blog Publish)
 - Forms: add `data-ajax-form` (+ optional `data-success-message`, `data-reload-table`)
 - List deletes: `data-admin-delete data-url="..." data-reload-table="#admin-datatable"` (+ confirm attrs — see below)
+- List actions (publish, etc.): `data-admin-action data-url="..." data-method="PATCH"` (+ confirm attrs); `DataTableActions::menu` supports `'method' => 'PATCH'`
 - Form-page deletes: set `data-reload-table=""` so redirect from JSON is used instead of reloading a missing table
 
 ## Confirm dialogs (`SuaveAdmin.confirmDialog`)
@@ -253,7 +261,9 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
   - Seeds textarea value into the editor after construct (API variants: `setHTMLCode` / fallbacks)
   - Periodically syncs editor HTML back into the textarea; `syncRichTextEditors()` also runs before AJAX `FormData`
   - `SuaveAdmin.initBlogEditForm()` paints the frontend completeness meter (Article body counts as done at 120+ words), injects `public/css/admin-blog-content.css` into the RTE so visual blocks match the public page, and keeps chart bar widths in sync when percents are edited in the article
-- Blog form layout: main composer + sticky publish/image sidebar (no internal sidebar scrollbar — page scrolls naturally; side cards use `min-width: 0` so Publish inputs wrap instead of clipping); **Publish** card starts with a frontend completeness bar (title, body, image, SEO, FAQs, takeaways, table, completion bars, stats, insight) plus the Draft/Published status select; chart percents are edited in the article; SEO in a collapsible `<details>` (`admin/blogs/form.blade.php`, `.admin-blog-form*` / `.admin-blog-complete*` in `admin.css`). No admin Internal links suggestion panel.
+- RTE chrome: `.admin-rte .richtexteditor` uses `overflow: visible` (vendor `overflow:hidden` clips font-size / heading dropdowns); toolbar `z-index` above content; `rte-dropdown-panel` raised above the editable area
+- Blog form layout: main composer + sticky publish/image sidebar (no internal sidebar scrollbar — page scrolls naturally; side cards use `min-width: 0` so Publish inputs wrap instead of clipping); **Publish** card starts with a frontend completeness bar (title, body, image, SEO, FAQs, takeaways, table, completion bars, stats, insight) plus the Draft/Published status select (**no `published_at` field** — `BlogService` stamps `published_at` when status becomes published and clears it on draft); SEO in a collapsible `<details>` (`admin/blogs/form.blade.php`, `.admin-blog-form*` / `.admin-blog-complete*` in `admin.css`). No admin Internal links suggestion panel.
+- Index row menu: drafts with `blogs.update` get **Publish** (`PATCH admin.blogs.publish` → `BlogService::publish()` + confirm via `data-admin-action`)
 - FAQ repeater rows (`data-admin-repeater` via `SuaveAdmin.bindRepeaters`) — question + answer; every submitted row is **required**. `BlogService::normalizeFaqItems()`
 - **TOC admin UI is commented out** for now (not used on frontend single-blog); existing `blogs.toc` is left unchanged on save. Re-enable form block + `toc` validation / `normalizeTocItems()` together when the frontend needs it
 - Override `RTE_DefaultConfig.url_base` is set to `asset('richtexteditor')` in the scripts partial
@@ -268,7 +278,7 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
   - `data-flatpickr-min-date` / `data-flatpickr-max-date`
   - `data-flatpickr-mode="range"`
 - Manual: `SuaveAdmin.initFlatpickr('#field', { enableTime: true, dateFormat: 'Y-m-d H:i' })`
-- Blog `published_at` uses Flatpickr datetime (`Y-m-d H:i`)
+- Blog forms do **not** expose `published_at` (auto-stamped on publish)
 
 ## Conversations (admin)
 
@@ -410,7 +420,8 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 8. User feedback: `createFlashMessage` (PHP session or JS Toastr) — never raw `toastr.*` / ad-hoc `Session::flash('status')` in new code
 9. Confirmations: **always** `SuaveAdmin.confirmDialog` / `data-admin-delete` with specific title + message + button label — **never** `window.confirm` / `confirm()`
 10. **Migrations:** never edit a migration that already ran on live; add a new one. Guard with `Schema::hasTable` / `Schema::hasColumn` (see **Migrations** above)
-11. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
+11. **DataTable / list queries:** `select` only columns actually used (plus PK/FKs for relations); constrain `with([...])` columns; never `table.*` or unused eager loads (see **DataTables + AJAX**)
+12. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
 
 ## Related
 
