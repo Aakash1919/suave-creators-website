@@ -4,7 +4,7 @@ return array (
   'pageTitle' => 'Healthcare Software Development Solutions | Suave Creators',
   'pageDescription' => 'Explore secure healthcare software solutions including EHR/EMR integration, hospital management systems, healthcare portals, mobile apps, and AI platforms.',
   'ogTitle' => 'Healthcare Software Development | Suave Creators',
-  'ogDescription' => 'Custom healthcare software development, EHR/EMR integration, hospital management systems, AI-powered healthcare apps, and secure patient portals.',
+  'ogDescription' => 'Explore secure healthcare software solutions including EHR/EMR integration, hospital management systems, healthcare portals, mobile apps, and AI platforms.',
   'eyebrow' => 'Serving more than 100+ health organisations',
   'heroTitle' => 
   array (
