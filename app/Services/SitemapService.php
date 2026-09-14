@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 class SitemapService
 {
     /**
-     * Build every public indexable URL for sitemap / llm.txt.
+     * Build every public indexable URL for sitemap / llms.txt.
      *
      * @return list<array{loc: string, lastmod: ?string, changefreq: string, priority: string, title: string, group: string}>
      */
@@ -61,6 +61,9 @@ class SitemapService
         }
 
         BlogCategory::query()
+            ->whereHas('blogs', static function ($query): void {
+                $query->published();
+            })
             ->orderBy('sort_order')
             ->orderBy('name')
             ->get(['name', 'slug', 'updated_at'])
@@ -213,7 +216,7 @@ class SitemapService
         $lines[] = '## Machine-readable sitemap';
         $lines[] = '';
         $lines[] = '- XML sitemap: '.$this->siteUrl('/sitemap.xml');
-        $lines[] = '- This file: '.$this->siteUrl('/llm.txt');
+        $lines[] = '- This file: '.$this->siteUrl('/llms.txt');
         $lines[] = '';
 
         return implode("\n", $lines);
@@ -232,11 +235,40 @@ class SitemapService
         return implode("\n", [
             'User-agent: *',
             'Allow: /',
-            'Disallow: /admin',
-            'Disallow: /suave-agent',
+            '',
+            '# Critical Public Rendering & Case Studies Access',
+            'Allow: /assets/',
+            'Allow: /css/',
+            'Allow: /js/',
+            'Allow: /fonts/',
+            'Allow: /case-studies/',
+            'Allow: /services/',
+            'Allow: /industries/',
+            '',
+            '# Internal Admin, Private Endpoints & Draft Handlers',
+            'Disallow: /admin/',
+            'Disallow: /suave-agent/',
+            'Disallow: /contact-us/draft',
+            'Disallow: /consultation-request',
+            '',
+            'User-agent: SemrushBot',
+            'User-agent: SemrushBot-SA',
+            'User-agent: Googlebot',
+            'User-agent: Bingbot',
+            'Allow: /',
+            '',
+            'User-agent: GPTBot',
+            'User-agent: ChatGPT-User',
+            'User-agent: PerplexityBot',
+            'User-agent: ClaudeBot',
+            'User-agent: Claude-Web',
+            'User-agent: Google-Extended',
+            'User-agent: Applebot-Extended',
+            'Allow: /',
             '',
             'Sitemap: '.$this->siteUrl('/sitemap.xml'),
-            '# LLM discovery: '.$this->siteUrl('/llm.txt'),
+            '',
+            '# '.$this->siteUrl('/llms.txt'),
             '',
         ]);
     }

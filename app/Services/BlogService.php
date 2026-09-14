@@ -59,6 +59,23 @@ class BlogService
     }
 
     /**
+     * Publish a draft blog and stamp published_at when missing.
+     */
+    public function publish(Blog $blog): Blog
+    {
+        if ($blog->status === Blog::STATUS_PUBLISHED && $blog->published_at !== null) {
+            return $blog;
+        }
+
+        $blog->forceFill([
+            'status' => Blog::STATUS_PUBLISHED,
+            'published_at' => $blog->published_at ?? now(),
+        ])->save();
+
+        return $blog->refresh();
+    }
+
+    /**
      * Persist a draft from a trusted internal payload (e.g. AI generation).
      *
      * @param  array<string, mixed>  $data
@@ -80,7 +97,7 @@ class BlogService
      */
     public function update(BlogUpdateRequest $request, Blog $blog): Blog
     {
-        $data = $this->attributesFromValidated($request->validated());
+        $data = $this->attributesFromValidated($request->validated(), $blog);
         $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title'], $blog->id);
 
         if ($request->hasFile('featured_image')) {
@@ -105,20 +122,27 @@ class BlogService
     /**
      * Normalize validated blog form data for persistence.
      *
+     * `published_at` is never taken from the form — it is stamped when status
+     * becomes published (kept on later saves) and cleared when draft again.
+     *
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */
-    public function attributesFromValidated(array $data): array
+    public function attributesFromValidated(array $data, ?Blog $blog = null): array
     {
         $data['faqs'] = $this->normalizeFaqItems($data['faqs'] ?? null);
-        unset($data['featured_image']);
+        unset($data['featured_image'], $data['published_at']);
 
         if (isset($data['content']) && is_string($data['content'])) {
             $data['content'] = BlogSupport::normalizeVisualHtml($data['content']);
         }
 
-        if (($data['status'] ?? null) === Blog::STATUS_PUBLISHED && empty($data['published_at'])) {
-            $data['published_at'] = now();
+        $status = $data['status'] ?? null;
+
+        if ($status === Blog::STATUS_PUBLISHED) {
+            $data['published_at'] = $blog?->published_at ?? now();
+        } elseif ($status === Blog::STATUS_DRAFT) {
+            $data['published_at'] = null;
         }
 
         return $data;

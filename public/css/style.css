@@ -4802,12 +4802,8 @@ body.mobile-nav-open {
     padding-block: 24px !important;
   }
 
-  .site-main>.industry-detail-banner,
-  .site-main>.industry-detail-banner>.grid>div:first-child {
-    min-height: 0 !important;
-  }
-
-  .service-banner {
+  .service-banner,
+  .industry-banner {
     padding-block: 24px !important;
   }
 
@@ -6725,6 +6721,611 @@ html {
 }
 
 /* ===== CASE STUDY METRIC COUNTERS END ===== */
+
+/* ===== SERVICE DETAIL BANNER START ===== */
+.site-main--service-detail {
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.service-banner__panel {
+  background-color: #0b1a5c;
+  background-image: linear-gradient(118deg, #061447 0%, #0d2a7a 48%, #1a1a6e 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 28px;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 20px 22px;
+  position: relative;
+  width: 100%;
+}
+
+.service-banner__panel:has(.service-banner__side--crm-orbit) {
+  overflow: visible;
+}
+
+.service-banner__panel--has-bg {
+  background-color: #0b1a5c;
+}
+
+.service-banner__grid {
+  align-items: center;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.service-banner__grid--copy-only .service-banner__copy {
+  max-width: 46rem;
+}
+
+.service-banner__copy {
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  min-width: 0;
+  position: relative;
+  text-align: left;
+  z-index: 1;
+}
+
+.service-banner__eyebrow {
+  background: linear-gradient(90deg, #2A4DFB 0%, #7A5FF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.service-banner__title {
+  display: flex;
+  flex-direction: column;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 28px;
+  margin: 0.5rem 0;
+}
+
+.service-banner__title-lead {
+  color: #fff;
+  font-weight: 700;
+}
+
+.service-banner__title-accent {
+  background: linear-gradient(180deg, #2F69FB 49.52%, #D078FE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  font-weight: 700;
+  max-width: 100%;
+  width: 100%;
+}
+
+.service-banner__desc {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0.5rem 0;
+  max-width: 34rem;
+}
+
+.service-banner__cta {
+  margin: 2rem 0 0;
+}
+
+.service-banner__side {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.service-banner__side-img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.service-banner__side-placeholder {
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(circle at 50% 45%, rgba(90, 140, 255, 0.28) 0%, rgba(20, 40, 120, 0.12) 55%, transparent 75%);
+  border: 1px dashed rgba(158, 193, 255, 0.35);
+  border-radius: 24px;
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Hub-and-spoke labels over service banner art */
+.service-banner__orbit-wrap {
+  isolation: isolate;
+  max-width: 420px;
+  position: relative;
+  width: 100%;
+}
+
+.service-banner__side--orbit .service-banner__side-img {
+  max-width: none;
+  position: relative;
+  z-index: 0;
+}
+
+.service-banner__tech-orbit {
+  --orbit-count: 6;
+  --orbit-step: 60deg;
+  --orbit-offset: 0deg;
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.service-banner__tech-hub {
+  align-items: center;
+  display: flex;
+  height: 30%;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+}
+
+.service-banner__tech-hub-img {
+  display: block;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.service-banner__tech-hub-label {
+  color: #fff;
+  font-size: clamp(0.7rem, 2.6vw, 1.15rem);
+  font-weight: 800;
+  left: 50%;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  max-width: 90%;
+  position: absolute;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(80, 180, 255, 0.55);
+  text-transform: uppercase;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.service-banner__tech-nodes {
+  inset: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.service-banner__tech-node {
+  /* Radius as % of node size (~36.5% of square parent / 21% node) */
+  --orbit-r: 174%;
+  aspect-ratio: 1;
+  display: flex;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotate(calc(var(--orbit-offset) + (var(--i) * var(--orbit-step))))
+    translateY(calc(var(--orbit-r) * -1))
+    rotate(calc((var(--orbit-offset) + (var(--i) * var(--orbit-step))) * -1));
+  width: 21%;
+}
+
+.service-banner__tech-orbit[data-count="4"] .service-banner__tech-node {
+  /* Match painted disc diameter (~25% of banner) and ring radius */
+  --orbit-r: 124%;
+  width: 25%;
+}
+
+.service-banner__tech-node-inner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  height: 100%;
+  justify-content: center;
+  padding: 12% 10% 14%;
+  text-align: center;
+  width: 100%;
+}
+
+.service-banner__tech-orbit[data-count="4"] .service-banner__tech-node-inner {
+  gap: 0.15em;
+  padding: 16%;
+}
+
+.service-banner__tech-node-img {
+  display: block;
+  flex: 0 0 auto;
+  height: auto;
+  max-height: 42%;
+  max-width: 58%;
+  object-fit: contain;
+  width: auto;
+}
+
+.service-banner__tech-orbit[data-count="4"] .service-banner__tech-node-img {
+  max-height: 32%;
+  max-width: 70%;
+  /* Knock out solid black logo backgrounds over the blue discs */
+  mix-blend-mode: lighten;
+}
+
+.service-banner__tech-node-label {
+  color: #fff;
+  display: -webkit-box;
+  font-size: clamp(0.5rem, 2.1vw, 0.7rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  max-width: 100%;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-align: center;
+}
+
+.service-banner__tech-orbit[data-count="4"] .service-banner__tech-node-label {
+  font-size: clamp(0.52rem, 2vw, 0.72rem);
+  margin: 0;
+  max-width: 92%;
+  text-transform: none;
+}
+
+.service-banner__tech-orbit[data-count="6"]:not([data-variant="crm"]) .service-banner__tech-node-label {
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-line-clamp: unset;
+  display: block;
+  text-overflow: ellipsis;
+}
+
+.service-banner__tech-placeholder {
+  background: rgba(120, 170, 255, 0.12);
+  border: 1.5px dashed rgba(180, 210, 255, 0.55);
+  border-radius: 10px;
+  display: block;
+  flex: 0 0 auto;
+  height: 38%;
+  max-height: 2.75rem;
+  min-height: 1.25rem;
+  width: 52%;
+}
+
+.service-banner__tech-orbit[data-count="4"] .service-banner__tech-placeholder {
+  height: 30%;
+  max-height: 2.5rem;
+  width: 52%;
+}
+
+.service-banner__tech-placeholder--hub {
+  aspect-ratio: 1;
+  border-radius: 18px;
+  height: 72%;
+  max-height: none;
+  width: 72%;
+}
+
+/* CRM: icons in painted circles, labels + chevrons outside */
+.service-banner__orbit-wrap--crm {
+  max-width: min(100%, 560px);
+  overflow: visible;
+  width: 100%;
+}
+
+.service-banner__orbit-wrap--crm .service-banner__side-img--crm {
+  display: block;
+  height: auto;
+  max-width: none;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+
+.service-banner__tech-orbit[data-variant="crm"] {
+  inset: 0;
+  overflow: visible;
+  position: absolute;
+  z-index: 1;
+}
+
+.service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-nodes {
+  inset: 0;
+}
+
+.service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-node {
+  /* Measured circle diameter ≈ 11–12% of banner */
+  height: 11.5%;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  transform: translate(-50%, -50%);
+  width: 11.5%;
+}
+
+.service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-node-inner {
+  gap: 0;
+  height: 100%;
+  padding: 18%;
+  width: 100%;
+}
+
+.service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-node-img {
+  max-height: 70%;
+  max-width: 70%;
+}
+
+.service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-placeholder {
+  background: rgba(140, 190, 255, 0.14);
+  border: 1.5px dashed rgba(180, 210, 255, 0.5);
+  border-radius: 50%;
+  height: 62%;
+  max-height: none;
+  min-height: 0;
+  width: 62%;
+}
+
+.service-banner__tech-node-meta {
+  align-items: center;
+  display: flex;
+  gap: 0.45rem;
+  position: absolute;
+  top: 50%;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.service-banner__tech-node--left .service-banner__tech-node-meta {
+  flex-direction: row;
+  justify-content: flex-end;
+  right: calc(100% + 0.65rem);
+  transform: translateY(-50%);
+}
+
+.service-banner__tech-node--right .service-banner__tech-node-meta {
+  flex-direction: row;
+  justify-content: flex-start;
+  left: calc(100% + 0.65rem);
+  transform: translateY(-50%);
+}
+
+.service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-node-label {
+  color: #fff;
+  display: block;
+  font-size: clamp(0.55rem, 1.45vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  max-width: 9rem;
+  overflow: visible;
+  text-overflow: clip;
+  text-transform: none;
+  white-space: nowrap;
+  -webkit-line-clamp: unset;
+}
+
+.service-banner__tech-node--left .service-banner__tech-node-label {
+  text-align: right;
+}
+
+.service-banner__tech-node--right .service-banner__tech-node-label {
+  text-align: left;
+}
+
+.service-banner__tech-node-chevrons {
+  color: #7eb6ff;
+  flex: 0 0 auto;
+  font-size: clamp(0.45rem, 1.15vw, 0.62rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  opacity: 0.95;
+  text-shadow: 0 0 10px rgba(80, 160, 255, 0.65);
+}
+
+.service-banner__tech-node-chevrons--left::before {
+  content: "<<<< ◆";
+}
+
+.service-banner__tech-node-chevrons--right::before {
+  content: "◆ >>>>";
+}
+
+@media (min-width: 640px) {
+  .service-banner__panel {
+    border-radius: 32px;
+    padding: 28px 40px;
+  }
+
+  .service-banner__title {
+    font-size: 2.75rem;
+    line-height: 1;
+  }
+
+  .service-banner__eyebrow {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-banner__panel {
+    padding: 36px 52px;
+  }
+
+  .service-banner__grid {
+    gap: 40px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .service-banner__grid--copy-only {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .service-banner__title {
+    font-size: 52px;
+    line-height: 1;
+  }
+
+  .service-banner__side {
+    justify-content: flex-end;
+  }
+
+  .service-banner__side-img,
+  .service-banner__side-placeholder,
+  .service-banner__orbit-wrap {
+    max-width: 480px;
+  }
+
+  .service-banner__orbit-wrap--crm {
+    max-width: min(100%, 560px);
+  }
+
+  .service-banner__tech-node-label {
+    font-size: 0.7rem;
+  }
+
+  .service-banner__tech-orbit[data-count="4"] .service-banner__tech-node-label {
+    font-size: 0.78rem;
+  }
+
+  .service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-node {
+    height: 11.5%;
+    width: 11.5%;
+  }
+
+  .service-banner__tech-orbit[data-variant="crm"] .service-banner__tech-node-label {
+    font-size: 0.78rem;
+    max-width: 9.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .service-banner__panel {
+    border-radius: 20px;
+    padding: 16px 16px;
+  }
+}
+
+/* Custom CRM: wider side art so the hero reads taller */
+.service-banner--crm .service-banner__orbit-wrap,
+.service-banner--crm .service-banner__side-img {
+  max-width: min(100%, 560px);
+}
+
+.service-banner--crm .service-banner__panel {
+  padding-bottom: 28px;
+  padding-top: 28px;
+}
+
+.service-banner--crm .service-banner__eyebrow {
+  margin-bottom: 0.85rem;
+}
+
+.service-banner--crm .service-banner__title {
+  gap: 0.35rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.service-banner--crm .service-banner__desc {
+  margin: 0.75rem 0 0;
+}
+
+.service-banner--crm .service-banner__cta {
+  margin-top: 2.75rem;
+}
+
+@media (min-width: 640px) {
+  .service-banner--crm .service-banner__panel {
+    padding-bottom: 40px;
+    padding-top: 40px;
+  }
+
+  .service-banner--crm .service-banner__title {
+    gap: 0.45rem;
+    margin: 0.85rem 0 1.15rem;
+  }
+
+  .service-banner--crm .service-banner__desc {
+    margin-top: 1rem;
+  }
+
+  .service-banner--crm .service-banner__cta {
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-banner--crm .service-banner__orbit-wrap,
+  .service-banner--crm .service-banner__side-img {
+    max-width: min(100%, 720px);
+  }
+
+  .service-banner--crm .service-banner__panel {
+    min-height: 520px;
+    padding-bottom: 48px;
+    padding-top: 48px;
+  }
+
+  .service-banner--crm .service-banner__title {
+    gap: 0.5rem;
+    margin: 1rem 0 1.25rem;
+  }
+
+  .service-banner--crm .service-banner__desc {
+    margin-top: 1.15rem;
+  }
+
+  .service-banner--crm .service-banner__cta {
+    margin-top: 3.25rem;
+  }
+}
+
+/* ===== SERVICE DETAIL BANNER END ===== */
+
+/* ===== INDUSTRY DETAIL BANNER START ===== */
+.site-main--industry-detail {
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sentence-case eyebrow (industry copy is longer than service labels) */
+.industry-banner .service-banner__eyebrow.industry-banner__eyebrow {
+  background: none;
+  background-image: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: #9eb6e8;
+  color: #9eb6e8;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+/* ===== INDUSTRY DETAIL BANNER END ===== */
 
 /* ===== INLINE CONSULTATION FORM START ===== */
 .consultation-inline-wrapper {

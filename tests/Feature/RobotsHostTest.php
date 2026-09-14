@@ -21,7 +21,11 @@ class RobotsHostTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Sitemap: https://suavecreators.com/sitemap.xml', false);
-        $response->assertSee('# LLM discovery: https://suavecreators.com/llm.txt', false);
+        $response->assertSee('# https://suavecreators.com/llms.txt', false);
+        $response->assertSee('Disallow: /admin/', false);
+        $response->assertSee('Disallow: /contact-us/draft', false);
+        $response->assertSee('Disallow: /consultation-request', false);
+        $response->assertSee('User-agent: GPTBot', false);
         $response->assertDontSee('https://www.suavecreators.com', false);
     }
 }

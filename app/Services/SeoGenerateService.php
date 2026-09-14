@@ -345,6 +345,22 @@ class SeoGenerateService
         $query = (string) (parse_url($currentUrl, PHP_URL_QUERY) ?: '');
         $path = '/'.ltrim($path, '/');
 
+        if ($query !== '') {
+            parse_str($query, $params);
+            $allowed = array_fill_keys(
+                array_map('strval', (array) config('seo.allowed_query_params', [])),
+                true
+            );
+            // Pagination stays off canonicals even when the request allows the keys.
+            unset($params['page'], $params['per_page']);
+            $params = array_filter(
+                $params,
+                static fn (mixed $value, mixed $key): bool => isset($allowed[(string) $key]),
+                ARRAY_FILTER_USE_BOTH
+            );
+            $query = http_build_query($params);
+        }
+
         return $baseUrl.$path.($query !== '' ? '?'.$query : '');
     }
 

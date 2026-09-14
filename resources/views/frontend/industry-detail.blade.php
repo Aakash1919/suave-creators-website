@@ -3,48 +3,59 @@
 @section('content')
 
 
-    <!-- Hero Section Start -->
+    <!-- Hero / Industry Banner Section Start -->
     <section
-        class="industry-detail-banner relative z-10 w-full overflow-x-clip section-pad-m pb-10 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10 lg:min-h-[600px] lg:pb-20 lg:pt-[52px] site-container">
-        <div class="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
-            <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[560px]">
-                <p
-                    class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold uppercase tracking-wide text-transparent sm:text-sm">
-                    {{ $industry['eyebrow'] ?? 'Industry Solutions' }}</p>
-                <h1
-                    class="page-hero-title mb-2 mt-1 flex flex-col text-[26px] font-semibold leading-[28px] text-white sm:mt-2 sm:text-5xl lg:text-[52px] lg:leading-none">
-                    @foreach ($industry['heroTitle'] ?? [] as $i => $line)
-                        @if ($i === 0)
-                            <span
-                                class="inline-block bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text font-extrabold text-transparent">{{ $line }}</span>
-                        @else
-                            <span>{{ $line }}</span>
-                        @endif
-                    @endforeach
-                </h1>
-                <p class="mb-2 mt-2 text-[13px] leading-[18px] text-[#B1B9DF] sm:text-sm sm:leading-5">{{ $industry['heroDescription'] ?? '' }}
-                </p>
-                <div class="mt-8">
-                    <x-frontend.inline-consultation-form
-                        theme="dark"
-                        placeholder="Enter your phone or email"
-                        button-text="Get Free Consultation"
-                        :secondary-href="$demoHref"
-                        secondary-label="Schedule a discovery call" />
-                </div>
-            </div>
+        class="full-bleed service-banner industry-banner relative z-1 pt-10 pb-0 md:pt-10 md:pb-2 lg:pt-[50px] lg:pb-2""
+        aria-labelledby="industry-banner-heading">
+        <div class="section-inner">
+            {{-- bannerBg: set in industry data (e.g. assets/background/{slug}-banner-bg.webp) --}}
             <div
-                class="industry-hero-media relative z-10 mx-auto hidden w-full max-w-[360px] min-w-0 items-center justify-center lg:flex lg:mx-0 lg:max-w-[480px] lg:justify-end">
-                @if (!empty($industry['heroImage']))
-                    <img src="{{ $industry['heroImage'] }}" alt="{{ $industry['pageTitle'] ?? '' }}"
-                        title="{{ $industry['pageTitle'] ?? '' }}" width="560" height="560"
-                        class="hidden h-auto w-full max-w-[360px] rounded-[20px] object-cover shadow-[0_24px_60px_rgba(0,0,63,0.35)] lg:ml-auto lg:block lg:max-w-[480px] lg:rounded-[28px]"
-                        loading="eager">
-                @endif
+                class="service-banner__panel{{ $bannerBg !== '' ? ' service-banner__panel--has-bg' : '' }}"
+                @if ($bannerBg !== '') style="background-image: url('{{ $bannerBg }}');" @endif>
+                <div class="service-banner__grid">
+                    <div class="service-banner__copy">
+                        <p class="service-banner__eyebrow industry-banner__eyebrow">{{ $industry['eyebrow'] ?? 'Industry Solutions' }}</p>
+                        <h1 id="industry-banner-heading" class="page-hero-title service-banner__title">
+                            @foreach (($industry['heroTitle'] ?? []) as $i => $line)
+                                @if ($i === 0)
+                                    <span class="service-banner__title-accent">{{ $line }}</span>
+                                @else
+                                    <span class="service-banner__title-lead">{{ $line }}</span>
+                                @endif
+                            @endforeach
+                        </h1>
+                        <p class="service-banner__desc">{{ $industry['heroDescription'] ?? '' }}</p>
+                        <div class="service-banner__cta">
+                            <x-frontend.inline-consultation-form
+                                theme="dark"
+                                placeholder="Enter your phone or email"
+                                button-text="Get Free Consultation"
+                                :secondary-href="$demoHref"
+                                secondary-label="Schedule a discovery call" />
+                        </div>
+                    </div>
+
+                    {{-- bannerSideImage: set in industry data (e.g. assets/media/{slug}-banner-side.webp) --}}
+                    <div class="service-banner__side">
+                        @if ($bannerSideImage !== '')
+                            <img
+                                src="{{ $bannerSideImage }}"
+                                alt="{{ ($industry['pageTitle'] ?? 'Industry').' side banner graphic for Suave Creators' }}"
+                                title="{{ ($industry['pageTitle'] ?? 'Industry').' side banner graphic for Suave Creators' }}"
+                                width="560"
+                                height="560"
+                                class="service-banner__side-img"
+                                loading="eager"
+                                decoding="async">
+                        @else
+                            <div class="service-banner__side-placeholder" aria-hidden="true"></div>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <!-- Hero Section End -->
+    <!-- Hero / Industry Banner Section End -->
 
     <!-- Intro + Stats Section Start -->
     <section class="full-bleed bg-white bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20"

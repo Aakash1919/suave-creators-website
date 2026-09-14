@@ -12,8 +12,8 @@ return array(
     1 => 'Solutions to upgrade your Business.',
   ),
   'heroDescription' => 'Upgrade your organisation with custom enterprise software solutions that organise data, automate daily work, improve management visibility, and support reliable growth.',
-  'heroImage1' => '/assets/media/build-visual.png',
-  'heroImage2' => '/assets/icons/build-icon.png',
+  'bannerSideImage' => '/assets/media/enterprise-solution-banner.webp',
+
   'bannerLogos' =>
   array(
     0 => array('src' => '/assets/clients/enterprise-partner-logo-1.svg', 'alt' => 'Client Logo 1'),
@@ -21,7 +21,7 @@ return array(
     2 => array('src' => '/assets/clients/enterprise-partner-logo-3.svg', 'alt' => 'Client Logo 3'),
     3 => array('src' => '/assets/clients/enterprise-partner-logo-4.svg', 'alt' => 'Client Logo 4'),
   ),
-  'bannerBg' => '/assets/media/enterprise-banner.webp',
+  'bannerBg' => '/assets/media/enterprise-software-bg.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'Custom Web Development',
