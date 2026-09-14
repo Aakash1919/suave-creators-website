@@ -17,7 +17,7 @@ class PartnershipsSection extends Component
      */
     public function __construct(
         public ?array $items = null,
-        public string $eyebrow = 'Our Partnerships & Growth Stack',
+        public string $eyebrow = 'OUR PARTNERSHIPS & CLIENT NETWORK',
         public string $ariaLabel = 'Client partnerships',
         public string $backgroundImage = 'assets/background/portfolio-section-pattern-bg.png',
     ) {

@@ -70,6 +70,7 @@ class HeroCaseStudiesVisual extends Component
             $bars = is_array($item['bars'] ?? null) ? array_values($item['bars']) : [42, 68, 92, 58, 76];
             $chartImage = trim((string) ($item['chart_image'] ?? ''));
             $metricImage = trim((string) ($item['metric_image'] ?? ''));
+            $brandTitle = trim((string) ($item['brand_title'] ?? ''));
             $slug = (string) ($item['slug'] ?? '');
             $theme = trim((string) ($item['theme'] ?? ''));
 
@@ -95,6 +96,7 @@ class HeroCaseStudiesVisual extends Component
                 'photo_image' => $photo,
                 'chart_image' => $chartImage !== '' ? $chartImage : null,
                 'metric_image' => $metricImage !== '' ? $metricImage : $photo,
+                'brand_title' => $brandTitle,
                 'theme' => $theme,
                 'bars' => array_map(static fn ($h): int => (int) $h, array_slice(array_pad($bars, 5, 55), 0, 5)),
             ];

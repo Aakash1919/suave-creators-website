@@ -33,7 +33,19 @@ class SuaveAgent implements Agent, HasTools, RemembersConversationsContract
     {
         $contacts = SuaveAgentKnowledge::companyContacts();
         $offices = collect($contacts['offices'])
-            ->map(fn (array $office): string => '- '.$office['label'].': '.$office['display'])
+            ->map(function (array $office): string {
+                $parts = [$office['label'].': '.$office['display']];
+
+                if (($office['phone'] ?? '') !== '') {
+                    $parts[] = 'Phone: '.$office['phone'];
+                }
+
+                if (($office['email'] ?? '') !== '') {
+                    $parts[] = 'Email: '.$office['email'];
+                }
+
+                return '- '.implode(' | ', $parts);
+            })
             ->implode("\n");
         $phones = implode(', ', $contacts['phones']);
         $demoHref = ContactSupport::demoHref();
