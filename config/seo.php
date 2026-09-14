@@ -282,9 +282,9 @@ return [
         ],
         'tasks-case-study' => [
             'title' => 'B2B CRM Task Management Case Study | Suave Creators',
-            'description' => 'See how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to improve sales team performance.',
+            'description' => 'Discover how Suave Creators redesigned B2B CRM task management with Kanban and List views, AI assistance, and automated workflows in one workspace.',
             'og_title' => 'B2B CRM Task Management | Case Study | Suave Creators',
-            'og_description' => 'See how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to improve sales team performance.',
+            'og_description' => 'Discover how Suave Creators redesigned B2B CRM task management with Kanban and List views, AI assistance, and automated workflows in one workspace.',
             'og_image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
         ],
         'teerrath-case-study' => [
