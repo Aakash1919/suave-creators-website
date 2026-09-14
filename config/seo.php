@@ -268,9 +268,9 @@ return [
         ],
         'ai-sales-coaching-case-study' => [
             'title' => 'AI Sales Coaching Platform Case Study | Suave Creators',
-            'description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
+            'description' => 'See how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to improve sales team performance.',
             'og_title' => 'AI Sales Coaching Platform Case Study',
-            'og_description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
+            'og_description' => 'See how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to improve sales team performance.',
             'og_image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
         ],
         'outreach-case-study' => [
