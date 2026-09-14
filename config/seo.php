@@ -17,6 +17,49 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Retired hosts (HTTP 410 Gone)
+    |--------------------------------------------------------------------------
+    |
+    | Point these DNS records at the same server as production, then every
+    | path on those Host headers returns 410 so Google drops them faster
+    | than NXDOMAIN / DNS errors (which burn crawl budget indefinitely).
+    |
+    */
+
+    'retired_hosts' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env('SEO_RETIRED_HOSTS', 'turbo.suavecreators.com'))
+    ))),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed public query parameters
+    |--------------------------------------------------------------------------
+    |
+    | GET/HEAD requests on the marketing site that include any other query
+    | key are 301-redirected to the same path with only these keys kept.
+    | Admin / SuaveAgent routes are excluded.
+    |
+    */
+
+    'allowed_query_params' => [
+        'page',
+        'per_page',
+        'category',
+        'q',
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'gclid',
+        'fbclid',
+        'msclkid',
+        '_ga',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Site-wide SEO defaults
     |--------------------------------------------------------------------------
     |
