@@ -4,7 +4,7 @@ return array (
   'pageTitle' => 'Logistics & Supply Chain App Development | Suave Creators',
   'pageDescription' => 'Custom logistics and supply chain apps including fleet management, warehouse systems, inventory tracking, route optimization, and AI automation.',
   'ogTitle' => 'Logistics & Supply Chain App Development | Suave Creators',
-  'ogDescription' => 'AI-powered logistics and supply chain app development including fleet management, WMS, inventory tracking, and real-time visibility solutions.',
+  'ogDescription' => 'Custom logistics and supply chain apps including fleet management, warehouse systems, inventory tracking, route optimization, and AI automation.',
   'eyebrow' => '100% Confidential and Secure',
   'heroTitle' => 
   array (
@@ -12,7 +12,8 @@ return array (
     1 => '& Supply Chain Apps',
   ),
   'heroDescription' => 'We help logistics companies navigate modern supply chains with solutions that deliver speed, reliability, and cost efficiency.',
-  'heroImage' => '/assets/media/logistics-banner.webp',
+  'bannerSideImage' => '/assets/media/logistics-banner copy.webp',
+  'bannerBg' => '/assets/media/logistics-bg.png',
   'introEyebrow' => 'Logistics Excellence',
   'introTitle' => 'Leading the Logistics App Development Company',
   'introDescription' => 'We are one of the leading custom supply chain and logistics app development companies. Our objective is to help businesses of all sizes advance with comprehensive, customised software that enhances productivity and growth.',

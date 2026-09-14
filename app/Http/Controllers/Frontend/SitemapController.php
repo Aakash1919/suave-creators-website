@@ -23,7 +23,7 @@ class SitemapController extends FrontendController
     }
 
     /**
-     * Markdown site map for LLMs / SEO assistants (`/llm.txt` and `/llms.txt`).
+     * Markdown site map for LLMs / SEO assistants (`/llms.txt`).
      */
     public function llmTxt(): Response
     {
@@ -34,7 +34,7 @@ class SitemapController extends FrontendController
     }
 
     /**
-     * Dynamic robots.txt with Sitemap + LLM pointers.
+     * Dynamic robots.txt with Sitemap + llms.txt pointer (comment).
      */
     public function robots(): Response
     {

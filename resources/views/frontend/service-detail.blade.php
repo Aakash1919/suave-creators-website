@@ -5,45 +5,156 @@
 
 <!-- 1. Hero / Service Banner Section Start -->
 <section
-  class="full-bleed service-banner relative z-10 bg-cover bg-center bg-no-repeat pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-[100px]"
-  style="background-image: url('{{ $bannerBg }}');"
+  class="full-bleed service-banner relative z-1 pt-10 pb-0 md:pt-10 md:pb-2 lg:pt-[50px] lg:pb-2{{ ($service['slug'] ?? '') === 'custom-crm-development' ? ' service-banner--crm' : '' }}"
   aria-labelledby="service-banner-heading">
   <div class="section-inner">
-    <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
-      <div class="relative z-0 flex max-w-xl min-w-0 flex-col text-left lg:max-w-[560px]">
-        <p class="mb-2 inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-sm font-bold uppercase tracking-wide text-transparent">{{ $service['eyebrow'] ?? 'Our Services' }}</p>
-        <h1 id="service-banner-heading" class="page-hero-title mb-2 mt-2 flex flex-col text-[26px] font-semibold leading-[28px] text-white sm:text-5xl sm:leading-none lg:text-[52px]">
-          @foreach (($service['heroTitle'] ?? []) as $i => $line)
-            @if ($i === 0)
-              <span class="inline-block bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text font-extrabold text-transparent">{{ $line }}</span>
-            @else
-              <span>{{ $line }}</span>
-            @endif
-          @endforeach
-        </h1>
-        <p class="mb-2 mt-2 text-[14px] leading-5 text-white">{{ $service['heroDescription'] ?? '' }}</p>
-        <div class="mt-8 mb-6 lg:mb-0">
-          <x-frontend.inline-consultation-form
-            theme="dark"
-            placeholder="Enter your phone or email"
-            button-text="Get Free Consultation"
-            :secondary-href="$demoHref"
-            secondary-label="Schedule a discovery call" />
+    {{-- bannerBg: set in service data (e.g. assets/background/{slug}-banner-bg.webp) --}}
+    <div
+      class="service-banner__panel{{ $bannerBg !== '' ? ' service-banner__panel--has-bg' : '' }}"
+      @if ($bannerBg !== '') style="background-image: url('{{ $bannerBg }}');" @endif>
+      @php
+        $bannerOrbit = is_array($service['bannerOrbit'] ?? null) ? $service['bannerOrbit'] : [];
+        $bannerOrbitNodes = array_values(array_filter(
+          is_array($bannerOrbit['nodes'] ?? null) ? $bannerOrbit['nodes'] : [],
+          static fn ($node): bool => is_array($node) && trim((string) ($node['label'] ?? '')) !== ''
+        ));
+        $bannerOrbitCenter = is_array($bannerOrbit['center'] ?? null) ? $bannerOrbit['center'] : null;
+        $hasBannerOrbit = $bannerOrbitNodes !== [];
+        $bannerOrbitCount = count($bannerOrbitNodes);
+        $bannerOrbitStep = $bannerOrbitCount > 0 ? (360 / $bannerOrbitCount) : 60;
+        $bannerOrbitVariant = trim((string) ($bannerOrbit['variant'] ?? ''));
+        $isCrmOrbit = $bannerOrbitVariant === 'crm';
+        $bannerOrbitOffset = isset($bannerOrbit['offset']) ? (float) $bannerOrbit['offset'] : 0.0;
+        $showBannerSide = $bannerSideImage !== '' || $hasBannerOrbit;
+      @endphp
+      <div class="service-banner__grid{{ $showBannerSide ? '' : ' service-banner__grid--copy-only' }}">
+        <div class="service-banner__copy">
+          <p class="service-banner__eyebrow">{{ $service['eyebrow'] ?? 'Our Services' }}</p>
+          <h1 id="service-banner-heading" class="page-hero-title service-banner__title">
+            @foreach (($service['heroTitle'] ?? []) as $i => $line)
+              @if ($i === 0)
+                <span class="service-banner__title-lead">{{ $line }}</span>
+              @else
+                <span class="service-banner__title-accent">{{ $line }}</span>
+              @endif
+            @endforeach
+          </h1>
+          <p class="service-banner__desc">{{ $service['heroDescription'] ?? '' }}</p>
+          <div class="service-banner__cta">
+            <x-frontend.inline-consultation-form
+              theme="dark"
+              placeholder="Enter your phone or email"
+              button-text="Get Free Consultation"
+              :secondary-href="$demoHref"
+              secondary-label="Schedule a discovery call" />
+          </div>
         </div>
-      </div>
-      <div class="relative z-10 hidden w-full min-w-0 items-center justify-center lg:flex lg:justify-end">
-        <div class="relative mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center">
-          @if (!empty($service['heroImage1']))
-            <img src="{{ $service['heroImage1'] }}" alt="Decorative orbit graphic for Suave Creators service banner" title="Decorative orbit graphic for Suave Creators service banner" width="480" height="480" class="service-banner__orbit absolute inset-0 z-[1] h-full w-full object-contain" loading="eager" aria-hidden="true">
-          @endif
-          @if (!empty($service['heroImage2']))
-            <img src="{{ $service['heroImage2'] }}" alt="{{ $service['pageTitle'] ?? '' }}" title="{{ $service['pageTitle'] ?? '' }}" width="160" height="160" class="relative z-[2] w-[32%] max-w-[140px] object-contain drop-shadow-xl" loading="eager">
+
+        {{-- bannerSideImage: set in service data (e.g. assets/media/{slug}-banner-side.webp) --}}
+        @if ($showBannerSide)
+        <div class="service-banner__side{{ $hasBannerOrbit ? ' service-banner__side--orbit' : '' }}{{ $isCrmOrbit ? ' service-banner__side--crm-orbit' : '' }}">
+          @if ($bannerSideImage !== '')
+            <div class="service-banner__orbit-wrap{{ $isCrmOrbit ? ' service-banner__orbit-wrap--crm' : '' }}">
+              <img
+                src="{{ $bannerSideImage }}"
+                alt="{{ ($service['pageTitle'] ?? 'Service').' side banner graphic for Suave Creators' }}"
+                title="{{ ($service['pageTitle'] ?? 'Service').' side banner graphic for Suave Creators' }}"
+                width="560"
+                height="560"
+                class="service-banner__side-img{{ $isCrmOrbit ? ' service-banner__side-img--crm' : '' }}"
+                loading="eager"
+                decoding="async">
+              @if ($hasBannerOrbit)
+                <div
+                  class="service-banner__tech-orbit"
+                  data-count="{{ $bannerOrbitCount }}"
+                  data-variant="{{ $bannerOrbitVariant !== '' ? $bannerOrbitVariant : 'default' }}"
+                  style="--orbit-count: {{ $bannerOrbitCount }}; --orbit-step: {{ $bannerOrbitStep }}deg; --orbit-offset: {{ $bannerOrbitOffset }}deg;"
+                  aria-label="{{ ($service['pageTitle'] ?? 'Service').' capabilities' }}">
+                  @if ($bannerOrbitCenter !== null)
+                    @php
+                      $hubSrc = trim((string) ($bannerOrbitCenter['src'] ?? ''));
+                      $hubLabel = trim((string) ($bannerOrbitCenter['label'] ?? ''));
+                      $hubAlt = trim((string) ($bannerOrbitCenter['alt'] ?? ($hubLabel !== '' ? $hubLabel : 'Service hub illustration for Suave Creators')));
+                    @endphp
+                    <div class="service-banner__tech-hub">
+                      @if ($hubSrc !== '')
+                        <img
+                          src="{{ $hubSrc }}"
+                          alt="{{ $hubAlt }}"
+                          title="{{ $hubAlt }}"
+                          width="160"
+                          height="160"
+                          class="service-banner__tech-hub-img"
+                          loading="eager"
+                          decoding="async">
+                      @else
+                        <span class="service-banner__tech-placeholder service-banner__tech-placeholder--hub" aria-hidden="true"></span>
+                      @endif
+                      @if ($hubLabel !== '')
+                        <span class="service-banner__tech-hub-label">{{ $hubLabel }}</span>
+                      @endif
+                    </div>
+                  @endif
+                  <ul class="service-banner__tech-nodes">
+                    @foreach ($bannerOrbitNodes as $index => $node)
+                      @php
+                        $nodeLabel = trim((string) ($node['label'] ?? ''));
+                        $nodeSrc = trim((string) ($node['src'] ?? ''));
+                        $nodeAlt = trim((string) ($node['alt'] ?? $nodeLabel));
+                        $nodeSide = in_array(($node['side'] ?? ''), ['left', 'right'], true) ? (string) $node['side'] : '';
+                        $nodeStyle = '--i: '.$index.';';
+                        if ($isCrmOrbit) {
+                          $x = isset($node['x']) ? (float) $node['x'] : null;
+                          $y = isset($node['y']) ? (float) $node['y'] : null;
+                          if ($x !== null && $y !== null) {
+                            $nodeStyle .= ' --x: '.$x.'%; --y: '.$y.'%;';
+                          }
+                        }
+                      @endphp
+                      <li class="service-banner__tech-node{{ $nodeSide !== '' ? ' service-banner__tech-node--'.$nodeSide : '' }}" style="{{ $nodeStyle }}">
+                        <div class="service-banner__tech-node-inner">
+                          @if ($nodeSrc !== '')
+                            <img
+                              src="{{ $nodeSrc }}"
+                              alt="{{ $nodeAlt }}"
+                              title="{{ $nodeAlt }}"
+                              width="48"
+                              height="48"
+                              class="service-banner__tech-node-img"
+                              loading="eager"
+                              decoding="async">
+                          @else
+                            <span class="service-banner__tech-placeholder" aria-hidden="true"></span>
+                          @endif
+                          @if (! $isCrmOrbit)
+                            <span class="service-banner__tech-node-label">{{ $nodeLabel }}</span>
+                          @endif
+                        </div>
+                        @if ($isCrmOrbit && $nodeLabel !== '')
+                          <span class="service-banner__tech-node-meta">
+                            @if ($nodeSide === 'left')
+                              <span class="service-banner__tech-node-label">{{ $nodeLabel }}</span>
+                              <span class="service-banner__tech-node-chevrons service-banner__tech-node-chevrons--left" aria-hidden="true"></span>
+                            @else
+                              <span class="service-banner__tech-node-chevrons service-banner__tech-node-chevrons--right" aria-hidden="true"></span>
+                              <span class="service-banner__tech-node-label">{{ $nodeLabel }}</span>
+                            @endif
+                          </span>
+                        @endif
+                      </li>
+                    @endforeach
+                  </ul>
+                </div>
+              @endif
+            </div>
           @endif
         </div>
+        @endif
       </div>
     </div>
 
-    @if (!empty($service['bannerLogos']))
+    {{-- @if (!empty($service['bannerLogos']))
       <div
         class="service-banner-logos serviceBannerLogosSwiper swiper mt-12 md:mt-14 lg:mt-12"
         style="--banner-logo-cols: {{ count($service['bannerLogos']) }}"
@@ -67,7 +178,7 @@
         </div>
       </div>
     @endif
-  </div>
+  </div> --}}
 </section>
 <!-- 1. Hero / Service Banner Section End -->
 

@@ -4,7 +4,7 @@ return array(
   'pageTitle' => 'AI Solutions & AI Software Development | Suave Creators',
   'pageDescription' => 'Custom AI solutions from Suave Creators: chatbots, automation, AI CRM features, analytics, and AI software that boost productivity.',
   'ogTitle' => 'AI Solutions & AI Software Development | Suave Creators',
-  'ogDescription' => 'Custom AI solutions for businesses: intelligent automation, chat assistants, predictive insights, and AI features in your software.',
+  'ogDescription' => 'Custom AI solutions from Suave Creators: chatbots, automation, AI CRM features, analytics, and AI software that boost productivity.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',
   'heroTitle' =>
   array(
@@ -12,18 +12,11 @@ return array(
     1 => 'AI Solutions for Growing Businesses',
   ),
   'heroDescription' => 'We embed AI where it creates real value—automating work, assisting customers and sales teams, and turning data into decisions your business can act on.',
-  'heroImage1' => '/assets/media/build-visual.png',
-  'heroImage2' => '/assets/icons/build-icon.png',
+  'bannerSideImage' => '/assets/media/AI-Solution-banner.webp',
+  
   'bannerLogos' =>
-  array(
-    0 => array('src' => '/assets/icons/tech/Open-AI.png', 'alt' => 'OpenAI logo for Suave Creators AI solutions', 'label' => 'OpenAI'),
-    1 => array('src' => '/assets/icons/tech/anthropic.png', 'alt' => 'Anthropic logo for Suave Creators Claude AI integrations', 'label' => 'Anthropic'),
-    2 => array('src' => '/assets/icons/tech/Vapi.png', 'alt' => 'Vapi logo for Suave Creators voice AI agents', 'label' => 'Vapi'),
-    3 => array('src' => '/assets/icons/tech/voice-assistant.png', 'alt' => 'Voice agents icon for Suave Creators conversational AI', 'label' => 'Voice Agents'),
-    4 => array('src' => '/assets/case-studies/ai-product-matching/ai-product-matching-hero-robot-icon.png', 'alt' => 'Chatbots icon for Suave Creators AI assistant development', 'label' => 'Chatbots'),
-    5 => array('src' => '/assets/icons/tech/google-gemini-icon.png', 'alt' => 'Google Gemini logo for Suave Creators multimodal AI solutions', 'label' => 'Gemini'),
-  ),
-  'bannerBg' => '/assets/background/banner-ai-solution.png',
+  array(),
+  'bannerBg' => '/assets/media/Ai-solutions-bg.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'AI Software Solutions',

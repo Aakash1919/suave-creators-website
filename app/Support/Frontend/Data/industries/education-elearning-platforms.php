@@ -4,7 +4,7 @@ return array (
   'pageTitle' => 'E-Learning Software Development Services | Suave Creators',
   'pageDescription' => 'Custom e-learning software including LMS platforms, mobile learning apps, virtual classrooms, AI education tools, and secure digital learning systems.',
   'ogTitle' => 'E-Learning Software Development Services | Suave Creators',
-  'ogDescription' => 'Custom e-learning software development including LMS platforms, virtual classrooms, mobile learning apps, and AI-powered education solutions.',
+  'ogDescription' => 'Custom e-learning software including LMS platforms, mobile learning apps, virtual classrooms, AI education tools, and secure digital learning systems.',
   'eyebrow' => 'We build smart E-learning Platforms',
   'heroTitle' => 
   array (
@@ -12,7 +12,8 @@ return array (
     1 => 'Development Services',
   ),
   'heroDescription' => 'We offer a diverse range of education and e-learning software development services for educational institutions, colleges, and online portals — tailored to your specific needs.',
-  'heroImage' => '/assets/media/education-banner.webp',
+  'bannerSideImage' => '/assets/media/e-learning-banner.webp',
+  'bannerBg' => '/assets/media/e-learning-bg.png',
   'introEyebrow' => 'Education Excellence',
   'introTitle' => 'We deliver the Best Solution',
   'introDescription' => 'Developing e-learning and educational solutions provides a great opportunity to reach your target audience and improve their digital learning experience. Our team offers all types of learning solutions in a single call.',

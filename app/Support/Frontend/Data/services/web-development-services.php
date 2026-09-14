@@ -4,7 +4,7 @@ return array(
   'pageTitle' => 'Custom Web Development Services | Suave Creators',
   'pageDescription' => 'Suave Creators offers custom web development including full-stack, Laravel, WordPress, React, Angular, PHP, Node.js & enterprise solutions.',
   'ogTitle' => 'Custom Web Development Services | Suave Creators',
-  'ogDescription' => 'Build high-performance, scalable and SEO-optimized websites with Suave Creators, custom web development services. Laravel, WordPress, React, Angular, PHP, Node.js & more.',
+  'ogDescription' => 'Suave Creators offers custom web development including full-stack, Laravel, WordPress, React, Angular, PHP, Node.js & enterprise solutions.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',
   'heroTitle' =>
   array(
@@ -12,18 +12,9 @@ return array(
     1 => 'Custom Web Development Services',
   ),
   'heroDescription' => 'We specialize in custom web development services, building responsive and SEO-friendly websites that are perfect for boosting your online presence.',
-  'heroImage1' => '/assets/media/build-visual.png',
-  'heroImage2' => '/assets/icons/build-icon.png',
-  'bannerLogos' =>
-  array(
-    0 => array('src' => '/assets/icons/tech/vue-color-logo.svg', 'alt' => 'Client Logo 1'),
-    1 => array('src' => '/assets/icons/tech/angular-color-logo.svg', 'alt' => 'Client Logo 2'),
-    2 => array('src' => '/assets/icons/tech/python-logo.svg', 'alt' => 'Client Logo 3'),
-    3 => array('src' => '/assets/icons/tech/react-color-logo.svg', 'alt' => 'Client Logo 4'),
-    4 => array('src' => '/assets/icons/tech/laravel-color-logo.svg', 'alt' => 'Client Logo 5'),
-    5 => array('src' => '/assets/icons/tech/php-logo.svg', 'alt' => 'PHP logo for Suave Creators web development'),
-  ),
-  'bannerBg' => '/assets/background/service-banner-bg.webp',
+  'bannerSideImage' => '/assets/media/web-developement-banner.webp',
+  'bannerLogos' => array(),
+  'bannerBg' => '/assets/media/web-deve-bg.png',
   'primaryCta' => 'Let’s Connect to Discuss',
   'secondaryCta' => 'Drop Your Vision',
   'introEyebrow' => 'Custom Web Development',

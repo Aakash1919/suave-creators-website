@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\Admin\BlogDataTable;
 use App\Http\Controllers\Admin\Concerns\RespondsToAdminAjax;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BlogPublishRequest;
 use App\Http\Requests\Admin\BlogStoreRequest;
 use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
@@ -106,6 +107,16 @@ class BlogController extends Controller
             $blog,
             ['blog' => ['id' => $blog->id, 'slug' => $blog->slug]]
         );
+    }
+
+    /**
+     * Publish a draft blog (sets published_at when missing).
+     */
+    public function publish(BlogPublishRequest $request, Blog $blog): JsonResponse|RedirectResponse
+    {
+        $this->blogs->publish($blog);
+
+        return $this->adminSuccess($request, 'Blog', 'published', 'admin.blogs.index');
     }
 
     /**

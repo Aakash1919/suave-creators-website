@@ -94,6 +94,9 @@ class BlogSupport
             ->all();
 
         $categories = self::categoryNavItems($category?->slug);
+        $listingUrl = $category !== null
+            ? route('blogs.category', ['slug' => $category->slug])
+            : route('blogs');
 
         return [
             'posts' => $posts,
@@ -101,6 +104,7 @@ class BlogSupport
             'heroImages' => self::heroImages(),
             'categories' => $categories,
             'search' => $search,
+            'listingUrl' => $listingUrl,
             'activeCategory' => $category !== null ? [
                 'name' => $category->name,
                 'slug' => $category->slug,
@@ -111,6 +115,7 @@ class BlogSupport
             'seoDescription' => $category !== null
                 ? 'Read Suave Creators articles in '.$category->name.' — practical insights on software, product, and digital growth.'
                 : null,
+            'seoCanonical' => $listingUrl,
         ];
     }
 
