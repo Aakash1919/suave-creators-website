@@ -353,9 +353,9 @@
                     </div>
                 </div>
             @endforeach
-            <div class="mt-10 flex flex-col items-center gap-3 md:flex-row md:flex-wrap md:justify-center md:gap-5">
+            <div class="mt-10 flex flex-nowrap items-center justify-center gap-3 sm:gap-5">
                 <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-                    class="u-btn-cta group inline-flex max-w-full items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:px-5">Let's
+                    class="u-btn-cta group inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:px-5">Let's
                     Connect to Discuss<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round"
@@ -364,7 +364,7 @@
                         <path d="M2 12H22" />
                     </svg></a>
                 <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-                    class="inline-flex max-w-full items-center border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book
+                    class="inline-flex shrink-0 items-center border-b border-[#00003F] text-sm font-semibold text-[#00003F]">Book
                     a Call</a>
             </div>
         </div>
