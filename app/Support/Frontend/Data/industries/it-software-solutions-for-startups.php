@@ -4,7 +4,7 @@ return array (
   'pageTitle' => 'Startup Software Development & IT Solutions | Suave Creators',
   'pageDescription' => 'Explore scalable software and IT solutions for startups, including custom CRM, ERP, AI, web applications, and secure technologies built for growth.',
   'ogTitle' => 'IT & Software Solutions for Startups | Suave Creators',
-  'ogDescription' => 'Startup-focused IT & software services delivering scalable CRM, ERP, and AI-powered solutions to help startups grow with secure, cost-effective custom software.',
+  'ogDescription' => 'Explore scalable software and IT solutions for startups, including custom CRM, ERP, AI, web applications, and secure technologies built for growth.',
   'eyebrow' => 'We believe in developing advance solutions',
   'heroTitle' => 
   array (

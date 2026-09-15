@@ -4,7 +4,7 @@ return array(
   'pageTitle' => 'E-commerce Development Services | Suave Creators',
   'pageDescription' => 'Build scalable e-commerce websites and platforms with Shopify, WooCommerce, Magento, or custom development to improve performance, user experience, and sales.',
   'ogTitle' => 'Custom E-commerce Development Services | Suave Creators',
-  'ogDescription' => 'Build a secure, scalable online store with Shopify, WooCommerce, Magento, or custom e-commerce solutions. Boost performance, conversions, and business growth.',
+  'ogDescription' => 'Build scalable e-commerce websites and platforms with Shopify, WooCommerce, Magento, or custom development to improve performance, user experience, and sales.',
   'eyebrow' => 'OUR TAILOR-MADE SERVICES',
   'heroTitle' =>
   array(
