@@ -34,7 +34,7 @@ class SitemapController extends FrontendController
     }
 
     /**
-     * Dynamic robots.txt with Sitemap + llms.txt pointer (comment).
+     * Dynamic robots.txt with Sitemap + LLM Context comment (llms.txt).
      */
     public function robots(): Response
     {
