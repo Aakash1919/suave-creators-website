@@ -10,9 +10,13 @@
                 height="14"
                 decoding="async"
             >
-            <a href="{{ $href() }}" class="site-topbar__text inline-flex min-w-0 items-center no-underline hover:opacity-90">
+            @if ($badge !== '')
+                <span class="hidden shrink-0 rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white sm:inline sm:text-[10px]">{{ $badge }}</span>
+            @endif
+            <a href="{{ $href() }}" class="site-topbar__text inline-flex min-w-0 flex-wrap items-center gap-x-1.5 no-underline hover:opacity-90 sm:gap-x-2">
                 <span class="bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[11px] font-bold leading-none text-transparent sm:text-xs sm:leading-[1.35]">{{ $title }}</span>
                 <span class="hidden text-[11px] font-semibold leading-[1.35] text-white sm:inline sm:text-xs">{{ $subtitle }}</span>
+                <span class="text-[11px] font-bold leading-[1.35] text-white sm:text-xs">{{ $ctaLabel }}</span>
             </a>
             <svg class="site-topbar__chevron shrink-0 text-white" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14" />

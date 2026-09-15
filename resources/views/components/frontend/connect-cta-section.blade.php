@@ -14,14 +14,14 @@
       <p>{{ $description }}</p>
     </div>
 
-    <div class="smart-together-cta__actions flex flex-row flex-nowrap items-center gap-2 sm:gap-3">
+    <div class="smart-together-cta__actions">
       <x-frontend.cta-button :href="$primaryHref">
         {{ $primaryLabel }}
       </x-frontend.cta-button>
       @if ($secondaryLabel !== '')
         <a href="{{ $secondaryHref }}"
           @if (str_starts_with($secondaryHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-          class="inline-flex shrink-0 cursor-pointer items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
+          class="inline-flex max-w-full cursor-pointer items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
           {{ $secondaryLabel }}
         </a>
       @endif
