@@ -11,21 +11,27 @@ class SuaveAgentKnowledge
      *     company: string,
      *     email: string,
      *     phones: array<int, string>,
-     *     offices: array<int, array{label: string, display: string, lines: array<int, string>}>
+     *     offices: array<int, array{label: string, display: string, lines: array<int, string>, phone: string, phone_href: string, email: string}>
      * }
      */
     public static function companyContacts(): array
     {
         $org = (array) config('seo.site.organization', []);
+        $offices = ContactSupport::offices();
+        $officePhones = array_values(array_filter(array_map(
+            static fn (array $office): string => (string) ($office['phone'] ?? ''),
+            $offices
+        )));
 
         return [
             'company' => (string) ($org['legal_name'] ?? 'Suave Creators'),
             'email' => strtolower((string) ($org['email'] ?? 'info@suavecreators.com')),
             'phones' => array_values(array_unique(array_filter([
-                (string) ($org['telephone'] ?? '+91 88949 00142'),
+                (string) ($org['telephone'] ?? '+1 (307) 435-9605'),
+                ...$officePhones,
                 '+91 18944 55019',
             ]))),
-            'offices' => ContactSupport::offices(),
+            'offices' => $offices,
         ];
     }
 

@@ -22,8 +22,7 @@
 
         <div class="web-services__grid">
             @foreach ($items as $item)
-            <a href="{{ $item['href'] }}">
-                <article class="web-service-card">
+            <a href="{{ $item['href'] }}" class="web-service-card web-service-card--{{ $item['tone'] }}">
                     <span class="web-service-card__icon web-service-card__icon--{{ $item['tone'] }}">
                         <img src="{{ asset($item['icon']) }}" alt="{{ $item['iconAlt'] }}" title="{{ $item['iconAlt'] }}" width="16" height="16" decoding="async" loading="lazy">
                     </span>
@@ -39,7 +38,9 @@
                     </div>
 
                     <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $item['description'] }}</p>
-                </article>
+                    @if (filled($item['linkLabel']))
+                        <span class="web-service-card__link inline-block text-[13px] font-semibold text-[#2A4DFB]">{{ $item['linkLabel'] }}</span>
+                    @endif
                 </a>
             @endforeach
         </div>

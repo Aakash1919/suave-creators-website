@@ -13,13 +13,13 @@ class ConnectCtaSection extends Component
     use NormalizesAssetPaths;
 
     public function __construct(
-        public string $eyebrow = 'Connect with us',
-        public string $title = 'Let’s Build Something Smart Together',
-        public string $description = 'Ready to transform your ideas into reality with Suave Creators?',
+        public string $eyebrow = 'GET IN TOUCH',
+        public string $title = 'Have a Complex Software Architecture or Custom CRM Requirement?',
+        public string $description = 'Discuss your product roadmap, API integrations, or legacy migration plans directly with a solution architect.',
         public string $titleId = 'connect-cta-title',
-        public string $primaryLabel = 'Get Started',
+        public string $primaryLabel = 'Book a Discovery Session ',
         public string $primaryHref = '',
-        public string $secondaryLabel = 'Discuss your Vision',
+        public string $secondaryLabel = 'Discuss Your Technical Roadmap',
         public string $secondaryHref = '',
         public string $phoneVideo = 'assets/hero/mobile-app-phone-demo.mp4',
         public string $phonePoster = 'assets/hero/mobile-app-phone-demo-poster.webp',

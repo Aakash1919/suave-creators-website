@@ -5,7 +5,7 @@
 
     <!-- Hero / Industry Banner Section Start -->
     <section
-        class="full-bleed service-banner industry-banner relative z-1 pt-10 pb-0 md:pt-10 md:pb-2 lg:pt-[50px] lg:pb-2""
+        class="full-bleed service-banner industry-banner relative z-1 pt-10 pb-0 md:pt-10 md:pb-2 lg:pt-[50px] lg:pb-2"
         aria-labelledby="industry-banner-heading">
         <div class="section-inner">
             {{-- bannerBg: set in industry data (e.g. assets/background/{slug}-banner-bg.webp) --}}
