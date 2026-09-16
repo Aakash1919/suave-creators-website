@@ -85,7 +85,7 @@ class ServiceSupport
     {
         return [
             [
-                'assets/media/developers-collaborating-code-review.webp',
+                'assets/media/developers-collaborating-code-review_.webp',
                 'End-to-End Development Expertise',
                 'With all of our projects, we always provide end-to-end development services. By leveraging our global young talent and systematic resource allocation, we provide the best and competitive pricing that helps you to get expert solutions and optimise your development budget.',
                 ['SEO', 'Mobile', 'First Performance'],

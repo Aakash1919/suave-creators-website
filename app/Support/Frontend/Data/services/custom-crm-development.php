@@ -155,7 +155,7 @@ return [
     'whyDescription' => 'We are in demand for developers to create smart CRM solutions. You can choose us for your next CRM solution.',
     'whyCards' => [
         0 => [
-            'image' => '/assets/media/developers-collaborating-code-review.webp',
+            'image' => '/assets/media/developers-collaborating-code-review_.webp',
             'title' => 'Expertise in Custom Solutions',
             'text' => 'We can proudly say that we have a team of expert custom CRM developers who will listen to your needs and give you a smart solution during the development phase. Let’s reach out to our smart team for your next digital product.',
         ],

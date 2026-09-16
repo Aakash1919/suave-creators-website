@@ -22,7 +22,7 @@ class ProductSupport
             'heroChips' => self::heroChips(),
             'heroBanner' => [
                 'src' => asset('assets/product/hero_banner.gif'),
-                'backSrc' => asset('assets/product/hero_banner_back.png'),
+                'backSrc' => asset('assets/product/hero_banner_back.webp'),
                 'alt' => 'Professional executive with animated blue digital energy streaks for Suave AI sales CRM outreach platform',
                 'backAlt' => 'Soft blue screen blend glow layer behind Suave AI sales CRM product hero banner',
             ],
@@ -63,7 +63,7 @@ class ProductSupport
             [
                 'position' => 'bottom-right',
                 'type' => 'companies',
-                'src' => asset('assets/product/hero-banner-companies-discovered-tile.png'),
+                'src' => asset('assets/product/hero-banner-companies-discovered-tile.webp'),
                 'alt' => 'Companies discovered stat tile showing 248 leads from map and list in Suave AI sales CRM',
             ],
         ];
@@ -293,7 +293,7 @@ class ProductSupport
                 ],
             ],
             'graphic' => [
-                'src' => asset('assets/product/data-privacy-security-infographic.webp'),
+                'src' => asset('assets/product/data-privacy-security-infographic_.webp'),
                 'alt' => 'Suave AI data privacy security infographic showing CRM modules protected by a central shield',
             ],
         ];

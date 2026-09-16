@@ -162,7 +162,7 @@ return [
             'features' => ['Use-Case Discovery', 'ROI Prioritization', 'Pilot Planning'],
         ],
         1 => [
-            'image' => 'assets/media/generative-engine-dev-team-coding_.png',
+            'image' => 'assets/media/developers-collaborating-code-review_.webp',
             'title' => 'Production-Ready Engineering',
             'tags' => ['APIs', 'Integration', 'Scale'],
             'text' => 'Our team builds AI into real systems with reliable APIs, monitoring, and fallbacks—so features stay useful after launch day.',

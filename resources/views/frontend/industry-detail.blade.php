@@ -436,7 +436,7 @@
       ['ecommerce', 'E-commerce & Retail Sector', 'Powering secure e-commerce payments and fraud protection.', '/assets/media/ecommerce-storefront-laptop-checkout.webp', 'Powering secure e-commerce payments and fraud protection.'],
       ['healthcare', 'Healthcare & Insurance Sector', 'Seamless billing, claims & policy management solutions.', '/assets/media/healthcare.webp', 'Seamless billing, claims & policy management solutions.'],
       ['Education', 'Education & EdTech Sector', 'Secure fee and payment solutions for education.', '/assets/media/elearning-platform-online-classroom.webp', 'Secure fee and payment solutions for education'],
-      ['IT', 'IT Solutions for Startups', 'Innovative solutions tailored to your business needs.', '/assets/media/it_solutions.webp', 'Innovative solutions tailored to your business needs.'],
+      ['IT', 'IT Solutions for Startups', 'Innovative solutions tailored to your business needs.', '/assets/media/it_solutions_.webp', 'Innovative solutions tailored to your business needs.'],
       ['logistics', 'Logistics and Supply Chain', 'Streamlined warehouse, inventory & transport management.', '/assets/media/supply_chain.webp', 'Streamlined warehouse, inventory & transport management.'],
     ];
     @endphp

@@ -75,7 +75,7 @@ class AboutSupport
                 'alt' => 'Research charts and analytics guiding data driven digital strategy',
             ],
             [
-                'image' => 'assets/media/generative-engine-dev-team-coding_.png',
+                'image' => 'assets/media/developers-collaborating-code-review_.webp',
                 'title' => 'Optimal Delivery',
                 'text' => 'We don\'t just deliver the services, but ensure that our clients are happy with what we are delivering to them. Our approach and strategies mark the excellence in our efforts to provide them with better deliverables.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],

@@ -99,7 +99,7 @@ class HomeSupport
             [
                 'title' => 'Clean Code, Seamless Scalability',
                 'description' => 'Modern microservices and scalable monolithic web applications built with Laravel, React, Angular, and Node.js.',
-                'image' => 'assets/media/generative-engine-dev-team-coding_.png',
+                'image' => 'assets/media/developers-collaborating-code-review_.webp',
                 'alt' => 'Software engineers building scalable web applications',
             ],
             [
@@ -219,7 +219,7 @@ class HomeSupport
                 'title' => 'Generative Engine Optimization (GEO)',
                 'headline' => 'AI Search Citations (ChatGPT / Perplexity)',
                 'description' => 'Positioning your brand as a primary source for conversational AI engines using structured entity data, first-party proof, and llms.txt.',
-                'image' => 'assets/media/generative-engine-dev-team-coding_.png',
+                'image' => 'assets/media/developers-collaborating-code-review_.webp',
                 'alt' => 'Generative engine optimization for brand visibility in AI search',
                 'iconAlt' => 'Generative engine optimization GEO service icon',
             ],

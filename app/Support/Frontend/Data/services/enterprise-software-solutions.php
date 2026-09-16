@@ -154,7 +154,7 @@ return [
             'text' => 'At Suave Creators, we are always ready to design enterprise software that completely aligns with your business goals and industry standards. Our ERP solutions are customized to help you achieve maximum efficiency and scalability.',
         ],
         1 => [
-            'image' => '/assets/media/generative-engine-dev-team-coding_.png',
+            'image' => '/assets/media/developers-collaborating-code-review_.webp',
             'title' => 'End-to-End Development Expertise',
             'text' => 'Our team handles everything from idea to implementation, which includes planning, designing, development, and support systems. Whether it’s ERP, SaaS, or a complex enterprise system, we ensure a smooth process with a focus on quality and performance, no matter, it’s ERP or SaaS.',
         ],
