@@ -93,8 +93,8 @@ $explicit = [ordered]@{
     'portfolio/portfolioimg1.webp' = 'portfolio/swastik-culture-hub-website.webp'
     'portfolio/portfolioimg2.webp' = 'portfolio/mavan-growth-agency-website.webp'
     'portfolio/portfolioimg3.webp' = 'portfolio/sales-automation-project-dashboard.webp'
-    'portfolio/portfolioimg4.webp' = 'portfolio/hubops-software-company-website.webp'
-    'portfolio/portfolioimg5.webp' = 'portfolio/suave-outreach-crm-laptop.webp'
+    'portfolio/portfolioimg4.webp' = 'portfolio/hubops-software-company-website_.webp'
+    'portfolio/portfolioimg5.webp' = 'portfolio/suave-outreach-crm-laptop_.webp'
     'portfolio/portfolioimg6.webp' = 'portfolio/ematrics-ai-sales-website.webp'
 
     # Blog
@@ -119,7 +119,7 @@ $explicit = [ordered]@{
     'background/blog-bg.png' = 'background/blog-section-bg.png'
     'background/consultation-bg.png' = 'background/consultation-section-bg.png'
     'background/core-bg.png' = 'background/core-section-bg.png'
-    'background/cover_banner.png' = 'background/home-hero-cover-bg.png'
+    'background/cover_banner.png' = 'background/home-hero-cover-bg.webp'
     'background/dev-bg.png' = 'background/web-services-section-bg.png'
     'background/footer-bg.png' = 'background/footer-bg.png'
     'background/industry-bg.png' = 'background/industries-section-bg.png'

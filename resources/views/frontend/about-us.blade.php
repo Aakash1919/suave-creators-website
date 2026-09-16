@@ -33,7 +33,7 @@
     </div>
 
     <div class="order-1 mx-auto w-full overflow-hidden rounded-xl border-[6px] border-white sm:order-2 sm:mt-8 sm:rounded-2xl sm:border-[10px]">
-      <img src="{{ asset('assets/team/about-us-team-portrait-banner.webp') }}"
+      <img src="{{ asset('assets/team/about-us-team-portrait-banner_.webp') }}"
         alt="Suave Creators IT company team portraits for web design and development"
         title="Suave Creators IT company team portraits for web design and development"
         class="block h-auto w-full rounded-lg object-cover sm:rounded-[12px]" loading="eager" decoding="async">
@@ -230,7 +230,7 @@
     style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
     <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12">
       <div class="order-2 w-full lg:order-1">
-        <img src="{{ asset('assets/media/right-transform-visual.png') }}"
+        <img src="{{ asset('assets/media/right-transform-visual.webp') }}"
           alt="Business transformation with Suave Creators custom software solutions"
           title="Business transformation with Suave Creators custom software solutions"
           class="ml-auto h-auto w-full max-w-[520px] object-cover lg:max-w-none" loading="lazy" decoding="async">

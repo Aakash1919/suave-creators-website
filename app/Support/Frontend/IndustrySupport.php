@@ -34,12 +34,12 @@ class IndustrySupport
     public static function portfolioHeroImages(): array
     {
         return [
-            'assets/portfolio/swastik-culture-hub-website.webp',
-            'assets/portfolio/mavan-growth-agency-website.png',
-            'assets/portfolio/sales-automation-project-dashboard.webp',
-            'assets/portfolio/hubops-software-company-website.webp',
-            'assets/portfolio/suave-outreach-crm-laptop.webp',
-            'assets/portfolio/ematrics-ai-sales-website_.png',
+            'assets/portfolio/swastik-culture-hub-website_.webp',
+            'assets/portfolio/mavan-growth-agency-website_.webp',
+            'assets/portfolio/sales-automation-project-dashboard_.webp',
+            'assets/portfolio/hubops-software-company-website_.webp',
+            'assets/portfolio/suave-outreach-crm-laptop_.webp',
+            'assets/portfolio/ematrics-ai-sales-website_.webp',
         ];
     }
 
@@ -121,7 +121,7 @@ class IndustrySupport
                 'Building Digital Foundations for Real Estate Success',
                 'Let\'s drive more sales and strong visibility with smart websites and property management software. Our software connects buyers with their dream home.',
                 ['RE Branding', 'CRE Branding', 'RE Website Design', 'RE Fund Luxury Branding', 'RE Development', 'RE Agent Solutions'],
-                'assets/blog/insight-future-of-work.jpg',
+                'assets/blog/insight-future-of-work.webp',
                 'fa-solid fa-house',
             ],
             [
@@ -190,7 +190,7 @@ class IndustrySupport
                 'icon' => 'launch',
                 'title' => 'Launch & Growth',
                 'desc' => 'Once your product is live, we continue to optimize, scale, and enhance it. A long term growth is provided from our end.',
-                'image' => 'assets/portfolio/warm-lounge-plants-artwork.png',
+                'image' => 'assets/media/diverse-team-data-meeting.webp',
                 'alt' => 'Product launch and growth metrics for industry platforms',
             ],
         ];

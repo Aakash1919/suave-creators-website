@@ -88,12 +88,12 @@ return [
     'portfolioTitle' => 'Explore what we do',
     'portfolioDescription' => 'See how thoughtful UI/UX design turns software into experiences people enjoy using.',
     'portfolioImages' => [
-        0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-        1 => '/assets/portfolio/mavan-growth-agency-website.png',
-        2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
-        3 => '/assets/portfolio/hubops-software-company-website.webp',
-        4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-        5 => '/assets/portfolio/ematrics-ai-sales-website_.png',
+        0 => '/assets/portfolio/swastik-culture-hub-website_.webp',
+        1 => '/assets/portfolio/mavan-growth-agency-website_.webp',
+        2 => '/assets/portfolio/sales-automation-project-dashboard_.webp',
+        3 => '/assets/portfolio/hubops-software-company-website_.webp',
+        4 => '/assets/portfolio/suave-outreach-crm-laptop_.webp',
+        5 => '/assets/portfolio/ematrics-ai-sales-website_.webp',
     ],
     'industriesEyebrow' => 'Industries We Offer',
     'industriesTitle' => 'Industries We Serve',
@@ -155,7 +155,7 @@ return [
     'whyDescription' => 'We blend research, visual craft, and product thinking so design decisions improve both usability and business outcomes.',
     'whyCards' => [
         0 => [
-            'image' => 'assets/blog/blogs-hero/03-creative_.webp',
+            'image' => 'assets/blog/blogs-hero/03-creative.webp',
             'title' => 'Research-Led Design Decisions',
             'tags' => ['UX Research', 'Testing', 'Insights'],
             'text' => 'Every layout and interaction is grounded in user needs and business priorities—not guesswork—so your interface solves real problems.',

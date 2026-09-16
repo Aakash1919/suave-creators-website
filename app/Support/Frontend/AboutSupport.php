@@ -61,7 +61,7 @@ class AboutSupport
     {
         return [
             [
-                'image' => 'assets/media/answer-engine-inspiration-mindmap_.webp',
+                'image' => 'assets/media/big-project-sticky-notes-planning.webp',
                 'title' => 'Innovative & Engaging Process',
                 'text' => 'We believe in bringing engagement through the creative efforts at our workplace. Our strategies are uniquely delivered to the clients, which keeps them at bay to converge businesses into better opportunities.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],
@@ -141,7 +141,7 @@ class AboutSupport
             [
                 'title' => 'Competitive Pricing',
                 'text' => 'We offer competitive pricing without compromising quality, ensuring cost-effective solutions tailored to your needs. Get premium digital services that maximize value while staying within your budget.',
-                'image' => 'assets/media/competitive-pricing-strategy-cash.webp',
+                'image' => 'assets/media/competitive-pricing-strategy-cash_.webp',
                 'alt' => 'Competitive pricing for web development and digital services',
             ],
             [

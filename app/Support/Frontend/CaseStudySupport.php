@@ -418,7 +418,7 @@ class CaseStudySupport
     {
         return [
             [
-                'src' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner_.png',
+                'src' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner_.webp',
                 'alt' => 'Appointment insurance product banner by Suave Creators',
                 'fan_rotate' => -1.6,
                 'fan_y' => -18,
@@ -443,7 +443,7 @@ class CaseStudySupport
                 'featured' => true,
             ],
             [
-                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_right.png',
+                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_right.webp',
                 'alt' => 'AI sales coaching product workspace designed by Suave Creators',
                 'fan_rotate' => 0.9,
                 'fan_y' => 12,
@@ -586,7 +586,7 @@ class CaseStudySupport
                 'slug' => 'suave-crm-outreach-case-study',
                 'title' => 'The Suave App Outreach - From a Complex Process to a Clear B2B CRM Sales Workspace',
                 'status' => 'published',
-                'image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero_.webp',
+                'image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.webp',
                 'short_description' => 'We redesigned the suave app’s fragmented B2B CRM outbound sales workflow into one prospecting workspace — map-based company discovery, AI sales briefings, cold email automation, and pipeline tracking — with about 65% fewer steps.',
                 'listing_subtitle' => 'B2B CRM Outbound Sales Workflow Redesign',
                 'industry' => 'B2B SaaS / Sales CRM',
@@ -663,7 +663,7 @@ class CaseStudySupport
                 'slug' => 'appointment-insurance-platform-case-study',
                 'title' => 'Appointment Insurance That Makes Showing Up the Default',
                 'status' => 'published',
-                'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner_.png',
+                'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner_.webp',
 
                 'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
@@ -689,7 +689,7 @@ class CaseStudySupport
                 'slug' => 'AI-product-matching',
                 'title' => 'AI Product Matching to an Automated AI Workspace',
                 'status' => 'published',
-                'image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo.webp',
+                'image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo_.webp',
                 'short_description' => 'AI product matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
                 'listing_subtitle' => 'Automated CRM pipeline analytics',
                 'industry' => 'Nonprofit / Procurement',

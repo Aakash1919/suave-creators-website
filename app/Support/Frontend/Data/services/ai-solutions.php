@@ -88,12 +88,12 @@ return [
     'portfolioTitle' => 'Explore what we do',
     'portfolioDescription' => 'See how AI-enhanced products help teams work smarter and serve customers better.',
     'portfolioImages' => [
-        0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-        1 => '/assets/portfolio/mavan-growth-agency-website.png',
-        2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
-        3 => '/assets/portfolio/hubops-software-company-website.webp',
-        4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-        5 => '/assets/portfolio/ematrics-ai-sales-website_.png',
+        0 => '/assets/portfolio/swastik-culture-hub-website_.webp',
+        1 => '/assets/portfolio/mavan-growth-agency-website_.webp',
+        2 => '/assets/portfolio/sales-automation-project-dashboard_.webp',
+        3 => '/assets/portfolio/hubops-software-company-website_.webp',
+        4 => '/assets/portfolio/suave-outreach-crm-laptop_.webp',
+        5 => '/assets/portfolio/ematrics-ai-sales-website_.webp',
     ],
     'industriesEyebrow' => 'Industries We Serve',
     'industriesTitle' => 'Industries We Serve',
@@ -155,7 +155,7 @@ return [
     'whyDescription' => 'We focus on practical AI that integrates with your products and processes—measurable outcomes over experimental hype.',
     'whyCards' => [
         0 => [
-            'image' => 'assets/blog/blogs-hero/02-laptop_.webp',
+            'image' => 'assets/blog/blogs-hero/02-laptop.webp',
             'title' => 'Business-First AI Roadmaps',
             'tags' => ['Use Cases', 'ROI', 'Strategy'],
             'text' => 'We start with workflows and goals, then recommend AI features that save time or revenue—so investment maps to clear outcomes.',

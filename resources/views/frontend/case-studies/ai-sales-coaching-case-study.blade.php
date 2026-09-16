@@ -285,7 +285,7 @@
     </div>
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/ai-sales-coaching/ai_sales_right.png') }}"
+            src="{{ asset('assets/case-studies/ai-sales-coaching/ai_sales_right.webp') }}"
             alt="Confident customer calls — without weeks of waiting. product screenshot for Suave Creators software development"
             title="Confident customer calls — without weeks of waiting. product screenshot for Suave Creators software development"
             width="960"
@@ -311,7 +311,7 @@
     </div>
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/ai-sales-coaching/ai_sales_left.webp') }}"
+            src="{{ asset('assets/case-studies/ai-sales-coaching/ai_sales_left_.webp') }}"
             alt="Feedback that doesn’t wait on a recording queue. product screenshot for Suave Creators software development"
             title="Feedback that doesn’t wait on a recording queue. product screenshot for Suave Creators software development"
             width="960"

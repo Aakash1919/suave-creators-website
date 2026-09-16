@@ -116,7 +116,7 @@ Site-wide sales chat widget — **not** a contact-page link.
 Animated silver star + pearl mark from the drop-in kit.
 
 - Layout component: `App\View\Components\Layouts\TheSuaveStarPearl` → `resources/views/components/layouts/the-suave-star-pearl.blade.php` (`<x-layouts.the-suave-star-pearl />`)
-- Assets: `public/assets/brand/the-suave-metallic-star.png`, `the-suave-white-pearl.png`
+- Assets: `public/assets/brand/the-suave-metallic-star.webp`, `the-suave-white-pearl.webp`
 - JS: `public/js/the-suave-star-pearl.js` (loaded once via `@once` + `@push('scripts')` on the component)
 - CSS: `public/css/style.css` under `/* ===== THE SUAVE STAR PEARL ===== */`
 - Props: `size`, `decorative`, `ariaLabel`, `starAlt`, `pearlAlt`, `width`/`height`

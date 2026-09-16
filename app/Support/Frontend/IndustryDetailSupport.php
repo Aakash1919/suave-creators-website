@@ -84,7 +84,7 @@ class IndustryDetailSupport
         $processImages = [
             'assets/portfolio/modern-office-yellow-accent-lounge.png',
             'assets/portfolio/contemporary-living-room-kitchen.png',
-            'assets/portfolio/warm-lounge-plants-artwork.png',
+            'assets/media/diverse-team-data-meeting.webp',
             'assets/portfolio/office-glass-meeting-rooms.png',
             'assets/blog/insight-digital-strategy.jpg',
             'assets/media/retail-solutions-visual-5.webp',
