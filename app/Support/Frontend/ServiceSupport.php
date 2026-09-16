@@ -193,9 +193,9 @@ class ServiceSupport
         $bodyImage = (string) ($service['bodyImage'] ?? '');
         $bodyBg = (string) ($service['bodyBg'] ?? '');
         $useBodyImageLayout = $bodyImage !== '';
-        $introLinkUrl = (string) ($service['introLinkUrl'] ?? '');
+        $introLinkUrl = (string) ($service['introLinkRoute'] ?? $service['introLinkUrl'] ?? '');
 
-        if ($introLinkUrl === '' || $introLinkUrl === '/services' || $introLinkUrl === '/services/') {
+        if ($introLinkUrl === '' || $introLinkUrl === 'services' || $introLinkUrl === '/services' || $introLinkUrl === '/services/') {
             $service['introLinkUrl'] = route('services');
         } else {
             $service['introLinkUrl'] = self::resolveInternalHref($introLinkUrl);
@@ -269,7 +269,7 @@ class ServiceSupport
                 'image' => (string) ($ind['icon'] ?? ''),
                 'title' => (string) ($ind['title'] ?? ''),
                 'text' => (string) ($ind['desc'] ?? ''),
-                'href' => self::resolveInternalHref((string) ($ind['link'] ?? '')),
+                'href' => self::industryHref($ind),
             ];
         }, $industries));
     }
@@ -288,6 +288,20 @@ class ServiceSupport
                 'step' => (string) ($card['step'] ?? ''),
             ];
         }, $cards));
+    }
+
+    /**
+     * @param  array<string, mixed>  $ind
+     */
+    protected static function industryHref(array $ind): string
+    {
+        $slug = trim((string) ($ind['slug'] ?? ''));
+
+        if ($slug !== '') {
+            return route('industry.show', ['slug' => $slug]);
+        }
+
+        return self::resolveInternalHref((string) ($ind['link'] ?? ''));
     }
 
     protected static function resolveInternalHref(string $href): string

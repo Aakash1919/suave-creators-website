@@ -10,7 +10,7 @@ class IndustryDetailSupport
 
     /** @var array<string, string> */
     public const SLUG_FILES = [
-        'healthcare' => 'healthcare.php',
+        'healthcare-software-development' => 'healthcare-software-development.php',
         'it-software-solutions-for-startups' => 'it-software-solutions-for-startups.php',
         'finance-banking-software-development' => 'finance-banking-software-development.php',
         'retail-ecommerce-solutions' => 'retail-ecommerce-solutions.php',

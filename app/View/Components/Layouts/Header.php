@@ -39,7 +39,7 @@ class Header extends Component
                 ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions', 'icon' => 'fa-solid fa-robot'],
             ],
             'Industries' => [
-                ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'healthcare-software-development'], 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'Startups & SaaS', 'icon' => 'fa-solid fa-rocket'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => ' FinTech & Banking', 'icon' => 'fa-solid fa-building-columns'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'Retail & E-Commerce', 'icon' => 'fa-solid fa-store'],

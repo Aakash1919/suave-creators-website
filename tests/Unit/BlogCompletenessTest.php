@@ -27,7 +27,7 @@ class BlogCompletenessTest extends TestCase
             'content' => str_repeat('<p>Detail for the public article about clinic software intake. </p>', 160)
                 .'<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>Start with intake.</li></ul></div>'
                 .'<aside class="blog-insight"><p>Keep the rollout honest.</p></aside>'
-                .'<p>See our <a href="/services/custom-crm-development">custom CRM development</a> and <a href="/industries/healthcare">healthcare</a> pages.</p>',
+                .'<p>See our <a href="'.route('service.show', ['slug' => 'custom-crm-development'], false).'">custom CRM development</a> and <a href="'.route('industry.show', ['slug' => 'healthcare-software-development'], false).'">healthcare</a> pages.</p>',
             'blog_category_id' => 1,
             'featured_image' => 'blogs/demo.webp',
             'meta_title' => 'How Clinics Should Brief A Custom CRM',

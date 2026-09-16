@@ -6,20 +6,20 @@ use Illuminate\Http\Request;
 require __DIR__.'/../vendor/autoload.php';
 $app = require __DIR__.'/../bootstrap/app.php';
 $kernel = $app->make(Kernel::class);
+$kernel->bootstrap();
 
 $uris = [
-    '/',
-    '/about-us',
-    '/contact-us',
-    '/services',
+    route('home', absolute: false),
+    route('about-us', absolute: false),
+    route('contact-us', absolute: false),
+    route('services', absolute: false),
     '/service/web-development-services',
-    '/industries',
-    '/industries/healthcare',
-    '/ai-powered-outreach-crm',
-    '/blogs',
-    '/blog/digital-strategy-that-creates-value',
-    '/privacy-policy',
-    '/terms-and-conditions',
+    route('industries', absolute: false),
+    route('industry.show', ['slug' => 'healthcare-software-development'], false),
+    route('product', absolute: false),
+    route('blogs', absolute: false),
+    route('privacy-policy', absolute: false),
+    route('terms-and-conditions', absolute: false),
 ];
 
 foreach ($uris as $uri) {

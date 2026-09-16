@@ -151,7 +151,7 @@ class CaseStudySupport
     {
         $map = [
             'turbo-trans-corporation-case-study' => [
-               'assets/case-studies/turbo-trans/turbo-trans-corporation-banner1.webp',
+                'assets/case-studies/turbo-trans/turbo-trans-corporation-banner1.webp',
                 'assets/case-studies/turbo-trans/turbo-banner2.png',
                 'assets/case-studies/turbo-trans/Turbo-banner03.webp',
             ],
@@ -175,7 +175,7 @@ class CaseStudySupport
                 'assets/case-studies/appointment-insurance/appointment-banner2.webp',
                 'assets/case-studies/appointment-insurance/appointment-banner6.png',
             ],
-         
+
             'AI-product-matching' => [
                 'assets/case-studies/ai-product-matching/product-matching-banner1.webp',
                 'assets/case-studies/ai-product-matching/AI-product-automation.webp',
@@ -393,7 +393,7 @@ class CaseStudySupport
             }
         }
 
-         return $items;
+        return $items;
     }
 
     /**
@@ -556,7 +556,7 @@ class CaseStudySupport
     protected static function listingItems(): array
     {
         return [
-            
+
             [
                 'slug' => 'ai-sales-coaching-platform-case-study',
                 'title' => 'An AI Sales Coach That Practices, Whispers, and Scores',
@@ -669,7 +669,7 @@ class CaseStudySupport
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
                 'industry' => 'Appointment Scheduling / Fintech',
                 'service_slugs' => ['web-development-services', 'enterprise-software-solutions'],
-                'industry_slugs' => ['healthcare', 'finance-banking-software-development'],
+                'industry_slugs' => ['healthcare-software-development', 'finance-banking-software-development'],
                 'results' => [
                     ['value' => '+$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
                     ['value' => '+90%', 'label' => 'Less card-fee waste on unused deposit money that comes back'],

@@ -44,7 +44,7 @@ class IndustriesSection extends Component
         }
 
         $this->cards ??= [
-            ['icon' => 'fa-solid fa-heart-pulse', 'title' => 'Healthcare', 'text' => 'HIPAA-compliant patient portals, telehealth integrations, automated appointment workflows, and secure medical data management', 'href' => route('industry.show', ['slug' => 'healthcare'])],
+            ['icon' => 'fa-solid fa-heart-pulse', 'title' => 'Healthcare', 'text' => 'HIPAA-compliant patient portals, telehealth integrations, automated appointment workflows, and secure medical data management', 'href' => route('industry.show', ['slug' => 'healthcare-software-development'])],
             ['icon' => 'fa-solid fa-gears', 'title' => 'Startups & SaaS', 'text' => 'Accelerated MVP development, scalable cloud backends, and multi-tenant architectures engineered to help funded startups scale.', 'href' => route('industry.show', ['slug' => 'it-software-solutions-for-startups'])],
             ['icon' => 'fa-solid fa-landmark', 'title' => 'Finance & FinTech', 'text' => 'Zero-trust banking architectures, secure payment processing gateways, automated billing ledgers, and compliance auditing tools.', 'href' => route('industry.show', ['slug' => 'finance-banking-software-development'])],
             ['icon' => 'fa-solid fa-cart-shopping', 'title' => 'Retail & E-Commerce', 'text' => 'High-volume omnichannel platforms, custom inventory management, dynamic pricing engines, and headless commerce builds.', 'href' => route('industry.show', ['slug' => 'retail-ecommerce-solutions'])],

@@ -10,7 +10,7 @@ Before editing the custom admin panel, RBAC, or admin conversation review:
 
 1. **Read and follow** `.cursor/skills/suave-admin/SKILL.md`
 2. Keep first-party roles/permissions — do not add Filament, Breeze, or Spatie Permission
-3. Gate routes with `admin` + `permission:{name}`; gate nav with `hasPermission`
+3. Gate routes with `admin` + `permission:{name}`; gate nav with `hasPermission`. Every admin route is **named**; use `route('admin....')` — never `/admin/...` path strings. Follow Laravel coding standards (Pint / PSR-12) in the skill
 4. Put CRUD / domain logic in `App\Services\*Service`; keep Admin controllers thin (HTTP + flash/JSON only)
 5. Put validation in `App\Http\Requests\Admin\*` Form Requests named `{Resource}StoreRequest` / `{Resource}UpdateRequest` (e.g. `BlogStoreRequest`) — no `$request->validate()` in controllers or services
 6. Admin create/edit forms are **full width** by default — do not constrain with `max-width` unless the user asks

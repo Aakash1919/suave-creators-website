@@ -36,7 +36,7 @@
       </button>
     </form>
 
-    <a href="{{ url('/') }}" target="_blank" rel="noopener" class="admin-header-icon" title="View site">
+    <a href="{{ route('home') }}" target="_blank" rel="noopener" class="admin-header-icon" title="View site">
       <i class="fa-solid fa-globe" aria-hidden="true"></i>
     </a>
 

@@ -4,11 +4,13 @@ description: >-
   Suave Creators custom Blade admin panel and first-party RBAC. Use whenever the
   user mentions admin, /admin, roles, permissions, Form Request, testimonials
   CRUD, blogs CRUD, users, contacts inbox, AI conversations review, DataTables,
-  Toastr, createFlashMessage, EnsurePermission, SiteAdmin, or files under
-  routes/admin.php, app/Http/Controllers/Admin, app/Http/Requests/Admin,
-  app/Services, app/DataTables/Admin, resources/views/admin. Requires
-  App\Services\*Service + Form Requests for mutations — not Filament, Breeze,
-  or Spatie Permission. Read this skill before any admin change.
+  Toastr, createFlashMessage, EnsurePermission, SiteAdmin, named routes,
+  Laravel coding standards, or files under routes/admin.php,
+  app/Http/Controllers/Admin, app/Http/Requests/Admin, app/Services,
+  app/DataTables/Admin, resources/views/admin. Requires named `route()` URLs,
+  Laravel/Pint conventions, App\Services\*Service + Form Requests for
+  mutations — not Filament, Breeze, or Spatie Permission. Read this skill
+  before any admin change.
 ---
 
 # Suave Admin
@@ -24,6 +26,29 @@ description: >-
 - **Form Requests required for mutations** — `App\Http\Requests\Admin\*` (and `Frontend\*` for public forms); no `$request->validate()` in controllers/services
 - **First-party RBAC only** — tables `roles`, `permissions`, `role_permission`, `user_role`; models `Role`, `Permission`; trait `HasRoles` on `User`
 - Do **not** install Filament, Breeze, Jetstream, or Spatie Permission for this panel
+
+## Named routes
+
+**Every admin URL is a named route** under the `admin.` prefix (`routes/admin.php`). Callers use `route('admin....')` / `redirect()->route('admin....')` / `to_route('admin....')` so a path change is made in the route file once.
+
+- No unnamed admin routes. Resource-style names: `admin.blogs.index`, `admin.blogs.store`, …
+- Blade, PHP, DataTables, and JS that hit admin URLs use `route('admin....')` — never hardcoded `/admin/...` path strings
+- Tests: `$this->get(route('admin.blogs.index'))` (or `absolute: false` when a path is required). Retired inbound URIs may stay literals
+- Redirects after create/update/delete: `redirect()->route('admin....')` or `to_route('admin....')` — not `redirect('/admin/...')`
+
+## Laravel coding standards
+
+Follow Laravel conventions (PSR-12). Do not invent a parallel style guide.
+
+- Run `vendor/bin/pint --dirty` after PHP edits (Laravel Pint is installed)
+- Thin controllers: HTTP in, `adminSuccess` / JSON / redirect out. Persistence and domain transforms live in `App\Services\*`
+- Validate with Form Requests named `{Resource}StoreRequest` / `{Resource}UpdateRequest` — no `$request->validate()` in controllers or services
+- Type-hint arguments and return types; use constructor promotion
+- Unknown records: `abort(404)` or `findOrFail()`
+- Use framework helpers that already exist: `str()` / `Str`, `filled()` / `blank()`, `to_route()`, `route()`
+- `config()` in application code; `env()` only inside `config/*.php`
+- Keep `routes/admin.php` declarative. No domain logic in the route file
+- Eloquent models for persisted data — do not add a query-builder-only parallel when a model exists
 
 ## Access model
 
@@ -410,18 +435,19 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 
 ## Conventions when changing admin
 
-1. New feature routes go in `routes/admin.php` behind `auth` + `admin` (+ `permission:` as needed)
-2. **Always** add/update `App\Services\{Feature}Service` for create/update/delete (and heavy reads); never leave that logic in the controller
-3. **Always** add/update Form Requests under `App\Http\Requests\Admin\` named `{Resource}StoreRequest` / `{Resource}UpdateRequest` (e.g. `BlogStoreRequest`) — no inline `$request->validate()` in controllers or services
-4. **Ask the user** whether create / edit / other operations should use a **page** or a **modal** before building the UI (unless they already said which)
-5. Add PHPDoc on public/protected methods
-6. Seed new permissions/roles in `RolesAndPermissionsSeeder` (idempotent `updateOrCreate`)
-7. Keep UI in the white-theme admin shell (`admin.css` helpers); do not couple to marketing Tailwind layout patterns unless sharing a deliberate component
-8. User feedback: `createFlashMessage` (PHP session or JS Toastr) — never raw `toastr.*` / ad-hoc `Session::flash('status')` in new code
-9. Confirmations: **always** `SuaveAdmin.confirmDialog` / `data-admin-delete` with specific title + message + button label — **never** `window.confirm` / `confirm()`
-10. **Migrations:** never edit a migration that already ran on live; add a new one. Guard with `Schema::hasTable` / `Schema::hasColumn` (see **Migrations** above)
-11. **DataTable / list queries:** `select` only columns actually used (plus PK/FKs for relations); constrain `with([...])` columns; never `table.*` or unused eager loads (see **DataTables + AJAX**)
-12. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
+1. New feature routes go in `routes/admin.php` behind `auth` + `admin` (+ `permission:` as needed). Every route is **named** (`admin.…`); generate URLs with `route()` / `redirect()->route()` / `to_route()` — never `/admin/...` literals
+2. Follow **Laravel coding standards** (Pint / PSR-12, thin controllers, Form Requests, `config()` not `env()` in app code) — see **Laravel coding standards** above
+3. **Always** add/update `App\Services\{Feature}Service` for create/update/delete (and heavy reads); never leave that logic in the controller
+4. **Always** add/update Form Requests under `App\Http\Requests\Admin\` named `{Resource}StoreRequest` / `{Resource}UpdateRequest` (e.g. `BlogStoreRequest`) — no inline `$request->validate()` in controllers or services
+5. **Ask the user** whether create / edit / other operations should use a **page** or a **modal** before building the UI (unless they already said which)
+6. Add PHPDoc on public/protected methods
+7. Seed new permissions/roles in `RolesAndPermissionsSeeder` (idempotent `updateOrCreate`)
+8. Keep UI in the white-theme admin shell (`admin.css` helpers); do not couple to marketing Tailwind layout patterns unless sharing a deliberate component
+9. User feedback: `createFlashMessage` (PHP session or JS Toastr) — never raw `toastr.*` / ad-hoc `Session::flash('status')` in new code
+10. Confirmations: **always** `SuaveAdmin.confirmDialog` / `data-admin-delete` with specific title + message + button label — **never** `window.confirm` / `confirm()`
+11. **Migrations:** never edit a migration that already ran on live; add a new one. Guard with `Schema::hasTable` / `Schema::hasColumn` (see **Migrations** above)
+12. **DataTable / list queries:** `select` only columns actually used (plus PK/FKs for relations); constrain `with([...])` columns; never `table.*` or unused eager loads (see **DataTables + AJAX**)
+13. When conventions change, update **this** skill and `.cursor/rules/suave-admin.mdc` in the same change set
 
 ## Related
 
