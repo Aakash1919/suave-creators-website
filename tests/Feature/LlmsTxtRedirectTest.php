@@ -13,7 +13,7 @@ class LlmsTxtRedirectTest extends TestCase
     {
         $response = $this->get('/llm.txt');
 
-        $response->assertRedirect('/llms.txt');
+        $response->assertRedirect(route('llms.txt'));
         $this->assertSame(301, $response->getStatusCode());
     }
 
@@ -21,7 +21,7 @@ class LlmsTxtRedirectTest extends TestCase
     {
         config(['app.url' => 'https://suavecreators.com']);
 
-        $response = $this->get('/llms.txt');
+        $response = $this->get(route('llms.txt'));
 
         $response->assertOk();
         $response->assertHeader('Content-Type', 'text/plain; charset=UTF-8');

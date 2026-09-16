@@ -14,6 +14,7 @@ This project uses **Cursor Agent Skills**. Skills are not optional documentation
 1. Match the user task to a row above.
 2. **Read** the skill file (and `reference.md` for frontend asset renames) before editing.
 3. Follow stack rules in the skill (e.g. first-party RBAC, `*Service` + Form Requests for admin; categorized `assets/` + verify script for frontend).
-4. Do **not** invent Filament, Spatie Permission, Breeze, or flat `public/images/` paths.
+4. **Named routes everywhere** — generate URLs with `route()` / `redirect()->route()` / `to_route()` so path changes do not require hunting hardcoded strings. Follow **Laravel coding standards** (Pint / PSR-12) documented in the skills.
+5. Do **not** invent Filament, Spatie Permission, Breeze, or flat `public/images/` paths.
 
 Project rules under `.cursor/rules/` reinforce the same gates when relevant files are in context.

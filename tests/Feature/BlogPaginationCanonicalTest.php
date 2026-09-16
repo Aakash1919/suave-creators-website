@@ -11,17 +11,17 @@ class BlogPaginationCanonicalTest extends TestCase
 
     public function test_blogs_page_query_redirects_to_clean_listing_url(): void
     {
-        $response = $this->get('/blogs?page=2');
+        $response = $this->get(route('blogs', absolute: false).'?page=2');
 
-        $response->assertRedirect('/blogs');
+        $response->assertRedirect(route('blogs'));
         $this->assertSame(301, $response->status());
     }
 
     public function test_blogs_page_query_preserves_safe_filters_when_redirecting(): void
     {
-        $response = $this->get('/blogs?page=3&q=crm&category=ai');
+        $response = $this->get(route('blogs', absolute: false).'?page=3&q=crm&category=ai');
 
-        $response->assertRedirect('/blogs?q=crm&category=ai');
+        $response->assertRedirect(route('blogs', absolute: false).'?q=crm&category=ai');
         $this->assertSame(301, $response->status());
     }
 
@@ -29,7 +29,7 @@ class BlogPaginationCanonicalTest extends TestCase
     {
         config(['app.url' => 'https://suavecreators.com']);
 
-        $response = $this->get('/blogs');
+        $response = $this->get(route('blogs'));
 
         $response->assertOk();
         $response->assertSee('<link rel="canonical" href="https://suavecreators.com/blogs">', false);
@@ -39,7 +39,7 @@ class BlogPaginationCanonicalTest extends TestCase
 
     public function test_filter_endpoint_still_accepts_page_for_ajax_pagination(): void
     {
-        $response = $this->getJson('/blogs/filter?page=2');
+        $response = $this->getJson(route('blogs.filter', ['page' => 2]));
 
         $response->assertOk();
         $response->assertJsonStructure(['html', 'meta' => ['page', 'last_page', 'total']]);

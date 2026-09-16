@@ -61,7 +61,7 @@ class IndustrySupport
                 'Our Healthcare Software Development Services cover designing and developing software for better hospital management and improved efficiency.',
                 'assets/media/ai-service-visual-2.webp',
                 ['AI Web design', 'UX Research', 'AI Figma Design', 'AI Visual Design'],
-                route('industry.show', ['slug' => 'healthcare']),
+                route('industry.show', ['slug' => 'healthcare-software-development']),
             ],
             [
                 'Education & E-learning Platforms',

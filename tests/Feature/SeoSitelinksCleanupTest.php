@@ -14,7 +14,7 @@ class SeoSitelinksCleanupTest extends TestCase
         $response = $this->get('/service/enterprise-software-solutions');
 
         $response->assertStatus(301);
-        $response->assertRedirect('/services/enterprise-software-solutions');
+        $response->assertRedirect(route('service.show', ['slug' => 'enterprise-software-solutions']));
     }
 
     public function test_legacy_industry_hub_permanently_redirects_to_industries_hub(): void
@@ -22,7 +22,19 @@ class SeoSitelinksCleanupTest extends TestCase
         $response = $this->get('/industry');
 
         $response->assertStatus(301);
-        $response->assertRedirect('/industries');
+        $response->assertRedirect(route('industries'));
+    }
+
+    public function test_legacy_healthcare_industry_url_permanently_redirects_to_software_development_slug(): void
+    {
+        $healthcareUrl = route('industry.show', ['slug' => 'healthcare-software-development']);
+
+        $response = $this->get('/industries/healthcare');
+
+        $response->assertStatus(301);
+        $response->assertRedirect($healthcareUrl);
+
+        $this->get($healthcareUrl)->assertOk();
     }
 
     public function test_leaked_main_public_urls_permanently_redirect_to_clean_paths(): void
@@ -30,7 +42,7 @@ class SeoSitelinksCleanupTest extends TestCase
         $response = $this->get('/main/public/about-us');
 
         $response->assertStatus(301);
-        $response->assertRedirect('/about-us');
+        $response->assertRedirect(route('about-us'));
         $this->assertStringNotContainsString('/main/public/', (string) $response->headers->get('Location'));
     }
 
@@ -39,7 +51,7 @@ class SeoSitelinksCleanupTest extends TestCase
         $response = $this->get('/main/public/about-us/');
 
         $response->assertStatus(301);
-        $response->assertRedirect('/about-us');
+        $response->assertRedirect(route('about-us'));
         $this->assertStringNotContainsString('/main/public/', (string) $response->headers->get('Location'));
     }
 
@@ -48,7 +60,7 @@ class SeoSitelinksCleanupTest extends TestCase
         $response = $this->get('/main/public/services/web-development-services/');
 
         $response->assertStatus(301);
-        $response->assertRedirect('/services/web-development-services');
+        $response->assertRedirect(route('service.show', ['slug' => 'web-development-services']));
         $this->assertStringNotContainsString('/main/public/', (string) $response->headers->get('Location'));
     }
 
@@ -85,12 +97,12 @@ class SeoSitelinksCleanupTest extends TestCase
         $response = $this->get('https://www.suavecreators.com/contact-us?from=google');
 
         $response->assertStatus(301);
-        $response->assertRedirect('https://suavecreators.com/contact-us?from=google');
+        $response->assertRedirect('https://suavecreators.com'.route('contact-us', absolute: false).'?from=google');
     }
 
     public function test_homepage_exposes_clear_primary_sitelink_candidates(): void
     {
-        $response = $this->get('/');
+        $response = $this->get(route('home'));
 
         $response->assertOk();
         $response->assertSee('>About<', false);
@@ -100,7 +112,7 @@ class SeoSitelinksCleanupTest extends TestCase
         $response->assertSee('>Case Studies<', false);
         $response->assertSee('>Contact<', false);
         $response->assertSee('>Contact Us<', false);
-        $response->assertSee('/services/enterprise-software-solutions', false);
+        $response->assertSee(parse_url(route('service.show', ['slug' => 'enterprise-software-solutions']), PHP_URL_PATH), false);
         $response->assertDontSee('>Our Product<', false);
     }
 }
