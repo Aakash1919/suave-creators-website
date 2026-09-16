@@ -95,11 +95,11 @@ return array(
   'portfolioImages' =>
   array(
     0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.png',
     2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
     3 => '/assets/portfolio/hubops-software-company-website.webp',
     4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website_.png',
   ),
   'industriesEyebrow' => 'Industries We Offer',
   'industriesTitle' => 'Industries We Serve',
@@ -164,21 +164,21 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => 'assets/blog/blogs-hero/03-creative.jpg',
+      'image' => 'assets/blog/blogs-hero/03-creative_.webp',
       'title' => 'Research-Led Design Decisions',
       'tags' => array('UX Research', 'Testing', 'Insights'),
       'text' => 'Every layout and interaction is grounded in user needs and business priorities—not guesswork—so your interface solves real problems.',
       'features' => array('User Interviews', 'Usability Testing', 'Competitive Analysis'),
     ),
     1 => array(
-      'image' => 'assets/media/social-media-marketing-mobile.webp',
+      'image' => 'assets/media/social-media-marketing-mobile_.webp',
       'title' => 'Conversion-Focused Interfaces',
       'tags' => array('CRO', 'CTA', 'Mobile-First'),
       'text' => 'We design for clarity and action: scannable hierarchy, strong CTAs, and mobile-first patterns that guide users toward key outcomes.',
       'features' => array('Landing Page UX', 'Funnel Design', 'Accessibility Basics'),
     ),
     2 => array(
-      'image' => 'assets/media/online-reputation-admin-dashboard.webp',
+      'image' => 'assets/media/summary-report-team-meeting-480.webp',
       'title' => 'Design That Developers Can Ship',
       'tags' => array('Handoff', 'Specs', 'Collaboration'),
       'text' => 'Clean Figma files, component systems, and collaborative handoff keep engineering aligned—so the live product matches the approved design.',

@@ -88,11 +88,11 @@ return array(
   'portfolioImages' =>
   array(
     0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.png',
     2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
     3 => '/assets/portfolio/hubops-software-company-website.webp',
     4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website_.png',
   ),
   'industriesEyebrow' => 'Industries We Serve',
   'industriesTitle' => 'Industries We Serve',
@@ -162,12 +162,12 @@ return array(
       'text' => 'At Suave Creators, we are always ready to design enterprise software that completely aligns with your business goals and industry standards. Our ERP solutions are customized to help you achieve maximum efficiency and scalability.',
     ),
     1 => array(
-      'image' => '/assets/media/generative-engine-dev-team-coding.webp',
+      'image' => '/assets/media/generative-engine-dev-team-coding_.png',
       'title' => 'End-to-End Development Expertise',
       'text' => 'Our team handles everything from idea to implementation, which includes planning, designing, development, and support systems. Whether it’s ERP, SaaS, or a complex enterprise system, we ensure a smooth process with a focus on quality and performance, no matter, it’s ERP or SaaS.',
     ),
     2 => array(
-      'image' => '/assets/media/online-reputation-admin-dashboard.webp',
+      'image' => 'assets/media/summary-report-team-meeting-480.webp',
       'title' => 'Ongoing Support & Future-Ready Technology',
       'text' => 'We just go beyond the development. Our team offers continuous support, updates, and enhancements after development to keep your software secure and competitive. By leveraging the latest technologies, we ensure your enterprise system is developed to evolve with your business.',
     ),

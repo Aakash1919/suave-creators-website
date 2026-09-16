@@ -42,12 +42,12 @@ class ConsultationSection extends Component
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
 
         $this->people ??= [
-            ['src' => 'assets/team/woman-short-bob-white-sweater-portrait.webp', 'alt' => 'Suave Creators software developer ready for a project consultation', 'tone' => 'pink', 'column' => 'left'],
-            ['src' => 'assets/team/man-beard-blue-sweater-portrait.webp', 'alt' => 'Suave Creators product specialist available for consultation', 'tone' => 'orange', 'column' => 'left'],
-            ['src' => 'assets/team/bearded-man-red-vneck-portrait.webp', 'alt' => 'Suave Creators technology leader for web development consultation', 'tone' => 'yellow', 'column' => 'center'],
-            ['src' => 'assets/team/young-man-teal-crewneck-portrait.webp', 'alt' => 'Suave Creators project lead for CRM and software consulting', 'tone' => 'blue', 'column' => 'center'],
-            ['src' => 'assets/team/woman-crossed-arms-olive-turtleneck-portrait.webp', 'alt' => 'Suave Creators UI UX designer for product consultation', 'tone' => 'coral', 'column' => 'right'],
-            ['src' => 'assets/team/bearded-man-navy-button-down-portrait.webp', 'alt' => 'Suave Creators software consultant ready for a digital project discussion', 'tone' => 'cyan', 'column' => 'right'],
+            ['src' => 'assets/team/woman-short-bob-white-sweater-portrait_.webp', 'alt' => 'Suave Creators software developer ready for a project consultation', 'tone' => 'pink', 'column' => 'left'],
+            ['src' => 'assets/team/man-beard-blue-sweater-portrait_.webp', 'alt' => 'Suave Creators product specialist available for consultation', 'tone' => 'orange', 'column' => 'left'],
+            ['src' => 'assets/team/bearded-man-red-vneck-portrait_.webp', 'alt' => 'Suave Creators technology leader for web development consultation', 'tone' => 'yellow', 'column' => 'center'],
+            ['src' => 'assets/team/young-man-teal-crewneck-portrait_.webp', 'alt' => 'Suave Creators project lead for CRM and software consulting', 'tone' => 'blue', 'column' => 'center'],
+            ['src' => 'assets/team/woman-crossed-arms-olive-turtleneck-portrait_.webp', 'alt' => 'Suave Creators UI UX designer for product consultation', 'tone' => 'coral', 'column' => 'right'],
+            ['src' => 'assets/team/bearded-man-navy-button-down-portrait_.webp', 'alt' => 'Suave Creators software consultant ready for a digital project discussion', 'tone' => 'cyan', 'column' => 'right'],
         ];
 
         $this->people = array_values(array_map(function (array $person): array {

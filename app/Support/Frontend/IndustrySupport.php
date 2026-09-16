@@ -35,11 +35,11 @@ class IndustrySupport
     {
         return [
             'assets/portfolio/swastik-culture-hub-website.webp',
-            'assets/portfolio/mavan-growth-agency-website.webp',
+            'assets/portfolio/mavan-growth-agency-website.png',
             'assets/portfolio/sales-automation-project-dashboard.webp',
             'assets/portfolio/hubops-software-company-website.webp',
             'assets/portfolio/suave-outreach-crm-laptop.webp',
-            'assets/portfolio/ematrics-ai-sales-website.webp',
+            'assets/portfolio/ematrics-ai-sales-website_.png',
         ];
     }
 

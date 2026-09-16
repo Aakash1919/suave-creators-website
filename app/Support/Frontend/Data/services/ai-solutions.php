@@ -94,11 +94,11 @@ return array(
   'portfolioImages' =>
   array(
     0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.png',
     2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
     3 => '/assets/portfolio/hubops-software-company-website.webp',
     4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website_.png',
   ),
   'industriesEyebrow' => 'Industries We Serve',
   'industriesTitle' => 'Industries We Serve',
@@ -163,21 +163,21 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => 'assets/blog/blogs-hero/02-laptop.jpg',
+      'image' => 'assets/blog/blogs-hero/02-laptop_.webp',
       'title' => 'Business-First AI Roadmaps',
       'tags' => array('Use Cases', 'ROI', 'Strategy'),
       'text' => 'We start with workflows and goals, then recommend AI features that save time or revenue—so investment maps to clear outcomes.',
       'features' => array('Use-Case Discovery', 'ROI Prioritization', 'Pilot Planning'),
     ),
     1 => array(
-      'image' => 'assets/media/generative-engine-dev-team-coding.webp',
+      'image' => 'assets/media/generative-engine-dev-team-coding_.png',
       'title' => 'Production-Ready Engineering',
       'tags' => array('APIs', 'Integration', 'Scale'),
       'text' => 'Our team builds AI into real systems with reliable APIs, monitoring, and fallbacks—so features stay useful after launch day.',
       'features' => array('Secure Integrations', 'Model Orchestration', 'Observability'),
     ),
     2 => array(
-      'image' => 'assets/media/content-strategy-team-planning.webp',
+      'image' => 'assets/media/content-strategy-team-planning_.webp',
       'title' => 'Privacy & Trust Built In',
       'tags' => array('Security', 'Governance', 'Compliance'),
       'text' => 'Data handling, permissions, and auditability are part of the design—critical for CRM, healthcare, finance, and enterprise use cases.',

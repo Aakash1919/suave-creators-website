@@ -418,7 +418,7 @@ class CaseStudySupport
     {
         return [
             [
-                'src' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
+                'src' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner_.png',
                 'alt' => 'Appointment insurance product banner by Suave Creators',
                 'fan_rotate' => -1.6,
                 'fan_y' => -18,
@@ -426,7 +426,7 @@ class CaseStudySupport
                 'fan_z' => 1,
             ],
             [
-                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
+                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach_.webp',
                 'alt' => 'AI sales coaching dashboard software built by Suave Creators',
                 'fan_rotate' => -0.8,
                 'fan_y' => 10,
@@ -443,7 +443,7 @@ class CaseStudySupport
                 'featured' => true,
             ],
             [
-                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_right.webp',
+                'src' => 'assets/case-studies/ai-sales-coaching/ai_sales_right.png',
                 'alt' => 'AI sales coaching product workspace designed by Suave Creators',
                 'fan_rotate' => 0.9,
                 'fan_y' => 12,
@@ -561,7 +561,7 @@ class CaseStudySupport
                 'slug' => 'ai-sales-coaching-platform-case-study',
                 'title' => 'An AI Sales Coach That Practices, Whispers, and Scores',
                 'status' => 'published',
-                'image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
+                'image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach_.webp',
                 'short_description' => 'An AI sales coaching platform that helps fast-growing teams keep performance consistent as they hire — with voice practice, live call coaching, and clear scores so new reps ramp faster and managers don’t wait on recordings.',
                 'listing_subtitle' => 'AI Sales Enablement Platform',
                 'industry' => 'Sales Enablement',
@@ -586,7 +586,7 @@ class CaseStudySupport
                 'slug' => 'suave-crm-outreach-case-study',
                 'title' => 'The Suave App Outreach - From a Complex Process to a Clear B2B CRM Sales Workspace',
                 'status' => 'published',
-                'image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
+                'image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero_.webp',
                 'short_description' => 'We redesigned the suave app’s fragmented B2B CRM outbound sales workflow into one prospecting workspace — map-based company discovery, AI sales briefings, cold email automation, and pipeline tracking — with about 65% fewer steps.',
                 'listing_subtitle' => 'B2B CRM Outbound Sales Workflow Redesign',
                 'industry' => 'B2B SaaS / Sales CRM',
@@ -611,7 +611,7 @@ class CaseStudySupport
                 'slug' => 'suave-crm-tasks-case-study',
                 'title' => 'The Suave App Tasks - From a Complex Process to a Clear B2B CRM Task Management Workspace',
                 'status' => 'published',
-                'image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
+                'image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner_.webp',
                 'short_description' => 'We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.',
                 'listing_subtitle' => 'B2B CRM Task Management Workflow Redesign',
                 'industry' => 'B2B SaaS / Work Management',
@@ -663,7 +663,7 @@ class CaseStudySupport
                 'slug' => 'appointment-insurance-platform-case-study',
                 'title' => 'Appointment Insurance That Makes Showing Up the Default',
                 'status' => 'published',
-                'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
+                'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner_.png',
 
                 'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',

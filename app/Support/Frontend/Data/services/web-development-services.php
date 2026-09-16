@@ -92,11 +92,11 @@ return array(
   'portfolioImages' =>
   array(
     0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.png',
     2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
     3 => '/assets/portfolio/hubops-software-company-website.webp',
     4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website_.png',
   ),
   'industriesEyebrow' => 'Industries We Offer',
   'industriesTitle' => 'Industries We Serve',

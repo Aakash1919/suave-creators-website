@@ -285,7 +285,7 @@
     </div>
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/ai-sales-coaching/ai_sales_right.webp') }}"
+            src="{{ asset('assets/case-studies/ai-sales-coaching/ai_sales_right.png') }}"
             alt="Confident customer calls — without weeks of waiting. product screenshot for Suave Creators software development"
             title="Confident customer calls — without weeks of waiting. product screenshot for Suave Creators software development"
             width="960"

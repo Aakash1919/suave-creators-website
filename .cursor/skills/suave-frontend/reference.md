@@ -8,11 +8,11 @@
 | `background/` | Section backgrounds | `assets/background/about-section-bg.png` |
 | `hero/` | Homepage hero stills / pattern assets | `assets/hero/hero-team-brainstorm-overhead.webp` |
 | `blog/` | Blog cards, insights | `assets/blog/digital-strategy-collaboration.png` |
-| `blog/blogs-hero/` | Blog hero photos | `assets/blog/blogs-hero/01-team.jpg` |
+| `blog/blogs-hero/` | Blog hero photos | `assets/blog/blogs-hero/01-team.webp` |
 | `portfolio/` | Portfolio / project shots | `assets/portfolio/modern-office-yellow-accent-lounge.png` |
 | `icons/` | UI/service icons + `*-development-icon` capability visuals | `assets/icons/web-development-icon.svg` |
 | `icons/tech/` | Tech stack logos & wordmarks | `assets/icons/tech/nodejs-logo.svg` |
-| `media/` | Fallback — banners, photos, illustrations, process SVGs | `assets/media/seo-infographic-on-imac.png` |
+| `media/` | Fallback — banners, photos, illustrations, process SVGs | `assets/media/seo-infographic-on-imac_.png` |
 | `product/` | Product page media (stay here; do not reclassify out) | `assets/product/hero-illustration.jpg` |
 
 **Rules:**
@@ -110,7 +110,7 @@ Design: `/images/tech-dev-N.svg` (was `technology-development-icon-N.svg`).
 | `black-logo-1.svg` | `nodejs-logo.svg` |
 | `tech-dev-3.svg` | `react-development-icon.svg` |
 | `laravel-logo-alt.svg` | delete if duplicate; else content name |
-| `market-1.png` | `seo-infographic-on-imac.png` |
+| `market-1.png` | `seo-infographic-on-imac_.png` |
 | `background_about.png` | `about-section-bg.png` |
 
 ## Import helpers

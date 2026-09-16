@@ -89,11 +89,11 @@ return array(
   'portfolioImages' =>
   array(
     0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-    1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+    1 => '/assets/portfolio/mavan-growth-agency-website.png',
     2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
     3 => '/assets/portfolio/hubops-software-company-website.webp',
     4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-    5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
+    5 => '/assets/portfolio/ematrics-ai-sales-website_.png',
   ),
   'industriesEyebrow' => 'Industries We Serve',
   'industriesTitle' => 'Industries We Serve',
@@ -158,7 +158,7 @@ return array(
   'whyCards' =>
   array(
     0 => array(
-      'image' => '/assets/media/content-strategy-team-planning.webp',
+      'image' => '/assets/media/content-strategy-team-planning_.webp',
       'title' => 'Tailored eCommerce Solutions',
       'text' => 'We help you to cover a custom e-commerce solution because every business and its needs are different. We will try to make your online store stand out and deliver quality results.',
     ),
