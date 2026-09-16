@@ -53,7 +53,7 @@ class LookupIndustries implements Tool
     public function schema(JsonSchema $schema): array
     {
         return [
-            'slug' => $schema->string()->description('Optional industry slug such as healthcare'),
+            'slug' => $schema->string()->description('Optional industry slug such as healthcare-software-development'),
         ];
     }
 }

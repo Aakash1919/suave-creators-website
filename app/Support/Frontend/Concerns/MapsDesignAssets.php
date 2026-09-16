@@ -109,7 +109,7 @@ trait MapsDesignAssets
         $mapped = [];
 
         foreach ($data as $key => $value) {
-            if (is_string($key) && in_array($key, ['url', 'href', 'introLinkUrl'], true) && is_string($value)) {
+            if (is_string($key) && in_array($key, ['url', 'href', 'introLinkUrl', 'introLinkRoute'], true) && is_string($value)) {
                 $mapped[$key] = $value;
 
                 continue;
@@ -138,7 +138,7 @@ trait MapsDesignAssets
         $imageSegment = 'im'.'ages';
 
         if (is_string($data)) {
-            if ($key !== null && in_array($key, ['url', 'href', 'introLinkUrl', 'content', 'quote', 'desc', 'description', 'text', 'title', 'label', 'name', 'role', 'slug', 'category', 'eyebrow', 'pageTitle', 'pageDescription', 'ogTitle', 'ogDescription', 'primaryCta', 'secondaryCta'], true)) {
+            if ($key !== null && in_array($key, ['url', 'href', 'introLinkUrl', 'introLinkRoute', 'content', 'quote', 'desc', 'description', 'text', 'title', 'label', 'name', 'role', 'slug', 'category', 'eyebrow', 'pageTitle', 'pageDescription', 'ogTitle', 'ogDescription', 'primaryCta', 'secondaryCta'], true)) {
                 return $data;
             }
 
@@ -175,5 +175,4 @@ trait MapsDesignAssets
 
         return $assetized;
     }
-
 }

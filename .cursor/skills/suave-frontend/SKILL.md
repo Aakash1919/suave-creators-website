@@ -4,9 +4,11 @@ description: >-
   Suave Creators marketing frontend. Use whenever the user mentions homepage,
   landing page, Blade views, View Components, testimonials section, HomeSupport,
   ContactSupport, public/assets, public/css/style.css, logos, hero images,
-  SuaveAgent chat widget, or verify-frontend-conventions. Requires categorized
-  asset paths and post-change verification. For admin panel / RBAC / Form
-  Requests use suave-admin instead. Read this skill before any frontend change.
+  SuaveAgent chat widget, named routes, Laravel coding standards, or
+  verify-frontend-conventions. Requires named `route()` URLs, Laravel/Pint
+  conventions, categorized asset paths, and post-change verification. For admin
+  panel / RBAC / Form Requests use suave-admin instead. Read this skill before
+  any frontend change.
 ---
 
 # Suave Frontend
@@ -64,17 +66,35 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 
 ## Routing / links
 
-- Every marketing page registers a **named route** in `routes/web.php`
-- Internal page hrefs use **`route()` only** — never `url('/path')` or raw paths for marketing pages
-- Prefer storing route names (and params) in component/Support defaults, then call `route()` in Blade
+**Every app URL is a named route.** Callers use `route()` / `redirect()->route()` / `to_route()` so a path or slug change is made in the route definition (and slug catalog) once — not by hunting hardcoded `/industries/...` strings.
+
+- Every marketing page registers a **named route** in `routes/web.php` (`->name(...)`). No anonymous/unnamed marketing routes
+- Internal hrefs, redirects, sitemap/llms entries, tests, and smoke scripts use **`route('name')` or `route('name', $params)` only** — never `url('/path')`, `redirect('/path')` (except the inbound retired URI), or raw `'/services/...'` / `'/industries/...'` path strings
+- Prefer storing **route names + params** (or catalog slugs) in component/Support defaults, then call `route()` in PHP/Blade. Do not duplicate URL path prefixes in data files
+- Tests: `$this->get(route('industry.show', ['slug' => $slug], false))` (and the same for other pages). `assertRedirect(route(...))`. A retired inbound path may stay a literal because it is not a named route
+- Legacy 301s: hardcode **only the old inbound URI**. The destination **must** be `redirect()->route(...)` — e.g. `Route::get('/industries/healthcare', fn () => redirect()->route('industry.show', ['slug' => 'healthcare-software-development'], 301))`
 - Header nav **Contact** and footer **Contact Us** links use **`route('contact-us')#contact-id`** (same-tab, to the contact form) — not the calendar
 - Marketing booking CTAs (Talk to an expert, Book a Call, demo/consultation buttons) use **`ContactSupport::demoHref()`** (`https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2D8d2UlApRNeJryaGldFknb4uF3ua7jFnBA4-ga1Q-lgnLz9K382sK5S2-4J2e-tWD8arDeGXy`) with `target="_blank" rel="noopener noreferrer"`. Do not point those booking CTAs at `route('contact-us')`
-- Same-page contact form anchors on `/contact-us` may still use `#contact-id`
+- Same-page contact form anchors on the contact page may still use `#contact-id`
 - Contact form: `POST` to `route('contact-us.store')` via AJAX (`novalidate` + custom field errors). Field `blur`/`change` also `POST`s to `route('contact-us.draft')` (silent; one `draft_token` row) so abandoned forms still save name/email/phone/service/message. On submit success: clear form and show “The request has been sent successfully.” Also includes `@csrf`, honeypot `website`, and `form_started_at` (bots get silent JSON success)
 - Legal pages: `PageController` methods `privacyPolicy` / `termsAndConditions` (`privacy-policy`, `terms-and-conditions`; Footer must use `route()`, not `url()`)
 - Sitemap / LLM: `route('sitemap')`, `route('llms.txt')`, `route('robots')` — generated from published blogs, case studies, services, industries, and static pages
 - Assets: `asset('assets/...')`; external / `tel:` / `mailto:` stay as-is
-- When a named route lands, update Header, Footer, Topbar, SuaveAgent CTAs, and page CTAs that still use `url()`
+- When adding a named route, wire Header, Footer, Topbar, SuaveAgent, and page CTAs with `route('the-new-name')` — do not add raw paths
+
+## Laravel coding standards
+
+Follow Laravel conventions (PSR-12). Do not invent a parallel style guide.
+
+- Run `vendor/bin/pint --dirty` after PHP edits (Laravel Pint is installed)
+- Thin controllers: HTTP in, view / `redirect()->route()` / JSON out. Frontend data lives in Support classes; admin mutations live in `App\Services\*`
+- Validate with Form Requests — no `$request->validate()` in controllers or services
+- Type-hint arguments and return types; use constructor promotion
+- Unknown slugs/records: `abort(404)` or `findOrFail()`
+- Use framework helpers that already exist: `str()` / `Str`, `filled()` / `blank()`, `to_route()`, `route()`, `asset()`
+- `config()` in application code; `env()` only inside `config/*.php`
+- Keep `routes/*.php` declarative (route list + one-line named redirects). No domain logic in the route file
+- Eloquent models for persisted data — do not add a query-builder-only parallel when a model exists
 
 ## SuaveAgent (floating chat)
 
@@ -233,4 +253,4 @@ Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSu
 
 ## Skill maintenance
 
-This is the **only** marketing-frontend project skill. Admin panel / RBAC lives in `suave-admin`. When frontend conventions change, update this skill and `reference.md` in the same change set. Do not recreate split skills for CSS/sections/assets.
+This is the **only** marketing-frontend project skill. Admin panel / RBAC lives in `suave-admin`. When frontend conventions change, update this skill and `reference.md` in the same change set. Do not recreate split skills for CSS/sections/assets. Named-route + Laravel coding-standard rules must stay aligned with [suave-admin](../suave-admin/SKILL.md).

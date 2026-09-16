@@ -55,7 +55,7 @@ class NewServicePagesSeoTest extends TestCase
         $this->assertContains(route('service.show', ['slug' => 'ai-solutions']), $serviceHrefs);
 
         $industryHrefs = array_column((new IndustriesSection)->cards, 'href');
-        $this->assertContains(route('industry.show', ['slug' => 'healthcare']), $industryHrefs);
+        $this->assertContains(route('industry.show', ['slug' => 'healthcare-software-development']), $industryHrefs);
         $this->assertContains(route('industry.show', ['slug' => 'education-elearning-platforms']), $industryHrefs);
 
         $footerLabels = array_column((new Footer)->columns['Services'], 'label');

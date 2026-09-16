@@ -71,7 +71,7 @@ class Footer extends Component
                 ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions'],
             ],
             'Industries' => [
-                ['route' => 'industry.show', 'params' => ['slug' => 'healthcare'], 'label' => 'Healthcare'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'healthcare-software-development'], 'label' => 'Healthcare'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'IT Solutions'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Banking'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'E-commerce'],
