@@ -27,7 +27,7 @@
             Back to Dashboard
           </a>
         @else
-          <a href="{{ url('/') }}" class="admin-btn admin-btn--primary">
+          <a href="{{ route('home') }}" class="admin-btn admin-btn--primary">
             Back to Home
           </a>
         @endauth

@@ -184,7 +184,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Names are **singular**.
 | Blog listing | `BlogController@index` | `blogs` |
 | Blog posts | `BlogController@show` | `blog.show` |
 
-Page links: `route()` only — never `url('/path')` for internal marketing pages.
+Page links: **`route()` / `redirect()->route()` / `to_route()` only** — never `url('/path')` or raw `'/industries/...'` strings. Every route has `->name()`. Legacy 301s hardcode only the retired inbound URI; the destination uses `redirect()->route()`. Follow Laravel coding standards (Pint / PSR-12) in `.cursor/skills/suave-frontend/SKILL.md`.
 
 ## Verification message (required)
 

@@ -46,7 +46,7 @@
                         try {
                             var url = new URL(href, window.location.href);
                             if (
-                                (url.origin === window.location.origin && url.pathname === '/contact-us')
+                                (url.origin === window.location.origin && url.pathname === @json(parse_url(route('contact-us'), PHP_URL_PATH)))
                                 || url.hostname === 'calendar.app.google'
                                 || url.hostname === 'calendar.google.com'
                             ) {

@@ -14,8 +14,8 @@ use App\Http\Controllers\Frontend\SuaveAgentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap');
-Route::redirect('/llm.txt', '/llms.txt', 301);
 Route::get('/llms.txt', [SitemapController::class, 'llmTxt'])->name('llms.txt');
+Route::get('/llm.txt', fn () => redirect()->route('llms.txt', status: 301))->name('llms.txt.legacy');
 Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -34,16 +34,17 @@ Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('p
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
-Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301));
+Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301))->name('service.show.legacy');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
 
-Route::redirect('/industry', '/industries', 301);
-Route::redirect('/main/public', '/', 301);
+Route::get('/industry', fn () => redirect()->route('industries', status: 301))->name('industries.legacy');
+Route::get('/industries/healthcare', fn () => redirect()->route('industry.show', ['slug' => 'healthcare-software-development'], 301))->name('industry.healthcare.legacy');
+Route::get('/main/public', fn () => redirect()->route('home', status: 301))->name('home.main-public.legacy');
 Route::get('/main/public/{path}', function (string $path) {
     $clean = trim($path, '/');
 
-    return redirect($clean === '' ? '/' : '/'.$clean, 301);
-})->where('path', '.*');
+    return redirect($clean === '' ? route('home') : url('/'.$clean), 301);
+})->where('path', '.*')->name('main-public.legacy');
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
@@ -56,7 +57,7 @@ Route::get('/case-studies/outreach-case-study', [CaseStudyController::class, 'ou
 Route::get('/case-studies/tasks-case-study', [CaseStudyController::class, 'tasksCaseStudy'])->name('tasks-case-study');
 Route::get('/case-studies/teerrath-case-study', [CaseStudyController::class, 'teerrathCaseStudy'])->name('teerrath-case-study');
 Route::get('/case-studies/appointment-insurance-case-study', [CaseStudyController::class, 'appointmentInsuranceCaseStudy'])->name('appointment-insurance-case-study');
-Route::redirect('/case-studies/cabvi-case-study', '/case-studies/ai-product-matching-case-study', 301);
+Route::get('/case-studies/cabvi-case-study', fn () => redirect()->route('ai-product-matching-case-study', status: 301))->name('ai-product-matching-case-study.legacy');
 Route::get('/case-studies/ai-product-matching-case-study', [CaseStudyController::class, 'aiProductMatchingCaseStudy'])->name('ai-product-matching-case-study');
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
 

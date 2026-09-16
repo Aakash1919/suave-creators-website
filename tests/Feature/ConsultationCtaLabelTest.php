@@ -13,17 +13,17 @@ class ConsultationCtaLabelTest extends TestCase
     public function test_primary_project_ctas_use_inline_consultation_form_with_placeholder_and_label(): void
     {
         foreach ([
-            '/',
-            '/about-us',
-            '/industries',
-            '/industries/healthcare',
-            '/services/enterprise-software-solutions',
-            '/services',
-        ] as $path) {
-            $response = $this->get($path);
+            ['path' => route('home', absolute: false), 'cta' => 'Get Architectural Consultation'],
+            ['path' => route('about-us', absolute: false), 'cta' => 'Get Free Consultation'],
+            ['path' => route('industries', absolute: false), 'cta' => 'Get Free Consultation'],
+            ['path' => route('industry.show', ['slug' => 'healthcare-software-development'], false), 'cta' => 'Get Free Consultation'],
+            ['path' => route('service.show', ['slug' => 'enterprise-software-solutions'], false), 'cta' => 'Get Free Consultation'],
+            ['path' => route('services', absolute: false), 'cta' => 'Get Free Consultation'],
+        ] as $page) {
+            $response = $this->get($page['path']);
 
             $response->assertOk();
-            $response->assertSee('Get Free Consultation', false);
+            $response->assertSee($page['cta'], false);
             $response->assertSee('placeholder="Enter your phone or email"', false);
             $response->assertDontSee('Start your Project', false);
         }
@@ -31,7 +31,7 @@ class ConsultationCtaLabelTest extends TestCase
 
     public function test_inline_consultation_form_saves_drafts_while_typing_and_before_window_close(): void
     {
-        $response = $this->get('/');
+        $response = $this->get(route('home'));
 
         $response->assertOk();
         $response->assertSee('data-draft-url="'.route('contact-us.draft').'"', false);

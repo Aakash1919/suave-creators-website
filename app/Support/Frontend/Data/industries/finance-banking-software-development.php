@@ -4,7 +4,7 @@ return array (
   'pageTitle' => 'Finance & Banking Software Development | Suave Creators',
   'pageDescription' => 'Secure finance and banking software including fintech platforms, mobile banking, digital wallets, AI solutions, and compliance-ready systems.',
   'ogTitle' => 'Finance & Banking Software Development | Suave Creators',
-  'ogDescription' => 'Secure finance and banking software solutions including fintech platforms, mobile banking apps, digital wallets, and AI-powered systems.',
+  'ogDescription' => 'Secure finance and banking software including fintech platforms, mobile banking, digital wallets, AI solutions, and compliance-ready systems.',
   'eyebrow' => 'Delivery Secure software for Banking sector',
   'heroTitle' => 
   array (
