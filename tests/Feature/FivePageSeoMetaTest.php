@@ -13,14 +13,14 @@ class FivePageSeoMetaTest extends TestCase
         $enterprise = ServiceSupport::service('enterprise-software-solutions');
         $crm = ServiceSupport::service('custom-crm-development');
 
-        $this->assertSame('Custom Software, CRM & Web App Development | Suave Creators', $pages['home']['title']);
-        $this->assertSame('Engineer custom software, bespoke CRM systems, and AI-driven web applications. Explore verified engineering case studies, tech stack, and ROI blueprints.', $pages['home']['description']);
+        $this->assertSame('Web & Software Development Company | Suave Creators', $pages['home']['title']);
+        $this->assertSame('Suave Creators builds custom web applications, software, CRM, ERP, AI and digital solutions that help businesses improve efficiency, scale faster and grow.', $pages['home']['description']);
 
         $this->assertSame('Software Development Services for B2B & SaaS Businesses', $pages['services']['title']);
-        $this->assertSame('Explore web, CRM, e-commerce, AI, and enterprise software services for businesses ready to invest in measurable digital growth.', $pages['services']['description']);
+        $this->assertSame('Explore custom B2B & SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, & more.', $pages['services']['description']);
 
         $this->assertSame('Contact Suave Creators | Get a Free Software Consultation', $pages['contact-us']['title']);
-        $this->assertSame('Tell us what you want to build. We’ll help clarify what it takes, what you’ll get, and the next steps to create real business results.', $pages['contact-us']['description']);
+        $this->assertSame('Have a software, web, CRM, ERP or AI project in mind? Contact Suave Creators for a free consultation and discuss your business requirements with our experts.', $pages['contact-us']['description']);
 
         $this->assertSame('Enterprise Software That Improves Operations', $enterprise['pageTitle']);
         $this->assertSame('Planning enterprise software? Understand what it takes, what you get, and how the right system can improve teams, workflows, and growth.', $enterprise['pageDescription']);

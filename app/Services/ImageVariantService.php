@@ -68,9 +68,15 @@ class ImageVariantService
         $pathInfo = pathinfo($originalPath);
         $filename = $pathInfo['filename'];
         $extension = $pathInfo['extension'] ?? 'jpg';
-        $directory = $pathInfo['dirname'];
+        $directory = $pathInfo['dirname'] ?? '';
+        $prefix = ($directory === '.' || $directory === '') ? '' : $directory.'/';
 
-        $manager = new ImageManager(new Driver());
+        $disk = Storage::disk('public');
+        if ($prefix !== '') {
+            $disk->makeDirectory(rtrim($directory, '/'));
+        }
+
+        $manager = new ImageManager(new Driver);
         $thumbnailPaths = [];
         $thumbnailConfig = config('image.thumbnails', []);
         $quality = (int) config('image.quality', 85);
@@ -79,10 +85,17 @@ class ImageVariantService
             // Re-read per size so we never keep multiple full-resolution clones in memory.
             $thumb = $manager->read($sourceAbsolutePath);
             $thumb->cover((int) $config['width'], (int) $config['height']);
-            $thumbPath = $directory.'/'.$filename.$config['suffix'].'.'.$extension;
-            $thumb->save(storage_path('app/public/'.$thumbPath), $quality);
+            $thumbPath = $prefix.$filename.$config['suffix'].'.'.$extension;
+
+            // Encode + Storage::put avoids Intervention's is_writable() check, which
+            // returns false on Windows/OneDrive dirs that are still writable via ACLs.
+            $encoded = $thumb->encodeByExtension($extension, quality: $quality);
+            if (! $disk->put($thumbPath, (string) $encoded)) {
+                throw new RuntimeException("Failed to write thumbnail: {$thumbPath}");
+            }
+
             $thumbnailPaths[$size] = $thumbPath;
-            unset($thumb);
+            unset($thumb, $encoded);
         }
 
         if (! isset($thumbnailPaths['medium'])) {
