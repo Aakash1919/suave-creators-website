@@ -31,8 +31,8 @@ class TheSuaveStarPearl extends Component
         ?string $assetBase = null,
     ) {
         $this->assetBase = $this->normalizeAssetPath($assetBase ?? 'assets/brand');
-        $this->starSrc = $this->normalizeAssetPath($this->assetBase.'/the-suave-metallic-star.png');
-        $this->pearlSrc = $this->normalizeAssetPath($this->assetBase.'/the-suave-white-pearl.png');
+        $this->starSrc = $this->normalizeAssetPath($this->assetBase.'/the-suave-metallic-star.webp');
+        $this->pearlSrc = $this->normalizeAssetPath($this->assetBase.'/the-suave-white-pearl.webp');
     }
 
     /**

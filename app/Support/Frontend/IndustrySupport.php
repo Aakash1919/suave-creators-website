@@ -121,7 +121,7 @@ class IndustrySupport
                 'Building Digital Foundations for Real Estate Success',
                 'Let\'s drive more sales and strong visibility with smart websites and property management software. Our software connects buyers with their dream home.',
                 ['RE Branding', 'CRE Branding', 'RE Website Design', 'RE Fund Luxury Branding', 'RE Development', 'RE Agent Solutions'],
-                'assets/blog/insight-future-of-work.jpg',
+                'assets/blog/insight-future-of-work.webp',
                 'fa-solid fa-house',
             ],
             [
@@ -190,7 +190,7 @@ class IndustrySupport
                 'icon' => 'launch',
                 'title' => 'Launch & Growth',
                 'desc' => 'Once your product is live, we continue to optimize, scale, and enhance it. A long term growth is provided from our end.',
-                'image' => 'assets/portfolio/warm-lounge-plants-artwork.png',
+                'image' => 'assets/media/diverse-team-data-meeting.webp',
                 'alt' => 'Product launch and growth metrics for industry platforms',
             ],
         ];

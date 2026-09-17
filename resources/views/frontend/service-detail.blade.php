@@ -614,7 +614,7 @@ $n = $index + 1;
 />
 
 <x-frontend.consultation-section
-  :background-image="$service['finalBg'] ?? ($service['bannerBg'] ?? 'assets/media/webservice-bg.webp')"
+  :background-image="$service['finalBg'] ?? ($service['bannerBg'] ?? 'assets/background/web-service-bg.webp')"
   :eyebrow="$service['finalEyebrow'] ?? 'Your Digital Future Together'"
   :title="$service['finalTitle'] ?? 'Let\'s Build Your Business Website Together'"
   :description="$service['finalDescription'] ?? ''"

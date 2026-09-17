@@ -1,29 +1,29 @@
 ---
 name: suave-admin
 description: >-
-  Suave Creators custom Blade admin panel and first-party RBAC. Use whenever the
-  user mentions admin, /admin, roles, permissions, Form Request, testimonials
-  CRUD, blogs CRUD, users, contacts inbox, AI conversations review, DataTables,
-  Toastr, createFlashMessage, EnsurePermission, SiteAdmin, named routes,
-  Laravel coding standards, or files under routes/admin.php,
-  app/Http/Controllers/Admin, app/Http/Requests/Admin, app/Services,
-  app/DataTables/Admin, resources/views/admin. Requires named `route()` URLs,
-  Laravel/Pint conventions, App\Services\*Service + Form Requests for
-  mutations — not Filament, Breeze, or Spatie Permission. Read this skill
-  before any admin change.
+  Use when working on the Suave Creators custom Blade admin panel, first-party
+  RBAC, roles, permissions, Form Requests, blogs/users/testimonials/case-studies
+  CRUD, DataTables, Toastr, createFlashMessage, EnsurePermission, SiteAdmin,
+  contacts inbox, AI conversation review, admin page vs modal forms, or files
+  under routes/admin.php, app/Http/Controllers/Admin, app/Http/Requests/Admin,
+  app/Services, app/DataTables/Admin, resources/views/admin. Requires named
+  route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
+  Permission. Read before any admin change.
+metadata:
+  last-updated: "2026-09-17"
 ---
 
 # Suave Admin
 
-**Always read this skill** before admin-panel or RBAC work. Marketing frontend stays in `suave-frontend`. Floating chat agent API/widget is documented there; this skill covers the **admin** side of conversations.
+**Always read this skill** before admin-panel or RBAC work. Shared coding: [`system-coding-standards`](../system-coding-standards/SKILL.md). New Service / Form Request / Migration: matching `create-*`. Deep Laravel: [`laravel-best-practices`](../laravel-best-practices/SKILL.md) + `rule/suave.md`. Marketing frontend stays in [`suave-frontend`](../suave-frontend/SKILL.md). After skill-affecting changes: [`orchestration-maintenance`](../orchestration-maintenance/SKILL.md).
 
 ## Stack (do not replace)
 
 - Custom Blade admin under `resources/views/admin/` + `resources/views/layouts/admin.blade.php`
 - Routes: `routes/admin.php` (prefix `/admin`, name prefix `admin.`), registered from `bootstrap/app.php`
 - Middleware aliases: `admin` → `EnsureAdminUser`, `permission:{name}` → `EnsurePermission`
-- **Services required for CRUD** — `App\Services\{Feature}Service` holds persistence + domain transforms; controllers stay thin
-- **Form Requests required for mutations** — `App\Http\Requests\Admin\*` (and `Frontend\*` for public forms); no `$request->validate()` in controllers/services
+- **Services required for CRUD** — see [`create-service`](../create-service/SKILL.md); catalog below
+- **Form Requests required for mutations** — see [`create-form-request`](../create-form-request/SKILL.md); catalog below
 - **First-party RBAC only** — tables `roles`, `permissions`, `role_permission`, `user_role`; models `Role`, `Permission`; trait `HasRoles` on `User`
 - Do **not** install Filament, Breeze, Jetstream, or Spatie Permission for this panel
 
@@ -36,19 +36,9 @@ description: >-
 - Tests: `$this->get(route('admin.blogs.index'))` (or `absolute: false` when a path is required). Retired inbound URIs may stay literals
 - Redirects after create/update/delete: `redirect()->route('admin....')` or `to_route('admin....')` — not `redirect('/admin/...')`
 
-## Laravel coding standards
+## Coding standards
 
-Follow Laravel conventions (PSR-12). Do not invent a parallel style guide.
-
-- Run `vendor/bin/pint --dirty` after PHP edits (Laravel Pint is installed)
-- Thin controllers: HTTP in, `adminSuccess` / JSON / redirect out. Persistence and domain transforms live in `App\Services\*`
-- Validate with Form Requests named `{Resource}StoreRequest` / `{Resource}UpdateRequest` — no `$request->validate()` in controllers or services
-- Type-hint arguments and return types; use constructor promotion
-- Unknown records: `abort(404)` or `findOrFail()`
-- Use framework helpers that already exist: `str()` / `Str`, `filled()` / `blank()`, `to_route()`, `route()`
-- `config()` in application code; `env()` only inside `config/*.php`
-- Keep `routes/admin.php` declarative. No domain logic in the route file
-- Eloquent models for persisted data — do not add a query-builder-only parallel when a model exists
+Follow [`system-coding-standards`](../system-coding-standards/SKILL.md) and Pint (`vendor/bin/pint --dirty`). Thin controllers; Services + Form Requests for mutations; `config()` not `env()` in app code.
 
 ## Access model
 
@@ -62,7 +52,7 @@ Follow Laravel conventions (PSR-12). Do not invent a parallel style guide.
 
 ## Services (required)
 
-**Every feature with create / update / delete (or domain-heavy reads) MUST have an `App\Services\{Feature}Service`.** Do not put validation, Eloquent writes, file storage, or transcript transforms in controllers.
+**Every feature with create / update / delete (or domain-heavy reads) MUST have an `App\Services\{Feature}Service`.** Recipe: [`create-service`](../create-service/SKILL.md). Do not put validation, Eloquent writes, file storage, or transcript transforms in controllers.
 
 | Service | Responsibility |
 |---------|----------------|
@@ -80,7 +70,7 @@ Follow Laravel conventions (PSR-12). Do not invent a parallel style guide.
 
 Rules:
 
-1. New admin CRUD → add `App\Services\{Name}Service` **and** `App\Http\Requests\Admin\{Name}StoreRequest` / `{Name}UpdateRequest` in the **same** change as the controller
+1. New admin CRUD → add `App\Services\{Name}Service` **and** Store/Update Form Requests in the **same** change as the controller
 2. Inject the service in the controller constructor; type-hint Form Requests on store/update; call `$this->{feature}->create|update|delete|…`
 3. Controllers only: authorize via middleware (+ Form Request `authorize()`), call the service, return `adminSuccess` / `adminError` / a view
 4. Exceptions: `AuthController` logout and `DashboardController` (stats/links) may stay without a service; login still uses `AdminLoginRequest`
@@ -88,7 +78,7 @@ Rules:
 
 ## Form Requests
 
-Namespace: `App\Http\Requests\Admin\` (admin) and `App\Http\Requests\Frontend\` (public marketing forms).
+Recipe: [`create-form-request`](../create-form-request/SKILL.md). Namespace: `App\Http\Requests\Admin\` (admin) and `App\Http\Requests\Frontend\` (public marketing forms).
 
 **Naming (required):** `{Resource}{Action}Request` — resource first, then action. Examples: `BlogStoreRequest`, `BlogUpdateRequest`. Never `StoreBlogRequest` / `UpdateBlogRequest`.
 
@@ -324,16 +314,7 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 
 ## Migrations
 
-**Never edit a migration that already ran on live.** Add a new migration instead.
-
-Every new migration must be idempotent with `Schema::has*` guards so it is safe to re-run and will not fail if the table or column already exists:
-
-- Create table: wrap in `if (! Schema::hasTable('…'))`
-- Add column: wrap in `if (! Schema::hasColumn('table', 'column'))`
-- Drop column: wrap in `if (Schema::hasColumn('table', 'column'))` (skip if missing)
-- Changing nullability / type: confirm the column exists (`hasColumn`) and only `change()` when the current definition still needs it (`Schema::getColumns()`)
-
-Follow the existing `blogs` thumb migrations and `2026_08_21_010000_add_draft_fields_to_contact_requests_table.php`.
+Recipe: [`create-migration`](../create-migration/SKILL.md). **Never edit a migration that already ran on live.** Add a new migration instead. Guard with `Schema::hasTable` / `hasColumn` (see existing `blogs` thumb migrations and `2026_08_21_010000_add_draft_fields_to_contact_requests_table.php`).
 
 ## Blog seed import (offline)
 

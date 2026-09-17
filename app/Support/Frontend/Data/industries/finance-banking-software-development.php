@@ -175,7 +175,7 @@ return array (
       'step' => '04',
       'title' => 'Education & EdTech Sector',
       'desc' => 'Fee management and payment gateways for schools, colleges, and learning platforms.',
-      'image' => '/assets/blog/insight-product-growth.jpg',
+      'image' => '/assets/blog/insight-future-of-work.webp',
       'alt' => 'Product growth planning for education platforms',
     ),
   ),

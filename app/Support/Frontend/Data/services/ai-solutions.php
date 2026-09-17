@@ -155,14 +155,14 @@ return [
     'whyDescription' => 'We focus on practical AI that integrates with your products and processes—measurable outcomes over experimental hype.',
     'whyCards' => [
         0 => [
-            'image' => 'assets/blog/blogs-hero/02-laptop.jpg',
+            'image' => 'assets/blog/blogs-hero/02-laptop.webp',
             'title' => 'Business-First AI Roadmaps',
             'tags' => ['Use Cases', 'ROI', 'Strategy'],
             'text' => 'We start with workflows and goals, then recommend AI features that save time or revenue—so investment maps to clear outcomes.',
             'features' => ['Use-Case Discovery', 'ROI Prioritization', 'Pilot Planning'],
         ],
         1 => [
-            'image' => 'assets/media/generative-engine-dev-team-coding.webp',
+            'image' => 'assets/media/developers-collaborating-code-review.webp',
             'title' => 'Production-Ready Engineering',
             'tags' => ['APIs', 'Integration', 'Scale'],
             'text' => 'Our team builds AI into real systems with reliable APIs, monitoring, and fallbacks—so features stay useful after launch day.',

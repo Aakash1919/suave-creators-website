@@ -8,9 +8,9 @@ alwaysApply: false
 
 Before editing the custom admin panel, RBAC, or admin conversation review:
 
-1. **Read and follow** `.cursor/skills/suave-admin/SKILL.md`
+1. **Read and follow** `.cursor/skills/suave-admin/SKILL.md` (plus `system-coding-standards` and matching `create-service` / `create-form-request` / `create-migration` when adding those layers; deep Laravel → `laravel-best-practices` + `rule/suave.md`)
 2. Keep first-party roles/permissions — do not add Filament, Breeze, or Spatie Permission
-3. Gate routes with `admin` + `permission:{name}`; gate nav with `hasPermission`. Every admin route is **named**; use `route('admin....')` — never `/admin/...` path strings. Follow Laravel coding standards (Pint / PSR-12) in the skill
+3. Gate routes with `admin` + `permission:{name}`; gate nav with `hasPermission`. Every admin route is **named**; use `route('admin....')` — never `/admin/...` path strings. Follow Laravel coding standards (Pint / PSR-12)
 4. Put CRUD / domain logic in `App\Services\*Service`; keep Admin controllers thin (HTTP + flash/JSON only)
 5. Put validation in `App\Http\Requests\Admin\*` Form Requests named `{Resource}StoreRequest` / `{Resource}UpdateRequest` (e.g. `BlogStoreRequest`) — no `$request->validate()` in controllers or services
 6. Admin create/edit forms are **full width** by default — do not constrain with `max-width` unless the user asks
@@ -21,9 +21,10 @@ Before editing the custom admin panel, RBAC, or admin conversation review:
 11. Flash / toast feedback: PHP `createFlashMessage('Blog')` / `createFlashMessage('Blog', 'updated')` → "{Resource} has been {action} successfully." (always session `status`; no flash key from callers). Prefer `adminSuccess($request, 'Blog', 'created'|…)`. JS uses `SuaveAdmin.createFlashMessage(type, message)` with the server message. Do not call `toastr.*` or `Session::flash('status', …)` in new success paths
 12. Confirmations: always the custom dialog (`SuaveAdmin.confirmDialog` or `data-admin-delete` with `data-confirm` / `data-confirm-title` / `data-confirm-label`) — never `window.confirm` / `confirm()`. Use action-specific title, message, and button label (see suave-admin skill → Confirm dialogs)
 13. Contact inbox: `contacts.view` + `ContactRequest` — public form spam guards are honeypot/timing/throttle only (no third-party captcha); public store uses `ContactStoreRequest`; field-blur drafts use `ContactDraftRequest` / `contact-us.draft`
-14. Migrations: never edit a migration that already ran on live — add a new file. Guard `up`/`down` with `Schema::hasTable` / `Schema::hasColumn` so missing or already-present tables/columns do not fail
+14. Migrations: never edit a migration that already ran on live — add a new file. Guard `up`/`down` with `Schema::hasTable` / `Schema::hasColumn` so missing or already-present tables/columns do not fail (`create-migration`)
 15. Roles UI: Admin → Roles (`roles.view` / `roles.manage`); protect the `admin` role key from rename/delete via `RoleService`
 16. Testimonials: Admin → Testimonials (`testimonials.view` / `testimonials.manage`); create/edit via modal on index; frontend reads `TestimonialService::cachedForFrontend()` (forever cache, forget on write)
 17. Case studies: Admin → Case studies (`case-studies.view|create|update|delete`); create/edit via **full pages** like blogs; public layout is fixed (hero, metrics, overview, two splits) — editors only fill content. Assign service/industry placement slugs for marketing pages. **Never auto-drafted** (no AI drafts). Edit-form “Generate SEO meta” fills meta/OG inputs only — editor must save
 18. DataTable / list queries: `select` only columns actually used (PK + displayed/filter/sort/action fields + FKs); constrain eager loads (`with(['rel:id,name'])`); never `table.*` or unused relations — see suave-admin skill → DataTables + AJAX
-19. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`
+19. Marketing frontend / SuaveAgent widget work belongs under `suave-frontend`; integrity checks under `frontend-audit`
+20. After material admin behavior/route/permission changes, follow `orchestration-maintenance`

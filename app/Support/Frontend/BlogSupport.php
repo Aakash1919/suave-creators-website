@@ -125,9 +125,9 @@ class BlogSupport
     public static function heroImages(): array
     {
         return [
-            ['src' => asset('assets/blog/blogs-hero/01-team.jpg'), 'alt' => 'Suave Creators team workspace for software development blogs', 'size' => 'sm'],
-            ['src' => asset('assets/blog/blogs-hero/02-laptop.jpg'), 'alt' => 'Laptop with code for web development insights blog', 'size' => 'md'],
-            ['src' => asset('assets/blog/blogs-hero/03-creative.jpg'), 'alt' => 'Creative team collaboration for digital strategy blog articles', 'size' => 'lg'],
+            ['src' => asset('assets/blog/blogs-hero/01-team.webp'), 'alt' => 'Suave Creators team workspace for software development blogs', 'size' => 'sm'],
+            ['src' => asset('assets/blog/blogs-hero/02-laptop.webp'), 'alt' => 'Laptop with code for web development insights blog', 'size' => 'md'],
+            ['src' => asset('assets/blog/blogs-hero/03-creative.webp'), 'alt' => 'Creative team collaboration for digital strategy blog articles', 'size' => 'lg'],
             ['src' => asset('assets/blog/blogs-hero/04-desk.jpg'), 'alt' => 'Modern desk setup for Suave Creators engineering insights', 'size' => 'md'],
             ['src' => asset('assets/blog/blogs-hero/05-notebook.jpg'), 'alt' => 'Notebook and workspace for software engineering blog posts', 'size' => 'sm'],
         ];

@@ -13,7 +13,7 @@ class HomeSupport
     {
         return array_merge(self::faqData(), [
             'heroShellClass' => 'bg-[#00003f]',
-            'heroBackgroundImage' => 'assets/background/home-hero-cover-bg.png',
+            'heroBackgroundImage' => 'assets/background/home-hero-cover-bg.webp',
             // LCP poster for home hero mosaic preload in layouts/frontend.blade.php
             'heroCaseStudies' => CaseStudySupport::heroVisualScenes(4),
             'stats' => self::stats(),
@@ -201,7 +201,7 @@ class HomeSupport
                 'title' => 'Online Reputation Management (ORM)',
                 'headline' => 'Trust & Entity Protection',
                 'description' => 'Monitoring and cultivating authentic third-party review profiles across G2, Clutch, and Google Business to reinforce domain credibility.',
-                'image' => 'assets/media/online-reputation-admin-dashboard.webp',
+                'image' => 'assets/media/summary-report-team-meeting-480.webp',
                 'alt' => 'Online reputation management review of brand sentiment analytics',
                 'iconAlt' => 'Online reputation management service icon',
             ],
@@ -210,7 +210,7 @@ class HomeSupport
                 'title' => 'Answer Engine Optimization (AEO)',
                 'headline' => ' Featured Snippets & Direct Answers',
                 'description' => 'Structuring pages with concise answers, clear definitions, and FAQ schema to dominate Google Featured Snippets and PAA boxes.',
-                'image' => 'assets/media/answer-engine-inspiration-mindmap.webp',
+                'image' => 'assets/media/big-project-sticky-notes-planning.webp',
                 'alt' => 'Answer engine optimization content planning for AI search',
                 'iconAlt' => 'Answer engine optimization AEO service icon',
             ],
@@ -219,7 +219,7 @@ class HomeSupport
                 'title' => 'Generative Engine Optimization (GEO)',
                 'headline' => 'AI Search Citations (ChatGPT / Perplexity)',
                 'description' => 'Positioning your brand as a primary source for conversational AI engines using structured entity data, first-party proof, and llms.txt.',
-                'image' => 'assets/media/generative-engine-dev-team-coding.webp',
+                'image' => 'assets/media/developers-collaborating-code-review.webp',
                 'alt' => 'Generative engine optimization for brand visibility in AI search',
                 'iconAlt' => 'Generative engine optimization GEO service icon',
             ],
