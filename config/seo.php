@@ -311,14 +311,14 @@ return [
             'description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
             'og_title' => 'AI Sales Coaching Platform Case Study | Suave Creators',
             'og_description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
-            'og_image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach.webp',
+            'og_image' => 'assets/case-studies/ai-sales-coaching/ai-sales-coach.webp',
         ],
         'outreach-case-study' => [
             'title' => 'B2B CRM Sales Automation Case Study | Suave Creators',
             'description' => 'Explore how Suave Creators built a B2B CRM for lead discovery, AI prospecting, cold email, and sales pipeline management to streamline outbound sales.',
             'og_title' => 'B2B CRM Sales Automation Case Study | Suave Creators',
             'og_description' => 'Explore how Suave Creators built a B2B CRM for lead discovery, AI prospecting, cold email, and sales pipeline management to streamline outbound sales.',
-            'og_image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.png',
+            'og_image' => 'assets/case-studies/suave-crm-outreach/outreach-before-after-hero.webp',
         ],
         'tasks-case-study' => [
             'title' => 'B2B CRM Task Management Case Study | Suave Creators',

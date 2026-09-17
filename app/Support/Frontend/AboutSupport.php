@@ -61,7 +61,7 @@ class AboutSupport
     {
         return [
             [
-                'image' => 'assets/media/answer-engine-inspiration-mindmap.webp',
+                'image' => 'assets/media/big-project-sticky-notes-planning.webp',
                 'title' => 'Innovative & Engaging Process',
                 'text' => 'We believe in bringing engagement through the creative efforts at our workplace. Our strategies are uniquely delivered to the clients, which keeps them at bay to converge businesses into better opportunities.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],
@@ -75,7 +75,7 @@ class AboutSupport
                 'alt' => 'Research charts and analytics guiding data driven digital strategy',
             ],
             [
-                'image' => 'assets/media/generative-engine-dev-team-coding.webp',
+                'image' => 'assets/media/developers-collaborating-code-review.webp',
                 'title' => 'Optimal Delivery',
                 'text' => 'We don\'t just deliver the services, but ensure that our clients are happy with what we are delivering to them. Our approach and strategies mark the excellence in our efforts to provide them with better deliverables.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],

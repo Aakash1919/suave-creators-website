@@ -4,7 +4,7 @@ return array (
   'pageTitle' => 'E-Learning Software Development Services | Suave Creators',
   'pageDescription' => 'Custom e-learning software including LMS platforms, mobile learning apps, virtual classrooms, AI education tools, and secure digital learning systems.',
   'ogTitle' => 'E-Learning Software Development Services | Suave Creators',
-  'ogDescription' => 'Custom e-learning software development including LMS platforms, virtual classrooms, mobile learning apps, and AI-powered education solutions.',
+  'ogDescription' => 'Custom e-learning software including LMS platforms, mobile learning apps, virtual classrooms, AI education tools, and secure digital learning systems.',
   'eyebrow' => 'We build smart E-learning Platforms',
   'heroTitle' => 
   array (

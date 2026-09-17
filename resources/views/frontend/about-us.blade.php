@@ -230,7 +230,7 @@
     style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
     <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12">
       <div class="order-2 w-full lg:order-1">
-        <img src="{{ asset('assets/media/right-transform-visual.png') }}"
+        <img src="{{ asset('assets/media/right-transform-visual.webp') }}"
           alt="Business transformation with Suave Creators custom software solutions"
           title="Business transformation with Suave Creators custom software solutions"
           class="ml-auto h-auto w-full max-w-[520px] object-cover lg:max-w-none" loading="lazy" decoding="async">

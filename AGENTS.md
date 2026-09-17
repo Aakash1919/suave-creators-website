@@ -1,20 +1,57 @@
-# Suave Creators — agent instructions
+# Suave Creators — Agent Instructions
 
-This project uses **Cursor Agent Skills**. Skills are not optional documentation — open and follow them before coding.
+Canonical skills live in [`.cursor/skills/{name}/SKILL.md`](.cursor/skills/). Catalog: [`.cursor/SKILL-REGISTRY.md`](.cursor/SKILL-REGISTRY.md). Do not add a duplicate `.agents/skills/` tree.
 
-## Required skills
+## Stack
 
-| Area | Read first |
-|------|------------|
-| Admin / RBAC / Form Requests / admin CRUD / migrations | [`.cursor/skills/suave-admin/SKILL.md`](.cursor/skills/suave-admin/SKILL.md) |
-| Marketing frontend / assets / CSS | [`.cursor/skills/suave-frontend/SKILL.md`](.cursor/skills/suave-frontend/SKILL.md) |
+| Layer | Tech |
+|---|---|
+| Backend | Laravel, PHP 8.x, MySQL |
+| Admin | Custom Blade + first-party RBAC (`roles` / `permissions`) |
+| Marketing | Blade + `public/assets/` + `public/css/style.css` + Vite Tailwind |
+| Tests | PHPUnit Feature/Unit |
+| Style | Laravel Pint (PSR-12) |
 
-## How to use
+## Required skill touchpoint
 
-1. Match the user task to a row above.
-2. **Read** the skill file (and `reference.md` for frontend asset renames) before editing.
-3. Follow stack rules in the skill (e.g. first-party RBAC, `*Service` + Form Requests for admin; categorized `assets/` + verify script for frontend).
-4. **Named routes everywhere** — generate URLs with `route()` / `redirect()->route()` / `to_route()` so path changes do not require hunting hardcoded strings. Follow **Laravel coding standards** (Pint / PSR-12) documented in the skills.
-5. Do **not** invent Filament, Spatie Permission, Breeze, or flat `public/images/` paths.
+Every change must do one of:
+
+1. Read the relevant `SKILL.md` and follow it.
+2. Update that skill when behavior, routes, permissions, assets, or gotchas change.
+3. Propose a new skill when a workflow repeats (senior approval; add a registry row).
+4. State that the skill was checked and is still accurate.
+
+| Kind | Prefix / name | When |
+|---|---|---|
+| System | `system-coding-standards` | Shared Laravel/Suave one-liners |
+| Laravel rules | `laravel-best-practices` | Eloquent/N+1/architecture — read mapped `rule/` + `rule/suave.md` |
+| Layer recipes | `create-*` | Service / Form Request / Migration placement + contracts |
+| Domain | `suave-admin`, `suave-frontend` | Admin RBAC vs marketing frontend |
+| Integrity | `frontend-audit` | Broken images, internal URLs, section checks |
+| Orchestration | `orchestration-maintenance` | After meaningful changes, refresh skill + registry |
+| Workflow | `code-review` | Branch/PR Standards vs Spec review |
+
+Admin CRUD → `suave-admin` + matching `create-*`. Marketing pages/assets → `suave-frontend` (+ `reference.md` for renames). After frontend edits → `frontend-audit`. Review a branch → `code-review`.
+
+## Quality gates
+
+Agents **run** these on touched files (do not ask the user to run them):
+
+```bash
+vendor/bin/pint --dirty
+# when marketing views/assets/CSS changed:
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-frontend-conventions.ps1
+php scripts/audit-frontend.php
+# when app/ routes/ business rules changed:
+php artisan test --filter={TestClass}
+```
+
+## Key conventions
+
+- Named routes only: `route()` / `redirect()->route()` / `to_route()`.
+- Mutations in `App\Services\*`; validation in Form Requests; thin controllers.
+- First-party RBAC only — not Filament, Breeze, or Spatie Permission.
+- Marketing media under categorized `public/assets/` — never flat `public/images/`.
+- Never edit a migration that already ran on live; guard with `Schema::hasTable` / `hasColumn`.
 
 Project rules under `.cursor/rules/` reinforce the same gates when relevant files are in context.

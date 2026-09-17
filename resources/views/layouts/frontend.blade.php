@@ -66,12 +66,12 @@
         );
         $bodyClass = $bodyClass ?? 'min-h-screen bg-white font-sans text-slate-900';
         $useHeroBackground = $useHeroBackground ?? true;
-        $heroBackgroundImage = $heroBackgroundImage ?? 'assets/background/home-hero-cover-bg.png';
+        $heroBackgroundImage = $heroBackgroundImage ?? 'assets/background/home-hero-cover-bg.webp';
         $heroShellClass = $heroShellClass ?? ($useHeroBackground ? 'bg-[#00003f]' : 'bg-white');
         $mainClass = $mainClass ?? 'site-main';
         $usesHomeHeroPattern = $useHeroBackground && in_array($heroBackgroundImage, [
-            'assets/background/home-hero-cover-bg.png',
-            '/assets/background/home-hero-cover-bg.png',
+            'assets/background/home-hero-cover-bg.webp',
+            '/assets/background/home-hero-cover-bg.webp',
         ], true);
     @endphp
 

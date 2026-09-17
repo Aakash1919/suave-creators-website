@@ -5,7 +5,7 @@ return [
     'pageTitle' => 'Custom Web Development Services | Suave Creators',
     'pageDescription' => 'Suave Creators offers custom web development including full-stack, Laravel, WordPress, React, Angular, PHP, Node.js & enterprise solutions.',
     'ogTitle' => 'Custom Web Development Services | Suave Creators',
-    'ogDescription' => 'Build high-performance, scalable and SEO-optimized websites with Suave Creators, custom web development services. Laravel, WordPress, React, Angular, PHP, Node.js & more.',
+    'ogDescription' => 'Suave Creators offers custom web development including full-stack, Laravel, WordPress, React, Angular, PHP, Node.js & enterprise solutions.',
     'eyebrow' => 'OUR TAILOR-MADE SERVICES',
     'heroTitle' => [
         0 => 'Boost your Online Presence with ',

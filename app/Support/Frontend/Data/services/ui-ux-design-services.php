@@ -5,7 +5,7 @@ return [
     'pageTitle' => 'UI/UX Design Services That Convert | Suave Creators',
     'pageDescription' => 'Suave Creators UI/UX design services: user research, wireframes, prototypes, and interfaces that improve usability and conversion.',
     'ogTitle' => 'UI/UX Design Services That Convert | Suave Creators',
-    'ogDescription' => 'User research, wireframing, prototyping, and UI design that help websites and apps convert more visitors into customers.',
+    'ogDescription' => 'Suave Creators UI/UX design services: user research, wireframes, prototypes, and interfaces that improve usability and conversion.',
     'eyebrow' => 'OUR TAILOR-MADE SERVICES',
     'heroTitle' => [
         0 => 'Stand Out With Expert ',
@@ -155,7 +155,7 @@ return [
     'whyDescription' => 'We blend research, visual craft, and product thinking so design decisions improve both usability and business outcomes.',
     'whyCards' => [
         0 => [
-            'image' => 'assets/blog/blogs-hero/03-creative.jpg',
+            'image' => 'assets/blog/blogs-hero/03-creative.webp',
             'title' => 'Research-Led Design Decisions',
             'tags' => ['UX Research', 'Testing', 'Insights'],
             'text' => 'Every layout and interaction is grounded in user needs and business priorities—not guesswork—so your interface solves real problems.',
@@ -169,7 +169,7 @@ return [
             'features' => ['Landing Page UX', 'Funnel Design', 'Accessibility Basics'],
         ],
         2 => [
-            'image' => 'assets/media/online-reputation-admin-dashboard.webp',
+            'image' => 'assets/media/summary-report-team-meeting-480.webp',
             'title' => 'Design That Developers Can Ship',
             'tags' => ['Handoff', 'Specs', 'Collaboration'],
             'text' => 'Clean Figma files, component systems, and collaborative handoff keep engineering aligned—so the live product matches the approved design.',

@@ -51,8 +51,8 @@
       const base = normalizeAssetBase(
         this.root.getAttribute("data-asset-base"),
       );
-      const starUrl = `${base}the-suave-metallic-star.png`;
-      const pearlUrl = `${base}the-suave-white-pearl.png`;
+      const starUrl = `${base}the-suave-metallic-star.webp`;
+      const pearlUrl = `${base}the-suave-white-pearl.webp`;
       this.starImage.setAttribute("src", starUrl);
       this.pearlImage.setAttribute("src", pearlUrl);
       this.root.style.setProperty("--tsp-star-mask", cssUrl(starUrl));
