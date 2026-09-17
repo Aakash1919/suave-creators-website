@@ -1,21 +1,21 @@
 ---
 name: suave-frontend
 description: >-
-  Suave Creators marketing frontend. Use whenever the user mentions homepage,
-  landing page, Blade views, View Components, testimonials section, HomeSupport,
+  Use when working on the Suave Creators marketing site — homepage, landing
+  pages, Blade views, View Components, testimonials, HomeSupport,
   ContactSupport, public/assets, public/css/style.css, logos, hero images,
-  SuaveAgent chat widget, named routes, Laravel coding standards, or
-  verify-frontend-conventions. Requires named `route()` URLs, Laravel/Pint
-  conventions, categorized asset paths, and post-change verification. For admin
-  panel / RBAC / Form Requests use suave-admin instead. Read this skill before
-  any frontend change.
+  SuaveAgent chat widget, named routes, or verify-frontend-conventions.
+  Requires categorized asset paths and post-change verification. For admin /
+  RBAC use suave-admin. For broken image/URL/section checks use frontend-audit.
+metadata:
+  last-updated: "2026-09-17"
 ---
 
 # Suave Frontend
 
-**Always read this skill** before marketing frontend work. Folder map + rename catalog: [reference.md](reference.md). Admin panel conventions: [suave-admin](../suave-admin/SKILL.md).
+**Always read this skill** before marketing frontend work. Folder map + rename catalog: [reference.md](reference.md). Shared coding: [`system-coding-standards`](../system-coding-standards/SKILL.md). Integrity: [`frontend-audit`](../frontend-audit/SKILL.md). Admin: [`suave-admin`](../suave-admin/SKILL.md). After skill-affecting changes: [`orchestration-maintenance`](../orchestration-maintenance/SKILL.md).
 
-The legacy `design/` static prototype folder was removed from the repo. Source of truth is Laravel Blade + `public/assets/` + `public/css/style.css`. Restore `design/` from git only if needed (see repo-root `changes-to-remove.md`).
+The legacy `design/` static prototype folder was removed from the repo. Source of truth is Laravel Blade + `public/assets/` + `public/css/style.css`. Crawl-budget rollback notes: repo-root `changes-to-remove.md` (not a design restore guide).
 
 ## Required after every change set
 
@@ -26,15 +26,16 @@ After editing frontend code/assets/CSS:
    > The changes are being verified and unwanted file functions are being removed
 
 2. Run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-frontend-conventions.ps1`
-3. Fix every failure the script reports (do not leave violations)
-4. Manually remove leftovers the script cannot auto-delete:
+3. Run `php scripts/audit-frontend.php` (broken images / internal URLs — see [`frontend-audit`](../frontend-audit/SKILL.md))
+4. Fix every failure the scripts report (do not leave violations)
+5. Manually remove leftovers the convention script cannot auto-delete:
    - Unused import scripts, temp Blade dumps, duplicate logo filenames (`white_logo.svg`, `gradient-logo.svg` as primary paths)
    - Exact duplicate assets (same SHA256) — keep the canonical content name, remap aliases in path maps
    - Core PHP string helpers in components/views when Laravel `str()` / `Str` / `NormalizesAssetPaths` should be used
    - Page JS that belongs in a component (`@once` + `@push('scripts')`)
    - Flat `public/images/` files (must live under `public/assets/...`)
    - Tailwind CDN on marketing layout (use `@vite('resources/css/app.css')`); star-pearl only via `<x-layouts.the-suave-star-pearl />` (never directly in `layouts/frontend.blade.php`)
-5. Summarize what was verified and what was removed
+6. Summarize what was verified and what was removed
 
 ## New or updated marketing pages
 
@@ -195,9 +196,14 @@ Full old→new tables: [reference.md](reference.md).
 | `scripts/reclassify-assets.ps1` | Fix misplaced files (`clients`↔`icons/tech`, etc.) |
 | `scripts/rename-assets-by-content.ps1` | Apply `asset-rename-map.json` |
 | `scripts/rewrite-asset-paths.ps1` | Rewrite `images/...` refs via path map |
-| `scripts/asset-path-map.json` | Design + legacy path → current `assets/...` |
+| `scripts/asset-path-map.json` | Design + legacy path → current `assets/...` (**runtime** via `MapsDesignAssets`) |
 | `scripts/asset-rename-map.json` | Relative rename history for re-runs |
 | `scripts/verify-frontend-conventions.ps1` | Fail on convention violations |
+| `scripts/audit-frontend.php` | Broken images + internal URL / page status audit (`frontend-audit`) |
+| `scripts/audit-img-alts.php` | Alt/title audit against rendered `/` |
+| `scripts/build-fa-subset.php` | Regenerate Font Awesome subset CSS when icon usage changes |
+| `scripts/split-deferred-css.php` | Regenerate `style-deferred.css` from marked sections |
+| `scripts/generate-product-og-banner.php` | Regenerate product OG banner when hero changes |
 
 When renaming: update both JSON maps, rewrite code refs, then verify. Prefer explicit map entries over heuristic `*-N` prefix rewrites for brand logos.
 
@@ -253,4 +259,4 @@ Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSu
 
 ## Skill maintenance
 
-This is the **only** marketing-frontend project skill. Admin panel / RBAC lives in `suave-admin`. When frontend conventions change, update this skill and `reference.md` in the same change set. Do not recreate split skills for CSS/sections/assets. Named-route + Laravel coding-standard rules must stay aligned with [suave-admin](../suave-admin/SKILL.md).
+Domain skill for marketing frontend. Shared coding lives in `system-coding-standards`; integrity checks in `frontend-audit`. When frontend conventions change, update this skill and `reference.md` in the same change set, then run `orchestration-maintenance`. Do not recreate split skills for CSS/sections/assets.

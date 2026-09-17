@@ -1,15 +1,27 @@
 ---
-description: Always load Suave project skills before coding — suave-admin or suave-frontend
+description: Always load Suave project skills before coding — registry + matching domain/create skills
 alwaysApply: true
 ---
 
 # Suave skills (required)
 
-Before implementing or editing code in this repo, **read the matching skill with the Read tool as your first action**. Do not rely on memory of prior chats.
+Before implementing or editing code in this repo, **read the matching skill with the Read tool as your first action**. Do not rely on memory of prior chats. Catalog: `.cursor/SKILL-REGISTRY.md`.
+
+## Required skill touchpoint
+
+Every change must do one of: read and follow the skill; update it when behavior changes; propose a new skill (registry row); or attest it was checked and is still accurate.
 
 | Work | Skill path |
 |------|------------|
-| Admin panel, RBAC, roles, permissions, Form Requests, blogs/users/testimonials CRUD, admin services/DataTables, Toastr/AJAX admin UI, contact inbox admin, AI conversation review, admin page vs modal forms, **database migrations** | `.cursor/skills/suave-admin/SKILL.md` |
-| Marketing site, Blade frontend, `public/assets`, `public/css/style.css`, View Components, HomeSupport / ContactSupport, SuaveAgent widget | `.cursor/skills/suave-frontend/SKILL.md` (+ `reference.md` when renaming assets) |
+| Shared Laravel / named routes / Pint / Do-not list | `.cursor/skills/system-coding-standards/SKILL.md` |
+| Deep Eloquent / N+1 / architecture / validation | `.cursor/skills/laravel-best-practices/SKILL.md` (+ mapped `rule/` and `rule/suave.md`) |
+| New/edit Service | `.cursor/skills/create-service/SKILL.md` |
+| New/edit Form Request | `.cursor/skills/create-form-request/SKILL.md` |
+| New migration | `.cursor/skills/create-migration/SKILL.md` |
+| Admin panel, RBAC, DataTables, admin CRUD | `.cursor/skills/suave-admin/SKILL.md` |
+| Marketing site, assets, CSS, SuaveAgent | `.cursor/skills/suave-frontend/SKILL.md` (+ `reference.md` when renaming assets) |
+| Broken images / URLs / sections audit | `.cursor/skills/frontend-audit/SKILL.md` |
+| Branch / PR review | `.cursor/skills/code-review/SKILL.md` |
+| After skill-affecting changes | `.cursor/skills/orchestration-maintenance/SKILL.md` |
 
-If both apply, read **both**. After reading, follow that skill for the rest of the change (named `route()` URLs, Laravel/Pint coding standards, services, Form Requests, flash helpers, verify scripts, etc.).
+If admin and frontend both apply, read **both** domain skills (plus `system-coding-standards`). After reading, follow those skills for the rest of the change.

@@ -113,7 +113,7 @@ Design: `/images/tech-dev-N.svg` (was `technology-development-icon-N.svg`).
 | `market-1.png` | `seo-infographic-on-imac.webp` |
 | `background_about.png` | `about-section-bg.png` |
 
-## Import helpers
+## Asset helpers
 
 | Script | Purpose |
 |--------|---------|
@@ -121,10 +121,13 @@ Design: `/images/tech-dev-N.svg` (was `technology-development-icon-N.svg`).
 | `scripts/rewrite-asset-paths.ps1` | Rewrite `images/...` refs to mapped `assets/...` |
 | `scripts/reclassify-assets.ps1` | Move misplaced tech logos / icons into the right category |
 | `scripts/rename-assets-by-content.ps1` | SEO content-based renames via `asset-rename-map.json` |
-| `scripts/import-home.ps1` | Historical — imported legacy design home into Blade (`design/` removed) |
 | `scripts/verify-frontend-conventions.ps1` | Fail on convention violations |
-| `scripts/asset-path-map.json` | Legacy/design path → current asset path |
+| `scripts/asset-path-map.json` | Legacy/design path → current asset path (**runtime** via `MapsDesignAssets`) |
 | `scripts/asset-rename-map.json` | Relative rename history |
+| `scripts/audit-img-alts.php` | Audit rendered `/` for missing alt/title |
+| `scripts/build-fa-subset.php` | Regenerate `public/css/fontawesome-subset.css` when icon usage changes |
+| `scripts/split-deferred-css.php` | Regenerate `style-deferred.css` from marked `style.css` sections |
+| `scripts/generate-product-og-banner.php` | Regenerate product OG banner WebP when the product hero changes |
 
 ## Blade / PHP examples
 
