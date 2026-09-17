@@ -75,7 +75,7 @@ class AboutSupport
                 'alt' => 'Research charts and analytics guiding data driven digital strategy',
             ],
             [
-                'image' => 'assets/media/developers-collaborating-code-review_.webp',
+                'image' => 'assets/media/developers-collaborating-code-review.webp',
                 'title' => 'Optimal Delivery',
                 'text' => 'We don\'t just deliver the services, but ensure that our clients are happy with what we are delivering to them. Our approach and strategies mark the excellence in our efforts to provide them with better deliverables.',
                 'tags' => ['SEO', 'Mobile', 'First Performance'],
@@ -141,7 +141,7 @@ class AboutSupport
             [
                 'title' => 'Competitive Pricing',
                 'text' => 'We offer competitive pricing without compromising quality, ensuring cost-effective solutions tailored to your needs. Get premium digital services that maximize value while staying within your budget.',
-                'image' => 'assets/media/competitive-pricing-strategy-cash_.webp',
+                'image' => 'assets/media/competitive-pricing-strategy-cash.webp',
                 'alt' => 'Competitive pricing for web development and digital services',
             ],
             [

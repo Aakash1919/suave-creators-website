@@ -311,7 +311,7 @@
     </div>
         <figure class="case-study-visual case-study-visual--photo">
           <img
-            src="{{ asset('assets/case-studies/ai-sales-coaching/ai_sales_left_.webp') }}"
+            src="{{ asset('assets/case-studies/ai-sales-coaching/ai-sales-left.webp') }}"
             alt="Feedback that doesn’t wait on a recording queue. product screenshot for Suave Creators software development"
             title="Feedback that doesn’t wait on a recording queue. product screenshot for Suave Creators software development"
             width="960"

@@ -104,10 +104,10 @@ async function bestInRange(inputPath, outputPath) {
 
 const jobs = [
   'public/assets/case-studies/ai-sales-coaching/ai_sales_right.webp',
-  'public/assets/case-studies/ai-sales-coaching/ai_sales_left_.webp',
-  'public/assets/case-studies/ai-sales-coaching/ai_sales_coach_.webp',
+  'public/assets/case-studies/ai-sales-coaching/ai-sales-left.webp',
+  'public/assets/case-studies/ai-sales-coaching/ai-sales-coach.webp',
   'public/assets/case-studies/suave-crm-outreach/outreach-before-after-hero.webp',
-  'public/assets/case-studies/suave-crm-tasks/the-suave-app-task-banner_.webp',
+  'public/assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
 ];
 
 console.log('=== compress webp to 80-90 KB (quality-first) ===');

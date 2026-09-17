@@ -307,7 +307,7 @@ return [
             'description' => 'Explore how Suave Creators built an AI sales coaching platform with voice practice, live call assistance, and post-call scoring to support sales team performance.',
             'og_title' => 'AI Sales Coaching Platform Case Study',
             'og_description' => 'See how an AI sales coach practices with reps, whispers live tips, and scores calls so growing teams ramp faster without living in a recording queue.',
-            'og_image' => 'assets/case-studies/ai-sales-coaching/ai_sales_coach_.webp',
+            'og_image' => 'assets/case-studies/ai-sales-coaching/ai-sales-coach.webp',
         ],
         'outreach-case-study' => [
             'title' => 'B2B CRM Sales Automation Case Study | Suave Creators',
@@ -321,7 +321,7 @@ return [
             'description' => 'See how Suave Creators redesigned B2B CRM task management with Kanban and List views, AI assistance, and automated workflows in one workspace.',
             'og_title' => 'B2B CRM Task Management | Case Study | Suave Creators',
             'og_description' => 'Kanban and List view integration plus an automated task assistant AI — one AI project management workspace with 50% less view switching.',
-            'og_image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner_.webp',
+            'og_image' => 'assets/case-studies/suave-crm-tasks/the-suave-app-task-banner.webp',
         ],
         'teerrath-case-study' => [
             'title' => 'Teerrath Spiritual Energy Scan Case Study | Case Study | Suave Creators',
@@ -334,12 +334,12 @@ return [
             'description' => 'Discover how Suave Creators built an appointment insurance platform with deposits, SMS invitations, check-in, and automated Stripe refund workflows.',
             'og_title' => 'Appointment Insurance Platform Case Study | Case Study | Suave Creators',
             'og_description' => 'See how appointment insurance turns no-shows into fair payouts — clear deposits, arrival check-in, and smart Stripe refunds that save card fees.',
-            'og_image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner_.webp',
+            'og_image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
         ],
         'ai-product-matching-case-study' => [
             'title' => 'AI Product Matching Case Study | Case Study | Suave Creators',
             'description' => 'AI Product Matching replaces hand-checking supplier sites, manual match qualification, and spreadsheet record-keeping with automated catalog search, AI help on close calls, and one place to decide with proof.',
-            'og_image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo_.webp',
+            'og_image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo.webp',
         ],
     ],
 

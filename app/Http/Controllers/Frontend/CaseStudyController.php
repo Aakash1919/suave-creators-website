@@ -34,7 +34,7 @@ class CaseStudyController extends FrontendController
         return $this->view('frontend.case-studies.tasks-case-study');
     }
 
-    public function teerrathCaseStudy(): View
+    public function teerrathCaseStudy(): View|RedirectResponse
     {
         return $this->draftView('frontend.case-studies.teerrath-case-study');
     }
@@ -57,9 +57,11 @@ class CaseStudyController extends FrontendController
         return redirect()->route($route, status: 301);
     }
 
-    protected function draftView(string $view): View
+    protected function draftView(string $view): View|RedirectResponse
     {
-        abort_unless(Auth::check(), 404);
+        if (! Auth::check()) {
+            return redirect()->route('case-studies', status: 301);
+        }
 
         return $this->view($view);
     }

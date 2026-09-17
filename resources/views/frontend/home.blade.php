@@ -149,7 +149,7 @@
               loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--portrait-main">
-            <img src="{{ asset('assets/team/professional-woman-product-team-portrait_.webp') }}" alt="Suave Creators product team specialist in a studio portrait" title="Suave Creators product team specialist in a studio portrait" width="640" height="960"
+            <img src="{{ asset('assets/team/professional-woman-product-team-portrait.webp') }}" alt="Suave Creators product team specialist in a studio portrait" title="Suave Creators product team specialist in a studio portrait" width="640" height="960"
               loading="lazy" decoding="async">
           </figure>
           <figure class="about-collage__tile about-collage__tile--office-wide">

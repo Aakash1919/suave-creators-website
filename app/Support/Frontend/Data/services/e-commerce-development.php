@@ -83,12 +83,12 @@ return [
     'portfolioTitle' => 'Explore what we do',
     'portfolioDescription' => 'Explore what we do.',
     'portfolioImages' => [
-        0 => '/assets/portfolio/swastik-culture-hub-website_.webp',
-        1 => '/assets/portfolio/mavan-growth-agency-website_.webp',
-        2 => '/assets/portfolio/sales-automation-project-dashboard_.webp',
-        3 => '/assets/portfolio/hubops-software-company-website_.webp',
-        4 => '/assets/portfolio/suave-outreach-crm-laptop_.webp',
-        5 => '/assets/portfolio/ematrics-ai-sales-website_.webp',
+        0 => '/assets/portfolio/swastik-culture-hub-website.webp',
+        1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+        2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
+        3 => '/assets/portfolio/hubops-software-company-website.webp',
+        4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
+        5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
     ],
     'industriesEyebrow' => 'Industries We Serve',
     'industriesTitle' => 'Industries We Serve',
@@ -150,7 +150,7 @@ return [
     'whyDescription' => 'As a leading e-commerce development company, we provide end-to-end services to transform your concept into a high-performing product.',
     'whyCards' => [
         0 => [
-            'image' => '/assets/media/content-strategy-team-planning_.webp',
+            'image' => '/assets/media/content-strategy-team-planning.webp',
             'title' => 'Tailored eCommerce Solutions',
             'text' => 'We help you to cover a custom e-commerce solution because every business and its needs are different. We will try to make your online store stand out and deliver quality results.',
         ],

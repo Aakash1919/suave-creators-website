@@ -88,12 +88,12 @@ return [
     'portfolioTitle' => 'Explore what we do',
     'portfolioDescription' => 'Check out our outstanding portfolio. A smart digital solution is waiting for you.',
     'portfolioImages' => [
-        0 => '/assets/portfolio/swastik-culture-hub-website_.webp',
-        1 => '/assets/portfolio/mavan-growth-agency-website_.webp',
-        2 => '/assets/portfolio/sales-automation-project-dashboard_.webp',
-        3 => '/assets/portfolio/hubops-software-company-website_.webp',
-        4 => '/assets/portfolio/suave-outreach-crm-laptop_.webp',
-        5 => '/assets/portfolio/ematrics-ai-sales-website_.webp',
+        0 => '/assets/portfolio/swastik-culture-hub-website.webp',
+        1 => '/assets/portfolio/mavan-growth-agency-website.webp',
+        2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
+        3 => '/assets/portfolio/hubops-software-company-website.webp',
+        4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
+        5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
     ],
     'industriesEyebrow' => 'Industries We Offer',
     'industriesTitle' => 'Industries We Serve',
@@ -155,7 +155,7 @@ return [
     'whyDescription' => 'We are in demand for developers to create smart CRM solutions. You can choose us for your next CRM solution.',
     'whyCards' => [
         0 => [
-            'image' => '/assets/media/developers-collaborating-code-review_.webp',
+            'image' => '/assets/media/developers-collaborating-code-review.webp',
             'title' => 'Expertise in Custom Solutions',
             'text' => 'We can proudly say that we have a team of expert custom CRM developers who will listen to your needs and give you a smart solution during the development phase. Let’s reach out to our smart team for your next digital product.',
         ],

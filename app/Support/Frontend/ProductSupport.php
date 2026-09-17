@@ -293,7 +293,7 @@ class ProductSupport
                 ],
             ],
             'graphic' => [
-                'src' => asset('assets/product/data-privacy-security-infographic_.webp'),
+                'src' => asset('assets/product/data-privacy-security-infographic.webp'),
                 'alt' => 'Suave AI data privacy security infographic showing CRM modules protected by a central shield',
             ],
         ];

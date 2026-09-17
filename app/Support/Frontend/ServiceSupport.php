@@ -85,14 +85,14 @@ class ServiceSupport
     {
         return [
             [
-                'assets/media/developers-collaborating-code-review_.webp',
+                'assets/media/developers-collaborating-code-review.webp',
                 'End-to-End Development Expertise',
                 'With all of our projects, we always provide end-to-end development services. By leveraging our global young talent and systematic resource allocation, we provide the best and competitive pricing that helps you to get expert solutions and optimise your development budget.',
                 ['SEO', 'Mobile', 'First Performance'],
                 'Offshore development team reviewing custom software code together',
             ],
             [
-                'assets/media/seo-infographic-on-imac_.webp',
+                'assets/media/seo-infographic-on-imac.webp',
                 'SEO-Optimisation and Performance',
                 'SEO optimization and high performance are the needs of every website and application nowadays. All of our solutions perform better and follow Search engine algorithms so that they easily gain good visibility on Google soon.',
                 ['UI/UX', 'Research', 'Prototyping'],
@@ -396,12 +396,12 @@ class ServiceSupport
     protected static function defaultPortfolioImages(): array
     {
         return [
-            '/assets/portfolio/swastik-culture-hub-website_.webp',
-            '/assets/portfolio/mavan-growth-agency-website_.webp',
-            '/assets/portfolio/sales-automation-project-dashboard_.webp',
-            '/assets/portfolio/hubops-software-company-website_.webp',
-            '/assets/portfolio/suave-outreach-crm-laptop_.webp',
-            '/assets/portfolio/ematrics-ai-sales-website_.webp',
+            '/assets/portfolio/swastik-culture-hub-website.webp',
+            '/assets/portfolio/mavan-growth-agency-website.webp',
+            '/assets/portfolio/sales-automation-project-dashboard.webp',
+            '/assets/portfolio/hubops-software-company-website.webp',
+            '/assets/portfolio/suave-outreach-crm-laptop.webp',
+            '/assets/portfolio/ematrics-ai-sales-website.webp',
         ];
     }
 

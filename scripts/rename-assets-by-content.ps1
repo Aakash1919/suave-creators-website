@@ -93,8 +93,8 @@ $explicit = [ordered]@{
     'portfolio/portfolioimg1.webp' = 'portfolio/swastik-culture-hub-website.webp'
     'portfolio/portfolioimg2.webp' = 'portfolio/mavan-growth-agency-website.webp'
     'portfolio/portfolioimg3.webp' = 'portfolio/sales-automation-project-dashboard.webp'
-    'portfolio/portfolioimg4.webp' = 'portfolio/hubops-software-company-website_.webp'
-    'portfolio/portfolioimg5.webp' = 'portfolio/suave-outreach-crm-laptop_.webp'
+    'portfolio/portfolioimg4.webp' = 'portfolio/hubops-software-company-website.webp'
+    'portfolio/portfolioimg5.webp' = 'portfolio/suave-outreach-crm-laptop.webp'
     'portfolio/portfolioimg6.webp' = 'portfolio/ematrics-ai-sales-website.webp'
 
     # Blog
