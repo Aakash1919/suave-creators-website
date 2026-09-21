@@ -59,6 +59,9 @@
       <div class="faq-list">
         @foreach ($qa as $index => $item)
           <div class="faq-item{{ $index === 0 ? ' is-open' : '' }}">
+            @if ($questionHeading === 'h3')
+              <h3 class="faq-item__heading">
+            @endif
             <button type="button" class="faq-item__summary"
               aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
               aria-controls="faq-answer-{{ $item['number'] }}"
@@ -66,6 +69,9 @@
               <span>{{ $item['question'] }}</span>
               <i class="fa-solid fa-chevron-down faq-item__chevron" aria-hidden="true"></i>
             </button>
+            @if ($questionHeading === 'h3')
+              </h3>
+            @endif
             <div class="faq-item__answer" id="faq-answer-{{ $item['number'] }}" role="region"
               aria-labelledby="faq-question-{{ $item['number'] }}"
               aria-hidden="{{ $index === 0 ? 'false' : 'true' }}">

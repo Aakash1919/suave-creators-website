@@ -13,9 +13,11 @@
           </span>
         </div>
         <h2 id="{{ $headingId }}" class="home-type-h2 mt-4 text-2xl font-semibold text-white">{{ $title }}</h2>
-        <p class="mt-5 max-w-sm text-sm leading-5 text-[#B1B9DF]">
-          {{ $subtitle }}
-        </p>
+        @if (filled($subtitle))
+          <p class="mt-5 max-w-sm text-sm leading-5 text-[#B1B9DF]">
+            {{ $subtitle }}
+          </p>
+        @endif
       </div>
     </div>
 

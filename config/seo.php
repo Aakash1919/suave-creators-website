@@ -247,10 +247,11 @@ return [
             'og_description' => 'Have a software, web, CRM, ERP or AI project in mind? Contact Suave Creators for a free consultation and discuss your business requirements with our experts.',
         ],
         'services' => [
-            'title' => 'Software Development Services for B2B & SaaS Businesses',
-            'description' => 'Explore custom B2B & SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, & more.',
-            'og_title' => 'Software Development Services for B2B & SaaS Businesses',
-            'og_description' => 'Explore custom B2B & SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, & more.',
+            'title' => 'Custom Software, CRM & AI Development Services | Suave Creators',
+            'description' => 'Enterprise B2B software development services: custom CRM builder, scalable web apps, enterprise software, UI/UX, and AI solutions with 100% code ownership.',
+            'og_title' => 'Custom Software, CRM & AI Development Services | Suave Creators',
+            'og_description' => 'Enterprise B2B software development services: custom CRM builder, scalable web apps, enterprise software, UI/UX, and AI solutions with 100% code ownership.',
+            'json_ld_breadcrumb_name' => 'Services',
         ],
         'industries' => [
             'title' => 'Industry-Specific Software Development Solutions | Suave Creators',

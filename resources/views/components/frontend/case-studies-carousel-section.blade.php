@@ -40,7 +40,7 @@
                   </div>
                 @endif
                 <x-frontend.cta-button :href="$item['url']" class="case-studies-carousel__cta">
-                  {{ $ctaLabel }}
+                  {{ $item['cta'] !== '' ? $item['cta'] : $ctaLabel }}
                 </x-frontend.cta-button>
               </div>
               @if ($item['image'] !== '')
