@@ -6370,14 +6370,28 @@ right: max(0px, calc(50% - 580px));
 }
 
 .digital-solution-section__copy {
-  align-self: center;
+  align-self: stretch;
   color: #4d4d4d;
   font-size: 14px;
   grid-area: copy;
   line-height: 24px;
   margin: 16px 0 0;
-  max-width: 560px;
+  max-width: none;
   min-width: 0;
+  width: 100%;
+}
+
+.digital-solution-section__copy p {
+  margin: 0;
+}
+
+.digital-solution-section__lead {
+  color: #171717;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  margin: 0 0 10px;
 }
 
 @keyframes digital-solution-spin {
@@ -6386,10 +6400,6 @@ right: max(0px, calc(50% - 580px));
 }
 
 @media (min-width: 768px) {
-  .digital-solution-section {
-    padding: 120px 0 40px;
-  }
-
   .digital-solution-section__row {
     gap: 28px;
     margin-inline: auto;
@@ -6416,16 +6426,13 @@ right: max(0px, calc(50% - 580px));
 
   .digital-solution-section__copy {
     margin-top: 16px;
-    max-width: 780px;
+    max-width: none;
     text-align: center;
+    width: 100%;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  .digital-solution-section {
-    padding: 56px 0 40px;
-  }
-
   .digital-solution-section__title-top,
   .digital-solution-section__title-agency {
     font-size: clamp(2.25rem, 5.5vw, 3rem);
@@ -6433,15 +6440,11 @@ right: max(0px, calc(50% - 580px));
 }
 
 @media (min-width: 1024px) {
-  .digital-solution-section {
-    padding: 160px 0 40px;
-  }
-
   .digital-solution-section__row {
     gap: 32px;
     margin-inline: auto;
     max-width: 1040px;
-    padding-left: 160px;
+    padding-right: 160px;
     position: relative;
   }
 
@@ -6449,9 +6452,10 @@ right: max(0px, calc(50% - 580px));
     bottom: auto;
     display: flex;
     height: 120px;
-    left: 0;
+    left: auto;
     margin: 0;
     position: absolute;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     width: 120px;
@@ -6459,11 +6463,11 @@ right: max(0px, calc(50% - 580px));
   }
 
   .digital-solution-section__content {
-    column-gap: 28px;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-    "top top"
-    "agency copy";
+    "top"
+    "agency"
+    "copy";
     justify-content: start;
     justify-items: start;
     margin-inline: 0;
@@ -6480,9 +6484,10 @@ right: max(0px, calc(50% - 580px));
   .digital-solution-section__copy {
     font-size: 14px;
     line-height: 24px;
-    margin-top: 0;
-    max-width: 520px;
+    margin-top: 20px;
+    max-width: none;
     text-align: left;
+    width: 100%;
   }
 }
 
@@ -6495,16 +6500,12 @@ right: max(0px, calc(50% - 580px));
 @media (min-width: 1280px) {
   .digital-solution-section__row {
     max-width: 1180px;
-    padding-left: 180px;
+    padding-right: 180px;
   }
 
   .digital-solution-section__title-top,
   .digital-solution-section__title-agency {
     font-size: 5.75rem;
-  }
-
-  .digital-solution-section__copy {
-    max-width: 560px;
   }
 }
 /* ===== SERVICES LISTING END ===== */

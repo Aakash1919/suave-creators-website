@@ -2508,6 +2508,13 @@ main button.rounded-full.bg-gradient-to-r {
   transition: box-shadow 180ms ease;
 }
 
+.faq-item__heading {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
 .faq-item.is-open {
   background-image: linear-gradient(#2a4dfb 0 0),
     linear-gradient(#2a4dfb 0 0),
@@ -7827,3 +7834,352 @@ html {
 }
 
 /* ===== INLINE CONSULTATION FORM END ===== */
+
+/* ===== SERVICES LLMO START ===== */
+.services-llmo {
+  background: #f7f8fc;
+  padding: 24px 0;
+}
+
+.services-llmo__card {
+  border: 1px solid rgb(42 77 251 / 12%);
+  border-radius: 18px;
+  background: #010062;
+  box-shadow: 0 18px 40px rgb(36 36 84 / 6%);
+  padding: 22px 22px 24px;
+}
+
+.services-llmo__kicker {
+  color: #2a4dfb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.services-llmo__question {
+  color:white;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+
+.services-llmo__answer {
+  color:whitesmoke;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .services-llmo {
+    padding: 12px 0 32px;
+  }
+
+  .services-llmo__card {
+    padding: 28px 32px;
+  }
+
+  .services-llmo__question {
+    font-size: 22px;
+  }
+}
+
+.about-stats--lifecycle {
+  gap: 12px 0;
+  /* grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); */
+}
+
+.about-stats--lifecycle .about-stat {
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.about-stats--lifecycle .about-stat + .about-stat::before {
+  display: none;
+}
+
+.web-service-card__meta {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.web-service-card__number {
+  color: #2a4dfb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.web-service-card__flagship {
+  background: #eef1ff;
+  border-radius: 999px;
+  color: #2a4dfb;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+.web-service-card__tags {
+  color: #2a4dfb;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 6px 0 8px;
+}
+
+#core-services .web-service-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#core-services .web-service-card__link {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+section[aria-labelledby="tech-stack-title"] .technology-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+section[aria-labelledby="tech-stack-title"] .technology-card__cta {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.about-stat__value--title {
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.digital-solution-section {
+  background-color: #f7f8fc;
+  padding: 40px 0;
+}
+
+.digital-solution-section__row {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+.digital-solution-section__badge {
+  align-items: center;
+  display: none;
+  flex-shrink: 0;
+  height: 120px;
+  justify-content: center;
+  position: relative;
+  width: 120px;
+}
+
+.digital-solution-section__ring {
+  animation: digital-solution-spin 10s linear infinite;
+  display: block;
+  height: 120px;
+  width: 120px;
+}
+
+.digital-solution-section__icon {
+  height: 40px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+}
+
+.digital-solution-section__content {
+  align-items: baseline;
+  column-gap: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+  "top"
+  "agency"
+  "copy";
+  row-gap: 0;
+  width: 100%;
+}
+
+.digital-solution-section__title {
+  color: #0b1b3f;
+  display: contents;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.digital-solution-section__title-top,
+.digital-solution-section__title-agency {
+  font-family: "PP Mori", "Roboto Flex", ui-sans-serif, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+.digital-solution-section__title-top {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  grid-area: top;
+}
+
+.digital-solution-section__title-agency {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  grid-area: agency;
+  white-space: nowrap;
+}
+
+.digital-solution-section__copy {
+  align-self: stretch;
+  color: #4d4d4d;
+  font-size: 14px;
+  grid-area: copy;
+  line-height: 24px;
+  margin: 16px 0 0;
+  max-width: none;
+  min-width: 0;
+  width: 100%;
+}
+
+.digital-solution-section__copy p {
+  margin: 0;
+}
+
+.digital-solution-section__lead {
+  color: #171717;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  margin: 0 0 10px;
+}
+
+@keyframes digital-solution-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (min-width: 768px) {
+  .digital-solution-section__row {
+    gap: 28px;
+    margin-inline: auto;
+    max-width: 860px;
+  }
+
+  .digital-solution-section__content {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+    "top"
+    "agency"
+    "copy";
+    justify-items: center;
+    margin-inline: auto;
+    row-gap: 0;
+    text-align: center;
+  }
+
+  .digital-solution-section__title-top,
+  .digital-solution-section__title-agency {
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    text-align: center;
+  }
+
+  .digital-solution-section__copy {
+    margin-top: 16px;
+    max-width: none;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .digital-solution-section__title-top,
+  .digital-solution-section__title-agency {
+    font-size: clamp(2.25rem, 5.5vw, 3rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .digital-solution-section__row {
+    gap: 32px;
+    margin-inline: auto;
+    max-width: 1040px;
+    padding-right: 160px;
+    position: relative;
+  }
+
+  .digital-solution-section__badge {
+    bottom: auto;
+    display: flex;
+    height: 120px;
+    left: auto;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    z-index: 1;
+  }
+
+  .digital-solution-section__content {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+    "top"
+    "agency"
+    "copy";
+    justify-content: start;
+    justify-items: start;
+    margin-inline: 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .digital-solution-section__title-top,
+  .digital-solution-section__title-agency {
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    text-align: left;
+  }
+
+  .digital-solution-section__copy {
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 20px;
+    max-width: none;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .digital-solution-section__ring {
+    animation: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .digital-solution-section__row {
+    max-width: 1180px;
+    padding-right: 180px;
+  }
+
+  .digital-solution-section__title-top,
+  .digital-solution-section__title-agency {
+    font-size: 5.75rem;
+  }
+}
+/* ===== SERVICES LLMO END ===== */

@@ -20,7 +20,7 @@
         for Global Businesses
       </h1>
       <p class="mb-0 mt-1 max-w-xl text-[14px] leading-5 text-[#4D4D4D]">
-        Explore custom B2B &amp; SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, &amp; more.
+        Explore custom B2B &amp; SaaS software development services from Suave Creators, including web applications, enterprise software, CRM, UI/UX, AI solutions, and cloud engineering with 100% code ownership.
       </p>
       <div class="mt-5 flex flex-col items-start gap-4">
         <x-frontend.inline-consultation-form
@@ -28,20 +28,28 @@
           placeholder="Enter your phone or email"
           button-text="Get Free Consultation"
           :secondary-href="$demoHref"
-          secondary-label="Schedule a discovery call" />
-        {{-- <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
-          <a href="#core-services" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
-            Explore Our Services
-          </a>
-          <a href="{{ route('product') }}" class="banner-text-link items-end border-b border-[#111827]/70 pb-0.5 text-[13px] font-semibold leading-[18px] text-[#111827] sm:text-sm">
-            Explore Suave Outreach CRM
-          </a>
-        </div> --}}
+          secondary-label="Schedule a Discovery Call →" />
       </div>
     </div>
   </div>
 </section>
 <!-- 1. Hero Section End -->
+
+<!-- LLMO Direct Answer Callout Start -->
+<section class="full-bleed services-llmo" aria-labelledby="services-llmo-question">
+  <div class="section-inner">
+    <div class="services-llmo__card">
+      <p class="services-llmo__kicker">Direct Answer</p>
+      <h2 id="services-llmo-question" class="services-llmo__question">
+        What software development services does Suave Creators provide?
+      </h2>
+      <p class="services-llmo__answer">
+        Suave Creators provides full-cycle custom software engineering services for global businesses across six core capabilities: custom web application development, enterprise software &amp; ERP solutions, UI/UX product design, bespoke CRM development, transactional e-commerce engineering, and production AI solutions. Governed under United States contracts from Sheridan, Wyoming with a dedicated engineering center in Palampur, India, Suave Creators delivers scalable, single-tenant software with 100% intellectual property ownership and up to 60% total cost of ownership (TCO) savings.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- LLMO Direct Answer Callout End -->
 
 <!-- 2. Digital Solution Agency Section Start -->
 <section class="full-bleed digital-solution-section" aria-labelledby="digital-solution-title">
@@ -52,17 +60,18 @@
         <img src="{{ asset('assets/icons/circular-icon.png') }}" alt="Circular Icon for Suave Creators software development" title="Circular Icon for Suave Creators software development" class="digital-solution-section__icon" width="40" height="40">
       </div>
       <div class="digital-solution-section__content">
-        <h2 id="digital-solution-title" class="digital-solution-section__title">
+        <p class="digital-solution-section__title">
           <span class="digital-solution-section__title-top">Digital solution</span>
-          <span class="digital-solution-section__title-agency">agency</span>
-        </h2>
-        <p class="digital-solution-section__copy">
-          Let&rsquo;s transform your business with custom software and digital development services. At Suave
-          Creators, we build websites and trust by developing top-notch digital products. Our custom offshore
-          development services are a merger of cost-effective and innovative design solutions that drive digital
-          transformation. Our expert team focuses on reducing operational costs and enhancing mobile and cloud
-          capabilities for businesses of all sizes.
+          <span class="digital-solution-section__title-agency">engineering</span>
         </p>
+        <div class="digital-solution-section__copy">
+          <h2 id="digital-solution-title" class="digital-solution-section__lead">
+            Transform Your Business Operations with Custom Software Engineering
+          </h2>
+          <p>
+            At Suave Creators, we build software that turns complex operational bottlenecks into competitive advantages. Our cross-border development services merge cost-effective engineering with enterprise-grade software architecture. Rather than forcing your business into rigid off-the-shelf software or expensive monthly seat licenses, our team engineers scalable platforms that reduce overhead, enhance cloud performance, and accelerate commercial growth.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -78,20 +87,20 @@
         Expertise
       </p>
       <h2 id="expertise-title" class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:text-[18px] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
-        We Build impactful solutions through web design and development.
+        We Build Impactful Digital Solutions Through Systematic Engineering
       </h2>
     </header>
 
-    <div class="about-stats">
+    <div class="about-stats about-stats--lifecycle">
       @foreach ($expertiseItems as $item)
         <article class="about-stat"
-          style="--stat-accent: {{ $item[3] }}; --stat-tint: {{ $item[4] }};">
+          style="--stat-accent: {{ $item['accent'] }}; --stat-tint: {{ $item['tint'] }};">
           <span class="about-stat__icon">
-            <img src="{{ asset($item[0]) }}" alt="{{ $item[5] ?? $item[1] }}" title="{{ $item[5] ?? $item[1] }}" class="about-stat__icon-image" width="40" height="40" decoding="async" loading="lazy">
+            <img src="{{ asset($item['icon']) }}" alt="{{ $item['alt'] }}" title="{{ $item['alt'] }}" class="about-stat__icon-image" width="40" height="40" decoding="async" loading="lazy">
           </span>
           <div class="about-stat__content">
-            <strong class="about-stat__value about-stat__value--title">{{ $item[1] }}</strong>
-            <p class="about-stat__description">{{ $item[2] }}</p>
+            <strong class="about-stat__value about-stat__value--title">{{ $item['title'] }}</strong>
+            <p class="about-stat__description">{{ $item['description'] }}</p>
           </div>
         </article>
       @endforeach
@@ -121,29 +130,39 @@
           Our Core Services
         </h2>
         <p class="text-[14px] leading-5 text-[#4D4D4D]">
-          A complete offshore development suite covering web, software, design, CRM, e-commerce and AI &mdash;
-          everything you need under one roof.
+          A complete software development suite covering web applications, bespoke CRM systems, enterprise ERPs, design, e-commerce, and artificial intelligence&mdash;everything you need under one engineering roof.
         </p>
       </div>
     </header>
 
     <div class="web-services__grid">
       @foreach ($servicesData as $service)
-        <a href="{{ $service[4] }}" class="web-service-card block">
-          <span class="web-service-card__icon web-service-card__icon--lg web-service-card__icon--{{ $service[5] }}">
-            <img src="{{ asset($service[0]) }}" alt="{{ $service[1] }}" title="{{ $service[1] }}" width="28" height="28">
+        <a href="{{ $service['href'] }}" class="web-service-card">
+          <span class="web-service-card__meta">
+            @if ($service['flagship'])
+              <span class="web-service-card__flagship">Flagship Offering</span>
+            @endif
+          </span>
+          <span class="web-service-card__icon web-service-card__icon--lg web-service-card__icon--{{ $service['color'] }}">
+            <img src="{{ asset($service['icon']) }}" alt="{{ $service['title'] }} service icon" title="{{ $service['title'] }} service icon" width="28" height="28">
           </span>
 
           <div class="web-service-card__category">
             <h3 class="text-[14px] font-semibold leading-[18px] text-[#171717]">
-              {{ $service[1] }}
+              {{ $service['number'] }}. {{ $service['title'] }}
             </h3>
           </div>
 
-          <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $service[2] }}</p>
+          @if (count($service['tags']) > 0)
+            <p class="web-service-card__tags">
+              {{ implode(' | ', $service['tags']) }}
+            </p>
+          @endif
 
-          <span class="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
-            {{ $service[3] }}
+          <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $service['description'] }}</p>
+
+          <span class="web-service-card__link inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
+            {{ $service['cta'] }}
             <svg xmlns="https://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
               stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M18 8L22 12L18 16" />
@@ -155,8 +174,8 @@
     </div>
 
     <div class="web-services__footer">
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Discuss your Requirements</a>
-      <a href="{{ route('product') }}">Explore Suave Outreach CRM</a>
+      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Discuss Your Requirements</a>
+      <a href="{{ route('product') }}">Explore Suave Outreach CRM →</a>
     </div>
   </div>
 </section>
@@ -167,6 +186,7 @@
   :title="$connectCta['title']"
   :description="$connectCta['description']"
   :primary-label="$connectCta['primaryLabel']"
+  :secondary-label="$connectCta['secondaryLabel']"
   title-id="services-cta-title"
 />
 
@@ -184,8 +204,7 @@
         Why Global Businesses Choose Our Offshore Services
       </h2>
       <p class="mx-auto mt-4 max-w-[620px] text-[14px] leading-5 text-[#4D4D4D]">
-        Our Offshore services provide a flexible and scalable solution for your business needs. You can easily
-        adjust your service requirements up or down as and when needed.
+        Our cross-border engineering model combines the security and contract governance of our US corporate headquarters with the technical scale and cost efficiency of our dedicated development center.
       </p>
     </header>
 
@@ -216,7 +235,7 @@
         placeholder="Enter your phone or email"
         button-text="Get Free Consultation"
         :secondary-href="$demoHref"
-        secondary-label="Book a Call" />
+        secondary-label="Book a Call via Calendar →" />
     </div>
   </div>
 </section>
@@ -247,9 +266,9 @@
           <img src="{{ asset($tech[0]) }}" alt="{{ $tech[1] }} technology icon for Suave Creators software development" title="{{ $tech[1] }} technology icon for Suave Creators software development" class="relative h-10 w-10 object-contain" loading="lazy">
           <h3 class="relative mt-3 text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $tech[1] }}</h3>
           <p class="relative mt-2 pr-5 text-[14px] leading-5 text-[#4D4D4D]">{{ $tech[2] }}</p>
-          <a href="{{ route('services') }}"
-            class="relative mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
-            Get Started
+          <a href="{{ $tech[4] }}"
+            class="technology-card__cta relative inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
+            Get Started 
             <svg xmlns="https://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
               stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M18 8L22 12L18 16" />
@@ -266,16 +285,19 @@
 <x-frontend.industries-section
   :cards="$processCards"
   eyebrow="Our Process"
-  title="Our process guides you step by step towards achieving success"
-  description="We follow a clear, collaborative process that takes your idea from research to a fully functional, high-performing product."
+  title="A Proven Engineering Process That Drives Predictable Success"
+  description="We follow a disciplined, transparent agile methodology that takes your project from discovery to deployment on time and within budget."
   heading-id="services-process-title"
   class="py-6 lg:py-[80px]"
 />
 <x-frontend.faq-section
+  id="faq"
   :qa="$faqs"
   heading-id="services-faq-heading"
-  eyebrow="Have questions about our Web Services?"
-  description="Here are the most asked questions about our offshore web, software and digital development services."
+  eyebrow="Have questions about our services?"
+  title="Frequently Asked Questions: Delivery, Pricing & Code Ownership"
+  description="Here are answers to the most common questions regarding our software engineering, delivery models, and code ownership."
+  question-heading="h3"
   class="faq-section--align bg-cover bg-top bg-no-repeat"
   style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}')"
 />
@@ -288,24 +310,33 @@
   :title="$consultation['title']"
   :description="$consultation['description']"
   :cta-label="$consultation['ctaLabel']"
+  :secondary-cta-label="$consultation['secondaryCtaLabel']"
   card-position="center"
   :allow-html-title="false"
 />
 
-<x-frontend.testimonials-section heading-id="services-testimonials-title" class="py-6 lg:py-24" />
+<x-frontend.testimonials-section
+  heading-id="services-testimonials-title"
+  class="py-6 lg:py-24"
+  eyebrow="CLIENT FEEDBACK"
+  title="Verified Feedback from Founders & Engineering Partners"
+  subtitle=""
+/>
 
 <x-frontend.case-studies-carousel-section
-  :items="\App\Support\Frontend\CaseStudySupport::servicesPageItems()"
+  :items="$caseStudies"
   heading-id="services-case-studies-title"
-  title="Case studies from our services"
+  eyebrow="Case Study"
+  title="Selected Delivery Stories from Our Practice Areas"
   subtitle="Selected delivery stories that show how we design and ship software across our practice areas."
 />
 
 <x-frontend.articles-insights-section
   :items="$articles"
   heading-id="services-insights-title"
-  title="Explore Our Latest Insights"
-  subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
+  eyebrow="Blogs and Insights"
+  title="Explore Our Latest Technical Insights"
+  subtitle=""
   section-class="section-pad-m py-6 lg:py-18"
   more-href="{{ route('blogs') }}"
   more-label="View all blog articles"
@@ -356,6 +387,11 @@
     line-height: 20px;
   }
 
+  #digital-solution-title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
   .about-stat__value--title {
     font-size: 14px !important;
     letter-spacing: -0.025em;
@@ -369,4 +405,3 @@
 }
 </style>
 @endpush
-

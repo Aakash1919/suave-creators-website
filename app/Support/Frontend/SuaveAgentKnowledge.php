@@ -43,7 +43,7 @@ class SuaveAgentKnowledge
     public static function servicesCatalog(): array
     {
         return array_map(static function (array $row): array {
-            $url = (string) ($row[4] ?? '');
+            $url = (string) ($row['href'] ?? $row[4] ?? '');
             $slug = null;
             if (preg_match('~/services?/([^/?#]+)~', $url, $matches) === 1) {
                 $slug = $matches[1];
@@ -51,8 +51,8 @@ class SuaveAgentKnowledge
 
             return [
                 'slug' => $slug,
-                'title' => (string) ($row[1] ?? ''),
-                'summary' => (string) ($row[2] ?? ''),
+                'title' => (string) ($row['title'] ?? $row[1] ?? ''),
+                'summary' => (string) ($row['description'] ?? $row[2] ?? ''),
                 'url' => $url !== '' ? $url : null,
             ];
         }, ServiceSupport::servicesData());

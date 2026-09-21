@@ -30,6 +30,7 @@ class FaqSection extends Component
         public string $ctaHref = '',
         public string $ctaLabel = 'Get Free Consultation',
         public bool $showCta = true,
+        public string $questionHeading = '',
     ) {
         $this->media = filled($this->media) ? $this->normalizeAssetPath($this->media) : null;
 
