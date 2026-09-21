@@ -11,11 +11,6 @@ use Throwable;
 class BlogHtmlSupport
 {
     /**
-     * Inline SVG larger than this (bytes) is extracted to a file.
-     */
-    public const LARGE_SVG_BYTES = 8192;
-
-    /**
      * Void / self-closing tags that are never treated as empty-content wrappers.
      */
     protected const VOID_TAGS = 'area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr';
@@ -134,7 +129,7 @@ class BlogHtmlSupport
     }
 
     /**
-     * Extract Base64 / data-URI / oversized inline SVG, fill empty alts, drop empty tags,
+     * Extract Base64 / data-URI / inline SVG, fill empty alts, drop empty tags,
      * and normalize article headings to H2 → H3 (page H1 stays in the Blade hero).
      *
      * @return array{
@@ -170,7 +165,7 @@ class BlogHtmlSupport
         $imagesWritten += $cssResult['images_written'];
         $failures += $cssResult['failures'];
 
-        $svgResult = self::rewriteLargeInlineSvgs($html, $slug, $title, $disk, $dryRun, $index, $messages);
+        $svgResult = self::rewriteInlineSvgs($html, $slug, $title, $disk, $dryRun, $index, $messages);
         $html = $svgResult['content'];
         $imagesWritten += $svgResult['images_written'];
         $failures += $svgResult['failures'];
@@ -180,6 +175,7 @@ class BlogHtmlSupport
         $html = self::wrapBareTables($html);
         $html = self::decorateContentImages($html, $title);
         $html = self::normalizeArticleHeadings($html, $title);
+        $html = self::stripInlineFonts($html);
 
         return [
             'content' => $html,
@@ -207,6 +203,41 @@ class BlogHtmlSupport
         $html = self::convertStyledHeadingParagraphs($html);
 
         return $html;
+    }
+
+    /**
+     * Drop pasted typefaces so article copy uses the site font (PP Mori / Roboto Flex).
+     * Leaves font-size / font-weight so heading promotion can still read them first.
+     */
+    public static function stripInlineFonts(string $html): string
+    {
+        if ($html === '') {
+            return $html;
+        }
+
+        $html = (string) preg_replace('/<style\b[^>]*>.*?<\/style>/is', '', $html);
+        $html = (string) preg_replace('/<\/?font\b[^>]*>/i', '', $html);
+        $html = (string) preg_replace('/\sface\s*=\s*(["\'])[^"\']*\1/i', '', $html);
+
+        $updated = preg_replace_callback(
+            '/\sstyle\s*=\s*(["\'])(.*?)\1/is',
+            static function (array $matches): string {
+                $quote = $matches[1];
+                $css = $matches[2];
+                $css = (string) preg_replace('/(?:^|;)\s*font-family\s*:[^;]*/i', '', $css);
+                $css = trim($css, " \t\n\r;");
+                $css = trim((string) preg_replace('/\s*;\s*/', '; ', $css), " \t;");
+
+                if ($css === '') {
+                    return '';
+                }
+
+                return ' style='.$quote.$css.$quote;
+            },
+            $html
+        );
+
+        return is_string($updated) ? $updated : $html;
     }
 
     /**
@@ -720,10 +751,12 @@ class BlogHtmlSupport
     }
 
     /**
+     * Extract inline `<svg>` markup to a public-disk file (any size, including embedded data: images).
+     *
      * @param  list<string>  $messages
      * @return array{content: string, images_written: int, failures: int}
      */
-    protected static function rewriteLargeInlineSvgs(
+    protected static function rewriteInlineSvgs(
         string $html,
         string $slug,
         string $title,
@@ -757,10 +790,6 @@ class BlogHtmlSupport
                 &$messages,
             ): string {
                 $svg = $matches[0];
-                $isHuge = strlen($svg) >= self::LARGE_SVG_BYTES || str_contains($svg, 'data:image');
-                if (! $isHuge) {
-                    return $svg;
-                }
 
                 $stored = self::storeImageBinary(
                     $svg,

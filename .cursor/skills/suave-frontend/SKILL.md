@@ -8,7 +8,7 @@ description: >-
   Requires categorized asset paths and post-change verification. For admin /
   RBAC use suave-admin. For broken image/URL/section checks use frontend-audit.
 metadata:
-  last-updated: "2026-09-18"
+  last-updated: "2026-09-21"
 ---
 
 # Suave Frontend
@@ -96,6 +96,7 @@ Follow Laravel conventions (PSR-12). Do not invent a parallel style guide.
 - `config()` in application code; `env()` only inside `config/*.php`
 - Keep `routes/*.php` declarative (route list + one-line named redirects). No domain logic in the route file
 - Eloquent models for persisted data — do not add a query-builder-only parallel when a model exists
+- Blog cards/listings (`BlogSupport::posts()`, `articleCards()`, index pagination) must use `Blog::forListing()` — never select `content` / `toc` / `faqs`. Load full HTML only in `post()` / `showData()` for the current article
 
 ## SuaveAgent (floating chat)
 
@@ -202,7 +203,7 @@ Full old→new tables: [reference.md](reference.md).
 | `scripts/audit-frontend.php` | Broken images + internal URL / page status audit (`frontend-audit`) |
 | `scripts/audit-img-alts.php` | Alt/title audit against rendered `/` |
 | `scripts/build-fa-subset.php` | Regenerate Font Awesome subset CSS when icon usage changes |
-| `scripts/split-deferred-css.php` | Regenerate `style-deferred.css` from marked sections in `style.css` (includes `SINGLE BLOG`) |
+| `scripts/split-deferred-css.php` | Move marked sections from `style.css` into `style-deferred.css`. Re-runs **preserve** sections that already live only in the deferred file (including `SINGLE BLOG`) so they are not wiped |
 | `scripts/generate-product-og-banner.php` | Regenerate product OG banner when hero changes |
 
 When renaming: update both JSON maps, rewrite code refs, then verify. Prefer explicit map entries over heuristic `*-N` prefix rewrites for brand logos.
@@ -250,8 +251,8 @@ Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSu
 ## Layout / CSS
 
 - Marketing layout: Tailwind **3.4.17** via Vite (`@vite('resources/css/app.css')`) + Font Awesome subset + `asset('css/style.css')` (+ `style-deferred.css` on non-home pages)
-- **Single blog:** CSS lives in `public/css/style-deferred.css` under `/* ===== SINGLE BLOG START/END ===== */` — do not inline a `@push('custom-css')` block in `single-blog.blade.php`. Share widget JS is `public/js/blog-share.js`. Sidebar is Categories + Top Posts only (no More Articles swiper). FAQ chrome title on articles is `Frequently Asked Questions`. Article tables are wrapped in `.blog-table-wrap` (`BlogHtmlSupport::wrapBareTables` on sanitize + render) so they scroll horizontally on mobile instead of clipping. Ancestors of tables (`*:has(> table)` / `*:has(> .blog-table-wrap)`) are capped at `max-width: 100%; min-width: 0` so pasted Google Docs / Tailwind `w-fit` flex wrappers cannot expand past the article and get clipped by `overflow-x: clip`. Stored article outline is H2 → H3 (`BlogHtmlSupport::normalizeArticleHeadings` on save); the page H1 stays in the Blade hero. On mobile (`max-width: 767px`), blog listing + single-blog heroes/sections override the generic `.site-main>.site-container.relative` padding (`2rem`/`3rem`) so extra top/bottom space is removed — keep those selectors more specific than the hero shell.
-- **Security headers:** `App\Http\Middleware\SecurityHeaders` on the web stack (also mirrored in `public/.htaccess`). Marketing pages send CSP **Report-Only** only — do not switch to enforcing CSP without reviewing reports
+- **Single blog:** CSS lives in `public/css/style-deferred.css` under `/* ===== SINGLE BLOG START/END ===== */` — do not inline a `@push('custom-css')` block in `single-blog.blade.php`. Share widget JS is `public/js/blog-share.js`. Sidebar is Categories + Top Posts only (no More Articles swiper). FAQ chrome title on articles is `Frequently Asked Questions`. Article tables are wrapped in `.blog-table-wrap` (`BlogHtmlSupport::wrapBareTables` on sanitize + render) so they scroll horizontally on mobile instead of clipping. Ancestors of tables (`*:has(> table)` / `*:has(> .blog-table-wrap)`) are capped at `max-width: 100%; min-width: 0` so pasted Google Docs / Tailwind `w-fit` flex wrappers cannot expand past the article and get clipped by `overflow-x: clip`. Stored article outline is H2 → H3 (`BlogHtmlSupport::normalizeArticleHeadings` on save); the page H1 stays in the Blade hero. Pasted typefaces are stripped (`BlogHtmlSupport::stripInlineFonts` on save + render) so copy uses `--site-font`; `.single-blog-content * { font-family: inherit !important }` beats leftover inline `font-family`. On mobile (`max-width: 767px`), blog listing + single-blog heroes/sections override the generic `.site-main>.site-container.relative` padding (`2rem`/`3rem`) so extra top/bottom space is removed — keep those selectors more specific than the hero shell.
+- **Security headers:** `App\Http\Middleware\SecurityHeaders` on the web stack. `public/.htaccess` mirrors nosniff / X-Frame-Options / Referrer-Policy / HSTS. CSP **Report-Only** is PHP-only — do not switch to enforcing CSP without reviewing reports
 - **Render-blocking:** load those sheets with `media="print" onload="this.media='all'"` (Vite via `Vite::useStyleTagAttributes` when not in HMR). Keep a small inline critical CSS block in `layouts/frontend.blade.php` for the hero LCP shell. Do not reintroduce sync `<link rel="stylesheet">` for those files on the critical path.
 - Swiper CSS/JS: lazy via `frontend-deferred.js` when `.swiper` is near the viewport — not global head links
 - Pin `tailwindcss` to `3.4.17` (matches former Play CDN); PostCSS + `tailwind.config.js` — not `@tailwindcss/vite` / v4

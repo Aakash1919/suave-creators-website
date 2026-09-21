@@ -5,6 +5,14 @@
   --color-brand-start: #2a4dfb;
 }
 
+body {
+  font-family: "PP Mori", "Roboto Flex", ui-sans-serif, system-ui, sans-serif;
+}
+
+body *:not(i):not([class^="fa"]):not([class*=" fa"]) {
+  font-family: inherit !important;
+}
+
 .blog-table-wrap,
 .blog-chart,
 .blog-insight,

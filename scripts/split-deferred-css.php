@@ -26,21 +26,62 @@ $deferredMarkers = [
     'SERVICES LISTING',
 ];
 
-$pattern = '/\/\* ===== ('.implode('|', array_map(static fn (string $marker): string => preg_quote($marker, '/'), $deferredMarkers)).') START ===== \*\/.*?\/\* ===== \1 END ===== \*\//s';
+$sectionPattern = '/\/\* ===== (.+?) START ===== \*\/.*?\/\* ===== \1 END ===== \*\//s';
 
-preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
+/**
+ * @return array<string, string>
+ */
+$extractSections = static function (string $css) use ($sectionPattern): array {
+    if ($css === '' || ! preg_match_all($sectionPattern, $css, $matches)) {
+        return [];
+    }
 
-if ($matches[0] === []) {
-    fwrite(STDERR, "No deferred CSS sections matched.\n");
+    $sections = [];
+    foreach ($matches[1] as $i => $name) {
+        $sections[$name] = $matches[0][$i];
+    }
+
+    return $sections;
+};
+
+$fromSource = $extractSections($content);
+$existingDeferred = is_readable($deferred) ? (string) file_get_contents($deferred) : '';
+$fromDeferred = $extractSections($existingDeferred);
+
+$extractedFromSource = [];
+foreach ($deferredMarkers as $marker) {
+    if (isset($fromSource[$marker])) {
+        $extractedFromSource[$marker] = $fromSource[$marker];
+    }
+}
+
+$merged = $fromDeferred;
+foreach ($extractedFromSource as $name => $chunk) {
+    $merged[$name] = $chunk;
+}
+
+if ($merged === []) {
+    fwrite(STDERR, "No deferred CSS sections matched in style.css or style-deferred.css.\n");
     exit(1);
 }
 
-$deferredChunks = array_map(static fn (array $match): string => $match[0], $matches[0]);
+$ordered = [];
+foreach ($deferredMarkers as $marker) {
+    if (isset($merged[$marker])) {
+        $ordered[] = $merged[$marker];
+        unset($merged[$marker]);
+    }
+}
+foreach ($merged as $chunk) {
+    $ordered[] = $chunk;
+}
+
 $deferredCss = "/* Deferred marketing CSS — page-specific sections; load non-blocking on the homepage. */\n\n"
-    .implode("\n\n", $deferredChunks)
+    .implode("\n\n", $ordered)
     ."\n";
 
-$coreCss = preg_replace($pattern, '', $content);
+$extractPattern = '/\/\* ===== ('.implode('|', array_map(static fn (string $marker): string => preg_quote($marker, '/'), $deferredMarkers)).') START ===== \*\/.*?\/\* ===== \1 END ===== \*\//s';
+$coreCss = preg_replace($extractPattern, '', $content);
 $coreCss = preg_replace("/\n{3,}/", "\n\n", (string) $coreCss);
 
 file_put_contents($deferred, $deferredCss);

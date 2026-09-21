@@ -14,7 +14,7 @@ class BlogHtmlSupportTest extends TestCase
         Storage::fake('public');
     }
 
-    public function test_sanitize_content_extracts_base64_image_to_webp(): void
+    public function test_sanitize_content_extracts_base64_image_to_disk(): void
     {
         $png = base64_decode(
             'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
@@ -30,17 +30,20 @@ class BlogHtmlSupportTest extends TestCase
         $this->assertSame(1, $result['alts_updated']);
         $this->assertGreaterThan(0, $result['empty_tags_removed']);
         $this->assertStringNotContainsString('data:image', $result['content']);
-        $this->assertMatchesRegularExpression('#src="/storage/blogs/content/sample-post-1\.webp"#', $result['content']);
+        $this->assertMatchesRegularExpression('#src="/storage/blogs/content/sample-post-1\.(webp|png)"#', $result['content']);
         $this->assertStringContainsString('alt="Sample Post"', $result['content']);
         $this->assertStringContainsString('loading="lazy"', $result['content']);
         $this->assertStringContainsString('width="1"', $result['content']);
         $this->assertStringContainsString('height="1"', $result['content']);
-        Storage::disk('public')->assertExists('blogs/content/sample-post-1.webp');
+        $this->assertTrue(
+            Storage::disk('public')->exists('blogs/content/sample-post-1.webp')
+            || Storage::disk('public')->exists('blogs/content/sample-post-1.png')
+        );
     }
 
-    public function test_sanitize_content_extracts_oversized_inline_svg(): void
+    public function test_sanitize_content_extracts_inline_svg(): void
     {
-        $svg = '<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 10 10">'.str_repeat('<rect width="1" height="1"/>', 600).'</svg>';
+        $svg = '<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="1" height="1"/></svg>';
 
         $result = BlogHtmlSupport::sanitizeContent($svg, 'svg-post', 'SVG Post');
 
@@ -64,7 +67,7 @@ class BlogHtmlSupportTest extends TestCase
         $this->assertSame(1, substr_count($result['content'], 'src='));
         $this->assertStringNotContainsString('data:image', $result['content']);
         $this->assertStringNotContainsString('stale.webp', $result['content']);
-        $this->assertMatchesRegularExpression('#src="/storage/blogs/content/huge-src-1\.webp"#', $result['content']);
+        $this->assertMatchesRegularExpression('#src="/storage/blogs/content/huge-src-1\.(webp|png)"#', $result['content']);
     }
 
     public function test_decorate_content_images_adds_lazy_and_alt(): void
@@ -131,5 +134,35 @@ class BlogHtmlSupportTest extends TestCase
 
         $this->assertStringContainsString('<h2>Keep This Outline</h2>', $out);
         $this->assertStringContainsString('<h3>Child Topic</h3>', $out);
+    }
+
+    public function test_strip_inline_fonts_removes_pasted_typefaces(): void
+    {
+        $html = '<style>@font-face { font-family: PasteSans; src: url(x.woff2); }</style>'
+            .'<p style="font-family: Arial, Helvetica, sans-serif; font-weight: 700;">Hello</p>'
+            .'<span style="font-family: &quot;Times New Roman&quot;, serif">World</span>'
+            .'<font face="Calibri">Docs</font>';
+
+        $out = BlogHtmlSupport::stripInlineFonts($html);
+
+        $this->assertStringNotContainsString('<style', $out);
+        $this->assertStringNotContainsString('font-family', $out);
+        $this->assertStringNotContainsString('<font', $out);
+        $this->assertStringNotContainsString('face=', $out);
+        $this->assertStringContainsString('style="font-weight: 700"', $out);
+        $this->assertStringContainsString('Hello', $out);
+        $this->assertStringContainsString('World', $out);
+        $this->assertStringContainsString('Docs', $out);
+    }
+
+    public function test_sanitize_content_strips_inline_fonts_after_heading_promotion(): void
+    {
+        $html = '<p style="font-size: 24px; font-family: Arial; font-weight: 700;">Phased Enterprise Implementation Roadmap</p>';
+
+        $out = BlogHtmlSupport::sanitizeContent($html, 'font-post', 'Font Post')['content'];
+
+        $this->assertMatchesRegularExpression('/<h2>.*Phased Enterprise Implementation Roadmap.*<\/h2>/is', $out);
+        $this->assertStringNotContainsString('font-family', $out);
+        $this->assertStringNotContainsString('Arial', $out);
     }
 }

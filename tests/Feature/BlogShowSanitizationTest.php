@@ -114,6 +114,40 @@ class BlogShowSanitizationTest extends TestCase
         $this->assertStringContainsString('<div class="blog-table-wrap"><table>', $response->getContent());
     }
 
+    public function test_published_blog_strips_inline_font_family(): void
+    {
+        $author = User::factory()->create();
+
+        $category = BlogCategory::query()->create([
+            'name' => 'Artificial Intelligence',
+            'slug' => 'artificial-intelligence',
+            'sort_order' => 1,
+        ]);
+
+        Blog::query()->create([
+            'blog_category_id' => $category->id,
+            'created_by_id' => $author->id,
+            'slug' => 'inline-font-paste',
+            'title' => 'Inline Font Paste',
+            'short_description' => 'Pasted Google Docs fonts should not leak onto the article.',
+            'content' => '<p style="font-family: Arial, Helvetica, sans-serif; color: #111111;">Hello site font.</p><font face="Times New Roman">Pasted docs typeface</font>',
+            'status' => Blog::STATUS_PUBLISHED,
+            'published_at' => now()->subDay(),
+        ]);
+
+        $response = $this->get(route('blog.show', [
+            'slug' => 'inline-font-paste',
+        ]));
+
+        $response->assertOk();
+        $html = $response->getContent();
+        $this->assertStringNotContainsString('Arial', $html);
+        $this->assertStringNotContainsString('Times New Roman', $html);
+        $this->assertStringNotContainsString('<font', $html);
+        $this->assertStringContainsString('Hello site font.', $html);
+        $this->assertStringContainsString('Pasted docs typeface', $html);
+    }
+
     public function test_marketing_pages_send_security_headers(): void
     {
         $response = $this->get(route('home'));
