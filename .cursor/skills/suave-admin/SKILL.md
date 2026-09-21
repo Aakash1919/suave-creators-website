@@ -10,7 +10,7 @@ description: >-
   route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
   Permission. Read before any admin change.
 metadata:
-  last-updated: "2026-09-17"
+  last-updated: "2026-09-21"
 ---
 
 # Suave Admin
@@ -56,7 +56,7 @@ Follow [`system-coding-standards`](../system-coding-standards/SKILL.md) and Pint
 
 | Service | Responsibility |
 |---------|----------------|
-| `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads, `normalizeVisualHtml()` on save |
+| `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads, `normalizeVisualHtml()` + `BlogHtmlSupport::sanitizeContent()` on save (extract Base64/inline SVG to `storage/app/public/blogs/content`, WebP when possible, fill empty alts, drop empty tags, wrap bare tables in `.blog-table-wrap`, unwrap nested headings, drop a duplicate lead title, promote body H3→H2 when the article has no H2, strip pasted `font-family` / `<font>` / `@font-face` so articles use the site typeface) |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization, service/industry placement slug lists. **No AI drafts** — content is editor-filled only |
@@ -352,13 +352,14 @@ One-off maintenance commands live under `app/Console/Commands/RunOnce/` with sig
 
 | Command | Purpose |
 |---------|---------|
-| `run-once:sanitize-blog` | Sanitize blog `content`: extract `data:image/…;base64,…` to `storage/app/public/blogs/content/{slug}-{n}.{ext}`, set `img` `alt` to the blog title, remove empty tags (`<p></p>`, `<span>&nbsp;</span>`, `<h2><br></h2>`, nested empties, etc.), and print a table of sanitized blog URLs |
+| `run-once:sanitize-blog` | Sanitize blog `content` via `BlogHtmlSupport` (same path as admin save): extract `data:image/…` and inline SVG to `storage/app/public/blogs/content/{slug}-{n}.webp` (SVG keeps `.svg`; other types WebP when possible), fill empty `img` `alt`s, add width/height/lazy when the file is local, remove empty tags, unwrap nested headings, drop a duplicate lead title, promote body H3→H2 when the article has no H2, strip pasted `font-family` / `<font>` / style blocks, and print a table of sanitized blog URLs. Load with `chunkById()` (`--chunk=1` default, PHP memory stays at 128M) — never `get()` all `content` columns at once |
 | `run-once:regenerate-blog-seo-meta` | Regenerate and save `meta_title`, `meta_description`, `og_title`, `og_description` for all blogs via `BlogSeoMetaGenerationService` / `SeoMetaAgent` |
 | `run-once:generate-blog-medium-thumbs` | Generate `medium_thumb_image` (480×280, `{name}-medium.{ext}`) from each blog’s existing `featured_image`; removes legacy `_small` / `_medium` files |
 
 ```bash
 php artisan run-once:sanitize-blog --dry-run
 php artisan run-once:sanitize-blog
+php artisan run-once:sanitize-blog --chunk=1
 php artisan run-once:sanitize-blog --blog=my-post-slug
 
 php artisan run-once:regenerate-blog-seo-meta --dry-run

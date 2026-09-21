@@ -5,6 +5,7 @@ use App\Http\Middleware\EnsurePermission;
 use App\Http\Middleware\RedirectCanonicalHost;
 use App\Http\Middleware\RedirectJunkQueryParams;
 use App\Http\Middleware\RejectRetiredHost;
+use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -31,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             RedirectCanonicalHost::class,
             RedirectJunkQueryParams::class,
+            SecurityHeaders::class,
         ]);
 
         $middleware->alias([
