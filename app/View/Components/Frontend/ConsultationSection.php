@@ -30,6 +30,7 @@ class ConsultationSection extends Component
         public bool $allowHtmlTitle = true,
         public bool $hideBgBelowDesktop = false,
         public ?array $people = null,
+        public string $consultationTheme = 'light'
     ) {
         if ($this->ctaHref === '') {
             $this->ctaHref = ContactSupport::demoHref();
