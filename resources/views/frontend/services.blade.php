@@ -61,8 +61,8 @@
       </div>
       <div class="digital-solution-section__content">
         <p class="digital-solution-section__title">
-          <span class="digital-solution-section__title-top">Digital solution</span>
-          <span class="digital-solution-section__title-agency">engineering</span>
+          <span class="digital-solution-section__title-top">Digital solution engineering</span>
+          {{-- <span class="digital-solution-section__title-agency">engineering</span> --}}
         </p>
         <div class="digital-solution-section__copy">
           <h2 id="digital-solution-title" class="digital-solution-section__lead">
@@ -313,6 +313,7 @@
   :secondary-cta-label="$consultation['secondaryCtaLabel']"
   card-position="center"
   :allow-html-title="false"
+  consultation-theme="dark"
 />
 
 <x-frontend.testimonials-section

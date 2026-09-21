@@ -6416,7 +6416,7 @@ html {
 .site-main>.full-bleed,
 .site-main>.faq-section,
 .site-footer {
-  content-visibility: auto;
+  /* content-visibility: auto; */
   contain-intrinsic-size: auto 720px;
 }
 

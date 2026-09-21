@@ -22,7 +22,7 @@
         <p>{{ $description }}</p>
         <div class="mt-6">
           <x-frontend.inline-consultation-form
-            theme="light"
+            theme="{{ $consultationTheme ?? 'light' }}"
             placeholder="Enter your phone or email"
             :button-text="$ctaLabel"
             :secondary-href="$secondaryCtaLabel !== '' ? $secondaryCtaHref : ($ctaHref !== '' ? $ctaHref : '')"
