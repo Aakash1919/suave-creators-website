@@ -11457,26 +11457,6 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   white-space: nowrap;
 }
 
-.site-main > .single-blog-top {
-  min-height: 0 !important;
-  padding-top: 0.25rem;
-  padding-bottom: 0.75rem;
-}
-
-@media (min-width: 768px) {
-  .site-main > .single-blog-top {
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .site-main > .single-blog-top {
-    padding-top: 0.75rem;
-    padding-bottom: 1.5rem;
-  }
-}
-
 .single-blog-top.site-container.relative .single-blog-main__title,
 .single-blog-top .single-blog-main__title {
   display: block;
@@ -11574,9 +11554,14 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 
 .single-blog-content {
   min-width: 0;
+  font-family: var(--site-font);
   font-size: 16px;
   line-height: 1.75;
   color: #1a1a1a;
+}
+
+.single-blog-content * {
+  font-family: inherit !important;
 }
 
 .single-blog-content > * {

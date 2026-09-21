@@ -76,6 +76,29 @@ class Blog extends Model
             ->where('published_at', '<=', now());
     }
 
+    /**
+     * Card/listing columns only — omit longtext content, toc, and faqs.
+     *
+     * @param  Builder<Blog>  $query
+     * @return Builder<Blog>
+     */
+    public function scopeForListing(Builder $query): Builder
+    {
+        return $query->select([
+            'id',
+            'blog_category_id',
+            'created_by_id',
+            'slug',
+            'title',
+            'short_description',
+            'featured_image',
+            'medium_thumb_image',
+            'status',
+            'published_at',
+            'updated_at',
+        ]);
+    }
+
     public function featuredImageUrl(): ?string
     {
         return $this->publicStorageUrl($this->featured_image);
