@@ -47,9 +47,10 @@ class BlogService
      */
     public function create(BlogStoreRequest $request): Blog
     {
-        $data = $this->attributesFromValidated($request->validated());
+        $validated = $request->validated();
+        $validated['slug'] = $this->uniqueSlug($validated['slug'] ?: $validated['title']);
+        $data = $this->attributesFromValidated($validated);
         $data['created_by_id'] = $request->user()?->id;
-        $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title']);
 
         if ($request->hasFile('featured_image')) {
             $this->applyFeaturedImageVariants($data, $request, $data['slug']);
@@ -89,6 +90,8 @@ class BlogService
             $data['slug'] = $this->uniqueSlug((string) $data['title']);
         }
 
+        $data = $this->attributesFromValidated($data);
+
         return Blog::query()->create($data);
     }
 
@@ -97,8 +100,9 @@ class BlogService
      */
     public function update(BlogUpdateRequest $request, Blog $blog): Blog
     {
-        $data = $this->attributesFromValidated($request->validated(), $blog);
-        $data['slug'] = $this->uniqueSlug($data['slug'] ?: $data['title'], $blog->id);
+        $validated = $request->validated();
+        $validated['slug'] = $this->uniqueSlug($validated['slug'] ?: $validated['title'], $blog->id);
+        $data = $this->attributesFromValidated($validated, $blog);
 
         if ($request->hasFile('featured_image')) {
             $this->deleteFeaturedImageVariants($blog);
@@ -134,7 +138,11 @@ class BlogService
         unset($data['featured_image'], $data['published_at']);
 
         if (isset($data['content']) && is_string($data['content'])) {
-            $data['content'] = BlogSupport::normalizeVisualHtml($data['content']);
+            $data['content'] = $this->sanitizeHtmlContent(
+                $data['content'],
+                (string) ($data['slug'] ?? $blog?->slug ?? ''),
+                (string) ($data['title'] ?? $blog?->title ?? ''),
+            );
         }
 
         $status = $data['status'] ?? null;
@@ -168,6 +176,22 @@ class BlogService
         }
 
         return $slug;
+    }
+
+    /**
+     * Normalize visual blocks, extract inline media, and tidy empty markup for persistence.
+     */
+    public function sanitizeHtmlContent(string $html, string $slug, string $title): string
+    {
+        $html = BlogSupport::normalizeVisualHtml($html);
+        $slug = trim($slug);
+        if ($slug === '') {
+            return $html;
+        }
+
+        $title = trim($title) !== '' ? trim($title) : $slug;
+
+        return BlogHtmlSupport::sanitizeContent($html, $slug, $title)['content'];
     }
 
     /**

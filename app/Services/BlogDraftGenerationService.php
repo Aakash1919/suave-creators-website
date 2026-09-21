@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Support\Blogs\BlogArticleOpenings;
 use App\Support\Blogs\BlogArticlePatterns;
+use App\Support\Blogs\BlogHtmlSupport;
 use App\Support\Blogs\BlogInternalLinks;
 use App\Support\Frontend\BlogSupport;
 use App\Support\SiteAdmin;
@@ -531,7 +532,7 @@ class BlogDraftGenerationService
         $html = $this->demoteHeadingOnes($html);
         $html = $this->stripEmptySpacerParagraphs($html);
         $html = $this->stripTrailingFaqHtml($html);
-        $html = $this->wrapBareTables($html);
+        $html = BlogHtmlSupport::wrapBareTables($html);
         $html = BlogSupport::normalizeVisualHtml($html);
 
         return trim($html);
@@ -576,34 +577,6 @@ class BlogDraftGenerationService
         }
 
         return trim(substr($html, 0, $pos));
-    }
-
-    /**
-     * Ensure every table is wrapped for horizontal scroll styling.
-     */
-    protected function wrapBareTables(string $html): string
-    {
-        if (! preg_match_all('/<table\b[^>]*>.*?<\/table>/is', $html, $matches, PREG_OFFSET_CAPTURE)) {
-            return $html;
-        }
-
-        $shift = 0;
-
-        foreach ($matches[0] as [$tableHtml, $pos]) {
-            $pos += $shift;
-            $prefixLength = min(120, $pos);
-            $before = substr($html, $pos - $prefixLength, $prefixLength);
-
-            if (preg_match('/<div\b[^>]*class="[^"]*\bblog-table-wrap\b[^"]*"[^>]*>\s*$/i', $before)) {
-                continue;
-            }
-
-            $wrapped = '<div class="blog-table-wrap">'.$tableHtml.'</div>';
-            $html = substr_replace($html, $wrapped, $pos, strlen($tableHtml));
-            $shift += strlen($wrapped) - strlen($tableHtml);
-        }
-
-        return $html;
     }
 
     protected function nullableLimit(mixed $value, int $limit): ?string

@@ -2,6 +2,9 @@
 
 namespace App\Ai\Agents;
 
+use App\Support\Blogs\BlogArticleOpenings;
+use App\Support\Blogs\BlogArticlePatterns;
+use App\Support\Blogs\BlogInternalLinks;
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Ai\Attributes\MaxTokens;
 use Laravel\Ai\Attributes\Model;
@@ -433,9 +436,9 @@ PROMPT;
      */
     protected function formatRequiredPatternBlock(): string
     {
-        $keys = implode(', ', \App\Support\Blogs\BlogArticlePatterns::keys());
+        $keys = implode(', ', BlogArticlePatterns::keys());
         $required = is_string($this->requiredPattern) ? trim($this->requiredPattern) : '';
-        $definition = $required !== '' ? \App\Support\Blogs\BlogArticlePatterns::get($required) : null;
+        $definition = $required !== '' ? BlogArticlePatterns::get($required) : null;
 
         $recent = $this->recentPatterns === []
             ? '(none detected yet)'
@@ -479,9 +482,9 @@ BLOCK;
      */
     protected function formatRequiredOpeningBlock(): string
     {
-        $keys = implode(', ', \App\Support\Blogs\BlogArticleOpenings::keys());
+        $keys = implode(', ', BlogArticleOpenings::keys());
         $required = is_string($this->requiredOpening) ? trim($this->requiredOpening) : '';
-        $definition = $required !== '' ? \App\Support\Blogs\BlogArticleOpenings::get($required) : null;
+        $definition = $required !== '' ? BlogArticleOpenings::get($required) : null;
 
         $recent = $this->recentOpenings === []
             ? '(none detected yet)'
@@ -523,7 +526,7 @@ BLOCK;
      */
     protected function formatInternalLinksBlock(): string
     {
-        $list = \App\Support\Blogs\BlogInternalLinks::formatForPrompt($this->internalLinks);
+        $list = BlogInternalLinks::formatForPrompt($this->internalLinks);
 
         return <<<BLOCK
 INTERNAL LINKS (required)

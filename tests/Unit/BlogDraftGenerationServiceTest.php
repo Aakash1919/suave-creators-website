@@ -7,6 +7,9 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\User;
 use App\Services\BlogDraftGenerationService;
+use App\Support\Blogs\BlogArticleOpenings;
+use App\Support\Blogs\BlogArticlePatterns;
+use App\Support\Blogs\BlogInternalLinks;
 use App\Support\SiteAdmin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -391,17 +394,17 @@ class BlogDraftGenerationServiceTest extends TestCase
             .'<div class="blog-checklist"><p class="blog-checklist__title">List</p><ul><li>Do</li></ul></div>'
             .'<aside class="blog-insight"><p>Take</p></aside>';
 
-        $this->assertTrue(\App\Support\Blogs\BlogArticlePatterns::htmlMatches('framework', $frameworkHtml));
+        $this->assertTrue(BlogArticlePatterns::htmlMatches('framework', $frameworkHtml));
 
         $comparisonWithoutTable = '<div class="blog-takeaways"><p class="blog-takeaways__title">Key takeaways</p><ul><li>One</li></ul></div>'
             .'<aside class="blog-insight"><p>Take</p></aside>';
 
-        $this->assertFalse(\App\Support\Blogs\BlogArticlePatterns::htmlMatches('comparison', $comparisonWithoutTable));
+        $this->assertFalse(BlogArticlePatterns::htmlMatches('comparison', $comparisonWithoutTable));
     }
 
     public function test_opening_rotation_avoids_recent_usage(): void
     {
-        $next = \App\Support\Blogs\BlogArticleOpenings::chooseNext(
+        $next = BlogArticleOpenings::chooseNext(
             ['scene', 'question'],
             []
         );
@@ -412,7 +415,7 @@ class BlogDraftGenerationServiceTest extends TestCase
 
     public function test_internal_links_suggest_service_or_industry_matches(): void
     {
-        $links = \App\Support\Blogs\BlogInternalLinks::suggest(
+        $links = BlogInternalLinks::suggest(
             title: 'How clinics should brief a custom CRM before hiring a partner',
             content: '<p>Healthcare operators need intake, reporting, and a shared CRM workflow.</p>',
             limit: 3,
@@ -447,7 +450,7 @@ class BlogDraftGenerationServiceTest extends TestCase
 
     public function test_choose_next_pattern_avoids_recent_usage(): void
     {
-        $next = \App\Support\Blogs\BlogArticlePatterns::chooseNext(
+        $next = BlogArticlePatterns::chooseNext(
             ['framework', 'story', 'comparison'],
             []
         );
