@@ -1,13 +1,15 @@
 <section {{ $attributes->merge(['class' => $sectionClass]) }} aria-labelledby="{{ $titleId }}">
   <div class="smart-together-cta__inner section-inner">
-    <div class="smart-together-cta__eyebrow mb-4 flex items-center gap-2">
-      <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"
-        aria-hidden="true"></span>
-      <span
-        class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
-        {{ $eyebrow }}
-      </span>
-    </div>
+    @if (filled($eyebrow))
+      <div class="smart-together-cta__eyebrow mb-4 flex items-center gap-2">
+        <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"
+          aria-hidden="true"></span>
+        <span
+          class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
+          {{ $eyebrow }}
+        </span>
+      </div>
+    @endif
 
     <div class="smart-together-cta__copy">
       <h2 id="{{ $titleId }}">{{ $title }}</h2>

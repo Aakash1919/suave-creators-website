@@ -23,58 +23,177 @@ class ServiceSupport
      */
     public static function indexData(): array
     {
+        $faqs = self::faqs();
+
         return [
-            'techStack' => AboutSupport::techStack(),
+            'techStack' => self::techStack(),
             'expertiseItems' => self::expertiseItems(),
             'servicesData' => self::servicesData(),
             'offshoreSlides' => self::offshoreSlides(),
             'techCards' => self::techCards(),
             'processCards' => self::processCards(),
-            'faqs' => self::faqs(),
+            'faqs' => $faqs,
             'articles' => self::articles(),
+            'caseStudies' => self::indexCaseStudies(),
             'connectCta' => [
-                'eyebrow' => 'Ready to Start Your Project?',
-                'title' => 'Are you Ready to Start Your Project?',
-                'description' => 'As the best development company, we help you to develop your next digital product. Get Innovative and advanced solutions with us and see the quick growth.',
+                'eyebrow' => '',
+                'title' => 'Ready to Start Your Project?',
+                'description' => 'Collaborate directly with senior software architects to scope your roadmap, evaluate your technology stack, and accelerate your time to market.',
                 'primaryLabel' => "Let's Connect to Discuss",
+                'secondaryLabel' => 'Discuss Your Technical Roadmap →',
             ],
             'consultation' => [
                 'backgroundImage' => 'assets/background/work-with-us-bg.webp',
-                'eyebrow' => 'Ready to Start Your Project?',
-                'title' => 'Are you Ready to Start Your Project?',
-                'description' => 'As the best development company, we help you to develop your next digital product. Get Innovative and advanced solutions with us and see the quick growth.',
+                'eyebrow' => '',
+                'title' => 'Ready to Start Your Project?',
+                'description' => 'Speak directly with an enterprise software architect to discuss your requirements, review your technical roadmap, and get an accurate project estimate.',
                 'ctaLabel' => "Let's Connect to Discuss",
+                'secondaryCtaLabel' => 'Book Direct via Google Calendar →',
                 'solo' => false,
                 'showPeople' => false,
             ],
+            'seoFaqs' => $faqs,
+            ...self::indexSeoStructuredData(),
         ];
     }
 
     /**
-     * @return array<int, array{0: string, 1: string, 2: string, 3: string, 4: string}>
+     * @return array<int, array{icon: string, title: string, description: string, accent: string, tint: string, alt: string}>
      */
     public static function expertiseItems(): array
     {
         return [
-            ['assets/portfolio/project-analysis-dashboard.png', 'Project analysis', 'Research and strategy', '#4C24F4', '#F0EAFF', 'Project analysis dashboard for Suave Creators web development services'],
-            ['assets/media/build-strategy-visual.png', 'Build strategy', 'Wireframe and design', '#1873E7', '#EAF5FC', 'Build strategy visual for Suave Creators software design process'],
-            ['assets/media/launch-live-visual.png', 'Launch and live', 'Development and scale', '#0F968E', '#E8F8F6', 'Launch and live product visual for Suave Creators development services'],
-            ['assets/brand/maintenance-mark-logo.png', 'Maintenance', 'Maintaining strong', '#FA6811', '#FFF0E7', 'Maintenance support mark for Suave Creators software services'],
+            [
+                'icon' => 'assets/portfolio/project-analysis-dashboard.png',
+                'title' => 'Project Analysis',
+                'description' => 'Comprehensive workflow evaluation and technical requirements scoping.',
+                'accent' => '#4C24F4',
+                'tint' => '#F0EAFF',
+                'alt' => 'Project analysis dashboard for Suave Creators software development services',
+            ],
+            [
+                'icon' => 'assets/icons/research-and-strategy-icon.webp',
+                'title' => 'Research & Strategy',
+                'description' => 'Competitive benchmarking, user journey mapping, and architecture planning.',
+                'accent' => '#1873E7',
+                'tint' => '#EAF5FC',
+                'alt' => 'Research and strategy step icon for Suave Creators software engineering',
+            ],
+            [
+                'icon' => 'assets/media/build-strategy-visual.png',
+                'title' => 'Build Strategy',
+                'description' => 'Database schema design, tech stack selection, and milestone roadmapping.',
+                'accent' => '#0F968E',
+                'tint' => '#E8F8F6',
+                'alt' => 'Build strategy visual for Suave Creators custom software architecture',
+            ],
+            [
+                'icon' => 'assets/icons/wireframe-and-design-icon.webp',
+                'title' => 'Wireframe & Design',
+                'description' => 'Interactive Figma prototypes and responsive design systems.',
+                'accent' => '#C4520D',
+                'tint' => '#FFF0E7',
+                'alt' => 'Wireframe and product design step icon for Suave Creators UI UX services',
+            ],
+            [
+                'icon' => 'assets/icons/development-and-scale-icon.webp',
+                'title' => 'Development & Scale',
+                'description' => 'Full-stack agile coding with bi-weekly staging demonstrations.',
+                'accent' => '#2A4DFB',
+                'tint' => '#EEF1FF',
+                'alt' => 'Development and scale step icon for Suave Creators full-stack engineering',
+            ],
+            [
+                'icon' => 'assets/media/launch-live-visual.png',
+                'title' => 'Launch & Live',
+                'description' => 'Zero-downtime deployment, data migration, and production cutover.',
+                'accent' => '#0C7A73',
+                'tint' => '#E8F8F6',
+                'alt' => 'Launch and live product visual for Suave Creators development services',
+            ],
+            [
+                'icon' => 'assets/brand/maintenance-mark-logo.png',
+                'title' => 'Maintenance',
+                'description' => 'Proactive 24/7 server monitoring, security patching, and SLA support.',
+                'accent' => '#FA6811',
+                'tint' => '#FFF0E7',
+                'alt' => 'Maintenance support mark for Suave Creators software services',
+            ],
         ];
     }
 
     /**
-     * @return array<int, array{0: string, 1: string, 2: string, 3: string, 4: string, 5: string}>
+     * @return array<int, array{icon: string, number: string, title: string, tags: array<int, string>, description: string, cta: string, href: string, color: string, flagship: bool}>
      */
     public static function servicesData(): array
     {
         return [
-            ['assets/icons/service-icon-1.svg', 'Web Development Services', 'Explore our top-notch web development services to get the best possible digital solution to enhance user interaction and scale seamlessly as your needs grow.', 'Explore Web Development', route('service.show', ['slug' => 'web-development-services']), 'blue'],
-            ['assets/icons/service-icon-2.svg', 'Enterprise Software Solutions', 'We offer the best and industry-specific Enterprise Software Solutions for organisations to manage their work more conveniently. Get a secure and scalable solution with us.', 'Explore Enterprise Solutions', route('service.show', ['slug' => 'enterprise-software-solutions']), 'blue'],
-            ['assets/icons/service-icon-3.svg', 'UI/UX Design Services', 'UI/UX Designs help you to stand out in the competition. We are experts in front-end design, optimising custom code to deliver the best UI/UX design services.', 'See UI/UX Services', route('services'), 'blue'],
-            ['assets/icons/service-icon-4.svg', 'Custom CRM Development', 'Suave Creators develops custom-tailored CRM Solutions, implementing application development software features and functionalities that drive businesses forward.', 'Learn More About CRM', route('service.show', ['slug' => 'custom-crm-development']), 'blue'],
-            ['assets/icons/service-icon-5.svg', 'E-commerce Development', 'Choosing e-commerce development with us is the best option for you. Try our best development services and get a reliable solution for your digital business needs.', 'Explore E-commerce Services', route('service.show', ['slug' => 'e-commerce-development']), 'blue'],
-            ['assets/icons/service-icon-6.svg', 'AI Solutions', 'With this fast technology world, everyone needs an AI solution. We embed an AI solution with all of our software solutions. AI helps businesses to make it more secure, advanced, and productive.', 'Explore AI Services', route('services'), 'blue'],
+            [
+                'icon' => 'assets/icons/service-icon-1.svg',
+                'number' => '01',
+                'title' => 'Web Development Services',
+                'tags' => ['Custom Cloud Applications', 'High-Concurrency Microservices', 'REST APIs'],
+                'description' => 'We engineer fast, responsive, and secure custom web applications using modern frameworks like Laravel, Node.js, and React. Built from the ground up for scalability, search engine visibility, and seamless user interaction as your data volume expands.',
+                'cta' => 'Explore Web Development',
+                'href' => route('service.show', ['slug' => 'web-development-services']),
+                'color' => 'blue',
+                'flagship' => false,
+            ],
+            [
+                'icon' => 'assets/icons/service-icon-2.svg',
+                'number' => '02',
+                'title' => 'Enterprise Software Solutions',
+                'tags' => ['ERP Systems', 'Operational Workflow Automation', 'Legacy System Modernization'],
+                'description' => 'Replace fragmented spreadsheets and disconnected departments with a unified enterprise platform. We build scalable ERP solutions featuring role-based permissions (RBAC), multi-branch inventory tracking, and custom automation.',
+                'cta' => 'Explore Enterprise Solutions',
+                'href' => route('service.show', ['slug' => 'enterprise-software-solutions']),
+                'color' => 'blue',
+                'flagship' => false,
+            ],
+            [
+                'icon' => 'assets/icons/service-icon-3.svg',
+                'number' => '03',
+                'title' => 'UI/UX Design Services',
+                'tags' => ['Design Systems', 'Interactive Wireframes', 'Mobile & Web Product Interfaces'],
+                'description' => 'Exceptional software demands intuitive user experiences that minimize rep error and maximize adoption. Our team designs clickable Figma prototypes, user-tested design systems, and responsive layouts that drive conversions.',
+                'cta' => 'See UI/UX Services',
+                'href' => route('service.show', ['slug' => 'ui-ux-design-services']),
+                'color' => 'blue',
+                'flagship' => false,
+            ],
+            [
+                'icon' => 'assets/icons/service-icon-4.svg',
+                'number' => '04',
+                'title' => 'Custom CRM Development',
+                'tags' => ['Zero Per-Seat Licensing', 'Pipeline Automation', 'Native S-Mail Outreach'],
+                'description' => 'Eliminate escalating monthly SaaS subscription fees. We build bespoke sales operating systems tailored to your unique deal stages—featuring drag-and-drop Kanban boards, automated lead scoring, and 100% data ownership.',
+                'cta' => 'Learn More About Custom CRM Builder',
+                'href' => route('service.show', ['slug' => 'custom-crm-development']),
+                'color' => 'blue',
+                'flagship' => true,
+            ],
+            [
+                'icon' => 'assets/icons/service-icon-5.svg',
+                'number' => '05',
+                'title' => 'E-Commerce Development',
+                'tags' => ['Shopify Plus', 'Headless E-Commerce', 'Custom Checkout APIs', 'POS Sync'],
+                'description' => 'Build high-converting, scalable e-commerce storefronts engineered for fast page loads and frictionless checkout. We engineer custom platforms or scale enterprise stores on Shopify Plus, WooCommerce, and Magento.',
+                'cta' => 'Explore E-Commerce Services',
+                'href' => route('service.show', ['slug' => 'e-commerce-development']),
+                'color' => 'blue',
+                'flagship' => false,
+            ],
+            [
+                'icon' => 'assets/icons/service-icon-6.svg',
+                'number' => '06',
+                'title' => 'AI Solutions & Multi-Agent Systems',
+                'tags' => ['Production AI Agents', 'Vector Databases (RAG)', 'Automated Lead Qualification'],
+                'description' => 'We move beyond basic chatbot wrappers. Our engineers integrate deterministic state machines, automated voice call coaching, and multi-agent document validation directly into your software with zero third-party token markups.',
+                'cta' => 'Explore AI Services',
+                'href' => route('service.show', ['slug' => 'ai-solutions']),
+                'color' => 'blue',
+                'flagship' => false,
+            ],
         ];
     }
 
@@ -87,38 +206,38 @@ class ServiceSupport
             [
                 'assets/media/developers-collaborating-code-review.webp',
                 'End-to-End Development Expertise',
-                'With all of our projects, we always provide end-to-end development services. By leveraging our global young talent and systematic resource allocation, we provide the best and competitive pricing that helps you to get expert solutions and optimise your development budget.',
-                ['SEO', 'Mobile', 'First Performance'],
+                'From initial requirements analysis and schema design to cloud deployment and ongoing maintenance, we manage the complete lifecycle. You receive senior engineering capacity that delivers high-performance software while cutting your development budget by up to 60%.',
+                ['Requirements', 'Cloud Deploy', 'Maintenance'],
                 'Offshore development team reviewing custom software code together',
             ],
             [
                 'assets/media/seo-infographic-on-imac.webp',
-                'SEO-Optimisation and Performance',
-                'SEO optimization and high performance are the needs of every website and application nowadays. All of our solutions perform better and follow Search engine algorithms so that they easily gain good visibility on Google soon.',
-                ['UI/UX', 'Research', 'Prototyping'],
+                'SEO-Optimisation and High-Performance Architecture',
+                'Fast page speeds and clean code structure are built into every application. We implement semantic HTML5, server-side rendering, sub-second TTFB, and schema markup to ensure your platform performs for users and ranks across search engines.',
+                ['Semantic HTML5', 'SSR', 'Core Web Vitals'],
                 'SEO optimisation strategy on screen for high performance websites',
             ],
             [
                 'assets/media/financial-dashboard-laptop-collaboration.webp',
-                'Global and Scalable Security',
-                'Our solutions are built to grow with your business. Whether you\'re a startup expanding into new markets or an enterprise business managing high volumes, we design platforms that scale without performance issues.',
-                ['SEO', 'Mobile', 'First Performance'],
+                'Global Security and Scalable Infrastructure',
+                'Our platforms are built to grow. Whether you are a venture-backed startup launching an MVP or an enterprise handling millions of database transactions, we design microservices architectures that scale securely with AES-256 data encryption and strict access controls.',
+                ['AES-256', 'Microservices', 'Access Controls'],
                 'Secure scalable analytics dashboard monitored by an enterprise software team',
             ],
         ];
     }
 
     /**
-     * @return array<int, array{0: string, 1: string, 2: string, 3: string}>
+     * @return array<int, array{0: string, 1: string, 2: string, 3: string, 4: string}>
      */
     public static function techCards(): array
     {
         return [
-            ['assets/icons/tech/shopify-technology-icon.png', 'Shopify & WooCommerce', 'We suggest CRM according to the clients\' needs. We develop websites for Shopify and WooCommerce for your e-commerce websites.', '#7AB55C'],
-            ['assets/icons/tech/react-technology-icon.png', 'React & Angular', 'We built websites on React & Angular to deliver high performance and a strong security system.', '#149ECA'],
-            ['assets/icons/tech/php-technology-icon.png', 'Laravel & PHP', 'We specialize in building web applications using the PHP programming language and the Laravel framework.', '#999999'],
-            ['assets/icons/tech/nodejs-technology-icon.png', 'Node.js', 'We use Node.js to build real-time apps, high-performance results, robust and mobile solutions, etc.', '#68A063'],
-            ['assets/icons/tech/wordpress-technology-icon.png', 'WordPress', 'A best and reliable easy-to-use CMS solution for all types of businesses with all SEO capabilities.', '#21759B'],
+            ['assets/icons/tech/shopify-technology-icon.png', 'Shopify & WooCommerce', 'High-volume e-commerce storefronts, custom checkout extensions, and inventory synchronization.', '#7AB55C', route('service.show', ['slug' => 'e-commerce-development'])],
+            ['assets/icons/tech/react-technology-icon.png', 'React & Angular', 'Dynamic, reactive frontend interfaces and collaborative real-time dashboards.', '#149ECA', route('service.show', ['slug' => 'web-development-services'])],
+            ['assets/icons/tech/php-technology-icon.png', 'Laravel & PHP', 'Scalable, secure backend architectures, robust REST APIs, and enterprise CRM solutions.', '#999999', route('service.show', ['slug' => 'custom-crm-development'])],
+            ['assets/icons/tech/nodejs-technology-icon.png', 'Node.js', 'Real-time event-driven applications, high-concurrency microservices, and WebSockets.', '#68A063', route('service.show', ['slug' => 'web-development-services'])],
+            ['assets/icons/tech/wordpress-technology-icon.png', 'WordPress', 'Fast, SEO-optimized business websites and content platforms with custom Gutenberg blocks.', '#21759B', route('service.show', ['slug' => 'web-development-services'])],
         ];
     }
 
@@ -128,9 +247,9 @@ class ServiceSupport
     public static function processCards(): array
     {
         return [
-            ['icon' => 'fa-solid fa-magnifying-glass-chart', 'title' => 'Discovery Phase', 'text' => 'Before starting anything, we do deep research and define the fundamental features of your future product.'],
-            ['icon' => 'fa-solid fa-route', 'title' => 'Strategy Development', 'text' => 'We craft a transparent roadmap for success. Our professional crew defines the project planning, sets deadlines, and chooses the right technologies to bring your vision to life.'],
-            ['icon' => 'fa-solid fa-code', 'title' => 'Implementation', 'text' => 'Our expert designers collaborate to transform strategy into a fully functional, high-performing product and deliver you the best possible solution.'],
+            ['icon' => 'fa-solid fa-magnifying-glass-chart', 'title' => 'Discovery Phase', 'text' => 'We analyze workflows, evaluate legacy databases, define functional specifications, and select the optimal technology stack.'],
+            ['icon' => 'fa-solid fa-route', 'title' => 'Strategy Development', 'text' => 'We establish clear milestone roadmaps, database schemas, API boundaries, and sprint deliverables.'],
+            ['icon' => 'fa-solid fa-code', 'title' => 'Implementation & QA', 'text' => 'Full-stack development in transparent two-week sprints with continuous testing, security verification, and live demos.'],
         ];
     }
 
@@ -140,12 +259,30 @@ class ServiceSupport
     public static function faqs(): array
     {
         return [
-            ['question' => 'Do you work with international clients?', 'answer' => 'Yes, Suave Creators works with international clients, including the UK, USA, Canada, Australia, and all countries across the globe.'],
-            ['question' => 'How do you ensure SEO-friendly development in your services?', 'answer' => 'We have the best team of seo experts who sit with the developer and do a complete audit step-by-step, and it will cover all technical and on-page aspects.'],
-            ['question' => 'What industries do you serve?', 'answer' => 'We specialise in offering solutions for all types of industries, like healthcare, education, banking, e-commerce, and logistics. Each solution is tailored to the industry standards, compliance needs, and customer experience.'],
-            ['question' => 'What is the typical project timeline?', 'answer' => 'It totally depends on the project complexity. Sometimes it will take 3 months or sometimes more than 6 months to 1 year.'],
-            ['question' => 'Do you offer post-launch support and maintenance?', 'answer' => "Yes, of course, we always do post-launch support and maintenance as per the client's requirements."],
-            ['question' => 'Why should we choose Suave Creators for our digital projects?', 'answer' => 'Suave Creators is a team of young talent who always work under timelines and deliver the best possible results.'],
+            [
+                'question' => 'Do you work with international clients?',
+                'answer' => 'Yes. Suave Creators works extensively with international clients across the United States, United Kingdom, Canada, Australia, the UAE, and Switzerland. All client contracts, non-disclosure agreements (NDAs), and intellectual property assignments are governed under United States law via our headquarters in Sheridan, Wyoming, providing complete legal protection and seamless cross-border collaboration.',
+            ],
+            [
+                'question' => 'How do you ensure SEO-friendly development in your services?',
+                'answer' => 'We build software with search engine visibility at the architectural core. This includes clean semantic HTML5 markup, server-side rendering (SSR) or static site generation via Next.js where appropriate, optimized Core Web Vitals (sub-second TTFB and minimal LCP), structured JSON-LD schema integration, automatic XML sitemaps, and proper canonicalization to ensure immediate indexation and high ranking potential.',
+            ],
+            [
+                'question' => 'What industries do you serve?',
+                'answer' => 'We deliver specialized software engineering across several key verticals: Logistics & Freight Forwarding (real-time dispatch and spot-quote engines), B2B SaaS & Tech Startups (custom MVPs and scalable platforms), Healthcare (HIPAA-compliant patient portals and appointment tools), Retail & E-Commerce (high-volume transactional stores), and Financial Services.',
+            ],
+            [
+                'question' => 'What is the typical project timeline?',
+                'answer' => 'A focused Minimum Viable Product (MVP) or custom CRM typically takes 8 to 12 weeks from architecture scoping to live deployment. Full-scale enterprise software suites, multi-system ERP integrations, and complex AI agent workflows generally require 16 to 24 weeks, structured across transparent, bi-weekly agile development sprints.',
+            ],
+            [
+                'question' => 'Do you offer post-launch support and maintenance?',
+                'answer' => 'Yes. We provide structured SLA maintenance agreements that include 24/7 automated uptime monitoring, proactive security patching, dependency upgrades, daily encrypted offsite backups, and allocated monthly developer hours for ongoing feature enhancements and technical optimizations.',
+            ],
+            [
+                'question' => 'Why should we choose Suave Creators for our digital projects?',
+                'answer' => 'Suave Creators gives you the best of both worlds: the legal protection, communication standards, and strategic leadership of a US-headquartered software firm, paired with the cost efficiency and scale of a dedicated engineering center. This model delivers up to 60% total cost of ownership (TCO) savings, 100% source code ownership, and direct collaboration with senior software architects without middle-management bloat.',
+            ],
         ];
     }
 
@@ -155,6 +292,127 @@ class ServiceSupport
     public static function articles(): array
     {
         return BlogSupport::articleCards(3);
+    }
+
+    /**
+     * @return array<int, array{label: string, src: string, alt: string}>
+     */
+    public static function techStack(): array
+    {
+        return [
+            ['label' => 'HTML5', 'src' => 'assets/icons/tech/html5.svg', 'alt' => 'HTML5 technology logo for Suave Creators web development'],
+            ['label' => 'JavaScript (ES6+)', 'src' => 'assets/icons/tech/javascript.svg', 'alt' => 'JavaScript ES6 technology logo for Suave Creators software development'],
+            ['label' => 'TypeScript', 'src' => 'assets/icons/tech/TypeScript.webp', 'alt' => 'TypeScript technology logo for Suave Creators software development'],
+            ['label' => 'Node.Js', 'src' => 'assets/icons/tech/nodedotjs.svg', 'alt' => 'Node.js technology logo partner of Suave Creators'],
+            ['label' => 'ReactJS', 'src' => 'assets/icons/tech/react-logo.svg', 'alt' => 'ReactJS technology logo for Suave Creators web applications'],
+            ['label' => 'Next.js', 'src' => 'assets/icons/tech/Next.js.webp', 'alt' => 'Next.js technology logo for Suave Creators web development'],
+            ['label' => 'Python', 'src' => 'assets/icons/tech/python-logo.svg', 'alt' => 'Python technology logo for Suave Creators custom software'],
+            ['label' => 'FastAPI', 'src' => 'assets/icons/tech/fast-api.webp', 'alt' => 'FastAPI technology logo for Suave Creators Python services'],
+            ['label' => 'Laravel (PHP)', 'src' => 'assets/icons/tech/php-logo.svg', 'alt' => 'Laravel PHP technology logo for Suave Creators backend development'],
+            ['label' => 'Vue.js', 'src' => 'assets/icons/tech/vuedotjs.svg', 'alt' => 'Vue.js technology logo for Suave Creators frontend development'],
+            ['label' => 'Angular', 'src' => 'assets/icons/tech/angular.svg', 'alt' => 'Angular technology logo for Suave Creators web development'],
+            ['label' => 'PostgreSQL', 'src' => 'assets/icons/tech/PostgresSQL.webp', 'alt' => 'PostgreSQL technology logo for Suave Creators database engineering'],
+            ['label' => 'Redis', 'src' => 'assets/icons/tech/Redis.webp', 'alt' => 'Redis technology logo for Suave Creators caching infrastructure'],
+            ['label' => 'Docker', 'src' => 'assets/icons/tech/Docker.webp', 'alt' => 'Docker technology logo for Suave Creators cloud engineering'],
+            ['label' => 'AWS', 'src' => 'assets/icons/tech/aws-logo.webp', 'alt' => 'AWS technology logo for Suave Creators cloud infrastructure'],
+            ['label' => 'Shopify Plus', 'src' => 'assets/icons/tech/shopify-technology-icon.png', 'alt' => 'Shopify Plus technology logo for Suave Creators ecommerce development'],
+            ['label' => 'WooCommerce', 'src' => 'assets/icons/tech/WooCommerce.webp', 'alt' => 'WooCommerce technology logo for Suave Creators ecommerce development'],
+            ['label' => 'WordPress', 'src' => 'assets/icons/tech/wordpress.svg', 'alt' => 'WordPress CMS technology logo for Suave Creators'],
+        ];
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public static function indexCaseStudies(): array
+    {
+        $outcomes = [
+            'ai-sales-coaching-platform-case-study' => [
+                'title' => 'An AI Sales Coach That Practices, Whispers, and Scores',
+                'short_description' => 'Voice practice modules, live call coaching, and automated post-call scoring resulting in +55% faster ramp time to quota and +60% less manager time spent reviewing calls.',
+                'cta' => 'Explore the AI Sales Coaching Case Study',
+            ],
+            'suave-crm-outreach-case-study' => [
+                'title' => 'The Suave App Outreach - B2B CRM Sales Workspace',
+                'short_description' => 'Consolidated fragmented outbound prospecting into one workspace with map discovery and automated cold email, achieving 65% fewer operational steps and a 35% reduction in sales pipeline effort.',
+                'cta' => 'Explore the B2B CRM Outreach Case Study',
+            ],
+            'suave-crm-tasks-case-study' => [
+                'title' => 'The Suave App Tasks - B2B CRM Task Management Workspace',
+                'short_description' => 'Redesigned task management with unified Kanban and List views, inline creation, and an AI assistant—cutting view switching by 50%.',
+                'cta' => 'Explore the Tasks Workspace Case Study',
+            ],
+            'appointment-insurance-platform-case-study' => [
+                'title' => 'Appointment Insurance That Makes Showing Up the Default',
+                'short_description' => 'Automated deposit protection with smart Stripe refunds that eliminated 90% of credit card fee waste on returned deposits.',
+                'cta' => 'Explore the Appointment Insurance Case Study',
+            ],
+            'AI-product-matching' => [
+                'title' => 'AI Product Matching to an Automated Workspace',
+                'short_description' => 'Automated catalog search and AI-assisted match qualification, reducing manual supplier site hunting by 70%.',
+                'cta' => 'Explore the AI Product Matching Case Study',
+            ],
+            'turbo-trans-corporation-case-study' => [
+                'title' => 'Custom Software Engineering: The Turbo Trans Corporation',
+                'short_description' => 'Streamlined freight operations and automated spot-quote routing, generating 42% more qualified loads and 3.4x faster lead response times.',
+                'cta' => 'Explore the Turbo Trans Logistics Case Study',
+            ],
+        ];
+
+        return array_values(array_map(static function (array $item) use ($outcomes): array {
+            $slug = (string) ($item['slug'] ?? '');
+            $overlay = $outcomes[$slug] ?? null;
+
+            if (is_array($overlay)) {
+                if (isset($overlay['title'])) {
+                    $item['title'] = (string) $overlay['title'];
+                }
+                $item['short_description'] = (string) $overlay['short_description'];
+                $item['cta'] = (string) $overlay['cta'];
+            }
+
+            return $item;
+        }, CaseStudySupport::servicesPageItems()));
+    }
+
+    /**
+     * @return array{seoJsonLdGraph: array<int, array<string, mixed>>, seoJsonLdWebpageAbout: string}
+     */
+    public static function indexSeoStructuredData(): array
+    {
+        $pageUrl = rtrim(route('services'), '/');
+        $serviceId = $pageUrl.'/#service';
+        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
+
+        return [
+            'seoJsonLdGraph' => [[
+                '@type' => 'Service',
+                '@id' => $serviceId,
+                'name' => 'Custom Software, CRM & Digital Product Engineering Services',
+                'provider' => [
+                    '@id' => $baseUrl.'/#organization',
+                ],
+                'serviceType' => 'B2B Software Development Services',
+                'areaServed' => [
+                    '@type' => 'AdministrativeArea',
+                    'name' => 'Worldwide',
+                ],
+                'hasOfferCatalog' => [
+                    '@type' => 'OfferCatalog',
+                    'name' => 'Core Software Engineering Services',
+                    'itemListElement' => array_values(array_map(static function (array $service): array {
+                        return [
+                            '@type' => 'Offer',
+                            'itemOffered' => [
+                                '@type' => 'Service',
+                                'name' => (string) $service['title'],
+                            ],
+                        ];
+                    }, self::servicesData())),
+                ],
+            ]],
+            'seoJsonLdWebpageAbout' => $serviceId,
+        ];
     }
 
     /**

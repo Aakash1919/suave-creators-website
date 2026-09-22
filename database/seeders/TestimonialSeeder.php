@@ -18,27 +18,27 @@ class TestimonialSeeder extends Seeder
 
         $items = [
             [
-                'quote' => 'Aakash and the Suave Creators engineering team delivered exceptional work on our global dispatch platform. They grasped our complex logistics workflows immediately, maintained transparent daily communication, and launched the portal on schedule. I highly recommend them for mission-critical web software builds.',
+                'quote' => 'Aakash and his team were fantastic to work with. They understood the project requirements clearly, communicated well throughout the process, and delivered high-quality work on time. I would definitely recommend them for any custom software project.',
                 'name' => 'Amit Rana',
-                'role' => 'Founder & CEO, Turbo Trans Corp',
+                'role' => 'Founder, Turbo Trans Corp',
                 'sort_order' => 1,
             ],
             [
-                'quote' => 'The Suave Creators team resolved our complex frontend architecture tasks with impressive speed. They were transparent throughout every sprint, proactive in solving edge cases, and delivered reliable, clean code under tight deadlines.',
+                'quote' => 'Aakash and his team were quick to address our frontend tasks. They understood our needs clearly, were transparent with communication, and completed the tasks on time.',
                 'name' => 'Rajesh',
-                'role' => 'Director of Product, ZiveAI',
+                'role' => 'Director, ZiveAI',
                 'sort_order' => 2,
             ],
             [
-                'quote' => 'Collaborating with Suave Creators has been a tremendous asset to our agency. Aakash is an exceptionally skilled programmer who consistently brings clean architecture, reliable problem-solving, and crystal-clear communication to every engagement.',
+                'quote' => 'The Suave Creator team has been a pleasure to work with. Aakash is an exceptionally talented programmer who consistently brings a positive attitude, writes clean and reliable code, and communicates clearly throughout the project.',
                 'name' => 'Mark Shelton',
-                'role' => 'Managing Director, DBS Interactive',
+                'role' => 'DBS Interactive',
                 'sort_order' => 3,
             ],
             [
-                'quote' => 'Working with Suave Creators has been an outstanding experience. Their team executed our technical roadmap with remarkable precision and care. They are our trusted engineering partners.',
+                'quote' => 'Great working with Suave Creators, very well executed projects. Keep up the good work.',
                 'name' => 'Adnyesh',
-                'role' => 'Chief Technology Officer, Ergode Inc',
+                'role' => 'CTO, Ergode Inc',
                 'sort_order' => 4,
             ],
         ];

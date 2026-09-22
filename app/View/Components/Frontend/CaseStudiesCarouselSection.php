@@ -42,6 +42,7 @@ class CaseStudiesCarouselSection extends Component
                     ? $title.' case study visual for Suave Creators software development'
                     : 'Case study visual for Suave Creators software development',
                 'url' => $slug !== '' ? CaseStudySupport::urlForSlug($slug) : route('case-studies'),
+                'cta' => (string) ($item['cta'] ?? ''),
                 'stats' => array_values(array_map(function (array $stat): array {
                     $value = trim((string) ($stat['value'] ?? ''));
 
