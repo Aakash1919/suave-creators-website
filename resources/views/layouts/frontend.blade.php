@@ -137,6 +137,10 @@
         /* Reserve hero shell so deferred Tailwind/style.css cannot shove site-main. */
         .site-main>.site-container.relative{box-sizing:border-box;min-height:13rem;padding-bottom:3rem;padding-top:2rem}
         .site-main>.single-blog-top{min-height:0;padding-bottom:.75rem;padding-top:.25rem}
+        @media (max-width:767px){
+            .site-main>.single-blog-top.site-container.relative{min-height:0;padding-bottom:.5rem;padding-top:.25rem}
+            .site-main>.blogs-hero.site-container.relative{min-height:0}
+        }
         .site-main>.site-container.relative>.grid{align-items:center;display:grid;gap:2.5rem;grid-template-columns:minmax(0,1fr)}
         .site-main>.site-container.relative>.grid>div:first-child{max-width:36rem;min-height:17rem}
         .site-main>.home-hero.relative>.grid>div:first-child{max-width:42rem}

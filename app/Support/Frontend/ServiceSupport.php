@@ -447,7 +447,6 @@ class ServiceSupport
             abort(404);
         }
 
-        $posts = BlogSupport::posts()->take(3)->values()->all();
         $bodyImage = (string) ($service['bodyImage'] ?? '');
         $bodyBg = (string) ($service['bodyBg'] ?? '');
         $useBodyImageLayout = $bodyImage !== '';
@@ -489,7 +488,7 @@ class ServiceSupport
             'industryCards' => self::mapIndustryCards($service['industries'] ?? []),
             'standoutCards' => self::mapStandoutCards($service['standoutCards'] ?? []),
             'processSteps' => self::mapProcessSteps($service['processSteps'] ?? []),
-            'articles' => self::mapArticles($posts),
+            'articles' => self::articles(),
             'caseStudies' => CaseStudySupport::forService($slug, 6),
             'techStack' => AboutSupport::techStack(),
             'webDevLayoutSlugs' => self::SLUGS,
@@ -609,26 +608,6 @@ class ServiceSupport
                 'desc' => (string) ($step['desc'] ?? ''),
             ];
         }, $steps, array_keys($steps)));
-    }
-
-    /**
-     * @param  array<int, array<string, mixed>>  $posts
-     * @return array<int, array<string, string>>
-     */
-    protected static function mapArticles(array $posts): array
-    {
-        return array_values(array_map(static function (array $post): array {
-            return [
-                'title' => (string) ($post['title'] ?? ''),
-                'excerpt' => (string) ($post['short_description'] ?? ''),
-                'image' => (string) ($post['image'] ?? ''),
-                'alt' => (string) ($post['title'] ?? ''),
-                'date' => (string) ($post['published_label'] ?? ''),
-                'datetime' => (string) ($post['published_date'] ?? ''),
-                'author' => (string) ($post['author_name'] ?? 'Suave Creators'),
-                'url' => (string) ($post['url'] ?? route('blogs')),
-            ];
-        }, $posts));
     }
 
     /**

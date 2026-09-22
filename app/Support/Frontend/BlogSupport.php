@@ -4,10 +4,12 @@ namespace App\Support\Frontend;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Support\Blogs\BlogHtmlSupport;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -19,15 +21,19 @@ class BlogSupport
     public const TABLET_PER_PAGE = 10;
 
     /**
+     * Published posts shaped for cards/sliders (no article HTML).
+     *
      * @return Collection<int, array<string, mixed>>
      */
-    public static function posts(?string $categorySlug = null): Collection
+    public static function posts(?string $categorySlug = null, ?int $limit = null): Collection
     {
         return self::publishedQuery($categorySlug)
-            ->with(['category', 'createdBy'])
+            ->forListing()
+            ->with(self::listingRelations())
             ->orderByDesc('published_at')
+            ->when($limit !== null, fn ($query) => $query->limit(max(1, $limit)))
             ->get()
-            ->map(fn (Blog $blog): array => self::mapBlog($blog));
+            ->map(fn (Blog $blog): array => self::mapBlog($blog, withContent: false));
     }
 
     /**
@@ -36,27 +42,26 @@ class BlogSupport
     public static function post(string $slug): ?array
     {
         $query = Blog::query()
-            ->with(['category', 'createdBy'])
-            ->where('slug', $slug);
-
-        if (auth()->check()) {
-            // Logged-in users may preview drafts on the single-blog page.
-            $query->where(function ($q): void {
-                $q->published()
-                    ->orWhere('status', Blog::STATUS_DRAFT);
-            });
-        } else {
-            $query->published();
-        }
+            ->with(self::listingRelations())
+            ->where('slug', $slug)
+            ->when(
+                auth()->check(),
+                function ($query): void {
+                    $query->where(function ($inner): void {
+                        $inner->published()
+                            ->orWhere('status', Blog::STATUS_DRAFT);
+                    });
+                },
+                function ($query): void {
+                    $query->published();
+                },
+            );
 
         $blog = $query->first();
 
         return $blog !== null ? self::mapBlog($blog, 'original') : null;
     }
 
-    /**
-     * @return int
-     */
     public static function perPage(?int $requested = null): int
     {
         return $requested === self::TABLET_PER_PAGE
@@ -83,13 +88,14 @@ class BlogSupport
 
         /** @var LengthAwarePaginator<int, Blog> $paginator */
         $paginator = self::publishedQuery($category?->slug, $search !== '' ? $search : null)
-            ->with(['category', 'createdBy'])
+            ->forListing()
+            ->with(self::listingRelations())
             ->orderByDesc('published_at')
-            ->paginate($perPage, ['*'], 'page', max(1, $page))
+            ->paginate($perPage, page: max(1, $page))
             ->withQueryString();
 
         $posts = $paginator->getCollection()
-            ->map(fn (Blog $blog): array => self::mapBlog($blog))
+            ->map(fn (Blog $blog): array => self::mapBlog($blog, withContent: false))
             ->values()
             ->all();
 
@@ -144,24 +150,18 @@ class BlogSupport
             abort(404);
         }
 
-        $allPosts = self::posts()->all();
+        $listingPosts = self::posts(limit: 8);
         $categories = self::topCategories(5, $post['category_slug'] ?? null);
 
-        $sliderPosts = [];
+        $sliderPosts = $listingPosts
+            ->reject(static fn (array $candidate): bool => ($candidate['slug'] ?? '') === $slug)
+            ->values();
 
-        foreach ($allPosts as $candidate) {
-            if (($candidate['slug'] ?? '') === $slug) {
-                continue;
-            }
-
-            $sliderPosts[] = $candidate;
+        if ($sliderPosts->count() < 2) {
+            $sliderPosts = $listingPosts->values();
         }
 
-        if (count($sliderPosts) < 2) {
-            $sliderPosts = $allPosts;
-        }
-
-        $sliderPosts = array_slice($sliderPosts, 0, 6);
+        $sliderPosts = $sliderPosts->take(6)->all();
 
         $articleContent = self::prepareArticleContent($post);
 
@@ -194,9 +194,9 @@ class BlogSupport
 
         return [
             'post' => $post,
-            'posts' => $allPosts,
+            'posts' => $listingPosts->all(),
             'categories' => $categories,
-            'topPosts' => array_slice($allPosts, 0, 5),
+            'topPosts' => $listingPosts->take(5)->all(),
             'sliderPosts' => $sliderPosts,
             'articleContent' => $articleContent,
             'shareLinks' => self::shareLinks(
@@ -261,8 +261,7 @@ class BlogSupport
      */
     public static function articleCards(int $limit = 4): array
     {
-        return self::posts()
-            ->take($limit)
+        return self::posts(limit: $limit)
             ->map(static function (array $post): array {
                 return [
                     'title' => (string) ($post['title'] ?? ''),
@@ -280,7 +279,7 @@ class BlogSupport
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Builder<Blog>
+     * @return Builder<Blog>
      */
     protected static function publishedQuery(?string $categorySlug = null, ?string $search = null)
     {
@@ -297,6 +296,17 @@ class BlogSupport
         }
 
         return $query;
+    }
+
+    /**
+     * @return list<string>
+     */
+    protected static function listingRelations(): array
+    {
+        return [
+            'category:id,name,slug',
+            'createdBy:id,name',
+        ];
     }
 
     /**
@@ -364,7 +374,7 @@ class BlogSupport
      * @param  'original'|'medium'  $imageVariant
      * @return array<string, mixed>
      */
-    protected static function mapBlog(Blog $blog, string $imageVariant = 'medium'): array
+    protected static function mapBlog(Blog $blog, string $imageVariant = 'medium', bool $withContent = true): array
     {
         $publishedAt = $blog->published_at instanceof Carbon
             ? $blog->published_at
@@ -387,7 +397,7 @@ class BlogSupport
             'is_draft' => $blog->status === Blog::STATUS_DRAFT,
             'image' => $image,
             'short_description' => (string) ($blog->short_description ?? ''),
-            'content' => self::normalizeStorageUrls((string) ($blog->content ?? '')),
+            'content' => $withContent ? self::normalizeStorageUrls((string) ($blog->content ?? '')) : '',
             'author_name' => (string) ($blog->createdBy?->name ?? 'Suave Creators'),
             'category' => $categoryName,
             'category_slug' => $categorySlug,
@@ -462,21 +472,15 @@ class BlogSupport
             return $content;
         }
 
-        $content = (string) preg_replace('/<h1(\b[^>]*)>/i', '<h2$1>', $content);
-        $content = (string) preg_replace('/<\/h1>/i', '</h2>', $content);
         $content = self::normalizeVisualHtml($content);
+        $content = BlogHtmlSupport::wrapBareTables($content);
 
         $fallbackAlt = $title !== '' ? $title : 'Suave Creators blog article';
 
-        return (string) preg_replace_callback('/<img\b([^>]*)>/i', static function (array $matches) use ($fallbackAlt): string {
-            $attrs = $matches[1];
+        $content = BlogHtmlSupport::decorateContentImages($content, $fallbackAlt);
+        $content = BlogHtmlSupport::normalizeArticleHeadings($content, $title);
 
-            if (preg_match('/\balt\s*=/i', $attrs)) {
-                return $matches[0];
-            }
-
-            return '<img alt="'.e($fallbackAlt).'"'.$attrs.'>';
-        }, $content);
+        return BlogHtmlSupport::stripInlineFonts($content);
     }
 
     /**

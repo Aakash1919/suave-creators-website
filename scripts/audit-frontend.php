@@ -11,7 +11,7 @@ $kernel = $app->make(Kernel::class);
 $kernel->bootstrap();
 $app->instance('request', Request::create('/', 'GET'));
 
-$serviceSlugs = (new \ReflectionClass(ServiceSupport::class))->getConstant('SLUGS') ?: [];
+$serviceSlugs = (new ReflectionClass(ServiceSupport::class))->getConstant('SLUGS') ?: [];
 $industrySlugs = [];
 $industryDir = base_path('app/Support/Frontend/Data/industries');
 if (is_dir($industryDir)) {
@@ -51,7 +51,7 @@ foreach ($industrySlugs as $slug) {
 }
 
 try {
-    foreach (BlogSupport::posts()->take(20) as $post) {
+    foreach (BlogSupport::posts(limit: 20) as $post) {
         if (! empty($post['slug'])) {
             $uris[] = route('blog.show', ['slug' => $post['slug']], false);
         }
