@@ -28,6 +28,7 @@ trait ValidatesBlogFields
             'blog_category_id' => ['nullable', 'exists:blog_categories,id'],
             'status' => ['required', Rule::in([Blog::STATUS_DRAFT, Blog::STATUS_PUBLISHED])],
             'featured_image' => ['nullable', 'image', 'max:5120'],
+            'featured_image_position' => ['nullable', 'string', Rule::in(['after_first_p', 'top', 'bottom', 'manual', 'hide'])],
             'meta_title' => ['nullable', 'string', 'max:60'],
             'meta_description' => ['nullable', 'string', 'max:160'],
             'og_title' => ['nullable', 'string', 'max:60'],
