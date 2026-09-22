@@ -26,6 +26,7 @@ class Blog extends Model
         'short_description',
         'content',
         'featured_image',
+        'featured_image_position',
         'medium_thumb_image',
         'status',
         'published_at',

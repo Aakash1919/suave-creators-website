@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @license Copyright (c) 2003-2026, richtexteditor - Richscripts Inc. All rights reserved.
  * For licensing, see http://richtexteditor.com/license.aspx
  */
@@ -278,7 +278,7 @@ RTE_DefaultConfig.collabShowRemoteCursors = true;
 
 RTE_DefaultConfig.inlineStyles = [["Red", "color:red", "color:red"], ["Bold", "font-weight:bold", "font-weight:bold"], ["Mark", "my-cls-mark"], ["Warning", "my-cls-warning"]]; // Default CSS styles for inline styles dropdown. 
 RTE_DefaultConfig.paragraphStyles = [["Red", "color:red", "color:red"], ["Bold", "font-weight:bold", "font-weight:bold"], ["Quote", "my-cls-quote"], ["LargeCenter", "my-cls-largecenter"]]; // Default CSS styles for paragraph styles dropdown. 
-RTE_DefaultConfig.imageStyles = [["Border", "border: 1px solid #ddd; border-radius: 4px; padding: 5px;"], ["grayscale", "filter: grayscale(100%);"], ["Shadow", "box-shadow:0 0 8px gray"], ["Margin10", "margin:10px"], ["Padding:10", "padding:10px"]
+RTE_DefaultConfig.imageStyles = [["Border", "border: 1px solid #ddd; border-radius: 4px; padding: 5px;"], ["grayscale", "filter: grayscale(100%);"], ["Shadow", "box-shadow:0 0 8px gray"], ["Margin Top & Bottom: 20", "margin-top: 20px; margin-bottom: 20px;"], ["Margin Top & Bottom: 10", "margin-top: 10px; margin-bottom: 10px;"], ["Margin Top & Bottom: 0", "margin-top: 0px; margin-bottom: 0px;"], ["Margin10", "margin:10px"], ["Margin0", "margin:0px"], ["Padding:10", "padding:10px"]
 	, ["Rounded Corners", "border-radius: 10px;"], ["Rounded Images", "border-radius: 50%;"], ["Thumbnail Image", "border: 1px solid #ddd; border-radius: 4px; padding: 5px;width:150px"]// Default CSS styles for image Styles dropdown. 
 ];
 RTE_DefaultConfig.linkStyles = [["Margin10", "margin:10px"], ["Padding:10", "padding:10px"], ["BigText", "font-size:36px"]]; // Default CSS styles for link Styles dropdown. 

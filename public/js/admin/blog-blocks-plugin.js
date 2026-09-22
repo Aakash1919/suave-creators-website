@@ -12,6 +12,7 @@
   };
 
   var labels = {
+    insertfeaturedimage: 'Featured image',
     inserttakeaways: 'Takeaways',
     insertresults: 'Results',
     insertchecklist: 'Checklist',
@@ -22,6 +23,7 @@
   };
 
   var icons = {
+    insertfeaturedimage: icon('<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>'),
     inserttakeaways: icon('<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>'),
     insertresults: icon('<path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-5"/><path d="M12 16V8"/><path d="M16 16v-3"/>'),
     insertchecklist: icon('<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'),
@@ -35,6 +37,148 @@
     window.RTE_DefaultConfig['text_' + cmd] = labels[cmd];
     window.RTE_DefaultConfig['svgCode_' + cmd] = icons[cmd];
   });
+
+  function sidebarFeaturedPreviewSrc() {
+    try {
+      var previewImg = document.querySelector('.admin-blog-form__image-preview');
+      if (previewImg && previewImg.src) {
+        return previewImg.src;
+      }
+    } catch (e) {
+      /* ignore */
+    }
+
+    return '';
+  }
+
+  /**
+   * Remove legacy / duplicate preview thumbs inside a featured-image box.
+   * Keeps at most one `.blog-featured-image-box__preview` wrapper.
+   */
+  function normalizeFeaturedImagePreviews(box) {
+    if (!box) {
+      return null;
+    }
+
+    var kept = null;
+    var previews = box.querySelectorAll('.blog-featured-image-box__preview');
+    for (var p = 0; p < previews.length; p++) {
+      if (!kept) {
+        kept = previews[p];
+      } else {
+        previews[p].remove();
+      }
+    }
+
+    var imgs = box.querySelectorAll('img');
+    for (var i = 0; i < imgs.length; i++) {
+      var img = imgs[i];
+      if (kept && kept.contains(img)) {
+        continue;
+      }
+      var alt = (img.getAttribute('alt') || '').toLowerCase();
+      if (alt === 'featured image preview' || img.classList.contains('blog-featured-image-box__thumb')) {
+        var wrap = img.parentElement;
+        if (wrap && wrap !== box && !wrap.classList.contains('blog-featured-image-box__preview') && wrap.childNodes.length === 1) {
+          wrap.remove();
+        } else {
+          img.remove();
+        }
+      }
+    }
+
+    return kept;
+  }
+
+  /**
+   * Live-paint the sidebar featured image into editor markers.
+   * Do not bake preview URLs into insert HTML — blob: srcs die after reload.
+   */
+  function paintFeaturedImagePreviews(editor) {
+    if (!editor) {
+      return;
+    }
+
+    try {
+      var editdoc = typeof editor.getDocument === 'function' ? editor.getDocument() : null;
+      var editable = typeof editor.getEditable === 'function' ? editor.getEditable() : (editdoc && editdoc.body);
+      if (!editdoc || !editable) {
+        return;
+      }
+
+      var src = sidebarFeaturedPreviewSrc();
+      var boxes = editable.querySelectorAll('.blog-featured-image-box');
+      for (var i = 0; i < boxes.length; i++) {
+        var box = boxes[i];
+
+        // Drop stray imgs/divs that sat beside the box inside the figure (old markup).
+        var figure = box.closest('figure[data-featured-image]');
+        if (figure) {
+          var child = figure.firstElementChild;
+          while (child) {
+            var next = child.nextElementSibling;
+            if (child !== box) {
+              if (child.tagName === 'IMG') {
+                child.remove();
+              } else if (
+                child.tagName === 'DIV' &&
+                !child.classList.contains('blog-featured-image-box') &&
+                child.querySelector('img[alt="Featured image preview"]')
+              ) {
+                child.remove();
+              }
+            }
+            child = next;
+          }
+        }
+
+        var preview = normalizeFeaturedImagePreviews(box);
+
+        if (!src) {
+          if (preview) {
+            preview.remove();
+          }
+          continue;
+        }
+
+        if (!preview) {
+          preview = editdoc.createElement('div');
+          preview.className = 'blog-featured-image-box__preview';
+          var img = editdoc.createElement('img');
+          img.className = 'blog-featured-image-box__thumb';
+          img.alt = 'Featured image preview';
+          preview.appendChild(img);
+          box.insertBefore(preview, box.firstChild);
+        }
+
+        var thumb = preview.querySelector('img');
+        if (!thumb) {
+          thumb = editdoc.createElement('img');
+          thumb.className = 'blog-featured-image-box__thumb';
+          thumb.alt = 'Featured image preview';
+          preview.appendChild(thumb);
+        }
+
+        if (thumb.getAttribute('src') !== src) {
+          thumb.setAttribute('src', src);
+        }
+      }
+    } catch (e) {
+      /* best-effort */
+    }
+  }
+
+  function htmlFeaturedImage() {
+    // Marker only — preview thumb is painted live via paintFeaturedImagePreviews().
+    return ''
+      + '<figure class="single-blog-main__image single-blog-main__image--inline" data-featured-image="true" contenteditable="false">'
+      + '<div class="blog-featured-image-box">'
+      + '<span class="blog-featured-image-box__badge">FEATURED IMAGE</span>'
+      + '<p class="blog-featured-image-box__title">Post Featured Image</p>'
+      + '<p class="blog-featured-image-box__hint">The featured image set in the sidebar will appear here on the published page.</p>'
+      + '</div>'
+      + '</figure><p><br></p>';
+  }
 
   function htmlTakeaways() {
     return ''
@@ -120,6 +264,7 @@
   }
 
   var commands = {
+    insertfeaturedimage: { html: htmlFeaturedImage, focus: 'blog-featured-image-box', slash: ['featured', 'image', 'banner'] },
     inserttakeaways: { html: htmlTakeaways, focus: 'blog-takeaways', slash: ['takeaways', 'bullets', 'summary'] },
     insertresults: { html: htmlResults, focus: 'blog-results', slash: ['results', 'outcomes'] },
     insertchecklist: { html: htmlChecklist, focus: 'blog-checklist', slash: ['checklist', 'todo', 'steps'] },
@@ -129,11 +274,43 @@
     insertblogtable: { html: htmlTable, focus: 'blog-table-wrap', slash: ['table', 'comparison', 'grid'] },
   };
 
-  var BLOCK_SELECTOR = '.blog-takeaways, .blog-results, .blog-checklist, .blog-stats, .blog-chart, .blog-insight, .blog-table-wrap';
+  var BLOCK_SELECTOR = '.blog-takeaways, .blog-results, .blog-checklist, .blog-stats, .blog-chart, .blog-insight, .blog-table-wrap, .blog-featured-image-box, figure[data-featured-image="true"]';
+
+  function ensureEditorSelection(editor) {
+    try {
+      if (typeof editor.focus === 'function') {
+        editor.focus();
+      }
+      var editdoc = typeof editor.getDocument === 'function' ? editor.getDocument() : null;
+      var editable = typeof editor.getEditable === 'function' ? editor.getEditable() : (editdoc && editdoc.body);
+      if (!editdoc || !editable) {
+        return;
+      }
+      var sel = typeof editor.getSelection === 'function' ? editor.getSelection() : (editdoc.defaultView ? editdoc.defaultView.getSelection() : editdoc.getSelection());
+      if (!sel || sel.rangeCount === 0) {
+        var range = editdoc.createRange();
+        range.selectNodeContents(editable);
+        range.collapse(false);
+        if (sel) {
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      }
+    } catch (e) {
+      /* best-effort */
+    }
+  }
 
   function insertHtml(editor, html) {
-    if (typeof editor.focus === 'function') {
-      editor.focus();
+    ensureEditorSelection(editor);
+
+    if (typeof editor.insertHTML === 'function') {
+      try {
+        editor.insertHTML(html);
+        return true;
+      } catch (e) {
+        /* fall through to execCommand / DOM */
+      }
     }
 
     try {
@@ -145,12 +322,32 @@
         }
       }
     } catch (e) {
-      /* fall through to the editor API */
+      /* fall through to DOM insertion */
     }
 
-    if (typeof editor.insertHTML === 'function') {
-      editor.insertHTML(html);
-      return true;
+    try {
+      var editdoc = typeof editor.getDocument === 'function' ? editor.getDocument() : null;
+      var editable = typeof editor.getEditable === 'function' ? editor.getEditable() : (editdoc && editdoc.body);
+      if (editdoc && editable) {
+        var temp = editdoc.createElement('div');
+        temp.innerHTML = html;
+        var frag = editdoc.createDocumentFragment();
+        var node;
+        while ((node = temp.firstChild)) {
+          frag.appendChild(node);
+        }
+        var sel = typeof editor.getSelection === 'function' ? editor.getSelection() : (editdoc.defaultView ? editdoc.defaultView.getSelection() : editdoc.getSelection());
+        if (sel && sel.rangeCount > 0) {
+          var range = sel.getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(frag);
+        } else {
+          editable.appendChild(frag);
+        }
+        return true;
+      }
+    } catch (e) {
+      /* ignore */
     }
 
     return false;
@@ -162,8 +359,36 @@
       return false;
     }
 
+    if (cmd === 'insertfeaturedimage') {
+      try {
+        var editdoc = typeof editor.getDocument === 'function' ? editor.getDocument() : null;
+        var editable = typeof editor.getEditable === 'function' ? editor.getEditable() : (editdoc && editdoc.body);
+        if (editable) {
+          var existing = editable.querySelectorAll('[data-featured-image]');
+          for (var i = 0; i < existing.length; i++) {
+            existing[i].remove();
+          }
+        }
+      } catch (e) {
+        /* ignore */
+      }
+    }
+
     if (!insertHtml(editor, def.html())) {
       return false;
+    }
+
+    if (cmd === 'insertfeaturedimage') {
+      try {
+        var posSelect = document.getElementById('blog-featured-image-position');
+        if (posSelect) {
+          posSelect.value = 'manual';
+          posSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      } catch (e) {
+        /* ignore */
+      }
+      paintFeaturedImagePreviews(editor);
     }
 
     try {
@@ -172,13 +397,15 @@
       var targets = editable && editable.getElementsByClassName ? editable.getElementsByClassName(def.focus) : [];
       if (targets && targets.length) {
         var target = targets[targets.length - 1];
-        var caretNode = target.querySelector('li, p, .blog-chart__label, .blog-stat__value') || target;
-        var range = editdoc.createRange();
-        range.selectNodeContents(caretNode);
-        range.collapse(true);
-        var sel = editor.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
+        if (cmd !== 'insertfeaturedimage') {
+          var caretNode = target.querySelector('li, p, .blog-chart__label, .blog-stat__value') || target;
+          var range = editdoc.createRange();
+          range.selectNodeContents(caretNode);
+          range.collapse(true);
+          var sel = editor.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
       }
     } catch (e) {
       /* caret is best-effort */
@@ -322,6 +549,7 @@
   window.RTE_DefaultConfig.plugin_blogblocks = RTE_Plugin_BlogBlocks;
   window.SuaveBlogBlocks = {
     insert: insertBlock,
+    paintFeaturedImagePreviews: paintFeaturedImagePreviews,
     undo: function (editor) {
       return runEditorCommand(editor, 'undo');
     },
