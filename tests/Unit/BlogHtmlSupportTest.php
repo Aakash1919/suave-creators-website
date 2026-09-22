@@ -165,4 +165,50 @@ class BlogHtmlSupportTest extends TestCase
         $this->assertStringNotContainsString('font-family', $out);
         $this->assertStringNotContainsString('Arial', $out);
     }
+
+    public function test_remove_empty_tags_strips_spacing_paragraphs_with_br_or_nbsp(): void
+    {
+        $html = '<p>Intro paragraph</p><p><br></p><p>&nbsp;</p><p>Ending paragraph</p><p></p><h2><br></h2>';
+
+        [$out, $removed] = BlogHtmlSupport::removeEmptyTags($html);
+
+        $this->assertStringContainsString('<p>Intro paragraph</p>', $out);
+        $this->assertStringContainsString('<p>Ending paragraph</p>', $out);
+        $this->assertStringNotContainsString('<p><br></p>', $out);
+        $this->assertStringNotContainsString('<p>&nbsp;</p>', $out);
+        $this->assertStringNotContainsString('<p></p>', $out);
+        $this->assertStringNotContainsString('<h2><br></h2>', $out);
+        $this->assertSame(4, $removed);
+    }
+
+    public function test_sanitize_content_strips_spacing_paragraphs_between_image_and_text(): void
+    {
+        $html = '<p><img src="/storage/blogs/content/crm-1.webp" alt="CRM"></p><p><br></p><p><br></p><p>After implementation text</p>';
+
+        $out = BlogHtmlSupport::sanitizeContent($html, 'crm-post', 'CRM Post')['content'];
+
+        $this->assertStringNotContainsString('<p><br></p>', $out);
+        $this->assertStringContainsString('<p>After implementation text</p>', $out);
+    }
+
+    public function test_sanitize_content_strips_featured_image_editor_previews(): void
+    {
+        $html = '<p>Intro</p>'
+            .'<figure class="single-blog-main__image" data-featured-image="true">'
+            .'<div class="blog-featured-image-box">'
+            .'<div class="blog-featured-image-box__preview"><img src="blob:http://127.0.0.1:8000/abc" alt="Featured image preview"></div>'
+            .'<span class="blog-featured-image-box__badge">FEATURED IMAGE</span>'
+            .'<p class="blog-featured-image-box__title">Post Featured Image</p>'
+            .'</div>'
+            .'</figure>'
+            .'<p>Outro</p>';
+
+        $out = BlogHtmlSupport::sanitizeContent($html, 'preview-post', 'Preview Post')['content'];
+
+        $this->assertStringNotContainsString('blog-featured-image-box__preview', $out);
+        $this->assertStringNotContainsString('blob:', $out);
+        $this->assertStringNotContainsString('Featured image preview', $out);
+        $this->assertStringContainsString('data-featured-image="true"', $out);
+        $this->assertStringContainsString('Post Featured Image', $out);
+    }
 }
