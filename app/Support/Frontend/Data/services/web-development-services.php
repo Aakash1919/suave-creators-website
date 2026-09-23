@@ -4,16 +4,16 @@ return [
     'slug' => 'web-development-services',
     'breadcrumbName' => 'Web Development Services',
     'pageTitle' => 'Custom Web Development Services | Suave Creators',
-    'pageDescription' => 'Custom web application development services for B2B enterprises and startups. Full-stack Laravel, React, Node.js, and cloud platforms with 100% code ownership.',
+    'pageDescription' => 'Custom web application development services for B2B enterprises and startups. Full-stack Laravel, React, Node.js and cloud platforms with 100% code ownership.',
     'ogTitle' => 'Custom Web Development Services | Suave Creators',
-    'ogDescription' => 'Custom web application development services for B2B enterprises and startups. Full-stack Laravel, React, Node.js, and cloud platforms with 100% code ownership.',
+    'ogDescription' => 'Custom web application development services for B2B enterprises and startups. Full-stack Laravel, React, Node.js and cloud platforms with 100% code ownership.',
     'ogImage' => 'assets/media/web-development-services-og.jpg',
     'eyebrow' => 'OUR TAILOR-MADE SERVICES',
     'heroTitle' => [
         0 => 'Custom Web Development Services for ',
         1 => 'High-Growth Businesses',
     ],
-    'heroDescription' => 'We engineer responsive, high-performance web applications, cloud customer portals, and enterprise software platforms. Built with modern full-stack frameworks, sub-second page performance, and 100% code ownership.',
+    'heroDescription' => 'We engineer responsive, high-performance web applications, cloud customer portals and enterprise software platforms. Built with modern full-stack frameworks, sub-second page performance and 100% code ownership.',
     'bannerSideImage' => '/assets/media/web-developement-banner.webp',
     'bannerLogos' => [],
     'bannerBg' => '/assets/media/web-deve-bg.png',
@@ -22,22 +22,16 @@ return [
 
     'introQuestion' => "What do Suave Creators' custom web development services include?",
     'introQuestionEyebrow' => 'Service Scope & Inclusions',
-    'introQuestionTags' => [
-        'Full-Stack Web & SaaS Engineering',
-        'Modern Tech Stacks (Laravel, React, Node.js, Python)',
-        'SOC 2 & HIPAA Compliant Architecture',
-        'US Legal Governance & Up to 60% TCO Savings',
-    ],
-    'introAnswer' => "Suave Creators' custom web development services encompass full-stack web application engineering, enterprise customer portals, cloud SaaS platforms, and secure REST/GraphQL API architectures. Built using modern stacks—including Laravel (PHP), ReactJS, Next.js, Node.js, Angular, and Python—all platforms are engineered with single-tenant database isolation, sub-second Core Web Vitals, and strict data security compliance (SOC 2, HIPAA, GDPR). Projects are governed under United States law via our Sheridan, Wyoming headquarters with high-velocity engineering from Palampur, India, delivering up to 60% total cost of ownership (TCO) savings.",
+    'introAnswer' => "Suave Creators' custom web development services encompass full-stack web application engineering, enterprise customer portals, cloud SaaS platforms and secure REST/GraphQL API architectures. Built using modern stacks including Laravel (PHP), ReactJS, Next.js, Node.js, Angular and Python. All platforms are engineered with single-tenant database isolation, sub-second Core Web Vitals and strict data security compliance (SOC 2, HIPAA, GDPR). Projects are governed under United States law via our Sheridan, Wyoming headquarters with high-velocity engineering from Palampur, India, delivering up to 60% total cost of ownership (TCO) savings.",
 
     'introEyebrow' => 'Custom Web Development',
     'introTitle' => 'Trusted by High-Growth Startups & Established Enterprises',
-    'introDescription' => 'We hold a proven track record in full-stack web development. Every web application is engineered for speed, clean data integrity, and high search visibility. From initial architecture modeling to production launch, we work alongside your stakeholders with transparent, bi-weekly agile milestones.',
+    'introDescription' => 'We hold a proven track record in full-stack web development. Every web application is engineered for speed, clean data integrity and high search visibility. From initial architecture modeling to production launch, we work alongside your stakeholders with transparent, bi-weekly agile milestones.',
     'introLinkText' => 'Explore All Services',
     'introLinkRoute' => 'services',
 
     'introStats' => [
-        ['50+', 'Projects Delivered', 'Web apps, CRMs, ERPs, and cloud software platforms', 'assets/icons/projects-delivered-stat-icon.svg', '#4C24F4'],
+        ['50+', 'Projects Delivered', 'Web apps, CRMs, ERPs and cloud software platforms', 'assets/icons/projects-delivered-stat-icon.svg', '#4C24F4'],
         ['10+', 'Years Experience', 'Modern scalable full-stack cloud architectures', 'assets/icons/years-experience-stat-icon.svg', '#1873E7'],
         ['98%', 'Client Satisfaction', 'Transparent agile development and SLA partnerships', 'assets/icons/funding-secured-stat-icon.svg', '#0C7A73'],
         ['15+', 'Senior Engineers', 'Full-stack devs & cloud systems architects', 'assets/icons/expert-team-stat-icon.svg', '#C4520D'],
@@ -55,7 +49,7 @@ return [
     'bodyTitle' => 'Tailored Web Solutions to Enhance Your Digital Operations',
     'bodyBg' => '/assets/background/about-banner-bg.png',
     'bodyParagraphs' => [
-        'At Suave Creators, we design and build full-stack web applications that solve operational complexity and delight end users. Our custom web development solutions are responsive, secure, and user-centric, ensuring your application performs smoothly across desktop, tablet, and mobile devices. We develop custom web applications, SaaS MVPs, transactional portals, and headless CMS platforms. Every product is backed by clean code standards, comprehensive documentation, and direct architect collaboration.',
+        'At Suave Creators, we design and build full-stack web applications that solve operational complexity and delight end users. Our custom web development solutions are responsive, secure and user-centric, ensuring your application performs smoothly across desktop, tablet and mobile devices. We develop custom web applications, SaaS MVPs, transactional portals and headless CMS platforms. Every product is backed by clean code standards, comprehensive documentation and direct architect collaboration.',
     ],
     'bodyPrimaryCta' => "Let's Connect to Discuss Your Project",
     'bodyPrimaryHref' => 'demo',
@@ -75,43 +69,43 @@ return [
 
     'capabilitiesEyebrow' => 'OUR EXPERTISE',
     'capabilitiesTitle' => 'Technical Capabilities Engineered for Scalability, Security & Performance',
-    'capabilitiesDescription' => 'Explore our technical capabilities across backend engineering, dynamic frontends, and enterprise database systems. We select the optimal framework stack to align with your product requirements and scalability targets.',
+    'capabilitiesDescription' => 'Explore our technical capabilities across backend engineering, dynamic frontends and enterprise database systems. We select the optimal framework stack to align with your product requirements and scalability targets.',
     'capabilities' => [
         0 => [
             'title' => 'Laravel Development',
             'image' => '/assets/icons/laravel-development-icon.svg',
             'tags' => ['Web Applications', 'Enterprise Portals', 'REST APIs', 'Scalable Backends'],
-            'desc' => 'We engineer backend systems on Laravel (PHP 8.3+), leveraging its robust ORM (Eloquent), automated queue workers, and modular MVC architecture. It is our primary choice for bespoke CRM systems, multi-branch ERP platforms, and mission-critical transactional web applications.',
+            'desc' => 'We engineer backend systems on Laravel (PHP 8.3+), leveraging its robust ORM (Eloquent), automated queue workers and modular MVC architecture. It is our primary choice for bespoke CRM systems, multi-branch ERP platforms and mission-critical transactional web applications.',
         ],
         1 => [
             'title' => 'Enterprise WordPress & Headless CMS',
             'image' => '/assets/icons/wordpress-development-icon.svg',
             'tags' => ['Custom Gutenberg Blocks', 'Headless APIs', 'High-Traffic Publishing', 'Security'],
-            'desc' => 'We develop custom, lightweight WordPress architectures without bloated third-party page builders. Using custom Gutenberg blocks, modular PHP, and REST/GraphQL endpoints, we deliver fast, SEO-optimized business platforms that marketing teams can easily manage without developer dependencies.',
+            'desc' => 'We develop custom, lightweight WordPress architectures without bloated third-party page builders. Using custom Gutenberg blocks, modular PHP and REST/GraphQL endpoints, we deliver fast, SEO-optimized business platforms that marketing teams can easily manage without developer dependencies.',
         ],
         2 => [
             'title' => 'ReactJS & Next.js Development',
             'image' => '/assets/icons/react-development-icon.svg',
             'tags' => ['Reactive Frontends', 'Sub-Second Virtual DOM', 'Server-Side Rendering (SSR)'],
-            'desc' => 'For dynamic, real-time user interfaces, we build on ReactJS and Next.js. We engineer interactive single-page applications (SPAs), live Kanban pipeline boards, and analytical reporting dashboards optimized for minimal client-side latency and sub-second Core Web Vitals.',
+            'desc' => 'For dynamic, real-time user interfaces, we build on ReactJS and Next.js. We engineer interactive single-page applications (SPAs), live Kanban pipeline boards and analytical reporting dashboards optimized for minimal client-side latency and sub-second Core Web Vitals.',
         ],
         3 => [
             'title' => 'Angular Enterprise Development',
             'image' => '/assets/icons/angular-development-icon.svg',
             'tags' => ['TypeScript', 'Two-Way Data Binding', 'Complex Enterprise Software', 'Scalability'],
-            'desc' => 'We deliver structured frontend engineering using Angular for complex, enterprise-grade web platforms. Angular’s opinionated architecture and strict TypeScript typing ensure long-term code maintainability, security, and stability for large cross-functional teams.',
+            'desc' => 'We deliver structured frontend engineering using Angular for complex, enterprise-grade web platforms. Angular’s opinionated architecture and strict TypeScript typing ensure long-term code maintainability, security and stability for large cross-functional teams.',
         ],
         4 => [
             'title' => 'PHP & Modern Full-Stack API Engineering',
             'image' => '/assets/icons/php-development-icon.svg',
             'tags' => ['High-Performance Backends', 'Microservices', 'Legacy Refactoring', 'Encryption'],
-            'desc' => 'PHP powers resilient, cost-effective server-side applications. We build modern, object-oriented PHP backends featuring strict type declarations, automated PHPUnit test coverage, and secure database abstraction layers engineered for high data throughput.',
+            'desc' => 'PHP powers resilient, cost-effective server-side applications. We build modern, object-oriented PHP backends featuring strict type declarations, automated PHPUnit test coverage and secure database abstraction layers engineered for high data throughput.',
         ],
         5 => [
             'title' => 'Node.js High-Concurrency Microservices',
             'image' => '/assets/icons/nodejs-development-icon.svg',
             'tags' => ['Event-Driven I/O', 'WebSockets', 'Real-Time Telemetry', 'Fast Data Processing'],
-            'desc' => 'We build high-throughput microservices on Node.js (NestJS / Express) to leverage its non-blocking, event-driven architecture. Ideal for real-time applications, collaborative workspaces, live messaging systems, and high-volume API ingestion pipelines.',
+            'desc' => 'We build high-throughput microservices on Node.js (NestJS / Express) to leverage its non-blocking, event-driven architecture. Ideal for real-time applications, collaborative workspaces, live messaging systems and high-volume API ingestion pipelines.',
         ],
     ],
 
@@ -121,7 +115,7 @@ return [
 
     'portfolioEyebrow' => 'OUR PORTFOLIO',
     'portfolioTitle' => 'Real-World Software Systems That Deliver Measurable Business ROI',
-    'portfolioDescription' => "We don't just build websites; we design and ship mission-critical software platforms. Explore our verified delivery records across logistics, sales automation, appointment scheduling, and AI systems.",
+    'portfolioDescription' => "We don't just build websites; we design and ship mission-critical software platforms. Explore our verified delivery records across logistics, sales automation, appointment scheduling and AI systems.",
     'portfolioPrimaryCta' => 'Get Free Consultation',
     'portfolioPrimaryHref' => 'demo',
     'portfolioSecondaryCta' => 'Explore Our Case Studies →',
@@ -137,42 +131,42 @@ return [
 
     'industriesEyebrow' => 'INDUSTRIES WE OFFER',
     'industriesTitle' => 'Specialized Industry Web & Software Development Solutions',
-    'industriesDescription' => 'As a dedicated software engineering company, we build custom web platforms tailored to the data structures, compliance mandates, and operational workflows of specific verticals.',
+    'industriesDescription' => 'As a dedicated software engineering company, we build custom web platforms tailored to the data structures, compliance mandates and operational workflows of specific verticals.',
     'industries' => [
         0 => [
             'icon' => '/assets/icons/industry-icon-1.svg',
             'title' => 'Healthcare & Clinics',
-            'desc' => 'HIPAA-compliant web portals, encrypted patient intake forms, secure tele-consultation scheduling, and deposit protection. Built on architectural patterns proven in our Appointment Insurance Platform Case Study.',
+            'desc' => 'HIPAA-compliant web portals, encrypted patient intake forms, secure tele-consultation scheduling and deposit protection. Built on architectural patterns proven in our Appointment Insurance Platform Case Study.',
             'slug' => 'healthcare-software-development',
         ],
         1 => [
             'icon' => '/assets/icons/industry-icon-2.svg',
             'title' => 'B2B & High-Volume E-Commerce',
-            'desc' => 'Transactional storefronts, custom checkout pipelines, multi-warehouse inventory syncing, and headless commerce. Explore our dedicated Custom E-Commerce Development Services.',
+            'desc' => 'Transactional storefronts, custom checkout pipelines, multi-warehouse inventory syncing and headless commerce. Explore our dedicated Custom E-Commerce Development Services.',
             'slug' => 'retail-ecommerce-solutions',
         ],
         2 => [
             'icon' => '/assets/icons/industry-icon-3.svg',
             'title' => 'B2B SaaS, IT & High-Growth Startups',
-            'desc' => 'Scalable MVP web applications, product-led sales dashboards, and multi-tenant cloud platforms designed to grow alongside your user base. Review our IT Solutions for Startups.',
+            'desc' => 'Scalable MVP web applications, product-led sales dashboards and multi-tenant cloud platforms designed to grow alongside your user base. Review our IT Solutions for Startups.',
             'slug' => 'it-software-solutions-for-startups',
         ],
         3 => [
             'icon' => '/assets/icons/industry-icon-4.svg',
             'title' => 'Financial Services & FinTech',
-            'desc' => 'Secure web platforms featuring multi-factor authentication (MFA), role-based access control (RBAC), automated compliance logging, and real-time banking and payment gateway integrations.',
+            'desc' => 'Secure web platforms featuring multi-factor authentication (MFA), role-based access control (RBAC), automated compliance logging and real-time banking and payment gateway integrations.',
             'slug' => 'finance-banking-software-development',
         ],
         4 => [
             'icon' => '/assets/icons/industry-icon-5.svg',
             'title' => 'Real Estate & Property Development',
-            'desc' => 'Interactive property portfolio directories, dynamic unit availability mapping, automated buyer inquiry routing, and broker commission ledger tracking.',
+            'desc' => 'Interactive property portfolio directories, dynamic unit availability mapping, automated buyer inquiry routing and broker commission ledger tracking.',
             'link' => '#',
         ],
         5 => [
             'icon' => '/assets/icons/industry-icon-6.svg',
             'title' => 'Education & E-Learning Organizations',
-            'desc' => 'Custom learning management systems (LMS), student progress portals, interactive testing tools, and institutional administration dashboards.',
+            'desc' => 'Custom learning management systems (LMS), student progress portals, interactive testing tools and institutional administration dashboards.',
             'slug' => 'education-elearning-platforms',
         ],
     ],
@@ -190,7 +184,7 @@ return [
 
     'whyEyebrow' => 'SUAVE CREATORS',
     'whyTitle' => 'Why Choose Us for Your Web & Software Development Needs?',
-    'whyDescription' => 'We combine senior architectural leadership, cross-border cost efficiency, and an engineering-first culture to ensure your software succeeds from concept to production.',
+    'whyDescription' => 'We combine senior architectural leadership, cross-border cost efficiency and an engineering-first culture to ensure your software succeeds from concept to production.',
     'whyCards' => [
         0 => [
             'image' => '/assets/media/startup-mvp-wireframe-planning-session.webp',
@@ -203,14 +197,14 @@ return [
             'image' => '/assets/media/dev-team-collaborative-coding-session.webp',
             'title' => 'Scalable, High-Performance & Responsive Architecture',
             'tags' => ['Decoupled Stack', 'Redis Caching', 'Database Indexing'],
-            'text' => 'Our applications are built to adapt as user concurrency increases. We implement decoupled frontend/backend architectures, Redis in-memory caching, and optimized database indexing to ensure your users experience sub-second response times across desktop, tablet, and mobile.',
+            'text' => 'Our applications are built to adapt as user concurrency increases. We implement decoupled frontend/backend architectures, Redis in-memory caching and optimized database indexing to ensure your users experience sub-second response times across desktop, tablet and mobile.',
             'features' => ['Sub-Second Response', 'High Concurrency', 'Fully Responsive'],
         ],
         2 => [
             'image' => '/assets/media/web-performance-analytics-dashboard.webp',
             'title' => 'Growth-Focused SEO & Technical Optimization',
             'tags' => ['Semantic HTML5', 'Server-Side Rendering', 'Schema.org JSON-LD'],
-            'text' => "We don't build software in a vacuum. By engineering applications with semantic HTML5, server-side rendering, sub-second TTFB, and structured JSON-LD schema, we ensure your platform is immediately indexable and well-positioned to rank on search engines.",
+            'text' => "We don't build software in a vacuum. By engineering applications with semantic HTML5, server-side rendering, sub-second TTFB and structured JSON-LD schema, we ensure your platform is immediately indexable and well-positioned to rank on search engines.",
             'features' => ['Sub-Second TTFB', 'Zero CLS', 'Search Engine Ready'],
         ],
     ],
@@ -223,7 +217,7 @@ return [
     'processSteps' => [
         0 => [
             'title' => 'Discovery & Strategy',
-            'desc' => 'We audit requirements, map user stories, design relational database schemas (ERD), and define the optimal technology stack.',
+            'desc' => 'We audit requirements, map user stories, design relational database schemas (ERD) and define the optimal technology stack.',
         ],
         1 => [
             'title' => 'Design & Interactive Prototyping',
@@ -235,34 +229,34 @@ return [
         ],
         3 => [
             'title' => 'Testing & Rigorous Quality Assurance',
-            'desc' => 'Automated unit testing, security vulnerability scans, load testing, and cross-device performance audits.',
+            'desc' => 'Automated unit testing, security vulnerability scans, load testing and cross-device performance audits.',
         ],
         4 => [
             'title' => 'Production Launch & Ongoing Support',
-            'desc' => 'Zero-downtime deployment, legacy data migration, complete repository handover, and 24/7 SLA maintenance.',
+            'desc' => 'Zero-downtime deployment, legacy data migration, complete repository handover and 24/7 SLA maintenance.',
         ],
     ],
 
     'standoutEyebrow' => 'OUR ADVANTAGE',
     'standoutTitle' => 'Why Suave Creators Stands Out',
-    'standoutDescription' => 'We combine senior architectural leadership, cross-border cost efficiency, and an engineering-first culture to ensure your software succeeds from concept to production.',
+    'standoutDescription' => 'We combine senior architectural leadership, cross-border cost efficiency and an engineering-first culture to ensure your software succeeds from concept to production.',
     'standoutCards' => [
         0 => [
             'step' => '01',
             'title' => 'Proven Experience & B2B Engineering Expertise',
-            'desc' => 'We have delivered over 50 custom software platforms, multi-tenant databases, and mission-critical applications. We build resilient digital assets that solve real operational complexity, not fragile templates.',
+            'desc' => 'We have delivered over 50 custom software platforms, multi-tenant databases and mission-critical applications. We build resilient digital assets that solve real operational complexity, not fragile templates.',
             'icon' => '/assets/icons/web-service-icon-1.svg',
         ],
         1 => [
             'step' => '02',
             'title' => 'Fast Delivery, Fixed Sprints & Predictable Roadmaps',
-            'desc' => 'We eliminate development ambiguity with defined milestone roadmaps, fixed-scope deliverables, and transparent sprint demonstrations that launch on schedule and within budget.',
+            'desc' => 'We eliminate development ambiguity with defined milestone roadmaps, fixed-scope deliverables and transparent sprint demonstrations that launch on schedule and within budget.',
             'icon' => '/assets/icons/web-service-icon-2.svg',
         ],
         2 => [
             'step' => '03',
             'title' => 'Direct Technical Leadership Without Account-Manager Friction',
-            'desc' => 'You collaborate directly with senior full-stack architects and technical leads who understand software infrastructure, commercial metrics, and scalable data design.',
+            'desc' => 'You collaborate directly with senior full-stack architects and technical leads who understand software infrastructure, commercial metrics and scalable data design.',
             'icon' => '/assets/icons/web-service-icon-3.svg',
         ],
     ],
@@ -276,7 +270,7 @@ return [
 
     'faqEyebrow' => 'HAVE QUESTIONS ABOUT OUR SERVICES?',
     'faqTitle' => 'Frequently Asked Questions: Delivery, Pricing & Code Ownership',
-    'faqDescription' => 'Here are answers to the most common questions regarding our custom web development services, pricing models, project timelines, and code ownership.',
+    'faqDescription' => 'Here are answers to the most common questions regarding our custom web development services, pricing models, project timelines and code ownership.',
     'faqQuestionHeading' => 'h3',
     'faqCtaLabel' => 'Get Free Consultation',
     'faqCtaHref' => 'demo',
@@ -288,34 +282,34 @@ return [
         ],
         1 => [
             'question' => 'How long does it take to develop a custom web application?',
-            'answer' => 'A focused web application or production-ready MVP typically requires 8 to 12 weeks from initial discovery and schema modeling to deployment. Large-scale enterprise web applications, complex multi-system ERP integrations, and high-volume e-commerce platforms typically require 14 to 20 weeks, structured across transparent two-week agile development sprints with live staging demonstrations.',
+            'answer' => 'A focused web application or production-ready MVP typically requires 8 to 12 weeks from initial discovery and schema modeling to deployment. Large-scale enterprise web applications, complex multi-system ERP integrations and high-volume e-commerce platforms typically require 14 to 20 weeks, structured across transparent two-week agile development sprints with live staging demonstrations.',
             'schemaAnswer' => 'A focused web application or production-ready MVP typically takes 8 to 12 weeks from initial requirements analysis to deployment. Larger enterprise web platforms and multi-integration software systems take 14 to 20 weeks, delivered in transparent two-week agile development sprints.',
         ],
         2 => [
             'question' => 'Do you offer post-launch support and maintenance?',
-            'answer' => 'Yes. We provide comprehensive post-launch SLA maintenance agreements that include 24/7 automated uptime monitoring, proactive security patching, dependency upgrades, automated daily encrypted offsite backups, and allocated monthly developer hours for ongoing feature enhancements and performance tuning.',
-            'schemaAnswer' => 'Yes. We offer structured monthly SLA maintenance agreements that include 24/7 server uptime monitoring, security patching, dependency upgrades, automated daily encrypted backups, and allocated developer hours for continuous feature iterations.',
+            'answer' => 'Yes. We provide comprehensive post-launch SLA maintenance agreements that include 24/7 automated uptime monitoring, proactive security patching, dependency upgrades, automated daily encrypted offsite backups and allocated monthly developer hours for ongoing feature enhancements and performance tuning.',
+            'schemaAnswer' => 'Yes. We offer structured monthly SLA maintenance agreements that include 24/7 server uptime monitoring, security patching, dependency upgrades, automated daily encrypted backups and allocated developer hours for continuous feature iterations.',
         ],
         3 => [
             'question' => 'Is your web development SEO-friendly?',
-            'answer' => 'Yes. We engineer web applications with search engine visibility built into the foundation: clean semantic HTML5 markup, server-side rendering (SSR) or static generation via Next.js where appropriate, optimized Core Web Vitals (sub-second TTFB, minimal LCP, and zero CLS), automated XML sitemaps, canonicalization, and structured JSON-LD schema integration.',
-            'schemaAnswer' => 'Yes. Every web application is engineered with search-first technical foundations: clean semantic HTML5 markup, server-side rendering (SSR) via Next.js where appropriate, sub-second Core Web Vitals (minimal LCP, CLS, and TTFB), automated XML sitemaps, canonicalization, and structured JSON-LD schema integration.',
+            'answer' => 'Yes. We engineer web applications with search engine visibility built into the foundation: clean semantic HTML5 markup, server-side rendering (SSR) or static generation via Next.js where appropriate, optimized Core Web Vitals (sub-second TTFB, minimal LCP and zero CLS), automated XML sitemaps, canonicalization and structured JSON-LD schema integration.',
+            'schemaAnswer' => 'Yes. Every web application is engineered with search-first technical foundations: clean semantic HTML5 markup, server-side rendering (SSR) via Next.js where appropriate, sub-second Core Web Vitals (minimal LCP, CLS and TTFB), automated XML sitemaps, canonicalization and structured JSON-LD schema integration.',
         ],
         4 => [
             'question' => 'Can you help me with a website redesign or legacy migration?',
-            'answer' => 'Yes. We specialize in legacy system modernization. We audit your existing database architecture, clean and map relational records, establish 301 redirect chains to protect existing search rankings, and execute zero-downtime data migrations from legacy frameworks into modern, high-speed stacks like Laravel, React, and Node.js.',
-            'schemaAnswer' => 'Yes. We specialize in legacy system modernization. We audit your existing database architecture, clean and map relational records, set up 301 redirect chains to protect existing search rankings, and execute zero-downtime data migrations from legacy frameworks into modern stacks like Laravel, React, and Node.js.',
+            'answer' => 'Yes. We specialize in legacy system modernization. We audit your existing database architecture, clean and map relational records, establish 301 redirect chains to protect existing search rankings and execute zero-downtime data migrations from legacy frameworks into modern, high-speed stacks like Laravel, React and Node.js.',
+            'schemaAnswer' => 'Yes. We specialize in legacy system modernization. We audit your existing database architecture, clean and map relational records, set up 301 redirect chains to protect existing search rankings and execute zero-downtime data migrations from legacy frameworks into modern stacks like Laravel, React and Node.js.',
         ],
         5 => [
             'question' => 'Who owns the source code and intellectual property once developed?',
-            'answer' => 'You own everything. Suave Creators operates on a 100% work-for-hire model. Upon milestone settlement, 100% of the intellectual property, source code repositories (GitHub/GitLab), database schemas, design tokens, and documentation are assigned directly to your organization with zero vendor lock-in or ongoing software royalties.',
-            'schemaAnswer' => 'You do. Suave Creators operates on a 100% work-for-hire model. Upon milestone settlement, complete source code repositories (GitHub/GitLab), database schemas, design tokens, and documentation are transferred directly to your organization with zero vendor lock-in or ongoing software royalties.',
+            'answer' => 'You own everything. Suave Creators operates on a 100% work-for-hire model. Upon milestone settlement, 100% of the intellectual property, source code repositories (GitHub/GitLab), database schemas, design tokens and documentation are assigned directly to your organization with zero vendor lock-in or ongoing software royalties.',
+            'schemaAnswer' => 'You do. Suave Creators operates on a 100% work-for-hire model. Upon milestone settlement, complete source code repositories (GitHub/GitLab), database schemas, design tokens and documentation are transferred directly to your organization with zero vendor lock-in or ongoing software royalties.',
         ],
     ],
 
     'finalEyebrow' => 'YOUR DIGITAL FUTURE TOGETHER',
     'finalTitle' => 'Let’s Build Your Business Web Application Together',
-    'finalDescription' => 'If you are planning to launch a new web platform, build an enterprise portal, or upgrade a legacy system, Suave Creators delivers on time and within budget. Let’s collaborate to engineer a custom digital platform that reflects your brand, delights your users, and drives measurable commercial results. Start your journey with our technical team today!',
+    'finalDescription' => 'If you are planning to launch a new web platform, build an enterprise portal, or upgrade a legacy system, Suave Creators delivers on time and within budget. Let’s collaborate to engineer a custom digital platform that reflects your brand, delights your users and drives measurable commercial results. Start your journey with our technical team today!',
     'finalBg' => '/assets/background/web-service-bg.webp',
     'hideFinalBgBelowDesktop' => true,
     'finalPrimaryCta' => 'Get a Free Quote',
@@ -330,14 +324,14 @@ return [
 
     'articlesEyebrow' => 'BLOGS AND INSIGHTS',
     'articlesTitle' => 'Explore Our Technical Insights',
-    'articlesSubtitle' => 'Explore our latest articles on custom CRM architectures, cross-border development advantages, and multi-agent AI automation.',
+    'articlesSubtitle' => 'Explore our latest articles on custom CRM architectures, cross-border development advantages and multi-agent AI automation.',
     'articlesMoreText' => 'View all blog articles →',
     'articlesMoreUrl' => 'blogs',
 
     'articles' => [
         0 => [
             'title' => 'Why US Mid-Market Companies Are Replacing Salesforce with Custom CRMs in 2026 (The 3-Year TCO Breakdown)',
-            'excerpt' => 'Evaluate Custom CRM vs. Salesforce in 2026. Compare 3-year TCO, per-seat subscription fatigue, native AI integration, and migration ROI.',
+            'excerpt' => 'Evaluate Custom CRM vs. Salesforce in 2026. Compare 3-year TCO, per-seat subscription fatigue, native AI integration and migration ROI.',
             'image' => '/storage/blogs/custom-crm-vs-salesforce-tco-analysis-2026-medium.webp',
             'alt' => 'Evaluate Custom CRM vs Salesforce 3-year TCO breakdown in 2026',
             'date' => 'Sep 21, 2026',
@@ -347,7 +341,7 @@ return [
         ],
         1 => [
             'title' => 'Why the India Market Is the Strategic Choice for US Web Development in 2026',
-            'excerpt' => 'Discover why US businesses hire Indian engineering partners: 60% TCO savings, 24/7 sprint cycles, US IP protection, and cross-border governance.',
+            'excerpt' => 'Discover why US businesses hire Indian engineering partners: 60% TCO savings, 24/7 sprint cycles, US IP protection and cross-border governance.',
             'image' => '/storage/blogs/why-the-india-market-is-the-strategic-choice-for-us-web-development-in-2026-medium.jpg',
             'alt' => 'Why US businesses hire Indian engineering partners for custom web development',
             'date' => 'Sep 18, 2026',
@@ -357,7 +351,7 @@ return [
         ],
         2 => [
             'title' => 'Beyond Chatbots: How Multi-Agent AI Systems Are Automating B2B Workflows in 2026',
-            'excerpt' => 'Moving past single-prompt LLM wrappers to deterministic state graphs, autonomous orchestration, and enterprise automation.',
+            'excerpt' => 'Moving past single-prompt LLM wrappers to deterministic state graphs, autonomous orchestration and enterprise automation.',
             'image' => '/storage/blogs/beyond-chatbots-how-multi-agent-ai-systems-are-automating-b2b-workflows-in-2026-medium.webp',
             'alt' => 'Multi-agent AI systems automating B2B workflows and enterprise operations in 2026',
             'date' => 'Sep 18, 2026',

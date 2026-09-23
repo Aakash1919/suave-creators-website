@@ -199,16 +199,6 @@
       <p class="mt-4 text-[15px] sm:text-[16px] leading-[26px] text-[#4D4D4D]">
         {{ $service['introAnswer'] }}
       </p>
-      @if (!empty($service['introQuestionTags']))
-        <div class="mt-6 flex flex-wrap gap-2.5">
-          @foreach ($service['introQuestionTags'] as $tag)
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#EEF1FF] px-3.5 py-1.5 text-[12px] font-semibold text-[#2A4DFB] transition-colors hover:bg-[#e2e7ff]">
-              <span class="h-1.5 w-1.5 rounded-full bg-[#2A4DFB]" aria-hidden="true"></span>
-              {{ $tag }}
-            </span>
-          @endforeach
-        </div>
-      @endif
     </div>
   </div>
 </section>
@@ -665,7 +655,7 @@ $n = $index + 1;
   heading-id="service-faq-heading"
   :eyebrow="$service['faqEyebrow'] ?? 'Have questions about our Services?'"
   :title="$service['faqTitle'] ?? 'Frequently Asked Questions: Delivery, Pricing & Code Ownership'"
-  :description="$service['faqDescription'] ?? 'Here are answers to the most common questions regarding our custom web development services, pricing models, project timelines, and code ownership.'"
+  :description="$service['faqDescription'] ?? 'Here are answers to the most common questions regarding our custom web development services, pricing models, project timelines and code ownership.'"
   :question-heading="($service['faqQuestionHeading'] ?? 'h3')"
   :show-cta="true"
   :cta-label="$service['faqCtaLabel'] ?? 'Get Free Consultation'"
