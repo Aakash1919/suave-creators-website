@@ -307,7 +307,7 @@ class SeoGenerateService
         if (in_array($routeName, ['service.show', 'industry.show', 'blog.show'])) {
             $parentUrl = Str::beforeLast($canonical, '/');
             $parentSlug = Str::afterLast($parentUrl, '/');
-            $pageTitle = config("seo.pages.$parentSlug.title") ?? ucfirst(str_replace('-', ' ', $parentSlug));
+            $pageTitle = config("seo.pages.$parentSlug.json_ld_breadcrumb_name") ?? config("seo.pages.$parentSlug.title") ?? ucfirst(str_replace('-', ' ', $parentSlug));
             $breadcrumb[] = [
                 '@type' => 'ListItem',
                 'position' => ++$position,

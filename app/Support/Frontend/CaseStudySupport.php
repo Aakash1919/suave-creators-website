@@ -665,16 +665,16 @@ class CaseStudySupport
                 'status' => 'published',
                 'image' => 'assets/case-studies/appointment-insurance/appointment-insurance-banner.webp',
 
-                'short_description' => 'An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.',
+                'short_description' => 'An appointment insurance and calendar monetization platform that protects schedules with deposits, text invites, arrival check-in, and smart Stripe refunds.',
                 'listing_subtitle' => 'Appointment Insurance Platform Against No-Shows',
                 'industry' => 'Appointment Scheduling / Fintech',
                 'service_slugs' => ['web-development-services', 'enterprise-software-solutions'],
                 'industry_slugs' => ['healthcare-software-development', 'finance-banking-software-development'],
                 'results' => [
-                    ['value' => '+$261', 'label' => 'Card fees saved on a $10k example by returning unused money the smart way'],
-                    ['value' => '+90%', 'label' => 'Less card-fee waste on unused deposit money that comes back'],
-                    ['value' => '+70%', 'label' => 'Less manual chasing for confirmations, deposits, and “are you coming?”'],
-                    ['value' => '+65%', 'label' => 'Improvement in recovering value from no-shows instead of treating them as pure loss'],
+                    ['value' => '+$261', 'label' => 'card fees saved on a $10k example through smart refund logic'],
+                    ['value' => '+90%', 'label' => 'less card-fee waste on returned deposit money'],
+                    ['value' => '+70%', 'label' => 'less manual chasing for confirmations, deposits, and arrival check-ins'],
+                    ['value' => '+65%', 'label' => 'improvement in recovering value from no-shows instead of treating them as pure loss'],
                 ],
                 'technologies' => [
                     'Appointment insurance',

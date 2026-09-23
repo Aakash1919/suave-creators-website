@@ -416,6 +416,86 @@ class ServiceSupport
     }
 
     /**
+     * @param  array<string, mixed>  $service
+     * @return array{seoJsonLdGraph?: array<int, array<string, mixed>>, seoJsonLdWebpageAbout?: string}
+     */
+    public static function serviceSeoStructuredData(string $slug, array $service): array
+    {
+        if ($slug !== 'web-development-services') {
+            return [];
+        }
+
+        $pageUrl = rtrim(route('service.show', ['slug' => 'web-development-services']), '/');
+        $serviceId = $pageUrl.'/#service';
+        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
+
+        return [
+            'seoJsonLdGraph' => [[
+                '@type' => 'Service',
+                '@id' => $serviceId,
+                'name' => 'Custom Web Development Services',
+                'provider' => [
+                    '@id' => $baseUrl.'/#organization',
+                ],
+                'serviceType' => 'Custom Web Application Engineering',
+                'areaServed' => [
+                    '@type' => 'AdministrativeArea',
+                    'name' => 'Worldwide',
+                ],
+                'description' => 'Full-cycle custom web application development, cloud SaaS engineering, dynamic frontend dashboards, and secure RESTful APIs built with Laravel, React, Node.js, and TypeScript.',
+                'hasOfferCatalog' => [
+                    '@type' => 'OfferCatalog',
+                    'name' => 'Web Development Framework Capabilities',
+                    'itemListElement' => [
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Laravel Web Application Engineering']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Enterprise WordPress & Headless CMS']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'ReactJS & Next.js Dynamic Dashboards']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Angular Enterprise Frontend Development']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Modern PHP Backend & API Engineering']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Node.js High-Concurrency Microservices']],
+                    ],
+                ],
+            ]],
+            'seoJsonLdWebpageAbout' => $serviceId,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $service
+     * @return array<int, array<string, mixed>>
+     */
+    protected static function mapServiceArticles(array $service): array
+    {
+        if (empty($service['articles']) || ! is_array($service['articles'])) {
+            return self::articles();
+        }
+
+        return array_values(array_map(static function (array $art): array {
+            $url = (string) ($art['url'] ?? '');
+            if (str_starts_with($url, 'blog.show:')) {
+                $url = route('blog.show', ['slug' => (string) str($url)->after('blog.show:')]);
+            } elseif (str_starts_with($url, 'blogs.category:')) {
+                $url = route('blogs.category', ['slug' => (string) str($url)->after('blogs.category:')]);
+            } elseif ($url === 'blogs' || $url === '/blog' || $url === '/blogs') {
+                $url = route('blogs');
+            } elseif (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://')) {
+                $url = self::resolveInternalHref($url);
+            }
+
+            return [
+                'title' => (string) ($art['title'] ?? ''),
+                'excerpt' => (string) ($art['excerpt'] ?? ''),
+                'image' => (string) ($art['image'] ?? ''),
+                'alt' => (string) ($art['alt'] ?? ($art['title'] ?? 'Suave Creators blog article')),
+                'date' => (string) ($art['date'] ?? ''),
+                'datetime' => (string) ($art['datetime'] ?? ''),
+                'author' => (string) ($art['author'] ?? 'Suave Creators'),
+                'url' => $url,
+            ];
+        }, $service['articles']));
+    }
+
+    /**
      * @return array<string, mixed>|null
      */
     public static function service(string $slug): ?array
@@ -447,6 +527,8 @@ class ServiceSupport
             abort(404);
         }
 
+        $service = self::normalizeServiceDetailProps($service);
+
         $bodyImage = (string) ($service['bodyImage'] ?? '');
         $bodyBg = (string) ($service['bodyBg'] ?? '');
         $useBodyImageLayout = $bodyImage !== '';
@@ -458,18 +540,23 @@ class ServiceSupport
             $service['introLinkUrl'] = self::resolveInternalHref($introLinkUrl);
         }
 
+        $ogImage = trim((string) ($service['ogImage'] ?? $service['seoImage'] ?? ''), '/');
+
         return [
             'service' => $service,
             'seoTitle' => (string) ($service['pageTitle'] ?? 'Service | Suave Creators'),
             'seoDescription' => (string) ($service['pageDescription'] ?? 'Suave Creators service details.'),
             'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
+            'seoImage' => $ogImage !== '' ? $ogImage : null,
             'mainClass' => 'site-main site-main--service-detail',
             'seoFaqs' => array_values(array_filter(
                 array_map(static function (array $faq): array {
+                    $answer = (string) ($faq['schemaAnswer'] ?? $faq['answer'] ?? '');
+
                     return [
                         'question' => (string) ($faq['question'] ?? ''),
-                        'answer' => (string) ($faq['answer'] ?? ''),
+                        'answer' => $answer,
                     ];
                 }, is_array($service['faqs'] ?? null) ? $service['faqs'] : []),
                 static fn (array $faq): bool => $faq['question'] !== '' && $faq['answer'] !== '',
@@ -484,13 +571,21 @@ class ServiceSupport
                 $service['marqueeIcons'] ?? self::defaultMarqueeIcons(),
             ),
             'portfolioItems' => self::mapPortfolioItems($service['portfolioImages'] ?? self::defaultPortfolioImages()),
-            'introStats' => self::introStats(),
+            'introStats' => $service['introStats'] ?? self::introStats(),
             'industryCards' => self::mapIndustryCards($service['industries'] ?? []),
             'standoutCards' => self::mapStandoutCards($service['standoutCards'] ?? []),
             'processSteps' => self::mapProcessSteps($service['processSteps'] ?? []),
-            'articles' => self::articles(),
-            'caseStudies' => CaseStudySupport::forService($slug, 6),
-            'techStack' => AboutSupport::techStack(),
+            'articles' => self::mapServiceArticles($service),
+            'caseStudies' => array_values(array_map(static function (array $item): array {
+                if (($item['slug'] ?? '') === 'appointment-insurance-platform-case-study') {
+                    $item['cta'] = 'Explore the Case Study';
+                }
+
+                return $item;
+            }, CaseStudySupport::forService($slug, 6))),
+            'techStack' => $slug === 'web-development-services'
+                ? self::techStack()
+                : AboutSupport::techStack(),
             'webDevLayoutSlugs' => self::SLUGS,
             'isWebDevelopmentService' => in_array($slug, self::SLUGS, true),
             'capabilitiesAsSlider' => ! empty($service['capabilitiesAsSlider']),
@@ -499,7 +594,100 @@ class ServiceSupport
             'bodySectionStyle' => $useBodyImageLayout
                 ? "--service-body-image: url('".e($bodyImage)."');"
                 : ($bodyBg !== '' ? "background-image: url('".e($bodyBg)."');" : ''),
+            'seoBreadcrumbName' => (string) ($service['breadcrumbName'] ?? 'Web Development Services'),
+            ...self::serviceSeoStructuredData($slug, $service),
         ];
+    }
+
+    /**
+     * Align legacy data keys with the service-detail Blade contract and resolve CTA hrefs.
+     *
+     * @param  array<string, mixed>  $service
+     * @return array<string, mixed>
+     */
+    protected static function normalizeServiceDetailProps(array $service): array
+    {
+        $aliases = [
+            'heroPrimaryCta' => ['heroPrimaryCta', 'primaryCta'],
+            'heroSecondaryCta' => ['heroSecondaryCta', 'secondaryCta'],
+            'faqEyebrow' => ['faqEyebrow', 'faqsEyebrow'],
+            'faqTitle' => ['faqTitle', 'faqsTitle'],
+            'faqDescription' => ['faqDescription', 'faqsDescription'],
+            'faqCtaLabel' => ['faqCtaLabel', 'faqsCtaLabel'],
+            'faqCtaHref' => ['faqCtaHref', 'faqsCtaHref'],
+            'caseStudiesEyebrow' => ['caseStudiesEyebrow', 'caseStudyEyebrow'],
+            'caseStudiesTitle' => ['caseStudiesTitle', 'caseStudyTitle'],
+            'caseStudiesSubtitle' => ['caseStudiesSubtitle', 'caseStudySubtitle'],
+            'articlesEyebrow' => ['articlesEyebrow', 'blogEyebrow'],
+            'articlesTitle' => ['articlesTitle', 'blogTitle'],
+            'articlesSubtitle' => ['articlesSubtitle', 'blogSubtitle'],
+            'articlesMoreText' => ['articlesMoreText', 'blogMoreLabel'],
+            'articlesMoreUrl' => ['articlesMoreUrl', 'blogMoreRoute'],
+            'whyButtonUrl' => ['whyButtonUrl', 'whyButtonHref'],
+        ];
+
+        foreach ($aliases as $canonical => $keys) {
+            foreach ($keys as $key) {
+                if (! array_key_exists($key, $service)) {
+                    continue;
+                }
+
+                $value = $service[$key];
+                if ($value === null || $value === '') {
+                    continue;
+                }
+
+                $service[$canonical] = $value;
+                break;
+            }
+        }
+
+        $hrefKeys = [
+            'bodyPrimaryHref',
+            'bodySecondaryHref',
+            'whyButtonUrl',
+            'finalPrimaryHref',
+            'finalSecondaryHref',
+            'faqCtaHref',
+            'portfolioPrimaryHref',
+            'portfolioSecondaryHref',
+            'crossSellPrimaryHref',
+            'crossSellSecondaryHref',
+            'articlesMoreUrl',
+        ];
+
+        foreach ($hrefKeys as $hrefKey) {
+            if (! array_key_exists($hrefKey, $service)) {
+                continue;
+            }
+
+            $service[$hrefKey] = self::resolveCtaHref((string) $service[$hrefKey]);
+        }
+
+        return $service;
+    }
+
+    protected static function resolveCtaHref(string $href): string
+    {
+        $href = trim($href);
+
+        if ($href === '' || $href === 'demo' || $href === 'booking') {
+            return ContactSupport::demoHref();
+        }
+
+        if (str_starts_with($href, 'service.show:')) {
+            return route('service.show', ['slug' => (string) str($href)->after('service.show:')]);
+        }
+
+        if (str_starts_with($href, 'industry.show:')) {
+            return route('industry.show', ['slug' => (string) str($href)->after('industry.show:')]);
+        }
+
+        if (str_starts_with($href, 'blog.show:')) {
+            return route('blog.show', ['slug' => (string) str($href)->after('blog.show:')]);
+        }
+
+        return self::resolveInternalHref($href);
     }
 
     /**
@@ -579,6 +767,7 @@ class ServiceSupport
             $path === 'services' => route('services'),
             $path === 'contact-us' => ContactSupport::demoHref(),
             $path === 'blogs' => route('blogs'),
+            $path === 'case-studies' => route('case-studies'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),
             str_starts_with($path, 'services/') => route('service.show', ['slug' => (string) str($path)->after('services/')]),
             str_starts_with($path, 'service/') => route('service.show', ['slug' => (string) str($path)->after('service/')]),
