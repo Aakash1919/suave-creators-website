@@ -20,7 +20,7 @@
             {{ $heroMid }}
             <span class="crm-builder-hero__title-accent">{{ $heroAccent }}</span>
           </span>
-          <span class="crm-builder-hero__title-accent">{{ $heroPurple }}</span>
+          <span class="crm-builder-hero__title-accent1">{{ $heroPurple }}</span>
         </h1>
         <p class="crm-builder-hero__desc">{{ $heroDescription }}</p>
         <div class="crm-builder-hero__cta">

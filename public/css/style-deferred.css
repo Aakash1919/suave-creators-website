@@ -7759,6 +7759,10 @@ body:has(.suave-agent.is-open) .blog-share {
   -webkit-text-fill-color: transparent;
 }
 
+.crm-builder-hero__title-accent1 {
+  color: #D078FE;
+  font-weight: 700;
+}
 .crm-builder-hero__desc {
   color: rgba(255, 255, 255, 0.82);
   font-size: 14px;
