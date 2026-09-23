@@ -36,7 +36,7 @@ class ContactDraftRequest extends FormRequest
             'draft_token' => ['nullable', 'uuid'],
             'name' => ['nullable', 'string', 'max:120'],
             'email' => ['nullable', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:60'],
+            'phone' => ['nullable', 'string', 'max:60', 'regex:/^\+?[0-9\s\-().]+$/'],
             'company' => ['nullable', 'string', 'max:120'],
             'service' => ['nullable', 'string', Rule::in(array_keys(ContactSupport::formServices()))],
             'message' => ['nullable', 'string', 'max:5000'],

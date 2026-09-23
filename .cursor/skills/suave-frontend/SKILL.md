@@ -8,7 +8,7 @@ description: >-
   Requires categorized asset paths and post-change verification. For admin /
   RBAC use suave-admin. For broken image/URL/section checks use frontend-audit.
 metadata:
-  last-updated: "2026-09-21"
+  last-updated: "2026-09-23"
 ---
 
 # Suave Frontend
@@ -143,6 +143,7 @@ Keep contact details consistent across SEO, footer, contact page, privacy, and S
 - Phones: `+1 (307) 435-9605`, `+91 88949 00142`, `+91 18944 55019`
 - Email: `info@suavecreators.com`
 - When contacts change, update SEO config, ContactSupport, Footer, privacy copy, and `SuaveAgentKnowledge` consumers together
+- Contact form phone input: reusable `<x-frontend.phone-field />` (`App\View\Components\Frontend\PhoneField` + `public/js/phone-field.js` + intl-tel-input CDN). Country dial code dropdown with `separateDialCode`; `strictMode` blocks letters; IP country via `route('geo.country')` (CF/CloudFront headers) then `ipapi.co`, fallback `us`. Submit/draft uses the hidden full international number. Allowlisted without `Section` postfix (with `CtaButton` / `CtaArrow` / `HeroCaseStudiesVisual` in `verify-frontend-conventions.ps1`).
 
 ## Assets
 

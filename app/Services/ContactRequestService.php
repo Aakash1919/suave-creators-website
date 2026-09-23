@@ -211,6 +211,14 @@ class ContactRequestService
     }
 
     /**
+     * Soft-delete a contact request.
+     */
+    public function delete(ContactRequest $contact): void
+    {
+        $contact->delete();
+    }
+
+    /**
      * @param  array<string, mixed>  $data
      * @return array{name: ?string, email: ?string, phone: ?string, service: ?string, message: ?string}
      */

@@ -64,6 +64,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::patch('/contacts/{contact}/archive', [ContactRequestController::class, 'archive'])->name('contacts.archive');
     });
 
+    Route::middleware('permission:contacts.delete')->group(function () {
+        Route::delete('/contacts/{contact}', [ContactRequestController::class, 'destroy'])->name('contacts.destroy');
+    });
+
     Route::middleware('permission:testimonials.view')->group(function () {
         Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
     });

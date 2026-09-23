@@ -10,7 +10,7 @@ description: >-
   route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
   Permission. Read before any admin change.
 metadata:
-  last-updated: "2026-09-21"
+  last-updated: "2026-09-23"
 ---
 
 # Suave Admin
@@ -170,6 +170,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - List deletes: `data-admin-delete data-url="..." data-reload-table="#admin-datatable"` (+ confirm attrs — see below)
 - List actions (publish, etc.): `data-admin-action data-url="..." data-method="PATCH"` (+ confirm attrs); `DataTableActions::menu` supports `'method' => 'PATCH'`
 - Form-page deletes: set `data-reload-table=""` so redirect from JSON is used instead of reloading a missing table
+- Stay on the page after a list/modal action: `adminSuccess` always returns a JSON `redirect` when given a route, and `confirmRequest` / `destroyRecord` follow it unless you pass `redirect: false` (JS), `data-redirect="false"` (on a `data-admin-delete` button), or `'redirect' => false` (a `DataTableActions::menu` delete item)
 
 ## Confirm dialogs (`SuaveAdmin.confirmDialog`)
 
@@ -311,6 +312,9 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 - Public POST: `contact-us.store` via `ContactRequestService` — honeypot `website`, `form_started_at` min 3s, CSRF, `throttle:5,1`; bots get silent success (no row)
 - Public draft POST: `contact-us.draft` (`throttle:30,1`) — honeypot only; upserts one `status=draft` row per `draft_token` as fields blur; submit upgrades that row to `new` and still returns “The request has been sent successfully.”
 - Admin: `ContactRequestController` + `ContactRequestDataTable`; permission `contacts.view`; Incomplete (`draft`) badge; opening a request marks `new` → `read` (drafts stay draft); archive via PATCH `admin.contacts.archive`
+- **Soft deletes:** `ContactRequest` uses `SoftDeletes` (`deleted_at`, migration `2026_09_23_120000_add_soft_deletes_to_contact_requests_table.php`). Delete via DELETE `admin.contacts.destroy` → `ContactRequestService::delete()`, gated by `contacts.delete` (admin only; not granted to editor)
+- **View = modal:** row menu “View” is a `data-contact-view` button that GETs `admin.contacts.show` via AJAX; `show()` returns JSON (`detail_html` rendered from `admin/contacts/partials/detail.blade.php`) and still marks read. Modal markup: `admin/contacts/partials/view-modal.blade.php` (Archive / Delete in footer). The full `admin.contacts.show` page stays for direct links and reuses the same detail partial
+- Same-page actions (row-menu Delete, modal Archive/Delete) pass `redirect: false` so the table reloads via AJAX instead of following the JSON `redirect`
 
 ## Migrations
 
@@ -408,7 +412,7 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 - `blogs.view|create|update|delete`
 - `case-studies.view|create|update|delete`
 - `conversations.view`
-- `contacts.view`
+- `contacts.view|delete`
 - `testimonials.view|manage`
 - `users.view|manage`
 - `roles.view|manage`

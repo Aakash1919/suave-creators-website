@@ -7,6 +7,7 @@ use App\Support\Admin\DataTableActions;
 use App\Support\Admin\DateRangeFilter;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class ContactRequestDataTable
@@ -45,12 +46,30 @@ class ContactRequestDataTable
             })
             ->editColumn('created_at', fn (ContactRequest $contact): string => optional($contact->created_at)?->diffForHumans() ?? '—')
             ->addColumn('actions', function (ContactRequest $contact): string {
-                return DataTableActions::menu([
+                $items = [
                     [
                         'label' => 'View',
-                        'url' => route('admin.contacts.show', $contact),
+                        'button' => true,
+                        'attrs' => [
+                            'data-contact-view' => true,
+                            'data-url' => route('admin.contacts.show', $contact),
+                        ],
                     ],
-                ]);
+                ];
+
+                if (Auth::user()?->hasPermission('contacts.delete')) {
+                    $items[] = [
+                        'label' => 'Delete',
+                        'url' => route('admin.contacts.destroy', $contact),
+                        'delete' => true,
+                        'redirect' => false,
+                        'confirmTitle' => 'Delete contact request?',
+                        'confirm' => 'Are you sure you want to delete the request from '.$contact->displayName().'? This cannot be undone.',
+                        'confirmLabel' => 'Delete',
+                    ];
+                }
+
+                return DataTableActions::menu($items);
             })
             ->filter(function (EloquentBuilder $query) use ($request): void {
                 $status = (string) $request->input('status', '');

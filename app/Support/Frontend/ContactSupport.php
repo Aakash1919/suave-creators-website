@@ -2,6 +2,8 @@
 
 namespace App\Support\Frontend;
 
+use Illuminate\Http\Request;
+
 class ContactSupport
 {
     public const DEMO_HREF = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2D8d2UlApRNeJryaGldFknb4uF3ua7jFnBA4-ga1Q-lgnLz9K382sK5S2-4J2e-tWD8arDeGXy';
@@ -116,6 +118,28 @@ class ContactSupport
         $normalized = preg_replace('/[^\d+]/', '', $phone) ?? '';
 
         return 'tel:'.$normalized;
+    }
+
+    /**
+     * Best-effort visitor country (iso2) from CDN/edge headers. Null when unknown.
+     */
+    public static function visitorCountry(?Request $request = null): ?string
+    {
+        $request ??= request();
+        $candidates = [
+            (string) $request->header('CF-IPCountry', ''),
+            (string) $request->header('CloudFront-Viewer-Country', ''),
+            (string) $request->server('HTTP_CF_IPCOUNTRY', ''),
+        ];
+
+        foreach ($candidates as $candidate) {
+            $code = strtolower(trim($candidate));
+            if (preg_match('/^[a-z]{2}$/', $code) === 1 && $code !== 'xx') {
+                return $code;
+            }
+        }
+
+        return null;
     }
 
     /**

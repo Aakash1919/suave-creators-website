@@ -27,6 +27,9 @@ Route::post('/contact-us', [ContactController::class, 'store'])
 Route::post('/contact-us/draft', [ContactController::class, 'draft'])
     ->middleware('throttle:30,1')
     ->name('contact-us.draft');
+Route::get('/geo/country', [ContactController::class, 'visitorCountry'])
+    ->middleware('throttle:60,1')
+    ->name('geo.country');
 Route::post('/consultation-request', [ContactController::class, 'quickConsultation'])
     ->middleware('throttle:10,1')
     ->name('consultation.store');
