@@ -6707,7 +6707,8 @@ html {
 /* ===== CASE STUDIES CAROUSEL START ===== */
 .case-studies-carousel {
   background-color: #f9fafc;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   padding: 48px 0;
   position: relative;
 }
@@ -6725,16 +6726,18 @@ html {
 
 .case-studies-carousel__header {
   margin: 0 0 1.75rem;
+  overflow: visible;
   position: relative;
   text-align: left;
 }
 
 .case-studies-carousel__eyebrow {
-  align-items: center;
+  align-items: flex-start;
   display: inline-flex;
   gap: 8px;
   justify-content: flex-start;
   margin: 0 0 0.85rem;
+  overflow: visible;
 }
 
 @media (min-width: 1024px) {
@@ -6750,19 +6753,22 @@ html {
   background: linear-gradient(180deg, #2a4dfb 0%, #7a5ff8 100%);
   border-radius: 999px;
   display: inline-block;
-  height: 16px;
+  flex: 0 0 auto;
+  height: 0.85em;
+  margin-top: 0.22em;
   width: 2px;
 }
 
 .case-studies-carousel__eyebrow-text {
-  background: linear-gradient(90deg, #2a4dfb 0%, #7a5ff8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  /* Avoid background-clip:text here — it clips PP Mori descenders (y in "Study"). */
+  color: #4f56fa;
+  display: inline-block;
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.5;
+  overflow: visible;
+  padding-bottom: 0.2em;
 }
 
 .case-studies-carousel__title {
