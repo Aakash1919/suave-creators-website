@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Frontend\ContactSupport;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -65,15 +66,7 @@ class ContactRequest extends Model
 
     public function serviceLabel(): string
     {
-        $labels = [
-            'web-development' => 'Web Development',
-            'ai-solutions' => 'AI Solutions',
-            'ui-ux-design' => 'UI/UX Design',
-            'ecommerce' => 'E-commerce Development',
-            'custom-crm' => 'Custom CRM Development',
-            'enterprise-software' => 'Enterprise Software',
-            'other' => 'Other',
-        ];
+        $labels = ContactSupport::formServices();
 
         $service = trim((string) $this->service);
 
@@ -83,4 +76,4 @@ class ContactRequest extends Model
 
         return $labels[$service] ?? $service;
     }
-};
+}

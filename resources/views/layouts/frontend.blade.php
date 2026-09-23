@@ -360,6 +360,7 @@
     {{-- Body-level so position:fixed is not captured by main/footer overflow or stacking. --}}
     @stack('fixed-widgets')
     <x-layouts.suave-agent />
+    <x-frontend.contact-modal />
     <x-layouts.analytics-events />
     {{-- Defer GTM/gtag + fonts + Swiper; stub queues carousel inits until deferred.js runs. --}}
     @php

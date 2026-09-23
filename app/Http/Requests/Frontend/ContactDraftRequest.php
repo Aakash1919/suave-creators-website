@@ -16,7 +16,7 @@ class ContactDraftRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $emptyToNull = [];
-        foreach (['draft_token', 'name', 'email', 'phone', 'service', 'message'] as $field) {
+        foreach (['draft_token', 'name', 'email', 'phone', 'company', 'service', 'message'] as $field) {
             if ($this->exists($field) && trim((string) $this->input($field)) === '') {
                 $emptyToNull[$field] = null;
             }
@@ -37,6 +37,7 @@ class ContactDraftRequest extends FormRequest
             'name' => ['nullable', 'string', 'max:120'],
             'email' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:60'],
+            'company' => ['nullable', 'string', 'max:120'],
             'service' => ['nullable', 'string', Rule::in(array_keys(ContactSupport::formServices()))],
             'message' => ['nullable', 'string', 'max:5000'],
         ];

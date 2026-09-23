@@ -59,7 +59,15 @@ class ContactRequestService
     {
         $data = $request->validated();
         $token = $this->nullableString($data['draft_token'] ?? null);
-        unset($data['draft_token']);
+        $company = $this->nullableString($data['company'] ?? null);
+        unset($data['draft_token'], $data['company']);
+
+        if ($company !== null) {
+            $msg = (string) ($data['message'] ?? '');
+            if (! str_contains($msg, $company)) {
+                $data['message'] = trim($msg.' [Company: '.$company.']');
+            }
+        }
 
         $attributes = [
             ...$data,
@@ -208,12 +216,22 @@ class ContactRequestService
      */
     private function draftFieldAttributes(array $data): array
     {
+        $company = $this->nullableString($data['company'] ?? null);
+        $message = $this->nullableString($data['message'] ?? null);
+
+        if ($company !== null) {
+            $msg = $message ?? '';
+            if (! str_contains($msg, $company)) {
+                $message = trim($msg.' [Company: '.$company.']');
+            }
+        }
+
         return [
             'name' => $this->nullableString($data['name'] ?? null),
             'email' => $this->nullableString($data['email'] ?? null),
             'phone' => $this->nullableString($data['phone'] ?? null),
             'service' => $this->nullableString($data['service'] ?? null),
-            'message' => $this->nullableString($data['message'] ?? null),
+            'message' => $message !== '' ? $message : null,
         ];
     }
 
