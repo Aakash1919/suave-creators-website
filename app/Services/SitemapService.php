@@ -319,6 +319,7 @@ class SitemapService
             ['route' => 'services', 'title' => 'Services', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['route' => 'industries', 'title' => 'Industries', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['route' => 'product', 'title' => 'AI Outreach CRM', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['route' => 'custom-crm-builder', 'title' => 'Custom CRM Builder', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['route' => 'case-studies', 'title' => 'Case Studies', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['route' => 'blogs', 'title' => 'Blog', 'group' => 'Primary', 'changefreq' => 'daily', 'priority' => '0.8'],
             ['route' => 'contact-us', 'title' => 'Contact Us', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.7'],

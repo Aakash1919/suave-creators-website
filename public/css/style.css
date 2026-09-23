@@ -1105,7 +1105,6 @@
 .hero-cs-visual__card-chart-img--ai-product-matching { object-position: center; }
 /* ===== HERO CASE STUDIES VISUAL END ===== */
 
-
 html {
   overflow-x: clip;
 }
@@ -1906,7 +1905,6 @@ main button.rounded-full.bg-gradient-to-r {
   }
 }
 
-
 .digitalMarketingSwiper .swiper-slide {
   height: auto;
 }
@@ -2340,6 +2338,95 @@ main button.rounded-full.bg-gradient-to-r {
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
 }
 
+.faq-section.faq-section--crm-builder {
+  background-color: #050447;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2.5rem 0 3rem !important;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__inner,
+.site-main > .faq-section.faq-section--crm-builder > .section-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2rem;
+  grid-column: full;
+  grid-template-columns: minmax(0, 1fr) !important;
+  margin-inline: auto;
+  max-width: 1520px;
+  padding-inline: var(--site-gutter);
+  width: 100%;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__image {
+  display: none !important;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__intro {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__eyebrow {
+  justify-content: flex-start;
+  margin: 0 !important;
+}
+
+.faq-section.faq-section--crm-builder h2 {
+  margin: 0 auto;
+  max-width: 46rem;
+  text-align: center;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__description {
+  margin: 0 auto;
+  max-width: 36rem;
+  text-align: center;
+}
+
+.faq-section.faq-section--crm-builder .faq-list {
+  align-self: stretch !important;
+  box-sizing: border-box;
+  justify-self: stretch;
+  max-width: none !important;
+  min-width: 0;
+  width: 80% !important;
+}
+
+.faq-section.faq-section--crm-builder .faq-item,
+.faq-section.faq-section--crm-builder .faq-item__heading,
+.faq-section.faq-section--crm-builder .faq-item__summary,
+.faq-section.faq-section--crm-builder .faq-item__answer,
+.faq-section.faq-section--crm-builder .faq-item__answer-inner,
+.faq-section.faq-section--crm-builder .faq-item__answer p {
+  box-sizing: border-box;
+  max-width: none !important;
+  width: 100%;
+}
+
+.faq-section.faq-section--crm-builder .faq-item__summary {
+  box-sizing: border-box;
+  padding: 16px 20px;
+}
+
+.faq-section.faq-section--crm-builder .faq-list .faq-item .faq-item__answer p {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 20px 18px !important;
+}
+
+@media (min-width: 640px) {
+  .faq-section.faq-section--crm-builder {
+    padding: 2.75rem 0 3.5rem !important;
+  }
+}
+
 .faq-section__intro {
   min-width: 0;
 }
@@ -2395,6 +2482,31 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 @media (min-width: 1024px) {
+  .faq-section.faq-section--crm-builder {
+    padding: 3.5rem 0 4.5rem !important;
+  }
+
+  .faq-section.faq-section--crm-builder .faq-section__inner,
+  .site-main > .faq-section.faq-section--crm-builder > .section-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem;
+    grid-column: full;
+    grid-template-columns: minmax(0, 1fr) !important;
+    max-width: 1520px;
+  }
+
+  .faq-section.faq-section--crm-builder .faq-section__intro {
+    min-height: 4.75rem;
+  }
+
+  .faq-section.faq-section--crm-builder .faq-section__eyebrow {
+    left: 0;
+    position: absolute;
+    top: 0.2rem;
+    white-space: nowrap;
+  }
+
   .faq-section--align .faq-section__inner {
     align-items: stretch;
     gap: clamp(36px, 4vw, 56px);
@@ -3082,6 +3194,22 @@ main button.rounded-full.bg-gradient-to-r {
   display: block;
   height: 100%;
   object-fit: cover;
+  width: 100%;
+}
+
+.consultation-person__placeholder {
+  background:
+    linear-gradient(180deg, rgba(42, 77, 251, 0.08) 0%, rgba(122, 95, 248, 0.14) 100%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(42, 77, 251, 0.05) 10px,
+      rgba(42, 77, 251, 0.05) 11px
+    );
+  border: 1px dashed rgba(42, 77, 251, 0.35);
+  display: block;
+  height: 100%;
   width: 100%;
 }
 
@@ -4102,7 +4230,12 @@ body.mobile-nav-open {
 }
 
 .consultation-eyebrow {
-  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(90deg, #2A4DFB 57.12%, #0026E3 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
   display: inline-block;
   font-size: 14px;
   font-weight: 600;
@@ -8183,3 +8316,4 @@ section[aria-labelledby="tech-stack-title"] .technology-card__cta {
   }
 }
 /* ===== SERVICES LLMO END ===== */
+
