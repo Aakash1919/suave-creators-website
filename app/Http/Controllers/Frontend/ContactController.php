@@ -11,6 +11,7 @@ use App\Services\CrmLeadSyncService;
 use App\Support\Frontend\ContactSupport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ContactController extends FrontendController
@@ -28,6 +29,16 @@ class ContactController extends FrontendController
         return $this->view('frontend.contact-us', array_merge(ContactSupport::data(), [
             'formStartedAt' => time(),
         ]));
+    }
+
+    /**
+     * Return visitor country iso2 for phone-field IP defaults (Cloudflare / CloudFront).
+     */
+    public function visitorCountry(Request $request): JsonResponse
+    {
+        return response()->json([
+            'country' => ContactSupport::visitorCountry($request),
+        ]);
     }
 
     /**
