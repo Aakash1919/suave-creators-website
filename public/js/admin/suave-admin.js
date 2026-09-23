@@ -768,7 +768,7 @@
           if (opts.reloadTable) {
             reloadDataTable(opts.reloadTable);
           }
-          if (response?.redirect || opts.redirect) {
+          if (opts.redirect !== false && (response?.redirect || opts.redirect)) {
             window.setTimeout(function () {
               window.location.href = response?.redirect || opts.redirect;
             }, 400);
@@ -831,13 +831,18 @@
         event.preventDefault();
         const $btn = $(this);
 
-        destroyRecord($btn.data('url'), {
+        const opts = {
           confirm: $btn.data('confirm') || 'This action cannot be undone.',
           confirmTitle: $btn.data('confirm-title') || 'Delete record?',
           confirmLabel: $btn.data('confirm-label') || 'Delete',
           reloadTable: resolveReloadTable($btn),
           successMessage: $btn.data('success-message') || 'Deleted successfully.',
-        });
+        };
+        if ($btn.attr('data-redirect') === 'false') {
+          opts.redirect = false;
+        }
+
+        destroyRecord($btn.data('url'), opts);
       });
   }
 

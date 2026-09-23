@@ -10,7 +10,7 @@ class DataTableActions
      * Styles live in public/css/admin.css so they do not depend on Tailwind
      * scanning PHP strings (Vite build does not see class names in this file).
      *
-     * @param  list<array{label: string, url?: string, href?: string, delete?: bool, method?: string, button?: bool, attrs?: array<string, scalar|null>, confirm?: string, confirmTitle?: string, confirmLabel?: string, class?: string, target?: string}>  $items
+     * @param  list<array{label: string, url?: string, href?: string, delete?: bool, method?: string, button?: bool, attrs?: array<string, scalar|null>, confirm?: string, confirmTitle?: string, confirmLabel?: string, class?: string, target?: string, redirect?: bool}>  $items
      */
     public static function menu(array $items): string
     {
@@ -34,7 +34,9 @@ class DataTableActions
                 $confirm = e((string) ($item['confirm'] ?? 'Delete this record?'));
                 $confirmTitle = e((string) ($item['confirmTitle'] ?? 'Delete record?'));
                 $confirmLabel = e((string) ($item['confirmLabel'] ?? 'Delete'));
-                $html .= '<button type="button" class="'.$itemClass.' admin-table__action-menu-item--danger" data-admin-delete data-url="'.$url.'" data-confirm="'.$confirm.'" data-confirm-title="'.$confirmTitle.'" data-confirm-label="'.$confirmLabel.'">'.$label.'</button>';
+                $redirectAttr = ($item['redirect'] ?? null) === false ? ' data-redirect="false"' : '';
+                $html .= '<button type="button" class="'.$itemClass.' admin-table__action-menu-item--danger" data-admin-delete data-url="'.$url.'" data-confirm="'.$confirm.'" data-confirm-title="'.$confirmTitle.'" data-confirm-label="'.$confirmLabel.'"'.$redirectAttr.'>'.$label.'</button>';
+
                 continue;
             }
 
@@ -44,12 +46,14 @@ class DataTableActions
                 $confirmTitle = e((string) ($item['confirmTitle'] ?? 'Confirm?'));
                 $confirmLabel = e((string) ($item['confirmLabel'] ?? $item['label'] ?? 'Confirm'));
                 $html .= '<button type="button" class="'.$itemClass.'" data-admin-action data-url="'.$url.'" data-method="'.e($method).'" data-confirm="'.$confirm.'" data-confirm-title="'.$confirmTitle.'" data-confirm-label="'.$confirmLabel.'">'.$label.'</button>';
+
                 continue;
             }
 
             if (! empty($item['button'])) {
                 $attrs = self::htmlAttributes(is_array($item['attrs'] ?? null) ? $item['attrs'] : []);
                 $html .= '<button type="button" class="'.$itemClass.'"'.$attrs.'>'.$label.'</button>';
+
                 continue;
             }
 
@@ -86,6 +90,7 @@ class DataTableActions
 
             if ($value === true) {
                 $html .= ' '.$key;
+
                 continue;
             }
 
