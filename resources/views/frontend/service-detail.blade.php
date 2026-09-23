@@ -44,9 +44,9 @@
             <x-frontend.inline-consultation-form
               theme="dark"
               placeholder="Enter your phone or email"
-              button-text="Get Free Consultation"
+              button-text="{{ $service['heroPrimaryCta'] ?? 'Get Free Consultation' }}"
               :secondary-href="$demoHref"
-              secondary-label="Schedule a discovery call" />
+              secondary-label="{{ $service['heroSecondaryCta'] ?? 'Schedule a Discovery Call →' }}" />
           </div>
         </div>
 
@@ -182,6 +182,39 @@
 </section>
 <!-- 1. Hero / Service Banner Section End -->
 
+@if (!empty($service['introQuestion']) && !empty($service['introAnswer']))
+<!-- 1.5 Service Scope & Overview Section Start -->
+<section class="full-bleed bg-white border-b border-[#e7e9ee] section-pad-m py-8 lg:py-14" aria-labelledby="service-scope-heading">
+  <div class="section-inner">
+    <div class="w-full">
+      <div class="mb-4 flex items-center gap-2">
+        <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]" aria-hidden="true"></span>
+        <span class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold uppercase tracking-wider text-transparent">
+          {{ $service['introQuestionEyebrow'] ?? 'Service Scope & Inclusions' }}
+        </span>
+      </div>
+      <h2 id="service-scope-heading" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">
+        {{ $service['introQuestion'] }}
+      </h2>
+      <p class="mt-4 text-[15px] sm:text-[16px] leading-[26px] text-[#4D4D4D]">
+        {{ $service['introAnswer'] }}
+      </p>
+      @if (!empty($service['introQuestionTags']))
+        <div class="mt-6 flex flex-wrap gap-2.5">
+          @foreach ($service['introQuestionTags'] as $tag)
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#EEF1FF] px-3.5 py-1.5 text-[12px] font-semibold text-[#2A4DFB] transition-colors hover:bg-[#e2e7ff]">
+              <span class="h-1.5 w-1.5 rounded-full bg-[#2A4DFB]" aria-hidden="true"></span>
+              {{ $tag }}
+            </span>
+          @endforeach
+        </div>
+      @endif
+    </div>
+  </div>
+</section>
+<!-- 1.5 Service Scope & Overview Section End -->
+@endif
+
 <!-- 2. Intro + Stats (ProjectProcess) Section Start -->
 <section class="full-bleed bg-white bg-[url('{{ $introBg }}')] bg-cover bg-top bg-no-repeat section-pad-m py-6 lg:py-20" aria-labelledby="service-intro-heading">
   <div class="section-inner">
@@ -224,7 +257,16 @@
 <!-- 2. Intro + Stats Section End -->
 
 @if ($isWebDevelopmentService)
-<x-frontend.connect-cta-section title-id="service-collab-title" />
+<x-frontend.connect-cta-section
+  :eyebrow="$service['crossSellEyebrow'] ?? 'GET IN TOUCH'"
+  :title="$service['crossSellTitle'] ?? 'Have a Complex Web Application or Custom CRM Architecture Requirement?'"
+  :description="$service['crossSellDescription'] ?? 'Looking to replace rigid third-party software or integrate complex multi-system APIs? Discuss your technical product roadmap, database schemas, or legacy migration plans directly with a solution architect.'"
+  title-id="service-collab-title"
+  :primary-label="$service['crossSellPrimaryLabel'] ?? 'Book a Discovery Session'"
+  :primary-href="$service['crossSellPrimaryHref'] ?? ''"
+  :secondary-label="$service['crossSellSecondaryLabel'] ?? 'Explore Our Custom CRM Builder Services →'"
+  :secondary-href="$service['crossSellSecondaryHref'] ?? route('service.show', ['slug' => 'custom-crm-development'])"
+/>
 @endif
 
 <!-- 4. Service Body (ServiceSection) Start -->
@@ -247,10 +289,12 @@
         <p class="mt-4 text-[14px] leading-5 text-[#4D4D4D]">{{ $para }}</p>
       @endforeach
       <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-5{{ $useBodyImageLayout ? ' items-start sm:items-center' : ' items-center justify-center' }}">
-        <x-frontend.cta-button>
-          Let's Connect to Discuss
+        <x-frontend.cta-button :href="$service['bodyPrimaryHref'] ?? ''">
+          {{ $service['bodyPrimaryCta'] ?? "Let's Connect to Discuss" }}
         </x-frontend.cta-button>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">Let's Build Your Digital Future Together</a>
+        <a href="{{ $service['bodySecondaryHref'] ?? $demoHref }}" @if (str_starts_with($service['bodySecondaryHref'] ?? $demoHref, 'http')) target="_blank" rel="noopener noreferrer" @endif class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">
+          {{ $service['bodySecondaryCta'] ?? "Let's Build Your Digital Future Together" }}
+        </a>
       </div>
     </div>
   </div>
@@ -400,14 +444,25 @@
       </div>
     </div>
     <div class="portfolio-hero-pagination"></div>
-    <div class="mt-10 flex flex-col items-center justify-center gap-4">
-      <x-frontend.inline-consultation-form
-        theme="light"
-        placeholder="Enter your phone or email"
-        button-text="Get Free Consultation"
-        :secondary-href="$demoHref"
-        secondary-label="Book a Call" />
-    </div>
+    @if (($service['slug'] ?? '') === 'web-development-services')
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+        <x-frontend.cta-button :href="$service['portfolioPrimaryHref'] ?? ''">
+          {{ $service['portfolioPrimaryCta'] ?? 'Get Free Consultation' }}
+        </x-frontend.cta-button>
+        <a href="{{ $service['portfolioSecondaryHref'] ?? route('case-studies') }}" class="inline-flex max-lg:min-h-[44px] items-center border-b border-[#2A4DFB] pb-0.5 text-sm font-semibold text-[#2A4DFB] hover:text-[#1835cc] transition">
+          {{ $service['portfolioSecondaryCta'] ?? 'Explore Our Case Studies →' }}
+        </a>
+      </div>
+    @else
+      <div class="mt-10 flex flex-col items-center justify-center gap-4">
+        <x-frontend.inline-consultation-form
+          theme="light"
+          placeholder="Enter your phone or email"
+          button-text="Get Free Consultation"
+          :secondary-href="$demoHref"
+          secondary-label="Book a Call" />
+      </div>
+    @endif
   </div>
 </section>
 @else
@@ -543,7 +598,7 @@ $n = $index + 1;
       @endforeach
     </div>
     <div class="mt-10 flex justify-center">
-      <x-frontend.cta-button :href="$demoHref">
+      <x-frontend.cta-button :href="$service['whyButtonUrl'] ?? ''">
         {{ $service['whyButtonText'] ?? "Let's Discuss Your Vision" }}
       </x-frontend.cta-button>
     </div>
@@ -608,8 +663,13 @@ $n = $index + 1;
 <x-frontend.faq-section
   :qa="$service['faqs'] ?? []"
   heading-id="service-faq-heading"
-  eyebrow="Have questions about our Services?"
-  description="Here are the most asked questions for this service."
+  :eyebrow="$service['faqEyebrow'] ?? 'Have questions about our Services?'"
+  :title="$service['faqTitle'] ?? 'Frequently Asked Questions: Delivery, Pricing & Code Ownership'"
+  :description="$service['faqDescription'] ?? 'Here are answers to the most common questions regarding our custom web development services, pricing models, project timelines, and code ownership.'"
+  :question-heading="($service['faqQuestionHeading'] ?? 'h3')"
+  :show-cta="true"
+  :cta-label="$service['faqCtaLabel'] ?? 'Get Free Consultation'"
+  :cta-href="$service['faqCtaHref'] ?? ''"
   class="faq-section--align faq-section--desktop-media"
 />
 
@@ -619,7 +679,9 @@ $n = $index + 1;
   :title="$service['finalTitle'] ?? 'Let\'s Build Your Business Website Together'"
   :description="$service['finalDescription'] ?? ''"
   :cta-label="$service['finalPrimaryCta'] ?? 'Get a Free Quote'"
+  :cta-href="$service['finalPrimaryHref'] ?? ''"
   :secondary-cta-label="$service['finalSecondaryCta'] ?? 'Contact us Today'"
+  :secondary-cta-href="$service['finalSecondaryHref'] ?? ''"
   :show-people="($service['showFinalPeople'] ?? true) !== false"
   :hide-bg-below-desktop="($service['hideFinalBgBelowDesktop'] ?? false) === true"
   :allow-html-title="false"
@@ -628,18 +690,20 @@ $n = $index + 1;
 <x-frontend.case-studies-carousel-section
   :items="$caseStudies ?? []"
   heading-id="service-case-studies-title"
-  title="From Outbound Chaos to a Modern Sales Workspace"
-  subtitle="Projects where this service shaped the product — from workflow design to shipped software."
+  :eyebrow="$service['caseStudiesEyebrow'] ?? 'CASE STUDY'"
+  :title="$service['caseStudiesTitle'] ?? 'Appointment Insurance That Makes Showing Up the Default'"
+  :subtitle="$service['caseStudiesSubtitle'] ?? 'Real projects where our software engineering shaped the product—from workflow design to production deployment.'"
 />
 
 <x-frontend.articles-insights-section
   :items="$articles"
   heading-id="service-insights-title"
-  title="Explore Our Insights"
-  subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
+  :eyebrow="$service['articlesEyebrow'] ?? 'BLOGS AND INSIGHTS'"
+  :title="$service['articlesTitle'] ?? 'Explore Our Technical Insights'"
+  :subtitle="$service['articlesSubtitle'] ?? ''"
   section-class="section-pad-m py-6 lg:py-18"
-  more-href="{{ route('blogs') }}"
-  more-label="View all blog articles"
+  :more-href="$service['articlesMoreUrl'] ?? route('blogs')"
+  :more-label="$service['articlesMoreText'] ?? 'View all blog articles →'"
 />
 
 @endsection
