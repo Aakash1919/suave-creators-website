@@ -26,6 +26,11 @@ class ContactStoreRequest extends FormRequest
                 .($company !== '' ? ' (Company: '.$company.')' : '')
                 .'.';
             $this->merge(['message' => $fallback]);
+        } elseif (mb_strlen($message) < 10) {
+            $service = (string) $this->input('service', '');
+            $serviceLabel = ContactSupport::formServices()[$service] ?? $service;
+            $suffix = $serviceLabel !== '' ? ' [Service: '.$serviceLabel.']' : ' [Consultation request]';
+            $this->merge(['message' => $message.$suffix]);
         }
     }
 

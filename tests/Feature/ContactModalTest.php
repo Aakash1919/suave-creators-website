@@ -24,8 +24,25 @@ class ContactModalTest extends TestCase
         $response->assertSee('Expert Guidance', false);
         $response->assertSee('Quick Response', false);
         $response->assertSee('Tailored Solutions', false);
-        $response->assertSee('Complete Confidentiality', false);
         $response->assertSee('window.openContactModal', false);
+        $response->assertSee('data-phone-field', false);
+        $response->assertSee('data-phone-field-input', false);
+        $response->assertSee('data-phone-field-value', false);
+        $response->assertSee('suave-phone-field', false);
+        $response->assertSee('intlTelInput', false);
+        $response->assertSee('Project Details / Message', false);
+        $response->assertSee('name="message"', false);
+        $response->assertSee('hidden lg:flex flex-col', false);
+    }
+
+    public function test_about_page_schedule_a_discovery_call_triggers_contact_modal(): void
+    {
+        $response = $this->get(route('about-us'));
+
+        $response->assertOk();
+        $response->assertSee('Schedule a discovery call');
+        $response->assertSee('href="#contact-modal"', false);
+        $response->assertSee('data-open-contact-modal', false);
     }
 
     public function test_contact_modal_submission_with_company_and_no_message_succeeds(): void
@@ -63,7 +80,34 @@ class ContactModalTest extends TestCase
         $this->assertStringContainsString('Innovate Corp', $saved->message);
     }
 
-    public function test_contact_modal_draft_save_includes_company(): void
+    public function test_contact_modal_submission_with_custom_message_succeeds(): void
+    {
+        $payload = [
+            'name' => 'Sarah Connor',
+            'email' => 'sarah@skynet-defense.com',
+            'phone' => '+1 415 555 2671',
+            'company' => 'Cyberdyne Systems',
+            'service' => 'ai-solutions',
+            'message' => 'We need an enterprise AI search portal integrated with our internal databases.',
+            'form_started_at' => time() - 10,
+            '_ajax' => '1',
+        ];
+
+        $response = $this->postJson(route('contact-us.store'), $payload);
+
+        $response->assertOk();
+        $response->assertJson([
+            'success' => true,
+            'message' => 'The request has been sent successfully.',
+        ]);
+
+        $saved = ContactRequest::query()->where('email', 'sarah@skynet-defense.com')->first();
+        $this->assertNotNull($saved);
+        $this->assertStringContainsString('enterprise AI search portal', $saved->message);
+        $this->assertStringContainsString('Cyberdyne Systems', $saved->message);
+    }
+
+    public function test_contact_modal_draft_save_includes_company_and_message(): void
     {
         $token = '33333333-3333-4333-8333-333333333333';
 
@@ -72,6 +116,7 @@ class ContactModalTest extends TestCase
             'name' => 'Alex Morgan',
             'company' => 'Innovate Corp',
             'service' => 'ai-solutions',
+            'message' => 'Drafting a new project inquiry for AI systems',
         ]);
 
         $response->assertOk();
@@ -82,5 +127,6 @@ class ContactModalTest extends TestCase
         $this->assertNotNull($saved);
         $this->assertEquals('Alex Morgan', $saved->name);
         $this->assertStringContainsString('Innovate Corp', (string) $saved->message);
+        $this->assertStringContainsString('Drafting a new project inquiry', (string) $saved->message);
     }
 }

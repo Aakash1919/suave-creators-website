@@ -1,7 +1,6 @@
 @props([
     'id' => 'contact-modal',
     'services' => null,
-    'countries' => null,
 ])
 
 @php
@@ -73,21 +72,10 @@
             'color' => '#E11D48',
         ],
     ];
-
-    $countriesList = $countries ?? [
-        ['code' => '+91', 'flag' => '🇮🇳', 'name' => 'India (+91)'],
-        ['code' => '+1', 'flag' => '🇺🇸', 'name' => 'United States (+1)'],
-        ['code' => '+44', 'flag' => '🇬🇧', 'name' => 'United Kingdom (+44)'],
-        ['code' => '+61', 'flag' => '🇦🇺', 'name' => 'Australia (+61)'],
-        ['code' => '+1', 'flag' => '🇨🇦', 'name' => 'Canada (+1)'],
-        ['code' => '+971', 'flag' => '🇦🇪', 'name' => 'UAE (+971)'],
-        ['code' => '+49', 'flag' => '🇩🇪', 'name' => 'Germany (+49)'],
-        ['code' => '+65', 'flag' => '🇸🇬', 'name' => 'Singapore (+65)'],
-    ];
 @endphp
 
 <div id="{{ $id }}"
-    class="contact-modal-root fixed inset-0 z-[12000] hidden items-center justify-center p-3 sm:p-4 md:p-6 opacity-0 transition-opacity duration-300 pointer-events-none"
+    class="contact-modal-root fixed inset-0 z-[12000] hidden flex items-center justify-center p-3 sm:p-4 md:p-6 opacity-0 transition-opacity duration-300 pointer-events-none overflow-x-hidden"
     role="dialog" aria-modal="true" aria-labelledby="{{ $id }}-heading" data-contact-modal-root>
 
     {{-- Backdrop --}}
@@ -96,7 +84,7 @@
 
     {{-- Modal Card Container --}}
     <div
-        class="contact-modal__card relative z-10 w-full max-w-[960px] overflow-hidden rounded-[24px] sm:rounded-[32px] bg-white shadow-[0_25px_80px_rgba(0,0,50,0.3)] ring-1 ring-black/5 transform transition-all duration-300 scale-95 opacity-0 max-h-[92vh] flex flex-col">
+        class="contact-modal__card relative z-10 w-full max-w-[560px] lg:max-w-[960px] m-auto overflow-hidden rounded-[24px] sm:rounded-[32px] bg-white shadow-[0_25px_80px_rgba(0,0,50,0.3)] ring-1 ring-black/5 transform transition-all duration-300 scale-95 opacity-0 max-h-[92vh] flex flex-col">
 
         {{-- Close Button --}}
         <button type="button"
@@ -106,10 +94,10 @@
         </button>
 
         {{-- Two-Column Modal Body --}}
-        <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] overflow-y-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] overflow-y-auto overflow-x-hidden w-full min-w-0">
 
             {{-- LEFT COLUMN: White Form Area --}}
-            <div class="p-6 sm:p-8 lg:p-9 bg-white flex flex-col justify-between relative">
+            <div class="p-5 sm:p-8 lg:p-9 bg-white flex flex-col justify-between relative min-w-0 max-w-full overflow-x-hidden">
 
                 {{-- Header info --}}
                 <div>
@@ -134,13 +122,10 @@
                     <input type="hidden" name="form_started_at" value="{{ time() }}" data-modal-started>
 
                     {{-- Honeypot bot protection --}}
-                    <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                    <div class="sr-only" aria-hidden="true" tabindex="-1">
                         <label for="{{ $id }}-website">Website</label>
                         <input id="{{ $id }}-website" type="text" name="website" tabindex="-1" autocomplete="off">
                     </div>
-
-                    {{-- Hidden phone value combining country code & phone number --}}
-                    <input type="hidden" name="phone" data-modal-phone-combined value="">
 
                     {{-- Row 1: Name & Email --}}
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -195,45 +180,18 @@
                             <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="company" hidden></span>
                         </div>
 
-                        {{-- Phone Number with Country Dropdown --}}
+                        {{-- Phone Number with intl-tel-input --}}
                         <div>
-                            <label for="{{ $id }}-phone-input" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
+                            <label for="{{ $id }}-phone" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
                                 Phone Number <span class="text-red-500">*</span>
                             </label>
-                            <div class="relative flex items-stretch">
-                                {{-- Country Selector Trigger --}}
-                                <div class="relative" data-country-dropdown-wrapper>
-                                    <button type="button"
-                                        class="h-full inline-flex items-center gap-1.5 rounded-l-xl border border-r-0 border-[#CBD5E1] bg-[#F8FAFC] px-2.5 sm:px-3 text-[13px] font-medium text-[#1E293B] hover:bg-[#F1F5F9] focus:outline-none focus:ring-2 focus:ring-[#2A4DFB]/20 transition"
-                                        data-country-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Select country code">
-                                        <span data-selected-flag>{{ $countriesList[0]['flag'] }}</span>
-                                        <span data-selected-code class="text-xs font-semibold text-[#334155]">{{ $countriesList[0]['code'] }}</span>
-                                        <i class="fa-solid fa-chevron-down text-[9px] text-[#64748B] transition-transform duration-200" aria-hidden="true"></i>
-                                    </button>
-
-                                    {{-- Country List Menu --}}
-                                    <div class="absolute left-0 top-full mt-1.5 w-52 rounded-xl border border-[#E2E8F0] bg-white p-1.5 shadow-xl z-50 hidden max-h-48 overflow-y-auto"
-                                        data-country-menu role="listbox">
-                                        @foreach ($countriesList as $c)
-                                            <button type="button"
-                                                class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-xs text-[#1E293B] hover:bg-[#EEF4FF] hover:text-[#2A4DFB] transition"
-                                                data-country-option data-code="{{ $c['code'] }}" data-flag="{{ $c['flag'] }}" role="option">
-                                                <span class="flex items-center gap-2">
-                                                    <span>{{ $c['flag'] }}</span>
-                                                    <span>{{ $c['name'] }}</span>
-                                                </span>
-                                                <span class="font-semibold text-slate-400">{{ $c['code'] }}</span>
-                                            </button>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                {{-- Number Input --}}
-                                <input id="{{ $id }}-phone-input" type="tel" inputmode="tel" autocomplete="tel-national" required
-                                    placeholder="98765 43210" data-modal-phone-input
-                                    class="w-full rounded-r-xl border border-[#CBD5E1] bg-white py-2.5 px-3 text-[13px] sm:text-sm text-[#0F172A] placeholder-[#94A3B8] transition duration-150 focus:border-[#2A4DFB] focus:outline-none focus:ring-4 focus:ring-[#2A4DFB]/10">
-                            </div>
-                            <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="phone" hidden></span>
+                            <x-frontend.phone-field
+                                id="{{ $id }}-phone"
+                                name="phone"
+                                label="Phone Number"
+                                placeholder="98765 43210"
+                                :show-label="false"
+                            />
                         </div>
                     </div>
 
@@ -278,6 +236,19 @@
                         <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="service" hidden></span>
                     </div>
 
+                    {{-- Row 4: Project Details / Message --}}
+                    <div>
+                        <label for="{{ $id }}-message" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
+                            Project Details / Message <span class="text-slate-400 font-normal text-[11px]">(Optional)</span>
+                        </label>
+                        <div class="relative">
+                            <textarea id="{{ $id }}-message" name="message" rows="2"
+                                placeholder="Tell us briefly about your project or what you want to build..."
+                                class="w-full rounded-xl border border-[#CBD5E1] bg-white py-2 px-3 text-[13px] sm:text-sm text-[#0F172A] placeholder-[#94A3B8] transition duration-150 focus:border-[#2A4DFB] focus:outline-none focus:ring-4 focus:ring-[#2A4DFB]/10 resize-none"></textarea>
+                        </div>
+                        <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="message" hidden></span>
+                    </div>
+
                     {{-- Form error banner --}}
                     <div class="rounded-lg bg-red-50 p-2.5 text-xs text-red-600 font-medium" data-modal-general-error hidden></div>
 
@@ -292,14 +263,14 @@
                     </div>
 
                     {{-- Trust Badge --}}
-                    <p class="text-center text-[11px] sm:text-xs text-[#64748B] flex items-center justify-center gap-1.5 pt-1">
+                    <p class="text-center text-[11px] sm:text-xs text-[#64748B] flex flex-wrap items-center justify-center gap-1.5 pt-1">
                         <i class="fa-solid fa-lock text-[10px] text-[#64748B]" aria-hidden="true"></i>
                         <span>Your information is secure and will never be shared.</span>
                     </p>
                 </form>
 
                 {{-- Success Screen Overlay --}}
-                <div class="absolute inset-0 bg-white/98 backdrop-blur-sm rounded-l-[24px] sm:rounded-l-[32px] p-8 flex flex-col items-center justify-center text-center z-40 hidden opacity-0 transition-opacity duration-300"
+                <div class="absolute inset-0 bg-white/98 backdrop-blur-sm rounded-[24px] sm:rounded-l-[32px] p-6 sm:p-8 flex flex-col items-center justify-center text-center z-40 hidden opacity-0 transition-opacity duration-300 overflow-hidden"
                     data-modal-success-screen>
                     <div class="h-16 w-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4 shadow-md shadow-emerald-500/10">
                         <i class="fa-solid fa-check" aria-hidden="true"></i>
@@ -318,8 +289,8 @@
                 </div>
             </div>
 
-            {{-- RIGHT COLUMN: Soft Blue Feature Card --}}
-            <div class="p-6 sm:p-8 lg:p-9 bg-gradient-to-br from-[#EEF4FF] via-[#F3F6FF] to-[#E8F0FE] flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-[#E2E8F0]/70 relative overflow-hidden">
+            {{-- RIGHT COLUMN: Soft Blue Feature Card (hidden on mobile, visible on desktop) --}}
+            <div class="hidden lg:flex flex-col justify-between p-6 sm:p-8 lg:p-9 bg-gradient-to-br from-[#EEF4FF] via-[#F3F6FF] to-[#E8F0FE] border-t lg:border-t-0 lg:border-l border-[#E2E8F0]/70 relative overflow-hidden">
                 <div class="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#2A4DFB]/10 blur-2xl" aria-hidden="true"></div>
 
                 <div>
@@ -402,6 +373,248 @@
     </div>
 </div>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@29.5.2/dist/css/intlTelInput.min.css">
+
+<style>
+/* Center modal in the middle of page horizontally & vertically */
+.contact-modal-root {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow-x: hidden !important;
+}
+.contact-modal-root.hidden {
+    display: none !important;
+}
+.contact-modal-root .contact-modal__card {
+    margin: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Scoped intl-tel-input styling inside Contact Modal */
+.contact-modal-root .suave-phone-field {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+.contact-modal-root .suave-phone-field .iti {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    background: #ffffff;
+    border: 1px solid #CBD5E1;
+    border-radius: 0.75rem; /* rounded-xl */
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    box-sizing: border-box;
+    overflow: visible;
+}
+.contact-modal-root .suave-phone-field .iti:hover {
+    border-color: #94A3B8;
+}
+.contact-modal-root .suave-phone-field .iti:has(.iti__tel-input:focus),
+.contact-modal-root .suave-phone-field .iti.iti--focus {
+    border-color: #2A4DFB;
+    box-shadow: 0 0 0 4px rgba(42, 77, 251, 0.1);
+}
+.contact-modal-root .suave-phone-field .iti.is-invalid {
+    border-color: #EF4444 !important;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15) !important;
+}
+.contact-modal-root .suave-phone-field .iti__country-container {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}
+.contact-modal-root .suave-phone-field .iti__selected-country {
+    background: #F8FAFC;
+    border: none;
+    border-right: 1px solid #CBD5E1;
+    border-radius: 0.75rem 0 0 0.75rem;
+    padding: 0 10px 0 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    flex-shrink: 0;
+}
+.contact-modal-root .suave-phone-field .iti__selected-country:hover {
+    background: #F1F5F9;
+}
+.contact-modal-root .suave-phone-field .iti__selected-country-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 100%;
+}
+.contact-modal-root .suave-phone-field .iti__selected-country-primary .iti__flag {
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+.contact-modal-root .suave-phone-field .iti__arrow {
+    margin: 0 !important;
+    border-right: 1.5px solid #64748B !important;
+    border-bottom: 1.5px solid #64748B !important;
+    width: 5px !important;
+    height: 5px !important;
+    box-sizing: border-box;
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+    margin-top: -2px !important;
+}
+.contact-modal-root .suave-phone-field .iti__arrow--up,
+.contact-modal-root .suave-phone-field .iti__selected-country[aria-expanded="true"] .iti__arrow {
+    margin-top: 2px !important;
+    transform: rotate(-135deg) !important;
+}
+.contact-modal-root .suave-phone-field .iti__selected-dial-code {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1E293B;
+    margin: 0 !important;
+    white-space: nowrap;
+}
+.contact-modal-root .suave-phone-field .iti__tel-input {
+    flex: 1 1 auto;
+    width: 100%;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0.625rem 0.875rem !important; /* py-2.5 px-3.5 */
+    font-size: 13px !important;
+    line-height: 1.25rem !important;
+    color: #0F172A !important;
+    border-radius: 0 0.75rem 0.75rem 0 !important;
+    box-sizing: border-box;
+}
+@media (min-width: 640px) {
+    .contact-modal-root .suave-phone-field .iti__tel-input {
+        font-size: 14px !important;
+    }
+}
+.contact-modal-root .suave-phone-field .iti__tel-input::placeholder {
+    color: #94A3B8;
+}
+.contact-modal-root .suave-phone-field .iti__country-selector {
+    position: absolute;
+    top: calc(100% + 6px) !important;
+    left: 0 !important;
+    z-index: 100 !important;
+    width: 290px;
+    max-width: calc(100vw - 48px) !important;
+    background: #ffffff;
+    border: 1px solid #CBD5E1;
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    max-height: 250px;
+    overflow: hidden;
+}
+@media (max-width: 640px) {
+    .contact-modal-root .suave-phone-field .iti__country-selector {
+        width: min(280px, calc(100vw - 48px)) !important;
+        max-width: calc(100vw - 48px) !important;
+    }
+}
+.contact-modal-root .suave-phone-field .iti__search-input-wrapper {
+    position: relative;
+    padding: 8px 10px;
+    border-bottom: 1px solid #F1F5F9;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.contact-modal-root .suave-phone-field .iti__search-icon {
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+}
+.contact-modal-root .suave-phone-field .iti__search-icon-svg {
+    width: 14px !important;
+    height: 14px !important;
+    stroke: #64748B !important;
+    display: block !important;
+}
+.contact-modal-root .suave-phone-field .iti__search-input {
+    width: 100% !important;
+    height: 36px !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 0.5rem !important;
+    padding: 0 12px 0 34px !important;
+    font-size: 13px !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    background: #F8FAFC !important;
+    color: #0F172A !important;
+    transition: all 0.15s ease;
+}
+.contact-modal-root .suave-phone-field .iti__search-input:focus {
+    border-color: #2A4DFB !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(42, 77, 251, 0.12) !important;
+}
+.contact-modal-root .suave-phone-field .iti__country-list {
+    max-height: 190px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+}
+.contact-modal-root .suave-phone-field .iti__country {
+    padding: 8px 12px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #1E293B;
+    transition: background-color 0.15s ease;
+    min-width: 0;
+}
+.contact-modal-root .suave-phone-field .iti__country:hover,
+.contact-modal-root .suave-phone-field .iti__country.iti__highlight {
+    background: #EEF4FF;
+    color: #2A4DFB;
+}
+.contact-modal-root .suave-phone-field .iti__country .iti__flag {
+    margin-right: 2px !important;
+    flex-shrink: 0;
+}
+.contact-modal-root .suave-phone-field .iti__country-name {
+    font-size: 13px;
+    color: #1E293B;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+.contact-modal-root .suave-phone-field .iti__dial-code {
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748B;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+.contact-modal-root .suave-phone-field .contact-form-panel__field-error,
+.contact-modal-root [data-error-for="phone"] {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #EF4444;
+    margin-top: 0.25rem;
+}
+</style>
+
 @once
 @push('scripts')
 <script>
@@ -429,16 +642,10 @@
         var serviceInput = modalRoot.querySelector('[data-service-value]');
         var serviceChevron = modalRoot.querySelector('[data-service-chevron]');
 
-        // Country dropdown elements
-        var countryDropdownWrapper = modalRoot.querySelector('[data-country-dropdown-wrapper]');
-        var countryTrigger = modalRoot.querySelector('[data-country-trigger]');
-        var countryMenu = modalRoot.querySelector('[data-country-menu]');
-        var selectedFlagEl = modalRoot.querySelector('[data-selected-flag]');
-        var selectedCodeEl = modalRoot.querySelector('[data-selected-code]');
-        var phoneInput = modalRoot.querySelector('[data-modal-phone-input]');
-        var phoneCombinedInput = modalRoot.querySelector('[data-modal-phone-combined]');
+        // Phone field elements
+        var phoneInput = modalRoot.querySelector('[data-phone-field-input]');
+        var phoneHiddenInput = modalRoot.querySelector('[data-phone-field-value]');
 
-        var currentCountryCode = '+91';
         var draftTokenInput = modalRoot.querySelector('[data-modal-draft-token]');
         var draftUrl = form ? form.getAttribute('data-draft-url') : '';
         var csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
@@ -447,16 +654,42 @@
         var draftAbort = null;
         var isSubmitting = false;
 
-        function updateCombinedPhone() {
-            var raw = phoneInput ? phoneInput.value.trim() : '';
-            if (phoneCombinedInput) {
-                phoneCombinedInput.value = raw ? (currentCountryCode + ' ' + raw) : '';
+        function getPhoneValue() {
+            if (window.SuavePhoneField) {
+                return window.SuavePhoneField.phoneValue(form);
+            }
+            return ((phoneHiddenInput && phoneHiddenInput.value) || (phoneInput && phoneInput.value) || '').trim();
+        }
+
+        function initPhoneField() {
+            if (window.SuavePhoneField) {
+                window.SuavePhoneField.initAll(modalRoot);
             }
         }
 
         function openModal(defaultService) {
             modalRoot.classList.remove('hidden');
+            modalRoot.classList.add('flex');
             document.body.style.overflow = 'hidden';
+
+            // Reset modal internal scroll position to top
+            if (modalCard) {
+                modalCard.scrollTop = 0;
+                var scrollers = modalCard.querySelectorAll('.overflow-y-auto');
+                scrollers.forEach(function (el) { el.scrollTop = 0; });
+            }
+
+            // Ensure phone field is initialized
+            initPhoneField();
+            if (!window.SuavePhoneField) {
+                var checkIti = setInterval(function () {
+                    if (window.SuavePhoneField) {
+                        clearInterval(checkIti);
+                        window.SuavePhoneField.initAll(modalRoot);
+                    }
+                }, 50);
+                setTimeout(function () { clearInterval(checkIti); }, 3000);
+            }
 
             // Pre-select service if requested
             if (defaultService) {
@@ -484,6 +717,7 @@
 
             setTimeout(function () {
                 modalRoot.classList.add('hidden');
+                modalRoot.classList.remove('flex');
                 document.body.style.overflow = '';
                 if (successScreen) {
                     successScreen.classList.add('hidden', 'opacity-0');
@@ -542,7 +776,6 @@
         if (serviceTrigger) {
             serviceTrigger.addEventListener('click', function (e) {
                 e.stopPropagation();
-                toggleCountryMenu(false);
                 toggleServiceMenu();
             });
         }
@@ -575,49 +808,10 @@
             });
         });
 
-        // Country dropdown toggle
-        function toggleCountryMenu(open) {
-            if (!countryMenu) return;
-            var isOpen = open !== undefined ? open : countryMenu.classList.contains('hidden');
-            if (isOpen) {
-                countryMenu.classList.remove('hidden');
-                countryTrigger.setAttribute('aria-expanded', 'true');
-            } else {
-                countryMenu.classList.add('hidden');
-                countryTrigger.setAttribute('aria-expanded', 'false');
-            }
-        }
-
-        if (countryTrigger) {
-            countryTrigger.addEventListener('click', function (e) {
-                e.stopPropagation();
-                toggleServiceMenu(false);
-                toggleCountryMenu();
-            });
-        }
-
-        modalRoot.querySelectorAll('[data-country-option]').forEach(function (opt) {
-            opt.addEventListener('click', function (e) {
-                e.stopPropagation();
-                var code = opt.getAttribute('data-code') || '+91';
-                var flag = opt.getAttribute('data-flag') || '🇮🇳';
-                currentCountryCode = code;
-                if (selectedFlagEl) selectedFlagEl.textContent = flag;
-                if (selectedCodeEl) selectedCodeEl.textContent = code;
-                updateCombinedPhone();
-                toggleCountryMenu(false);
-                if (phoneInput) phoneInput.focus();
-                scheduleDraftSave();
-            });
-        });
-
         // Close dropdown menus when clicking outside them
         document.addEventListener('click', function (e) {
             if (serviceDropdownWrapper && !serviceDropdownWrapper.contains(e.target)) {
                 toggleServiceMenu(false);
-            }
-            if (countryDropdownWrapper && !countryDropdownWrapper.contains(e.target)) {
-                toggleCountryMenu(false);
             }
         });
 
@@ -658,6 +852,11 @@
                 err.hidden = true;
                 err.textContent = '';
             }
+            if (field === 'phone') {
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.setInvalid(form, false);
+                }
+            }
             var el = form ? form.querySelector('[name="' + field + '"]') : null;
             if (el) {
                 el.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/20');
@@ -674,6 +873,11 @@
                 err.textContent = msg;
                 err.hidden = false;
             }
+            if (field === 'phone') {
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.setInvalid(form, true);
+                }
+            }
             var el = form ? form.querySelector('[name="' + field + '"]') : null;
             if (el) {
                 el.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/20');
@@ -681,7 +885,7 @@
         }
 
         function clearAllErrors() {
-            ['name', 'email', 'company', 'phone', 'service'].forEach(clearFieldError);
+            ['name', 'email', 'company', 'phone', 'service', 'message'].forEach(clearFieldError);
             if (generalError) {
                 generalError.hidden = true;
                 generalError.textContent = '';
@@ -690,7 +894,9 @@
 
         function saveDraft() {
             if (isSubmitting || !draftUrl || !form) return;
-            updateCombinedPhone();
+            if (window.SuavePhoneField) {
+                window.SuavePhoneField.syncAll(form);
+            }
 
             var token = ensureDraftToken();
             var body = new FormData();
@@ -698,8 +904,9 @@
             body.append('name', (form.querySelector('[name="name"]')?.value || '').trim());
             body.append('email', (form.querySelector('[name="email"]')?.value || '').trim());
             body.append('company', (form.querySelector('[name="company"]')?.value || '').trim());
-            body.append('phone', phoneCombinedInput ? phoneCombinedInput.value.trim() : '');
+            body.append('phone', getPhoneValue());
             body.append('service', serviceInput ? serviceInput.value.trim() : '');
+            body.append('message', (form.querySelector('[name="message"]')?.value || '').trim());
 
             if (draftAbort) draftAbort.abort();
             draftAbort = new AbortController();
@@ -724,7 +931,7 @@
 
         // Field change listeners
         if (form) {
-            ['name', 'email', 'company'].forEach(function (name) {
+            ['name', 'email', 'company', 'message'].forEach(function (name) {
                 var input = form.querySelector('[name="' + name + '"]');
                 if (input) {
                     input.addEventListener('input', function () {
@@ -740,14 +947,24 @@
             if (phoneInput) {
                 phoneInput.addEventListener('input', function () {
                     clearFieldError('phone');
-                    updateCombinedPhone();
+                    if (window.SuavePhoneField) {
+                        window.SuavePhoneField.syncAll(form);
+                        window.SuavePhoneField.setInvalid(form, false);
+                    }
                     scheduleDraftSave();
                 });
                 phoneInput.addEventListener('blur', function () {
-                    updateCombinedPhone();
+                    if (window.SuavePhoneField) {
+                        window.SuavePhoneField.syncAll(form);
+                    }
                     saveDraft();
                 });
             }
+
+            form.addEventListener('suave-phone:change', function () {
+                clearFieldError('phone');
+                scheduleDraftSave();
+            });
         }
 
         // Form Submit
@@ -755,11 +972,13 @@
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 clearAllErrors();
-                updateCombinedPhone();
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.syncAll(form);
+                }
 
                 var nameVal = (form.querySelector('[name="name"]')?.value || '').trim();
                 var emailVal = (form.querySelector('[name="email"]')?.value || '').trim();
-                var phoneVal = phoneInput ? phoneInput.value.trim() : '';
+                var phoneVal = getPhoneValue();
                 var serviceVal = serviceInput ? serviceInput.value.trim() : '';
 
                 var hasError = false;
@@ -778,11 +997,12 @@
                     hasError = true;
                 }
 
-                if (!phoneVal) {
-                    showFieldError('phone', 'Please enter your phone number.');
-                    hasError = true;
-                } else if (phoneVal.length < 5) {
+                var digitsOnly = phoneVal.replace(/\D/g, '');
+                if (!phoneVal || digitsOnly.length < 5) {
                     showFieldError('phone', 'Please enter a valid phone number.');
+                    if (window.SuavePhoneField) {
+                        window.SuavePhoneField.setInvalid(form, true);
+                    }
                     hasError = true;
                 }
 
@@ -851,6 +1071,9 @@
 
                     // Reset form & token
                     form.reset();
+                    if (window.SuavePhoneField) {
+                        window.SuavePhoneField.resetAll(form);
+                    }
                     if (serviceInput) serviceInput.value = '';
                     if (serviceLabel) {
                         serviceLabel.textContent = 'Select a service';
@@ -860,7 +1083,6 @@
                     if (serviceIcon) {
                         serviceIcon.innerHTML = '<i class="fa-solid fa-shapes text-sm" aria-hidden="true"></i>';
                     }
-                    if (phoneCombinedInput) phoneCombinedInput.value = '';
                     try {
                         sessionStorage.removeItem(DRAFT_STORAGE_KEY);
                     } catch (e) {}

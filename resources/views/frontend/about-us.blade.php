@@ -27,7 +27,7 @@
           theme="light"
           placeholder="Enter your phone or email"
           button-text="Get Free Consultation"
-          :secondary-href="$demoHref"
+          secondary-href="#contact-modal"
           secondary-label="Schedule a discovery call" />
       </div>
     </div>
