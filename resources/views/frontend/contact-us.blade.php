@@ -847,6 +847,10 @@
                             });
                         }
                         resetForm();
+                        if (data.redirect) {
+                            window.location.href = data.redirect;
+                            return;
+                        }
                         showSuccess(data.message || 'The request has been sent successfully.');
                     })
                     .catch(function() {

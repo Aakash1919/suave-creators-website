@@ -129,4 +129,55 @@ class ContactModalTest extends TestCase
         $this->assertStringContainsString('Innovate Corp', (string) $saved->message);
         $this->assertStringContainsString('Drafting a new project inquiry', (string) $saved->message);
     }
+
+    public function test_thank_you_page_renders_successfully(): void
+    {
+        $response = $this->get(route('thank-you'));
+
+        $response->assertOk();
+        $response->assertSee('Thank You! Your Request Has Been Received');
+        $response->assertSee('What Happens Next?');
+        $response->assertSee('Requirement Assessment');
+        $response->assertSee('Tailored Solution Roadmap');
+        $response->assertSee('Discovery Strategy Call');
+        $response->assertSee('Explore While You Wait');
+        $response->assertSee(route('case-studies'));
+        $response->assertSee(route('blogs'));
+        $response->assertSee(route('home'));
+    }
+
+    public function test_contact_submission_returns_thank_you_redirect_in_json(): void
+    {
+        $payload = [
+            'name' => 'Elena Rostova',
+            'email' => 'elena@enterprise.org',
+            'phone' => '+44 7700 900077',
+            'service' => 'enterprise-software',
+            'message' => 'Need architectural review of distributed cloud services.',
+            'form_started_at' => time() - 10,
+            '_ajax' => '1',
+        ];
+
+        $response = $this->postJson(route('contact-us.store'), $payload);
+
+        $response->assertOk();
+        $response->assertJsonPath('success', true);
+        $response->assertJsonPath('redirect', route('thank-you'));
+    }
+
+    public function test_non_ajax_contact_submission_redirects_to_thank_you(): void
+    {
+        $payload = [
+            'name' => 'Marcus Vance',
+            'email' => 'marcus@vancecapital.com',
+            'phone' => '+1 212 555 0199',
+            'service' => 'custom-crm',
+            'message' => 'Migrating financial CRM to custom Laravel solution.',
+            'form_started_at' => time() - 10,
+        ];
+
+        $response = $this->post(route('contact-us.store'), $payload);
+
+        $response->assertRedirect(route('thank-you'));
+    }
 }

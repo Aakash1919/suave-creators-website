@@ -63,6 +63,7 @@
             'case-studies',
             'case-study.show',
             '*-case-study',
+            'thank-you',
         );
         $bodyClass = $bodyClass ?? 'min-h-screen bg-white font-sans text-slate-900';
         $useHeroBackground = $useHeroBackground ?? true;

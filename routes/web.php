@@ -35,6 +35,7 @@ Route::post('/consultation-request', [ContactController::class, 'quickConsultati
     ->name('consultation.store');
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
+Route::get('/thank-you', [PageController::class, 'thankYou'])->name('thank-you');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301))->name('service.show.legacy');

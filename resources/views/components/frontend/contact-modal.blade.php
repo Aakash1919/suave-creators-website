@@ -1088,16 +1088,9 @@
                     } catch (e) {}
                     if (draftTokenInput) draftTokenInput.value = '';
 
-                    // Display success screen inside modal
-                    if (successScreen) {
-                        if (data.message && successMessageEl) {
-                            successMessageEl.textContent = data.message;
-                        }
-                        successScreen.classList.remove('hidden');
-                        requestAnimationFrame(function () {
-                            successScreen.classList.remove('opacity-0');
-                        });
-                    }
+                    // Redirect to Thank You page
+                    var redirectUrl = data.redirect || '{{ route('thank-you') }}';
+                    window.location.href = redirectUrl;
                 })
                 .catch(function () {
                     if (generalError) {
