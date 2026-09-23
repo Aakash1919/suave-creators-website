@@ -36,24 +36,36 @@
           <div class="consultation-people__column consultation-people__column--left">
             @foreach ($columns['left'] as $person)
               <figure class="consultation-person consultation-person--{{ $person['tone'] }}">
-                <img src="{{ asset($person['src']) }}" alt="{{ $person['alt'] }}" title="{{ $person['alt'] }}"
-                  width="640" height="960" loading="lazy" decoding="async">
+                @if (filled($person['src']))
+                  <img src="{{ asset($person['src']) }}" alt="{{ $person['alt'] }}" title="{{ $person['alt'] }}"
+                    width="640" height="960" loading="lazy" decoding="async">
+                @else
+                  <span class="consultation-person__placeholder" aria-hidden="true"></span>
+                @endif
               </figure>
             @endforeach
           </div>
           <div class="consultation-people__column consultation-people__column--center">
             @foreach ($columns['center'] as $person)
               <figure class="consultation-person consultation-person--{{ $person['tone'] }}">
-                <img src="{{ asset($person['src']) }}" alt="{{ $person['alt'] }}" title="{{ $person['alt'] }}"
-                  width="640" height="960" loading="lazy" decoding="async">
+                @if (filled($person['src']))
+                  <img src="{{ asset($person['src']) }}" alt="{{ $person['alt'] }}" title="{{ $person['alt'] }}"
+                    width="640" height="960" loading="lazy" decoding="async">
+                @else
+                  <span class="consultation-person__placeholder" aria-hidden="true"></span>
+                @endif
               </figure>
             @endforeach
           </div>
           <div class="consultation-people__column consultation-people__column--right">
             @foreach ($columns['right'] as $person)
               <figure class="consultation-person consultation-person--{{ $person['tone'] }}">
-                <img src="{{ asset($person['src']) }}" alt="{{ $person['alt'] }}" title="{{ $person['alt'] }}"
-                  width="640" height="960" loading="lazy" decoding="async">
+                @if (filled($person['src']))
+                  <img src="{{ asset($person['src']) }}" alt="{{ $person['alt'] }}" title="{{ $person['alt'] }}"
+                    width="640" height="960" loading="lazy" decoding="async">
+                @else
+                  <span class="consultation-person__placeholder" aria-hidden="true"></span>
+                @endif
               </figure>
             @endforeach
           </div>

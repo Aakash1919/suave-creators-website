@@ -304,6 +304,20 @@ class SeoGenerateService
             'item' => $baseUrl.'/',
         ];
 
+        if (is_string($routeName)) {
+            $parentName = config("seo.pages.{$routeName}.json_ld_breadcrumb_parent_name");
+            $parentRoute = config("seo.pages.{$routeName}.json_ld_breadcrumb_parent_route");
+
+            if (is_string($parentName) && $parentName !== '' && is_string($parentRoute) && $parentRoute !== '') {
+                $breadcrumb[] = [
+                    '@type' => 'ListItem',
+                    'position' => ++$position,
+                    'name' => $parentName,
+                    'item' => route($parentRoute),
+                ];
+            }
+        }
+
         if (in_array($routeName, ['service.show', 'industry.show', 'blog.show'])) {
             $parentUrl = Str::beforeLast($canonical, '/');
             $parentSlug = Str::afterLast($parentUrl, '/');

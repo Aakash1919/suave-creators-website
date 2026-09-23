@@ -112,6 +112,8 @@ Design: `/images/tech-dev-N.svg` (was `technology-development-icon-N.svg`).
 | `laravel-logo-alt.svg` | delete if duplicate; else content name |
 | `market-1.png` | `seo-infographic-on-imac.webp` |
 | `background_about.png` | `about-section-bg.png` |
+| `logistics-banner copy.webp` | `logistics-supply-chain-collage.webp` |
+| `ai-sales-coaching2 copy.png` | `ai-sales-coaching-2.png` |
 
 ## Asset helpers
 
@@ -181,6 +183,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Names are **singular**.
 | Industries hub | `IndustryController@index` | `industries` |
 | Industry details (×6) | `IndustryController@show($slug)` | `industry.show` |
 | Product | `ProductController@index` | `product` |
+| Custom CRM Builder | `CustomCrmBuilderController@index` | `custom-crm-builder` |
 | Case study listing | `CaseStudyController@index` | `case-studies` |
 | Case study details (independent Blade) | `CaseStudyController` dedicated methods | `turbo-trans-case-study`, `outreach-case-study`, `ai-sales-coaching-case-study`, `tasks-case-study`, `teerrath-case-study`, `appointment-insurance-case-study`, `ai-product-matching-case-study` |
 | Legacy case study slug | `CaseStudyController@show` (301) | `case-study.show` |
