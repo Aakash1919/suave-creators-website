@@ -294,60 +294,61 @@
     </div>
 
     <div class="crm-builder-verticals__layout">
-      <div class="crm-builder-verticals__list" role="tablist" aria-label="{{ $verticals['eyebrow'] }}">
+      <div
+        class="crm-builder-verticals__list"
+        role="tablist"
+        aria-label="{{ $verticals['eyebrow'] }}"
+        style="--crm-vertical-count: {{ count($verticals['items']) }}">
         @foreach ($verticals['items'] as $vertical)
-          <button
-            type="button"
-            class="crm-builder-verticals__trigger{{ $loop->first ? ' is-active' : '' }}"
-            id="crm-vertical-tab-{{ $vertical['id'] }}"
-            role="tab"
-            aria-selected="{{ $loop->first ? 'true' : 'false' }}"
-            aria-controls="crm-vertical-panel-{{ $vertical['id'] }}"
-            data-vertical="{{ $vertical['id'] }}">
-            <span class="crm-builder-verticals__number">{{ $vertical['number'] }}</span>
-            <span class="crm-builder-verticals__label">{{ $vertical['title'] }}</span>
-          </button>
-        @endforeach
-      </div>
-
-      <div class="crm-builder-verticals__panels">
-        @foreach ($verticals['items'] as $vertical)
-          <article
-            class="crm-builder-verticals__panel{{ $loop->first ? ' is-active' : '' }}"
-            id="crm-vertical-panel-{{ $vertical['id'] }}"
-            role="tabpanel"
-            aria-labelledby="crm-vertical-tab-{{ $vertical['id'] }}"
-            @unless ($loop->first) hidden @endunless>
-            <span class="crm-builder-verticals__badge">
-              @if (filled($vertical['icon']))
-                <img
-                  src="{{ asset($vertical['icon']) }}"
-                  alt="{{ $vertical['iconAlt'] }}"
-                  title="{{ $vertical['iconAlt'] }}"
-                  width="28"
-                  height="28"
-                  loading="lazy"
-                  decoding="async">
-              @else
-                <span class="crm-builder-verticals__icon-placeholder" aria-hidden="true"></span>
-              @endif
-            </span>
-            <h3 class="crm-builder-verticals__panel-title">{{ $vertical['title'] }}</h3>
-            <div class="crm-builder-verticals__block">
-              <p class="crm-builder-verticals__kicker crm-builder-verticals__kicker--challenge">{{ $verticals['challengeLabel'] }}</p>
-              <p class="crm-builder-verticals__text">{{ $vertical['challenge'] }}</p>
-            </div>
-            <div class="crm-builder-verticals__block">
-              <p class="crm-builder-verticals__kicker crm-builder-verticals__kicker--architecture">{{ $verticals['architectureLabel'] }}</p>
-              <p class="crm-builder-verticals__text">
-                {{ $vertical['architecture'] }}
-                @if (filled($vertical['proofRoute'] ?? null) && filled($vertical['proofLabel'] ?? null))
-                  {{ $vertical['proofPrefix'] ?? 'See' }}
-                  <a href="{{ route($vertical['proofRoute']) }}" class="crm-builder-verticals__proof-link">{{ $vertical['proofLabel'] }}</a>.
+          <div class="crm-builder-verticals__item">
+            <button
+              type="button"
+              class="crm-builder-verticals__trigger{{ $loop->first ? ' is-active' : '' }}"
+              id="crm-vertical-tab-{{ $vertical['id'] }}"
+              role="tab"
+              aria-selected="{{ $loop->first ? 'true' : 'false' }}"
+              aria-controls="crm-vertical-panel-{{ $vertical['id'] }}"
+              data-vertical="{{ $vertical['id'] }}">
+              <span class="crm-builder-verticals__number">{{ $vertical['number'] }}</span>
+              <span class="crm-builder-verticals__label">{{ $vertical['title'] }}</span>
+            </button>
+            <article
+              class="crm-builder-verticals__panel{{ $loop->first ? ' is-active' : '' }}"
+              id="crm-vertical-panel-{{ $vertical['id'] }}"
+              role="tabpanel"
+              aria-labelledby="crm-vertical-tab-{{ $vertical['id'] }}"
+              @unless ($loop->first) hidden @endunless>
+              <span class="crm-builder-verticals__badge">
+                @if (filled($vertical['icon']))
+                  <img
+                    src="{{ asset($vertical['icon']) }}"
+                    alt="{{ $vertical['iconAlt'] }}"
+                    title="{{ $vertical['iconAlt'] }}"
+                    width="28"
+                    height="28"
+                    loading="lazy"
+                    decoding="async">
+                @else
+                  <span class="crm-builder-verticals__icon-placeholder" aria-hidden="true"></span>
                 @endif
-              </p>
-            </div>
-          </article>
+              </span>
+              <h3 class="crm-builder-verticals__panel-title">{{ $vertical['title'] }}</h3>
+              <div class="crm-builder-verticals__block">
+                <p class="crm-builder-verticals__kicker crm-builder-verticals__kicker--challenge">{{ $verticals['challengeLabel'] }}</p>
+                <p class="crm-builder-verticals__text">{{ $vertical['challenge'] }}</p>
+              </div>
+              <div class="crm-builder-verticals__block">
+                <p class="crm-builder-verticals__kicker crm-builder-verticals__kicker--architecture">{{ $verticals['architectureLabel'] }}</p>
+                <p class="crm-builder-verticals__text">
+                  {{ $vertical['architecture'] }}
+                  @if (filled($vertical['proofRoute'] ?? null) && filled($vertical['proofLabel'] ?? null))
+                    {{ $vertical['proofPrefix'] ?? 'See' }}
+                    <a href="{{ route($vertical['proofRoute']) }}" class="crm-builder-verticals__proof-link">{{ $vertical['proofLabel'] }}</a>.
+                  @endif
+                </p>
+              </div>
+            </article>
+          </div>
         @endforeach
       </div>
     </div>
