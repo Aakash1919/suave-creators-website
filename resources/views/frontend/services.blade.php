@@ -39,7 +39,7 @@
 <section class="full-bleed services-llmo" aria-labelledby="services-llmo-question">
   <div class="section-inner">
     <div class="services-llmo__card">
-      <!-- <p class="services-llmo__kicker">Direct Answer</p> -->
+      <p class="services-llmo__kicker">Direct Answer</p>
       <h2 id="services-llmo-question" class="services-llmo__question">
         What software development services does Suave Creators provide?
       </h2>
