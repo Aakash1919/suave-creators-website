@@ -1,19 +1,15 @@
 <section {{ $attributes->merge(['class' => $sectionClass]) }} aria-labelledby="{{ $titleId }}">
   <div class="smart-together-cta__inner section-inner">
-    @if (filled($eyebrow))
-      <div class="smart-together-cta__eyebrow mb-4 flex items-center gap-2">
-        <span class="inline-block h-[16px] w-[2px] rounded-full bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8]"
-          aria-hidden="true"></span>
-        <span
-          class="inline-block bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-[14px] font-bold leading-[100%] text-transparent">
-          {{ $eyebrow }}
-        </span>
-      </div>
-    @endif
-
     <div class="smart-together-cta__copy">
+      @if (filled($eyebrow))
+        <div class="smart-together-cta__eyebrow">
+          <span>{{ $eyebrow }}</span>
+        </div>
+      @endif
       <h2 id="{{ $titleId }}">{{ $title }}</h2>
-      <p>{{ $description }}</p>
+      @if (filled($description))
+        <p>{{ $description }}</p>
+      @endif
     </div>
 
     <div class="smart-together-cta__actions">
@@ -23,8 +19,11 @@
       @if ($secondaryLabel !== '')
         <a href="{{ $secondaryHref }}"
           @if (str_starts_with($secondaryHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-          class="inline-flex max-w-full cursor-pointer items-center border-b border-white/70 pb-px text-sm font-semibold text-white">
-          {{ $secondaryLabel }}
+          class="{{ $secondaryClass !== '' ? $secondaryClass : 'smart-together-cta__btn-secondary group' }}">
+          <span>{{ $secondaryLabel }}</span>
+          @if (!str_contains($secondaryLabel, '→') && !str_contains($secondaryLabel, '&rarr;'))
+            <x-frontend.cta-arrow />
+          @endif
         </a>
       @endif
     </div>

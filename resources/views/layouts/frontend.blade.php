@@ -50,6 +50,7 @@
         $loadDeferredCss = request()->routeIs(
             'about-us',
             'product',
+            'custom-crm-builder',
             'blogs',
             'blogs.category',
             'blog.show',

@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CaseStudyController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\CustomCrmBuilderController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\IndustryController;
 use App\Http\Controllers\Frontend\PageController;
@@ -36,6 +37,7 @@ Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'
 Route::get('/thank-you', [PageController::class, 'thankYou'])->name('thank-you');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services/custom-crm-builder', fn () => redirect()->route('service.show', ['slug' => 'custom-crm-development'], 301))->name('services.custom-crm-builder.legacy');
 Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301))->name('service.show.legacy');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
 
@@ -51,6 +53,7 @@ Route::get('/industries', [IndustryController::class, 'index'])->name('industrie
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
 Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
+Route::get('/custom-crm-builder', [CustomCrmBuilderController::class, 'index'])->name('custom-crm-builder');
 
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');
 Route::get('/case-studies/turbo-trans-case-study', [CaseStudyController::class, 'turboTransCaseStudy'])->name('turbo-trans-case-study');
@@ -65,6 +68,7 @@ Route::get('/case-studies/ai-product-matching-case-study', [CaseStudyController:
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+Route::get('/blog', fn () => redirect()->route('blogs', status: 301))->name('blog.index.legacy');
 Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');
 Route::get('/blogs/category/{slug}', [BlogController::class, 'category'])->name('blogs.category');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');

@@ -36,6 +36,10 @@ class FaqSection extends Component
 
         if ($this->ctaHref === '') {
             $this->ctaHref = $this->resolveDefaultCtaHref();
+        } elseif (! str_starts_with($this->ctaHref, '#')
+            && ! str_starts_with($this->ctaHref, 'http')
+            && ! str_starts_with($this->ctaHref, '/')) {
+            $this->ctaHref = route($this->ctaHref);
         }
 
         $this->resolvedMediaType = $this->mediaType
