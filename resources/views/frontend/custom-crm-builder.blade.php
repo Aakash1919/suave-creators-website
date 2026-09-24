@@ -77,8 +77,16 @@
       </div>
       <p class="crm-builder-hero__definition-copy">{{ $definitionCopy }}</p>
     </article>
+  </div>
+</section>
 
-    <div class="crm-builder-trust" id="roi">
+<section
+  class="full-bleed crm-builder-trust-band"
+  id="roi"
+  style="background-image: url('{{ asset($trustBackgroundImage) }}');"
+  aria-label="{{ $trustTitle }}">
+  <div class="section-inner">
+    <div class="crm-builder-trust">
       <div class="crm-builder-trust__intro">
         <p class="crm-builder-trust__eyebrow">
           <span class="crm-builder-trust__eyebrow-bar" aria-hidden="true"></span>
@@ -223,52 +231,64 @@
       </div>
     </div>
 
-    <div class="crm-builder-modules__grid">
-      @foreach ($modules['items'] as $module)
-        <article class="crm-builder-modules__card">
-          <div class="crm-builder-modules__media">
-            @if (filled($module['image']))
-              <img
-                class="crm-builder-modules__shot"
-                src="{{ asset($module['image']) }}"
-                alt="{{ $module['imageAlt'] }}"
-                title="{{ $module['imageAlt'] }}"
-                width="400"
-                height="180"
-                loading="lazy"
-                decoding="async">
-            @else
-              <span class="crm-builder-modules__media-placeholder" aria-hidden="true"></span>
-            @endif
-            <span class="crm-builder-modules__badge">
-              @if (filled($module['icon']))
-                <img
-                  src="{{ asset($module['icon']) }}"
-                  alt="{{ $module['iconAlt'] }}"
-                  title="{{ $module['iconAlt'] }}"
-                  width="24"
-                  height="24"
-                  loading="lazy"
-                  decoding="async">
-              @else
-                <span class="crm-builder-modules__icon-placeholder" aria-hidden="true"></span>
-              @endif
-            </span>
+    <div class="crmModulesSwiper swiper crm-builder-modules__swiper" aria-label="{{ $modules['eyebrow'] }}">
+      <div class="swiper-wrapper">
+        @foreach ($modules['items'] as $module)
+          <div class="swiper-slide">
+            <article class="crm-builder-modules__card">
+              <div class="crm-builder-modules__media">
+                @if (filled($module['image']))
+                  <img
+                    class="crm-builder-modules__shot"
+                    src="{{ asset($module['image']) }}"
+                    alt="{{ $module['imageAlt'] }}"
+                    title="{{ $module['imageAlt'] }}"
+                    width="400"
+                    height="180"
+                    loading="lazy"
+                    decoding="async">
+                @else
+                  <span class="crm-builder-modules__media-placeholder" aria-hidden="true"></span>
+                @endif
+                <span class="crm-builder-modules__badge">
+                  @if (filled($module['icon']))
+                    <img
+                      src="{{ asset($module['icon']) }}"
+                      alt="{{ $module['iconAlt'] }}"
+                      title="{{ $module['iconAlt'] }}"
+                      width="24"
+                      height="24"
+                      loading="lazy"
+                      decoding="async">
+                  @else
+                    <span class="crm-builder-modules__icon-placeholder" aria-hidden="true"></span>
+                  @endif
+                </span>
+              </div>
+              <div class="crm-builder-modules__body">
+                <h3 class="crm-builder-modules__card-title">{{ $module['title'] }}</h3>
+                <p class="crm-builder-modules__card-copy">{{ $module['copy'] }}</p>
+                <ul class="crm-builder-modules__tags">
+                  @foreach ($module['tags'] as $tag)
+                    <li>{{ $tag }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            </article>
           </div>
-          <div class="crm-builder-modules__body">
-            <h3 class="crm-builder-modules__card-title">{{ $module['title'] }}</h3>
-            <p class="crm-builder-modules__card-copy">{{ $module['copy'] }}</p>
-            <ul class="crm-builder-modules__tags">
-              @foreach ($module['tags'] as $tag)
-                <li>{{ $tag }}</li>
-              @endforeach
-            </ul>
-          </div>
-        </article>
-      @endforeach
+        @endforeach
+      </div>
     </div>
 
-    <div class="crm-builder-modules__cta">
+    <div class="crm-builder-modules__footer">
+      <div class="crm-builder-modules__nav">
+        <button class="crm-builder-modules__prev offerings-control" type="button" aria-label="Previous technical capability">
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button class="crm-builder-modules__next offerings-control" type="button" aria-label="Next technical capability">
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
       <x-frontend.cta-button :href="$demoHref">{{ $modules['cta'] }}</x-frontend.cta-button>
     </div>
   </div>
@@ -518,23 +538,34 @@
       <h2 id="crm-builder-execution-heading" class="home-type-h2 crm-builder-execution__title">{{ $execution['title'] }}</h2>
     </div>
 
-    <div class="crm-builder-execution__layout">
-      <ol class="crm-builder-execution__steps">
-        @foreach ($execution['items'] as $step)
-          <li class="crm-builder-execution__step">
-            <span class="crm-builder-execution__number"><span class="crm-builder-execution__number-text">{{ $step['number'] }}</span></span>
+    <ol class="crm-builder-execution__steps">
+      @foreach ($execution['items'] as $step)
+        <li class="crm-builder-execution__step crm-builder-execution__step--{{ $step['tone'] }}">
+          <span class="crm-builder-execution__number">{{ $step['number'] }}</span>
+          <article class="crm-builder-execution__card">
+            <span class="crm-builder-execution__icon">
+              @if (filled($step['icon']))
+                <img
+                  src="{{ asset($step['icon']) }}"
+                  alt="{{ $step['iconAlt'] }}"
+                  title="{{ $step['iconAlt'] }}"
+                  width="28"
+                  height="28"
+                  loading="lazy"
+                  decoding="async">
+              @else
+                <span class="crm-builder-execution__icon-placeholder" aria-hidden="true"></span>
+              @endif
+            </span>
             <div class="crm-builder-execution__content">
               <h3 class="crm-builder-execution__step-title">{{ $step['title'] }}</h3>
               <p class="crm-builder-execution__step-copy">{{ $step['copy'] }}</p>
               <p class="crm-builder-execution__deliverable">
                 <span class="crm-builder-execution__check" aria-hidden="true">
-                  <img
-                    src="{{ asset($execution['checkIcon']) }}"
-                    alt="{{ $execution['checkIconAlt'] }}"
-                    title="{{ $execution['checkIconAlt'] }}"
-                    width="28"
-                    height="20"
-                    decoding="async">
+                  <svg viewBox="0 0 16 16" width="16" height="16" focusable="false">
+                    <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
+                    <path d="M4.6 8.2 6.8 10.4 11.4 5.7" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
                 </span>
                 <span class="crm-builder-execution__deliverable-text">
                   <strong>{{ $execution['deliverableLabel'] }}</strong>
@@ -542,26 +573,10 @@
                 </span>
               </p>
             </div>
-          </li>
-        @endforeach
-      </ol>
-
-      <div class="crm-builder-execution__visual">
-        @if (filled($execution['image']))
-          <img
-            class="crm-builder-execution__shot"
-            src="{{ asset($execution['image']) }}"
-            alt="{{ $execution['imageAlt'] }}"
-            title="{{ $execution['imageAlt'] }}"
-            width="480"
-            height="460"
-            loading="lazy"
-            decoding="async">
-        @else
-          <span class="crm-builder-execution__media-placeholder" aria-hidden="true"></span>
-        @endif
-      </div>
-    </div>
+          </article>
+        </li>
+      @endforeach
+    </ol>
   </div>
 </section>
 
@@ -678,6 +693,42 @@
 @endsection
 
 @push('scripts')
+<script>
+  window.suaveWhenSwiperReady(function () {
+    document.querySelectorAll('.crmModulesSwiper:not(.swiper-initialized)').forEach(function (el) {
+      var root = el.closest('.crm-builder-modules');
+      if (!root) return;
+
+      new Swiper(el, {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        speed: 550,
+        rewind: true,
+        allowTouchMove: true,
+        simulateTouch: true,
+        grabCursor: true,
+        watchOverflow: true,
+        keyboard: {
+          enabled: true,
+          onlyInViewport: true
+        },
+        navigation: {
+          nextEl: root.querySelector('.crm-builder-modules__next'),
+          prevEl: root.querySelector('.crm-builder-modules__prev')
+        },
+        a11y: {
+          prevSlideMessage: 'Previous technical capability',
+          nextSlideMessage: 'Next technical capability',
+          containerMessage: 'Technical capabilities carousel'
+        },
+        breakpoints: {
+          640: { slidesPerView: 2, spaceBetween: 20 },
+          1024: { slidesPerView: 3, spaceBetween: 24 }
+        }
+      });
+    });
+  });
+</script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var root = document.querySelector('.crm-builder-verticals');
