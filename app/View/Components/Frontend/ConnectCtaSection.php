@@ -13,18 +13,19 @@ class ConnectCtaSection extends Component
     use NormalizesAssetPaths;
 
     public function __construct(
-        public string $eyebrow = 'GET IN TOUCH',
-        public string $title = 'Have a Complex Software Architecture or Custom CRM Requirement?',
-        public string $description = 'Discuss your product roadmap, API integrations, or legacy migration plans directly with a solution architect.',
+        public string $eyebrow = 'Connect with us',
+        public string $title = 'Let’s Build Something Smart Together',
+        public string $description = 'Ready to transform your ideas into reality with Suave Creators?',
         public string $titleId = 'connect-cta-title',
-        public string $primaryLabel = 'Book a Discovery Session ',
+        public string $primaryLabel = 'Get Started',
         public string $primaryHref = '',
-        public string $secondaryLabel = 'Discuss Your Technical Roadmap',
+        public string $secondaryLabel = 'Discuss your vision',
         public string $secondaryHref = '',
+        public string $secondaryClass = '',
         public string $phoneVideo = 'assets/hero/mobile-app-phone-demo.mp4',
         public string $phonePoster = 'assets/hero/mobile-app-phone-demo-poster.webp',
         public string $phoneAlt = 'Mobile app demo for a custom CRM and software product',
-        public bool $showPhone = true,
+        public bool $showPhone = false,
         public string $sectionClass = 'full-bleed smart-together-cta py-6',
     ) {
         if ($this->primaryHref === '') {
@@ -33,6 +34,10 @@ class ConnectCtaSection extends Component
 
         if ($this->secondaryHref === '') {
             $this->secondaryHref = ContactSupport::demoHref();
+        }
+
+        if (! $this->showPhone && ! str_contains($this->sectionClass, 'smart-together-cta--no-phone')) {
+            $this->sectionClass = trim($this->sectionClass.' smart-together-cta--no-phone');
         }
 
         $this->phoneVideo = $this->normalizeAssetPath($this->phoneVideo);

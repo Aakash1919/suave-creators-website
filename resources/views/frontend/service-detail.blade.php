@@ -248,7 +248,7 @@
 
 @if ($isWebDevelopmentService)
 <x-frontend.connect-cta-section
-  :eyebrow="$service['crossSellEyebrow'] ?? 'GET IN TOUCH'"
+  :eyebrow="$service['crossSellEyebrow'] ?? 'Connect with us'"
   :title="$service['crossSellTitle'] ?? 'Have a Complex Web Application or Custom CRM Architecture Requirement?'"
   :description="$service['crossSellDescription'] ?? 'Looking to replace rigid third-party software or integrate complex multi-system APIs? Discuss your technical product roadmap, database schemas, or legacy migration plans directly with a solution architect.'"
   title-id="service-collab-title"
@@ -256,6 +256,8 @@
   :primary-href="$service['crossSellPrimaryHref'] ?? ''"
   :secondary-label="$service['crossSellSecondaryLabel'] ?? 'Explore Our Custom CRM Builder Services →'"
   :secondary-href="$service['crossSellSecondaryHref'] ?? route('service.show', ['slug' => 'custom-crm-development'])"
+  :secondary-class="$service['crossSellSecondaryClass'] ?? 'smart-together-cta__btn-secondary group'"
+  :show-phone="$service['crossSellShowPhone'] ?? false"
 />
 @endif
 
@@ -1160,7 +1162,7 @@ $n = $index + 1;
 
 .development-process-section {
   background: linear-gradient(5deg, #edf0ff 0%, #ffffff 100%);
-  padding: 80px 0;
+  padding: 40px 0;
   text-align: center;
 }
 
@@ -1168,7 +1170,7 @@ $n = $index + 1;
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 0 auto 32px;
+  margin: 0 auto 20px;
   max-width: 720px;
   text-align: center;
   width: 100%;
@@ -1179,7 +1181,7 @@ $n = $index + 1;
   font-size: clamp(1.75rem, 4vw, 2.75rem);
   font-weight: 600;
   line-height: 1.2;
-  margin: 16px auto 0;
+  margin: 12px auto 0;
   max-width: 680px;
   text-align: center;
 }
@@ -1189,7 +1191,7 @@ $n = $index + 1;
   font-family: "PP Mori", "Roboto Flex", ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  margin: 16px auto 0;
+  margin: 12px auto 0;
   max-width: 700px;
   text-align: center;
   width: 100%;
@@ -1284,11 +1286,11 @@ $n = $index + 1;
 
 @media (max-width: 639px) {
   .development-process-section {
-    padding: 40px 0;
+    padding: 32px 0;
   }
 
   .development-process-section__header {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   .development-process-section__title {
@@ -1311,7 +1313,7 @@ $n = $index + 1;
 
 @media (min-width: 640px) and (max-width: 1279px) {
   .development-process-section {
-    padding: 48px 0;
+    padding: 36px 0;
   }
 
   .development-process-section__inner {
@@ -1490,7 +1492,7 @@ $n = $index + 1;
 
 @media (min-width: 1280px) {
   .development-process-section {
-    padding: 120px 0 80px;
+    padding: 48px 0 40px;
   }
 
   .development-process-section__header {
@@ -1499,12 +1501,12 @@ $n = $index + 1;
 
   .development-process-section__inner {
     background-image: url("/assets/media/development-vector-visual.png");
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
     background-size: contain;
-    min-height: 620px;
-    padding: 32px 0 56px;
-    text-align: center;
+    min-height: 580px;
+    padding: 0;
+    text-align: left;
   }
 
   .development-process-section__inner::before {
@@ -1530,6 +1532,7 @@ $n = $index + 1;
     grid-column: auto;
     max-width: none;
     padding: 0 12px;
+    text-align: left;
     width: auto;
   }
 
@@ -1538,11 +1541,11 @@ $n = $index + 1;
   }
 
   .development-process-section__step:nth-child(odd) {
-    margin-top: 340px;
+    margin-top: 330px;
   }
 
   .development-process-section__step:nth-child(even) {
-    margin-top: 0;
+    margin-top: 100px;
     padding-bottom: 24px;
   }
 
