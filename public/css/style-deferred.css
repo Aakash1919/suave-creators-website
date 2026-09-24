@@ -8017,6 +8017,20 @@ body:has(.suave-agent.is-open) .blog-share {
   line-height: 1;
 }
 
+@media (max-width: 767px) {
+  .crm-builder-dash__metrics {
+    padding-right: 10.75rem;
+  }
+
+  .crm-builder-score {
+    bottom: 0.7rem;
+    left: auto;
+    margin: 0;
+    position: absolute;
+    right: 0.65rem;
+  }
+}
+
 .crm-builder-hero__definition {
   /* background: rgba(16, 22, 52, 0.88); */
   border: 1px solid #FFFFFF1A;
@@ -8242,6 +8256,7 @@ body:has(.suave-agent.is-open) .blog-share {
 
   .crm-builder-trust {
     padding: 36px 36px 28px;
+    margin-top:40px;
   }
 
   .crm-builder-trust__intro {
