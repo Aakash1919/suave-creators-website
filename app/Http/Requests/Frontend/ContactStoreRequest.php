@@ -35,7 +35,7 @@ class ContactStoreRequest extends FormRequest
             'draft_token' => ['nullable', 'uuid'],
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:255'],
-            'phone' => ['required', 'string', 'max:60'],
+            'phone' => ['required', 'string', 'max:60', 'regex:/^\+?[0-9\s\-().]+$/'],
             'service' => ['required', 'string', Rule::in(array_keys(ContactSupport::formServices()))],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
         ];
@@ -54,6 +54,7 @@ class ContactStoreRequest extends FormRequest
             'email.max' => 'Email may not be longer than 255 characters.',
             'phone.required' => 'Please enter your phone number.',
             'phone.max' => 'Phone number may not be longer than 60 characters.',
+            'phone.regex' => 'Phone number may only contain digits and dialing symbols.',
             'service.required' => 'Please select a service.',
             'service.in' => 'Please select a valid service.',
             'message.required' => 'Please tell us what you are trying to fix.',

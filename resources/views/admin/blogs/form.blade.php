@@ -26,7 +26,7 @@
 
     <form method="POST" action="{{ $blog->exists ? route('admin.blogs.update', $blog) : route('admin.blogs.store') }}"
         enctype="multipart/form-data" class="admin-blog-form" data-ajax-form
-        data-blog-content-css="{{ asset('css/admin-blog-content.css') }}"
+        data-blog-content-css="{{ asset('css/admin-blog-content.css') }}?v={{ file_exists(public_path('css/admin-blog-content.css')) ? filemtime(public_path('css/admin-blog-content.css')) : 1 }}"
         data-success-message="{{ $blog->exists ? 'Blog has been updated successfully.' : 'Blog has been created successfully.' }}">
         @csrf
         @if ($blog->exists)
@@ -57,6 +57,7 @@
                                 <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-editor="redo" title="Redo last change">Redo</button>
                                 <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-editor="removeblock" title="Remove the layout block the cursor is in">Remove block</button>
                                 <span class="admin-blog-blocks__split" aria-hidden="true"></span>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertfeaturedimage" title="Insert Featured image marker at cursor">Featured image</button>
                                 <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="inserttakeaways" title="Insert key takeaways">Takeaways</button>
                                 <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertresults" title="Insert results list">Results</button>
                                 <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-blog-block="insertchecklist" title="Insert checklist">Checklist</button>
@@ -305,7 +306,7 @@
                             <p>Shown on cards and social previews.</p>
                         </div>
                     </div>
-                    <div class="admin-card__body">
+                    <div class="admin-card__body space-y-4">
                         <label class="admin-blog-form__image" for="blog-featured-image">
                             @if ($blog->featuredImageUrl())
                                 <img src="{{ $blog->featuredImageUrl() }}" alt="Current featured image"
@@ -319,6 +320,21 @@
                             <input id="blog-featured-image" type="file" name="featured_image" accept="image/*"
                                 class="admin-blog-form__image-input">
                         </label>
+
+                        <div>
+                            <label class="admin-label" for="blog-featured-image-position">Location in article</label>
+                            <select id="blog-featured-image-position" name="featured_image_position" class="admin-select">
+                                <option value="after_first_p" @selected(old('featured_image_position', $blog->featured_image_position ?? 'after_first_p') === 'after_first_p')>After first paragraph (Default)</option>
+                                <option value="top" @selected(old('featured_image_position', $blog->featured_image_position ?? 'after_first_p') === 'top')>Top of article</option>
+                                <option value="bottom" @selected(old('featured_image_position', $blog->featured_image_position ?? 'after_first_p') === 'bottom')>Bottom of article</option>
+                                <option value="manual" @selected(old('featured_image_position', $blog->featured_image_position ?? 'after_first_p') === 'manual')>Manual position in editor</option>
+                                <option value="hide" @selected(old('featured_image_position', $blog->featured_image_position ?? 'after_first_p') === 'hide')>Hide in article body (Thumbnail only)</option>
+                            </select>
+                            <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm mt-2 w-full" data-blog-block="insertfeaturedimage" title="Insert Featured image marker at cursor in the editor">
+                                <i class="fa-regular fa-image" aria-hidden="true"></i> Insert featured image into editor
+                            </button>
+                            <p class="admin-help mt-1">Choose where the featured image is placed, or click "Insert featured image into editor" / toolbar button to position it manually.</p>
+                        </div>
                     </div>
                 </section>
 
@@ -345,7 +361,7 @@
 
 @push('styles')
     @include('layouts.admin.partials.richtexteditor-styles')
-    <link rel="stylesheet" href="{{ asset('css/admin-blog-content.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-blog-content.css') }}?v={{ file_exists(public_path('css/admin-blog-content.css')) ? filemtime(public_path('css/admin-blog-content.css')) : 1 }}">
 @endpush
 
 @push('scripts')

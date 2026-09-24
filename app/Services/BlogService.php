@@ -135,6 +135,7 @@ class BlogService
     public function attributesFromValidated(array $data, ?Blog $blog = null): array
     {
         $data['faqs'] = $this->normalizeFaqItems($data['faqs'] ?? null);
+        $data['featured_image_position'] = $data['featured_image_position'] ?? ($blog?->featured_image_position ?? 'after_first_p');
         unset($data['featured_image'], $data['published_at']);
 
         if (isset($data['content']) && is_string($data['content'])) {

@@ -1734,6 +1734,8 @@
     "images/Right Arrow.png": "assets/media/soft-white-right-arrow.png",
     "/assets/media/soft-white-right-arrow.png": "assets/media/soft-white-right-arrow.png",
     "assets/media/soft-white-right-arrow.png": "assets/media/soft-white-right-arrow.png",
+    "/assets/media/soft-white-right-arrow.svg": "assets/media/soft-white-right-arrow.svg",
+    "assets/media/soft-white-right-arrow.svg": "assets/media/soft-white-right-arrow.svg",
     "images/seo-infographic-on-imac.webp": "assets/media/seo-infographic-on-imac.webp",
     "/images/seo-infographic-on-imac.webp": "assets/media/seo-infographic-on-imac.webp",
     "images/ppc-campaign-planning.webp": "assets/media/ppc-campaign-planning.webp",
@@ -1873,5 +1875,9 @@
     "assets/brand/logo-white.png": "assets/brand/logo-white.webp",
     "/assets/brand/logo-white.png": "assets/brand/logo-white.webp",
     "assets/brand/logo-white-220.png": "assets/brand/logo-white-220.webp",
-    "/assets/brand/logo-white-220.png": "assets/brand/logo-white-220.webp"
+    "/assets/brand/logo-white-220.png": "assets/brand/logo-white-220.webp",
+    "assets/media/logistics-banner copy.webp": "assets/media/logistics-supply-chain-collage.webp",
+    "/assets/media/logistics-banner copy.webp": "assets/media/logistics-supply-chain-collage.webp",
+    "assets/case-studies/ai-sales-coaching/ai-sales-coaching2 copy.png": "assets/case-studies/ai-sales-coaching/ai-sales-coaching-2.png",
+    "/assets/case-studies/ai-sales-coaching/ai-sales-coaching2 copy.png": "assets/case-studies/ai-sales-coaching/ai-sales-coaching-2.png"
 }

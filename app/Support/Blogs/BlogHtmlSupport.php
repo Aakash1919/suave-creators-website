@@ -171,6 +171,7 @@ class BlogHtmlSupport
         $failures += $svgResult['failures'];
 
         $html = self::upgradeInsecureHttpUrls($html);
+        $html = self::stripFeaturedImageEditorPreviews($html);
         [$html, $emptyRemoved] = self::removeEmptyTags($html);
         $html = self::wrapBareTables($html);
         $html = self::decorateContentImages($html, $title);
@@ -936,6 +937,37 @@ class BlogHtmlSupport
     /**
      * @return array{0: string, 1: int}
      */
+    /**
+     * Drop editor-only featured-image thumbs (blob:/sidebar previews) before save.
+     * The public page injects the real featured image from the blogs table.
+     */
+    public static function stripFeaturedImageEditorPreviews(string $html): string
+    {
+        if ($html === '') {
+            return $html;
+        }
+
+        $html = (string) preg_replace(
+            '/<div[^>]*class="[^"]*\bblog-featured-image-box__preview\b[^"]*"[^>]*>.*?<\/div>/is',
+            '',
+            $html
+        );
+
+        // Legacy insert markup: bare preview img with this alt (often a dead blob: URL).
+        $html = (string) preg_replace(
+            '/<div[^>]*>\s*<img\b[^>]*\balt=(["\'])Featured image preview\1[^>]*>\s*<\/div>/is',
+            '',
+            $html
+        );
+        $html = (string) preg_replace(
+            '/<img\b[^>]*\balt=(["\'])Featured image preview\1[^>]*>/is',
+            '',
+            $html
+        );
+
+        return $html;
+    }
+
     public static function removeEmptyTags(string $html): array
     {
         $removed = 0;
@@ -970,6 +1002,7 @@ class BlogHtmlSupport
             $html = $next;
         }
 
+        $html = str_replace("\r\n", "\n", $html);
         $html = (string) preg_replace("/[ \t]+\n/", "\n", $html);
         $html = (string) preg_replace("/\n{3,}/", "\n\n", $html);
 

@@ -8,7 +8,7 @@ description: >-
   Requires categorized asset paths and post-change verification. For admin /
   RBAC use suave-admin. For broken image/URL/section checks use frontend-audit.
 metadata:
-  last-updated: "2026-09-21"
+  last-updated: "2026-09-23"
 ---
 
 # Suave Frontend
@@ -57,6 +57,7 @@ Work directly in Laravel (no `design/` import step):
 Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular** (`ServiceController`, `IndustryController`, `BlogController` — never plural).
 
 - **Dedicated controller per page**, thin: load Support data → return the view
+- **Custom CRM Builder landing:** `CustomCrmBuilderController@index` for `/custom-crm-builder` (`custom-crm-builder`). Dedicated Blade + `CustomCrmBuilderSupport` — **not** `ServiceController` / `service.show` / `ServiceSupport::SLUGS`. SEO is `config/seo.php` `pages.custom-crm-builder`; `json_ld_breadcrumb_parent_name` + `json_ld_breadcrumb_parent_route` insert a parent crumb (Services) via `SeoGenerateService`. Extra Service JSON-LD comes from `CustomCrmBuilderSupport::seoStructuredData()`.
 - **Services exception:** one `ServiceController` — `index` for `/services`, `show(string $slug)` for all `/service/{slug}` details (no per-service controllers; abort 404 for unknown slugs)
 - **Industries exception:** one `IndustryController` — `index` for `/industries`, `show(string $slug)` for all `/industries/{slug}` details (no per-industry controllers; abort 404 for unknown slugs)
 - **Blogs:** one `BlogController` — `index` for `/blogs`, `show(string $slug)` for `/blog/{slug}` (abort 404 for unknown slugs; shared single-blog Blade)
@@ -143,6 +144,7 @@ Keep contact details consistent across SEO, footer, contact page, privacy, and S
 - Phones: `+1 (307) 435-9605`, `+91 88949 00142`, `+91 18944 55019`
 - Email: `info@suavecreators.com`
 - When contacts change, update SEO config, ContactSupport, Footer, privacy copy, and `SuaveAgentKnowledge` consumers together
+- Contact form phone input: reusable `<x-frontend.phone-field />` (`App\View\Components\Frontend\PhoneField` + `public/js/phone-field.js` + intl-tel-input CDN). Country dial code dropdown with `separateDialCode`; `strictMode` blocks letters; IP country via `route('geo.country')` (CF/CloudFront headers) then `ipapi.co`, fallback `us`. Submit/draft uses the hidden full international number. Allowlisted without `Section` postfix (with `CtaButton` / `CtaArrow` / `HeroCaseStudiesVisual` in `verify-frontend-conventions.ps1`).
 
 ## Assets
 
@@ -203,7 +205,7 @@ Full old→new tables: [reference.md](reference.md).
 | `scripts/audit-frontend.php` | Broken images + internal URL / page status audit (`frontend-audit`) |
 | `scripts/audit-img-alts.php` | Alt/title audit against rendered `/` |
 | `scripts/build-fa-subset.php` | Regenerate Font Awesome subset CSS when icon usage changes |
-| `scripts/split-deferred-css.php` | Move marked sections from `style.css` into `style-deferred.css`. Re-runs **preserve** sections that already live only in the deferred file (including `SINGLE BLOG`) so they are not wiped |
+| `scripts/split-deferred-css.php` | Move marked sections from `style.css` into `style-deferred.css`. Re-runs **preserve** sections that already live only in the deferred file (including `SINGLE BLOG` so they are not wiped). Current deferred markers include PRODUCT, CRM BUILDER HERO, SINGLE BLOG, and other page-specific blocks. |
 | `scripts/generate-product-og-banner.php` | Regenerate product OG banner when hero changes |
 
 When renaming: update both JSON maps, rewrite code refs, then verify. Prefer explicit map entries over heuristic `*-N` prefix rewrites for brand logos.
@@ -239,6 +241,8 @@ Alts must be **SEO-friendly**: natural language that describes the image **and**
 | Tag | `<x-frontend.{name}-section />` |
 
 Shared multi-page blocks must be Section components (not `resources/views/frontend/partials/`). Examples: `tech-partnerships-section`, `partnerships-section`, `core-values-section`, `faq-section`, `testimonials-section`, `articles-insights-section`, `marquee-section`, `consultation-section`, `connect-cta-section`, `industries-section`, `case-studies-carousel-section`, `case-studies-spotlight-section`.
+
+**consultation-section vs FAQ:** keep them as separate sections. FAQ uses `<x-frontend.faq-section :show-cta="false" />`; the booking CTA is `<x-frontend.consultation-section />`. The card class is `consultation-card bg-cover bg-no-repeat` plus `bg-top` when `cardPosition` is not `center` (page default is `top`). Empty `people[].src` renders `consultation-person__placeholder` (no broken `<img>`) until portraits land under `assets/team/`. Custom CRM Builder fills all six CTA tiles: `assets/media/analyst-headset-custom-crm-dashboard.webp`, `executive-tablet-crm-hologram.webp`, `floating-analytics-dashboard-laptop.webp`, `analyst-performance-metrics-laptop.webp`, `crm-contact-hologram-keyboard.webp`, and `consultant-crm-team-tablet.webp`. Empty `people[].src` still renders `consultation-person__placeholder`.
 
 Shared CTA chrome: `UiHelper::btnPrimary()` / `UiHelper::ctaArrow()` in `app/Support/Frontend/UiHelper.php`; Blade tags `<x-frontend.cta-button>` and `<x-frontend.cta-arrow />` (do not pass `$btnPrimary` / `$ctaArrow` from controllers). Shared metric count-up chrome: `<x-frontend.case-study-metric-value />` (not a Section) — use it on product story metrics only. Single case-study pages, listing cards, carousels, and spotlight cards show static values (plain `<p>` / `<span>`), not counters.
 

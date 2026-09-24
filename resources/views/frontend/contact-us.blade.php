@@ -111,22 +111,33 @@
                 <aside class="contact-form-panel__info" aria-labelledby="contact-form-heading">
                     <p class="contact-form-panel__eyebrow">
                         <span class="contact-form-panel__eyebrow-bar" aria-hidden="true"></span>
-                        Contact · 1-day reply
+                        Contact · Reply in a few hours
                     </p>
                     <h2 id="contact-form-heading" class="home-type-h2 contact-form-panel__title">
-                        Tell us what you&rsquo;re<br>
-                        <span>trying to fix.</span>
+                        Tell us about your project and our experts will get back to you with the next steps.
                     </h2>
                     <p class="contact-form-panel__lead">
-                        Prefer a call or email? We read every note ourselves and reply within one business day.
+                        Prefer a call or email? We read every note ourselves.
                     </p>
 
                     <div class="contact-form-panel__meta">
-                        <a class="contact-form-panel__meta-card" href="tel:+918894900142">
+                        <div class="contact-form-panel__meta-card">
                             <span class="contact-form-panel__meta-label">Phone</span>
-                            <span class="contact-form-panel__meta-value">+91 88949 00142</span>
-                            <span class="contact-form-panel__meta-note">Mon–Fri · 1:30PM–9:30PM</span>
-                        </a>
+                            <a class="contact-form-panel__meta-phone" href="tel:+13074359605">
+                                <img src="{{ asset('assets/flags/us.svg') }}"
+                                    alt="United States flag for Suave Creators USA phone contact number"
+                                    title="United States flag for Suave Creators USA phone contact number"
+                                    width="20" height="20" decoding="async" />
+                                <span class="contact-form-panel__meta-value">+1 (307) 435-9605</span>
+                            </a>
+                            <a class="contact-form-panel__meta-phone" href="tel:+918894900142">
+                                <img src="{{ asset('assets/flags/in.svg') }}"
+                                    alt="India flag for Suave Creators India phone contact number"
+                                    title="India flag for Suave Creators India phone contact number"
+                                    width="20" height="20" decoding="async" />
+                                <span class="contact-form-panel__meta-value">+91 88949 00142</span>
+                            </a>
+                        </div>
                         <a class="contact-form-panel__meta-card" href="mailto:info@suavecreators.com">
                             <span class="contact-form-panel__meta-label">Email</span>
                             <span class="contact-form-panel__meta-value">info@suavecreators.com</span>
@@ -140,7 +151,7 @@
                         <header class="contact-form-panel__form-intro">
                             <p class="contact-form-panel__form-status">
                                 <span aria-hidden="true"></span>
-                                Live intake
+                                Reply within a few hours
                             </p>
                             <h3 class="contact-form-panel__form-title">Start the conversation</h3>
                         </header>
@@ -176,12 +187,8 @@
                             </div>
 
                             <div class="contact-form-panel__row">
-                                <label for="contact-phone">
-                                    <span class="contact-form-panel__label-text">Phone</span>
-                                    <input id="contact-phone" name="phone" type="text" inputmode="tel"
-                                        autocomplete="tel" placeholder="+91 90000 00000">
-                                    <span class="contact-form-panel__field-error" data-error-for="phone" hidden></span>
-                                </label>
+                                <x-frontend.phone-field id="contact-phone" name="phone" label="Phone"
+                                    placeholder="98765 43210" />
                                 <label for="contact-service">
                                     <span class="contact-form-panel__label-text">Service</span>
                                     <select id="contact-service" name="service">
@@ -202,9 +209,7 @@
                             </label>
 
                             <div class="contact-form-panel__actions">
-                                <button type="submit"
-                                    class=" contact-form-panel__submit group inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-2 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:text-sm"
-                                    data-contact-submit>
+                                <button type="submit" class="contact-form-panel__submit" data-contact-submit>
                                     Send inquiry
                                     <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -216,7 +221,7 @@
                             </div>
 
                             <p class="contact-form-panel__disclaimer">
-                                Reply within 1 business day.
+                                Reply within a few hours.
                                 <a href="{{ route('privacy-policy') }}">Privacy policy</a>
                             </p>
                         </form>
@@ -482,6 +487,10 @@
             }
 
             function currentDraftPayload() {
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.syncAll(form);
+                }
+
                 const data = {};
                 draftFields.forEach(function(name) {
                     data[name] = (field(name)?.value || '').trim();
@@ -512,6 +521,9 @@
                 }
 
                 ensureDraftToken();
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.syncAll(form);
+                }
                 const body = new FormData(form);
 
                 if (draftAbort) {
@@ -568,26 +580,32 @@
                 saveDraft(keepalive);
             }
 
-            function clearErrors() {
-                form.querySelectorAll('.is-invalid').forEach(function(el) {
-                    el.classList.remove('is-invalid');
-                });
-                form.querySelectorAll('[data-error-for]').forEach(function(el) {
-                    el.hidden = true;
-                    el.textContent = '';
-                });
-            }
-
             function showError(name, message) {
                 const input = field(name);
                 const error = form.querySelector('[data-error-for="' + name + '"]');
                 if (input) {
                     input.classList.add('is-invalid');
                 }
+                if (name === 'phone' && window.SuavePhoneField) {
+                    window.SuavePhoneField.setInvalid(form, true);
+                }
                 if (error) {
                     error.textContent = message;
                     error.hidden = false;
                 }
+            }
+
+            function clearErrors() {
+                form.querySelectorAll('.is-invalid').forEach(function(el) {
+                    el.classList.remove('is-invalid');
+                });
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.setInvalid(form, false);
+                }
+                form.querySelectorAll('[data-error-for]').forEach(function(el) {
+                    el.hidden = true;
+                    el.textContent = '';
+                });
             }
 
             function showServerErrors(errors) {
@@ -604,6 +622,10 @@
             function validate() {
                 clearErrors();
                 let ok = true;
+
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.syncAll(form);
+                }
 
                 const name = (field('name')?.value || '').trim();
                 const email = (field('email')?.value || '').trim();
@@ -629,6 +651,9 @@
 
                 if (!phone) {
                     showError('phone', 'Please enter your phone number.');
+                    ok = false;
+                } else if (window.SuavePhoneField && window.SuavePhoneField.hasLetters(phone)) {
+                    showError('phone', 'Phone number may only contain digits.');
                     ok = false;
                 }
 
@@ -674,6 +699,9 @@
                 if (service) {
                     service.selectedIndex = 0;
                 }
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.resetAll(form);
+                }
                 if (startedInput) {
                     startedInput.value = String(Math.floor(Date.now() / 1000));
                 }
@@ -683,7 +711,7 @@
                 clearErrors();
             }
 
-            ['name', 'email', 'phone', 'service', 'message'].forEach(function(name) {
+            ['name', 'email', 'service', 'message'].forEach(function(name) {
                 const input = field(name);
                 if (!input) {
                     return;
@@ -709,6 +737,37 @@
                 });
             });
 
+            const phoneVisible = form.querySelector('[data-phone-field-input]');
+            if (phoneVisible) {
+                phoneVisible.addEventListener('input', function() {
+                    if (window.SuavePhoneField) {
+                        window.SuavePhoneField.syncAll(form);
+                        window.SuavePhoneField.setInvalid(form, false);
+                    }
+                    const error = form.querySelector('[data-error-for="phone"]');
+                    if (error) {
+                        error.hidden = true;
+                        error.textContent = '';
+                    }
+                    if (successEl) {
+                        successEl.hidden = true;
+                    }
+                    scheduleDraftSave();
+                });
+                phoneVisible.addEventListener('change', function() {
+                    flushDraftSave(false);
+                });
+                phoneVisible.addEventListener('blur', function() {
+                    if (window.SuavePhoneField) {
+                        window.SuavePhoneField.syncAll(form);
+                    }
+                    flushDraftSave(false);
+                });
+                form.addEventListener('suave-phone:change', function() {
+                    scheduleDraftSave();
+                });
+            }
+
             const storedToken = readStoredDraftToken();
             if (storedToken) {
                 setDraftToken(storedToken);
@@ -727,7 +786,11 @@
 
                 if (!validate()) {
                     const firstInvalid = form.querySelector('.is-invalid');
-                    firstInvalid?.focus();
+                    if (firstInvalid && typeof firstInvalid.focus === 'function') {
+                        firstInvalid.focus();
+                    } else {
+                        form.querySelector('[data-phone-field-input]')?.focus();
+                    }
                     return;
                 }
 
@@ -740,6 +803,10 @@
                     draftAbort.abort();
                 }
                 setSubmitting(true);
+
+                if (window.SuavePhoneField) {
+                    window.SuavePhoneField.syncAll(form);
+                }
 
                 const body = new FormData(form);
 

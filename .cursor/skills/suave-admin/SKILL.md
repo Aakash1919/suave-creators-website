@@ -10,7 +10,7 @@ description: >-
   route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
   Permission. Read before any admin change.
 metadata:
-  last-updated: "2026-09-21"
+  last-updated: "2026-09-23"
 ---
 
 # Suave Admin
@@ -170,6 +170,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - List deletes: `data-admin-delete data-url="..." data-reload-table="#admin-datatable"` (+ confirm attrs — see below)
 - List actions (publish, etc.): `data-admin-action data-url="..." data-method="PATCH"` (+ confirm attrs); `DataTableActions::menu` supports `'method' => 'PATCH'`
 - Form-page deletes: set `data-reload-table=""` so redirect from JSON is used instead of reloading a missing table
+- Stay on the page after a list/modal action: `adminSuccess` always returns a JSON `redirect` when given a route, and `confirmRequest` / `destroyRecord` follow it unless you pass `redirect: false` (JS), `data-redirect="false"` (on a `data-admin-delete` button), or `'redirect' => false` (a `DataTableActions::menu` delete item)
 
 ## Confirm dialogs (`SuaveAdmin.confirmDialog`)
 
@@ -269,15 +270,15 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 - Do **not** load the editor globally — include styles/scripts only on pages that need it:
   - `@include('layouts.admin.partials.richtexteditor-styles')` in `@push('styles')`
   - `@include('layouts.admin.partials.richtexteditor-scripts')` in `@push('scripts')`
-- Blog toolbar preset `toolbar_blog` (set in the scripts partial): **undo/redo first**, then formatting, headings/size, lists, quote, **public-page blocks** (takeaways, results, checklist, stats, completion bars, insight, comparison table), link, image/video, HR, HTML source, fullscreen
-- Block insert commands live in `public/js/admin/blog-blocks-plugin.js` (`plugin_blogblocks`) — labeled **Undo / Redo / Remove block** plus insert buttons above Content (`data-blog-block-toolbar`), matching toolbar icons, and `/` slash menu under **Blog layout**. Completion-bar fills are edited in the article (label + percent), not in the publish sidebar.
+- Blog toolbar preset `toolbar_blog` (set in the scripts partial): **undo/redo first**, then formatting, headings/size, lists, quote, **public-page blocks** (featured image, takeaways, results, checklist, stats, completion bars, insight, comparison table), link, image/video, HR, HTML source, fullscreen
+- Block insert commands live in `public/js/admin/blog-blocks-plugin.js` (`plugin_blogblocks`) — labeled **Undo / Redo / Remove block** plus insert buttons above Content (`data-blog-block-toolbar`: Featured image, Takeaways, Results, Checklist, Stat boxes, Completion bars, Insight, Comparison table), matching toolbar icons, and `/` slash menu under **Blog layout**. Completion-bar fills are edited in the article (label + percent), not in the publish sidebar.
 - Explicitly **omitted**: template, delete, insert comment, save/new/print, cut/copy/paste, find, spellcheck, AI, emoji, gallery, document, revision history, TOC, page break, help, togglemore
 - Init via `SuaveAdmin.initRichTextEditor('#blog-content', { height: 640, toolbar: 'blog', wordCountGoal: 2000 })`
   - Seeds textarea value into the editor after construct (API variants: `setHTMLCode` / fallbacks)
   - Periodically syncs editor HTML back into the textarea; `syncRichTextEditors()` also runs before AJAX `FormData`
   - `SuaveAdmin.initBlogEditForm()` paints the frontend completeness meter (Article body counts as done at 120+ words), injects `public/css/admin-blog-content.css` into the RTE so visual blocks match the public page, and keeps chart bar widths in sync when percents are edited in the article
 - RTE chrome: `.admin-rte .richtexteditor` uses `overflow: visible` (vendor `overflow:hidden` clips font-size / heading dropdowns); toolbar `z-index` above content; `rte-dropdown-panel` raised above the editable area
-- Blog form layout: main composer + sticky publish/image sidebar (no internal sidebar scrollbar — page scrolls naturally; side cards use `min-width: 0` so Publish inputs wrap instead of clipping); **Publish** card starts with a frontend completeness bar (title, body, image, SEO, FAQs, takeaways, table, completion bars, stats, insight) plus the Draft/Published status select (**no `published_at` field** — `BlogService` stamps `published_at` when status becomes published and clears it on draft); SEO in a collapsible `<details>` (`admin/blogs/form.blade.php`, `.admin-blog-form*` / `.admin-blog-complete*` in `admin.css`). No admin Internal links suggestion panel.
+- Blog form layout: main composer + sticky publish/image sidebar (no internal sidebar scrollbar — page scrolls naturally; side cards use `min-width: 0` so Publish inputs wrap instead of clipping); **Publish** card starts with a frontend completeness bar (title, body, image, SEO, FAQs, takeaways, table, completion bars, stats, insight) plus the Draft/Published status select (**no `published_at` field** — `BlogService` stamps `published_at` when status becomes published and clears it on draft); **Featured image** card includes the image uploader and **Location in article** (`featured_image_position`: `after_first_p` default, `top`, `bottom`, `manual`, or `hide`), supported in-editor via `[featured_image]` or the **Featured image** layout button; SEO in a collapsible `<details>` (`admin/blogs/form.blade.php`, `.admin-blog-form*` / `.admin-blog-complete*` in `admin.css`). No admin Internal links suggestion panel.
 - Index row menu: drafts with `blogs.update` get **Publish** (`PATCH admin.blogs.publish` → `BlogService::publish()` + confirm via `data-admin-action`)
 - FAQ repeater rows (`data-admin-repeater` via `SuaveAdmin.bindRepeaters`) — question + answer; every submitted row is **required**. `BlogService::normalizeFaqItems()`
 - **TOC admin UI is commented out** for now (not used on frontend single-blog); existing `blogs.toc` is left unchanged on save. Re-enable form block + `toc` validation / `normalizeTocItems()` together when the frontend needs it
@@ -311,6 +312,9 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 - Public POST: `contact-us.store` via `ContactRequestService` — honeypot `website`, `form_started_at` min 3s, CSRF, `throttle:5,1`; bots get silent success (no row)
 - Public draft POST: `contact-us.draft` (`throttle:30,1`) — honeypot only; upserts one `status=draft` row per `draft_token` as fields blur; submit upgrades that row to `new` and still returns “The request has been sent successfully.”
 - Admin: `ContactRequestController` + `ContactRequestDataTable`; permission `contacts.view`; Incomplete (`draft`) badge; opening a request marks `new` → `read` (drafts stay draft); archive via PATCH `admin.contacts.archive`
+- **Soft deletes:** `ContactRequest` uses `SoftDeletes` (`deleted_at`, migration `2026_09_23_120000_add_soft_deletes_to_contact_requests_table.php`). Delete via DELETE `admin.contacts.destroy` → `ContactRequestService::delete()`, gated by `contacts.delete` (admin only; not granted to editor)
+- **View = modal:** row menu “View” is a `data-contact-view` button that GETs `admin.contacts.show` via AJAX; `show()` returns JSON (`detail_html` rendered from `admin/contacts/partials/detail.blade.php`) and still marks read. Modal markup: `admin/contacts/partials/view-modal.blade.php` (Archive / Delete in footer). The full `admin.contacts.show` page stays for direct links and reuses the same detail partial
+- Same-page actions (row-menu Delete, modal Archive/Delete) pass `redirect: false` so the table reloads via AJAX instead of following the JSON `redirect`
 
 ## Migrations
 
@@ -408,7 +412,7 @@ Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permiss
 - `blogs.view|create|update|delete`
 - `case-studies.view|create|update|delete`
 - `conversations.view`
-- `contacts.view`
+- `contacts.view|delete`
 - `testimonials.view|manage`
 - `users.view|manage`
 - `roles.view|manage`

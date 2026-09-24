@@ -396,6 +396,7 @@ class BlogSupport
             'status' => (string) $blog->status,
             'is_draft' => $blog->status === Blog::STATUS_DRAFT,
             'image' => $image,
+            'featured_image_position' => (string) ($blog->featured_image_position ?? 'after_first_p'),
             'short_description' => (string) ($blog->short_description ?? ''),
             'content' => $withContent ? self::normalizeStorageUrls((string) ($blog->content ?? '')) : '',
             'author_name' => (string) ($blog->createdBy?->name ?? 'Suave Creators'),
@@ -425,6 +426,7 @@ class BlogSupport
         $title = (string) ($post['title'] ?? 'Blog article');
         $image = (string) ($post['image'] ?? '');
         $pullQuote = trim((string) ($post['short_description'] ?? ''));
+        $position = (string) ($post['featured_image_position'] ?? 'after_first_p');
 
         $content = self::normalizeArticleMarkup($content, $title);
 
@@ -434,6 +436,65 @@ class BlogSupport
                 .'</figure>'
             : '';
 
+        $figurePattern = '/(?:\s*<p[^>]*>\s*)?<figure[^>]*\bdata-featured-image="true"[^>]*>.*?<\/figure>(?:\s*<\/p>\s*)?/is';
+        $boxPattern = '/(?:\s*<p[^>]*>\s*)?<div[^>]*class="[^"]*\bblog-featured-image-box\b[^"]*"[^>]*>.*?<\/div>(?:\s*<\/p>\s*)?/is';
+        $shortcodePattern = '/(?:\s*<p[^>]*>\s*)?\[featured_image\](?:\s*<\/p>\s*)?/i';
+
+        $hasManualPlaceholder = (bool) (
+            preg_match($figurePattern, $content)
+            || preg_match($boxPattern, $content)
+            || preg_match($shortcodePattern, $content)
+            || preg_match('/class="blog-featured-image-box/i', $content)
+        );
+
+        $stripPlaceholders = static function (string $text) use ($figurePattern, $boxPattern, $shortcodePattern): string {
+            $text = (string) preg_replace($figurePattern, '', $text);
+            $text = (string) preg_replace($boxPattern, '', $text);
+            $text = (string) preg_replace($shortcodePattern, '', $text);
+            $text = (string) preg_replace('/<div[^>]*class="[^"]*\bblog-featured-image-box__preview\b[^"]*"[^>]*>.*?<\/div>/is', '', $text);
+            $text = (string) preg_replace('/<span class="blog-featured-image-box__badge">.*?<\/span>/is', '', $text);
+            $text = (string) preg_replace('/<p class="blog-featured-image-box__title">.*?<\/p>/is', '', $text);
+            $text = (string) preg_replace('/<p class="blog-featured-image-box__hint">.*?<\/p>/is', '', $text);
+
+            return $text;
+        };
+
+        if ($position === 'hide') {
+            $content = $stripPlaceholders($content);
+
+            return self::injectPullQuote($content, $pullQuote);
+        }
+
+        if ($position === 'top') {
+            $content = $stripPlaceholders($content);
+            $contentWithQuote = self::injectPullQuote($content, $pullQuote);
+
+            return $featureImageHtml.$contentWithQuote;
+        }
+
+        if ($position === 'bottom') {
+            $content = $stripPlaceholders($content);
+            $contentWithQuote = self::injectPullQuote($content, $pullQuote);
+
+            return $contentWithQuote.$featureImageHtml;
+        }
+
+        if ($hasManualPlaceholder) {
+            if (preg_match($figurePattern, $content)) {
+                $content = (string) preg_replace($figurePattern, $featureImageHtml, $content, 1);
+            } elseif (preg_match($shortcodePattern, $content)) {
+                $content = (string) preg_replace($shortcodePattern, $featureImageHtml, $content, 1);
+            } elseif (preg_match($boxPattern, $content)) {
+                $content = (string) preg_replace($boxPattern, $featureImageHtml, $content, 1);
+            }
+
+            // Strip any leftover/duplicate placeholders and loose widget text
+            $content = $stripPlaceholders($content);
+
+            return self::injectPullQuote($content, $pullQuote);
+        }
+
+        // Default: 'after_first_p' (and fallback for 'manual' when no tag is present)
         $hasStructuredCallout = (bool) preg_match(
             '/class="[^"]*\b(?:blog-insight|blog-takeaways)\b/i',
             $content
@@ -461,6 +522,34 @@ class BlogSupport
         }
 
         return $featureImageHtml.$content;
+    }
+
+    /**
+     * Inject pull-quote blockquote after first paragraph if not already in content.
+     */
+    protected static function injectPullQuote(string $content, string $pullQuote): string
+    {
+        if ($pullQuote === '') {
+            return $content;
+        }
+
+        $hasStructuredCallout = (bool) preg_match(
+            '/class="[^"]*\b(?:blog-insight|blog-takeaways)\b/i',
+            $content
+        );
+
+        if ($hasStructuredCallout || stripos($content, '<blockquote') !== false) {
+            return $content;
+        }
+
+        $quoteHtml = '<blockquote><p>'.e($pullQuote).'</p></blockquote>';
+        $closePos = strpos($content, '</p>');
+
+        if ($closePos !== false) {
+            return substr_replace($content, '</p>'.$quoteHtml, $closePos, 4);
+        }
+
+        return $quoteHtml.$content;
     }
 
     /**

@@ -1105,7 +1105,6 @@
 .hero-cs-visual__card-chart-img--ai-product-matching { object-position: center; }
 /* ===== HERO CASE STUDIES VISUAL END ===== */
 
-
 html {
   overflow-x: clip;
 }
@@ -1391,36 +1390,63 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .smart-together-cta {
-  background: radial-gradient(circle at 72% 45%, rgb(36 40 194 / 24%), transparent 30%),
-    radial-gradient(circle at 96% 10%, rgb(39 19 156 / 24%), transparent 24%),
-    linear-gradient(105deg, #03031f 0%, #05043a 56%, #050250 100%);
-  border-bottom: 1px solid rgb(255 255 255 / 82%);
-  border-top: 1px solid rgb(255 255 255 / 82%);
+  background: radial-gradient(circle at 75% 50%, rgb(42 77 251 / 18%), transparent 40%),
+    radial-gradient(circle at 20% 50%, rgb(30 27 75 / 35%), transparent 50%),
+    linear-gradient(105deg, #020214 0%, #040424 50%, #060538 100%);
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+  border-top: 1px solid rgb(255 255 255 / 8%);
   color: #fff;
   overflow: hidden;
   position: relative;
 }
 
 .smart-together-cta::before {
-  background-image: linear-gradient(125deg, transparent 47%, rgb(120 113 255 / 5%) 48% 49%, transparent 50%),
-    radial-gradient(circle, rgb(255 255 255 / 7%) 0 1px, transparent 1.5px);
-  background-size: 180px 120px, 34px 34px;
-  content: "";
-  inset: 0;
-  opacity: 0.5;
-  pointer-events: none;
-  position: absolute;
+  display: none;
 }
 
 .smart-together-cta__inner {
   align-items: center;
-  display: grid;
+  display: flex;
+  justify-content: space-between;
   gap: 32px;
-  grid-template-columns: minmax(130px, 0.65fr) minmax(310px, 1.55fr) auto 70px;
   min-height: 112px;
-  padding-block: 20px;
+  /* padding-block: 28px; */
   position: relative;
   z-index: 1;
+}
+
+.smart-together-cta__copy {
+  max-width: 760px;
+}
+
+.smart-together-cta__eyebrow {
+  display: inline-block;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  padding-bottom: 7px;
+  position: relative;
+}
+
+.smart-together-cta__eyebrow span {
+  background: linear-gradient(90deg, #2A4DFB 0%, #7A5FF8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.smart-together-cta__eyebrow::after {
+  background: linear-gradient(90deg, #2A4DFB 0%, #7A5FF8 100%);
+  border-radius: 999px;
+  bottom: 0;
+  content: "";
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 18px;
 }
 
 .smart-together-cta__copy h2 {
@@ -1428,23 +1454,54 @@ main button.rounded-full.bg-gradient-to-r {
   font-size: 24px;
   font-weight: 600;
   line-height: 1.3;
+  margin: 0;
 }
 
 .smart-together-cta__copy p {
-  color: #B1B9DF;
+  color: #94a3b8;
   font-size: 14px;
-  line-height: 1.25rem;
-  margin-top: 8px;
-  font-weight: 600;
+  font-weight: 400;
+  line-height: 1.45;
+  margin-top: 6px;
+  margin-bottom: 0;
 }
 
 .smart-together-cta__actions {
   align-items: center;
   display: flex;
   flex-direction: row;
+  flex-shrink: 0;
   flex-wrap: wrap;
-  gap: 12px;
-  max-width: 100%;
+  gap: 14px;
+}
+
+.smart-together-cta__btn-secondary {
+  align-items: center;
+  backdrop-filter: blur(8px);
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 9999px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  padding: 8px 20px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.smart-together-cta__btn-secondary:hover {
+  background: rgb(255 255 255 / 16%);
+  border-color: rgb(255 255 255 / 35%);
+  color: #fff;
+}
+
+.smart-together-cta__phone {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .smart-together-cta__phone-video,
@@ -1906,7 +1963,6 @@ main button.rounded-full.bg-gradient-to-r {
   }
 }
 
-
 .digitalMarketingSwiper .swiper-slide {
   height: auto;
 }
@@ -2226,18 +2282,24 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 .industry-card__arrow {
-  bottom: 13px;
+  bottom: 16px;
   color: #a8afe5;
   font-size: 8px;
   line-height: 1;
   position: absolute !important;
-  right: 14px;
+  right: 20px;
+  transition: transform 180ms ease;
+}
+
+.industry-card:hover .industry-card__arrow,
+.industry-card:focus-visible .industry-card__arrow {
+  transform: translateX(4px);
 }
 
 .industry-card__arrow img {
   display: block;
-  height: 5px;
-  width: 18px;
+  height: 10px;
+  width: 28px;
 }
 
 .industries-served__project {
@@ -2340,6 +2402,95 @@ main button.rounded-full.bg-gradient-to-r {
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
 }
 
+.faq-section.faq-section--crm-builder {
+  background-color: #050447;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2.5rem 0 3rem !important;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__inner,
+.site-main > .faq-section.faq-section--crm-builder > .section-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2rem;
+  grid-column: full;
+  grid-template-columns: minmax(0, 1fr) !important;
+  margin-inline: auto;
+  max-width: 1520px;
+  padding-inline: var(--site-gutter);
+  width: 100%;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__image {
+  display: none !important;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__intro {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__eyebrow {
+  justify-content: flex-start;
+  margin: 0 !important;
+}
+
+.faq-section.faq-section--crm-builder h2 {
+  margin: 0 auto;
+  max-width: 46rem;
+  text-align: center;
+}
+
+.faq-section.faq-section--crm-builder .faq-section__description {
+  margin: 0 auto;
+  max-width: 36rem;
+  text-align: center;
+}
+
+.faq-section.faq-section--crm-builder .faq-list {
+  align-self: stretch !important;
+  box-sizing: border-box;
+  justify-self: stretch;
+  max-width: none !important;
+  min-width: 0;
+  width: 80% !important;
+}
+
+.faq-section.faq-section--crm-builder .faq-item,
+.faq-section.faq-section--crm-builder .faq-item__heading,
+.faq-section.faq-section--crm-builder .faq-item__summary,
+.faq-section.faq-section--crm-builder .faq-item__answer,
+.faq-section.faq-section--crm-builder .faq-item__answer-inner,
+.faq-section.faq-section--crm-builder .faq-item__answer p {
+  box-sizing: border-box;
+  max-width: none !important;
+  width: 100%;
+}
+
+.faq-section.faq-section--crm-builder .faq-item__summary {
+  box-sizing: border-box;
+  padding: 16px 20px;
+}
+
+.faq-section.faq-section--crm-builder .faq-list .faq-item .faq-item__answer p {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 20px 18px !important;
+}
+
+@media (min-width: 640px) {
+  .faq-section.faq-section--crm-builder {
+    padding: 2.75rem 0 3.5rem !important;
+  }
+}
+
 .faq-section__intro {
   min-width: 0;
 }
@@ -2395,6 +2546,31 @@ main button.rounded-full.bg-gradient-to-r {
 }
 
 @media (min-width: 1024px) {
+  .faq-section.faq-section--crm-builder {
+    padding: 3.5rem 0 4.5rem !important;
+  }
+
+  .faq-section.faq-section--crm-builder .faq-section__inner,
+  .site-main > .faq-section.faq-section--crm-builder > .section-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem;
+    grid-column: full;
+    grid-template-columns: minmax(0, 1fr) !important;
+    max-width: 1520px;
+  }
+
+  .faq-section.faq-section--crm-builder .faq-section__intro {
+    min-height: 4.75rem;
+  }
+
+  .faq-section.faq-section--crm-builder .faq-section__eyebrow {
+    left: 0;
+    position: absolute;
+    top: 0.2rem;
+    white-space: nowrap;
+  }
+
   .faq-section--align .faq-section__inner {
     align-items: stretch;
     gap: clamp(36px, 4vw, 56px);
@@ -3082,6 +3258,22 @@ main button.rounded-full.bg-gradient-to-r {
   display: block;
   height: 100%;
   object-fit: cover;
+  width: 100%;
+}
+
+.consultation-person__placeholder {
+  background:
+    linear-gradient(180deg, rgba(42, 77, 251, 0.08) 0%, rgba(122, 95, 248, 0.14) 100%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(42, 77, 251, 0.05) 10px,
+      rgba(42, 77, 251, 0.05) 11px
+    );
+  border: 1px dashed rgba(42, 77, 251, 0.35);
+  display: block;
+  height: 100%;
   width: 100%;
 }
 
@@ -4102,7 +4294,12 @@ body.mobile-nav-open {
 }
 
 .consultation-eyebrow {
-  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(90deg, #2A4DFB 57.12%, #0026E3 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
   display: inline-block;
   font-size: 14px;
   font-weight: 600;
@@ -4698,38 +4895,27 @@ body.mobile-nav-open {
   }
 
   .smart-together-cta__inner {
-    gap: 18px 22px;
-    grid-template-columns: 1fr auto;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
     min-height: 0;
-    padding-block: 28px;
-  }
-
-  .smart-together-cta__eyebrow,
-  .smart-together-cta__copy,
-  .smart-together-cta__actions {
-    grid-column: 1;
+    padding-block: 24px;
   }
 
   .smart-together-cta__copy {
-    max-width: min(100%, 420px);
-  }
-
-  .smart-together-cta__copy h2 {
-    font-size: clamp(1.125rem, 2.4vw, 1.5rem);
-  }
-
-  .smart-together-cta__actions {
-    align-items: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 12px;
     max-width: 100%;
   }
 
-  .smart-together-cta__phone {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    align-self: center;
+  .smart-together-cta__copy h2 {
+    font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  }
+
+  .smart-together-cta__actions {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
   }
 
   .web-services {
@@ -5260,20 +5446,15 @@ body.mobile-nav-open {
   }
 
   .smart-together-cta__inner {
-    gap: 18px 22px;
-    grid-template-columns: 1fr auto;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
     min-height: 0;
-    padding-block: 28px;
-  }
-
-  .smart-together-cta__eyebrow,
-  .smart-together-cta__copy,
-  .smart-together-cta__actions {
-    grid-column: 1;
+    padding-block: 22px;
   }
 
   .smart-together-cta__copy {
-    max-width: 280px;
+    max-width: 100%;
   }
 
   .smart-together-cta__copy h2 {
@@ -5281,20 +5462,15 @@ body.mobile-nav-open {
   }
 
   .smart-together-cta__copy p {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .smart-together-cta__actions {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 12px;
-    max-width: 100%;
-  }
-
-  .smart-together-cta__phone {
-    grid-column: 2;
-    grid-row: 1 / span 3;
+    gap: 10px;
+    width: 100%;
   }
 
   .web-services {
@@ -5869,30 +6045,16 @@ body.mobile-nav-open {
 }
 
 @media (max-width: 479px) {
-  .smart-together-cta__inner {
-    grid-template-columns: 1fr;
+  .smart-together-cta__actions {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
   }
 
-  .smart-together-cta__eyebrow,
-  .smart-together-cta__copy,
-  .smart-together-cta__actions,
-  .smart-together-cta__phone {
-    grid-column: 1;
-  }
-
-  .smart-together-cta__phone {
-    grid-row: auto;
-    position: absolute;
-    right: 20px;
-    top: 24px;
-  }
-
-  .smart-together-cta__eyebrow {
-    padding-right: 58px;
-  }
-
-  .smart-together-cta__copy {
-    padding-right: 18px;
+  .smart-together-cta__actions > * {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
 }
 
@@ -6707,7 +6869,8 @@ html {
 /* ===== CASE STUDIES CAROUSEL START ===== */
 .case-studies-carousel {
   background-color: #f9fafc;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   padding: 48px 0;
   position: relative;
 }
@@ -6725,16 +6888,18 @@ html {
 
 .case-studies-carousel__header {
   margin: 0 0 1.75rem;
+  overflow: visible;
   position: relative;
   text-align: left;
 }
 
 .case-studies-carousel__eyebrow {
-  align-items: center;
+  align-items: flex-start;
   display: inline-flex;
   gap: 8px;
   justify-content: flex-start;
   margin: 0 0 0.85rem;
+  overflow: visible;
 }
 
 @media (min-width: 1024px) {
@@ -6750,19 +6915,22 @@ html {
   background: linear-gradient(180deg, #2a4dfb 0%, #7a5ff8 100%);
   border-radius: 999px;
   display: inline-block;
-  height: 16px;
+  flex: 0 0 auto;
+  height: 0.85em;
+  margin-top: 0.22em;
   width: 2px;
 }
 
 .case-studies-carousel__eyebrow-text {
-  background: linear-gradient(90deg, #2a4dfb 0%, #7a5ff8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  /* Avoid background-clip:text here — it clips PP Mori descenders (y in "Study"). */
+  color: #4f56fa;
+  display: inline-block;
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.5;
+  overflow: visible;
+  padding-bottom: 0.2em;
 }
 
 .case-studies-carousel__title {
@@ -8183,3 +8351,4 @@ section[aria-labelledby="tech-stack-title"] .technology-card__cta {
   }
 }
 /* ===== SERVICES LLMO END ===== */
+

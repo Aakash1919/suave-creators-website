@@ -21,6 +21,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'blogs.delete' => 'Delete blogs',
             'conversations.view' => 'View AI conversations',
             'contacts.view' => 'View contact requests',
+            'contacts.delete' => 'Delete contact requests',
             'testimonials.view' => 'View testimonials',
             'testimonials.manage' => 'Create and edit testimonials',
             'users.view' => 'View users',
