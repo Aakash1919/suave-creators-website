@@ -8037,8 +8037,9 @@ body:has(.suave-agent.is-open) .blog-share {
   background: #FFFFFF05;
 
   border-radius: 20px;
-  max-width: 42rem;
+  max-width: 70%;
   padding: 18px 20px 20px;
+  
 }
 
 .crm-builder-hero__definition-head {
@@ -8257,7 +8258,7 @@ body:has(.suave-agent.is-open) .blog-share {
   }
 
   .crm-builder-hero__definition {
-    margin-top: -0.5rem;
+    margin-top: 0.75rem;
   }
 
   .crm-builder-trust-band {

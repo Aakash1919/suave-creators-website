@@ -185,14 +185,14 @@ class CustomCrmBuilderSupport
                 [
                     'metric' => 'Custom AI & LLM Automation',
                     'saasValue' => 'Expensive credits',
-                    'saasDetail' => 'Rigid, generic add-on assistants billed as extra credits',
+                    'saasDetail' => 'or rigid, generic add-on assistants',
                     'customValue' => 'Native LLM Orchestration',
                     'customDetail' => 'Tailored models running directly on your data',
                 ],
                 [
                     'metric' => 'Custom Business Logic',
                     'saasValue' => 'Constrained',
-                    'saasDetail' => 'Vendor app-store plugins and governor limits',
+                    'saasDetail' => 'by vendor app-store plugins and governor limits',
                     'customValue' => 'Zero Limitations',
                     'customDetail' => 'Built directly to your operational workflows and rules',
                 ],
@@ -318,7 +318,7 @@ class CustomCrmBuilderSupport
             'description' => 'Generic CRM templates fail when applied to specialized business models. We build purpose-built data models and interfaces designed for your',
             'descriptionLine' => 'industry\'s exact operational requirements.',
             'backgroundImage' => 'assets/background/custom-crm-builder-industries-bg.webp',
-            'challengeLabel' => 'Challenge',
+            'challengeLabel' => 'Challenges Solved',
             'architectureLabel' => 'Custom Architecture',
             'items' => [
                 [
@@ -586,7 +586,7 @@ class CustomCrmBuilderSupport
                     'iconAlt' => 'Discovery and architecture modeling icon for custom CRM software development',
                     'title' => 'Discovery & Architecture Modeling',
                     'copy' => 'We analyze your sales stages, data schemas, API integrations, and user roles.',
-                    'deliverable' => 'System Architecture Document, ERD, and project roadmap.',
+                    'deliverable' => 'System Architecture Document, ERD (Entity Relationship Diagram), and project roadmap.',
                 ],
                 [
                     'number' => '02',
