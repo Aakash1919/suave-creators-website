@@ -20,7 +20,7 @@ return [
     'heroPrimaryCta' => 'Get Free Consultation',
     'heroSecondaryCta' => 'Schedule a Discovery Call →',
 
-    'introQuestion' => "What do Suave Creators' custom web development services include?",
+    'introQuestion' => "What do Suave Creators custom web development services include?",
     'introQuestionEyebrow' => 'Service Scope & Inclusions',
     'introAnswer' => "Suave Creators' custom web development services encompass full-stack web application engineering, enterprise customer portals, cloud SaaS platforms and secure REST/GraphQL API architectures. Built using modern stacks including Laravel (PHP), ReactJS, Next.js, Node.js, Angular and Python. All platforms are engineered with single-tenant database isolation, sub-second Core Web Vitals and strict data security compliance (SOC 2, HIPAA, GDPR). Projects are governed under United States law via our Sheridan, Wyoming headquarters with high-velocity engineering from Palampur, India, delivering up to 60% total cost of ownership (TCO) savings.",
 
@@ -37,13 +37,15 @@ return [
         ['15+', 'Senior Engineers', 'Full-stack devs & cloud systems architects', 'assets/icons/expert-team-stat-icon.svg', '#C4520D'],
     ],
 
-    'crossSellEyebrow' => 'GET IN TOUCH',
+    'crossSellEyebrow' => 'Connect with us',
     'crossSellTitle' => 'Have a Complex Web Application or Custom CRM Architecture Requirement?',
     'crossSellDescription' => 'Looking to replace rigid third-party software or integrate complex multi-system APIs? Discuss your technical product roadmap, database schemas, or legacy migration plans directly with a solution architect.',
     'crossSellPrimaryLabel' => 'Book a Discovery Session',
     'crossSellPrimaryHref' => 'demo',
     'crossSellSecondaryLabel' => 'Explore Our Custom CRM Builder Services →',
     'crossSellSecondaryHref' => 'service.show:custom-crm-development',
+    'crossSellSecondaryClass' => 'smart-together-cta__btn-secondary group',
+    'crossSellShowPhone' => false,
 
     'bodyEyebrow' => 'SUAVE CREATORS',
     'bodyTitle' => 'Tailored Web Solutions to Enhance Your Digital Operations',

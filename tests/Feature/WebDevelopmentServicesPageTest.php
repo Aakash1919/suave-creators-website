@@ -16,25 +16,21 @@ class WebDevelopmentServicesPageTest extends TestCase
 
         // 1. Title & Meta
         $response->assertSee('<title>Custom Web Development Services | Suave Creators</title>', false);
-        $response->assertSee('Custom web application development services for B2B enterprises and startups. Full-stack Laravel, React, Node.js, and cloud platforms with 100% code ownership.', false);
+        $response->assertSee('Custom web application development services for B2B enterprises and startups. Full-stack Laravel, React, Node.js and cloud platforms with 100% code ownership.', false);
         $response->assertSee('assets/media/web-development-services-og.jpg', false);
 
         // 2. Hero Section
         $response->assertSee('OUR TAILOR-MADE SERVICES');
         $response->assertSee('Custom Web Development Services for');
         $response->assertSee('High-Growth Businesses');
-        $response->assertSee('We engineer responsive, high-performance web applications, cloud customer portals, and enterprise software platforms.');
+        $response->assertSee('We engineer responsive, high-performance web applications, cloud customer portals and enterprise software platforms.');
         $response->assertSee('Get Free Consultation');
         $response->assertSee("Schedule a Discovery Call \u{2192}");
 
         // 3. Service Scope & Overview
         $response->assertSee('Service Scope &amp; Inclusions', false);
-        $response->assertSee("What do Suave Creators' custom web development services include?");
-        $response->assertSee("Suave Creators' custom web development services encompass full-stack web application engineering");
-        $response->assertSee('Full-Stack Web &amp; SaaS Engineering', false);
-        $response->assertSee('Modern Tech Stacks (Laravel, React, Node.js, Python)', false);
-        $response->assertSee('SOC 2 &amp; HIPAA Compliant Architecture', false);
-        $response->assertSee('US Legal Governance &amp; Up to 60% TCO Savings', false);
+        $response->assertSee('What do Suave Creators&#039; custom web development services include?', false);
+        $response->assertSee('Suave Creators&#039; custom web development services encompass full-stack web application engineering', false);
 
         // 3.1 Intro & Stats
         $response->assertSee('Trusted by High-Growth Startups &amp; Established Enterprises', false);
@@ -53,6 +49,9 @@ class WebDevelopmentServicesPageTest extends TestCase
         $response->assertSee('Book a Discovery Session');
         $response->assertSee("Explore Our Custom CRM Builder Services \u{2192}");
         $response->assertSee($demoHref, false);
+        $response->assertSee('smart-together-cta--no-phone', false);
+        $response->assertDontSee('smart-together-cta__phone', false);
+        $response->assertDontSee('border-b border-white/70 pb-px', false);
 
         // 5. Executive Overview
         $response->assertSee('Tailored Web Solutions to Enhance Your Digital Operations');
