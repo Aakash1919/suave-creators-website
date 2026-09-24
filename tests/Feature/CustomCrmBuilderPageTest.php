@@ -67,9 +67,14 @@ class CustomCrmBuilderPageTest extends TestCase
         $response->assertSee('Systematic Execution', false);
         $response->assertSee('From Workflow Blueprint to Production Deployment', false);
         $response->assertSee('Discovery &amp; Architecture Modeling', false);
-        $response->assertSee('ERD (Entity Relationship Diagram)', false);
+        $response->assertSee('ERD (Entity Relationship Diagram), and project roadmap', false);
+        $response->assertSee('Challenges Solved', false);
+        $response->assertSee('or rigid, generic add-on assistants', false);
         $response->assertSee('crm-builder-execution', false);
-        $response->assertSee('crm-deliverable-check-icon.webp', false);
+        $response->assertSee('execution_logo.webp', false);
+        $response->assertDontSee('crm-builder-execution__icon-placeholder', false);
+        $response->assertDontSee('crm-deliverable-check-icon.webp', false);
+        $response->assertDontSee('ui-ux-workflow-design-illustration.webp', false);
         $response->assertSee('custom-crm-builder-execution-bg.webp', false);
         $response->assertSee('Verified Results', false);
         $response->assertSee('Proven Delivery: How We Engineered a Modern Sales', false);

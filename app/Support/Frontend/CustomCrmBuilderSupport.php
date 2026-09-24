@@ -17,6 +17,7 @@ class CustomCrmBuilderSupport
             'useHeroBackground' => true,
             'heroBackgroundImage' => '',
             'bannerBackgroundImage' => 'assets/background/custom-crm-builder-hero-bg.webp',
+            'trustBackgroundImage' => 'assets/background/crm-trust-triangle-pattern.webp',
             'demoHref' => ContactSupport::demoHref(),
             'eyebrow' => 'Our Tailor-Made Software Services',
             'heroLead' => 'Custom CRM Builder &',
@@ -184,14 +185,14 @@ class CustomCrmBuilderSupport
                 [
                     'metric' => 'Custom AI & LLM Automation',
                     'saasValue' => 'Expensive credits',
-                    'saasDetail' => 'Rigid, generic add-on assistants billed as extra credits',
+                    'saasDetail' => 'or rigid, generic add-on assistants',
                     'customValue' => 'Native LLM Orchestration',
                     'customDetail' => 'Tailored models running directly on your data',
                 ],
                 [
                     'metric' => 'Custom Business Logic',
                     'saasValue' => 'Constrained',
-                    'saasDetail' => 'Vendor app-store plugins and governor limits',
+                    'saasDetail' => 'by vendor app-store plugins and governor limits',
                     'customValue' => 'Zero Limitations',
                     'customDetail' => 'Built directly to your operational workflows and rules',
                 ],
@@ -317,7 +318,7 @@ class CustomCrmBuilderSupport
             'description' => 'Generic CRM templates fail when applied to specialized business models. We build purpose-built data models and interfaces designed for your',
             'descriptionLine' => 'industry\'s exact operational requirements.',
             'backgroundImage' => 'assets/background/custom-crm-builder-industries-bg.webp',
-            'challengeLabel' => 'Challenge',
+            'challengeLabel' => 'Challenges Solved',
             'architectureLabel' => 'Custom Architecture',
             'items' => [
                 [
@@ -403,7 +404,7 @@ class CustomCrmBuilderSupport
             'title' => 'Built with Modern, Scalable, Enterprise-Grade Technologies',
             'items' => [
                 [
-                    'image' => 'assets/media/developer-coding-laptop-desk.webp',
+                    'image' => 'assets/media/backend_engennering.webp',
                     'imageAlt' => 'Backend engineering stack for custom CRM software development',
                     'title' => 'Backend Engineering',
                     'items' => [
@@ -413,7 +414,7 @@ class CustomCrmBuilderSupport
                     ],
                 ],
                 [
-                    'image' => 'assets/media/frontend-dashboard-charts-laptop.webp',
+                    'image' => 'assets/media/frontend_dashboard.webp',
                     'imageAlt' => 'Frontend dashboards stack for custom CRM software development',
                     'title' => 'Frontend & Dashboards',
                     'items' => [
@@ -426,7 +427,7 @@ class CustomCrmBuilderSupport
                     ],
                 ],
                 [
-                    'image' => 'assets/media/database-server-hologram-touch.webp',
+                    'image' => 'assets/media/database_coaching.webp',
                     'imageAlt' => 'Databases and caching stack for custom CRM software development',
                     'title' => 'Databases & Caching',
                     'items' => [
@@ -437,7 +438,7 @@ class CustomCrmBuilderSupport
                     ],
                 ],
                 [
-                    'image' => 'assets/media/cloud-security-data-protection-laptop.webp',
+                    'image' => 'assets/media/infrastructure_security.webp',
                     'imageAlt' => 'Infrastructure and security stack for custom CRM software development',
                     'title' => 'Infrastructure & Security',
                     'items' => [
@@ -566,12 +567,8 @@ class CustomCrmBuilderSupport
      *     eyebrow: string,
      *     title: string,
      *     backgroundImage: string,
-     *     image: string,
-     *     imageAlt: string,
      *     deliverableLabel: string,
-     *     checkIcon: string,
-     *     checkIconAlt: string,
-     *     items: array<int, array{number: string, title: string, copy: string, deliverable: string}>
+     *     items: array<int, array{number: string, tone: string, icon: string, iconAlt: string, title: string, copy: string, deliverable: string}>
      * }
      */
     protected static function execution(): array
@@ -580,38 +577,49 @@ class CustomCrmBuilderSupport
             'eyebrow' => 'Systematic Execution',
             'title' => 'From Workflow Blueprint to Production Deployment',
             'backgroundImage' => 'assets/background/custom-crm-builder-execution-bg.webp',
-            'image' => 'assets/media/ui-ux-workflow-design-illustration.webp',
-            'imageAlt' => 'UI UX workflow illustration for custom CRM software development',
             'deliverableLabel' => 'Deliverables:',
-            'checkIcon' => 'assets/icons/crm-deliverable-check-icon.webp',
-            'checkIconAlt' => 'Completed custom CRM deliverable check icon',
             'items' => [
                 [
                     'number' => '01',
+                    'tone' => 'blue',
+                    'icon' => 'assets/media/execution_logo.webp',
+                    'iconAlt' => 'Discovery and architecture modeling icon for custom CRM software development',
                     'title' => 'Discovery & Architecture Modeling',
                     'copy' => 'We analyze your sales stages, data schemas, API integrations, and user roles.',
                     'deliverable' => 'System Architecture Document, ERD (Entity Relationship Diagram), and project roadmap.',
                 ],
                 [
                     'number' => '02',
+                    'tone' => 'green',
+                    'icon' => 'assets/media/execution_logo4.webp',
+                    'iconAlt' => 'UI UX prototyping icon for custom CRM software development',
                     'title' => 'UI/UX Design & High-Fidelity Prototyping',
                     'copy' => 'We craft intuitive, clean interfaces prioritizing sales velocity and minimal data entry friction.',
                     'deliverable' => 'Interactive Figma prototypes covering desktop, tablet, and mobile views.',
                 ],
                 [
                     'number' => '03',
+                    'tone' => 'violet',
+                    'icon' => 'assets/media/execution_logo3.webp',
+                    'iconAlt' => 'Full-stack engineering icon for custom CRM software development',
                     'title' => 'Full-Stack Engineering & AI Pipeline Orchestration',
                     'copy' => 'We develop the core application using Laravel/Node.js backends and dynamic React frontends.',
                     'deliverable' => 'Bi-weekly sprint demos, containerized test builds, and integrated API endpoints.',
                 ],
                 [
                     'number' => '04',
+                    'tone' => 'amber',
+                    'icon' => 'assets/media/execution_logo2.webp',
+                    'iconAlt' => 'Quality assurance and security audit icon for custom CRM software',
                     'title' => 'Rigorous QA, Security Audits & Performance Tuning',
                     'copy' => 'We conduct end-to-end testing, role-permission verification, load testing, and security scans.',
                     'deliverable' => 'Automated test suites, vulnerability audit reports, and sub-second query tuning.',
                 ],
                 [
                     'number' => '05',
+                    'tone' => 'sky',
+                    'icon' => 'assets/media/execution_logo1.webp',
+                    'iconAlt' => 'Production deployment icon for custom CRM software development',
                     'title' => 'Deployment, Team Training & Ongoing Evolution',
                     'copy' => 'We execute zero-downtime production deployment, assist with data migration, and provide documentation.',
                     'deliverable' => 'Production launch, staff onboarding sessions, SLA maintenance, and ongoing updates.',
