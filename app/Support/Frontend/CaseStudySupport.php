@@ -157,7 +157,7 @@ class CaseStudySupport
             ],
             'ai-sales-coaching-platform-case-study' => [
                 'assets/case-studies/ai-sales-coaching/AI-sales-coaching1.webp',
-                'assets/case-studies/ai-sales-coaching/ai-sales-coaching2 copy.png',
+                'assets/case-studies/ai-sales-coaching/ai-sales-coaching-2.png',
                 'assets/case-studies/ai-sales-coaching/ai-sales-coaching-03.webp',
             ],
             'suave-crm-outreach-case-study' => [

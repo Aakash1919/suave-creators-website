@@ -24,6 +24,7 @@ $deferredMarkers = [
     'INDUSTRY DETAIL SERVICES',
     'INDUSTRY DETAIL AGILE',
     'SERVICES LISTING',
+    'CRM BUILDER HERO',
 ];
 
 $sectionPattern = '/\/\* ===== (.+?) START ===== \*\/.*?\/\* ===== \1 END ===== \*\//s';
