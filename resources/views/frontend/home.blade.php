@@ -499,9 +499,7 @@
 
 <x-frontend.consultation-section
   title="Ready to Engineer Your Custom Platform or Modernize Your Software?"
-  cta-label="Claim Free Architecture Scoping Session"
-  secondary-cta-label="Book Direct via Google Calendar →"
-  :secondary-cta-href="$demoHref"
+  cta-label="Schedule a Call"
 />
 
 <!-- Partnerships Section Start -->

@@ -14,6 +14,26 @@ class ContactStoreRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $message = trim((string) $this->input('message', ''));
+        if ($message === '') {
+            $service = (string) $this->input('service', '');
+            $company = trim((string) $this->input('company', ''));
+            $serviceLabel = ContactSupport::formServices()[$service] ?? $service;
+            $fallback = 'Free consultation request'
+                .($serviceLabel !== '' ? ' for '.$serviceLabel : '')
+                .($company !== '' ? ' (Company: '.$company.')' : '')
+                .'.';
+            $this->merge(['message' => $fallback]);
+        } elseif (mb_strlen($message) < 10) {
+            $service = (string) $this->input('service', '');
+            $serviceLabel = ContactSupport::formServices()[$service] ?? $service;
+            $suffix = $serviceLabel !== '' ? ' [Service: '.$serviceLabel.']' : ' [Consultation request]';
+            $this->merge(['message' => $message.$suffix]);
+        }
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -26,6 +46,7 @@ class ContactStoreRequest extends FormRequest
                 'name' => ['nullable', 'string', 'max:120'],
                 'email' => ['nullable', 'email', 'max:255'],
                 'phone' => ['nullable', 'string', 'max:60'],
+                'company' => ['nullable', 'string', 'max:120'],
                 'service' => ['nullable', 'string', 'max:120'],
                 'message' => ['nullable', 'string', 'max:5000'],
             ];
@@ -36,6 +57,7 @@ class ContactStoreRequest extends FormRequest
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'string', 'max:60', 'regex:/^\+?[0-9\s\-().]+$/'],
+            'company' => ['nullable', 'string', 'max:120'],
             'service' => ['required', 'string', Rule::in(array_keys(ContactSupport::formServices()))],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
         ];

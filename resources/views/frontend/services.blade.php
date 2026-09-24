@@ -310,7 +310,6 @@
   :title="$consultation['title']"
   :description="$consultation['description']"
   :cta-label="$consultation['ctaLabel']"
-  :secondary-cta-label="$consultation['secondaryCtaLabel']"
   card-position="center"
   :allow-html-title="false"
   consultation-theme="dark"

@@ -18,10 +18,12 @@ class ConsultationSection extends Component
     public function __construct(
         public string $title = 'Ready to Engineer Your Custom Platform or Modernize Your Software?',
         public string $description = 'Schedule an architecture scoping call with our technical lead. We will review your product requirements, assess technical constraints, and deliver an actionable implementation roadmap with transparent sprint estimates.',
-        public string $ctaLabel = 'Claim Free Architecture Scoping Session',
-        public string $ctaHref = '',
-        public string $secondaryCtaLabel = 'Book Direct via Google Calendar →',
+        public string $ctaLabel = 'Schedule a Call',
+        public string $buttonText = '',
+        public string $ctaHref = '#contact-modal',
+        public string $secondaryCtaLabel = '',
         public string $secondaryCtaHref = '',
+        public string $service = '',
         public string $backgroundImage = 'assets/background/consultation-section-bg.png',
         public string $eyebrow = '',
         public string $cardPosition = 'top',
@@ -32,8 +34,12 @@ class ConsultationSection extends Component
         public ?array $people = null,
         public string $consultationTheme = 'light'
     ) {
+        if ($this->buttonText !== '') {
+            $this->ctaLabel = $this->buttonText;
+        }
+
         if ($this->ctaHref === '') {
-            $this->ctaHref = ContactSupport::demoHref();
+            $this->ctaHref = '#contact-modal';
         }
 
         if ($this->secondaryCtaHref === '' && $this->secondaryCtaLabel !== '') {

@@ -54,12 +54,13 @@ class ContactController extends FrontendController
                     'success' => true,
                     'message' => ContactRequestService::SUCCESS_MESSAGE,
                     'lead_tracked' => false,
+                    'redirect' => route('thank-you'),
                 ]);
             }
 
             createFlashMessage('Contact request', 'created');
 
-            return redirect()->route('contact-us')->withFragment('contact-id');
+            return redirect()->route('thank-you');
         }
 
         $contact = $this->contacts->store($request);
@@ -70,12 +71,13 @@ class ContactController extends FrontendController
                 'success' => true,
                 'message' => ContactRequestService::SUCCESS_MESSAGE,
                 'lead_tracked' => true,
+                'redirect' => route('thank-you'),
             ]);
         }
 
         createFlashMessage('Contact request', 'created');
 
-        return redirect()->route('contact-us')->withFragment('contact-id');
+        return redirect()->route('thank-you');
     }
 
     /**
