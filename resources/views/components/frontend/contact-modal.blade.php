@@ -130,7 +130,7 @@
                     {{-- Row 1: Name & Email --}}
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {{-- Name --}}
-                        <div>
+                        <div class="min-w-0">
                             <label for="{{ $id }}-name" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
                                 Your Name <span class="text-red-500">*</span>
                             </label>
@@ -146,7 +146,7 @@
                         </div>
 
                         {{-- Email --}}
-                        <div>
+                        <div class="min-w-0">
                             <label for="{{ $id }}-email" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
                                 Business Email <span class="text-red-500">*</span>
                             </label>
@@ -165,7 +165,7 @@
                     {{-- Row 2: Company Name & Phone Number --}}
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {{-- Company Name --}}
-                        <div>
+                        <div class="min-w-0">
                             <label for="{{ $id }}-company" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
                                 Company Name
                             </label>
@@ -181,7 +181,7 @@
                         </div>
 
                         {{-- Phone Number with intl-tel-input --}}
-                        <div>
+                        <div class="min-w-0">
                             <label for="{{ $id }}-phone" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
                                 Phone Number <span class="text-red-500">*</span>
                             </label>
@@ -395,10 +395,14 @@
 .contact-modal-root .suave-phone-field {
     display: block;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     position: relative;
 }
 .contact-modal-root .suave-phone-field .iti {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     display: flex;
     align-items: stretch;
     background: #ffffff;
@@ -425,17 +429,18 @@
     display: flex;
     align-items: stretch;
     position: relative;
+    flex-shrink: 0;
 }
 .contact-modal-root .suave-phone-field .iti__selected-country {
     background: #F8FAFC;
     border: none;
     border-right: 1px solid #CBD5E1;
     border-radius: 0.75rem 0 0 0.75rem;
-    padding: 0 10px 0 12px;
+    padding: 0 8px 0 10px;
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
     transition: background-color 0.15s ease;
     flex-shrink: 0;
@@ -479,18 +484,19 @@
     white-space: nowrap;
 }
 .contact-modal-root .suave-phone-field .iti__tel-input {
-    flex: 1 1 auto;
-    width: 100%;
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    width: 0 !important;
     background: transparent !important;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    padding: 0.625rem 0.875rem !important; /* py-2.5 px-3.5 */
+    padding: 0.625rem 0.75rem !important; /* py-2.5 px-3 */
     font-size: 13px !important;
     line-height: 1.25rem !important;
     color: #0F172A !important;
     border-radius: 0 0.75rem 0.75rem 0 !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 @media (min-width: 640px) {
     .contact-modal-root .suave-phone-field .iti__tel-input {

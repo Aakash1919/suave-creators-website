@@ -22,10 +22,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us');
 Route::post('/contact-us', [ContactController::class, 'store'])
-    ->middleware('throttle:5,1')
     ->name('contact-us.store');
 Route::post('/contact-us/draft', [ContactController::class, 'draft'])
-    ->middleware('throttle:30,1')
     ->name('contact-us.draft');
 Route::get('/geo/country', [ContactController::class, 'visitorCountry'])
     ->middleware('throttle:60,1')

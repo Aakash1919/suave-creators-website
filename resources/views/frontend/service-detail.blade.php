@@ -619,7 +619,7 @@ $n = $index + 1;
   :title="$service['finalTitle'] ?? 'Let\'s Build Your Business Website Together'"
   :description="$service['finalDescription'] ?? ''"
   :cta-label="$service['finalPrimaryCta'] ?? 'Get a Free Quote'"
-  :secondary-cta-label="$service['finalSecondaryCta'] ?? 'Contact us Today'"
+  :service="$service['slug'] ?? ''"
   :show-people="($service['showFinalPeople'] ?? true) !== false"
   :hide-bg-below-desktop="($service['hideFinalBgBelowDesktop'] ?? false) === true"
   :allow-html-title="false"

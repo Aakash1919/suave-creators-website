@@ -13,18 +13,18 @@ class ConsultationCtaLabelTest extends TestCase
     public function test_primary_project_ctas_use_inline_consultation_form_with_placeholder_and_label(): void
     {
         foreach ([
-            ['path' => route('home', absolute: false), 'cta' => 'Get Architectural Consultation'],
-            ['path' => route('about-us', absolute: false), 'cta' => 'Get Free Consultation'],
-            ['path' => route('industries', absolute: false), 'cta' => 'Get Free Consultation'],
-            ['path' => route('industry.show', ['slug' => 'healthcare-software-development'], false), 'cta' => 'Get Free Consultation'],
-            ['path' => route('service.show', ['slug' => 'enterprise-software-solutions'], false), 'cta' => 'Get Free Consultation'],
-            ['path' => route('services', absolute: false), 'cta' => 'Get Free Consultation'],
+            ['path' => route('home', absolute: false), 'cta' => 'Get Architectural Consultation', 'placeholder' => 'Enter your business email or phone number'],
+            ['path' => route('about-us', absolute: false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
+            ['path' => route('industries', absolute: false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
+            ['path' => route('industry.show', ['slug' => 'healthcare-software-development'], false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
+            ['path' => route('service.show', ['slug' => 'enterprise-software-solutions'], false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
+            ['path' => route('services', absolute: false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
         ] as $page) {
             $response = $this->get($page['path']);
 
             $response->assertOk();
             $response->assertSee($page['cta'], false);
-            $response->assertSee('placeholder="Enter your phone or email"', false);
+            $response->assertSee('placeholder="'.$page['placeholder'].'"', false);
             $response->assertDontSee('Start your Project', false);
         }
     }

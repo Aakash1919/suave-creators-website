@@ -35,14 +35,49 @@ class ContactModalTest extends TestCase
         $response->assertSee('hidden lg:flex flex-col', false);
     }
 
-    public function test_about_page_schedule_a_discovery_call_triggers_contact_modal(): void
+    public function test_about_page_hero_schedule_call_links_to_calendar_and_consultation_triggers_modal(): void
     {
         $response = $this->get(route('about-us'));
 
         $response->assertOk();
+        // Hero inline consultation form link opens demo calendar like before
         $response->assertSee('Schedule a discovery call');
-        $response->assertSee('href="#contact-modal"', false);
+        $response->assertSee('target="_blank"', false);
+
+        // Consultation section button triggers contact modal
+        $response->assertSee('Schedule a Call');
         $response->assertSee('data-open-contact-modal', false);
+    }
+
+    public function test_home_page_consultation_section_button_triggers_contact_modal(): void
+    {
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('Schedule a Call');
+        $response->assertSee('data-open-contact-modal', false);
+        $response->assertDontSee('Claim Free Architecture Scoping Session', false);
+        $response->assertDontSee('Book Direct via Google Calendar →', false);
+    }
+
+    public function test_contact_modal_has_no_throttle_rate_limit_on_repeated_submissions(): void
+    {
+        for ($i = 1; $i <= 8; $i++) {
+            $payload = [
+                'name' => "User {$i}",
+                'email' => "user{$i}@example.com",
+                'phone' => "+1 555 010 {$i}",
+                'company' => "Company {$i}",
+                'service' => 'web-development',
+                'message' => "Testing rapid submissions number {$i} to verify no rate limit.",
+                'form_started_at' => time() - 10,
+                '_ajax' => '1',
+            ];
+
+            $response = $this->postJson(route('contact-us.store'), $payload);
+            $this->assertNotEquals(429, $response->getStatusCode(), "Request {$i} should not be throttled (429).");
+            $response->assertOk();
+        }
     }
 
     public function test_contact_modal_submission_with_company_and_no_message_succeeds(): void
@@ -136,14 +171,11 @@ class ContactModalTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Thank You! Your Request Has Been Received');
-        $response->assertSee('What Happens Next?');
-        $response->assertSee('Requirement Assessment');
-        $response->assertSee('Tailored Solution Roadmap');
-        $response->assertSee('Discovery Strategy Call');
-        $response->assertSee('Explore While You Wait');
-        $response->assertSee(route('case-studies'));
-        $response->assertSee(route('blogs'));
+        $response->assertSee('We appreciate you reaching out to Suave Creators');
+        $response->assertSee('Back to Home');
         $response->assertSee(route('home'));
+        $response->assertDontSee('What Happens Next?');
+        $response->assertDontSee('Explore While You Wait');
     }
 
     public function test_contact_submission_returns_thank_you_redirect_in_json(): void
