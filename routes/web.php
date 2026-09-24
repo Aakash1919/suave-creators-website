@@ -38,6 +38,7 @@ Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('p
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services/custom-crm-builder', fn () => redirect()->route('service.show', ['slug' => 'custom-crm-development'], 301))->name('services.custom-crm-builder.legacy');
 Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301))->name('service.show.legacy');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
 
@@ -68,6 +69,7 @@ Route::get('/case-studies/ai-product-matching-case-study', [CaseStudyController:
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+Route::get('/blog', fn () => redirect()->route('blogs', status: 301))->name('blog.index.legacy');
 Route::get('/blogs/filter', [BlogController::class, 'filter'])->name('blogs.filter');
 Route::get('/blogs/category/{slug}', [BlogController::class, 'category'])->name('blogs.category');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');

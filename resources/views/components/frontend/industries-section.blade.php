@@ -67,10 +67,10 @@
           <p>{{ $card['text'] }}</p>
           @if (! $hasStep)
             <span class="industry-card__arrow" aria-hidden="true">
-              <img src="{{ asset('assets/media/soft-white-right-arrow.png') }}"
+              <img src="{{ asset('assets/media/soft-white-right-arrow.svg') }}"
                 alt="Soft white right arrow for Suave Creators industries we serve"
                 title="Soft white right arrow for Suave Creators industries we serve"
-                width="18" height="5" decoding="async" loading="lazy">
+                width="28" height="10" decoding="async" loading="lazy">
             </span>
           @endif
         </{{ $tag }}>
