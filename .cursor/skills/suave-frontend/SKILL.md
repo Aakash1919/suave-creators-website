@@ -8,7 +8,7 @@ description: >-
   Requires categorized asset paths and post-change verification. For admin /
   RBAC use suave-admin. For broken image/URL/section checks use frontend-audit.
 metadata:
-  last-updated: "2026-09-23"
+  last-updated: "2026-09-25"
 ---
 
 # Suave Frontend
@@ -58,6 +58,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 
 - **Dedicated controller per page**, thin: load Support data → return the view
 - **Custom CRM Builder landing:** `CustomCrmBuilderController@index` for `/custom-crm-builder` (`custom-crm-builder`). Dedicated Blade + `CustomCrmBuilderSupport` — **not** `ServiceController` / `service.show` / `ServiceSupport::SLUGS`. SEO is `config/seo.php` `pages.custom-crm-builder`; `json_ld_breadcrumb_parent_name` + `json_ld_breadcrumb_parent_route` insert a parent crumb (Services) via `SeoGenerateService`. Extra Service JSON-LD comes from `CustomCrmBuilderSupport::seoStructuredData()`.
+- **Enterprise AI & ERP UAE landing:** `EnterpriseAiErpController@index` for `/enterprise-ai-erp-uae` (`enterprise-ai-erp-uae`). Dedicated Blade + `EnterpriseAiErpSupport`. Standalone: do **not** add it to Header, Footer, services, or industries. SEO is `config/seo.php` `pages.enterprise-ai-erp-uae` with **no** breadcrumb parent. Hero command-center graphic is an empty placeholder (`enterprise-ai-erp-hero__visual`) until an `assets/media/` image is added. The strategic capital allocation section below the definition block uses five `<img>` collage slots (`enterprise-ai-erp-allocation__tile`, including the center circle). Swap each `src` in `EnterpriseAiErpSupport::allocationVisuals()` when the final `assets/media/` photos land. The TCO comparison below it reuses the `crm-builder-tco` table markup and styles. Its header-row icons stay empty placeholders (`enterprise-ai-erp-tco__icon-placeholder`) until `metricIcon`, `saasIcon`, and `customIcon` are set in `EnterpriseAiErpSupport::tco()`. The modules carousel below the table (`enterpriseModulesSwiper`, inited with `suaveWhenSwiperReady`) uses empty card-icon placeholders (`enterprise-ai-erp-modules__icon-placeholder`) until each `items[].icon` path is set. CSS lives in `style-deferred.css` under `ENTERPRISE AI ERP`. The layout only loads that file when the route is in `$loadDeferredCss` in `layouts/frontend.blade.php` — keep `enterprise-ai-erp-uae` on that list.
 - **Services exception:** one `ServiceController` — `index` for `/services`, `show(string $slug)` for all `/service/{slug}` details (no per-service controllers; abort 404 for unknown slugs)
 - **Industries exception:** one `IndustryController` — `index` for `/industries`, `show(string $slug)` for all `/industries/{slug}` details (no per-industry controllers; abort 404 for unknown slugs)
 - **Blogs:** one `BlogController` — `index` for `/blogs`, `show(string $slug)` for `/blog/{slug}` (abort 404 for unknown slugs; shared single-blog Blade)

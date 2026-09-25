@@ -51,6 +51,7 @@
             'about-us',
             'product',
             'custom-crm-builder',
+            'enterprise-ai-erp-uae',
             'blogs',
             'blogs.category',
             'blog.show',

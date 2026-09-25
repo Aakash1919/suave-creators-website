@@ -274,6 +274,15 @@ return [
             'json_ld_breadcrumb_parent_name' => 'Services',
             'json_ld_breadcrumb_parent_route' => 'services',
         ],
+        'enterprise-ai-erp-uae' => [
+            'title' => 'Enterprise AI & Custom ERP Solutions in the UAE | Suave Creators',
+            'description' => 'Build AI-native ERP platforms for UAE enterprises. 100% code ownership, Arabic-English interfaces, and FTA VAT and Corporate Tax compliance from Suave Creators.',
+            'og_title' => 'Enterprise AI & Custom ERP Solutions in the UAE | Suave Creators',
+            'og_description' => 'Build AI-native ERP platforms for UAE enterprises. 100% code ownership, Arabic-English interfaces, and FTA VAT and Corporate Tax compliance from Suave Creators.',
+            'json_ld_name' => 'Enterprise AI & Custom ERP Solutions in the UAE | Suave Creators',
+            'json_ld_description' => 'Build AI-native ERP platforms for UAE enterprises. 100% code ownership, Arabic-English interfaces, and FTA VAT and Corporate Tax compliance from Suave Creators.',
+            'json_ld_breadcrumb_name' => 'Enterprise AI & ERP UAE',
+        ],
         'product' => [
             'title' => 'AI Outreach CRM & Sales Automation | Suave Creators',
             'description' => 'Automate outreach, capture leads, and close deals with Suave Creators AI Outreach CRM. Start free and scale sales with intelligent workflows.',

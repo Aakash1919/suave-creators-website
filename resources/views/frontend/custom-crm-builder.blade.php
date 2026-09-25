@@ -203,7 +203,7 @@
                 </span>
               </th>
               <td class="crm-builder-tco__col--saas">
-                <strong class="crm-builder-tco__value crm-builder-tco__value--saas">{{ $row['saasValue'] }}</strong>
+                <strong class="crm-builder-tco__value crm-builder-tco__value--saas_">{{ $row['saasValue'] }}</strong>
                 <span class="crm-builder-tco__detail">{{ $row['saasDetail'] }}</span>
               </td>
               <td class="crm-builder-tco__col--custom">

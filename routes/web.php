@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CaseStudyController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CustomCrmBuilderController;
+use App\Http\Controllers\Frontend\EnterpriseAiErpController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\IndustryController;
 use App\Http\Controllers\Frontend\PageController;
@@ -55,6 +56,7 @@ Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('ind
 
 Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
 Route::get('/custom-crm-builder', [CustomCrmBuilderController::class, 'index'])->name('custom-crm-builder');
+Route::get('/enterprise-ai-erp-uae', [EnterpriseAiErpController::class, 'index'])->name('enterprise-ai-erp-uae');
 
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');
 Route::get('/case-studies/turbo-trans-case-study', [CaseStudyController::class, 'turboTransCaseStudy'])->name('turbo-trans-case-study');
