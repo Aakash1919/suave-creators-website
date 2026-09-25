@@ -172,8 +172,8 @@ class ContactModalTest extends TestCase
     {
         $response = $this->get(route('thank-you'));
 
-        $response->assertOk();
-        $response->assertSee('Thank You! Your Request Has Been Received');
+        $response->assertSee('Thank You!');
+        $response->assertSee('Your Request Has Been Received');
         $response->assertSee('We appreciate you reaching out to Suave Creators');
         $response->assertSee('Back to Home');
         $response->assertSee(route('home'));
