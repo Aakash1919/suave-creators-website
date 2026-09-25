@@ -19,7 +19,7 @@
             Thank You!
         </h1>
 
-        <p class="text-lg sm:text-xl md:text-2xl font-semibold text-[#1E293B] mt-2 sm:mt-3 tracking-tight">
+        <p class="text-2xl sm:text-[32px] md:text-[40px] font-semibold text-[#1E293B] mt-2 sm:mt-3 tracking-tight leading-tight">
             Your Request Has Been Received
         </p>
 
