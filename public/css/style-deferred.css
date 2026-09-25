@@ -5337,6 +5337,7 @@ right: max(0px, calc(50% - 580px));
 .suave-phone-field .iti__selected-country-primary{
   align-items: center;
   display: inline-flex;
+  gap: 6px;
   height: 100%;
   padding: 0 0 0 6px;
 }
