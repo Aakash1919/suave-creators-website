@@ -19,7 +19,7 @@
             Thank You!
         </h1>
 
-        <p class="text-2xl sm:text-[32px] md:text-[40px] font-semibold text-[#1E293B] mt-2 sm:mt-3 tracking-tight leading-tight">
+        <p class="thank-you-subtitle font-semibold text-[#1E293B] mt-2 sm:mt-3 tracking-tight leading-tight" style="font-size: 40px; line-height: 1.2;">
             Your Request Has Been Received
         </p>
 
@@ -36,53 +36,75 @@
     <!-- Thank You Section End -->
 
     <style>
-        @keyframes thankYouPop {
-            0% {
-                transform: scale(0.35);
-                opacity: 0;
+        .thank-you-subtitle {
+            font-size: 40px !important;
+            line-height: 1.2 !important;
+        }
+
+        @keyframes thankYouBadgeFloat {
+            0%, 100% {
+                transform: translateY(0);
             }
-            70% {
-                transform: scale(1.12);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
+            50% {
+                transform: translateY(-5px);
             }
         }
 
         @keyframes thankYouPulseRing {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.35);
+            0% {
+                transform: scale(0.95);
+                opacity: 0.9;
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
             }
-            50% {
+            70% {
+                transform: scale(1.35);
+                opacity: 0;
                 box-shadow: 0 0 0 14px rgba(16, 185, 129, 0);
+            }
+            100% {
+                transform: scale(1.35);
+                opacity: 0;
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
             }
         }
 
         @keyframes thankYouCheckmark {
-            0% {
-                transform: scale(0) rotate(-45deg);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.25) rotate(4deg);
-                opacity: 1;
-            }
-            100% {
+            0%, 100% {
                 transform: scale(1) rotate(0deg);
-                opacity: 1;
+            }
+            20% {
+                transform: scale(1.22) rotate(4deg);
+            }
+            35% {
+                transform: scale(0.95) rotate(-2deg);
+            }
+            50% {
+                transform: scale(1.08) rotate(1deg);
+            }
+            65% {
+                transform: scale(1) rotate(0deg);
             }
         }
 
         .thank-you-check-badge {
-            animation: thankYouPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both,
-                       thankYouPulseRing 2.4s ease-in-out 0.6s infinite;
+            position: relative;
+            animation: thankYouBadgeFloat 3s ease-in-out infinite;
+        }
+
+        .thank-you-check-badge::before {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 9999px;
+            border: 2px solid rgba(16, 185, 129, 0.4);
+            animation: thankYouPulseRing 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+            pointer-events: none;
         }
 
         .thank-you-check-icon {
             display: inline-block;
-            animation: thankYouCheckmark 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+            transform-origin: center;
+            animation: thankYouCheckmark 2.4s ease-in-out infinite;
         }
     </style>
 @endsection
