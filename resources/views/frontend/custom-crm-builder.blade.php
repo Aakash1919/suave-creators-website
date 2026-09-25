@@ -132,6 +132,20 @@
     </div>
 
     <div class="crm-builder-tco__panel">
+      <div class="crm-builder-tco__mobile-head">
+        <span class="crm-builder-tco__icon crm-builder-tco__icon--metric">
+          <img
+            src="{{ asset($tco['metricIcon']) }}"
+            alt="{{ $tco['metricIconAlt'] }}"
+            title="{{ $tco['metricIconAlt'] }}"
+            width="24"
+            height="24"
+            decoding="async">
+        </span>
+        <div class="crm-builder-tco__mobile-head-copy">
+          <p class="crm-builder-tco__mobile-head-title">{{ $tco['metricHeading'] }}</p>
+        </div>
+      </div>
       <table class="crm-builder-tco__table">
         <thead>
           <tr>
@@ -200,13 +214,42 @@
                       decoding="async">
                   </span>
                   <span class="crm-builder-tco__metric-label">{{ $row['metric'] }}</span>
+                  <svg class="crm-builder-tco__chevron" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                    <path d="M5 7.5 10 12.5 15 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
                 </span>
               </th>
               <td class="crm-builder-tco__col--saas">
+                <span class="crm-builder-tco__mobile-label">
+                  <img
+                    src="{{ asset($tco['saasIcon']) }}"
+                    alt="{{ $tco['saasIconAlt'] }}"
+                    title="{{ $tco['saasIconAlt'] }}"
+                    width="16"
+                    height="16"
+                    decoding="async">
+                  <span class="crm-builder-tco__mobile-label-copy">
+                    <span class="crm-builder-tco__mobile-label-text">{{ $tco['saasHeading'] }}</span>
+                    <span class="crm-builder-tco__mobile-label-note">{{ $tco['saasNote'] }}</span>
+                  </span>
+                </span>
                 <strong class="crm-builder-tco__value crm-builder-tco__value--saas">{{ $row['saasValue'] }}</strong>
                 <span class="crm-builder-tco__detail">{{ $row['saasDetail'] }}</span>
               </td>
               <td class="crm-builder-tco__col--custom">
+                <span class="crm-builder-tco__mobile-label">
+                  <img
+                    src="{{ asset($tco['customIcon']) }}"
+                    alt="{{ $tco['customIconAlt'] }}"
+                    title="{{ $tco['customIconAlt'] }}"
+                    width="16"
+                    height="16"
+                    decoding="async">
+                  <span class="crm-builder-tco__mobile-label-copy">
+                    <span class="crm-builder-tco__mobile-label-text">{{ $tco['customHeading'] }}</span>
+                    <span class="crm-builder-tco__mobile-label-note">{{ $tco['customNote'] }}</span>
+                  </span>
+                </span>
                 <strong class="crm-builder-tco__value crm-builder-tco__value--custom">{{ $row['customValue'] }}</strong>
                 <span class="crm-builder-tco__detail">{{ $row['customDetail'] }}</span>
               </td>
@@ -214,6 +257,12 @@
           @endforeach
         </tbody>
       </table>
+      <button type="button" class="crm-builder-tco__more" aria-expanded="false">
+        Read more
+        <svg xmlns="http://www.w3.org/2000/svg" class="crm-builder-tco__more-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+          <path d="M5 7.5 10 12.5 15 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
     </div>
   </div>
 </section>
@@ -314,6 +363,53 @@
     </div>
 
     <div class="crm-builder-verticals__layout">
+      <div class="crmVerticalsSwiper swiper crm-builder-verticals__swiper" aria-label="{{ $verticals['eyebrow'] }}">
+        <div class="swiper-wrapper">
+          @foreach ($verticals['items'] as $vertical)
+            <div class="swiper-slide">
+              <article class="crm-builder-verticals__panel">
+                <span class="crm-builder-verticals__badge">
+                  @if (filled($vertical['icon']))
+                    <img
+                      src="{{ asset($vertical['icon']) }}"
+                      alt="{{ $vertical['iconAlt'] }}"
+                      title="{{ $vertical['iconAlt'] }}"
+                      width="28"
+                      height="28"
+                      loading="lazy"
+                      decoding="async">
+                  @else
+                    <span class="crm-builder-verticals__icon-placeholder" aria-hidden="true"></span>
+                  @endif
+                </span>
+                <h3 class="crm-builder-verticals__panel-title">{{ $vertical['title'] }}</h3>
+                <div class="crm-builder-verticals__block">
+                  <p class="crm-builder-verticals__kicker crm-builder-verticals__kicker--challenge">{{ $verticals['challengeLabel'] }}</p>
+                  <p class="crm-builder-verticals__text">{{ $vertical['challenge'] }}</p>
+                </div>
+                <div class="crm-builder-verticals__block">
+                  <p class="crm-builder-verticals__kicker crm-builder-verticals__kicker--architecture">{{ $verticals['architectureLabel'] }}</p>
+                  <p class="crm-builder-verticals__text">
+                    {{ $vertical['architecture'] }}
+                    @if (filled($vertical['proofRoute'] ?? null) && filled($vertical['proofLabel'] ?? null))
+                      {{ $vertical['proofPrefix'] ?? 'See' }}
+                      <a href="{{ route($vertical['proofRoute']) }}" class="crm-builder-verticals__proof-link">{{ $vertical['proofLabel'] }}</a>.
+                    @endif
+                  </p>
+                </div>
+              </article>
+            </div>
+          @endforeach
+        </div>
+      </div>
+      <div class="crm-builder-verticals__nav">
+        <button class="crm-builder-verticals__prev offerings-control" type="button" aria-label="Previous industry">
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button class="crm-builder-verticals__next offerings-control" type="button" aria-label="Next industry">
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
       <div
         class="crm-builder-verticals__list"
         role="tablist"
@@ -694,7 +790,66 @@
 
 @push('scripts')
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var panel = document.querySelector('.crm-builder-tco__panel');
+    var button = panel ? panel.querySelector('.crm-builder-tco__more') : null;
+    if (!panel || !button) return;
+
+    button.addEventListener('click', function () {
+      panel.classList.add('is-expanded');
+      button.setAttribute('aria-expanded', 'true');
+    });
+  });
+</script>
+<script>
   window.suaveWhenSwiperReady(function () {
+    document.querySelectorAll('.crmVerticalsSwiper:not(.swiper-initialized)').forEach(function (el) {
+      var root = el.closest('.crm-builder-verticals');
+      if (!root) return;
+
+      var mobileQuery = window.matchMedia('(max-width: 767px)');
+      var verticalsSwiper = null;
+
+      function mountVerticalsSwiper() {
+        if (!mobileQuery.matches) {
+          if (verticalsSwiper) {
+            verticalsSwiper.destroy(true, true);
+            verticalsSwiper = null;
+          }
+          return;
+        }
+
+        if (verticalsSwiper || el.classList.contains('swiper-initialized')) return;
+
+        verticalsSwiper = new Swiper(el, {
+          slidesPerView: 1,
+          spaceBetween: 16,
+          speed: 550,
+          rewind: true,
+          allowTouchMove: true,
+          simulateTouch: true,
+          grabCursor: true,
+          watchOverflow: true,
+          keyboard: {
+            enabled: true,
+            onlyInViewport: true
+          },
+          navigation: {
+            nextEl: root.querySelector('.crm-builder-verticals__next'),
+            prevEl: root.querySelector('.crm-builder-verticals__prev')
+          },
+          a11y: {
+            prevSlideMessage: 'Previous industry',
+            nextSlideMessage: 'Next industry',
+            containerMessage: 'Industries carousel'
+          }
+        });
+      }
+
+      mountVerticalsSwiper();
+      mobileQuery.addEventListener('change', mountVerticalsSwiper);
+    });
+
     document.querySelectorAll('.crmModulesSwiper:not(.swiper-initialized)').forEach(function (el) {
       var root = el.closest('.crm-builder-modules');
       if (!root) return;
