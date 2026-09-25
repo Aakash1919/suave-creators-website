@@ -84,7 +84,7 @@
 
     {{-- Modal Card Container --}}
     <div
-        class="contact-modal__card relative z-10 w-full max-w-[560px] lg:max-w-[960px] m-auto overflow-hidden rounded-[24px] sm:rounded-[32px] bg-white shadow-[0_25px_80px_rgba(0,0,50,0.3)] ring-1 ring-black/5 transform transition-all duration-300 scale-95 opacity-0 max-h-[92vh] flex flex-col">
+        class="contact-modal__card relative z-10 w-full max-w-[620px] lg:max-w-[1040px] m-auto overflow-hidden rounded-[24px] sm:rounded-[32px] bg-white shadow-[0_25px_80px_rgba(0,0,50,0.3)] ring-1 ring-black/5 transform transition-all duration-300 scale-95 opacity-0 max-h-[92vh] flex flex-col">
 
         {{-- Close Button --}}
         <button type="button"
@@ -94,10 +94,10 @@
         </button>
 
         {{-- Two-Column Modal Body --}}
-        <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] overflow-y-auto overflow-x-hidden w-full min-w-0">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] overflow-y-auto overflow-x-hidden w-full min-w-0">
 
             {{-- LEFT COLUMN: White Form Area --}}
-            <div class="p-5 sm:p-8 lg:p-9 bg-white flex flex-col justify-between relative min-w-0 max-w-full overflow-x-hidden">
+            <div class="p-5 sm:p-8 lg:p-9 bg-white flex flex-col justify-start relative min-w-0 max-w-full overflow-x-hidden">
 
                 {{-- Header info --}}
                 <div>
@@ -107,7 +107,7 @@
                     <h2 id="{{ $id }}-heading" class="text-2xl sm:text-3xl font-extrabold text-[#0B132B] tracking-tight">
                         Get a Free Consultation
                     </h2>
-                    <p class="text-[13px] sm:text-sm text-[#64748B] mt-1.5 mb-6 leading-relaxed">
+                    <p class="text-[13px] sm:text-sm text-[#64748B] mt-1.5 mb-3 sm:mb-4 leading-relaxed">
                         Tell us about your project and our experts will get back to you within 24 hours with the next steps.
                     </p>
                 </div>
@@ -227,9 +227,9 @@
                             Project Details / Message <span class="text-slate-400 font-normal text-[11px]">(Optional)</span>
                         </label>
                         <div class="relative">
-                            <textarea id="{{ $id }}-message" name="message" rows="2"
+                            <textarea id="{{ $id }}-message" name="message" rows="4"
                                 placeholder="Tell us briefly about your project or what you want to build..."
-                                class="w-full rounded-xl border border-[#CBD5E1] bg-white py-2 px-3 text-[13px] sm:text-sm text-[#0F172A] placeholder-[#94A3B8] transition duration-150 focus:border-[#2A4DFB] focus:outline-none focus:ring-4 focus:ring-[#2A4DFB]/10 resize-none"></textarea>
+                                class="w-full rounded-xl border border-[#CBD5E1] bg-white py-2.5 px-3.5 text-[13px] sm:text-sm text-[#0F172A] placeholder-[#94A3B8] transition duration-150 focus:border-[#2A4DFB] focus:outline-none focus:ring-4 focus:ring-[#2A4DFB]/10 resize-none"></textarea>
                         </div>
                         <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="message" hidden></span>
                     </div>
