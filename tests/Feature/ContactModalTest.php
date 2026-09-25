@@ -30,6 +30,9 @@ class ContactModalTest extends TestCase
         $response->assertSee('data-phone-field-value', false);
         $response->assertSee('suave-phone-field', false);
         $response->assertSee('intlTelInput', false);
+        $response->assertSee('Email <span class="text-red-500">*</span>', false);
+        $response->assertDontSee('Business Email', false);
+        $response->assertDontSee('Company Name', false);
         $response->assertSee('Project Details / Message', false);
         $response->assertSee('name="message"', false);
         $response->assertSee('hidden lg:flex flex-col', false);

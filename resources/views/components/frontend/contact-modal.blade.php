@@ -149,7 +149,7 @@
                         {{-- Email --}}
                         <div class="min-w-0">
                             <label for="{{ $id }}-email" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
-                                Business Email <span class="text-red-500">*</span>
+                                Email <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
                                 <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-[#94A3B8]">
@@ -163,22 +163,47 @@
                         </div>
                     </div>
 
-                    {{-- Row 2: Company Name & Phone Number --}}
+                    {{-- Row 2: Service & Phone Number --}}
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {{-- Company Name --}}
+                        {{-- Service Dropdown --}}
                         <div class="min-w-0">
-                            <label for="{{ $id }}-company" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
-                                Company Name
+                            <label id="{{ $id }}-service-label" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
+                                Service You&rsquo;re Interested In <span class="text-red-500">*</span>
                             </label>
-                            <div class="relative">
-                                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-[#94A3B8]">
-                                    <i class="fa-regular fa-building text-xs" aria-hidden="true"></i>
-                                </span>
-                                <input id="{{ $id }}-company" name="company" type="text" autocomplete="organization"
-                                    placeholder="Enter company name"
-                                    class="w-full rounded-xl border border-[#CBD5E1] bg-white py-2.5 pl-9 pr-3 text-[13px] sm:text-sm text-[#0F172A] placeholder-[#94A3B8] transition duration-150 focus:border-[#2A4DFB] focus:outline-none focus:ring-4 focus:ring-[#2A4DFB]/10">
+                            <div class="relative" data-service-dropdown-wrapper>
+                                {{-- Real Hidden Service Input --}}
+                                <input type="hidden" name="service" value="" data-service-value required>
+
+                                {{-- Dropdown Trigger Button --}}
+                                <button type="button"
+                                    class="w-full rounded-xl border border-[#CBD5E1] bg-white py-2.5 px-3.5 text-left text-[13px] sm:text-sm flex items-center justify-between text-[#94A3B8] hover:border-[#94A3B8] focus:border-[#2A4DFB] focus:outline-none focus:ring-4 focus:ring-[#2A4DFB]/10 transition duration-150"
+                                    data-service-trigger aria-haspopup="listbox" aria-expanded="false" aria-labelledby="{{ $id }}-service-label">
+                                    <span class="flex items-center gap-2.5 min-w-0">
+                                        <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center text-[#2A4DFB]" data-service-icon>
+                                            <i class="fa-solid fa-shapes text-sm" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="truncate text-[#94A3B8]" data-service-label>Select a service</span>
+                                    </span>
+                                    <i class="fa-solid fa-chevron-down text-[11px] text-[#64748B] shrink-0 transition-transform duration-200" aria-hidden="true" data-service-chevron></i>
+                                </button>
+
+                                {{-- Dropdown Options Menu --}}
+                                <div class="absolute left-0 top-full mt-1.5 w-full rounded-xl border border-[#E2E8F0] bg-white p-1.5 shadow-2xl z-50 hidden max-h-60 overflow-y-auto"
+                                    data-service-menu role="listbox">
+                                    @foreach ($servicesList as $s)
+                                        <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg cursor-pointer text-[13px] text-[#1E293B] hover:bg-[#EEF4FF] hover:text-[#2A4DFB] transition group"
+                                            data-service-option data-value="{{ $s['value'] }}" data-label="{{ $s['label'] }}" data-icon="{{ $s['icon'] }}" data-color="{{ $s['color'] }}" role="option">
+                                            <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md" style="color: {{ $s['color'] }};">
+                                                <i class="{{ $s['icon'] }} text-xs" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="font-medium text-[#1E293B] group-hover:text-[#2A4DFB] transition-colors leading-snug">
+                                                {{ $s['label'] }}
+                                            </span>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-                            <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="company" hidden></span>
+                            <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="service" hidden></span>
                         </div>
 
                         {{-- Phone Number with intl-tel-input --}}
@@ -194,47 +219,6 @@
                                 :show-label="false"
                             />
                         </div>
-                    </div>
-
-                    {{-- Row 3: Service Dropdown --}}
-                    <div>
-                        <label id="{{ $id }}-service-label" class="block text-[12px] font-semibold text-[#1E293B] mb-1.5">
-                            Service You&rsquo;re Interested In <span class="text-red-500">*</span>
-                        </label>
-                        <div class="relative" data-service-dropdown-wrapper>
-                            {{-- Real Hidden Service Input --}}
-                            <input type="hidden" name="service" value="" data-service-value required>
-
-                            {{-- Dropdown Trigger Button --}}
-                            <button type="button"
-                                class="w-full rounded-xl border border-[#CBD5E1] bg-white py-2.5 px-3.5 text-left text-[13px] sm:text-sm flex items-center justify-between text-[#94A3B8] hover:border-[#94A3B8] focus:border-[#2A4DFB] focus:outline-none focus:ring-4 focus:ring-[#2A4DFB]/10 transition duration-150"
-                                data-service-trigger aria-haspopup="listbox" aria-expanded="false" aria-labelledby="{{ $id }}-service-label">
-                                <span class="flex items-center gap-2.5 min-w-0">
-                                    <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center text-[#2A4DFB]" data-service-icon>
-                                        <i class="fa-solid fa-shapes text-sm" aria-hidden="true"></i>
-                                    </span>
-                                    <span class="truncate text-[#94A3B8]" data-service-label>Select a service</span>
-                                </span>
-                                <i class="fa-solid fa-chevron-down text-[11px] text-[#64748B] shrink-0 transition-transform duration-200" aria-hidden="true" data-service-chevron></i>
-                            </button>
-
-                            {{-- Dropdown Options Menu --}}
-                            <div class="absolute left-0 top-full mt-1.5 w-full rounded-xl border border-[#E2E8F0] bg-white p-1.5 shadow-2xl z-50 hidden max-h-60 overflow-y-auto"
-                                data-service-menu role="listbox">
-                                @foreach ($servicesList as $s)
-                                    <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg cursor-pointer text-[13px] text-[#1E293B] hover:bg-[#EEF4FF] hover:text-[#2A4DFB] transition group"
-                                        data-service-option data-value="{{ $s['value'] }}" data-label="{{ $s['label'] }}" data-icon="{{ $s['icon'] }}" data-color="{{ $s['color'] }}" role="option">
-                                        <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md" style="color: {{ $s['color'] }};">
-                                            <i class="{{ $s['icon'] }} text-xs" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="font-medium text-[#1E293B] group-hover:text-[#2A4DFB] transition-colors leading-snug">
-                                            {{ $s['label'] }}
-                                        </span>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <span class="block text-[11px] text-red-500 font-medium mt-1" data-error-for="service" hidden></span>
                     </div>
 
                     {{-- Row 4: Project Details / Message --}}
@@ -910,7 +894,6 @@
             body.append('draft_token', token);
             body.append('name', (form.querySelector('[name="name"]')?.value || '').trim());
             body.append('email', (form.querySelector('[name="email"]')?.value || '').trim());
-            body.append('company', (form.querySelector('[name="company"]')?.value || '').trim());
             body.append('phone', getPhoneValue());
             body.append('service', serviceInput ? serviceInput.value.trim() : '');
             body.append('message', (form.querySelector('[name="message"]')?.value || '').trim());
@@ -938,7 +921,7 @@
 
         // Field change listeners
         if (form) {
-            ['name', 'email', 'company', 'message'].forEach(function (name) {
+            ['name', 'email', 'message'].forEach(function (name) {
                 var input = form.querySelector('[name="' + name + '"]');
                 if (input) {
                     input.addEventListener('input', function () {
