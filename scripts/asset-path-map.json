@@ -1,4 +1,8 @@
 {
+    "assets/images/enterprise-software-og.jpg": "assets/media/enterprise-software-og.jpg",
+    "/assets/images/enterprise-software-og.jpg": "assets/media/enterprise-software-og.jpg",
+    "images/enterprise-software-og.jpg": "assets/media/enterprise-software-og.jpg",
+    "/images/enterprise-software-og.jpg": "assets/media/enterprise-software-og.jpg",
     "images/about-banner-bg.png": "assets/background/about-banner-bg.png",
     "/images/about-banner-bg.png": "assets/background/about-banner-bg.png",
     "images/about-banner-image.png": "assets/team/about-us-team-portrait-banner.webp",
