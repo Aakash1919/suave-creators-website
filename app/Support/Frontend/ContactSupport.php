@@ -221,12 +221,17 @@ class ContactSupport
     public static function formServices(): array
     {
         return [
-            'web-development' => 'Web Development',
-            'ai-solutions' => 'AI Solutions',
-            'ui-ux-design' => 'UI/UX Design',
-            'ecommerce' => 'E-commerce Development',
+            'custom-software' => 'Custom Software Development',
             'custom-crm' => 'Custom CRM Development',
-            'enterprise-software' => 'Enterprise Software',
+            'ai-solutions' => 'AI Solutions & Development',
+            'web-development' => 'Web Development',
+            'ecommerce' => 'E-commerce Development',
+            'enterprise-software' => 'Enterprise Software Solutions',
+            'ui-ux-design' => 'UI/UX Design',
+            'mobile-app' => 'Mobile App Development',
+            'cloud-devops' => 'Cloud & DevOps',
+            'digital-marketing' => 'Digital Marketing',
+            'seo-aeo-geo' => 'SEO (AEO & GEO)',
             'other' => 'Other',
         ];
     }

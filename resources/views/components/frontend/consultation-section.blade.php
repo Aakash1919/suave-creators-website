@@ -20,13 +20,21 @@
           @endif
         </h2>
         <p>{{ $description }}</p>
-        <div class="mt-6">
-          <x-frontend.inline-consultation-form
-            theme="{{ $consultationTheme ?? 'light' }}"
-            placeholder="Enter your phone or email"
-            :button-text="$ctaLabel"
-            :secondary-href="$secondaryCtaLabel !== '' ? $secondaryCtaHref : ($ctaHref !== '' ? $ctaHref : '')"
-            :secondary-label="$secondaryCtaLabel !== '' ? $secondaryCtaLabel : ''" />
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <a href="{{ $ctaHref }}"
+            data-open-contact-modal
+            @if ($service !== '') data-service="{{ $service }}" @endif
+            class="group consultation-cta cursor-pointer">
+            <span>{{ $ctaLabel }}</span>
+            <x-frontend.cta-arrow />
+          </a>
+          @if ($secondaryCtaLabel !== '' && $secondaryCtaHref !== '')
+            <a href="{{ $secondaryCtaHref }}"
+              @if (str_starts_with($secondaryCtaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
+              class="consultation-secondary-link inline-flex cursor-pointer items-end border-b border-white/70 pb-0.5 text-sm font-semibold text-white">
+              {{ $secondaryCtaLabel }}
+            </a>
+          @endif
         </div>
       </div>
 
