@@ -452,7 +452,8 @@
           placeholder="Enter your phone or email"
           button-text="Get Free Consultation"
           :secondary-href="$demoHref"
-          secondary-label="Book a Call" />
+          secondary-label="Book a Call"
+          :secondary-as-button="true" />
       </div>
     @endif
   </div>
