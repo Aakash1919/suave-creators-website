@@ -47,6 +47,10 @@ class ContactController extends FrontendController
     public function store(ContactStoreRequest $request): JsonResponse|RedirectResponse
     {
         $wantsJson = $request->ajax() || $request->expectsJson() || $request->boolean('_ajax');
+        $redirectUrl = $request->input('_redirect');
+        if ($redirectUrl && ! str_starts_with($redirectUrl, '/') && ! str_starts_with($redirectUrl, url('/'))) {
+            $redirectUrl = null;
+        }
 
         if ($this->contacts->isBotSubmission($request)) {
             if ($wantsJson) {
@@ -54,12 +58,13 @@ class ContactController extends FrontendController
                     'success' => true,
                     'message' => ContactRequestService::SUCCESS_MESSAGE,
                     'lead_tracked' => false,
+                    ...($redirectUrl ? ['redirect' => $redirectUrl] : []),
                 ]);
             }
 
             createFlashMessage('Contact request', 'created');
 
-            return redirect()->route('contact-us')->withFragment('contact-id');
+            return $redirectUrl ? redirect()->to($redirectUrl) : redirect()->route('contact-us')->withFragment('contact-id');
         }
 
         $contact = $this->contacts->store($request);
@@ -70,12 +75,13 @@ class ContactController extends FrontendController
                 'success' => true,
                 'message' => ContactRequestService::SUCCESS_MESSAGE,
                 'lead_tracked' => true,
+                ...($redirectUrl ? ['redirect' => $redirectUrl] : []),
             ]);
         }
 
         createFlashMessage('Contact request', 'created');
 
-        return redirect()->route('contact-us')->withFragment('contact-id');
+        return $redirectUrl ? redirect()->to($redirectUrl) : redirect()->route('contact-us')->withFragment('contact-id');
     }
 
     /**

@@ -20,7 +20,7 @@ return [
     'heroPrimaryCta' => 'Get Free Consultation',
     'heroSecondaryCta' => 'Schedule a Discovery Call →',
 
-    'introQuestion' => "What do Suave Creators custom web development services include?",
+    'introQuestion' => "What do Suave Creators' custom web development services include?",
     'introQuestionEyebrow' => 'Service Scope & Inclusions',
     'introAnswer' => "Suave Creators' custom web development services encompass full-stack web application engineering, enterprise customer portals, cloud SaaS platforms and secure REST/GraphQL API architectures. Built using modern stacks including Laravel (PHP), ReactJS, Next.js, Node.js, Angular and Python. All platforms are engineered with single-tenant database isolation, sub-second Core Web Vitals and strict data security compliance (SOC 2, HIPAA, GDPR). Projects are governed under United States law via our Sheridan, Wyoming headquarters with high-velocity engineering from Palampur, India, delivering up to 60% total cost of ownership (TCO) savings.",
 
