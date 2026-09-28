@@ -2,224 +2,284 @@
 
 return [
     'slug' => 'enterprise-software-solutions',
-    'pageTitle' => 'Enterprise Software That Improves Operations',
-    'pageDescription' => 'Planning enterprise software? Understand what it takes, what you get, and how the right system can improve teams, workflows, and growth.',
-    'ogTitle' => 'Enterprise Software That Improves Operations',
-    'ogDescription' => 'Planning enterprise software? Understand what it takes, what you get, and how the right system can improve teams, workflows, and growth.',
+    'pageTitle' => 'Custom Enterprise Software Solutions & ERP Systems | Suave Creators',
+    'pageDescription' => 'Custom enterprise software solutions, bespoke ERP development, and workflow automation. Eliminate per-seat SaaS costs with 100% code and IP ownership.',
+    'ogTitle' => 'Custom Enterprise Software Solutions & ERP Systems | Suave Creators',
+    'ogDescription' => 'Custom enterprise software solutions, bespoke ERP development, and workflow automation. Eliminate per-seat SaaS costs with 100% code and IP ownership.',
+    'ogImage' => 'assets/media/enterprise-software-og.jpg',
+    'breadcrumbName' => 'Enterprise Software Solutions',
+
+    // Section 1: Hero Section
     'eyebrow' => 'OUR TAILOR-MADE SERVICES',
     'heroTitle' => [
-        0 => 'Smart Enterprise Software ',
-        1 => 'Solutions to upgrade your Business.',
+        'Smart Enterprise Software ',
+        'Solutions to Run Your Entire Business.',
     ],
-    'heroDescription' => 'Upgrade your organisation with custom enterprise software solutions that organise data, automate daily work, improve management visibility, and support reliable growth.',
+    'heroDescription' => 'Replace fragmented tools, manual spreadsheets, and escalating SaaS fees with custom enterprise software. We engineer central ERP platforms, internal operations engines, and automated workflows designed around how your company actually operates.',
     'bannerSideImage' => '/assets/media/enterprise-solution-banner.webp',
-
     'bannerBg' => '/assets/media/enterprise-software-bg.png',
     'primaryCta' => 'Let’s Connect to Discuss',
     'secondaryCta' => 'Drop Your Vision',
-    'introEyebrow' => 'Custom Web Development',
-    'introTitle' => 'Reach Out for Trusted Solution',
-    'introDescription' => 'We are trusted by many businesses and startups. With a team of qualified and professional software engineers, we are committed to providing reliable solutions that strictly follow individual clients’ demands.',
+
+    // Section 2: Trust & Authority Strip
+    'introEyebrow' => 'Enterprise Software Engineering',
+    'introTitle' => 'Direct Access to Senior Solutions Architects',
+    'introDescription' => 'We partner with mid-market businesses, logistics operators, and growing companies to build reliable operational software. From database design to production rollout, our engineers build scalable platforms that give you full ownership of your data and codebase.',
     'introLinkText' => 'Explore Services',
     'introLinkRoute' => 'services',
+
+    // Stats Grid
+    'introStats' => [
+        ['50+', 'Projects Delivered', 'Scalable enterprise platforms, bespoke ERPs, and automated workflow engines.', 'assets/icons/projects-delivered-stat-icon.svg', '#4C24F4'],
+        ['10+', 'Years Systems Experience', 'Senior full-stack architects engineering reliable enterprise systems.', 'assets/icons/years-experience-stat-icon.svg', '#1873E7'],
+        ['98%', 'Client Retention Rate', 'Long-term engineering partnerships driven by transparent SLAs and support.', 'assets/icons/funding-secured-stat-icon.svg', '#0C7A73'],
+        ['15+', 'Senior Engineers & Architects', 'Full-time in-house developers specializing in Laravel, React, Node.js, and cloud.', 'assets/icons/expert-team-stat-icon.svg', '#C4520D'],
+    ],
+
+    // Section 3: Architecture Discovery Callout Card
+    'crossSellEyebrow' => 'Connect with us',
+    'crossSellTitle' => 'Have a Complex Enterprise Architecture or Custom ERP Requirement?',
+    'crossSellDescription' => 'Looking to replace rigid third-party software, eliminate per-seat licensing fees, or integrate legacy databases with modern APIs? Discuss your technical roadmap, database schemas, or migration timeline directly with a solutions architect.',
+    'crossSellPrimaryLabel' => 'Book a Discovery Session',
+    'crossSellPrimaryHref' => 'contact-us',
+    'crossSellSecondaryLabel' => 'Explore Our Custom CRM Builder Services →',
+    'crossSellSecondaryHref' => 'custom-crm-builder',
+    'crossSellSecondaryClass' => 'smart-together-cta__btn-secondary group',
+    'crossSellShowPhone' => false,
+
+    // Section 4: Overview / Core Definition Section
     'bodyEyebrow' => 'Suave Creators',
-    'bodyTitle' => 'Enterprise Software Solutions for Operations, Management, and Growth',
+    'bodyTitle' => 'Enterprise Software Solutions for Operations, Management, and Long-Term Growth',
     'bodyBg' => '/assets/background/about-banner-bg.png',
     'bodyParagraphs' => [
-        0 => 'Enterprise software is a business system that helps teams manage complex operations, shared data, permissions, reporting, workflows, and integrations in one reliable place. Suave Creators builds enterprise software solutions for companies that need more control than spreadsheets, disconnected tools, or off-the-shelf apps can provide.',
-        1 => 'Common enterprise software examples include ERP, CRM, HR management, inventory and order management, analytics dashboards, workflow automation, and system integrations. We design these systems around your actual processes, so your team can track work, reduce manual effort, and make faster decisions from accurate data.',
+        'Enterprise software is the central nervous system of a business. It unifies operations, team permissions, transactional data, reporting, and external integrations in one dependable place. Suave Creators builds custom enterprise platforms for companies that have hit the limits of spreadsheets, disconnected SaaS apps, and off-the-shelf software.',
+        'Whether you need a bespoke ERP, cross-departmental inventory and order management, automated billing pipelines, or multi-system API bridges, we build software around your actual processes. Your team works faster, manual errors drop, and leadership gets clean, real-time visibility from a single source of truth.',
     ],
+    'bodyPrimaryCta' => 'Let’s Build Together',
+    'bodyPrimaryHref' => 'contact-us',
+    'bodySecondaryCta' => "Let's Build Your Digital Future Together",
+    'bodySecondaryHref' => 'demo',
+
+    // Section 5: Capabilities Grid (4 Numbered Cards)
     'capabilitiesEyebrow' => 'Let’s Build Together',
-    'capabilitiesTitle' => 'Technologies We Use for Enterprise Software Solutions',
-    'capabilitiesDescription' => 'We use a variety of technologies while developing Enterprise Software according to clients\' requirements. ',
+    'capabilitiesTitle' => 'Technologies & Capabilities for Enterprise Software Solutions',
+    'capabilitiesDescription' => 'We build custom software around your operational bottlenecks using modern, maintainable stacks.',
     'capabilitiesGridColumns' => 2,
     'capabilities' => [
-        0 => [
-            'title' => 'ERP Development',
+        [
+            'title' => 'Custom ERP Development',
             'image' => '/assets/icons/enterprise-technology-icon-1.svg',
-            'tags' => ['Website', 'Dashboard', 'Web Application', 'Software'],
-            'desc' => 'As a tailored ERP software solutions company, we provide customized solutions to design robust and upgraded ERP software solutions. It covers both web and mobile interfaces to suit your industry type and the scale business.',
+            'tags' => ['Operations', 'Dashboard', 'Inventory', 'Web Application'],
+            'desc' => 'We engineer custom ERP systems that fit your exact business model. Instead of paying for hundreds of unused features in generic suites, you get a clean platform covering multi-location inventory, purchase orders, production tracking, and accounting synchronization.',
         ],
-        1 => [
-            'title' => 'SaaS Solutions',
+        [
+            'title' => 'Commercial SaaS Engineering',
             'image' => '/assets/icons/enterprise-technology-icon-4.svg',
-            'tags' => ['Website', 'Dashboard', 'Web Application', 'Software'],
-            'desc' => 'Our team develops and maintains custom SaaS solutions for businesses to reduce the workload of business premise infrastructure. Our end-to-end SaaS ERP implementation modernized your enterprise operations and overcame complex business challenges through our scalable SaaS solutions.',
+            'tags' => ['Multi-Tenant', 'Stripe Billing', 'Cloud Infrastructure', 'Portals'],
+            'desc' => 'Turn your internal operational tools into commercial subscription software. We build scalable multi-tenant platforms with isolated tenant databases, automated onboarding, usage-based billing, and self-serve team administration.',
         ],
-        2 => [
-            'title' => 'Cloud-Based Solutions',
+        [
+            'title' => 'Cloud Modernization & Microservices',
             'image' => '/assets/icons/enterprise-technology-icon-2.svg',
-            'tags' => ['Website', 'Dashboard', 'Web Application', 'Software'],
-            'desc' => 'The demand for cloud-based solutions is growing rapidly. We help you build the best cloud-based enterprise solutions. We also help you in developing cloud-native apps using DevOps & approaches that include Kubernetes, etc.',
+            'tags' => ['AWS / GCP', 'Docker', 'API Gateways', 'Zero-Downtime'],
+            'desc' => 'Modernize legacy codebases, unmaintained desktop databases, and slow monoliths. We refactor old systems into fast, containerized web applications hosted on AWS or Google Cloud, with automated backups, CI/CD pipelines, and zero data loss.',
         ],
-        3 => [
-            'title' => 'Custom Business Software Development',
+        [
+            'title' => 'Custom Business Software & API Integration',
             'image' => '/assets/icons/enterprise-technology-icon-3.svg',
-            'tags' => ['Website', 'Dashboard', 'Web Application', 'Software'],
-            'desc' => 'We listen to clients\' requirements first and then work on custom business software solutions that perfectly fit company-specific needs. Our Custom software covers all types of CRM, HR Management, Project, and inventory management to control all the functionality. ',
+            'tags' => ['Automation', 'Data Sync', 'Role Permissions', 'PostgreSQL'],
+            'desc' => 'We connect tools that refuse to talk to each other. Our engineers build custom middleware, webhooks, and automated data pipelines that link your core operational database directly with QuickBooks, banking rails, logistics telematics, and customer portals.',
         ],
     ],
+
+    // Section 6: Projects Teaser Banner
     'portfolioEyebrow' => 'Our Projects',
-    'portfolioTitle' => 'Explore what we do',
-    'portfolioDescription' => 'We built a smart solution. Check out our portfolio and understand our skills, creativity and approach',
+    'portfolioTitle' => 'Explore What We Engineer',
+    'portfolioDescription' => 'Real production platforms where our software architecture solved major operational bottlenecks.',
     'portfolioImages' => [
-        0 => '/assets/portfolio/swastik-culture-hub-website.webp',
-        1 => '/assets/portfolio/mavan-growth-agency-website.webp',
-        2 => '/assets/portfolio/sales-automation-project-dashboard.webp',
-        3 => '/assets/portfolio/hubops-software-company-website.webp',
-        4 => '/assets/portfolio/suave-outreach-crm-laptop.webp',
-        5 => '/assets/portfolio/ematrics-ai-sales-website.webp',
+        '/assets/portfolio/swastik-culture-hub-website.webp',
+        '/assets/portfolio/mavan-growth-agency-website.webp',
+        '/assets/portfolio/sales-automation-project-dashboard.webp',
+        '/assets/portfolio/hubops-software-company-website.webp',
+        '/assets/portfolio/suave-outreach-crm-laptop.webp',
+        '/assets/portfolio/ematrics-ai-sales-website.webp',
     ],
+
+    // Section 7: Industries We Serve
     'industriesEyebrow' => 'Industries We Serve',
     'industriesTitle' => 'Industries We Serve',
-    'industriesDescription' => 'For the last many years, we have served a distinct client base, including healthcare, technology, financial and banking, e-commerce, and logistics etc. We focus on delivering scalable and integrated real business value through precision-driven execution.',
+    'industriesDescription' => 'We build software for industries where operational reliability, data security, and transaction accuracy are non-negotiable.',
     'industries' => [
-        0 => [
+        [
             'icon' => '/assets/icons/healthcare-icon-1.svg',
             'title' => 'Healthcare',
-            'desc' => 'We design Healthcare software solutions for the healthcare business. We cover businesses including patient portals, Patients\' health records, Doctors\' data management, appointment scheduling, and billing systems. We always make sure that our solutions ensure data security and enhance patient interactions.',
+            'desc' => 'Custom patient portals, appointment scheduling, encrypted health record interfaces, and billing workflows engineered to maintain strict HIPAA compliance and patient data privacy.',
             'slug' => 'healthcare-software-development',
         ],
-        1 => [
+        [
             'icon' => '/assets/icons/healthcare-icon-2.svg',
             'title' => 'Finance & Banking',
-            'desc' => 'We build custom banking and financial solutions that help manage daily transactions, regulatory compliance, and optimize financial services. Our solutions include banking platforms, investment management tools, and fintech applications.',
+            'desc' => 'Transactional ledger systems, automated payment processing via Stripe/Plaid, lending management portals, and audit trails built to financial security standards.',
             'slug' => 'finance-banking-software-development',
         ],
-        2 => [
+        [
             'icon' => '/assets/icons/healthcare-icon-3.svg',
             'title' => 'Retail & E-commerce',
-            'desc' => 'We develop custom enterprise software solutions for e-commerce and retail businesses, including customer relationship management (CRM), and analytics tools that help you optimize operations and boost customer satisfaction.',
+            'desc' => 'Centralized middleware that synchronizes stock, pricing, order fulfillment, and returns across multiple physical warehouses, storefronts, and accounting tools in real time.',
             'slug' => 'retail-ecommerce-solutions',
         ],
-        3 => [
+        [
             'icon' => '/assets/icons/healthcare-icon-4.svg',
             'title' => 'Manufacturing & Supply Chain',
-            'desc' => 'We offer enterprise software solutions that help manufacturers and supply chain businesses to efficiently manage their operations. Our software solutions cover production scheduling, inventory tracking, and complete logistics management.',
+            'desc' => 'Material requirements planning (MRP), production scheduling boards, bill-of-materials tracking, and automated vendor purchase orders that eliminate manual delays.',
             'link' => '#',
         ],
-        4 => [
+        [
             'icon' => '/assets/icons/healthcare-icon-5.svg',
-            'title' => 'Education & E-learning Platforms',
-            'desc' => 'Our Professional team creates custom software solutions for educational institutes and e-learning platforms. We integrate all features with our tools, like enhancing student engagement, student attendance management, and course management.',
+            'title' => 'Education & E-learning',
+            'desc' => 'Custom learning management platforms, campus administration dashboards, automated attendance, student progress tracking, and secure assessment portals.',
             'slug' => 'education-elearning-platforms',
         ],
-        5 => [
+        [
             'icon' => '/assets/icons/healthcare-icon-6.svg',
-            'title' => 'Logistics & Supply Chain',
-            'desc' => 'We help logistics and supply chain businesses to improve all day-to-day operational efficiency, reduce labour and costs too, order management, and ensure timely deliveries with seamless integration.',
+            'title' => 'Logistics & Fleet Management',
+            'desc' => 'Dispatch software, automated driver settlements, route milestone tracking, and telematics hardware integration to eliminate paper logs and phone tag.',
             'slug' => 'logistics-supply-chain-apps',
         ],
     ],
+
+    // Section 9: Why Choose Suave Creators (3 Cards)
     'whyEyebrow' => 'Suave Creators',
     'whyTitle' => 'Why Choose Suave Creators for Your Enterprise Software Needs?',
-    'whyDescription' => 'We are powered by innovative and fresh minds who are committed to developing smart solutions with creativity and excellence.',
+    'whyDescription' => 'We believe in transparent partnerships, robust code quality, and building software that directly serves your long-term business goals.',
     'whyCards' => [
-        0 => [
+        [
             'image' => '/assets/media/big-project-sticky-notes-planning.webp',
-            'title' => 'Tailored Solutions for Every Business',
-            'text' => 'At Suave Creators, we are always ready to design enterprise software that completely aligns with your business goals and industry standards. Our ERP solutions are customized to help you achieve maximum efficiency and scalability.',
+            'title' => 'Software Built Around Your Rules',
+            'text' => 'We don\'t force your staff to adapt to rigid templates. Every screen, database table, and permission setting is built around your established operational procedures.',
         ],
-        1 => [
+        [
             'image' => '/assets/media/developers-collaborating-code-review.webp',
-            'title' => 'End-to-End Development Expertise',
-            'text' => 'Our team handles everything from idea to implementation, which includes planning, designing, development, and support systems. Whether it’s ERP, SaaS, or a complex enterprise system, we ensure a smooth process with a focus on quality and performance, no matter, it’s ERP or SaaS.',
+            'title' => 'Senior Engineering from Day One',
+            'text' => 'You communicate directly with solutions architects and senior developers who understand database normalization, security, and scalable infrastructure.',
         ],
-        2 => [
+        [
             'image' => 'assets/media/summary-report-team-meeting-480.webp',
-            'title' => 'Ongoing Support & Future-Ready Technology',
-            'text' => 'We just go beyond the development. Our team offers continuous support, updates, and enhancements after development to keep your software secure and competitive. By leveraging the latest technologies, we ensure your enterprise system is developed to evolve with your business.',
+            'title' => '100% Code & IP Ownership',
+            'text' => 'When a project is completed, you own all source code repositories, database schemas, and documentation. No licensing ties, zero royalties, no vendor lock-in.',
         ],
     ],
     'whyButtonText' => 'Let’s Discuss Your Vision',
+    'whyButtonUrl' => 'contact-us',
+
+    // Section 10: Development Process (5 Steps)
     'processEyebrow' => 'Suave Creators',
     'processTitle' => 'Our Enterprise Software Development Process',
-    'processDescription' => 'A step-by-step procedure is followed whenever we are working on the development phase. These are steps:-',
+    'processDescription' => 'A structured engineering lifecycle designed for precision, transparent milestones, and zero operational downtime.',
     'processSteps' => [
-        0 => [
-            'title' => 'Discovery & Strategy',
-            'desc' => 'A clean plan is always required to make a project successful. Our team works closely with you and understands your business goals, requirements more clearly. In the discovery phase, we do some research and make a tailored strategy.',
+        [
+            'title' => 'Discovery & Architecture',
+            'desc' => 'We evaluate your workflows, map out database entities, document API endpoints, and establish a clear technical specification before writing code.',
         ],
-        1 => [
-            'title' => 'Design & Prototyping',
-            'desc' => 'After a clean strategy, we bring discussed ideas into a wireframe and interactive prototypes. We make sure your software is optimised, visually appealing, and has a good (UX) design for better user experience.',
+        [
+            'title' => 'Interactive UX & Prototyping',
+            'desc' => 'We create clickable Figma wireframes showing exact user journeys so your team can test usability and approve interfaces prior to development.',
         ],
-        2 => [
-            'title' => 'Development & Integration',
-            'desc' => 'After finalising the design, our development team supports advanced technologies like PHP, React, and Laravel to build powerful custom solutions. We also integrate third-party tools, APIs, and existing systems, which are required as per client details.',
+        [
+            'title' => 'Sprint-Based Development',
+            'desc' => 'We build in two-week agile sprints. You receive live staging demos every two weeks to test real, working software increments.',
         ],
-        3 => [
-            'title' => 'Testing & Quality Assurance',
-            'desc' => 'Quality is always the heart of the process; that’s why we give more importance to this phase. We carry out a rigorous testing process across multiple devices to recognise the minor issues and resolve them before the website launch.',
+        [
+            'title' => 'Testing & Security QA',
+            'desc' => 'Comprehensive testing across data validation, system load, user permission roles, and edge-case transactions to guarantee rock-solid stability.',
         ],
-        4 => [
-            'title' => 'Launch & Ongoing Support',
-            'desc' => 'Quality is always the heart of the process; that’s why we give more importance to this phase. We carry out a rigorous testing process across multiple devices to recognise the minor issues and resolve them before the website launch.',
+        [
+            'title' => 'Deployment & Smooth Cutover',
+            'desc' => 'We handle cloud server provisioning, data migration, and parallel-run testing to transition your team off legacy systems with zero operational downtime.',
         ],
     ],
+
+    // Section 11: Why Suave Creators Stands Out (3 Differentiator Cards)
     'standoutEyebrow' => 'Explore',
     'standoutTitle' => 'Why Suave Creators Stands Out',
     'standoutCards' => [
-        0 => [
+        [
             'step' => '01',
-            'title' => 'Industry-Specific Expertise',
-            'desc' => 'We have a team of experts who are all industry specialists and have good command of their proficiency. Whether it’s healthcare, education, finance, or e-commerce, we design enterprise systems that address industry-specific needs and give you a competitive edge.',
+            'title' => 'Domain-Specific Technical Depth',
+            'desc' => 'We take time to understand the business mechanics behind your operations—whether that\'s freight margins, medical billing, or warehouse batching.',
             'icon' => '/assets/icons/web-service-icon-1.svg',
         ],
-        1 => [
+        [
             'step' => '02',
-            'title' => 'Seamless Integration',
-            'desc' => 'We design software that works in harmony with your existing tools and systems. From CRM and ERP platforms to third-party applications, our solutions are built for smooth integration. This minimises disruption, improves efficiency, and allows your business to maximise the value of its technology investments.',
+            'title' => 'Clean System Integration',
+            'desc' => 'We make sure your new software communicates smoothly with your existing accounting tools, legacy databases, and third-party APIs.',
             'icon' => '/assets/icons/web-service-icon-2.svg',
         ],
-        2 => [
+        [
             'step' => '03',
-            'title' => 'Commitment to Client Success',
-            'desc' => 'Client success is our top priority. We are always ready to collaborate with our clients to understand the vision, goals, and challenges smartly and deliver the software solutions that exactly they want to grow their business efficiently.',
+            'title' => 'Long-Term SLA Support',
+            'desc' => 'Beyond deployment, we offer ongoing maintenance, monitoring, security updates, and SLA tiers to support your system as your company expands.',
             'icon' => '/assets/icons/web-service-icon-3.svg',
         ],
     ],
+
+    'logoMarquee' => [
+        '/assets/brand/logo-mark-shape.svg',
+        '/assets/brand/logo-mark-shape.svg',
+        '/assets/brand/logo-mark-shape.svg',
+        '/assets/brand/logo-mark-shape.svg',
+    ],
+
+    // Section 12: Frequently Asked Questions (8 FAQs)
+    'faqEyebrow' => 'Have questions about our Services?',
+    'faqTitle' => 'Frequently Asked Questions: Delivery, Pricing & Code Ownership',
+    'faqDescription' => 'Clear answers to help you evaluate custom enterprise software development.',
+    'faqCtaLabel' => 'Get Free Consultation',
+    'faqCtaHref' => 'contact-us',
     'faqs' => [
-        0 => [
+        [
             'question' => 'What is enterprise software?',
-            'answer' => 'Enterprise software is a business application used to manage company-wide operations, data, teams, permissions, reporting, and workflows. It helps growing organisations replace scattered tools with one reliable system.',
+            'answer' => 'Enterprise software is a centralized application suite that manages company-wide operations, data records, team permissions, and reporting across an entire organization. It replaces disconnected tools and manual spreadsheets with one dependable system.',
         ],
-        1 => [
+        [
             'question' => 'What are examples of enterprise software?',
-            'answer' => 'Examples of enterprise software include ERP, CRM, HR management, inventory and order management, analytics dashboards, workflow automation, and system integrations built around daily business operations.',
+            'answer' => 'Common examples include custom Enterprise Resource Planning (ERP) platforms, supply chain management systems, automated billing portals, human resource platforms (HRMS), inventory tracking engines, and business intelligence dashboards.',
         ],
-        2 => [
+        [
             'question' => 'How does enterprise software management help operations?',
-            'answer' => 'Enterprise software management helps leaders organise workflows, assign access, monitor performance, connect departments, reduce manual work, and keep business data accurate across teams.',
+            'answer' => 'It establishes a single source of truth across all departments. By automating repetitive tasks, removing duplicate data entry, and connecting sales, inventory, and accounting, enterprise software reduces errors, speeds up order cycles, and gives leadership real-time visibility.',
         ],
-        3 => [
+        [
             'question' => 'What are custom enterprise software solutions?',
-            'answer' => 'Custom enterprise software solutions are applications designed around your exact business needs. They streamline operations, improve efficiency, connect systems, and support long-term growth.',
+            'answer' => 'Custom enterprise software solutions are proprietary software platforms designed from scratch around an organization\'s specific workflows and compliance rules. Unlike off-the-shelf software, custom builds involve zero per-seat subscription fees and allow complete control over features and updates.',
         ],
-        4 => [
+        [
             'question' => 'How long does it take to develop custom enterprise software?',
-            'answer' => 'The timeline depends on the complexity of the project. On average, it can take anywhere from 1 month to 6 months, depending on the features, integrations, data requirements, and scale of the software.',
+            'answer' => 'An operational MVP or first core module typically takes 8 to 14 weeks. A full-scale enterprise ERP or multi-department modernization generally takes between 4 to 6 months, delivered in continuous two-week working sprint milestones.',
         ],
-        5 => [
+        [
             'question' => 'What industries benefit from custom enterprise software solutions?',
-            'answer' => 'Industries like banking, education, logistics, healthcare, retail, e-commerce, and manufacturing all benefit from custom enterprise software designed for their daily tasks.',
+            'answer' => 'Any industry managing complex transactions, multi-step workflows, or regulatory requirements benefits significantly—especially Logistics, Healthcare, FinTech, Manufacturing, Multi-Channel Commerce, and Higher Education.',
         ],
-        6 => [
+        [
             'question' => 'What is the difference between SaaS and custom enterprise software?',
-            'answer' => 'SaaS is a ready-to-use subscription-based software solution, while custom enterprise software is developed from scratch to meet your specific business requirements.',
+            'answer' => 'With commercial SaaS, you pay recurring monthly fees per user, your data lives on a shared third-party server, and you must accept the vendor\'s feature limitations. With custom enterprise software, you make a one-time capital investment to build an asset you own outright, with zero per-user fees and unlimited flexibility.',
         ],
-        7 => [
+        [
             'question' => 'How do you ensure the security of enterprise software solutions?',
-            'answer' => 'We follow strict security practices, including data encryption, safe coding, regular updates, and compliance with industry standards to keep your system secure.',
+            'answer' => 'We implement AES-256 data encryption at rest, TLS 1.3 in transit, strict Role-Based Access Control (RBAC), multi-factor authentication (MFA/SSO), parameterized database queries to prevent SQL injection, and detailed audit logging to maintain SOC2, HIPAA, and GDPR compliance standards.',
         ],
     ],
-    'finalEyebrow' => 'Your Digital Future Together',
-    'finalTitle' => 'Let’s Build Your Enterprise Software Together',
 
-    'finalDescription' => 'At Suave Creators, we believe enterprise software should make everyday work clearer, faster, and easier to manage. Our Enterprise Software Solutions services are tailored to your business goals, from internal dashboards and ERP tools to CRM workflows, automation, and secure system integrations.',
+    // Section 13: Bottom Call-to-Action Banner
+    'finalEyebrow' => 'Your Digital Future Together',
+    'finalTitle' => 'Let’s Build Enterprise Software Tailored to Your Business',
+    'finalDescription' => 'At Suave Creators, we believe enterprise software should make everyday operations clearer, faster, and easier to scale. Discuss your technical requirements, database needs, and project timeline directly with our lead architect.',
     'finalBg' => '/assets/background/enterprise-service-alt-bg.webp',
     'hideFinalBgBelowDesktop' => true,
     'finalPrimaryCta' => 'Get a Free Quote',
-    'finalSecondaryCta' => 'Contact us Today',
+    'finalPrimaryHref' => 'contact-us',
+    'finalSecondaryCta' => 'Contact Us Today',
+    'finalSecondaryHref' => 'contact-us',
     'showFinalPeople' => false,
 ];

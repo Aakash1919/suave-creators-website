@@ -426,13 +426,52 @@ class ServiceSupport
      */
     public static function serviceSeoStructuredData(string $slug, array $service): array
     {
+        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
+
+        if ($slug === 'enterprise-software-solutions') {
+            $pageUrl = rtrim(route('service.show', ['slug' => 'enterprise-software-solutions']), '/');
+            $serviceId = $pageUrl.'/#service';
+
+            return [
+                'seoJsonLdGraph' => [[
+                    '@type' => 'Service',
+                    '@id' => $serviceId,
+                    'name' => 'Custom Enterprise Software Solutions',
+                    'url' => $pageUrl,
+                    'serviceType' => 'Enterprise Software Development',
+                    'category' => 'Software Engineering',
+                    'provider' => [
+                        '@id' => $baseUrl.'/#organization',
+                    ],
+                    'areaServed' => [
+                        ['@type' => 'Country', 'name' => 'United States'],
+                        ['@type' => 'Country', 'name' => 'United Kingdom'],
+                        ['@type' => 'Country', 'name' => 'United Arab Emirates'],
+                        ['@type' => 'Country', 'name' => 'Canada'],
+                        ['@type' => 'Country', 'name' => 'Switzerland'],
+                    ],
+                    'description' => 'Bespoke enterprise software, custom ERP development, legacy code modernization, and automated API middleware with 100% intellectual property ownership.',
+                    'hasOfferCatalog' => [
+                        '@type' => 'OfferCatalog',
+                        'name' => 'Enterprise Software Services',
+                        'itemListElement' => [
+                            ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Bespoke ERP & Operations Management Platforms']],
+                            ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Legacy Code Modernization & Database Migration']],
+                            ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'API Middleware & Automated Sync Pipelines']],
+                            ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Commercial Multi-Tenant SaaS Systems']],
+                        ],
+                    ],
+                ]],
+                'seoJsonLdWebpageAbout' => $serviceId,
+            ];
+        }
+
         if ($slug !== 'web-development-services') {
             return [];
         }
 
         $pageUrl = rtrim(route('service.show', ['slug' => 'web-development-services']), '/');
         $serviceId = $pageUrl.'/#service';
-        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
 
         return [
             'seoJsonLdGraph' => [[
@@ -709,7 +748,19 @@ class ServiceSupport
     {
         $href = trim($href);
 
-        if ($href === '' || $href === 'demo' || $href === 'booking') {
+        if ($href === 'demo' || $href === 'booking') {
+            return ContactSupport::demoHref();
+        }
+
+        if ($href === 'contact' || $href === 'contact-us') {
+            return route('contact-us');
+        }
+
+        if ($href === 'custom-crm-builder') {
+            return route('custom-crm-builder');
+        }
+
+        if ($href === '') {
             return ContactSupport::demoHref();
         }
 
@@ -803,7 +854,8 @@ class ServiceSupport
 
         return match (true) {
             $path === 'services' => route('services'),
-            $path === 'contact-us' => ContactSupport::demoHref(),
+            $path === 'contact-us' || $path === 'contact' => route('contact-us'),
+            $path === 'custom-crm-builder' => route('custom-crm-builder'),
             $path === 'blogs' => route('blogs'),
             $path === 'case-studies' => route('case-studies'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),
