@@ -4239,7 +4239,8 @@ body.mobile-nav-open {
 }
 
 .portfolio-hero-showcase .portfolio-showcase__image {
-  aspect-ratio: 1.23 / 1;
+  aspect-ratio: 1614 / 1348;
+  border-radius: 0;
   box-shadow: 0 12px 30px rgb(36 36 84 / 8%);
 }
 

@@ -4,6 +4,8 @@
     'buttonText' => 'Get Free Consultation',
     'secondaryHref' => '',
     'secondaryLabel' => '',
+    'secondaryAsButton' => false,
+    'secondaryClass' => '',
     'formId' => null,
     'showField' => false,
     'align' => 'center',
@@ -61,11 +63,22 @@
   <div class="consultation-inline-status mt-2 text-xs font-medium px-1 text-left" hidden></div>
 
   @if ($secondaryLabel !== '' && $secondaryHref !== '')
-    <div class="mt-3 flex items-center">
+    @php
+      $hasTextArrow = str_contains($secondaryLabel, '→') || str_contains($secondaryLabel, '&rarr;');
+      $defaultSecondaryClass = $secondaryAsButton
+          ? ($isDark
+              ? 'group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20'
+              : 'u-btn-cta group inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110')
+          : 'group inline-flex items-center gap-1.5 no-underline '.($isDark ? 'border-white/70 text-white/80 hover:text-white' : 'border-[#00003F] text-[#2A4DFB] hover:text-[#2A4DFB]').' text-[13px] sm:text-sm font-semibold transition';
+      $appliedSecondaryClass = $secondaryClass !== '' ? $secondaryClass : $defaultSecondaryClass;
+    @endphp
+    <div class="{{ $secondaryAsButton ? 'mt-4 flex items-center justify-center' : 'mt-3 flex items-center' }}">
       <a href="{{ $secondaryHref }}"
-        class="group inline-flex items-center gap-1.5 no-underline {{ $isDark ? 'border-white/70 text-white/80 hover:text-white' : 'border-[#00003F] text-[#2A4DFB] hover:text-[#2A4DFB]' }} text-[13px] sm:text-sm font-semibold transition">
-        {{ $secondaryLabel }}
-        <x-frontend.cta-arrow />
+        class="{{ $appliedSecondaryClass }}">
+        <span>{{ $secondaryLabel }}</span>
+        @if (! $hasTextArrow)
+          <x-frontend.cta-arrow class="shrink-0" />
+        @endif
       </a>
     </div>
   @endif
