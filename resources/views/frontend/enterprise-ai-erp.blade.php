@@ -1,8 +1,15 @@
 @extends('layouts.frontend')
 
+@push('custom-css')
+<link rel="preload" as="image" href="{{ asset($bannerBackgroundImage) }}" type="image/webp">
+@endpush
+
 @section('content')
 
-<section class="full-bleed enterprise-ai-erp-hero" aria-labelledby="enterprise-ai-erp-heading">
+<section
+  class="full-bleed enterprise-ai-erp-hero"
+  style="background-image: url('{{ asset($bannerBackgroundImage) }}');"
+  aria-labelledby="enterprise-ai-erp-heading">
   <div class="section-inner enterprise-ai-erp-hero__inner">
     <div class="enterprise-ai-erp-hero__top">
       <div class="enterprise-ai-erp-hero__copy">
@@ -25,18 +32,41 @@
       {{-- Replace this frame with an img: asset('assets/media/...') plus alt and title. --}}
       <div class="enterprise-ai-erp-hero__visual" role="img" aria-label="{{ $visualLabel }}"></div>
     </div>
+  </div>
+</section>
 
-    <section class="enterprise-ai-erp-metrics" aria-labelledby="enterprise-ai-erp-metrics-heading">
-      <h2 id="enterprise-ai-erp-metrics-heading" class="enterprise-ai-erp-metrics__title">{{ $metricsTitle }}</h2>
-      <div class="enterprise-ai-erp-metrics__grid">
-        @foreach ($metrics as $metric)
-          <article class="enterprise-ai-erp-metrics__card">
-            <p class="enterprise-ai-erp-metrics__value">{{ $metric['value'] }}</p>
-            <p class="enterprise-ai-erp-metrics__detail">{{ $metric['detail'] }}</p>
+<section
+  class="full-bleed crm-builder-trust-band"
+  id="trust"
+  style="background-image: url('{{ asset($trustBackgroundImage) }}');"
+  aria-label="{{ $trustTitle }}">
+  <div class="section-inner">
+    <div class="crm-builder-trust">
+      <div class="crm-builder-trust__intro">
+        <p class="crm-builder-trust__eyebrow">
+          <span class="crm-builder-trust__eyebrow-bar" aria-hidden="true"></span>
+          <span class="crm-builder-trust__eyebrow-text">{{ $trustEyebrow }}</span>
+        </p>
+        <div class="crm-builder-trust__copy">
+          <h2 class="home-type-h2 crm-builder-trust__title">{{ $trustTitle }}</h2>
+          <p class="crm-builder-trust__desc">{{ $trustDescription }}</p>
+          <a href="{{ route('services') }}" class="crm-builder-trust__link">
+            {{ $trustLinkText }}
+            <x-frontend.cta-arrow />
+          </a>
+        </div>
+      </div>
+
+      <div class="crm-builder-trust__stats">
+        @foreach ($trustStats as $stat)
+          <article class="crm-builder-trust__stat">
+            <strong class="crm-builder-trust__stat-value">{{ $stat['value'] }}</strong>
+            <h3 class="crm-builder-trust__stat-label">{{ $stat['label'] }}</h3>
+            <p class="crm-builder-trust__stat-detail">{{ $stat['detail'] }}</p>
           </article>
         @endforeach
       </div>
-    </section>
+    </div>
   </div>
 </section>
 
@@ -222,32 +252,32 @@
 
     <div class="enterpriseModulesSwiper swiper enterprise-ai-erp-modules__swiper" aria-label="{{ $modules['eyebrow'] }}">
       <div class="swiper-wrapper">
-      @foreach ($modules['items'] as $item)
-        <div class="swiper-slide">
-        <article class="enterprise-ai-erp-modules__card">
-          <div class="enterprise-ai-erp-modules__icon">
-            @if (filled($item['icon']))
-              <img
-                src="{{ asset($item['icon']) }}"
-                alt="{{ $item['iconAlt'] }}"
-                title="{{ $item['iconAlt'] }}"
-                width="28"
-                height="28"
-                decoding="async">
-            @else
-              <span class="enterprise-ai-erp-modules__icon-placeholder" role="img" aria-label="{{ $item['iconAlt'] }}"></span>
-            @endif
+        @foreach ($modules['items'] as $item)
+          <div class="swiper-slide">
+            <article class="enterprise-ai-erp-modules__card">
+              <div class="enterprise-ai-erp-modules__icon">
+                @if (filled($item['icon']))
+                  <img
+                    src="{{ asset($item['icon']) }}"
+                    alt="{{ $item['iconAlt'] }}"
+                    title="{{ $item['iconAlt'] }}"
+                    width="28"
+                    height="28"
+                    decoding="async">
+                @else
+                  <span class="enterprise-ai-erp-modules__icon-placeholder" role="img" aria-label="{{ $item['iconAlt'] }}"></span>
+                @endif
+              </div>
+              <h3 class="enterprise-ai-erp-modules__card-title">{{ $item['title'] }}</h3>
+              <ul class="enterprise-ai-erp-modules__tags">
+                @foreach ($item['tags'] as $tag)
+                  <li>{{ $tag }}</li>
+                @endforeach
+              </ul>
+              <p class="enterprise-ai-erp-modules__card-copy">{{ $item['copy'] }}</p>
+            </article>
           </div>
-          <h3 class="enterprise-ai-erp-modules__card-title">{{ $item['title'] }}</h3>
-          <ul class="enterprise-ai-erp-modules__tags">
-            @foreach ($item['tags'] as $tag)
-              <li>{{ $tag }}</li>
-            @endforeach
-          </ul>
-          <p class="enterprise-ai-erp-modules__card-copy">{{ $item['copy'] }}</p>
-        </article>
-        </div>
-      @endforeach
+        @endforeach
       </div>
     </div>
 
@@ -258,6 +288,170 @@
       <button class="enterprise-ai-erp-modules__next offerings-control" type="button" aria-label="Next enterprise module">
         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
       </button>
+    </div>
+  </div>
+</section>
+
+<section class="full-bleed enterprise-ai-erp-verticals" aria-labelledby="enterprise-ai-erp-verticals-heading">
+  <div class="section-inner enterprise-ai-erp-verticals__inner">
+    <div class="enterprise-ai-erp-verticals__intro">
+      <p class="enterprise-ai-erp-verticals__eyebrow">
+        <span class="enterprise-ai-erp-verticals__eyebrow-mark" aria-hidden="true"></span>
+        {{ $verticals['eyebrow'] }}
+      </p>
+      <div class="enterprise-ai-erp-verticals__copy">
+        <h2 id="enterprise-ai-erp-verticals-heading" class="enterprise-ai-erp-verticals__title">{{ $verticals['title'] }}</h2>
+        <p class="enterprise-ai-erp-verticals__desc">{{ $verticals['description'] }}</p>
+      </div>
+    </div>
+
+    <div class="enterprise-ai-erp-verticals__grid">
+      @foreach ($verticals['items'] as $item)
+        <article class="enterprise-ai-erp-verticals__card">
+          <div class="enterprise-ai-erp-verticals__media">
+            @if (filled($item['image']))
+              <img
+                src="{{ asset($item['image']) }}"
+                alt="{{ $item['imageAlt'] }}"
+                title="{{ $item['imageAlt'] }}"
+                width="640"
+                height="400"
+                loading="lazy"
+                decoding="async">
+            @else
+              <span class="enterprise-ai-erp-verticals__image-placeholder" role="img" aria-label="{{ $item['imageAlt'] }}"></span>
+            @endif
+          </div>
+          <div class="enterprise-ai-erp-verticals__logo">
+            @if (filled($item['logo']))
+              <img
+                src="{{ asset($item['logo']) }}"
+                alt="{{ $item['logoAlt'] }}"
+                title="{{ $item['logoAlt'] }}"
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async">
+            @else
+              <span class="enterprise-ai-erp-verticals__logo-placeholder" role="img" aria-label="{{ $item['logoAlt'] }}"></span>
+            @endif
+          </div>
+          <h3 class="enterprise-ai-erp-verticals__card-title">{{ $item['title'] }}</h3>
+          <p class="enterprise-ai-erp-verticals__kicker">{{ $verticals['challengeLabel'] }}</p>
+          <p class="enterprise-ai-erp-verticals__text">{{ $item['challenge'] }}</p>
+          <p class="enterprise-ai-erp-verticals__kicker1">{{ $verticals['architectureLabel'] }}</p>
+          <p class="enterprise-ai-erp-verticals__text">{{ $item['architecture'] }}</p>
+        </article>
+      @endforeach
+    </div>
+  </div>
+</section>
+
+<section class="full-bleed enterprise-ai-erp-governance" aria-labelledby="enterprise-ai-erp-governance-heading">
+  <div class="section-inner enterprise-ai-erp-governance__inner">
+    <div class="enterprise-ai-erp-governance__copy">
+      <p class="enterprise-ai-erp-governance__eyebrow">{{ $governance['eyebrow'] }}</p>
+      <h2 id="enterprise-ai-erp-governance-heading" class="enterprise-ai-erp-governance__title">{{ $governance['title'] }}</h2>
+      <p class="enterprise-ai-erp-governance__desc">{{ $governance['description'] }}</p>
+    </div>
+    <div class="enterprise-ai-erp-governance__list">
+      @foreach ($governance['items'] as $item)
+        <article class="enterprise-ai-erp-governance__card">
+          <h3 class="enterprise-ai-erp-governance__card-title">{{ $item['title'] }}</h3>
+          <p class="enterprise-ai-erp-governance__card-copy">{{ $item['copy'] }}</p>
+        </article>
+      @endforeach
+    </div>
+  </div>
+</section>
+
+<section class="full-bleed enterprise-ai-erp-stack" aria-labelledby="enterprise-ai-erp-stack-heading">
+  <div class="section-inner enterprise-ai-erp-stack__inner">
+    <p class="enterprise-ai-erp-stack__eyebrow">{{ $stack['eyebrow'] }}</p>
+    <h2 id="enterprise-ai-erp-stack-heading" class="enterprise-ai-erp-stack__title">{{ $stack['title'] }}</h2>
+
+    @foreach ($stack['groups'] as $group)
+      <div class="enterprise-ai-erp-stack__row">
+        <div class="enterprise-ai-erp-stack__intro">
+          <h3 class="enterprise-ai-erp-stack__category">{{ $group['title'] }}</h3>
+          <p class="enterprise-ai-erp-stack__subtitle">{{ $group['subtitle'] }}</p>
+          <p class="enterprise-ai-erp-stack__desc">{{ $group['description'] }}</p>
+        </div>
+        <ul class="enterprise-ai-erp-stack__cards">
+          @foreach ($group['items'] as $item)
+            <li class="enterprise-ai-erp-stack__card">
+              <div class="enterprise-ai-erp-stack__icon">
+                @if (filled($item['icon']))
+                  <img
+                    src="{{ asset($item['icon']) }}"
+                    alt="{{ $item['iconAlt'] }}"
+                    title="{{ $item['iconAlt'] }}"
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                    decoding="async">
+                @else
+                  <span class="enterprise-ai-erp-stack__icon-placeholder" role="img" aria-label="{{ $item['iconAlt'] }}"></span>
+                @endif
+              </div>
+              <p class="enterprise-ai-erp-stack__name">{{ $item['name'] }}</p>
+              <p class="enterprise-ai-erp-stack__copy">{{ $item['copy'] }}</p>
+            </li>
+          @endforeach
+        </ul>
+      </div>
+    @endforeach
+  </div>
+</section>
+
+<section class="full-bleed enterprise-ai-erp-delivery" aria-labelledby="enterprise-ai-erp-delivery-heading">
+  <div class="section-inner enterprise-ai-erp-delivery__inner">
+    <div class="enterprise-ai-erp-delivery__intro">
+      <p class="enterprise-ai-erp-delivery__eyebrow">
+        <span class="enterprise-ai-erp-delivery__eyebrow-mark" aria-hidden="true"></span>
+        {{ $delivery['eyebrow'] }}
+      </p>
+      <div class="enterprise-ai-erp-delivery__copy">
+        <h2 id="enterprise-ai-erp-delivery-heading" class="enterprise-ai-erp-delivery__title">{{ $delivery['title'] }}</h2>
+        <p class="enterprise-ai-erp-delivery__desc">{{ $delivery['description'] }}</p>
+      </div>
+    </div>
+
+    <div class="enterprise-ai-erp-delivery__grid">
+      @foreach ($delivery['items'] as $item)
+        <article class="enterprise-ai-erp-delivery__card">
+          <div class="enterprise-ai-erp-delivery__media">
+            @if (filled($item['image']))
+              <img
+                src="{{ asset($item['image']) }}"
+                alt="{{ $item['imageAlt'] }}"
+                title="{{ $item['imageAlt'] }}"
+                width="640"
+                height="400"
+                loading="lazy"
+                decoding="async">
+            @else
+              <span class="enterprise-ai-erp-delivery__image-placeholder" role="img" aria-label="{{ $item['imageAlt'] }}"></span>
+            @endif
+          </div>
+          <div class="enterprise-ai-erp-delivery__logo">
+            @if (filled($item['logo']))
+              <img
+                src="{{ asset($item['logo']) }}"
+                alt="{{ $item['logoAlt'] }}"
+                title="{{ $item['logoAlt'] }}"
+                width="22"
+                height="22"
+                loading="lazy"
+                decoding="async">
+            @else
+              <span class="enterprise-ai-erp-delivery__logo-placeholder" role="img" aria-label="{{ $item['logoAlt'] }}"></span>
+            @endif
+          </div>
+          <h3 class="enterprise-ai-erp-delivery__card-title">{{ $item['title'] }}</h3>
+          <p class="enterprise-ai-erp-delivery__text">{{ $item['copy'] }}</p>
+        </article>
+      @endforeach
     </div>
   </div>
 </section>
@@ -294,8 +488,8 @@
           containerMessage: 'Enterprise modules carousel'
         },
         breakpoints: {
-          640: { slidesPerView: 2, spaceBetween: 18 },
-          1024: { slidesPerView: 3, spaceBetween: 18 }
+          768: { slidesPerView: 2, spaceBetween: 18 },
+          1200: { slidesPerView: 4, spaceBetween: 18 }
         }
       });
     });

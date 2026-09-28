@@ -21,8 +21,13 @@ class EnterpriseAiErpSupport
             'primaryCta' => 'Schedule a Technical Discovery Session',
             'secondaryCta' => 'Let\'s Connect',
             'visualLabel' => 'Enterprise command center',
-            'metricsTitle' => 'Trust & Credibility Metrics Bar (UAE Enterprise Scale)',
-            'metrics' => self::metrics(),
+            'bannerBackgroundImage' => 'assets/media/erp-banner-bg.webp',
+            'trustBackgroundImage' => 'assets/background/crm-trust-triangle-pattern.webp',
+            'trustEyebrow' => 'TRUST & CREDIBILITY',
+            'trustTitle' => 'Trusted at UAE Enterprise Scale',
+            'trustDescription' => 'These operating metrics reflect how Suave Creators builds client-owned ERP platforms for Dubai, Abu Dhabi, and the wider GCC: lower three-year cost, real-time overlap with UAE business hours, full source-code handover, and no per-seat license tax.',
+            'trustLinkText' => 'Explore All Services',
+            'trustStats' => self::trustStats(),
             'definitionEyebrow' => 'Enterprise AI and ERP',
             'definitionTitle' => 'What are enterprise AI and ERP solutions in the UAE?',
             'definitionCopy' => 'Enterprise AI and ERP solutions in the UAE are custom-built software architectures that integrate core resource planning modules—such as inventory, supply chain, procurement, and multi-entity accounting—with autonomous AI agent pipelines. Engineered specifically for the regulatory and operational landscape of Dubai, Abu Dhabi, and the wider GCC, these systems natively support UAE Federal Tax Authority (FTA) 5% VAT rules, Corporate Tax compliance, bilingual (Arabic/English) RTL/LTR interfaces, and localized cloud hosting (AWS UAE or Azure UAE regions) with',
@@ -35,30 +40,38 @@ class EnterpriseAiErpSupport
             'allocationVisuals' => self::allocationVisuals(),
             'tco' => self::tco(),
             'modules' => self::modules(),
+            'verticals' => self::verticals(),
+            'governance' => self::governance(),
+            'stack' => self::stack(),
+            'delivery' => self::delivery(),
         ];
     }
 
     /**
-     * @return list<array{value: string, detail: string}>
+     * @return list<array{value: string, label: string, detail: string}>
      */
-    protected static function metrics(): array
+    protected static function trustStats(): array
     {
         return [
             [
                 'value' => 'AED 450K+',
-                'detail' => 'Average 3-Yr TCO Capital Savings vs. Legacy ERP Vendors (SAP / Oracle)',
+                'label' => 'Average 3-Yr TCO Capital Savings',
+                'detail' => 'Versus legacy ERP vendors (SAP / Oracle)',
             ],
             [
                 'value' => '1.5 Hour',
-                'detail' => 'Time Zone Overlap. Direct real-time collaboration with UAE business hours',
+                'label' => 'Time Zone Overlap',
+                'detail' => 'Direct real-time collaboration with UAE business hours',
             ],
             [
                 'value' => '100%',
-                'detail' => 'Code Sovereignty. Complete source code transfer to your private repo',
+                'label' => 'Code Sovereignty',
+                'detail' => 'Complete source code transfer to your private repo',
             ],
             [
                 'value' => 'Zero',
-                'detail' => 'Per-Seat Licensing Tax. Add unlimited employees, reps & external partners',
+                'label' => 'Per-Seat Licensing Tax',
+                'detail' => 'Add unlimited employees, reps & external partners',
             ],
         ];
     }
@@ -188,46 +201,340 @@ class EnterpriseAiErpSupport
             'description' => 'We do not deploy one-size-fits-all software. Every module is purpose-built to automate manual steps, eliminate data silos, and provide real-time operational visibility across your regional entities.',
             'items' => [
                 [
-                    'icon' => '',
+                    'icon' => 'assets/media/module-icon1.webp',
                     'iconAlt' => 'FTA VAT and corporate tax icon for UAE enterprise ERP modules',
                     'title' => 'FTA VAT & UAE Corporate Tax Compliant Financial Engines',
                     'tags' => $tags,
                     'copy' => $copy,
                 ],
                 [
-                    'icon' => '',
+                    'icon' => 'assets/media/module-icon2.webp',
                     'iconAlt' => 'Multi-agent AI workflow icon for UAE enterprise ERP modules',
                     'title' => 'Autonomous Multi-Agent AI Workflow Orchestration',
                     'tags' => $tags,
                     'copy' => $copy,
                 ],
                 [
-                    'icon' => '',
+                    'icon' => 'assets/media/module-icon3.webp',
                     'iconAlt' => 'Supply chain and free zone logistics icon for UAE enterprise ERP',
                     'title' => 'Supply Chain, Fleet & Free Zone Logistics Management',
                     'tags' => $tags,
                     'copy' => $copy,
                 ],
                 [
-                    'icon' => '',
+                    'icon' => 'assets/media/module-icon4.webp',
                     'iconAlt' => 'B2B CRM pipeline icon for UAE enterprise ERP modules',
                     'title' => 'Unified B2B CRM & Multi-Channel Pipeline Automation',
                     'tags' => $tags,
                     'copy' => $copy,
                 ],
                 [
-                    'icon' => '',
+                    'icon' => 'assets/media/module-icon5.webp',
                     'iconAlt' => 'Bilingual Arabic English interface icon for UAE enterprise ERP',
                     'title' => 'Bilingual (Arabic & English) Enterprise User Interfaces',
                     'tags' => $tags,
                     'copy' => $copy,
                 ],
                 [
-                    'icon' => '',
+                    'icon' => 'assets/media/module-icon6.webp',
                     'iconAlt' => 'Single-tenant cloud security icon for UAE enterprise ERP',
                     'title' => 'Single-Tenant Cloud Security & UAE Data Sovereignty',
                     'tags' => $tags,
                     'copy' => $copy,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Card photos and logos stay empty until assets are added under public/assets/media/.
+     *
+     * @return array<string, mixed>
+     */
+    protected static function verticals(): array
+    {
+        $challenge = 'Fragmented customs declarations, volatile lane rates, and delayed spot-quote confirmations across UAE trade corridors.';
+        $architecture = 'Automated spot-quote calculation engines, lead-matching modules, and bill-of-lading extraction agents modeled on our verified Turbo Trans Corporation Custom Software.';
+
+        return [
+            'eyebrow' => 'Vertical Industry Specialization',
+            'title' => 'Tailored ERP & AI Architecture for UAE Commercial Sectors',
+            'description' => 'Generic enterprise software breaks when applied to the multi-jurisdictional realities of the UAE. We engineer systems around the exact operational models of key regional industries.',
+            'challengeLabel' => 'Operational Challenge',
+            'architectureLabel' => 'Custom Architecture',
+            'items' => [
+                [
+                    'image' => '',
+                    'imageAlt' => 'Container port terminal for UAE logistics and freight forwarding ERP',
+                    'logo' => '',
+                    'logoAlt' => 'Logistics freight forwarding logo for UAE enterprise ERP',
+                    'title' => 'Logistics, Freight Forwarding & Port Operations',
+                    'challenge' => $challenge,
+                    'architecture' => $architecture,
+                ],
+                [
+                    'image' => '',
+                    'imageAlt' => 'Real estate team reviewing a commercial property development model',
+                    'logo' => '',
+                    'logoAlt' => 'Real estate development logo for UAE enterprise ERP',
+                    'title' => 'Real Estate Developers & Commercial Brokerages',
+                    'challenge' => $challenge,
+                    'architecture' => $architecture,
+                ],
+                [
+                    'image' => '',
+                    'imageAlt' => 'Trading executives reviewing distribution analytics for UAE conglomerates',
+                    'logo' => '',
+                    'logoAlt' => 'General trading and distribution logo for UAE enterprise ERP',
+                    'title' => 'General Trading, Distribution & Conglomerates',
+                    'challenge' => $challenge,
+                    'architecture' => $architecture,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected static function governance(): array
+    {
+        return [
+            'eyebrow' => 'Regulatory Governance',
+            'title' => 'Built for UAE Legal Compliance, Tax Standards & Data Sovereignty',
+            'description' => 'We engineer custom software systems that protect your business from compliance fines and data security risks specific to the UAE regulatory environment.',
+            'items' => [
+                [
+                    'title' => 'UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021)',
+                    'copy' => 'Strict adherence to data subject rights, consent management frameworks, and single-tenant hosting models that keep enterprise records within authorized geographic boundaries.',
+                ],
+                [
+                    'title' => 'Federal Tax Authority (FTA) Compliance',
+                    'copy' => 'Built-in accounting logic providing automated 5% VAT calculations, standardized audit files (FAF), and e-invoicing architecture aligned with UAE Ministry of Finance mandates.',
+                ],
+                [
+                    'title' => 'Corporate Tax Readiness (Federal Decree-Law No. 47 of 2022)',
+                    'copy' => 'Structured financial ledgers that separate exempt free-zone income from mainland taxable operations, ensuring complete audit readiness for corporate tax submissions.',
+                ],
+                [
+                    'title' => 'In-Country Cloud Hosting',
+                    'copy' => 'Deployable on AWS Middle East (UAE) Region (me-central-1 in Abu Dhabi & Dubai) or Microsoft Azure UAE North (Dubai) for complete data residency.',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Tech-card icons stay empty until each items[].icon path is set.
+     *
+     * @return array<string, mixed>
+     */
+    protected static function stack(): array
+    {
+        return [
+            'eyebrow' => 'Architectural Standards',
+            'title' => 'Modern Full-Stack Technologies Engineered for Scale',
+            'groups' => [
+                [
+                    'title' => 'Core Backend',
+                    'subtitle' => 'Robust & Scalable Backend Solutions',
+                    'description' => 'Building secure, high-performance backend systems for modern applications.',
+                    'items' => [
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Laravel logo for enterprise ERP backend engineering',
+                            'name' => 'Laravel',
+                            'copy' => '(PHP 8.3+) for transactional robustness',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'PHP logo for scalable enterprise web applications',
+                            'name' => 'PHP',
+                            'copy' => 'for scalable web applications',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Node.js logo for real-time enterprise environments',
+                            'name' => 'Node.js',
+                            'copy' => 'for real-time microservices',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Nest logo for production enterprise API development',
+                            'name' => 'Nest',
+                            'copy' => '(PHP 8.3+) for structured & scalable APIs',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Python logo for AI agent orchestration in enterprise ERP',
+                            'name' => 'Python',
+                            'copy' => '(FastAPI & Celery) for AI agent orchestration',
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Frontend & Dashboards',
+                    'subtitle' => 'Modern Interfaces & Interactive Dashboards',
+                    'description' => 'Delivering seamless user experiences with modern technologies.',
+                    'items' => [
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'React logo for dynamic enterprise ERP interfaces',
+                            'name' => 'ReactJS',
+                            'copy' => 'for dynamic UIs',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Next.js logo for high-performance enterprise web apps',
+                            'name' => 'Next.js',
+                            'copy' => 'for high-performance web apps',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Tailwind CSS logo for bilingual enterprise dashboards',
+                            'name' => 'Tailwind CSS',
+                            'copy' => 'with optimized RTL/LTR support',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'TypeScript logo for type-safe enterprise application code',
+                            'name' => 'TypeScript',
+                            'copy' => 'for type-safe code',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'WebSockets logo for live enterprise connectivity',
+                            'name' => 'Web Sockets',
+                            'copy' => 'for live connectivity',
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Databases & Vector Storage',
+                    'subtitle' => 'Reliable Data & Intelligence Search',
+                    'description' => 'Powering your application with fast, secure and semantic data solutions.',
+                    'items' => [
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'PostgreSQL logo for semantic search in enterprise ERP',
+                            'name' => 'PostgreSQL',
+                            'copy' => 'SQL engine for semantic search',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Redis logo for in-memory caching in enterprise systems',
+                            'name' => 'Redis',
+                            'copy' => 'In-memory caching & persistent',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Elasticsearch logo for high-speed enterprise catalog search',
+                            'name' => 'Elasticsearch',
+                            'copy' => 'for high-speed catalog querying',
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'AI Orchestration & LLMs',
+                    'subtitle' => 'Smarter AI Integration & Automation',
+                    'description' => 'Leveraging advanced AI models and orchestration tools for intelligent and scalable solutions.',
+                    'items' => [
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'LangGraph logo for enterprise AI workflow orchestration',
+                            'name' => 'LangGraph',
+                            'copy' => 'Lang Graph',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'AutoGen logo for multi-agent enterprise automation',
+                            'name' => 'AutoGen',
+                            'copy' => 'Auto Gen',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Private Llama logo for secure enterprise AI deployments',
+                            'name' => 'Private Llama-3',
+                            'copy' => 'for secure deployments on internal enterprise',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Azure OpenAI logo for isolated enterprise AI hosting',
+                            'name' => 'Azure',
+                            'copy' => 'Azure Open AI for hosted & isolated VPCs',
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Cloud & DevOps',
+                    'subtitle' => 'Scalable Infrastructure & Continuous Delivery',
+                    'description' => 'Containerized, automated and cloud-native infrastructure for maximum efficiency.',
+                    'items' => [
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Docker logo for enterprise containerization',
+                            'name' => 'Docker',
+                            'copy' => 'Docker Containerization',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Kubernetes logo for enterprise container clustering',
+                            'name' => 'Kubernetes',
+                            'copy' => 'Kubernetes clustering',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Cloudflare logo for enterprise content delivery',
+                            'name' => 'Cloudflare',
+                            'copy' => 'Enterprise CDN',
+                        ],
+                        [
+                            'icon' => '',
+                            'iconAlt' => 'Automated CI/CD icon for enterprise deployment pipelines',
+                            'name' => 'Automated CI/CD',
+                            'copy' => 'deployment pipelines',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Card photos and logos stay empty until assets are added under public/assets/media/.
+     *
+     * @return array<string, mixed>
+     */
+    protected static function delivery(): array
+    {
+        return [
+            'eyebrow' => 'The Strategic Delivery Advantage',
+            'title' => 'Why UAE Conglomerates Choose Our Cross-Border Model',
+            'description' => 'How Suave Creators delivers world-class software engineering with seamless communication and substantial cost savings.',
+            'items' => [
+                [
+                    'image' => '',
+                    'imageAlt' => 'Timezone clock showing the 1.5 hour overlap between UAE and India engineering hours',
+                    'logo' => '',
+                    'logoAlt' => 'Working hours overlap icon for UAE and India software delivery',
+                    'title' => '1.5-Hour Working Hours Overlap (GMT+4 vs. GMT+5:30)',
+                    'copy' => 'Our primary engineering center in Palampur, India operates just 90 minutes ahead of Gulf Standard Time (GST). Your project team shares a synchronized working day with our senior software architects. Daily standups, live code reviews, and critical sprint milestones occur in real time via Slack, Microsoft Teams, and Google Meet.',
+                ],
+                [
+                    'image' => '',
+                    'imageAlt' => 'UAE and India software teams collaborating on an enterprise ERP project',
+                    'logo' => '',
+                    'logoAlt' => 'Capital savings icon for custom enterprise software versus local UAE agencies',
+                    'title' => 'Up to 60% Capital Savings vs. Local UAE IT Agencies',
+                    'copy' => 'Traditional domestic agencies in Dubai and the Big 4 consulting firms charge between AED 450 to AED 900+ per developer hour, with significant markups for account management bloat. Suave Creators provides direct collaboration with senior full-stack architects at a fraction of the cost, saving businesses up to 60% in total development capital.',
+                ],
+                [
+                    'image' => '',
+                    'imageAlt' => 'Intellectual property ownership visual for custom enterprise software builds',
+                    'logo' => '',
+                    'logoAlt' => 'Intellectual property sovereignty icon for client-owned enterprise software',
+                    'title' => '100% Intellectual Property Sovereignty',
+                    'copy' => 'Every repository, database schema, design token, and compiled build belongs exclusively to your company. Master Service Agreements (MSAs) and Non-Disclosure Agreements (NDAs) are backed by international commercial legal frameworks through our US headquarters (Sheridan, WY).',
                 ],
             ],
         ];

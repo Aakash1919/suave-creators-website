@@ -16224,26 +16224,14 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 
 /* ===== ENTERPRISE AI ERP START ===== */
 .enterprise-ai-erp-hero {
-  background:
-    radial-gradient(ellipse 70% 50% at 18% 0%, rgba(88, 70, 220, 0.35), transparent 60%),
-    radial-gradient(ellipse 55% 45% at 88% 18%, rgba(42, 77, 251, 0.28), transparent 62%),
-    linear-gradient(180deg, #07091f 0%, #0b1028 48%, #090c22 100%);
+  background-color: #07091f;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #fff;
   overflow: hidden;
   padding: 4.5rem 0 3.5rem;
   position: relative;
-}
-
-.enterprise-ai-erp-hero::before {
-  background-image:
-    linear-gradient(rgba(142, 182, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(142, 182, 255, 0.08) 1px, transparent 1px);
-  background-size: 72px 72px;
-  content: "";
-  inset: 0;
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 78%);
-  pointer-events: none;
-  position: absolute;
 }
 
 .enterprise-ai-erp-hero__inner {
@@ -16375,52 +16363,6 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   width: 100%;
 }
 
-.enterprise-ai-erp-metrics {
-  margin-top: 3.25rem;
-}
-
-.enterprise-ai-erp-metrics__title {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-  margin: 0 0 16px;
-  text-align: left;
-}
-
-.enterprise-ai-erp-metrics__grid {
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.enterprise-ai-erp-metrics__card {
-  background: rgba(12, 18, 52, 0.92);
-  border: 1px solid rgba(110, 140, 255, 0.28);
-  border-radius: 14px;
-  box-shadow: inset 0 1px 0 rgba(160, 186, 255, 0.08);
-  min-height: 148px;
-  padding: 22px 18px 20px;
-}
-
-.enterprise-ai-erp-metrics__value {
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin: 0;
-}
-
-.enterprise-ai-erp-metrics__detail {
-  color: rgba(176, 190, 230, 0.72);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.45;
-  margin: 10px 0 0;
-}
-
 @media (min-width: 640px) {
   .enterprise-ai-erp-hero__title {
     font-size: 2.75rem;
@@ -16452,8 +16394,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 }
 
 @media (max-width: 1023px) {
-  .enterprise-ai-erp-hero__top,
-  .enterprise-ai-erp-metrics__grid {
+  .enterprise-ai-erp-hero__top {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -16463,8 +16404,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
     padding: 2.5rem 0 2.25rem;
   }
 
-  .enterprise-ai-erp-hero__top,
-  .enterprise-ai-erp-metrics__grid {
+  .enterprise-ai-erp-hero__top {
     grid-template-columns: 1fr;
   }
 
@@ -16472,6 +16412,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
     min-height: 220px;
   }
 }
+
 .enterprise-ai-erp-definition {
   background-color: #f3f6ff;
   background-position: center;
@@ -16867,13 +16808,13 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 }
 
 .enterprise-ai-erp-modules__tags li {
-  border: 1px solid rgba(142, 162, 255, 0.45);
-  border-radius: 999px;
-  color: #c9d2ff;
+  background: #0B0B62;
+  border-radius: 2px;
+  color: #727AFF;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.2;
-  padding: 5px 10px;
+  padding: 1px 3px;
 }
 
 .enterprise-ai-erp-modules__card-copy {
@@ -16883,7 +16824,7 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
   margin: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .enterprise-ai-erp-modules__intro {
     grid-template-columns: minmax(13rem, 0.34fr) minmax(0, 1fr);
   }
@@ -16892,6 +16833,665 @@ body:has(.case-studies-hero--with-fan) .site-hero-bg {
 @media (max-width: 767px) {
   .enterprise-ai-erp-modules {
     padding: 2.5rem 0;
+  }
+}
+
+.enterprise-ai-erp-verticals {
+  background: #fff;
+  padding: 3.5rem 0 4.25rem;
+}
+
+.enterprise-ai-erp-verticals__intro {
+  align-items: flex-start;
+  display: flex;
+  gap: 2.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.enterprise-ai-erp-verticals__eyebrow {
+  align-items: center;
+  color: #2a4dfb;
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 0.5rem;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  margin: 0.35rem 0 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.enterprise-ai-erp-verticals__eyebrow-mark {
+  background: #2a4dfb;
+  border-radius: 1px;
+  display: block;
+  flex-shrink: 0;
+  height: 14px;
+  width: 3px;
+}
+
+.enterprise-ai-erp-verticals__copy {
+  min-width: 0;
+}
+
+.enterprise-ai-erp-verticals__title {
+  color: #171717;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.enterprise-ai-erp-verticals__desc {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0.45rem 0 0;
+  max-width: 46rem;
+}
+
+.enterprise-ai-erp-verticals__grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.enterprise-ai-erp-verticals__card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: visible;
+  padding: 10px 10px 18px;
+  width: 100%;
+}
+
+.enterprise-ai-erp-verticals__media {
+  aspect-ratio: 16 / 9;
+  background: #eef2ff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.enterprise-ai-erp-verticals__media img,
+.enterprise-ai-erp-verticals__image-placeholder {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.enterprise-ai-erp-verticals__media img {
+  object-fit: cover;
+}
+
+.enterprise-ai-erp-verticals__image-placeholder {
+  background:
+    linear-gradient(180deg, rgba(42, 77, 251, 0.06) 0%, rgba(122, 95, 248, 0.12) 100%);
+  border: 1px dashed #c7d2fe;
+}
+
+.enterprise-ai-erp-verticals__logo {
+  align-items: center;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+  display: flex;
+  height: 52px;
+  justify-content: center;
+  margin: -26px 0 0 12px;
+  position: relative;
+  width: 52px;
+  z-index: 1;
+}
+
+.enterprise-ai-erp-verticals__logo img {
+  display: block;
+  height: 32px;
+  object-fit: contain;
+  width: 32px;
+}
+
+.enterprise-ai-erp-verticals__logo-placeholder {
+  background:
+    linear-gradient(180deg, rgba(42, 77, 251, 0.08) 0%, rgba(122, 95, 248, 0.16) 100%);
+  border: 1px dashed #93a8ff;
+  border-radius: 8px;
+  display: block;
+  height: 28px;
+  width: 28px;
+}
+
+.enterprise-ai-erp-verticals__card-title {
+  color: #171717;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 22px;
+  margin: 12px 8px 10px;
+}
+
+.enterprise-ai-erp-verticals__kicker {
+  color: #00003F;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  margin: 0 8px 4px;
+  text-transform: uppercase;
+}
+.enterprise-ai-erp-verticals__kicker1 {
+  color: #2A4DFB;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  margin: 0 8px 4px;
+  text-transform: uppercase;
+}
+
+.enterprise-ai-erp-verticals__text {
+  color:#4D4D4D;
+
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 8px 12px;
+}
+
+.enterprise-ai-erp-verticals__text:last-child {
+  margin-bottom: 4px;
+}
+
+@media (max-width: 1023px) {
+  .enterprise-ai-erp-verticals__intro {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .enterprise-ai-erp-verticals__eyebrow {
+    margin-top: 0;
+    white-space: normal;
+  }
+
+  .enterprise-ai-erp-verticals__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .enterprise-ai-erp-verticals__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .enterprise-ai-erp-verticals__card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .enterprise-ai-erp-verticals {
+    padding: 2.5rem 0;
+  }
+
+  .enterprise-ai-erp-verticals__title {
+    font-size: 22px;
+  }
+}
+
+.enterprise-ai-erp-governance {
+  background: #f5f7fb;
+  padding: 4.75rem 0 5.25rem;
+}
+
+.enterprise-ai-erp-governance__inner {
+  align-items: start;
+  display: grid;
+  gap: 2.75rem 4.5rem;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+}
+
+.enterprise-ai-erp-governance__eyebrow {
+  color: #2a4dfb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  margin: 0 0 1.1rem;
+  text-transform: uppercase;
+}
+
+.enterprise-ai-erp-governance__title {
+  color: #111111;
+  font-size: clamp(1.85rem, 2.35vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  margin: 0;
+  max-width: 18em;
+}
+
+.enterprise-ai-erp-governance__desc {
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 1.25rem 0 0;
+  max-width: 26rem;
+}
+
+.enterprise-ai-erp-governance__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.enterprise-ai-erp-governance__card {
+  background: #fff;
+  border-left: 3px solid #2a4dfb;
+  border-radius: 1px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.05);
+  margin: 0;
+  padding: 9px 9px 9px 9px;
+}
+
+.enterprise-ai-erp-governance__card-title {
+  color: #111111;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+  margin: 0 0 6px;
+}
+
+.enterprise-ai-erp-governance__card-copy {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .enterprise-ai-erp-governance__inner {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .enterprise-ai-erp-governance__title {
+    max-width: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .enterprise-ai-erp-governance {
+    padding: 2.5rem 0;
+  }
+}
+
+.enterprise-ai-erp-stack {
+  background:
+    radial-gradient(ellipse 42% 28% at 8% 18%, rgba(42, 77, 251, 0.28), transparent 70%),
+    radial-gradient(ellipse 36% 32% at 92% 78%, rgba(88, 60, 220, 0.22), transparent 72%),
+    #070b1c;
+  padding: 4.5rem 0 5rem;
+}
+
+.enterprise-ai-erp-stack__eyebrow {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  margin: 0 0 0.7rem;
+  text-transform: uppercase;
+}
+
+.enterprise-ai-erp-stack__title {
+  color: #fff;
+  font-size: clamp(1.7rem, 2.4vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 1.75rem;
+}
+
+.enterprise-ai-erp-stack__row {
+  align-items: stretch;
+  background: #0B1036;
+  border-radius: 16px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(220px, 26%) minmax(0, 1fr);
+  margin-top: 18px;
+  padding: 16px 16px 16px 22px;
+}
+
+.enterprise-ai-erp-stack__intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem 1.25rem 0.5rem 0;
+  position: relative;
+}
+
+.enterprise-ai-erp-stack__intro::after {
+  background: linear-gradient(90deg, #2A4DFB 0%, #7A5FF8 100%);
+  content: "";
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2px;
+}
+
+.enterprise-ai-erp-stack__category {
+  color: #4d7cff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  margin: 0 0 0.7rem;
+  text-transform: uppercase;
+}
+
+.enterprise-ai-erp-stack__subtitle {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin: 0 0 0.55rem;
+}
+
+.enterprise-ai-erp-stack__desc {
+  color: #9aa3c2;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 16rem;
+}
+
+.enterprise-ai-erp-stack__cards {
+  align-items: stretch;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.enterprise-ai-erp-stack__card {
+  align-items: center;
+  background: #161c4a;
+  border: 1px solid rgba(90, 110, 200, 0.18);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+  margin: 0;
+  min-height: 168px;
+  padding: 1.35rem 0.85rem 1.15rem;
+  text-align: center;
+  width: 100%;
+}
+
+.enterprise-ai-erp-stack__icon {
+  align-items: center;
+  display: flex;
+  height: 42px;
+  justify-content: center;
+  margin-bottom: 0.7rem;
+  width: 42px;
+}
+
+.enterprise-ai-erp-stack__icon img {
+  display: block;
+  height: 36px;
+  object-fit: contain;
+  width: 36px;
+}
+
+.enterprise-ai-erp-stack__icon-placeholder {
+  background:
+    linear-gradient(180deg, rgba(142, 162, 255, 0.18) 0%, rgba(122, 95, 248, 0.28) 100%);
+  border: 1px dashed rgba(186, 196, 255, 0.7);
+  border-radius: 8px;
+  display: block;
+  height: 36px;
+  width: 36px;
+}
+
+.enterprise-ai-erp-stack__name {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 0 0 0.3rem;
+}
+
+.enterprise-ai-erp-stack__copy {
+  color: rgba(214, 220, 245, 0.68);
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 12rem;
+}
+
+@media (max-width: 1100px) {
+  .enterprise-ai-erp-stack__row {
+    grid-template-columns: 1fr;
+  }
+
+  .enterprise-ai-erp-stack__intro::after {
+    display: none;
+  }
+
+  .enterprise-ai-erp-stack__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .enterprise-ai-erp-stack {
+    padding: 2.5rem 0;
+  }
+
+  .enterprise-ai-erp-stack__title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .enterprise-ai-erp-stack__cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.enterprise-ai-erp-delivery {
+  background: #f7f8fc;
+  padding: 4.25rem 0 4.75rem;
+}
+
+.enterprise-ai-erp-delivery__intro {
+  align-items: flex-start;
+  display: flex;
+  gap: 2.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.enterprise-ai-erp-delivery__eyebrow {
+  align-items: center;
+  color: #2a4dfb;
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 0.5rem;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  margin: 0.35rem 0 0;
+  max-width: 11rem;
+  text-transform: uppercase;
+}
+
+.enterprise-ai-erp-delivery__eyebrow-mark {
+  background: #2a4dfb;
+  border-radius: 1px;
+  display: block;
+  flex-shrink: 0;
+  height: 14px;
+  width: 3px;
+}
+
+.enterprise-ai-erp-delivery__copy {
+  min-width: 0;
+}
+
+.enterprise-ai-erp-delivery__title {
+  color: #171717;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.enterprise-ai-erp-delivery__desc {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0.45rem 0 0;
+  max-width: 42rem;
+}
+
+.enterprise-ai-erp-delivery__grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.enterprise-ai-erp-delivery__card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 10px 10px 22px;
+  width: 100%;
+}
+
+.enterprise-ai-erp-delivery__media {
+  aspect-ratio: 16 / 10;
+  background: #e8edf5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.enterprise-ai-erp-delivery__media img,
+.enterprise-ai-erp-delivery__image-placeholder {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.enterprise-ai-erp-delivery__media img {
+  filter: grayscale(1);
+  object-fit: cover;
+}
+
+.enterprise-ai-erp-delivery__image-placeholder {
+  background:
+    linear-gradient(180deg, rgba(42, 77, 251, 0.06) 0%, rgba(122, 95, 248, 0.12) 100%);
+  border: 1px dashed #c7d2fe;
+}
+
+.enterprise-ai-erp-delivery__logo {
+  align-items: center;
+  background: #2a4dfb;
+  border-radius: 50%;
+  box-shadow: 0 6px 14px rgba(42, 77, 251, 0.28);
+  display: flex;
+  height: 36px;
+  justify-content: center;
+  margin: -18px 0 0 16px;
+  position: relative;
+  width: 36px;
+  z-index: 1;
+}
+
+.enterprise-ai-erp-delivery__logo img {
+  display: block;
+  height: 18px;
+  object-fit: contain;
+  width: 18px;
+}
+
+.enterprise-ai-erp-delivery__logo-placeholder {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px dashed rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  display: block;
+  height: 18px;
+  width: 18px;
+}
+
+.enterprise-ai-erp-delivery__card-title {
+  color: #2a4dfb;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin: 14px 10px 8px;
+}
+
+.enterprise-ai-erp-delivery__text {
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 10px;
+}
+
+@media (max-width: 1023px) {
+  .enterprise-ai-erp-delivery__intro {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .enterprise-ai-erp-delivery__eyebrow {
+    margin-top: 0;
+    max-width: none;
+  }
+
+  .enterprise-ai-erp-delivery__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .enterprise-ai-erp-delivery__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .enterprise-ai-erp-delivery__card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .enterprise-ai-erp-delivery {
+    padding: 2.5rem 0;
+  }
+
+  .enterprise-ai-erp-delivery__title {
+    font-size: 22px;
   }
 }
 
