@@ -216,16 +216,14 @@
         </div>
         <h2 id="service-intro-heading" class="home-type-h2 text-[20px] font-semibold leading-[28px] tracking-[-0.025em] text-[#171717] sm:leading-[32px] lg:text-[24px] lg:leading-[36px]">{{ $service['introTitle'] ?? '' }}</h2>
         <p class="mt-4 max-w-[560px] text-[14px] leading-5 text-[#4D4D4D]">{{ $service['introDescription'] ?? '' }}</p>
-        <div class="mt-8">
+        <div class="mt-8 flex flex-wrap items-center gap-4">
           <x-frontend.cta-button :href="$service['introLinkUrl'] ?? route('services')">
             {{ $service['introLinkText'] ?? 'Explore Services' }}
           </x-frontend.cta-button>
           @if (($service['slug'] ?? '') === 'custom-crm-development')
-            <p class="mt-4">
-              <a href="{{ route('product') }}" class="inline-flex items-end border-b border-[#2A4DFB]/70 pb-0.5 text-sm font-semibold text-[#2A4DFB]">
-                Explore our live Suave Outreach CRM
-              </a>
-            </p>
+            <x-frontend.cta-button :href="route('product')" variant="secondary-blue">
+              Explore our live Suave Outreach CRM
+            </x-frontend.cta-button>
           @endif
         </div>
       </div>
@@ -284,9 +282,9 @@
         <x-frontend.cta-button :href="$service['bodyPrimaryHref'] ?? ''">
           {{ $service['bodyPrimaryCta'] ?? "Let's Connect to Discuss" }}
         </x-frontend.cta-button>
-        <a href="{{ $service['bodySecondaryHref'] ?? $demoHref }}" @if (str_starts_with($service['bodySecondaryHref'] ?? $demoHref, 'http')) target="_blank" rel="noopener noreferrer" @endif class="inline-flex max-lg:min-h-[44px] items-end pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">
+        <x-frontend.cta-button :href="$service['bodySecondaryHref'] ?? $demoHref" variant="secondary">
           {{ $service['bodySecondaryCta'] ?? "Let's Build Your Digital Future Together" }}
-        </a>
+        </x-frontend.cta-button>
       </div>
     </div>
   </div>
@@ -441,9 +439,9 @@
         <x-frontend.cta-button :href="$service['portfolioPrimaryHref'] ?? ''">
           {{ $service['portfolioPrimaryCta'] ?? 'Get Free Consultation' }}
         </x-frontend.cta-button>
-        <a href="{{ $service['portfolioSecondaryHref'] ?? route('case-studies') }}" class="inline-flex max-lg:min-h-[44px] items-center border-b border-[#2A4DFB] pb-0.5 text-sm font-semibold text-[#2A4DFB] hover:text-[#1835cc] transition">
+        <x-frontend.cta-button :href="$service['portfolioSecondaryHref'] ?? route('case-studies')" variant="secondary-blue">
           {{ $service['portfolioSecondaryCta'] ?? 'Explore Our Case Studies →' }}
-        </a>
+        </x-frontend.cta-button>
       </div>
     @else
       <div class="mt-10 flex flex-col items-center justify-center gap-4">
@@ -964,7 +962,7 @@ $n = $index + 1;
   font-style: normal;
   font-weight: 700;
   margin-top: 10px;
-  text-decoration: underline;
+  text-decoration: none;
   text-transform: uppercase;
 }
 

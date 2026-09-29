@@ -177,7 +177,9 @@
         <x-frontend.cta-button :href="route('about-us')" class="max-w-full">
           Learn More About Our Team 
         </x-frontend.cta-button>
-        <a href="{{ route('case-studies') }}" class="border-b border-[#00003F] text-[13px] sm:text-sm font-semibold ">Explore Client Case Studies</a>
+        <x-frontend.cta-button :href="route('case-studies')" variant="secondary">
+          Explore Client Case Studies
+        </x-frontend.cta-button>
       </div>
     </div>
   </div>
@@ -237,7 +239,9 @@
         </button>
       </div>
       <nav class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></nav>
-      <a class="offerings-expert-link" href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Schedule a Technical Scoping Call →</a>
+      <x-frontend.cta-button :href="$demoHref" variant="secondary-blue">
+        Schedule a Technical Scoping Call
+      </x-frontend.cta-button>
     </div>
   </div>
 </section>
@@ -680,8 +684,7 @@
 .offerings-expert-link {
   font-size: 14px;
   font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
   background: linear-gradient(90deg, #2A4DFB 57.12%, #0026E3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -869,14 +872,13 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 1.25rem;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .digital-marketing-services__more a {
   color: #2a4dfb;
   margin-left: 8px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
   font-size: 14px;
   font-weight: 600;
 }

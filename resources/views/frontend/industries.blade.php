@@ -31,10 +31,6 @@
           button-text="Get Free Consultation"
           :secondary-href="$demoHref"
           secondary-label="Schedule a discovery call" />
-        {{-- <a href="#industry-expertise"
-          class="banner-text-link max-lg:min-h-[44px] items-end justify-center border-b border-white/70 pb-0.5 text-[13px] font-semibold text-white sm:justify-start sm:text-sm">
-          Explore industries
-        </a> --}}
       </div>
     </div>
 
@@ -103,20 +99,13 @@
         performance.
       </p>
       <div class="mt-6 flex w-full flex-col items-center justify-center gap-4 sm:mt-8 sm:w-auto sm:flex-row sm:gap-5">
-        <a href="tel:+918894900142"
-          class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:w-auto sm:max-w-none sm:px-5 sm:py-2 sm:text-sm">
+        <x-frontend.cta-button href="tel:+918894900142">
           <span class="sm:hidden">Discuss Your Project</span>
           <span class="hidden sm:inline">Discuss Your Project Requirements</span>
-          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-            <path d="M18 8L22 12L18 16" />
-            <path d="M2 12H22" />
-          </svg>
-        </a>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">
+        </x-frontend.cta-button>
+        <x-frontend.cta-button :href="$demoHref" variant="secondary">
           Schedule a discovery call
-        </a>
+        </x-frontend.cta-button>
       </div>
     </div>
   </div>
@@ -185,20 +174,13 @@
       </div>
       <nav class="industry-core-services-pagination flex md:hidden" aria-label="Core services pagination"></nav>
       <div class="flex w-full flex-col items-center gap-4 md:ml-auto md:w-auto md:flex-row md:justify-end md:gap-5">
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
-          class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:w-auto sm:max-w-none sm:px-5 sm:py-2 sm:text-sm">
+        <x-frontend.cta-button :href="$demoHref">
           <span class="sm:hidden">Talk to Experts</span>
           <span class="hidden sm:inline">Speak With Our Industry Tech Experts</span>
-          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-            <path d="M18 8L22 12L18 16" />
-            <path d="M2 12H22" />
-          </svg>
-        </a>
-        <a href="{{ route('services') }}" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">
+        </x-frontend.cta-button>
+        <x-frontend.cta-button :href="route('services')" variant="secondary">
           Explore Our Industry Solutions
-        </a>
+        </x-frontend.cta-button>
       </div>
     </div>
   </div>
@@ -351,7 +333,9 @@
     </div>
 
     <div class="web-services__footer">
-      <a href="{{ route('services') }}">See All Services</a>
+      <x-frontend.cta-button :href="route('services')" variant="secondary-blue">
+        See All Services
+      </x-frontend.cta-button>
     </div>
   </div>
 </section>

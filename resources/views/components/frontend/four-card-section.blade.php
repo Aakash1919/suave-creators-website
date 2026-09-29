@@ -46,9 +46,9 @@
 
         @if (filled($ctaHref) && filled($ctaLabel))
             <div class="mt-8 flex justify-end">
-                <a href="{{ $ctaHref }}"
-                    @if (str_starts_with($ctaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-                    class="border-b border-[#2A4DFB] text-sm font-semibold text-[#2A4DFB]">{{ $ctaLabel }}</a>
+                <x-frontend.cta-button :href="$ctaHref" variant="secondary-blue">
+                    {{ $ctaLabel }}
+                </x-frontend.cta-button>
             </div>
         @endif
     </div>
