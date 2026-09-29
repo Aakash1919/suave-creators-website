@@ -139,7 +139,7 @@
             </header>
             <div class="web-services__grid">
                 @foreach ($industry['services'] ?? [] as $index => $service)
-                    <article class="web-service-card">
+                    <a href="{{ route('contact-us') }}#contact-id" class="web-service-card group">
                         <span class="web-service-card__icon">
                             <img src="{{ $service['icon'] ?? '' }}"
                                 alt="{{ $service['title'] ?? 'Industry service' }} icon for Suave Creators software development"
@@ -152,12 +152,7 @@
                             <div class="flex items-start justify-between gap-2">
                                 <h3 class="mt-2 min-w-0 text-[14px] font-semibold leading-[18px] text-[#171717]">
                                     {{ $service['title'] ?? '' }}</h3>
-                                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                    fill="none" stroke="#2A4DFB" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="mt-2 shrink-0" aria-hidden="true">
-                                    <path d="M18 8L22 12L18 16" />
-                                    <path d="M2 12H22" />
-                                </svg>
+                                <x-frontend.cta-arrow class="industry-service-card__arrow mt-2 shrink-0 text-[#2A4DFB]" />
                             </div>
                         </div>
                         <p class="mt-1 text-[13px] leading-[18px] text-[#4D4D4D] sm:text-[14px] sm:leading-5">
@@ -174,7 +169,7 @@
                                     title="{{ $serviceImageAlt }}" width="640" height="360"
                                     class="h-full w-full object-cover" loading="lazy"></figure>
                         @endif
-                    </article>
+                    </a>
                 @endforeach
             </div>
             <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-5">
@@ -493,7 +488,7 @@
       subtitle="Projects where this industry context shaped the product — from discovery to shipped software."
     />
 
-    <x-frontend.articles-insights-section :items="$articles" heading-id="industry-insights-title"
+    <x-frontend.articles-insights-section :category="$insightCategory" heading-id="industry-insights-title"
         title="Explore Our Insights"
         subtitle="Get in touch with industry trends with our updated blogs from technology and development experts."
         section-class="section-pad-m py-6 lg:py-18" more-href="{{ route('blogs') }}" more-label="View all blog articles" />
@@ -618,4 +613,13 @@
             }
         });
     </script>
+@endpush
+
+@push('custom-css')
+<style>
+.industry-service-card__arrow {
+  height: 22px;
+  width: 28px;
+}
+</style>
 @endpush

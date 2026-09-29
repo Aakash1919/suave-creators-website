@@ -69,16 +69,6 @@
       @endfor
     </div>
   </div>
-  <div class="section-inner">
-    <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10">
-      <x-frontend.inline-consultation-form
-        theme="light"
-        placeholder="Enter your phone or email"
-        button-text="Get Free Consultation"
-        :secondary-href="$demoHref"
-        secondary-label="Book a Call" />
-    </div>
-  </div>
 </section>
 <!-- 2. Portfolio Showcase Marquee Section End -->
 
@@ -103,19 +93,11 @@
         performance.
       </p>
       <div class="mt-6 flex w-full flex-col items-center justify-center gap-4 sm:mt-8 sm:w-auto sm:flex-row sm:gap-5">
-        <a href="tel:+918894900142"
+        <a href="{{ route('contact-us') }}#contact-id"
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:w-auto sm:max-w-none sm:px-5 sm:py-2 sm:text-sm">
           <span class="sm:hidden">Discuss Your Project</span>
           <span class="hidden sm:inline">Discuss Your Project Requirements</span>
-          <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-            <path d="M18 8L22 12L18 16" />
-            <path d="M2 12H22" />
-          </svg>
-        </a>
-        <a href="{{ $demoHref }}" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">
-          Schedule a discovery call
+          <x-frontend.cta-arrow />
         </a>
       </div>
     </div>
@@ -280,15 +262,10 @@
               </div>
               <h3>{{ $industry[1] }}</h3>
               <p>{{ $industry[2] }}</p>
-              <a href="{{ $demoHref }}"
-                class="u-btn-cta group mt-5 inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white transition hover:brightness-110 sm:mt-6 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
+              <a href="{{ route('contact-us') }}#contact-id"
+                class="u-btn-cta group relative z-10 mt-5 inline-flex h-auto min-h-11 w-fit shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-[13px] font-bold text-white transition hover:brightness-110 sm:mt-6 sm:text-sm">
                 Get a Free Project Roadmap
-                <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                  <path d="M18 8L22 12L18 16" />
-                  <path d="M2 12H22" />
-                </svg>
+                <x-frontend.cta-arrow />
               </a>
             </div>
           </div>
@@ -401,7 +378,6 @@
 />
 
 <x-frontend.articles-insights-section
-  :items="$articles"
   heading-id="industry-insights-title"
   section-class="section-pad-m py-6 lg:py-18"
   more-href="{{ route('blogs') }}"
@@ -1058,7 +1034,10 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      min-width: 0;
       padding-block: 8px;
+      position: relative;
+      z-index: 1;
     }
   }
 

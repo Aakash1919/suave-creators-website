@@ -739,7 +739,7 @@
 />
 
 <x-frontend.articles-insights-section
-  :items="$articles"
+  category="software-development"
   heading-id="crm-builder-insights-title"
   eyebrow="Blogs and Insights"
   title="Explore Technical Insights on Custom Software Architecture"

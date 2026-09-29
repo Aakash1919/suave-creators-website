@@ -19,6 +19,17 @@ class IndustryDetailSupport
     ];
 
     /**
+     * Blog category slug for the insights section. Null when this industry has no matching category.
+     */
+    public static function insightCategory(?string $slug): ?string
+    {
+        return match ($slug) {
+            'it-software-solutions-for-startups' => 'startups',
+            default => null,
+        };
+    }
+
+    /**
      * @return array<string, mixed>|null
      */
     public static function industry(string $slug): ?array
@@ -69,7 +80,7 @@ class IndustryDetailSupport
             'testimonialItems' => HomeSupport::testimonials(),
             'marqueeLabels' => $industry['marqueeLabels'] ?? ['INNOVATION', 'SECURITY', 'SCALABILITY', 'AI POWERED', 'GROWTH', 'SUPPORT'],
             'techStack' => AboutSupport::techStack(),
-            'articles' => self::sampleInsights(),
+            'insightCategory' => self::insightCategory($slug),
             'caseStudies' => CaseStudySupport::forIndustry($slug, 6),
         ];
     }
@@ -172,13 +183,5 @@ class IndustryDetailSupport
                 $card(3, 'SLA & Monitoring', 'Monitoring tools, reporting, and service-level commitments.'),
             ],
         ];
-    }
-
-    /**
-     * @return array<int, array<string, string>>
-     */
-    protected static function sampleInsights(): array
-    {
-        return BlogSupport::articleCards(3);
     }
 }

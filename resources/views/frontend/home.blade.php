@@ -488,7 +488,6 @@
 <x-frontend.testimonials-section :items="$testimonials" />
 
 <x-frontend.articles-insights-section
-  :items="$articles"
   eyebrow="BLOGS & INSIGHTS"
   title="Latest Engineering, CRM & AI Insights from Our Technical Team"
   subtitle="Actionable guides, architecture teardowns, and industry analysis authored by our senior developers and digital strategists."
