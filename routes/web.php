@@ -39,6 +39,7 @@ Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('p
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services/uae/enterprise-ai-erp-solutions', [EnterpriseAiErpController::class, 'index'])->name('enterprise-ai-erp-uae');
 Route::get('/services/custom-crm-builder', fn () => redirect()->route('service.show', ['slug' => 'custom-crm-development'], 301))->name('services.custom-crm-builder.legacy');
 Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301))->name('service.show.legacy');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
@@ -56,7 +57,7 @@ Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('ind
 
 Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
 Route::get('/custom-crm-builder', [CustomCrmBuilderController::class, 'index'])->name('custom-crm-builder');
-Route::get('/enterprise-ai-erp-uae', [EnterpriseAiErpController::class, 'index'])->name('enterprise-ai-erp-uae');
+Route::get('/enterprise-ai-erp-uae', fn () => redirect()->route('enterprise-ai-erp-uae', status: 301));
 
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');
 Route::get('/case-studies/turbo-trans-case-study', [CaseStudyController::class, 'turboTransCaseStudy'])->name('turbo-trans-case-study');
