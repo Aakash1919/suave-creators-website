@@ -765,7 +765,7 @@ class ServiceSupport
 
         return match (true) {
             $path === 'services' => route('services'),
-            $path === 'contact-us' => route('contact-us', absolute: false),
+            $path === 'contact-us' => ContactSupport::demoHref(),
             $path === 'blogs' => route('blogs'),
             $path === 'case-studies' => route('case-studies'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),

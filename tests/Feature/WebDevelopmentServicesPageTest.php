@@ -61,6 +61,14 @@ class WebDevelopmentServicesPageTest extends TestCase
 
         // 6. Core Capabilities (01-06)
         $response->assertSee('Laravel Development');
+        $response->assertSee('Technical Capabilities Engineered for Scalability, Security &amp; Performance', false);
+        $this->assertGreaterThanOrEqual(
+            6,
+            preg_match_all(
+                '/href="'.preg_quote($demoHref, '/').'"[^>]*>\s*Start a project\s*<svg/s',
+                (string) $response->getContent()
+            )
+        );
         $response->assertSee('Enterprise WordPress &amp; Headless CMS', false);
         $response->assertSee('ReactJS &amp; Next.js Development', false);
         $response->assertSee('Angular Enterprise Development');

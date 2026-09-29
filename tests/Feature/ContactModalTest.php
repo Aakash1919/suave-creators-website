@@ -44,7 +44,7 @@ class ContactModalTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Schedule a discovery call');
-        $response->assertSee('href="'.route('contact-us', absolute: false).'"', false);
+        $response->assertSee('href="'.route('contact-us', absolute: false).'#contact-id"', false);
         $response->assertDontSee('calendar.google.com', false);
 
         $response->assertSee('Schedule a Call');

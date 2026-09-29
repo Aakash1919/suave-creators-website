@@ -8,7 +8,7 @@ class ContactSupport
 {
     public static function demoHref(): string
     {
-        return route('contact-us', absolute: false);
+        return route('contact-us', absolute: false).'#contact-id';
     }
 
     public static function isBookingCtaLabel(string $label): bool

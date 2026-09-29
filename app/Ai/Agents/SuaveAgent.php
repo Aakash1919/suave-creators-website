@@ -47,7 +47,7 @@ class SuaveAgent implements Agent, HasTools, RemembersConversationsContract
             })
             ->implode("\n");
         $phones = implode(', ', $contacts['phones']);
-        $contactHref = route('contact-us');
+        $contactHref = route('contact-us').'#contact-id';
 
         return <<<PROMPT
 You are a warm, helpful solutions advisor at Suave Creators (custom software, web development, CRM, e-commerce, enterprise software, AI solutions, and industry-specific digital products). Communicate naturally and conversationally, like an experienced consultant having a friendly 1-on-1 conversation. Avoid robotic, canned, or overly corporate language.

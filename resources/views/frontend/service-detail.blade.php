@@ -330,7 +330,13 @@
             @foreach (($service['capabilities'] ?? []) as $index => $cap)
               <div class="swiper-slide h-auto">
                 <article class="web-service-card">
-                  <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
+                  <div class="web-service-card__head">
+                    <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
+                    <a href="{{ $demoHref }}" class="web-service-card__link group inline-flex shrink-0 items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
+                      Start a project
+                      <x-frontend.cta-arrow />
+                    </a>
+                  </div>
                   <div class="web-service-card__category">
                     <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
                     <h3 class="mt-2 text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
@@ -361,7 +367,13 @@
       <div class="web-services__grid{{ $capabilitiesGridColumns === 2 ? ' web-services__grid--cols-2' : '' }}">
         @foreach (($service['capabilities'] ?? []) as $index => $cap)
           <article class="web-service-card">
-            <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
+            <div class="web-service-card__head">
+              <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
+              <a href="{{ $demoHref }}" class="web-service-card__link group inline-flex shrink-0 items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
+                Start a project
+                <x-frontend.cta-arrow />
+              </a>
+            </div>
             <div class="web-service-card__category">
               <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
               <h3 class="mt-2 text-[14px] font-semibold leading-[18px] text-[#171717]">{{ $cap['title'] ?? '' }}</h3>
@@ -707,10 +719,24 @@ $n = $index + 1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.web-service-card__head {
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.web-service-card__head .web-service-card__link {
+  margin-top: 4px;
+  padding-top: 0;
+  white-space: nowrap;
+}
+
 .web-service-card__icon-img {
   display: block;
   height: 64px;
-  margin-bottom: 14px;
+  margin-bottom: 0;
   min-width: 80px;
   object-fit: contain;
   width: 80px;
@@ -1407,6 +1433,10 @@ $n = $index + 1;
 
   .web-service-card__icon-img {
     margin-inline: auto;
+  }
+
+  .web-service-card__head .web-service-card__icon-img {
+    margin-inline: 0;
   }
 
   .why-choose-item__toggle {
