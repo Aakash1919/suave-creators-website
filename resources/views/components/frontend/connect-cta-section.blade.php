@@ -23,7 +23,7 @@
       @if ($secondaryLabel !== '')
         <x-frontend.cta-button
           :href="$secondaryHref"
-          variant="secondary"
+          variant="secondary-dark"
           :modal="$secondaryModal"
           :service="$secondaryService"
         >

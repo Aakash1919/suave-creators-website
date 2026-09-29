@@ -43,7 +43,7 @@
                         </svg>
                     </a>
                     <a href="tel:+918894900142"
-                        class="banner-text-link items-center gap-2 whitespace-nowrap border-b border-white/70 text-[13px] font-semibold text-white sm:text-sm">
+                        class="u-btn-secondary u-btn-secondary--dark group inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 hover:border-white/35">
                         <i class="fa-solid fa-phone text-xs" aria-hidden="true"></i>
                         +91 88949 00142
                     </a>
