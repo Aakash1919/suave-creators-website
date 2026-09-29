@@ -21,7 +21,13 @@ class CtaButton extends Component
         public string $href = '',
         public string $variant = 'default',
         public bool $showArrow = true,
+        public bool $modal = false,
+        public string $service = '',
     ) {
+        if ($this->modal && $this->href === '') {
+            $this->href = '#contact-modal';
+        }
+
         $this->resolvedHref = $this->href !== ''
             ? $this->href
             : ContactSupport::demoHref();

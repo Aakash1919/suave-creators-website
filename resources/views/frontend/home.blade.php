@@ -243,7 +243,7 @@
 </section>
 <!-- Offerings Showcase Section End -->
 
-<x-frontend.connect-cta-section />
+<x-frontend.connect-cta-section primary-modal />
 
 <!-- Web Development Services Section Start -->
 <x-frontend.three-card-section class="web-services--home" />

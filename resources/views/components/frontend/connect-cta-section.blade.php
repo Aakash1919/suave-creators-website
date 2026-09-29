@@ -13,13 +13,19 @@
     </div>
 
     <div class="smart-together-cta__actions">
-      <x-frontend.cta-button :href="$primaryHref">
+      <x-frontend.cta-button
+        :href="$primaryHref"
+        :modal="$primaryModal"
+        :service="$primaryService"
+      >
         {{ $primaryLabel }}
       </x-frontend.cta-button>
       @if ($secondaryLabel !== '')
         <a href="{{ $secondaryHref }}"
+          @if ($secondaryModal || $secondaryHref === '#contact-modal') data-open-contact-modal @endif
+          @if ($secondaryService !== '') data-service="{{ $secondaryService }}" @endif
           @if (str_starts_with($secondaryHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-          class="{{ $secondaryClass !== '' ? $secondaryClass : 'smart-together-cta__btn-secondary group' }}">
+          class="{{ $secondaryClass !== '' ? $secondaryClass : 'smart-together-cta__btn-secondary group' }} cursor-pointer">
           <span>{{ $secondaryLabel }}</span>
           @if (!str_contains($secondaryLabel, '→') && !str_contains($secondaryLabel, '&rarr;'))
             <x-frontend.cta-arrow />
