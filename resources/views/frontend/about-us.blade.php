@@ -312,7 +312,6 @@
 <!-- 8. Why Choose Us Section End -->
 
 <x-frontend.articles-insights-section
-  :items="$articles"
   heading-id="about-insights-title"
   more-href="{{ route('blogs') }}"
   more-label="View all blog articles"

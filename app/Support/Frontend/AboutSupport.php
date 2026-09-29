@@ -16,7 +16,6 @@ class AboutSupport
             'coreValues' => self::coreValues(),
             'growthFeatures' => self::growthFeatures(),
             'techStack' => self::techStack(),
-            'articles' => array_slice(HomeSupport::articles(), 0, 3),
             'partnerMarqueeItems' => HomeSupport::partnerMarqueeItems(),
         ];
     }

@@ -26,10 +26,17 @@
       <div class="articlesInsightsSwiper swiper">
         <div class="swiper-wrapper">
           @foreach ($items as $article)
+            @php
+              $articleUrl = str_starts_with($article['url'], 'http') || str_starts_with($article['url'], '/')
+                ? $article['url']
+                : route($article['url']);
+            @endphp
             <div class="swiper-slide">
               <article class="articles-card">
                 <figure class="articles-card__image">
-                  <img src="{{ str_starts_with((string) $article['image'], 'http') || str_starts_with((string) $article['image'], '/') ? $article['image'] : asset($article['image']) }}" alt="{{ $article['alt'] }}" title="{{ $article['alt'] }}" width="1024" height="683" loading="lazy" decoding="async">
+                  <a href="{{ $articleUrl }}" class="articles-card__media-link">
+                    <img src="{{ str_starts_with((string) $article['image'], 'http') || str_starts_with((string) $article['image'], '/') ? $article['image'] : asset($article['image']) }}" alt="{{ $article['alt'] }}" title="{{ $article['alt'] }}" width="1024" height="683" loading="lazy" decoding="async">
+                  </a>
                 </figure>
                 <div class="articles-card__body">
                   <div class="articles-card__meta">
@@ -56,10 +63,10 @@
                       </time>
                     @endif
                   </div>
-                  <h3>{{ $article['title'] }}</h3>
+                  <h3><a href="{{ $articleUrl }}" class="articles-card__title-link">{{ $article['title'] }}</a></h3>
                   <p title="{{ $article['excerpt'] }}">{{ $article['excerpt'] }}</p>
                   <a class="articles-card__link group"
-                    href="{{ str_starts_with($article['url'], 'http') ? $article['url'] : (str_starts_with($article['url'], '/') ? $article['url'] : route($article['url'])) }}">
+                    href="{{ $articleUrl }}">
                     Read Article<span class="sr-only"> about {{ $article['title'] }}</span>
                     <x-frontend.cta-arrow />
                   </a>

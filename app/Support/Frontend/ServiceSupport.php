@@ -19,6 +19,20 @@ class ServiceSupport
     ];
 
     /**
+     * Blog category slug for the insights section. Null when this service has no matching category.
+     */
+    public static function insightCategory(?string $slug): ?string
+    {
+        return match ($slug) {
+            'web-development-services' => 'web-development',
+            'ui-ux-design-services' => 'design',
+            'ai-solutions' => 'artificial-intelligence',
+            'custom-crm-development', 'enterprise-software-solutions' => 'software-development',
+            default => null,
+        };
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public static function indexData(): array
@@ -33,7 +47,6 @@ class ServiceSupport
             'techCards' => self::techCards(),
             'processCards' => self::processCards(),
             'faqs' => $faqs,
-            'articles' => self::articles(),
             'caseStudies' => self::indexCaseStudies(),
             'connectCta' => [
                 'eyebrow' => '',
@@ -287,14 +300,6 @@ class ServiceSupport
     }
 
     /**
-     * @return array<int, array{title: string, excerpt: string, image: string, alt: string, date: string, datetime: string, author: string, url: string}>
-     */
-    public static function articles(): array
-    {
-        return BlogSupport::articleCards(3);
-    }
-
-    /**
      * @return array<int, array{label: string, src: string, alt: string}>
      */
     public static function techStack(): array
@@ -461,41 +466,6 @@ class ServiceSupport
     }
 
     /**
-     * @param  array<string, mixed>  $service
-     * @return array<int, array<string, mixed>>
-     */
-    protected static function mapServiceArticles(array $service): array
-    {
-        if (empty($service['articles']) || ! is_array($service['articles'])) {
-            return self::articles();
-        }
-
-        return array_values(array_map(static function (array $art): array {
-            $url = (string) ($art['url'] ?? '');
-            if (str_starts_with($url, 'blog.show:')) {
-                $url = route('blog.show', ['slug' => (string) str($url)->after('blog.show:')]);
-            } elseif (str_starts_with($url, 'blogs.category:')) {
-                $url = route('blogs.category', ['slug' => (string) str($url)->after('blogs.category:')]);
-            } elseif ($url === 'blogs' || $url === '/blog' || $url === '/blogs') {
-                $url = route('blogs');
-            } elseif (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://')) {
-                $url = self::resolveInternalHref($url);
-            }
-
-            return [
-                'title' => (string) ($art['title'] ?? ''),
-                'excerpt' => (string) ($art['excerpt'] ?? ''),
-                'image' => (string) ($art['image'] ?? ''),
-                'alt' => (string) ($art['alt'] ?? ($art['title'] ?? 'Suave Creators blog article')),
-                'date' => (string) ($art['date'] ?? ''),
-                'datetime' => (string) ($art['datetime'] ?? ''),
-                'author' => (string) ($art['author'] ?? 'Suave Creators'),
-                'url' => $url,
-            ];
-        }, $service['articles']));
-    }
-
-    /**
      * @return array<string, mixed>|null
      */
     public static function service(string $slug): ?array
@@ -575,7 +545,6 @@ class ServiceSupport
             'industryCards' => self::mapIndustryCards($service['industries'] ?? []),
             'standoutCards' => self::mapStandoutCards($service['standoutCards'] ?? []),
             'processSteps' => self::mapProcessSteps($service['processSteps'] ?? []),
-            'articles' => self::mapServiceArticles($service),
             'caseStudies' => array_values(array_map(static function (array $item): array {
                 if (($item['slug'] ?? '') === 'appointment-insurance-platform-case-study') {
                     $item['cta'] = 'Explore the Case Study';
@@ -586,6 +555,7 @@ class ServiceSupport
             'techStack' => $slug === 'web-development-services'
                 ? self::techStack()
                 : AboutSupport::techStack(),
+            'insightCategory' => self::insightCategory($slug),
             'webDevLayoutSlugs' => self::SLUGS,
             'isWebDevelopmentService' => in_array($slug, self::SLUGS, true),
             'capabilitiesAsSlider' => ! empty($service['capabilitiesAsSlider']),

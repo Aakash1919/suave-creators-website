@@ -329,13 +329,10 @@
           <div class="swiper-wrapper">
             @foreach (($service['capabilities'] ?? []) as $index => $cap)
               <div class="swiper-slide h-auto">
-                <article class="web-service-card">
+                <a href="{{ $demoHref }}" class="web-service-card group" aria-label="Contact Suave Creators about {{ $cap['title'] ?? 'this capability' }}">
                   <div class="web-service-card__head">
                     <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
-                    <a href="{{ $demoHref }}" class="web-service-card__link group inline-flex shrink-0 items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
-                      Start a project
-                      <x-frontend.cta-arrow />
-                    </a>
+                    <x-frontend.cta-arrow class="web-service-card__arrow" />
                   </div>
                   <div class="web-service-card__category">
                     <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
@@ -349,7 +346,7 @@
                     </div>
                   @endif
                   <p class="mt-2 text-[14px] leading-5 text-[#4D4D4D]">{{ $cap['desc'] ?? '' }}</p>
-                </article>
+                </a>
               </div>
             @endforeach
           </div>
@@ -366,13 +363,10 @@
     @else
       <div class="web-services__grid{{ $capabilitiesGridColumns === 2 ? ' web-services__grid--cols-2' : '' }}">
         @foreach (($service['capabilities'] ?? []) as $index => $cap)
-          <article class="web-service-card">
+          <a href="{{ $demoHref }}" class="web-service-card group" aria-label="Contact Suave Creators about {{ $cap['title'] ?? 'this capability' }}">
             <div class="web-service-card__head">
               <img class="web-service-card__icon-img" src="{{ $cap['image'] ?? '' }}" alt="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" title="{{ ($cap['title'] ?? 'Service').' capability icon for Suave Creators software development' }}" width="80" height="64">
-              <a href="{{ $demoHref }}" class="web-service-card__link group inline-flex shrink-0 items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
-                Start a project
-                <x-frontend.cta-arrow />
-              </a>
+              <x-frontend.cta-arrow class="web-service-card__arrow" />
             </div>
             <div class="web-service-card__category">
               <span class="text-[10px] font-semibold uppercase text-[#4D4D4D]">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) . ' - Capability' }}</span>
@@ -386,7 +380,7 @@
               </div>
             @endif
             <p class="mt-2 text-[14px] leading-5 text-[#4D4D4D]">{{ $cap['desc'] ?? '' }}</p>
-          </article>
+          </a>
         @endforeach
       </div>
     @endif
@@ -702,7 +696,7 @@ $n = $index + 1;
 />
 
 <x-frontend.articles-insights-section
-  :items="$articles"
+  :category="$insightCategory"
   heading-id="service-insights-title"
   :eyebrow="$service['articlesEyebrow'] ?? 'BLOGS AND INSIGHTS'"
   :title="$service['articlesTitle'] ?? 'Explore Our Technical Insights'"
@@ -719,18 +713,25 @@ $n = $index + 1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+a.web-service-card {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .web-service-card__head {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   gap: 12px;
   justify-content: space-between;
   margin-bottom: 14px;
 }
 
-.web-service-card__head .web-service-card__link {
-  margin-top: 4px;
-  padding-top: 0;
-  white-space: nowrap;
+.web-service-card__arrow {
+  color: #2a4dfb;
+  flex-shrink: 0;
+  height: 22px;
+  width: 28px;
 }
 
 .web-service-card__icon-img {

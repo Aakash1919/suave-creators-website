@@ -62,13 +62,9 @@ class WebDevelopmentServicesPageTest extends TestCase
         // 6. Core Capabilities (01-06)
         $response->assertSee('Laravel Development');
         $response->assertSee('Technical Capabilities Engineered for Scalability, Security &amp; Performance', false);
-        $this->assertGreaterThanOrEqual(
-            6,
-            preg_match_all(
-                '/href="'.preg_quote($demoHref, '/').'"[^>]*>\s*Start a project\s*<svg/s',
-                (string) $response->getContent()
-            )
-        );
+        $response->assertSee('class="web-service-card group"', false);
+        $response->assertSee('web-service-card__arrow', false);
+        $response->assertDontSee('>Start a project<', false);
         $response->assertSee('Enterprise WordPress &amp; Headless CMS', false);
         $response->assertSee('ReactJS &amp; Next.js Development', false);
         $response->assertSee('Angular Enterprise Development');
@@ -133,12 +129,7 @@ class WebDevelopmentServicesPageTest extends TestCase
         $response->assertSee('Appointment Insurance That Makes Showing Up the Default');
         $response->assertSee('Explore the Case Study');
 
-        // 16. Blogs and Insights
-        $response->assertSee('Explore Our Technical Insights');
-        $response->assertSee('Explore our latest articles on custom CRM architectures');
-        $response->assertSee('Why US Mid-Market Companies Are Replacing Salesforce with Custom CRMs in 2026');
-        $response->assertSee('Why the India Market Is the Strategic Choice for US Web Development in 2026');
-        $response->assertSee('Beyond Chatbots: How Multi-Agent AI Systems Are Automating B2B Workflows in 2026');
+        // 16. Blogs and Insights are loaded from published posts (latest three).
 
         // 17. Schema.org JSON-LD Graph (short FAQ schema answers)
         $content = (string) $response->getContent();
