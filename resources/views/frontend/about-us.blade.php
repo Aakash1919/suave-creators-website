@@ -68,7 +68,7 @@
         </p>
 
         <div class="mt-6 flex flex-wrap items-center gap-4 sm:mt-8 sm:gap-5">
-          <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
+          <a href="{{ $demoHref }}"
             class="inline-flex min-h-11 items-center underline text-sm font-semibold bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] bg-clip-text text-transparent transition hover:opacity-80">
             Need more services based on your demand?
           </a>
@@ -302,7 +302,7 @@
 
     <div class="mt-10 flex flex-wrap items-center justify-start gap-2 sm:justify-end sm:gap-3">
       <span class="text-[13px] font-medium text-white/90 lg:text-[14px]">Let&rsquo;s Connect to Discuss</span>
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
+      <a href="{{ $demoHref }}"
         class="text-[13px] font-semibold text-[#8B95FF] underline underline-offset-4 transition hover:text-white lg:text-[14px]">
         Book a Call
       </a>

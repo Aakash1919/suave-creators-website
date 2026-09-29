@@ -39,7 +39,7 @@
 
                     <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $item['description'] }}</p>
                     @if (filled($item['linkLabel']))
-                        <span class="web-service-card__link inline-block text-[13px] font-semibold text-[#2A4DFB]">{{ $item['linkLabel'] }}</span>
+                        <span class="web-service-card__link group inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2A4DFB]">{{ $item['linkLabel'] }}<x-frontend.cta-arrow /></span>
                     @endif
                 </a>
             @endforeach
@@ -48,7 +48,7 @@
         @if (filled($ctaHref) && filled($ctaLabel))
             <div class="web-services__footer">
                 <a href="{{ $ctaHref }}"
-                    @if (str_starts_with($ctaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif>{{ $ctaLabel }}</a>
+                    @if (str_starts_with($ctaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif class="group inline-flex items-center gap-1.5">{{ $ctaLabel }}<x-frontend.cta-arrow /></a>
             </div>
         @endif
     </div>

@@ -40,7 +40,7 @@ class ServiceSupport
                 'title' => 'Ready to Start Your Project?',
                 'description' => 'Collaborate directly with senior software architects to scope your roadmap, evaluate your technology stack, and accelerate your time to market.',
                 'primaryLabel' => "Let's Connect to Discuss",
-                'secondaryLabel' => 'Discuss Your Technical Roadmap →',
+                'secondaryLabel' => 'Discuss Your Technical Roadmap',
             ],
             'consultation' => [
                 'backgroundImage' => 'assets/background/work-with-us-bg.webp',
@@ -48,7 +48,7 @@ class ServiceSupport
                 'title' => 'Ready to Start Your Project?',
                 'description' => 'Speak directly with an enterprise software architect to discuss your requirements, review your technical roadmap, and get an accurate project estimate.',
                 'ctaLabel' => "Let's Connect to Discuss",
-                'secondaryCtaLabel' => 'Book Direct via Google Calendar →',
+                'secondaryCtaLabel' => 'Contact Us',
                 'solo' => false,
                 'showPeople' => false,
             ],
@@ -765,7 +765,7 @@ class ServiceSupport
 
         return match (true) {
             $path === 'services' => route('services'),
-            $path === 'contact-us' => ContactSupport::demoHref(),
+            $path === 'contact-us' => route('contact-us', absolute: false),
             $path === 'blogs' => route('blogs'),
             $path === 'case-studies' => route('case-studies'),
             str_starts_with($path, 'industries/') => route('industry.show', ['slug' => (string) str($path)->after('industries/')]),

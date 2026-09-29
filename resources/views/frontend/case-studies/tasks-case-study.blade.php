@@ -16,16 +16,10 @@
       <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">The Suave App Tasks - From a Complex Process to a Clear B2B CRM Task Management Workspace</h1>
       <p class="case-study-detail-hero__lead">We redesigned the suave app’s Tasks module into one B2B CRM task management workspace — Kanban and List view integration, inline create, a task drawer, and an automated task assistant AI — with about 50% less switching between views.</p>
 
-      <div class="case-study-detail-hero__meta">
-        <span><strong>Year</strong> 2026</span>
-      </div>
       <div class="case-study-detail-hero__actions">
-        <a href="#overview" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
-          See the story
-          <x-frontend.cta-arrow />
-        </a>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--ghost">
+        <a href="{{ $demoHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
           Start a similar project
+          <x-frontend.cta-arrow />
         </a>
       </div>
     </div>
@@ -388,7 +382,7 @@
         <p>Tell us about your workflow — we will help you turn it into a clear product experience.</p>
       </div>
       <div class="case-study-story__cta-actions">
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
+        <a href="{{ $demoHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
           Talk to us
           <x-frontend.cta-arrow />
         </a>
