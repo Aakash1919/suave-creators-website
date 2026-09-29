@@ -63,6 +63,20 @@ class ContactModalTest extends TestCase
         $response->assertDontSee('Book Direct via Google Calendar →', false);
     }
 
+    public function test_home_page_get_started_button_triggers_contact_modal(): void
+    {
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('Get Started');
+        // Ensure Get Started button has data-open-contact-modal and links to #contact-modal
+        $content = $response->getContent();
+        $this->assertMatchesRegularExpression(
+            '/<a[^>]*href=["\']#contact-modal["\'][^>]*data-open-contact-modal[^>]*>[\s\S]*?Get Started[\s\S]*?<\/a>/i',
+            $content
+        );
+    }
+
     public function test_contact_modal_has_no_throttle_rate_limit_on_repeated_submissions(): void
     {
         for ($i = 1; $i <= 8; $i++) {
