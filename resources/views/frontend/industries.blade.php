@@ -114,7 +114,7 @@
             <path d="M2 12H22" />
           </svg>
         </a>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">
+        <a href="{{ $demoHref }}" class="border-b border-[#00003F] text-[13px] font-semibold text-[#00003F] sm:text-sm">
           Schedule a discovery call
         </a>
       </div>
@@ -185,7 +185,7 @@
       </div>
       <nav class="industry-core-services-pagination flex md:hidden" aria-label="Core services pagination"></nav>
       <div class="flex w-full flex-col items-center gap-4 md:ml-auto md:w-auto md:flex-row md:justify-end md:gap-5">
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
+        <a href="{{ $demoHref }}"
           class="u-btn-cta group inline-flex h-[34px] min-h-[34px] w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:w-auto sm:max-w-none sm:px-5 sm:py-2 sm:text-sm">
           <span class="sm:hidden">Talk to Experts</span>
           <span class="hidden sm:inline">Speak With Our Industry Tech Experts</span>
@@ -280,7 +280,7 @@
               </div>
               <h3>{{ $industry[1] }}</h3>
               <p>{{ $industry[2] }}</p>
-              <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer"
+              <a href="{{ $demoHref }}"
                 class="u-btn-cta group mt-5 inline-flex h-[34px] min-h-[34px] items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white transition hover:brightness-110 sm:mt-6 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm">
                 Get a Free Project Roadmap
                 <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none"

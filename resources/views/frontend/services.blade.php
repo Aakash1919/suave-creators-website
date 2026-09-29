@@ -28,7 +28,7 @@
           placeholder="Enter your phone or email"
           button-text="Get Free Consultation"
           :secondary-href="$demoHref"
-          secondary-label="Schedule a Discovery Call →" />
+          secondary-label="Schedule a Discovery Call" />
       </div>
     </div>
   </div>
@@ -161,21 +161,17 @@
 
           <p class="mt-1 text-[14px] leading-5 text-[#4D4D4D]">{{ $service['description'] }}</p>
 
-          <span class="web-service-card__link inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
+          <span class="web-service-card__link group inline-flex items-center gap-1.5 text-[13px] font-semibold leading-[18px] text-[#2A4DFB]">
             {{ $service['cta'] }}
-            <svg xmlns="https://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 24 24" fill="none"
-              stroke="#2A4DFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 8L22 12L18 16" />
-              <path d="M2 12H22" />
-            </svg>
+            <x-frontend.cta-arrow />
           </span>
         </a>
       @endforeach
     </div>
 
     <div class="web-services__footer">
-      <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Discuss Your Requirements</a>
-      <a href="{{ route('product') }}">Explore Suave Outreach CRM →</a>
+      <a href="{{ $demoHref }}">Discuss Your Requirements</a>
+      <a class="group inline-flex items-center gap-1.5" href="{{ route('product') }}">Explore Suave Outreach CRM<x-frontend.cta-arrow /></a>
     </div>
   </div>
 </section>
@@ -235,7 +231,7 @@
         placeholder="Enter your phone or email"
         button-text="Get Free Consultation"
         :secondary-href="$demoHref"
-        secondary-label="Book a Call via Calendar →" />
+        secondary-label="Book a Call" />
     </div>
   </div>
 </section>

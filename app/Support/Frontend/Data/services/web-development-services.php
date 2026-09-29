@@ -18,7 +18,7 @@ return [
     'bannerLogos' => [],
     'bannerBg' => '/assets/media/web-deve-bg.png',
     'heroPrimaryCta' => 'Get Free Consultation',
-    'heroSecondaryCta' => 'Schedule a Discovery Call →',
+    'heroSecondaryCta' => 'Schedule a Discovery Call',
 
     'introQuestion' => "What do Suave Creators' custom web development services include?",
     'introQuestionEyebrow' => 'Service Scope & Inclusions',
@@ -42,7 +42,7 @@ return [
     'crossSellDescription' => 'Looking to replace rigid third-party software or integrate complex multi-system APIs? Discuss your technical product roadmap, database schemas, or legacy migration plans directly with a solution architect.',
     'crossSellPrimaryLabel' => 'Book a Discovery Session',
     'crossSellPrimaryHref' => 'demo',
-    'crossSellSecondaryLabel' => 'Explore Our Custom CRM Builder Services →',
+    'crossSellSecondaryLabel' => 'Explore Our Custom CRM Builder Services',
     'crossSellSecondaryHref' => 'service.show:custom-crm-development',
     'crossSellSecondaryClass' => 'smart-together-cta__btn-secondary group',
     'crossSellShowPhone' => false,
@@ -55,7 +55,7 @@ return [
     ],
     'bodyPrimaryCta' => "Let's Connect to Discuss Your Project",
     'bodyPrimaryHref' => 'demo',
-    'bodySecondaryCta' => "Let's Build Your Digital Future Together →",
+    'bodySecondaryCta' => "Let's Build Your Digital Future Together",
     'bodySecondaryHref' => 'demo',
 
     'marqueeIcons' => [
@@ -120,7 +120,7 @@ return [
     'portfolioDescription' => "We don't just build websites; we design and ship mission-critical software platforms. Explore our verified delivery records across logistics, sales automation, appointment scheduling and AI systems.",
     'portfolioPrimaryCta' => 'Get Free Consultation',
     'portfolioPrimaryHref' => 'demo',
-    'portfolioSecondaryCta' => 'Explore Our Case Studies →',
+    'portfolioSecondaryCta' => 'Explore Our Case Studies',
     'portfolioSecondaryHref' => 'case-studies',
     'portfolioImages' => [
         0 => '/assets/portfolio/swastik-culture-hub-website.webp',
@@ -316,7 +316,7 @@ return [
     'hideFinalBgBelowDesktop' => true,
     'finalPrimaryCta' => 'Get a Free Quote',
     'finalPrimaryHref' => 'demo',
-    'finalSecondaryCta' => 'Contact Us Today →',
+    'finalSecondaryCta' => 'Contact Us Today',
     'finalSecondaryHref' => 'demo',
     'showFinalPeople' => false,
 
@@ -327,7 +327,7 @@ return [
     'articlesEyebrow' => 'BLOGS AND INSIGHTS',
     'articlesTitle' => 'Explore Our Technical Insights',
     'articlesSubtitle' => 'Explore our latest articles on custom CRM architectures, cross-border development advantages and multi-agent AI automation.',
-    'articlesMoreText' => 'View all blog articles →',
+    'articlesMoreText' => 'View all blog articles',
     'articlesMoreUrl' => 'blogs',
 
     'articles' => [

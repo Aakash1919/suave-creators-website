@@ -25,7 +25,8 @@ class WebDevelopmentServicesPageTest extends TestCase
         $response->assertSee('High-Growth Businesses');
         $response->assertSee('We engineer responsive, high-performance web applications, cloud customer portals and enterprise software platforms.');
         $response->assertSee('Get Free Consultation');
-        $response->assertSee("Schedule a Discovery Call \u{2192}");
+        $response->assertSee('Schedule a Discovery Call');
+        $response->assertDontSee("Schedule a Discovery Call \u{2192}");
 
         // 3. Service Scope & Overview
         $response->assertSee('Service Scope &amp; Inclusions', false);
@@ -47,7 +48,7 @@ class WebDevelopmentServicesPageTest extends TestCase
         // 4. Strategic In-Page Cross-Sell Banner
         $response->assertSee('Have a Complex Web Application or Custom CRM Architecture Requirement?');
         $response->assertSee('Book a Discovery Session');
-        $response->assertSee("Explore Our Custom CRM Builder Services \u{2192}");
+        $response->assertSee('Explore Our Custom CRM Builder Services');
         $response->assertSee($demoHref, false);
         $response->assertSee('smart-together-cta--no-phone', false);
         $response->assertDontSee('smart-together-cta__phone', false);
@@ -56,10 +57,18 @@ class WebDevelopmentServicesPageTest extends TestCase
         // 5. Executive Overview
         $response->assertSee('Tailored Web Solutions to Enhance Your Digital Operations');
         $response->assertSee("Let's Connect to Discuss Your Project");
-        $response->assertSee("Let's Build Your Digital Future Together \u{2192}");
+        $response->assertSee("Let's Build Your Digital Future Together");
 
         // 6. Core Capabilities (01-06)
         $response->assertSee('Laravel Development');
+        $response->assertSee('Technical Capabilities Engineered for Scalability, Security &amp; Performance', false);
+        $this->assertGreaterThanOrEqual(
+            6,
+            preg_match_all(
+                '/href="'.preg_quote($demoHref, '/').'"[^>]*>\s*Start a project\s*<svg/s',
+                (string) $response->getContent()
+            )
+        );
         $response->assertSee('Enterprise WordPress &amp; Headless CMS', false);
         $response->assertSee('ReactJS &amp; Next.js Development', false);
         $response->assertSee('Angular Enterprise Development');
@@ -68,7 +77,7 @@ class WebDevelopmentServicesPageTest extends TestCase
 
         // 7. Portfolio Showcase
         $response->assertSee('Real-World Software Systems That Deliver Measurable Business ROI');
-        $response->assertSee("Explore Our Case Studies \u{2192}");
+        $response->assertSee('Explore Our Case Studies');
 
         // 8. Industries
         $response->assertSee('Specialized Industry Web &amp; Software Development Solutions', false);
@@ -118,7 +127,7 @@ class WebDevelopmentServicesPageTest extends TestCase
         // 14. Pre-Footer Call to Action
         $response->assertSee("Let\u{2019}s Build Your Business Web Application Together");
         $response->assertSee('Get a Free Quote');
-        $response->assertSee("Contact Us Today \u{2192}");
+        $response->assertSee('Contact Us Today');
 
         // 15. Featured Case Study
         $response->assertSee('Appointment Insurance That Makes Showing Up the Default');

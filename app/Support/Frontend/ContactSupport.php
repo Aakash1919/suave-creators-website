@@ -6,11 +6,9 @@ use Illuminate\Http\Request;
 
 class ContactSupport
 {
-    public const DEMO_HREF = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2D8d2UlApRNeJryaGldFknb4uF3ua7jFnBA4-ga1Q-lgnLz9K382sK5S2-4J2e-tWD8arDeGXy';
-
     public static function demoHref(): string
     {
-        return self::DEMO_HREF;
+        return route('contact-us', absolute: false).'#contact-id';
     }
 
     public static function isBookingCtaLabel(string $label): bool

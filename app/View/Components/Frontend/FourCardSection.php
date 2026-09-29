@@ -23,7 +23,7 @@ class FourCardSection extends Component
         public string $headingId = 'four-card-title',
         public string $backgroundImage = 'assets/background/technology-section-bg.png',
         public string $ctaHref = '',
-        public string $ctaLabel = 'Book a Technical Consultation →',
+        public string $ctaLabel = 'Book a Technical Consultation',
     ) {
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
 

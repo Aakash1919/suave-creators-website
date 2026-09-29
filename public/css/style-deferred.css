@@ -11085,9 +11085,6 @@ body:has(.suave-agent.is-open) .blog-share {
   background-image: none;
   box-shadow: inset 3px 0 0 #2a4dfb;
 }
-.faq-item.is-open{
-  margin-left: 150px;
-}
 
 .faq-section.faq-section--crm-builder .faq-item__heading,
 .faq-section.faq-section--crm-builder .faq-item__summary,
@@ -11095,9 +11092,6 @@ body:has(.suave-agent.is-open) .blog-share {
 .faq-section.faq-section--crm-builder .faq-item__answer-inner {
   max-width: none;
   width: 100%;
-}
-.faq-item{
-  margin-left: 150px;
 }
 .faq-section.faq-section--crm-builder .faq-item__summary {
   box-sizing: border-box;

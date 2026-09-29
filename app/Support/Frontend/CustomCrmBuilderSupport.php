@@ -699,7 +699,7 @@ class CustomCrmBuilderSupport
             'title' => 'Ready to Stop Paying Per-User Fees and Build Your Custom CRM?',
             'description' => 'Schedule a technical discovery call with our system architects. We will analyze your current sales workflows, evaluate your three-year TCO savings, and provide an actionable architectural roadmap.',
             'ctaLabel' => 'Schedule a Free CRM Discovery Consultation',
-            'secondaryCtaLabel' => 'Book Direct via Google Calendar →',
+            'secondaryCtaLabel' => 'Contact Us',
             'cardPosition' => 'top',
             'people' => [
                 ['src' => 'assets/media/analyst-headset-custom-crm-dashboard.webp', 'alt' => 'Analyst reviewing custom CRM analytics dashboard during software consultation', 'tone' => 'pink', 'column' => 'left'],

@@ -38,16 +38,15 @@ class ContactModalTest extends TestCase
         $response->assertSee('hidden lg:flex flex-col', false);
     }
 
-    public function test_about_page_hero_schedule_call_links_to_calendar_and_consultation_triggers_modal(): void
+    public function test_about_page_hero_schedule_call_links_to_contact_page_and_consultation_triggers_modal(): void
     {
         $response = $this->get(route('about-us'));
 
         $response->assertOk();
-        // Hero inline consultation form link opens demo calendar like before
         $response->assertSee('Schedule a discovery call');
-        $response->assertSee('target="_blank"', false);
+        $response->assertSee('href="'.route('contact-us', absolute: false).'#contact-id"', false);
+        $response->assertDontSee('calendar.google.com', false);
 
-        // Consultation section button triggers contact modal
         $response->assertSee('Schedule a Call');
         $response->assertSee('data-open-contact-modal', false);
     }

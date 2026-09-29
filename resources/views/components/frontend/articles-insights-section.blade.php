@@ -76,7 +76,7 @@
           <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
         </button>
         <nav class="articles-insights-pagination" aria-label="Articles pagination"></nav>
-        <a class="articles-insights__more" href="{{ str_starts_with($moreHref, 'http') || str_starts_with($moreHref, '/') ? $moreHref : route($moreHref) }}">{{ $moreLabel }}</a>
+        <a class="articles-insights__more group inline-flex items-center gap-1.5" href="{{ str_starts_with($moreHref, 'http') || str_starts_with($moreHref, '/') ? $moreHref : route($moreHref) }}">{{ $moreLabel }}<x-frontend.cta-arrow /></a>
         <button class="articles-insights-next articles-insights__control" type="button"
           aria-label="Next article">
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>

@@ -16,16 +16,10 @@
       <h1 id="case-study-detail-heading" class="case-study-detail-hero__title">Appointment Insurance That Makes Showing Up the Default</h1>
       <p class="case-study-detail-hero__lead">An appointment insurance platform that protects calendars with clear deposits, text invites, arrival check-in, and smart Stripe refunds — so unused deposit money comes back without wasting card fees, and no-shows pay the person who waited.</p>
 
-      <div class="case-study-detail-hero__meta">
-        <span><strong>Year</strong> 2025</span>
-      </div>
       <div class="case-study-detail-hero__actions">
-        <a href="#overview" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
-          See the story
-          <x-frontend.cta-arrow />
-        </a>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--ghost">
+        <a href="{{ $demoHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
           Start a similar project
+          <x-frontend.cta-arrow />
         </a>
       </div>
     </div>
@@ -280,7 +274,7 @@
         <p>Tell us about your workflow — we will help you turn it into a clear product experience.</p>
       </div>
       <div class="case-study-story__cta-actions">
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
+        <a href="{{ $demoHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
           Talk to us
           <x-frontend.cta-arrow />
         </a>
