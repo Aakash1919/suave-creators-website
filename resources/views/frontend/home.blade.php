@@ -243,7 +243,7 @@
 </section>
 <!-- Offerings Showcase Section End -->
 
-<x-frontend.connect-cta-section />
+<x-frontend.connect-cta-section primary-modal />
 
 <!-- Web Development Services Section Start -->
 <x-frontend.three-card-section class="web-services--home" />
@@ -499,9 +499,7 @@
 
 <x-frontend.consultation-section
   title="Ready to Engineer Your Custom Platform or Modernize Your Software?"
-  cta-label="Claim Free Architecture Scoping Session"
-  secondary-cta-label="Book Direct via Google Calendar →"
-  :secondary-cta-href="$demoHref"
+  cta-label="Schedule a Call"
 />
 
 <!-- Partnerships Section Start -->

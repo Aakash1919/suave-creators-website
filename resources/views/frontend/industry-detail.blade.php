@@ -480,7 +480,7 @@
         class="faq-section--align" />
 
     <x-frontend.consultation-section :background-image="$industry['finalBg'] ?? 'assets/background/consultation-section-bg.png'" :eyebrow="$industry['finalEyebrow'] ?? 'Your Digital Future Together'" :title="$industry['finalTitle'] ?? 'Let\'s Build Your Next Digital Solution with us!'" :description="$industry['finalDescription'] ?? ''"
-        cta-label="Get a Free Quote" secondary-cta-label="Contact us Today" :show-people="false" :hide-bg-below-desktop="($industry['hideFinalBgBelowDesktop'] ?? false) === true"
+        cta-label="Get a Free Quote" :show-people="false" :hide-bg-below-desktop="($industry['hideFinalBgBelowDesktop'] ?? false) === true"
         :allow-html-title="false" />
 
     <x-frontend.testimonials-section :items="$testimonialItems" eyebrow="Client Testimonials" title="What Our Clients Say"

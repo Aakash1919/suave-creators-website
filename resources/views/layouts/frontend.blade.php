@@ -65,6 +65,7 @@
             'case-studies',
             'case-study.show',
             '*-case-study',
+            'thank-you',
         );
         $bodyClass = $bodyClass ?? 'min-h-screen bg-white font-sans text-slate-900';
         $useHeroBackground = $useHeroBackground ?? true;
@@ -370,6 +371,7 @@
     {{-- Body-level so position:fixed is not captured by main/footer overflow or stacking. --}}
     @stack('fixed-widgets')
     <x-layouts.suave-agent />
+    <x-frontend.contact-modal />
     <x-layouts.analytics-events />
     {{-- Defer GTM/gtag + fonts + Swiper; stub queues carousel inits until deferred.js runs. --}}
     @php

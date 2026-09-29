@@ -24,10 +24,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us');
 Route::post('/contact-us', [ContactController::class, 'store'])
-    ->middleware('throttle:5,1')
     ->name('contact-us.store');
 Route::post('/contact-us/draft', [ContactController::class, 'draft'])
-    ->middleware('throttle:30,1')
     ->name('contact-us.draft');
 Route::get('/geo/country', [ContactController::class, 'visitorCountry'])
     ->middleware('throttle:60,1')
@@ -37,6 +35,7 @@ Route::post('/consultation-request', [ContactController::class, 'quickConsultati
     ->name('consultation.store');
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
+Route::get('/thank-you', [PageController::class, 'thankYou'])->name('thank-you');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/services/uae/enterprise-ai-erp-solutions', [EnterpriseAiErpController::class, 'index'])->name('enterprise-ai-erp-uae');
