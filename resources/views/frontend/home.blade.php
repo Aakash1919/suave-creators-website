@@ -237,7 +237,7 @@
         </button>
       </div>
       <nav class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></nav>
-      <a class="offerings-expert-link" href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Schedule a Technical Scoping Call →</a>
+      <a class="offerings-expert-link group inline-flex items-center gap-1.5" href="{{ $demoHref }}">Schedule a Technical Scoping Call<x-frontend.cta-arrow /></a>
     </div>
   </div>
 </section>
@@ -381,7 +381,7 @@
       <nav class="digital-marketing-pagination flex md:hidden" aria-label="Digital marketing pagination"></nav>
       <p class="digital-marketing-services__more">
         <span class="digital-marketing-services__more-text">Need a specialized growth or search strategy for your platform?</span>
-        <a href="{{ route('services') }}">See All Marketing Services →</a>
+        <a class="group inline-flex items-center gap-1.5" href="{{ route('services') }}">See All Marketing Services<x-frontend.cta-arrow /></a>
       </p>
     </div>
   </div>
@@ -458,7 +458,7 @@
       <p class="digital-marketing-services__more">
         <span>Ready to review requirements for your custom application?
         </span>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">Schedule an Architectural Discovery Call →</a>
+        <a class="group inline-flex items-center gap-1.5" href="{{ $demoHref }}">Schedule an Architectural Discovery Call<x-frontend.cta-arrow /></a>
       </p>
     </div>
   </div>
@@ -494,7 +494,7 @@
   subtitle="Actionable guides, architecture teardowns, and industry analysis authored by our senior developers and digital strategists."
   heading-id="articles-insights-title"
   more-href="{{ route('blogs') }}"
-  more-label="View All Engineering & Search Articles →"
+  more-label="View All Engineering & Search Articles"
 />
 
 <x-frontend.consultation-section

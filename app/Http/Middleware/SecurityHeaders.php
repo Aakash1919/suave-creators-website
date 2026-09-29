@@ -42,7 +42,7 @@ class SecurityHeaders
             "font-src 'self' https://fonts.gstatic.com data:",
             "img-src 'self' data: blob: https:",
             "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://cdn.jsdelivr.net https://ipapi.co",
-            "frame-src 'self' https://www.googletagmanager.com https://calendar.google.com https://www.youtube.com https://www.youtube-nocookie.com",
+            "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com",
             "media-src 'self'",
             "object-src 'none'",
             "base-uri 'self'",

@@ -39,11 +39,11 @@
         </p>
 
         <div class="product-hero__actions">
-          <a href="{{ $contactHref }}" class="product-btn product-btn--primary" target="_blank" rel="noopener noreferrer">
-            Start Free Trial <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          <a href="{{ $contactHref }}" class="product-btn product-btn--primary">
+            Start Free Trial <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
-          <a href="{{ $demoHref }}" class="product-btn product-btn--secondary product-btn--ghost" target="_blank" rel="noopener noreferrer">
-            Book Your Demo <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          <a href="{{ $demoHref }}" class="product-btn product-btn--secondary product-btn--ghost">
+            Book Your Demo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
 
@@ -194,7 +194,7 @@
       </div>
 
       <div class="product-add-ons__cta">
-        <a href="{{ $contactHref }}" class="product-add-ons__link" target="_blank" rel="noopener noreferrer">
+        <a href="{{ $contactHref }}" class="product-add-ons__link">
           Ask which add-ons fit your team
           <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </a>
@@ -257,8 +257,8 @@
       </div>
 
       <div class="product-business-works__cta">
-        <a href="{{ $demoHref }}" class="product-btn product-business-works__btn" target="_blank" rel="noopener noreferrer">
-          Book Your Demo <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        <a href="{{ $demoHref }}" class="product-btn product-business-works__btn">
+          Book Your Demo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -467,9 +467,9 @@
           <h3>{{ $caseStudy['cta']['title'] }}</h3>
           <p>{{ $caseStudy['cta']['description'] }}</p>
         </div>
-        <a href="{{ $demoHref }}" class="product-btn product-btn--primary product-case-study__cta-btn" target="_blank" rel="noopener noreferrer">
+        <a href="{{ $demoHref }}" class="product-btn product-btn--primary product-case-study__cta-btn">
           {{ $caseStudy['cta']['button'] }}
-          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -521,9 +521,9 @@
             <span class="product-sales-cta__title-accent">{{ $salesCta['titleAccent'] }}</span>
           </h2>
           <p class="product-sales-cta__description">{{ $salesCta['description'] }}</p>
-          <a href="{{ $demoHref }}" class="product-btn product-btn--primary product-sales-cta__btn" target="_blank" rel="noopener noreferrer">
+          <a href="{{ $demoHref }}" class="product-btn product-btn--primary product-sales-cta__btn">
             {{ $salesCta['button'] }}
-            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
           <p class="product-sales-cta__service-link">
             Built by Suave Creators &mdash; <a href="{{ route('service.show', 'custom-crm-development') }}">custom CRM development experts</a>

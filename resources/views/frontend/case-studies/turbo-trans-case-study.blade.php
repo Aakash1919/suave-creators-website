@@ -17,12 +17,9 @@
       <p class="case-study-detail-hero__lead">Explore how Suave Creators delivered a custom software solution for Turbo Trans Corporation, addressing business workflows, usability, and operational needs.</p>
 
       <div class="case-study-detail-hero__actions">
-        <a href="#overview" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
-          See the story
-          <x-frontend.cta-arrow />
-        </a>
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--ghost">
+        <a href="{{ $demoHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
           Start a similar project
+          <x-frontend.cta-arrow />
         </a>
       </div>
     </div>
@@ -157,7 +154,7 @@
         <p>Tell us about your workflow — we will help you turn it into a clear product experience.</p>
       </div>
       <div class="case-study-story__cta-actions">
-        <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
+        <a href="{{ $demoHref }}" class="case-study-detail-hero__btn case-study-detail-hero__btn--primary">
           Talk to us
           <x-frontend.cta-arrow />
         </a>

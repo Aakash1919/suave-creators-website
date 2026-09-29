@@ -31,8 +31,9 @@
           @if ($secondaryCtaLabel !== '' && $secondaryCtaHref !== '')
             <a href="{{ $secondaryCtaHref }}"
               @if (str_starts_with($secondaryCtaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-              class="consultation-secondary-link inline-flex cursor-pointer items-end border-b border-white/70 pb-0.5 text-sm font-semibold text-white">
+              class="consultation-secondary-link group inline-flex cursor-pointer items-center gap-1.5 border-b border-white/70 pb-0.5 text-sm font-semibold text-white">
               {{ $secondaryCtaLabel }}
+              <x-frontend.cta-arrow />
             </a>
           @endif
         </div>

@@ -78,7 +78,7 @@
 
       <section class="legal-page__section">
         <h2>Contact</h2>
-        <p>If you have any questions regarding our website, services, terms, privacy policy, or any other concerns, please <a href="{{ $demoHref }}" target="_blank" rel="noopener noreferrer">contact us</a>.</p>
+        <p>If you have any questions regarding our website, services, terms, privacy policy, or any other concerns, please <a href="{{ $demoHref }}">contact us</a>.</p>
         <ul class="legal-page__contact">
           <li><a href="mailto:info@suavecreators.com">info@suavecreators.com</a></li>
           <li><a href="{{ $siteUrl }}" target="_blank" rel="noopener noreferrer">{{ $siteUrl }}</a></li>

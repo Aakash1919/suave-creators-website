@@ -69,7 +69,6 @@
 
         <div class="site-header__actions flex items-center justify-end gap-2 sm:gap-4 xl:gap-5">
             <a href="{{ $ctaHref() }}"
-                target="_blank" rel="noopener noreferrer"
                 class="site-header__cta u-btn-cta !hidden shrink-0 cursor-pointer items-center gap-1 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-[14px] py-[8px] text-sm font-bold text-white transition hover:brightness-110 md:!inline-flex md:px-[18px]">
                 <span class="hidden lg:inline">{{ $ctaLabel }}</span>
                 <span class="lg:hidden">{{ $ctaLabelShort }}</span>
@@ -152,7 +151,6 @@
                     </div>
 
                     <a href="{{ $ctaHref() }}"
-                        target="_blank" rel="noopener noreferrer"
                         class="mobile-nav__cta u-btn-cta cursor-pointer">
                         {{ $ctaLabel }}
                         <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"
