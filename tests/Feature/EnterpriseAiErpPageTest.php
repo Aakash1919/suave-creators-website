@@ -82,7 +82,12 @@ class EnterpriseAiErpPageTest extends TestCase
         $response->assertSee('PHP logo for enterprise ERP backend development', false);
         $response->assertSee('assets/icons/tech/nest.webp', false);
         $response->assertSee('NestJS logo for scalable enterprise backend services', false);
-        $response->assertDontSee('enterprise-ai-erp-stack__icon-placeholder', false);
+        $response->assertDontSee('enterprise-ai-erp-stack__name">TypeScript', false);
+        $response->assertDontSee('enterprise-ai-erp-stack__name">Vue', false);
+        $response->assertSee('MySQL', false);
+        $response->assertSee('MongoDB', false);
+        $response->assertSee('AWS', false);
+        $this->assertSame(3, substr_count($response->getContent(), 'enterprise-ai-erp-stack__icon-placeholder'));
         $response->assertSee('Why UAE Conglomerates Choose Our Cross-Border Model', false);
         $response->assertSee('The Strategic Delivery Advantage', false);
         $response->assertSee('1.5-Hour Working Hours Overlap (GMT+4 vs. GMT+5:30)', false);
