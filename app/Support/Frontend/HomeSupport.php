@@ -22,7 +22,6 @@ class HomeSupport
             'digitalMarketingServices' => self::digitalMarketingServices(),
             'portfolioShowcaseProjects' => self::portfolioShowcaseProjects(),
             'testimonials' => self::testimonials(),
-            'articles' => self::articles(),
             'servicesMarqueeItems' => self::servicesMarqueeItems(),
             'partnerMarqueeItems' => self::partnerMarqueeItems(),
         ]);
@@ -165,7 +164,7 @@ class HomeSupport
                 'title' => 'Search Engine Optimization (SEO)',
                 'headline' => ' High-Intent Organic Discovery',
                 'description' => ' Technical crawlability audits, Core Web Vitals optimization, and topical cluster authority that convert searches into clients.',
-                'image' => 'assets/media/seo-infographic-on-imac.webp', 
+                'image' => 'assets/media/seo-infographic-on-imac.webp',
                 'alt' => 'SEO analytics dashboard for search engine optimization services',
                 'iconAlt' => 'Search engine optimization SEO service icon',
             ],
@@ -359,13 +358,5 @@ class HomeSupport
     public static function testimonials(): array
     {
         return app(TestimonialService::class)->cachedForFrontend();
-    }
-
-    /**
-     * @return array<int, array{title: string, excerpt: string, image: string, alt: string, date: string, datetime: string, author: string, url: string}>
-     */
-    public static function articles(): array
-    {
-        return BlogSupport::articleCards(4);
     }
 }

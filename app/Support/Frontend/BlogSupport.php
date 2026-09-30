@@ -259,9 +259,11 @@ class BlogSupport
      *
      * @return array<int, array{title: string, excerpt: string, image: string, alt: string, date: string, datetime: string, author: string, url: string}>
      */
-    public static function articleCards(int $limit = 4): array
+    public static function articleCards(int $limit = 4, ?string $categorySlug = null): array
     {
-        return self::posts(limit: $limit)
+        $categorySlug = filled($categorySlug) ? $categorySlug : null;
+
+        return self::posts(categorySlug: $categorySlug, limit: $limit)
             ->map(static function (array $post): array {
                 return [
                     'title' => (string) ($post['title'] ?? ''),

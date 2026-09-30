@@ -45,7 +45,6 @@ class CustomCrmBuilderSupport
             'results' => self::results(),
             'faq' => $faq,
             'seoFaqs' => $faq['items'],
-            'articles' => BlogSupport::articleCards(3),
             'consultation' => self::consultation(),
             'partnerLogos' => self::partnerLogos(),
             ...self::seoStructuredData(),

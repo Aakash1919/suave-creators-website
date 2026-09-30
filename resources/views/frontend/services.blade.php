@@ -328,7 +328,6 @@
 />
 
 <x-frontend.articles-insights-section
-  :items="$articles"
   heading-id="services-insights-title"
   eyebrow="Blogs and Insights"
   title="Explore Our Latest Technical Insights"

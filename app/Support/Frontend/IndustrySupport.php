@@ -10,8 +10,6 @@ class IndustrySupport
     public static function data(): array
     {
         return [
-            'latestPosts' => BlogSupport::posts(limit: 3)->all(),
-            'articles' => BlogSupport::articleCards(3),
             'caseStudies' => CaseStudySupport::industriesPageItems(),
             'techStack' => AboutSupport::techStack(),
             'portfolioHeroImages' => self::portfolioHeroImages(),
