@@ -27,12 +27,12 @@ class ConnectCtaSection extends Component
         public string $phoneAlt = 'Mobile app demo for a custom CRM and software product',
         public bool $showPhone = false,
         public string $sectionClass = 'full-bleed smart-together-cta py-6',
-        public bool $primaryModal = false,
+        public bool $primaryModal = true,
         public string $primaryService = '',
         public bool $secondaryModal = false,
         public string $secondaryService = '',
     ) {
-        if ($this->primaryModal && $this->primaryHref === '') {
+        if ($this->primaryModal) {
             $this->primaryHref = '#contact-modal';
         }
 

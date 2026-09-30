@@ -497,11 +497,8 @@ class ServiceSupport
             abort(404);
         }
 
-        $service = self::normalizeServiceDetailProps($service);
+        $service = array_replace(self::detailDefaults(), self::normalizeServiceDetailProps($service));
 
-        $bodyImage = (string) ($service['bodyImage'] ?? '');
-        $bodyBg = (string) ($service['bodyBg'] ?? '');
-        $useBodyImageLayout = $bodyImage !== '';
         $introLinkUrl = (string) ($service['introLinkRoute'] ?? $service['introLinkUrl'] ?? '');
 
         if ($introLinkUrl === '' || $introLinkUrl === 'services' || $introLinkUrl === '/services' || $introLinkUrl === '/services/') {
@@ -531,15 +528,6 @@ class ServiceSupport
                 }, is_array($service['faqs'] ?? null) ? $service['faqs'] : []),
                 static fn (array $faq): bool => $faq['question'] !== '' && $faq['answer'] !== '',
             )),
-            'bannerBg' => (string) ($service['bannerBg'] ?? ''),
-            'bannerSideImage' => (string) ($service['bannerSideImage'] ?? ''),
-            'introBg' => asset(self::mapDesignPath('/assets/background/technology-section-bg.png')),
-            'collabBackground' => asset(self::mapDesignPath((string) ($service['collabBackground'] ?? '/assets/media/collaboration-back-visual.png'))),
-            'collabImage' => asset(self::mapDesignPath((string) ($service['collabImage'] ?? '/assets/media/collaboration-front-visual.png'))),
-            'marqueeIcons' => array_map(
-                fn (mixed $icon): string => asset(is_string($icon) ? self::mapDesignPath($icon) : ''),
-                $service['marqueeIcons'] ?? self::defaultMarqueeIcons(),
-            ),
             'portfolioItems' => self::mapPortfolioItems($service['portfolioImages'] ?? self::defaultPortfolioImages()),
             'introStats' => $service['introStats'] ?? self::introStats(),
             'industryCards' => self::mapIndustryCards($service['industries'] ?? []),
@@ -552,25 +540,108 @@ class ServiceSupport
 
                 return $item;
             }, CaseStudySupport::forService($slug, 6))),
-            'techStack' => $slug === 'web-development-services'
-                ? self::techStack()
-                : AboutSupport::techStack(),
             'insightCategory' => self::insightCategory($slug),
-            'webDevLayoutSlugs' => self::SLUGS,
-            'isWebDevelopmentService' => in_array($slug, self::SLUGS, true),
-            'capabilitiesAsSlider' => ! empty($service['capabilitiesAsSlider']),
-            'capabilitiesGridColumns' => (int) ($service['capabilitiesGridColumns'] ?? 3),
-            'useBodyImageLayout' => $useBodyImageLayout,
-            'bodySectionStyle' => $useBodyImageLayout
-                ? "--service-body-image: url('".e($bodyImage)."');"
-                : ($bodyBg !== '' ? "background-image: url('".e($bodyBg)."');" : ''),
             'seoBreadcrumbName' => (string) ($service['breadcrumbName'] ?? 'Web Development Services'),
             ...self::serviceSeoStructuredData($slug, $service),
         ];
     }
 
     /**
-     * Align legacy data keys with the service-detail Blade contract and resolve CTA hrefs.
+     * Copy and CTA fallbacks for every service page; data files override per slug.
+     *
+     * @return array<string, mixed>
+     */
+    protected static function detailDefaults(): array
+    {
+        $demoHref = ContactSupport::demoHref();
+
+        return [
+            'eyebrow' => 'Our Services',
+            'pageTitle' => 'Service',
+            'heroTitle' => [],
+            'heroDescription' => '',
+            'heroPrimaryCta' => 'Get Free Consultation',
+            'heroSecondaryCta' => 'Schedule a Discovery Call',
+            'bannerBg' => '',
+            'bannerSideImage' => '',
+            'introQuestionEyebrow' => 'Service Scope & Inclusions',
+            'introQuestion' => '',
+            'introAnswer' => '',
+            'introEyebrow' => 'Our Services',
+            'introTitle' => '',
+            'introDescription' => '',
+            'introLinkText' => 'Explore Services',
+            'crossSellEyebrow' => 'Connect with us',
+            'crossSellTitle' => 'Have a Complex Web Application or Custom CRM Architecture Requirement?',
+            'crossSellDescription' => 'Looking to replace rigid third-party software or integrate complex multi-system APIs? Discuss your technical product roadmap, database schemas, or legacy migration plans directly with a solution architect.',
+            'crossSellPrimaryLabel' => 'Book a Discovery Session',
+            'crossSellSecondaryLabel' => 'Explore Our Custom CRM Builder Services',
+            'crossSellSecondaryClass' => 'smart-together-cta__btn-secondary group',
+            'crossSellShowPhone' => false,
+            'bodyBg' => '',
+            'bodyEyebrow' => 'Suave Creators',
+            'bodyTitle' => '',
+            'bodyParagraphs' => [],
+            'bodyPrimaryHref' => $demoHref,
+            'bodyPrimaryCta' => "Let's Connect to Discuss",
+            'bodySecondaryHref' => $demoHref,
+            'bodySecondaryCta' => "Let's Build Your Digital Future Together",
+            'capabilitiesEyebrow' => "Let's Build Together",
+            'capabilitiesTitle' => 'Our Expertise',
+            'capabilitiesDescription' => '',
+            'capabilities' => [],
+            'capabilitiesGridColumns' => 3,
+            'portfolioEyebrow' => 'Our Projects',
+            'portfolioTitle' => '',
+            'portfolioDescription' => '',
+            'portfolioPrimaryHref' => $demoHref,
+            'portfolioPrimaryCta' => 'Get Free Consultation',
+            'portfolioSecondaryHref' => route('case-studies'),
+            'portfolioSecondaryCta' => 'Explore Our Case Studies',
+            'industriesEyebrow' => 'Industries We Offer',
+            'industriesTitle' => '',
+            'industriesDescription' => '',
+            'whyEyebrow' => 'Suave Creators',
+            'whyTitle' => '',
+            'whyDescription' => '',
+            'whyCards' => [],
+            'whyButtonUrl' => $demoHref,
+            'whyButtonText' => "Let's Discuss Your Vision",
+            'processEyebrow' => 'Suave Creators',
+            'processTitle' => '',
+            'processDescription' => '',
+            'standoutEyebrow' => 'Why Suave Creators Stands Out',
+            'standoutTitle' => '',
+            'standoutDescription' => '',
+            'faqs' => [],
+            'faqEyebrow' => 'Have questions about our Services?',
+            'faqTitle' => 'Frequently Asked Questions: Delivery, Pricing & Code Ownership',
+            'faqDescription' => 'Here are answers to the most common questions regarding our custom web development services, pricing models, project timelines and code ownership.',
+            'faqQuestionHeading' => 'h3',
+            'faqCtaLabel' => 'Get Free Consultation',
+            'faqCtaHref' => $demoHref,
+            'finalBg' => 'assets/background/web-service-bg.webp',
+            'finalEyebrow' => 'Your Digital Future Together',
+            'finalTitle' => "Let's Build Your Business Website Together",
+            'finalDescription' => '',
+            'finalPrimaryCta' => 'Get a Free Quote',
+            'finalSecondaryCta' => '',
+            'finalSecondaryHref' => '',
+            'showFinalPeople' => true,
+            'hideFinalBgBelowDesktop' => false,
+            'caseStudiesEyebrow' => 'CASE STUDY',
+            'caseStudiesTitle' => 'Appointment Insurance That Makes Showing Up the Default',
+            'caseStudiesSubtitle' => 'Real projects where our software engineering shaped the product—from workflow design to production deployment.',
+            'articlesEyebrow' => 'BLOGS AND INSIGHTS',
+            'articlesTitle' => 'Explore Our Technical Insights',
+            'articlesSubtitle' => '',
+            'articlesMoreUrl' => route('blogs'),
+            'articlesMoreText' => 'View all blog articles',
+        ];
+    }
+
+    /**
+     * Align legacy data keys with the service page Blade contract and resolve CTA hrefs.
      *
      * @param  array<string, mixed>  $service
      * @return array<string, mixed>
@@ -621,8 +692,6 @@ class ServiceSupport
             'faqCtaHref',
             'portfolioPrimaryHref',
             'portfolioSecondaryHref',
-            'crossSellPrimaryHref',
-            'crossSellSecondaryHref',
             'articlesMoreUrl',
         ];
 
@@ -767,23 +836,6 @@ class ServiceSupport
                 'desc' => (string) ($step['desc'] ?? ''),
             ];
         }, $steps, array_keys($steps)));
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    protected static function defaultMarqueeIcons(): array
-    {
-        return [
-            '/assets/media/service-process-step-1.svg',
-            '/assets/icons/service-process-step-arrow-icon.svg',
-            '/assets/media/service-process-step-2.svg',
-            '/assets/icons/service-process-step-arrow-icon.svg',
-            '/assets/media/service-process-step-3.svg',
-            '/assets/icons/service-process-step-arrow-icon.svg',
-            '/assets/media/service-process-step-4.svg',
-            '/assets/icons/service-process-step-arrow-icon.svg',
-        ];
     }
 
     /**

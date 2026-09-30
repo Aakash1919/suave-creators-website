@@ -14,6 +14,8 @@ class ServiceController extends FrontendController
 
     public function show(string $slug): View
     {
-        return $this->view('frontend.service-detail', ServiceSupport::showData($slug));
+        $data = ServiceSupport::showData($slug);
+
+        return $this->view('frontend.services.'.$slug, $data);
     }
 }

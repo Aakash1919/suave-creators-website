@@ -183,30 +183,6 @@ return [
             'answer' => 'Suave Creators is a team of young talent who work under timelines and deliver the best possible results.',
         ],
     ],
-    'testimonialsData' => [
-        0 => [
-            'quote' => 'They took the time to understand our complex business needs and turned them into an elegant digital solution.',
-            'name' => 'Steve',
-            'role' => 'Director, Red3Sixty',
-            'image' => '/assets/media/testimonial-portrait-1.webp',
-        ],
-        1 => [
-            'quote' => 'From strategy to execution, they nailed every part of our digital campaign. The results were far beyond our expectations!',
-            'name' => 'Jane Smith',
-            'role' => 'Marketing Head',
-            'image' => '/assets/media/testimonial-portrait-1.webp',
-        ],
-    ],
-    'companyLogos' => [
-        0 => '/assets/icons/tech/nodejs-logo.svg',
-        1 => '/assets/icons/tech/wordpress-logo.svg',
-        2 => '/assets/icons/tech/angular-logo.svg',
-        3 => '/assets/icons/tech/vue-logo.svg',
-        4 => '/assets/icons/tech/wordpress-wordmark-logo.svg',
-        5 => '/assets/icons/tech/react-logo.svg',
-        6 => '/assets/icons/tech/nodejs-logo.svg',
-        7 => '/assets/icons/tech/wordpress-logo.svg',
-    ],
     'marqueeLabels' => [
         0 => 'TELEHEALTH',
         1 => 'EHR / EMR',

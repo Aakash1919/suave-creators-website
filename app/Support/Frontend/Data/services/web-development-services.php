@@ -15,7 +15,6 @@ return [
     ],
     'heroDescription' => 'We engineer responsive, high-performance web applications, cloud customer portals and enterprise software platforms. Built with modern full-stack frameworks, sub-second page performance and 100% code ownership.',
     'bannerSideImage' => '/assets/media/web-developement-banner.webp',
-    'bannerLogos' => [],
     'bannerBg' => '/assets/media/web-deve-bg.png',
     'heroPrimaryCta' => 'Get Free Consultation',
     'heroSecondaryCta' => 'Schedule a Discovery Call',
@@ -41,9 +40,7 @@ return [
     'crossSellTitle' => 'Have a Complex Web Application or Custom CRM Architecture Requirement?',
     'crossSellDescription' => 'Looking to replace rigid third-party software or integrate complex multi-system APIs? Discuss your technical product roadmap, database schemas, or legacy migration plans directly with a solution architect.',
     'crossSellPrimaryLabel' => 'Book a Discovery Session',
-    'crossSellPrimaryHref' => 'demo',
     'crossSellSecondaryLabel' => 'Explore Our Custom CRM Builder Services',
-    'crossSellSecondaryHref' => 'service.show:custom-crm-development',
     'crossSellSecondaryClass' => 'smart-together-cta__btn-secondary group',
     'crossSellShowPhone' => false,
 
@@ -57,17 +54,6 @@ return [
     'bodyPrimaryHref' => 'demo',
     'bodySecondaryCta' => "Let's Build Your Digital Future Together",
     'bodySecondaryHref' => 'demo',
-
-    'marqueeIcons' => [
-        0 => '/assets/media/service-process-step-1.svg',
-        1 => '/assets/icons/service-process-step-arrow-icon.svg',
-        2 => '/assets/media/service-process-step-2.svg',
-        3 => '/assets/icons/service-process-step-arrow-icon.svg',
-        4 => '/assets/media/service-process-step-3.svg',
-        5 => '/assets/icons/service-process-step-arrow-icon.svg',
-        6 => '/assets/media/service-process-step-4.svg',
-        7 => '/assets/icons/service-process-step-arrow-icon.svg',
-    ],
 
     'capabilitiesEyebrow' => 'OUR EXPERTISE',
     'capabilitiesTitle' => 'Technical Capabilities Engineered for Scalability, Security & Performance',
@@ -110,10 +96,6 @@ return [
             'desc' => 'We build high-throughput microservices on Node.js (NestJS / Express) to leverage its non-blocking, event-driven architecture. Ideal for real-time applications, collaborative workspaces, live messaging systems and high-volume API ingestion pipelines.',
         ],
     ],
-
-    'collabText' => 'Come and build together a better business with',
-    'collabBrand' => 'SUAVE CREATORS.',
-    'collabButtonText' => 'REQUEST A QUOTE',
 
     'portfolioEyebrow' => 'OUR PORTFOLIO',
     'portfolioTitle' => 'Real-World Software Systems That Deliver Measurable Business ROI',
@@ -171,17 +153,6 @@ return [
             'desc' => 'Custom learning management systems (LMS), student progress portals, interactive testing tools and institutional administration dashboards.',
             'slug' => 'education-elearning-platforms',
         ],
-    ],
-
-    'companyLogos' => [
-        0 => '/assets/icons/tech/nodejs-logo.svg',
-        1 => '/assets/icons/tech/wordpress-logo.svg',
-        2 => '/assets/icons/tech/angular-logo.svg',
-        3 => '/assets/icons/tech/vue-logo.svg',
-        4 => '/assets/icons/tech/wordpress-wordmark-logo.svg',
-        5 => '/assets/icons/tech/react-logo.svg',
-        6 => '/assets/icons/tech/nodejs-logo.svg',
-        7 => '/assets/icons/tech/wordpress-logo.svg',
     ],
 
     'whyEyebrow' => 'SUAVE CREATORS',
@@ -263,13 +234,6 @@ return [
         ],
     ],
 
-    'logoMarquee' => [
-        0 => '/assets/brand/logo-mark-shape.svg',
-        1 => '/assets/brand/logo-mark-shape.svg',
-        2 => '/assets/brand/logo-mark-shape.svg',
-        3 => '/assets/brand/logo-mark-shape.svg',
-    ],
-
     'faqEyebrow' => 'HAVE QUESTIONS ABOUT OUR SERVICES?',
     'faqTitle' => 'Frequently Asked Questions: Delivery, Pricing & Code Ownership',
     'faqDescription' => 'Here are answers to the most common questions regarding our custom web development services, pricing models, project timelines and code ownership.',
@@ -330,36 +294,4 @@ return [
     'articlesMoreText' => 'View all blog articles',
     'articlesMoreUrl' => 'blogs',
 
-    'articles' => [
-        0 => [
-            'title' => 'Why US Mid-Market Companies Are Replacing Salesforce with Custom CRMs in 2026 (The 3-Year TCO Breakdown)',
-            'excerpt' => 'Evaluate Custom CRM vs. Salesforce in 2026. Compare 3-year TCO, per-seat subscription fatigue, native AI integration and migration ROI.',
-            'image' => '/storage/blogs/custom-crm-vs-salesforce-tco-analysis-2026-medium.webp',
-            'alt' => 'Evaluate Custom CRM vs Salesforce 3-year TCO breakdown in 2026',
-            'date' => 'Sep 21, 2026',
-            'datetime' => '2026-09-21',
-            'author' => 'Suave Creators',
-            'url' => 'blog.show:custom-crm-vs-salesforce-tco-analysis-2026',
-        ],
-        1 => [
-            'title' => 'Why the India Market Is the Strategic Choice for US Web Development in 2026',
-            'excerpt' => 'Discover why US businesses hire Indian engineering partners: 60% TCO savings, 24/7 sprint cycles, US IP protection and cross-border governance.',
-            'image' => '/storage/blogs/why-the-india-market-is-the-strategic-choice-for-us-web-development-in-2026-medium.jpg',
-            'alt' => 'Why US businesses hire Indian engineering partners for custom web development',
-            'date' => 'Sep 18, 2026',
-            'datetime' => '2026-09-18',
-            'author' => 'Suave Creators',
-            'url' => 'blogs.category:web-development',
-        ],
-        2 => [
-            'title' => 'Beyond Chatbots: How Multi-Agent AI Systems Are Automating B2B Workflows in 2026',
-            'excerpt' => 'Moving past single-prompt LLM wrappers to deterministic state graphs, autonomous orchestration and enterprise automation.',
-            'image' => '/storage/blogs/beyond-chatbots-how-multi-agent-ai-systems-are-automating-b2b-workflows-in-2026-medium.webp',
-            'alt' => 'Multi-agent AI systems automating B2B workflows and enterprise operations in 2026',
-            'date' => 'Sep 18, 2026',
-            'datetime' => '2026-09-18',
-            'author' => 'Suave Creators',
-            'url' => 'blog.show:beyond-chatbots-how-multi-agent-ai-systems-are-automating-b2b-workflows-in-2026',
-        ],
-    ],
 ];
