@@ -17,6 +17,7 @@ class ChatLead extends Model
         'uuid',
         'name',
         'email',
+        'phone',
         'session_token',
         'escalated_at',
     ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Ai\Agents\SuaveAgent;
+use App\Http\Requests\Frontend\SuaveAgentStartRequest;
 use App\Models\ChatLead;
 use App\Services\CrmLeadSyncService;
 use Illuminate\Http\JsonResponse;
@@ -19,15 +20,19 @@ class SuaveAgentController extends FrontendController
     /**
      * Create a ChatLead + conversation session with an instant greeting.
      *
-     * @return array{lead_uuid: string, session_token: string, conversation_id: string, greeting: string, escalated: bool, lead: array{name: string, email: string}}
+     * @return array{lead_uuid: string, session_token: string, conversation_id: string, greeting: string, escalated: bool, lead: array{name: string, email: string, phone: string|null}}
      */
-    public static function createLeadSession(string $name, string $contact): array
+    public static function createLeadSession(string $name, string $contact, string $phone = ''): array
     {
         $contact = trim($contact);
+        $phone = trim($phone);
         $name = trim($name);
+        $contactIsEmail = filter_var($contact, FILTER_VALIDATE_EMAIL) !== false;
+        $storedPhone = $phone !== '' ? $phone : (! $contactIsEmail && $contact !== '' ? $contact : null);
+        $storedEmail = $contactIsEmail ? $contact : null;
 
         if ($name === '') {
-            if (filter_var($contact, FILTER_VALIDATE_EMAIL)) {
+            if ($contactIsEmail) {
                 $name = ucfirst(Str::before($contact, '@'));
             } else {
                 $name = 'Guest';
@@ -35,12 +40,13 @@ class SuaveAgentController extends FrontendController
         }
 
         $plainToken = Str::random(48);
-        $greeting = (new self)->instantGreeting($name, $contact);
+        $greeting = (new self)->instantGreeting($name, $contactIsEmail ? $contact : '');
 
-        [$lead, $conversationId] = DB::transaction(function () use ($name, $contact, $plainToken, $greeting): array {
+        [$lead, $conversationId] = DB::transaction(function () use ($name, $storedEmail, $storedPhone, $plainToken, $greeting): array {
             $lead = ChatLead::query()->create([
                 'name' => $name,
-                'email' => $contact,
+                'email' => $storedEmail,
+                'phone' => $storedPhone,
                 'session_token' => ChatLead::hashSessionToken($plainToken),
             ]);
 
@@ -81,6 +87,7 @@ class SuaveAgentController extends FrontendController
             'lead' => [
                 'name' => $lead->name,
                 'email' => $lead->email,
+                'phone' => $lead->phone,
             ],
         ];
     }
@@ -88,22 +95,19 @@ class SuaveAgentController extends FrontendController
     /**
      * Create a ChatLead + conversation with an instant greeting (no LLM wait).
      */
-    public function start(Request $request): JsonResponse
+    public function start(SuaveAgentStartRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'name' => ['nullable', 'string', 'max:120'],
-            'email' => ['nullable', 'string', 'max:255'],
-            'contact' => ['nullable', 'string', 'max:255'],
-        ]);
+        $validated = $request->validated();
 
-        $contact = $validated['contact'] ?? $validated['email'] ?? null;
-        if (blank($contact)) {
-            throw ValidationException::withMessages([
-                'email' => 'Please provide a valid email or phone number.',
-            ]);
+        if (filled($validated['contact'] ?? null)) {
+            $sessionData = self::createLeadSession((string) ($validated['name'] ?? ''), (string) $validated['contact']);
+        } else {
+            $sessionData = self::createLeadSession(
+                (string) ($validated['name'] ?? ''),
+                (string) ($validated['email'] ?? ''),
+                (string) ($validated['phone'] ?? ''),
+            );
         }
-
-        $sessionData = self::createLeadSession((string) ($validated['name'] ?? ''), (string) $contact);
 
         return response()->json($sessionData);
     }

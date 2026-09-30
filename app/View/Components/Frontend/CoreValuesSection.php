@@ -11,6 +11,8 @@ class CoreValuesSection extends Component
 {
     use NormalizesAssetPaths;
 
+    public bool $hasIcons = false;
+
     /**
      * @param  array<int, array{title?: string, desc?: string, image?: string, alt?: string, icon?: string}>  $items
      */
@@ -39,6 +41,8 @@ class CoreValuesSection extends Component
                 'icon' => (string) ($item['icon'] ?? ''),
             ];
         }, $this->items));
+
+        $this->hasIcons = collect($this->items)->contains(fn (array $item): bool => $item['icon'] !== '');
     }
 
     public function render(): View|Closure|string

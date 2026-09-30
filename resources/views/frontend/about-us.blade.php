@@ -25,6 +25,7 @@
       <div class="mx-auto mt-8 flex w-full max-w-[560px] flex-col items-center sm:mt-10">
         <x-frontend.inline-consultation-form
           theme="light"
+          align="center"
           placeholder="Enter your phone or email"
           button-text="Get Free Consultation"
           :secondary-href="$demoHref"
@@ -155,31 +156,7 @@
 </section>
 <!-- 3. Why Suave Creators Section End -->
 
-<!-- 4. Smart Modules Section Start -->
-<section class="full-bleed about-modules-section section-pad-m py-6 md:py-14 lg:py-16" aria-labelledby="about-modules-title">
-  <div class="section-inner">
-    <header class="mx-auto mb-8 max-w-[720px] text-center md:mb-10">
-      <h2 id="about-modules-title" class="text-[14px] font-semibold leading-snug text-[#5B6CFF]">
-        &ldquo;17+ Smart Modules. One Unified Workspace.&rdquo;
-      </h2>
-      <span class="mx-auto mt-1 block h-[2px] w-[28px] rounded-full bg-[#5B6CFF]" aria-hidden="true"></span>
-    </header>
-
-    <div class="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4 lg:grid-cols-6 lg:gap-5">
-      @foreach ($smartModules as $module)
-        <article class="about-module-card">
-          <span class="about-module-card__icon" aria-hidden="true">
-            <i class="{{ $module['icon'] }}"></i>
-          </span>
-          <span class="about-module-card__label">{{ $module['label'] }}</span>
-        </article>
-      @endforeach
-    </div>
-  </div>
-</section>
-<!-- 4. Smart Modules Section End -->
-
-<!-- 5. Core Values Section Start -->
+<!-- 4. Core Values Section Start -->
 <section class="full-bleed bg-cover bg-top bg-no-repeat section-pad-m py-6 sm:py-16 lg:py-24"
   style="background-image: url('{{ asset('assets/background/core-section-bg.webp') }}');"
   aria-labelledby="core-values-title">
@@ -222,9 +199,9 @@
     </div>
   </div>
 </section>
-<!-- 5. Core Values Section End -->
+<!-- 4. Core Values Section End -->
 
-<!-- 6. Work With Us CTA Section Start -->
+<!-- 5. Work With Us CTA Section Start -->
 <section class="full-bleed overflow-hidden bg-white section-pad-m py-6 sm:py-14 lg:py-20" aria-labelledby="about-work-title">
   <div class="section-inner rounded-2xl bg-cover bg-center bg-no-repeat p-5 sm:p-8 lg:p-12"
     style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');">
@@ -249,16 +226,9 @@
     </div>
   </div>
 </section>
-<!-- 6. Work With Us CTA Section End -->
+<!-- 5. Work With Us CTA Section End -->
 
-<!-- 7. Technologies Marquee Section Start -->
-<x-frontend.tech-partnerships-section
-  :items="$techStack"
-  section-class="full-bleed full-bleed--edge bg-[white] pt-6 pb-10 lg:pt-10 lg:pb-14"
-/>
-<!-- 7. Technologies Marquee Section End -->
-
-<!-- 8. Why Choose Us Section Start -->
+<!-- 6. Why Choose Us Section Start -->
 <section class="full-bleed bg-[#050A24] bg-cover bg-center bg-no-repeat section-pad-m py-6 sm:py-14 md:py-16 lg:py-20"
   style="background-image: url('{{ asset('assets/background/core-values-section-bg.png') }}');"
   aria-labelledby="digital-growth-title">
@@ -309,7 +279,7 @@
     </div>
   </div>
 </section>
-<!-- 8. Why Choose Us Section End -->
+<!-- 6. Why Choose Us Section End -->
 
 <x-frontend.articles-insights-section
   heading-id="about-insights-title"
@@ -320,9 +290,9 @@
 
 <x-frontend.consultation-section />
 
-<!-- 11. Partnerships Section Start -->
+<!-- 7. Partnerships Section Start -->
 <x-frontend.partnerships-section :items="$partnerMarqueeItems" />
-<!-- 11. Partnerships Section End -->
+<!-- 7. Partnerships Section End -->
 @endsection
 
 @push('scripts')

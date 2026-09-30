@@ -13,7 +13,22 @@
         <div class="admin-messenger__identity-copy">
           <h1 class="admin-messenger__name">{{ $lead->name }}</h1>
           <p class="admin-messenger__meta">
-            <a href="mailto:{{ $lead->email }}">{{ $lead->email }}</a>
+            @php
+              $leadEmail = trim((string) $lead->email);
+              $leadPhone = trim((string) $lead->phone);
+              $leadEmailIsEmail = filter_var($leadEmail, FILTER_VALIDATE_EMAIL);
+            @endphp
+            @if ($leadEmailIsEmail)
+              <a href="mailto:{{ $leadEmail }}">{{ $leadEmail }}</a>
+            @elseif ($leadEmail !== '' && $leadPhone === '')
+              <span>{{ $leadEmail }}</span>
+            @endif
+            @if ($leadPhone !== '')
+              @if ($leadEmailIsEmail)
+                <span aria-hidden="true"> · </span>
+              @endif
+              <a href="tel:{{ preg_replace('/\s+/', '', $leadPhone) }}">{{ $leadPhone }}</a>
+            @endif
             @if ($lead->escalated_at)
               <span class="admin-messenger__pill admin-messenger__pill--danger">Escalated {{ $lead->escalated_at->diffForHumans() }}</span>
             @else

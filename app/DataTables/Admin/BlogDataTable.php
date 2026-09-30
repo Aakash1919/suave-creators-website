@@ -30,16 +30,18 @@ class BlogDataTable
             ])
             ->with(['category:id,name']);
 
+        $canUpdate = (bool) Auth::user()?->hasPermission('blogs.update');
+
         return DataTables::eloquent($query)
             ->addColumn('category_name', fn (Blog $blog): string => e($blog->category?->name ?? '—'))
-            ->editColumn('title', function (Blog $blog): string {
+            ->editColumn('title', function (Blog $blog) use ($canUpdate): string {
                 $title = e($blog->title);
                 $slug = e($blog->slug);
                 $titleHtml = $title;
 
-                if ($blog->slug !== '') {
-                    $url = e(route('blog.show', ['slug' => $blog->slug]));
-                    $titleHtml = '<a href="'.$url.'" target="_blank" rel="noopener noreferrer" class="admin-table__title-link">'.$title.'</a>';
+                if ($canUpdate) {
+                    $url = e(route('admin.blogs.edit', $blog));
+                    $titleHtml = '<a href="'.$url.'" class="admin-table__title-link">'.$title.'</a>';
                 }
 
                 return '<div class="admin-table__title">'.$titleHtml.'</div>'
@@ -57,6 +59,14 @@ class BlogDataTable
             ->addColumn('actions', function (Blog $blog): string {
                 $items = [];
                 $name = trim((string) $blog->title) !== '' ? (string) $blog->title : 'this blog';
+
+                if ($blog->status === Blog::STATUS_PUBLISHED && $blog->slug !== '') {
+                    $items[] = [
+                        'label' => 'View live',
+                        'url' => route('blog.show', ['slug' => $blog->slug]),
+                        'target' => '_blank',
+                    ];
+                }
 
                 if (Auth::user()?->hasPermission('blogs.update')) {
                     $items[] = [

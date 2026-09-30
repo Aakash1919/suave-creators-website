@@ -12,14 +12,16 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=3">
     <link rel="apple-touch-icon" href="{{ asset('assets/brand/favicon-192.png') }}?v=3" sizes="192x192">
 
-    @if ($googleSiteVerification = config('seo.site.google_site_verification'))
+    @php
+        $isProduction = app()->isProduction();
+        $googleSiteVerification = $isProduction ? config('seo.site.google_site_verification') : null;
+        $googleAnalyticsId = $isProduction ? config('seo.site.google_analytics_id') : null;
+        $googleTagManagerId = $isProduction ? config('seo.site.google_tag_manager_id') : null;
+    @endphp
+    @if ($googleSiteVerification)
         <meta name="google-site-verification" content="{{ $googleSiteVerification }}">
     @endif
 
-    @php
-        $googleAnalyticsId = config('seo.site.google_analytics_id');
-        $googleTagManagerId = config('seo.site.google_tag_manager_id');
-    @endphp
     @if ($googleAnalyticsId || $googleTagManagerId)
         {{-- Queue analytics commands early; gtag.js / gtm.js load after idle or first interaction. --}}
         <script>

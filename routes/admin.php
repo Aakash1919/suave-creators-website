@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\ConversationController;
@@ -51,6 +52,20 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::middleware('permission:blogs.delete')->group(function () {
         Route::delete('/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+    });
+
+    Route::middleware('permission:blog-categories.view')->group(function () {
+        Route::get('/blog-categories', [BlogCategoryController::class, 'index'])->name('blog-categories.index');
+    });
+
+    Route::middleware('permission:blog-categories.create')->group(function () {
+        Route::get('/blog-categories/create', [BlogCategoryController::class, 'create'])->name('blog-categories.create');
+        Route::post('/blog-categories', [BlogCategoryController::class, 'store'])->name('blog-categories.store');
+    });
+
+    Route::middleware('permission:blog-categories.update')->group(function () {
+        Route::get('/blog-categories/{blogCategory}/edit', [BlogCategoryController::class, 'edit'])->name('blog-categories.edit');
+        Route::put('/blog-categories/{blogCategory}', [BlogCategoryController::class, 'update'])->name('blog-categories.update');
     });
 
     Route::middleware('permission:conversations.view')->group(function () {

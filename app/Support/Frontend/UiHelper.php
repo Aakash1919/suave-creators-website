@@ -7,11 +7,13 @@ class UiHelper
     /**
      * Primary CTA button class string.
      *
-     * @param  'default'|'compact'  $variant
+     * @param  'default'|'compact'|'secondary'|'secondary-light'  $variant
      */
     public static function btnPrimary(string $variant = 'default'): string
     {
         return match ($variant) {
+            'secondary' => 'smart-together-cta__btn-secondary group cursor-pointer',
+            'secondary-light' => 'smart-together-cta__btn-secondary smart-together-cta__btn-secondary--light group cursor-pointer',
             'compact' => 'u-btn-cta group inline-flex h-[34px] min-h-[34px] cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm',
             default => 'u-btn-cta group inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110',
         };

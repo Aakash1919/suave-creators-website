@@ -15,6 +15,8 @@ class IndustryController extends FrontendController
 
     public function show(string $slug): View
     {
-        return $this->view('frontend.industry-detail', IndustryDetailSupport::showData($slug));
+        $data = IndustryDetailSupport::showData($slug);
+
+        return $this->view('frontend.industries.'.$slug, $data);
     }
 }
