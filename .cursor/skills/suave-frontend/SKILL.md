@@ -81,6 +81,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - Same-page contact form anchors on the contact page may still use `#contact-id`
 - Contact form: `POST` to `route('contact-us.store')` via AJAX (`novalidate` + custom field errors). Field `blur`/`change` also `POST`s to `route('contact-us.draft')` (silent; one `draft_token` row) so abandoned forms still save name/email/phone/service/message. On submit success: clear form and show “The request has been sent successfully.” Also includes `@csrf`, honeypot `website`, and `form_started_at` (bots get silent JSON success)
 - Legal pages: `PageController` methods `privacyPolicy` / `termsAndConditions` (`privacy-policy`, `terms-and-conditions`; Footer must use `route()`, not `url()`)
+- Google tags (site verification meta, GA4 `gtag`, GTM script + noscript iframe) render **only when `app()->isProduction()`**; `layouts/frontend.blade.php` nulls the `config('seo.site.*')` IDs elsewhere, which also stops `frontend-deferred.js` loading gtag.js / gtm.js
 - Sitemap / LLM: `route('sitemap')`, `route('llms.txt')`, `route('robots')` — generated from published blogs, case studies, services, industries, and static pages
 - Assets: `asset('assets/...')`; external / `tel:` / `mailto:` stay as-is
 - When adding a named route, wire Header, Footer, Topbar, SuaveAgent, and page CTAs with `route('the-new-name')` — do not add raw paths

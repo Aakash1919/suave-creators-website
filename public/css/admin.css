@@ -1332,7 +1332,6 @@ body:has(.admin-messenger) {
   color: var(--admin-primary);
   text-decoration: underline;
 }
-
 .admin-table__meta {
   margin-top: 0.15rem;
   font-size: 0.78rem;
