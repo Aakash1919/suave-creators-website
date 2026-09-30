@@ -13,8 +13,10 @@ class ChatWidgetIcon extends Component
 
     public string $resolvedSrc;
 
+    public string $version;
+
     /**
-     * Classic circular Suave chat mark (dark disc + gradient ring).
+     * Classic circular Suave chat mark (brand gradient disc, white mark).
      */
     public function __construct(
         public string $alt = 'Chat with Suave Creators for custom software and CRM support',
@@ -25,6 +27,8 @@ class ChatWidgetIcon extends Component
         $this->resolvedSrc = $this->normalizeAssetPath(
             $src ?? 'assets/brand/chat-widget-icon.svg'
         );
+        $absolute = public_path($this->resolvedSrc);
+        $this->version = is_file($absolute) ? (string) filemtime($absolute) : '1';
     }
 
     /**

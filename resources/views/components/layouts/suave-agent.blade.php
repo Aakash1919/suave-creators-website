@@ -302,8 +302,11 @@
           }
         }
 
+        var autoOpenDismissed = false;
+
         toggle.addEventListener('click', function () {
           var open = panel.hidden;
+          if (!open) autoOpenDismissed = true;
           setOpen(open);
           if (open) {
             ensureMarked();
@@ -319,6 +322,7 @@
         }
 
         closeBtn.addEventListener('click', function () {
+          autoOpenDismissed = true;
           setOpen(false);
         });
 
@@ -701,6 +705,19 @@
             }
           }
         };
+
+        function scheduleAutoOpen() {
+          window.setTimeout(function () {
+            if (autoOpenDismissed || !panel.hidden) return;
+            window.SuaveAgent.open();
+          }, 5000);
+        }
+
+        if (document.readyState === 'complete') {
+          scheduleAutoOpen();
+        } else {
+          window.addEventListener('load', scheduleAutoOpen);
+        }
 
         window.addEventListener('suave-agent:start', function (e) {
           if (e.detail && e.detail.chat_session) {
