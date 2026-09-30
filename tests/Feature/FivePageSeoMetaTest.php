@@ -22,8 +22,8 @@ class FivePageSeoMetaTest extends TestCase
         $this->assertSame('Contact Suave Creators | Get a Free Software Consultation', $pages['contact-us']['title']);
         $this->assertSame('Have a software, web, CRM, ERP or AI project in mind? Contact Suave Creators for a free consultation and discuss your business requirements with our experts.', $pages['contact-us']['description']);
 
-        $this->assertSame('Enterprise Software That Improves Operations', $enterprise['pageTitle']);
-        $this->assertSame('Planning enterprise software? Understand what it takes, what you get, and how the right system can improve teams, workflows, and growth.', $enterprise['pageDescription']);
+        $this->assertSame('Custom Enterprise Software Solutions & ERP Systems | Suave Creators', $enterprise['pageTitle']);
+        $this->assertSame('Custom enterprise software solutions, bespoke ERP development, and workflow automation. Eliminate per-seat SaaS costs with 100% code and IP ownership.', $enterprise['pageDescription']);
 
         $this->assertSame('Custom CRM That Turns Leads Into Revenue', $crm['pageTitle']);
         $this->assertSame('Ready for a CRM built around your sales process? See what you get, how it works, and how it can improve follow-ups, visibility, and revenue.', $crm['pageDescription']);

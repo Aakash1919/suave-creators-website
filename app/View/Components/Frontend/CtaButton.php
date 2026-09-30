@@ -15,7 +15,7 @@ class CtaButton extends Component
     public string $btnClass;
 
     /**
-     * @param  'default'|'compact'|'secondary'|'secondary-light'  $variant
+     * @param  'default'|'compact'|'secondary'|'secondary-light'|'secondary-dark'|'secondary-blue'  $variant
      */
     public function __construct(
         public string $href = '',
@@ -32,7 +32,14 @@ class CtaButton extends Component
             ? $this->href
             : ContactSupport::demoHref();
 
-        $this->btnClass = UiHelper::btnPrimary($this->variant);
+        $this->btnClass = match ($this->variant) {
+            'secondary' => UiHelper::btnSecondary('light'),
+            'secondary-light' => UiHelper::btnPrimary('secondary-light'),
+            'secondary-dark' => UiHelper::btnSecondary('dark'),
+            'secondary-blue' => UiHelper::btnSecondary('blue'),
+            'compact' => UiHelper::btnPrimary('compact'),
+            default => UiHelper::btnPrimary('default'),
+        };
     }
 
     public function render(): View|Closure|string

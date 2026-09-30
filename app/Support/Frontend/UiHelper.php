@@ -19,6 +19,26 @@ class UiHelper
         };
     }
 
+    /**
+     * Secondary CTA button class string (symmetric with primary CTA).
+     *
+     * @param  'light'|'dark'|'blue'  $theme
+     * @param  'default'|'compact'  $variant
+     */
+    public static function btnSecondary(string $theme = 'light', string $variant = 'default'): string
+    {
+        $base = match ($theme) {
+            'dark' => 'u-btn-secondary u-btn-secondary--dark group inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20 hover:border-white/35',
+            'blue' => 'u-btn-secondary u-btn-secondary--blue group inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#2A4DFB] bg-transparent text-[#2A4DFB] transition hover:bg-[#2A4DFB] hover:text-white',
+            default => 'u-btn-secondary u-btn-secondary--light group inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#00003F] bg-transparent text-[#00003F] transition hover:bg-[#00003F] hover:text-white',
+        };
+
+        return match ($variant) {
+            'compact' => $base.' h-[34px] min-h-[34px] px-4 py-0 text-[13px] font-semibold sm:h-auto sm:min-h-11 sm:px-5 sm:py-2 sm:text-sm',
+            default => $base.' px-5 py-2 text-sm font-semibold',
+        };
+    }
+
     public static function ctaArrow(): string
     {
         return '<svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>';
