@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style-deferred.css">
+  <link rel="stylesheet" href="/css/fontawesome-subset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</head>
+<body>
+<main class="site-main">
+<section class="full-bleed enterprise-ai-erp-evidence" aria-labelledby="enterprise-ai-erp-evidence-heading">
+  <div class="section-inner enterprise-ai-erp-evidence__inner">
+    <p class="enterprise-ai-erp-evidence__eyebrow">Evidence-Based Engineering</p>
+    <h2 id="enterprise-ai-erp-evidence-heading" class="enterprise-ai-erp-evidence__title">Real-World Software Systems Powering Commercial Growth</h2>
+    <div class="enterprise-ai-erp-evidence__stage">
+      <button class="enterprise-ai-erp-evidence__control enterprise-ai-erp-evidence__prev" type="button" aria-label="Previous software system">
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <button class="enterprise-ai-erp-evidence__control enterprise-ai-erp-evidence__next" type="button" aria-label="Next software system">
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+      <div class="enterpriseEvidenceSwiper swiper enterprise-ai-erp-evidence__swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <article class="enterprise-ai-erp-evidence__card">
+              <div class="enterprise-ai-erp-evidence__icon"><span class="enterprise-ai-erp-evidence__icon-placeholder"></span></div>
+              <h3 class="enterprise-ai-erp-evidence__card-title">Turbo Trans Corporation Custom Logistics Software</h3>
+              <p class="enterprise-ai-erp-evidence__value">3.5×</p>
+              <p class="enterprise-ai-erp-evidence__label">Faster lead response</p>
+              <p class="enterprise-ai-erp-evidence__copy">Built real-time dispatch and automated spot-quote calculations, resulting in 3.4x faster lead response times and 42% more qualified loads.</p>
+            </article>
+          </div>
+          <div class="swiper-slide">
+            <article class="enterprise-ai-erp-evidence__card">
+              <div class="enterprise-ai-erp-evidence__icon"><span class="enterprise-ai-erp-evidence__icon-placeholder"></span></div>
+              <h3 class="enterprise-ai-erp-evidence__card-title">B2B Sales CRM &amp; Outbound Pipeline Automation</h3>
+              <p class="enterprise-ai-erp-evidence__value">35%</p>
+              <p class="enterprise-ai-erp-evidence__label">Admin effort reduction</p>
+              <p class="enterprise-ai-erp-evidence__copy">Streamlined outbound sales workflows from twelve manual steps down to four automated actions, achieving a 35% reduction in administrative pipeline effort.</p>
+            </article>
+          </div>
+          <div class="swiper-slide">
+            <article class="enterprise-ai-erp-evidence__card">
+              <div class="enterprise-ai-erp-evidence__icon"><span class="enterprise-ai-erp-evidence__icon-placeholder"></span></div>
+              <h3 class="enterprise-ai-erp-evidence__card-title">AI Sales Coaching Platform</h3>
+              <p class="enterprise-ai-erp-evidence__value">55%</p>
+              <p class="enterprise-ai-erp-evidence__label">Faster ramp to quota</p>
+              <p class="enterprise-ai-erp-evidence__copy">Deployed real-time speech-to-text coaching and post-call objection scoring, delivering 55% faster rep ramp time to quota.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  new Swiper('.enterpriseEvidenceSwiper', {
+    slidesPerView: 1,
+    spaceBetween: 18,
+    rewind: true,
+    watchOverflow: false,
+    navigation: {
+      nextEl: '.enterprise-ai-erp-evidence__next',
+      prevEl: '.enterprise-ai-erp-evidence__prev'
+    },
+    breakpoints: {
+      768: { slidesPerView: 2, spaceBetween: 18 },
+      1200: { slidesPerView: 3, spaceBetween: 20 }
+    }
+  });
+</script>
+</body>
+</html>
