@@ -10,7 +10,7 @@ description: >-
   route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
   Permission. Read before any admin change.
 metadata:
-  last-updated: "2026-09-23"
+  last-updated: "2026-09-30"
 ---
 
 # Suave Admin
@@ -48,6 +48,7 @@ Follow [`system-coding-standards`](../system-coding-standards/SKILL.md) and Pint
 - Roles: `admin` (all permissions), `editor` (blogs view/create/update, case-studies view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
 - Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
 - Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
+- Blog categories: Admin → **Blog categories** (`admin.blog-categories.*`); create/edit use an **index modal**. Permissions `blog-categories.view|create|update` (not the blog post permissions). `RolesAndPermissionsSeeder` grants them to the `admin` role only. Existing databases get the same grant from `2026_09_30_104619_add_blog_categories_permissions`. Public `/blogs/category/{slug}` still appears only after a published post uses the category. There is no delete action (posts use `nullOnDelete`)
 - Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-drafted** (no trend writer). Edit-form “Generate SEO meta” is allowed like blogs. Marketing listing cards and the `/services` carousel read the static catalog in `App\Support\Frontend\CaseStudySupport` (not this admin table). Public detail pages are independent Blade views under `resources/views/frontend/case-studies/`. Keep `service_slugs` / `industry_slugs` in that catalog in sync when a story should appear on a service or industry page.
 
 ## Services (required)
@@ -57,6 +58,7 @@ Follow [`system-coding-standards`](../system-coding-standards/SKILL.md) and Pint
 | Service | Responsibility |
 |---------|----------------|
 | `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads, `normalizeVisualHtml()` + `BlogHtmlSupport::sanitizeContent()` on save (extract Base64/inline SVG to `storage/app/public/blogs/content`, WebP when possible, fill empty alts, drop empty tags, wrap bare tables in `.blog-table-wrap`, unwrap nested headings, drop a duplicate lead title, promote body H3→H2 when the article has no H2, strip pasted `font-family` / `<font>` / `@font-face` so articles use the site typeface) |
+| `BlogCategoryService` | Blog category create/update, unique slug from name when the slug field is empty, next `sort_order`. No delete |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization, service/industry placement slug lists. **No AI drafts** — content is editor-filled only |
@@ -86,6 +88,7 @@ Recipe: [`create-form-request`](../create-form-request/SKILL.md). Namespace: `Ap
 |--------|---------|
 | Admin login | `AdminLoginRequest` |
 | Blog create/update | `BlogStoreRequest` / `BlogUpdateRequest` (`Concerns\ValidatesBlogFields`) |
+| Blog category create/update | `BlogCategoryStoreRequest` / `BlogCategoryUpdateRequest` (`Concerns\ValidatesBlogCategoryFields`; `blog-categories.create` / `blog-categories.update`) |
 | Blog publish (index) | `BlogPublishRequest` |
 | Case study create/update | `CaseStudyStoreRequest` / `CaseStudyUpdateRequest` (`Concerns\ValidatesCaseStudyFields`) |
 | User create/update | `UserStoreRequest` / `UserUpdateRequest` |
@@ -111,6 +114,7 @@ Namespace: `App\Http\Controllers\Admin\`
 | Auth | `AuthController` | — (`AdminLoginRequest` for login) |
 | Home | `DashboardController` | — (stats/links) |
 | Blogs | `BlogController` | `App\Services\BlogService` (`publish()` for index Publish action) |
+| Blog categories | `BlogCategoryController` | `App\Services\BlogCategoryService` (index modal; no delete) |
 | Case studies | `CaseStudyController` | `App\Services\CaseStudyService` |
 | Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store/draft via `ContactStoreRequest` / `ContactDraftRequest`) |
 | Profile | `ProfileController` | `App\Services\ProfileService` |
@@ -126,7 +130,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - Layout: `layouts.admin` — **white theme**: light sidebar (`240px`), white topbar, purple primary `#7539FF`, surface `#F7F8F9`; fonts match frontend (`PP Mori` + `Roboto Flex`)
 - **Tailwind:** compiled via Vite — `@vite('resources/css/app.css')` in `layouts/admin` (same entry as marketing). Pin `tailwindcss` **3.4.17** + `tailwind.config.js` content scan of Blade + `app/Support/Admin`, `app/DataTables`, `app/View/Components`. Do **not** use `cdn.tailwindcss.com`. Theme tokens `primary` / `surface` / `ink` live in `tailwind.config.js`. Row action menus use **admin.css** classes (`admin-table__action-menu*`), not Tailwind strings in PHP. Local: `npm run dev` or `npm run build` so `public/build` exists.
 - Partials under `resources/views/layouts/admin/partials/`:
-  - `sidebar.blade.php` — light brand bar + soft active nav + user chip; collapses to mini (icons only, hover expands)
+  - `sidebar.blade.php` — light brand bar + soft active nav + user chip; collapses to mini (icons only, hover expands). Section captions (same indent as links, not a nested parent row): **Main menu** (Dashboard), **Blog** (Categories, Posts), **Inbox** (AI, Contact requests), **General** (Testimonials), **System** (Users, Roles)
   - `header.blade.php` — search, icon actions, avatar dropdown (profile / sign out); hamburger toggles mini sidebar on desktop / overlay on mobile
   - `toastr.blade.php` — [Toastr](https://codeseven.github.io/toastr/) CSS + `window.SuaveAdminFlash` bridge
   - `assets.blade.php` — jQuery, Toastr JS, DataTables JS, Flatpickr JS, `public/js/admin/suave-admin.js`
@@ -138,20 +142,20 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - Styles: `public/css/admin.css` — white theme tokens (`--admin-primary`, `--admin-light`, `--admin-surface`); mini width `--admin-sidebar-collapsed-w: 72px` via `.admin-app.is-sidebar-collapsed`
 - Reuse CSS helpers: `.admin-card`, `.admin-table`, `.admin-btn--primary`, `.admin-badge-*`, `.admin-stat`, `.admin-toolbar`
 - **Admin forms are full width by default** — do not add `max-width` / narrow card constraints on create/edit forms unless the user explicitly asks for a constrained layout
-- **Page vs modal (required before building UI):** When adding or changing create / edit / other mutation UX, **ask the user** whether they want a **full page** or a **modal** (unless they already specified). Do not assume. Testimonials use modal create/edit on the index page (`admin/testimonials/partials/form-modal.blade.php` + `.admin-modal*` in `admin.css` + `SuaveAdmin.openAdminModal` / `closeAdminModal`). Page forms stay under `admin/{feature}/form.blade.php`.
+- **Page vs modal (required before building UI):** When adding or changing create / edit / other mutation UX, **ask the user** whether they want a **full page** or a **modal** (unless they already specified). Do not assume. Testimonials and blog categories use modal create/edit on the index page (`admin/testimonials/partials/form-modal.blade.php`, `admin/blog-categories/partials/form-modal.blade.php` + `.admin-modal*` in `admin.css` + `SuaveAdmin.openAdminModal` / `closeAdminModal`). Page forms stay under `admin/{feature}/form.blade.php`.
 - **List pages:** use `<x-admin.datatable>` (`App\View\Components\Admin\Datatable`) for the table shell — page head + Tailwind toolbar (search + always-visible `filters` slot / `<details>` sort & column menus) + table + rows-per-page footer. Slots: `actions`, `filters`. Pass `:columns`, optional `:sort-options`
 - Row kebab menus: `App\Support\Admin\DataTableActions::menu([...])` — native `<details>` + `.admin-table__action-menu*` in `admin.css` (no Tailwind-in-PHP strings; no dropdown JS). Open menus lift scroll overflow via `:has(.admin-table__action-menu[open])`; last row flips the panel upward
 - `SuaveAdmin.initDataTable` only wires search/sort/column visibility to Yajra; open/close is CSS/native
 - Gate sidebar links with `$user->hasPermission(...)`
 - Auth view: `admin.auth.login` (white card on light surface)
 - Error pages: `resources/views/errors/{403,404,500}.blade.php` + `errors/layout.blade.php` (centered white card, illustration, primary CTA)
-- Feature views: `admin/blogs`, `admin/case-studies`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
+- Feature views: `admin/blogs`, `admin/blog-categories`, `admin/case-studies`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
 - Do **not** dump admin styles into marketing `public/css/style.css`
 
 ## DataTables + AJAX
 
 - Package: `yajra/laravel-datatables-oracle`
-- Server classes: `app/DataTables/Admin/{Blog,CaseStudy,User,Role,Testimonial,Conversation}DataTable.php`
+- Server classes: `app/DataTables/Admin/{Blog,BlogCategory,CaseStudy,User,Role,Testimonial,Conversation}DataTable.php`
 - **Select only columns you use (required):** listing queries must `select([...])` the primary key + every column read by column renderers, filters, sorts, and row actions — never `table.*`. Eager-load relations with constrained columns (`with(['category:id,name'])`), and omit unused relations. Include FKs needed for those relations (e.g. `blog_category_id`). Soft-delete scopes still apply without selecting `deleted_at`.
   - Example — blogs index: `id`, `blog_category_id`, `title`, `slug`, `status`, `published_at`, `updated_at` + `with(['category:id,name'])` — not `blogs.*`, not `createdBy`, not `content` / `faqs` / SEO blobs
   - Same rule for other admin DataTables and list endpoints: if a column is not shown or needed for the row menu / filter, do not fetch it
@@ -410,6 +414,7 @@ Config: `config/case-studies.php` → `seo_meta.model` (`CASE_STUDY_SEO_META_MOD
 Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permission:` middleware on routes:
 
 - `blogs.view|create|update|delete`
+- `blog-categories.view|create|update` (admin role by default; not granted to editor)
 - `case-studies.view|create|update|delete`
 - `conversations.view`
 - `contacts.view|delete`
