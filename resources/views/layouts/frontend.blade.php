@@ -49,6 +49,7 @@
         $styleCssHref = asset('css/style.css').'?v='.filemtime(public_path('css/style.css'));
         $deferredCssHref = asset('css/style-deferred.css').'?v='.filemtime(public_path('css/style-deferred.css'));
         $faSubsetHref = asset('css/fontawesome-subset.css').'?v='.filemtime(public_path('css/fontawesome-subset.css'));
+        $preloaderBgHref = asset('assets/background/loader_bg.webp').'?v='.filemtime(public_path('assets/background/loader_bg.webp'));
         $loadDeferredCss = request()->routeIs(
             'about-us',
             'product',
@@ -167,7 +168,7 @@
         /* Preloader hides the unstyled shell while the non-blocking sheets are still fetching. */
         .site-preloader {
             align-items: center;
-            background: #00003f url('{{ asset('assets/background/loader_bg.webp') }}') center / cover no-repeat;
+            background: #00003f url('{{ $preloaderBgHref }}') center / cover no-repeat;
             display: flex;
             inset: 0;
             justify-content: center;
@@ -176,14 +177,14 @@
         }
 
         .site-preloader__spinner {
-            background: url('{{ asset('assets/background/loading_gif.gif') }}') center / contain no-repeat;
-            box-sizing: border-box;
+            animation: site-preloader-spin .8s steps(8) infinite;
             display: block;
             height: 44px;
             width: 44px;
-            inline-size: 44px;
-            block-size: 44px;
-            opacity: 1;
+        }
+
+        @keyframes site-preloader-spin {
+            to { transform: rotate(360deg); }
         }
 
         html.is-css-ready .site-preloader {
@@ -242,8 +243,7 @@
         }
     </style>
 
-    <link rel="preload" as="image" href="{{ asset('assets/background/loader_bg.webp') }}" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('assets/background/loading_gif.gif') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ $preloaderBgHref }}">
     <link rel="preload" as="font" href="{{ asset('fonts/fontawesome/fa-solid-900.woff2') }}" type="font/woff2" crossorigin>
 
     @if ($useHeroBackground && $heroBackgroundImage)

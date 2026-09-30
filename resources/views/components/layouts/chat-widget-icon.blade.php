@@ -1,6 +1,6 @@
 <img
     {{ $attributes->merge(['class' => 'chat-widget-icon']) }}
-    src="{{ asset($resolvedSrc) }}"
+    src="{{ asset($resolvedSrc) }}?v={{ $version }}"
     alt="{{ $alt }}"
     title="{{ $alt }}"
     width="{{ $width }}"

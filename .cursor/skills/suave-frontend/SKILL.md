@@ -116,6 +116,8 @@ Site-wide sales chat widget — **not** a contact-page link.
 - Assistant replies: Markdown (CDN `marked` in the widget; admin review uses `Str::markdown()` — see suave-admin)
 - UX: greet + collect name and phone. Email is optional. The phone input is `<x-frontend.phone-field>` (flag, dial code, national number). Both `chat_leads.email` and `chat_leads.phone` are nullable so either field can be required later without another schema change. The lead form uses `novalidate` and shows a red message under each invalid field (`suave-agent__field-error`) — do not put `required` on those inputs (that shows the browser tooltip). Start is an instant canned greeting; chat streams “Reviewing…” / “Processing…”. Escalate politely via `EscalateToSales`. The homepage consultation can still start a session from one contact value (stored as email or phone, not both).
 - Do not point the floating icon at `contact-us`; it opens the chat panel
+- The panel auto-opens 8 seconds after `window` `load` (`scheduleAutoOpen` in the widget script). Skip it when the visitor already opened or closed the panel (`autoOpenDismissed`)
+- Toggle highlight: white ring plus brand-blue glow (`suave-agent-highlight` on `.suave-agent__toggle`) around the gradient disc so it reads on both the navy hero and light sections. The pulse stops under `prefers-reduced-motion`
 
 ## TheSuaveStarPearl (brand emblem)
 
@@ -131,7 +133,7 @@ Animated silver star + pearl mark from the drop-in kit.
 
 ## ChatWidgetIcon (floating chat mark)
 
-Classic circular chat brand mark (dark disc + gradient ring SVG).
+Classic circular chat brand mark (brand gradient disc, white mark SVG). The `src` is versioned with `filemtime` because the CDN caches assets as immutable.
 
 - Layout component: `App\View\Components\Layouts\ChatWidgetIcon` → `resources/views/components/layouts/chat-widget-icon.blade.php` (`<x-layouts.chat-widget-icon />`)
 - Asset: `public/assets/brand/chat-widget-icon.svg` (PNG variant also available)
@@ -267,6 +269,7 @@ Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSu
 - **Single blog:** CSS lives in `public/css/style-deferred.css` under `/* ===== SINGLE BLOG START/END ===== */` — do not inline a `@push('custom-css')` block in `single-blog.blade.php`. Share widget JS is `public/js/blog-share.js`. Sidebar is Categories + Top Posts only (no More Articles swiper). FAQ chrome title on articles is `Frequently Asked Questions`. Article tables are wrapped in `.blog-table-wrap` (`BlogHtmlSupport::wrapBareTables` on sanitize + render) so they scroll horizontally on mobile instead of clipping. Ancestors of tables (`*:has(> table)` / `*:has(> .blog-table-wrap)`) are capped at `max-width: 100%; min-width: 0` so pasted Google Docs / Tailwind `w-fit` flex wrappers cannot expand past the article and get clipped by `overflow-x: clip`. Stored article outline is H2 → H3 (`BlogHtmlSupport::normalizeArticleHeadings` on save); the page H1 stays in the Blade hero. Pasted typefaces are stripped (`BlogHtmlSupport::stripInlineFonts` on save + render) so copy uses `--site-font`; `.single-blog-content * { font-family: inherit !important }` beats leftover inline `font-family`. On mobile (`max-width: 767px`), blog listing + single-blog heroes/sections override the generic `.site-main>.site-container.relative` padding (`2rem`/`3rem`) so extra top/bottom space is removed — keep those selectors more specific than the hero shell.
 - **Security headers:** `App\Http\Middleware\SecurityHeaders` on the web stack. `public/.htaccess` mirrors nosniff / X-Frame-Options / Referrer-Policy / HSTS. CSP **Report-Only** is PHP-only — do not switch to enforcing CSP without reviewing reports
 - **Render-blocking:** load those sheets with `media="print" onload="this.media='all'"` (Vite via `Vite::useStyleTagAttributes` when not in HMR). Keep a small inline critical CSS block in `layouts/frontend.blade.php` for the hero LCP shell. Do not reintroduce sync `<link rel="stylesheet">` for those files on the critical path.
+- **Site preloader** (`<x-layouts.site-preloader />`): lifts when every `link[data-suave-css]` sheet applies (3s hard cap) — never gate it on `DOMContentLoaded`, which waits for deferred CDN scripts (intl-tel-input). Spinner is inline SVG; `assets/background/loader_bg.webp` is ~12 KB (1920 wide) and versioned with `?v=filemtime` because the CDN serves assets `immutable`. Do not reintroduce a GIF spinner or 4K background, and do not give preloader assets `fetchpriority="high"`
 - Swiper CSS/JS: lazy via `frontend-deferred.js` when `.swiper` is near the viewport — not global head links
 - Pin `tailwindcss` to `3.4.17` (matches former Play CDN); PostCSS + `tailwind.config.js` — not `@tailwindcss/vite` / v4
 - Do not use the Tailwind Play CDN (`cdn.tailwindcss.com`) on marketing pages

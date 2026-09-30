@@ -6095,9 +6095,32 @@ body.mobile-nav-open {
 .suave-agent__toggle {
   appearance: none;
   border: 0;
+  border-radius: 50%;
   background: transparent;
   padding: 0;
   cursor: pointer;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #2a4dfb,
+    0 10px 24px rgba(42, 77, 251, 0.55);
+  animation: suave-agent-highlight 1.6s ease-in-out infinite;
+}
+
+@keyframes suave-agent-highlight {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px #fff,
+      0 0 0 6px #2a4dfb,
+      0 10px 24px rgba(42, 77, 251, 0.45);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 4px #fff,
+      0 0 0 12px rgba(42, 77, 251, 0.28),
+      0 12px 32px rgba(122, 95, 248, 0.75);
+  }
 }
 
 .suave-agent.is-open .suave-agent__toggle {
@@ -6726,7 +6749,8 @@ body.mobile-nav-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .suave-agent__online-dot {
+  .suave-agent__online-dot,
+  .suave-agent__toggle {
     animation: none;
   }
 }
