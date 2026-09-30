@@ -6,6 +6,7 @@
     class="suave-phone-field"
     data-phone-field
     data-geo-country-url="{{ $geoCountryUrl }}"
+    @if ($dropdownOnBody) data-dropdown-body="1" @endif
     @if ($initialCountry !== '') data-initial-country="{{ $initialCountry }}" @endif
 >
     @if ($showLabel)

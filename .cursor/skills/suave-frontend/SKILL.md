@@ -8,7 +8,7 @@ description: >-
   Requires categorized asset paths and post-change verification. For admin /
   RBAC use suave-admin. For broken image/URL/section checks use frontend-audit.
 metadata:
-  last-updated: "2026-09-23"
+  last-updated: "2026-09-30"
 ---
 
 # Suave Frontend
@@ -77,6 +77,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Class names are always **singular**
 - Legacy 301s: hardcode **only the old inbound URI**. The destination **must** be `redirect()->route(...)` — e.g. `Route::get('/industries/healthcare', fn () => redirect()->route('industry.show', ['slug' => 'healthcare-software-development'], 301))`
 - Header nav **Contact** and footer **Contact Us** links use **`route('contact-us')#contact-id`** (same-tab, to the contact form)
 - Marketing booking CTAs (Talk to an expert, Book a Call, demo/consultation buttons) use **`ContactSupport::demoHref()`**, which returns `route('contact-us', absolute: false).'#contact-id'` so the visitor lands on the contact form. Same-tab — do not add `target="_blank"`
+- **Inline consultation field** (`inline-consultation-form`): the phone/email input stays on the homepage only (`show-field`). Every other page renders that component as two CTAs. The primary button opens the Suave Agent panel (`SuaveAgent.open()`, `data-consultation-open-agent`). The secondary link uses `ContactSupport::demoHref()`. Do not put the contact input back on non-home heroes. Left-aligned banners (services, industries, service and industry detail) pass `align="start"`. The about banner and centered sections below the hero stay `align="center"`.
 - Same-page contact form anchors on the contact page may still use `#contact-id`
 - Contact form: `POST` to `route('contact-us.store')` via AJAX (`novalidate` + custom field errors). Field `blur`/`change` also `POST`s to `route('contact-us.draft')` (silent; one `draft_token` row) so abandoned forms still save name/email/phone/service/message. On submit success: clear form and show “The request has been sent successfully.” Also includes `@csrf`, honeypot `website`, and `form_started_at` (bots get silent JSON success)
 - Legal pages: `PageController` methods `privacyPolicy` / `termsAndConditions` (`privacy-policy`, `terms-and-conditions`; Footer must use `route()`, not `url()`)
@@ -111,7 +112,7 @@ Site-wide sales chat widget — **not** a contact-page link.
 - Knowledge/contacts: `SuaveAgentKnowledge` (offices via `ContactSupport::offices()`, SEO org email/phone)
 - Persistence: `ChatLead` + Laravel AI SDK conversation tables only; resume via `localStorage` key `suave_agent_session_v1`
 - Assistant replies: Markdown (CDN `marked` in the widget; admin review uses `Str::markdown()` — see suave-admin)
-- UX: greet + collect name/email (start is instant canned greeting; chat streams “Reviewing…” / “Processing…”); escalate politely via `EscalateToSales`
+- UX: greet + collect name and phone. Email is optional. The phone input is `<x-frontend.phone-field>` (flag, dial code, national number). Both `chat_leads.email` and `chat_leads.phone` are nullable so either field can be required later without another schema change. The lead form uses `novalidate` and shows a red message under each invalid field (`suave-agent__field-error`) — do not put `required` on those inputs (that shows the browser tooltip). Start is an instant canned greeting; chat streams “Reviewing…” / “Processing…”. Escalate politely via `EscalateToSales`. The homepage consultation can still start a session from one contact value (stored as email or phone, not both).
 - Do not point the floating icon at `contact-us`; it opens the chat panel
 
 ## TheSuaveStarPearl (brand emblem)

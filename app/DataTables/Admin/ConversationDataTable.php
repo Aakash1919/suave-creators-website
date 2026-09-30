@@ -41,7 +41,7 @@ class ConversationDataTable
                     .'<span class="admin-table__avatar" aria-hidden="true">'.e(self::initials($lead->name)).'</span>'
                     .'<div>'
                     .'<div class="admin-table__title">'.e($lead->name).'</div>'
-                    .'<div class="admin-table__meta">'.e($lead->email).'</div>'
+                    .'<div class="admin-table__meta">'.e(self::contactMeta($lead)).'</div>'
                     .'</div>'
                     .'</div>';
             })
@@ -88,6 +88,26 @@ class ConversationDataTable
             ['data' => 'updated_at', 'name' => 'updated_at', 'title' => 'Updated'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'orderable' => false, 'searchable' => false, 'className' => 'admin-table__actions'],
         ];
+    }
+
+    private static function contactMeta(ChatLead $lead): string
+    {
+        $email = trim((string) $lead->email);
+        $phone = trim((string) $lead->phone);
+        $emailIsEmail = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+        $parts = [];
+
+        if ($emailIsEmail) {
+            $parts[] = $email;
+        } elseif ($email !== '' && $phone === '') {
+            $parts[] = $email;
+        }
+
+        if ($phone !== '' && ! in_array($phone, $parts, true)) {
+            $parts[] = $phone;
+        }
+
+        return implode(' · ', $parts);
     }
 
     private static function initials(string $name): string

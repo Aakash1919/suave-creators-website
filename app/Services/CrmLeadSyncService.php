@@ -143,12 +143,17 @@ class CrmLeadSyncService
      */
     private function chatContactChannels(ChatLead $lead): array
     {
-        $contact = trim((string) $lead->email);
-        $isEmail = filter_var($contact, FILTER_VALIDATE_EMAIL) !== false;
+        $email = trim((string) $lead->email);
+        $phone = trim((string) $lead->phone);
+        $emailIsEmail = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+
+        if ($phone === '' && ! $emailIsEmail && $email !== '') {
+            $phone = $email;
+        }
 
         return [
-            'email' => $isEmail ? $contact : null,
-            'phone' => $isEmail || $contact === '' ? null : $contact,
+            'email' => $emailIsEmail ? $email : null,
+            'phone' => $phone !== '' ? $phone : null,
         ];
     }
 

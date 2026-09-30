@@ -24,6 +24,7 @@ class PhoneField extends Component
         public string $placeholder = '98765 43210',
         public string $autocomplete = 'tel-national',
         public bool $showLabel = true,
+        public bool $dropdownOnBody = false,
         ?string $geoCountryUrl = null,
         ?string $initialCountry = null,
     ) {

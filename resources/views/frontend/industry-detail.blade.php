@@ -28,6 +28,7 @@
                         <div class="service-banner__cta">
                             <x-frontend.inline-consultation-form
                                 theme="dark"
+                                align="start"
                                 placeholder="Enter your phone or email"
                                 button-text="Get Free Consultation"
                                 :secondary-href="$demoHref"

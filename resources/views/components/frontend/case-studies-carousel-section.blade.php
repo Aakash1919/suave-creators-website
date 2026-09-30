@@ -1,8 +1,7 @@
 @if (count($items) > 0)
 {{-- Case Studies Carousel (light, services and industry pages) --}}
 <section
-  {{ $attributes->merge(['class' => trim("full-bleed case-studies-carousel bg-cover bg-top bg-no-repeat {$sectionClass}")]) }}
-  style="background-image: url('{{ asset('assets/background/offerings-section-bg.webp') }}')"
+  {{ $attributes->merge(['class' => trim("full-bleed case-studies-carousel {$sectionClass}")]) }}
   aria-labelledby="{{ $headingId }}">
   <div class="section-inner case-studies-carousel__inner">
     <header class="case-studies-carousel__header">
