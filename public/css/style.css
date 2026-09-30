@@ -1498,6 +1498,19 @@ main button.rounded-full.bg-gradient-to-r {
   color: #fff;
 }
 
+.smart-together-cta__btn-secondary--light {
+  background: rgb(42 77 251 / 6%);
+  border-color: rgb(42 77 251 / 25%);
+  color: #2a4dfb;
+  font-weight: 700;
+}
+
+.smart-together-cta__btn-secondary--light:hover {
+  background: rgb(42 77 251 / 12%);
+  border-color: rgb(42 77 251 / 45%);
+  color: #2a4dfb;
+}
+
 .smart-together-cta__phone {
   align-items: center;
   display: flex;

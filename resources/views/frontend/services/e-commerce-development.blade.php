@@ -29,7 +29,6 @@
   :primary-label="$service['crossSellPrimaryLabel']"
   primary-service="ecommerce"
   :secondary-label="$service['crossSellSecondaryLabel']"
-  :secondary-class="$service['crossSellSecondaryClass']"
   :show-phone="$service['crossSellShowPhone']" />
 
 <x-frontend.service-overview-section

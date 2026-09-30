@@ -576,7 +576,6 @@ class ServiceSupport
             'crossSellDescription' => 'Looking to replace rigid third-party software or integrate complex multi-system APIs? Discuss your technical product roadmap, database schemas, or legacy migration plans directly with a solution architect.',
             'crossSellPrimaryLabel' => 'Book a Discovery Session',
             'crossSellSecondaryLabel' => 'Explore Our Custom CRM Builder Services',
-            'crossSellSecondaryClass' => 'smart-together-cta__btn-secondary group',
             'crossSellShowPhone' => false,
             'bodyBg' => '',
             'bodyEyebrow' => 'Suave Creators',

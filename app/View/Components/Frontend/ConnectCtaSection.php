@@ -21,7 +21,6 @@ class ConnectCtaSection extends Component
         public string $primaryHref = '',
         public string $secondaryLabel = 'Discuss your vision',
         public string $secondaryHref = '',
-        public string $secondaryClass = '',
         public string $phoneVideo = 'assets/hero/mobile-app-phone-demo.mp4',
         public string $phonePoster = 'assets/hero/mobile-app-phone-demo-poster.webp',
         public string $phoneAlt = 'Mobile app demo for a custom CRM and software product',

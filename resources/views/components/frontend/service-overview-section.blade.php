@@ -13,10 +13,9 @@
         <x-frontend.cta-button :href="$resolvedPrimaryHref">
           {{ $primaryLabel }}
         </x-frontend.cta-button>
-        <a href="{{ $resolvedSecondaryHref }}" class="group inline-flex max-lg:min-h-[44px] items-center gap-1.5 pb-0.5 border-b border-[#00003F] text-sm font-semibold leading-tight text-[#00003F]">
+        <x-frontend.cta-button :href="$resolvedSecondaryHref" variant="secondary-light">
           {{ $secondaryLabel }}
-          <x-frontend.cta-arrow />
-        </a>
+        </x-frontend.cta-button>
       </div>
     </div>
   </div>
