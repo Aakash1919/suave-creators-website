@@ -58,7 +58,7 @@ class BlogSeoMetaGenerationService
     public function regenerateAndSave(Blog $blog, array $overrides = []): array
     {
         $seo = $this->generate($blog, $overrides);
-        $blog->forceFill($seo)->save();
+        Blog::withoutTimestamps(static fn () => $blog->forceFill($seo)->save());
 
         return $seo;
     }

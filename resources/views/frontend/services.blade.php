@@ -25,6 +25,7 @@
       <div class="mt-5 flex flex-col items-start gap-4">
         <x-frontend.inline-consultation-form
           theme="light"
+          align="start"
           placeholder="Enter your phone or email"
           button-text="Get Free Consultation"
           :secondary-href="$demoHref"

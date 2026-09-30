@@ -28,7 +28,8 @@
           placeholder="Enter your business email or phone number"
           button-text="Get Architectural Consultation"
           :secondary-href="$demoHref"
-          secondary-label="" />
+          secondary-label=""
+          show-field />
         <p class="home-hero__trust-line mt-3 text-[11px] leading-4 text-[#F9F6EE] sm:text-xs sm:leading-5">
           100% Codebase &amp; IP Ownership • Direct Senior Architect Access • Transparent 2-Week Sprints
         </p>
@@ -243,7 +244,7 @@
 </section>
 <!-- Offerings Showcase Section End -->
 
-<x-frontend.connect-cta-section primary-modal />
+<x-frontend.connect-cta-section />
 
 <!-- Web Development Services Section Start -->
 <x-frontend.three-card-section class="web-services--home" />

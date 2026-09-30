@@ -10,7 +10,7 @@ description: >-
   route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
   Permission. Read before any admin change.
 metadata:
-  last-updated: "2026-09-23"
+  last-updated: "2026-09-30"
 ---
 
 # Suave Admin
@@ -48,6 +48,7 @@ Follow [`system-coding-standards`](../system-coding-standards/SKILL.md) and Pint
 - Roles: `admin` (all permissions), `editor` (blogs view/create/update, case-studies view/create/update, profile, conversations.view, contacts.view, testimonials.view/manage)
 - Roles CRUD: Admin → **Roles** (`roles.view` / `roles.manage`); `admin` role key cannot be renamed or deleted
 - Testimonials CRUD: Admin → **Testimonials** (`testimonials.view` / `testimonials.manage`); create/edit use an **index modal** (not separate pages); published items served via `TestimonialService::cachedForFrontend()` (forever cache, forgotten on create/update/delete)
+- Blog categories: Admin → **Blog categories** (`admin.blog-categories.*`); create/edit use an **index modal**. Permissions `blog-categories.view|create|update` (not the blog post permissions). `RolesAndPermissionsSeeder` grants them to the `admin` role only. Existing databases get the same grant from `2026_09_30_104619_add_blog_categories_permissions`. Public `/blogs/category/{slug}` still appears only after a published post uses the category. There is no delete action (posts use `nullOnDelete`)
 - Case studies CRUD: Admin → **Case studies** (`case-studies.view|create|update|delete`); create/edit use **full pages** like blogs; public layout is fixed so editors only fill content; **never auto-drafted** (no trend writer). Edit-form “Generate SEO meta” is allowed like blogs. Marketing listing cards and the `/services` carousel read the static catalog in `App\Support\Frontend\CaseStudySupport` (not this admin table). Public detail pages are independent Blade views under `resources/views/frontend/case-studies/`. Keep `service_slugs` / `industry_slugs` in that catalog in sync when a story should appear on a service or industry page.
 
 ## Services (required)
@@ -57,8 +58,10 @@ Follow [`system-coding-standards`](../system-coding-standards/SKILL.md) and Pint
 | Service | Responsibility |
 |---------|----------------|
 | `BlogService` | Blog CRUD, slug, featured image, FAQ repeater (TOC admin UI disabled until frontend single-blog uses it), `createDraft()` for trusted internal payloads, `normalizeVisualHtml()` + `BlogHtmlSupport::sanitizeContent()` on save (extract Base64/inline SVG to `storage/app/public/blogs/content`, WebP when possible, fill empty alts, drop empty tags, wrap bare tables in `.blog-table-wrap`, unwrap nested headings, drop a duplicate lead title, promote body H3→H2 when the article has no H2, strip pasted `font-family` / `<font>` / `@font-face` so articles use the site typeface) |
+| `BlogCategoryService` | Blog category create/update, unique slug from name when the slug field is empty, next `sort_order`. No delete |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
+| `BlogRewriteService` | Legacy post rewrite via `BlogRewriteAgent` (run-once only): length target = average of published posts with `id >= blogs.rewrite.below_id` ± tolerance, human-written exemplars, `[[IMG_n]]` image tokenize/restore (images byte-for-byte), legacy link normalization, validation + retries, saves `content` + `faqs` only; `backupBlog()` / `restoreFromBackup()` on the single `blogs_backup` table (`blog_id` primary key; first backup per post is never overwritten, so it keeps the pre-rewrite original) |
 | `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization, service/industry placement slug lists. **No AI drafts** — content is editor-filled only |
 | `CaseStudySeoMetaGenerationService` | AI SEO/OG field suggestions via `CaseStudySeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
 | `UserService` | User create/update, password hash, `syncRoles` |
@@ -86,6 +89,7 @@ Recipe: [`create-form-request`](../create-form-request/SKILL.md). Namespace: `Ap
 |--------|---------|
 | Admin login | `AdminLoginRequest` |
 | Blog create/update | `BlogStoreRequest` / `BlogUpdateRequest` (`Concerns\ValidatesBlogFields`) |
+| Blog category create/update | `BlogCategoryStoreRequest` / `BlogCategoryUpdateRequest` (`Concerns\ValidatesBlogCategoryFields`; `blog-categories.create` / `blog-categories.update`) |
 | Blog publish (index) | `BlogPublishRequest` |
 | Case study create/update | `CaseStudyStoreRequest` / `CaseStudyUpdateRequest` (`Concerns\ValidatesCaseStudyFields`) |
 | User create/update | `UserStoreRequest` / `UserUpdateRequest` |
@@ -111,6 +115,7 @@ Namespace: `App\Http\Controllers\Admin\`
 | Auth | `AuthController` | — (`AdminLoginRequest` for login) |
 | Home | `DashboardController` | — (stats/links) |
 | Blogs | `BlogController` | `App\Services\BlogService` (`publish()` for index Publish action) |
+| Blog categories | `BlogCategoryController` | `App\Services\BlogCategoryService` (index modal; no delete) |
 | Case studies | `CaseStudyController` | `App\Services\CaseStudyService` |
 | Contacts | `ContactRequestController` | `App\Services\ContactRequestService` (also public store/draft via `ContactStoreRequest` / `ContactDraftRequest`) |
 | Profile | `ProfileController` | `App\Services\ProfileService` |
@@ -126,7 +131,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - Layout: `layouts.admin` — **white theme**: light sidebar (`240px`), white topbar, purple primary `#7539FF`, surface `#F7F8F9`; fonts match frontend (`PP Mori` + `Roboto Flex`)
 - **Tailwind:** compiled via Vite — `@vite('resources/css/app.css')` in `layouts/admin` (same entry as marketing). Pin `tailwindcss` **3.4.17** + `tailwind.config.js` content scan of Blade + `app/Support/Admin`, `app/DataTables`, `app/View/Components`. Do **not** use `cdn.tailwindcss.com`. Theme tokens `primary` / `surface` / `ink` live in `tailwind.config.js`. Row action menus use **admin.css** classes (`admin-table__action-menu*`), not Tailwind strings in PHP. Local: `npm run dev` or `npm run build` so `public/build` exists.
 - Partials under `resources/views/layouts/admin/partials/`:
-  - `sidebar.blade.php` — light brand bar + soft active nav + user chip; collapses to mini (icons only, hover expands)
+  - `sidebar.blade.php` — light brand bar + soft active nav + user chip; collapses to mini (icons only, hover expands). Section captions (same indent as links, not a nested parent row): **Main menu** (Dashboard), **Blog** (Categories, Posts), **Inbox** (AI, Contact requests), **General** (Testimonials), **System** (Users, Roles)
   - `header.blade.php` — search, icon actions, avatar dropdown (profile / sign out); hamburger toggles mini sidebar on desktop / overlay on mobile
   - `toastr.blade.php` — [Toastr](https://codeseven.github.io/toastr/) CSS + `window.SuaveAdminFlash` bridge
   - `assets.blade.php` — jQuery, Toastr JS, DataTables JS, Flatpickr JS, `public/js/admin/suave-admin.js`
@@ -138,20 +143,20 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - Styles: `public/css/admin.css` — white theme tokens (`--admin-primary`, `--admin-light`, `--admin-surface`); mini width `--admin-sidebar-collapsed-w: 72px` via `.admin-app.is-sidebar-collapsed`
 - Reuse CSS helpers: `.admin-card`, `.admin-table`, `.admin-btn--primary`, `.admin-badge-*`, `.admin-stat`, `.admin-toolbar`
 - **Admin forms are full width by default** — do not add `max-width` / narrow card constraints on create/edit forms unless the user explicitly asks for a constrained layout
-- **Page vs modal (required before building UI):** When adding or changing create / edit / other mutation UX, **ask the user** whether they want a **full page** or a **modal** (unless they already specified). Do not assume. Testimonials use modal create/edit on the index page (`admin/testimonials/partials/form-modal.blade.php` + `.admin-modal*` in `admin.css` + `SuaveAdmin.openAdminModal` / `closeAdminModal`). Page forms stay under `admin/{feature}/form.blade.php`.
+- **Page vs modal (required before building UI):** When adding or changing create / edit / other mutation UX, **ask the user** whether they want a **full page** or a **modal** (unless they already specified). Do not assume. Testimonials and blog categories use modal create/edit on the index page (`admin/testimonials/partials/form-modal.blade.php`, `admin/blog-categories/partials/form-modal.blade.php` + `.admin-modal*` in `admin.css` + `SuaveAdmin.openAdminModal` / `closeAdminModal`). Page forms stay under `admin/{feature}/form.blade.php`.
 - **List pages:** use `<x-admin.datatable>` (`App\View\Components\Admin\Datatable`) for the table shell — page head + Tailwind toolbar (search + always-visible `filters` slot / `<details>` sort & column menus) + table + rows-per-page footer. Slots: `actions`, `filters`. Pass `:columns`, optional `:sort-options`
 - Row kebab menus: `App\Support\Admin\DataTableActions::menu([...])` — native `<details>` + `.admin-table__action-menu*` in `admin.css` (no Tailwind-in-PHP strings; no dropdown JS). Open menus lift scroll overflow via `:has(.admin-table__action-menu[open])`; last row flips the panel upward
 - `SuaveAdmin.initDataTable` only wires search/sort/column visibility to Yajra; open/close is CSS/native
 - Gate sidebar links with `$user->hasPermission(...)`
 - Auth view: `admin.auth.login` (white card on light surface)
 - Error pages: `resources/views/errors/{403,404,500}.blade.php` + `errors/layout.blade.php` (centered white card, illustration, primary CTA)
-- Feature views: `admin/blogs`, `admin/case-studies`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
+- Feature views: `admin/blogs`, `admin/blog-categories`, `admin/case-studies`, `admin/contacts`, `admin/conversations`, `admin/users`, `admin/roles`, `admin/testimonials`, `admin/profile`, `admin/dashboard`
 - Do **not** dump admin styles into marketing `public/css/style.css`
 
 ## DataTables + AJAX
 
 - Package: `yajra/laravel-datatables-oracle`
-- Server classes: `app/DataTables/Admin/{Blog,CaseStudy,User,Role,Testimonial,Conversation}DataTable.php`
+- Server classes: `app/DataTables/Admin/{Blog,BlogCategory,CaseStudy,User,Role,Testimonial,Conversation}DataTable.php`
 - **Select only columns you use (required):** listing queries must `select([...])` the primary key + every column read by column renderers, filters, sorts, and row actions — never `table.*`. Eager-load relations with constrained columns (`with(['category:id,name'])`), and omit unused relations. Include FKs needed for those relations (e.g. `blog_category_id`). Soft-delete scopes still apply without selecting `deleted_at`.
   - Example — blogs index: `id`, `blog_category_id`, `title`, `slug`, `status`, `published_at`, `updated_at` + `with(['category:id,name'])` — not `blogs.*`, not `createdBy`, not `content` / `faqs` / SEO blobs
   - Same rule for other admin DataTables and list endpoints: if a column is not shown or needed for the row menu / filter, do not fetch it
@@ -279,6 +284,7 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
   - `SuaveAdmin.initBlogEditForm()` paints the frontend completeness meter (Article body counts as done at 120+ words), injects `public/css/admin-blog-content.css` into the RTE so visual blocks match the public page, and keeps chart bar widths in sync when percents are edited in the article
 - RTE chrome: `.admin-rte .richtexteditor` uses `overflow: visible` (vendor `overflow:hidden` clips font-size / heading dropdowns); toolbar `z-index` above content; `rte-dropdown-panel` raised above the editable area
 - Blog form layout: main composer + sticky publish/image sidebar (no internal sidebar scrollbar — page scrolls naturally; side cards use `min-width: 0` so Publish inputs wrap instead of clipping); **Publish** card starts with a frontend completeness bar (title, body, image, SEO, FAQs, takeaways, table, completion bars, stats, insight) plus the Draft/Published status select (**no `published_at` field** — `BlogService` stamps `published_at` when status becomes published and clears it on draft); **Featured image** card includes the image uploader and **Location in article** (`featured_image_position`: `after_first_p` default, `top`, `bottom`, `manual`, or `hide`), supported in-editor via `[featured_image]` or the **Featured image** layout button; SEO in a collapsible `<details>` (`admin/blogs/form.blade.php`, `.admin-blog-form*` / `.admin-blog-complete*` in `admin.css`). No admin Internal links suggestion panel.
+- Index **Title** links to `admin.blogs.edit` (plain text without `blogs.update`); the row menu's first item is a new-tab **View live** link (`blog.show`) for published posts only
 - Index row menu: drafts with `blogs.update` get **Publish** (`PATCH admin.blogs.publish` → `BlogService::publish()` + confirm via `data-admin-action`)
 - FAQ repeater rows (`data-admin-repeater` via `SuaveAdmin.bindRepeaters`) — question + answer; every submitted row is **required**. `BlogService::normalizeFaqItems()`
 - **TOC admin UI is commented out** for now (not used on frontend single-blog); existing `blogs.toc` is left unchanged on save. Re-enable form block + `toc` validation / `normalizeTocItems()` together when the frontend needs it
@@ -359,6 +365,8 @@ One-off maintenance commands live under `app/Console/Commands/RunOnce/` with sig
 | `run-once:sanitize-blog` | Sanitize blog `content` via `BlogHtmlSupport` (same path as admin save): extract `data:image/…` and inline SVG to `storage/app/public/blogs/content/{slug}-{n}.webp` (SVG keeps `.svg`; other types WebP when possible), fill empty `img` `alt`s, add width/height/lazy when the file is local, remove empty tags, unwrap nested headings, drop a duplicate lead title, promote body H3→H2 when the article has no H2, strip pasted `font-family` / `<font>` / style blocks, and print a table of sanitized blog URLs. Load with `chunkById()` (`--chunk=1` default, PHP memory stays at 128M) — never `get()` all `content` columns at once |
 | `run-once:regenerate-blog-seo-meta` | Regenerate and save `meta_title`, `meta_description`, `og_title`, `og_description` for all blogs via `BlogSeoMetaGenerationService` / `SeoMetaAgent` |
 | `run-once:generate-blog-medium-thumbs` | Generate `medium_thumb_image` (480×280, `{name}-medium.{ext}`) from each blog’s existing `featured_image`; removes legacy `_small` / `_medium` files |
+| `run-once:rewrite-legacy-blogs {blog}` | Rewrite **one** post (required id or slug argument; must be `< blogs.rewrite.below_id`, 70) in the voice of the human-written posts at or above it, via `BlogRewriteService`. Model defaults to `gpt-4.1` (`BLOG_REWRITE_MODEL`; deliberately not `AI_DEFAULT_MODEL`, because gpt-4o-mini fails the link/style checks). After the rewrite passes validation it stores the post's original content + FAQs in `blogs_backup` if not already there (unless `--skip-backup` / `--dry-run`), then saves. Never touches `title`, `slug`, category, dates, `featured_image`, thumbs, or inline images (images are swapped for `[[IMG_n]]` tokens and the `<img>` tag restored byte-for-byte; each image is output as a bare top-level `<img>` (no `<p>`/`<span>`/`<b>` wrapper or trailing `<br>`, which added extra space below) with `style="width: 100%; margin-top: 20px; margin-bottom: 20px"` (only the style attribute changes; `<figure>` blocks are kept as-is), and tokens left inside a sentence/heading are moved after that block). Every link gets `style="text-decoration: none"` like the human posts (the blog CSS underlines links by default). Optional sections (quick summary, numbered points, table, architecture, roadmap) only when the original supports them. **No case-study / “real-world proof” sections** (the model invented client outcomes); case studies appear only as a link inside an ordinary sentence. Jargon words in `plain_word_swaps` are swapped in code and Link placement is validated (`linkPlacementProblems()`): page links (everything except `/contact-us`) must sit before the closing H2, the first one within the first ~40% of the body, and some between 30–80%; the closing section carries only the contact link. Anchor relevance is validated (`anchorProblems()` via `BlogInternalLinks::anchorKeywordMap()` / `anchorFits()`): each page link's anchor text must contain one of that page's topic words from its title/slug (e.g. "crm" for `/services/custom-crm-development`, "web" for web development), so vague anchors like "connecting your tools" are rejected; the words are shown next to each URL in the prompt, and each page may be linked only once. Case studies are suggested only when their placement matches and the post mentions 2+ of their distinctive topic words. Invented client anecdotes ("one mid-size distributor we worked with", "one of our clients") and "in half/halved/doubled" claims absent from the original are rejected. AI-signal checks reject a draft (then revise) for: stock heading shapes ("X That Drives Y", "Why X Actually…", "Should Be as…", "Hidden Cost of…", "…Matters", "From X-er to Y-er"), 3+ "Why/How" headings, a heading that repeats the title (also auto-stripped via `stripTitleHeadings()`) or a duplicate heading, claims absent from the original (N seconds, "most visitors/users…", payback/ROI timelines, "studies show", 2x/twice), more than one "not X, but Y" contrast, and any two-word phrase repeated more than `max_phrase_repeats` (5, +1 per 250 words over 1,250). `banned_phrases` also covers business filler ("drive growth", "sell smarter", "on your own terms"…), unbacked authority ("see it constantly", "we routinely", "in our experience"…) and stock CTA labels ("Scope Your Project"). The prompt asks for the thesis once, per-section new information, real friction/trade-offs, sparing "we", and a plain closing paragraph with `/contact-us` inside a specific next-step sentence (no bold-label CTA lines); style exemplars now pass only human openings (no headings or closings to copy). Em dashes are banned (`em_dash_per_100_words` defaults to **0**): the cleanup turns paired dashes into parentheses and the rest into commas in the body and FAQs, spaced hyphens/en dashes between words become commas (number ranges like `$45,000 – $85,000` stay), and the agent prompt itself contains no em dashes; percentages not in the original are rejected; failed attempts are revised (previous draft + problem list) rather than regenerated. Length must land within the average word count of published posts `id >= below_id` ± `length_tolerance`. Validation rejects banned “AI” phrases, missing/duplicate image tokens, links outside `BlogInternalLinks::allowedPaths()`, fewer than `min_links` body links, or no `/contact-us` CTA; retries with feedback up to `max_attempts`. `--dry-run` writes a preview to `storage/app/blog-rewrites/{id}-{slug}.html`. Config: `config/blogs.php` → `rewrite` (`BLOG_REWRITE_MODEL` — use a stronger model than `gpt-4o-mini`) |
+| `run-once:restore-blog-content` | Copy the original `content` + `faqs` back from `blogs_backup` (`--blog=` id/slug, or `--all`) |
 
 ```bash
 php artisan run-once:sanitize-blog --dry-run
@@ -374,7 +382,13 @@ php artisan run-once:generate-blog-medium-thumbs --dry-run
 php artisan run-once:generate-blog-medium-thumbs
 php artisan run-once:generate-blog-medium-thumbs --missing-only
 php artisan run-once:generate-blog-medium-thumbs --blog=my-post-slug
+
+php artisan run-once:rewrite-legacy-blogs 48 --dry-run
+php artisan run-once:rewrite-legacy-blogs 48
+php artisan run-once:restore-blog-content --blog=48
 ```
+
+After rewriting a post, run `run-once:regenerate-blog-seo-meta --blog=…` for it and `php scripts/audit-frontend.php`.
 
 Ensure `php artisan storage:link` exists so `/storage/…` URLs resolve. Safe to re-run.
 
@@ -393,7 +407,7 @@ Schedule in `routes/console.php` (Tue/Fri at `BLOG_TREND_DRAFTS_TIME`) is **comm
 
 Config: `config/blogs.php` + `.env` (`BLOG_TREND_DRAFTS_*`, `OPENAI_API_KEY`). Agent: `App\Ai\Agents\BlogWriterAgent`.
 
-Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + a visual-block excerpt + sample FAQ) and **assigns one unused layout pattern** from `App\Support\Blogs\BlogArticlePatterns` (**framework**, **story**, **comparison**, **checklist**, **stats-led**, or **roadmap**) plus an independent **opening style** from `BlogArticleOpenings` (**scene**, **question**, **contrast**, or **checklist-first**). **Tables / stats / charts are optional** except when the pattern’s identity requires them (comparison → table, stats-led → stats). `BlogInternalLinks` ranks 2–3 service / industry / related-blog URLs for the writer to weave in (AI drafts only — not shown in the admin edit sidebar). After the model responds, `assertUniqueDraft()` rejects near-duplicate titles or high content-token overlap and retries up to `BLOG_TREND_DRAFTS_UNIQUENESS_MAX_ATTEMPTS`. Human consultant voice, no page `<h1>`, `id` on each `<h2>`, never invent survey statistics, 6–8 FAQs in the `faqs` field only, always `status=draft`. When charts are used they must include labelled `.blog-chart__row` tracks, inline `data-width` / `style="width: N%"`, and `.blog-chart__value`. Completeness meter tracks core fields + takeaways + insight + internal links (not table/chart/stats). `normalizeHtmlContent()` / `BlogSupport::normalizeVisualHtml()` wraps bare tables, rewrites chart bars into labelled rows with values, and drops empty `.blog-stat` / `.blog-insight` boxes. Single-blog CSS uses Intelegain-like 16px/28px body rhythm; the page includes LinkedIn/Facebook/X/WhatsApp/copy share buttons.
+Generation reads existing posts (titles, category frequency, 2–3 rich style exemplars with heading outlines + opening HTML + a visual-block excerpt + sample FAQ) and **assigns one unused layout pattern** from `App\Support\Blogs\BlogArticlePatterns` (**framework**, **story**, **comparison**, **checklist**, **stats-led**, or **roadmap**) plus an independent **opening style** from `BlogArticleOpenings` (**scene**, **question**, **contrast**, or **checklist-first**). **Tables / stats / charts are optional** except when the pattern’s identity requires them (comparison → table, stats-led → stats). `BlogInternalLinks` ranks 2–3 service / industry / related-blog URLs for the writer to weave in (AI drafts only — not shown in the admin edit sidebar). `BlogInternalLinks::suggestForRewrite()` / `allowedPaths()` (relative paths to **site pages only** — services, industries, case studies, product, about, contact; never other blog posts, and `normalizeLinks()` unwraps any `/blog/…` or `/blogs` link to plain text) serve `run-once:rewrite-legacy-blogs` only; `normalizeInternalHref()` maps legacy `/service/…`, `/industries/healthcare`, absolute suavecreators.com URLs to current paths. After the model responds, `assertUniqueDraft()` rejects near-duplicate titles or high content-token overlap and retries up to `BLOG_TREND_DRAFTS_UNIQUENESS_MAX_ATTEMPTS`. Human consultant voice, no page `<h1>`, `id` on each `<h2>`, never invent survey statistics, 6–8 FAQs in the `faqs` field only, always `status=draft`. When charts are used they must include labelled `.blog-chart__row` tracks, inline `data-width` / `style="width: N%"`, and `.blog-chart__value`. Completeness meter tracks core fields + takeaways + insight + internal links (not table/chart/stats). `normalizeHtmlContent()` / `BlogSupport::normalizeVisualHtml()` wraps bare tables, rewrites chart bars into labelled rows with values, and drops empty `.blog-stat` / `.blog-insight` boxes. Single-blog CSS uses Intelegain-like 16px/28px body rhythm; the page includes LinkedIn/Facebook/X/WhatsApp/copy share buttons.
 
 ## Edit-form SEO meta (manual save)
 
@@ -410,6 +424,7 @@ Config: `config/case-studies.php` → `seo_meta.model` (`CASE_STUDY_SEO_META_MOD
 Keep names stable; add new ones in `RolesAndPermissionsSeeder` and wire `permission:` middleware on routes:
 
 - `blogs.view|create|update|delete`
+- `blog-categories.view|create|update` (admin role by default; not granted to editor)
 - `case-studies.view|create|update|delete`
 - `conversations.view`
 - `contacts.view|delete`

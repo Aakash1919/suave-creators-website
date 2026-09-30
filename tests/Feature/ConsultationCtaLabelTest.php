@@ -10,21 +10,66 @@ class ConsultationCtaLabelTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_primary_project_ctas_use_inline_consultation_form_with_placeholder_and_label(): void
+    public function test_home_keeps_inline_consultation_field(): void
+    {
+        $response = $this->get(route('home', absolute: false));
+
+        $response->assertOk();
+        $response->assertSee('Get Architectural Consultation', false);
+        $response->assertSee('placeholder="Enter your business email or phone number"', false);
+        $response->assertSee('name="contact"', false);
+        $response->assertDontSee('consultation-inline-actions', false);
+        $response->assertDontSee('Start your Project', false);
+    }
+
+    public function test_non_home_pages_use_two_consultation_ctas_without_a_text_field(): void
     {
         foreach ([
-            ['path' => route('home', absolute: false), 'cta' => 'Get Architectural Consultation', 'placeholder' => 'Enter your business email or phone number'],
-            ['path' => route('about-us', absolute: false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
-            ['path' => route('industries', absolute: false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
-            ['path' => route('industry.show', ['slug' => 'healthcare-software-development'], false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
-            ['path' => route('service.show', ['slug' => 'enterprise-software-solutions'], false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
-            ['path' => route('services', absolute: false), 'cta' => 'Get Free Consultation', 'placeholder' => 'Enter your phone or email'],
+            [
+                'path' => route('about-us', absolute: false),
+                'primary' => 'Get Free Consultation',
+                'secondary' => 'Schedule a discovery call',
+            ],
+            [
+                'path' => route('industries', absolute: false),
+                'primary' => 'Get Free Consultation',
+                'secondary' => 'Schedule a discovery call',
+            ],
+            [
+                'path' => route('industry.show', ['slug' => 'healthcare-software-development'], false),
+                'primary' => 'Get Free Consultation',
+                'secondary' => 'Schedule a discovery call',
+            ],
+            [
+                'path' => route('service.show', ['slug' => 'enterprise-software-solutions'], false),
+                'primary' => 'Get Free Consultation',
+                'secondary' => 'Drop Your Vision',
+            ],
+            [
+                'path' => route('services', absolute: false),
+                'primary' => 'Get Free Consultation',
+                'secondary' => 'Schedule a Discovery Call',
+            ],
         ] as $page) {
             $response = $this->get($page['path']);
 
             $response->assertOk();
-            $response->assertSee($page['cta'], false);
-            $response->assertSee('placeholder="'.$page['placeholder'].'"', false);
+            $response->assertSee($page['primary'], false);
+            $response->assertSee($page['secondary'], false);
+            $response->assertSee('consultation-inline-actions', false);
+            $response->assertSee('data-consultation-open-agent', false);
+            if (in_array($page['path'], [
+                route('about-us', absolute: false),
+                route('services', absolute: false),
+                route('service.show', ['slug' => 'enterprise-software-solutions'], false),
+            ], true)) {
+                $response->assertSee('consultation-inline-actions--center', false);
+            } else {
+                $response->assertDontSee('consultation-inline-actions--center', false);
+            }
+            $response->assertSee('window.SuaveAgent.open()', false);
+            $response->assertDontSee('name="contact"', false);
+            $response->assertDontSee('placeholder="Enter your phone or email"', false);
             $response->assertDontSee('Start your Project', false);
         }
     }
@@ -98,7 +143,8 @@ class ConsultationCtaLabelTest extends TestCase
             'service' => 'Free Consultation',
         ]);
         $this->assertDatabaseHas('chat_leads', [
-            'email' => '+1 (555) 234-5678',
+            'email' => null,
+            'phone' => '+1 (555) 234-5678',
         ]);
     }
 

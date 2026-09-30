@@ -21,14 +21,14 @@
         {{ $primaryLabel }}
       </x-frontend.cta-button>
       @if ($secondaryLabel !== '')
-        <a href="{{ $secondaryHref }}"
-          @if ($secondaryModal || $secondaryHref === '#contact-modal') data-open-contact-modal @endif
-          @if ($secondaryService !== '') data-service="{{ $secondaryService }}" @endif
-          @if (str_starts_with($secondaryHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-          class="{{ $secondaryClass !== '' ? $secondaryClass : 'smart-together-cta__btn-secondary group' }} group cursor-pointer">
+        <x-frontend.cta-button
+          :href="$secondaryHref"
+          variant="secondary"
+          :modal="$secondaryModal"
+          :service="$secondaryService"
+        >
           <span>{{ $secondaryLabel }}</span>
-          <x-frontend.cta-arrow />
-        </a>
+        </x-frontend.cta-button>
       @endif
     </div>
 

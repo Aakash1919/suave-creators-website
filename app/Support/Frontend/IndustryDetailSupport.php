@@ -63,6 +63,8 @@ class IndustryDetailSupport
             abort(404);
         }
 
+        $industry = array_replace(self::detailDefaults(), $industry);
+
         return [
             'industry' => $industry,
             'seoTitle' => (string) ($industry['pageTitle'] ?? 'Industry Solutions | Suave Creators'),
@@ -70,65 +72,96 @@ class IndustryDetailSupport
             'seoOgTitle' => (string) ($industry['ogTitle'] ?? $industry['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($industry['ogDescription'] ?? $industry['pageDescription'] ?? ''),
             'mainClass' => 'site-main site-main--industry-detail',
-            'bannerBg' => (string) ($industry['bannerBg'] ?? ''),
-            'bannerSideImage' => (string) ($industry['bannerSideImage'] ?? ''),
-            'iconColors' => ['blue', 'orange', 'cyan', 'mint', 'rose', 'amber'],
-            'processData' => $processData = $industry['processData'] ?? self::defaultProcessData(),
-            'agileTabs' => array_keys($processData),
+            'agilePhases' => self::agilePhases(),
             'introStats' => ServiceSupport::introStats(),
-            'coreValuesItems' => self::mapCoreValuesItems($industry['processes'] ?? []),
+            'sectors' => self::sectors(),
             'testimonialItems' => HomeSupport::testimonials(),
-            'marqueeLabels' => $industry['marqueeLabels'] ?? ['INNOVATION', 'SECURITY', 'SCALABILITY', 'AI POWERED', 'GROWTH', 'SUPPORT'],
-            'techStack' => AboutSupport::techStack(),
+            'marqueeItems' => self::marqueeItems($industry['marqueeLabels']),
             'insightCategory' => self::insightCategory($slug),
             'caseStudies' => CaseStudySupport::forIndustry($slug, 6),
         ];
     }
 
     /**
-     * @param  array<int, array<string, mixed>>  $processes
+     * Copy fallbacks for every industry page; data files override per slug.
+     *
+     * @return array<string, mixed>
+     */
+    protected static function detailDefaults(): array
+    {
+        return [
+            'eyebrow' => 'Industry Solutions',
+            'pageTitle' => 'Industry',
+            'heroTitle' => [],
+            'heroDescription' => '',
+            'bannerBg' => '',
+            'bannerSideImage' => '',
+            'introEyebrow' => 'Professional Solutions',
+            'introTitle' => '',
+            'introDescription' => '',
+            'servicesEyebrow' => 'Services',
+            'servicesTitle' => '',
+            'servicesDescription' => '',
+            'services' => [],
+            'ctaEyebrow' => 'Ready to Start Your Project?',
+            'ctaTitle' => '',
+            'ctaDescription' => '',
+            'specializedEyebrow' => 'Specialized Services',
+            'specializedTitle' => '',
+            'specializedDescription' => '',
+            'specialized' => [],
+            'marqueeLabels' => ['INNOVATION', 'SECURITY', 'SCALABILITY', 'AI POWERED', 'GROWTH', 'SUPPORT'],
+            'whyEyebrow' => 'Why Us',
+            'whyTitle' => '',
+            'whyDescription' => '',
+            'whyCards' => [],
+            'agileTitle' => 'Our Agile Development Process',
+            'agileSubtitle' => 'Let’s connect with our experienced developers for expert guidance and tailored solutions.',
+            'faqs' => [],
+            'finalBg' => 'assets/background/consultation-section-bg.png',
+            'finalEyebrow' => 'Your Digital Future Together',
+            'finalTitle' => "Let's Build Your Next Digital Solution with us!",
+            'finalDescription' => '',
+            'hideFinalBgBelowDesktop' => false,
+        ];
+    }
+
+    /**
+     * Sector cards shared by every industry page; icon keys match the core-values-section SVG symbols.
+     *
      * @return array<int, array{icon: string, title: string, desc: string, image: string, alt: string}>
      */
-    protected static function mapCoreValuesItems(array $processes): array
+    public static function sectors(): array
     {
-        $iconCycle = ['innovation', 'quality', 'trust', 'customer'];
-        $processImages = [
-            'assets/portfolio/modern-office-yellow-accent-lounge.png',
-            'assets/portfolio/contemporary-living-room-kitchen.png',
-            'assets/media/diverse-team-data-meeting.webp',
-            'assets/portfolio/office-glass-meeting-rooms.png',
-            'assets/blog/insight-digital-strategy.jpg',
-            'assets/media/retail-solutions-visual-5.webp',
+        return [
+            ['icon' => 'fintech', 'title' => 'Fintech & Banking Sector', 'desc' => 'Building secure, scalable platforms for modern finance.', 'image' => 'assets/media/fintech-dashboard-financial-analytics.webp', 'alt' => 'Building secure, scalable platforms for modern finance.'],
+            ['icon' => 'ecommerce', 'title' => 'E-commerce & Retail Sector', 'desc' => 'Powering secure e-commerce payments and fraud protection.', 'image' => 'assets/media/ecommerce-storefront-laptop-checkout.webp', 'alt' => 'Powering secure e-commerce payments and fraud protection.'],
+            ['icon' => 'healthcare', 'title' => 'Healthcare & Insurance Sector', 'desc' => 'Seamless billing, claims & policy management solutions.', 'image' => 'assets/media/healthcare.webp', 'alt' => 'Seamless billing, claims & policy management solutions.'],
+            ['icon' => 'education', 'title' => 'Education & EdTech Sector', 'desc' => 'Secure fee and payment solutions for education.', 'image' => 'assets/media/elearning-platform-online-classroom.webp', 'alt' => 'Secure fee and payment solutions for education'],
+            ['icon' => 'it', 'title' => 'IT Solutions for Startups', 'desc' => 'Innovative solutions tailored to your business needs.', 'image' => 'assets/media/it-solutions.webp', 'alt' => 'Innovative solutions tailored to your business needs.'],
+            ['icon' => 'logistics', 'title' => 'Logistics and Supply Chain', 'desc' => 'Streamlined warehouse, inventory & transport management.', 'image' => 'assets/media/supply-chain.webp', 'alt' => 'Streamlined warehouse, inventory & transport management.'],
         ];
-        $processAlts = [
-            'Modern building exterior for industry software delivery',
-            'Contemporary living room for digital product design',
-            'Modern lounge with plants for software team collaboration',
-            'Contemporary office for enterprise software development',
-            'Startup team collaborating on digital strategy',
-            'Logistics software on tablet in a warehouse',
-        ];
+    }
 
-        $items = [];
+    /**
+     * Alternate filled / outlined marquee labels.
+     *
+     * @param  array<int, string>  $labels
+     * @return array<int, array{label: string, style: string, separator: string}>
+     */
+    protected static function marqueeItems(array $labels): array
+    {
+        return array_values(array_map(static function (string $label, int $index): array {
+            $style = $index % 2 === 0 ? 'filled' : 'outlined';
 
-        foreach ($processes as $index => $process) {
-            $imgIndex = $index % count($processImages);
-            $items[] = [
-                'icon' => $iconCycle[$index % count($iconCycle)],
-                'title' => (string) ($process['title'] ?? ''),
-                'desc' => (string) ($process['desc'] ?? ''),
-                'image' => (string) ($process['image'] ?? $processImages[$imgIndex]),
-                'alt' => (string) ($process['alt'] ?? $processAlts[$imgIndex]),
-            ];
-        }
-
-        return $items;
+            return ['label' => $label, 'style' => $style, 'separator' => $style];
+        }, $labels, array_keys($labels)));
     }
 
     /**
      * @return array<string, array<int, array<string, string>>>
      */
-    protected static function defaultProcessData(): array
+    protected static function agilePhases(): array
     {
         $icons = [
             asset('assets/icons/agile-icon-1.svg'),

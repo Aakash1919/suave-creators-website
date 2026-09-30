@@ -1,0 +1,123 @@
+{
+    "purpose": "Temporary code for rewriting legacy blog posts (id < 70) with AI. Remove everything below once every legacy post has been rewritten and checked on the live site.",
+    "remove_when": "All posts with id < 70 are rewritten, reviewed live, and nobody needs to restore an original from blogs_backup any more.",
+    "commands_while_in_use": {
+        "preview": "php artisan run-once:rewrite-legacy-blogs {id} --dry-run",
+        "rewrite_and_save": "php artisan run-once:rewrite-legacy-blogs {id}",
+        "restore_one": "php artisan run-once:restore-blog-content --blog={id}",
+        "restore_all": "php artisan run-once:restore-blog-content --all"
+    },
+    "delete_files": [
+        {
+            "path": "app/Console/Commands/RunOnce/RewriteLegacyBlogsCommand.php",
+            "what": "Artisan command run-once:rewrite-legacy-blogs {blog} {--dry-run} {--skip-backup}"
+        },
+        {
+            "path": "app/Console/Commands/RunOnce/RestoreBlogContentCommand.php",
+            "what": "Artisan command run-once:restore-blog-content {--blog=} {--all}; restores content + faqs from blogs_backup"
+        },
+        {
+            "path": "app/Services/BlogRewriteService.php",
+            "what": "Rewrite pipeline: image tokens, validation checks, backup/restore, save without touching timestamps"
+        },
+        {
+            "path": "app/Ai/Agents/BlogRewriteAgent.php",
+            "what": "Laravel AI agent with the rewrite prompt (gpt-4.1)"
+        },
+        {
+            "path": "tests/Feature/RewriteLegacyBlogsCommandTest.php",
+            "what": "Feature tests for the rewrite and restore commands"
+        }
+    ],
+    "edit_files": [
+        {
+            "path": "app/Support/Blogs/BlogInternalLinks.php",
+            "remove": [
+                "use App\\Support\\Frontend\\CaseStudySupport; (only used by rewriteCatalog)",
+                "const LEGACY_PATHS",
+                "suggestForRewrite()",
+                "allowedPaths()",
+                "isBlogPath()",
+                "anchorKeywordMap()",
+                "anchorFits()",
+                "anchorTokens()",
+                "normalizeInternalHref()",
+                "relativePath()",
+                "rewriteCatalog()",
+                "In formatForPrompt(): the $words / anchor_words block that appends '(anchor text must include one of: ...)'",
+                "Class docblock: change back to 'Suggest internal marketing links ... for AI drafts' (drop 'and legacy blog rewrites')"
+            ],
+            "keep": "catalog(), suggest(), formatForPrompt() (minus the anchor_words block), entry(), tokenize(), score() are used by blog draft generation."
+        },
+        {
+            "path": "config/blogs.php",
+            "remove": [
+                "The whole 'rewrite' => [ ... ] block and its 'Legacy blog rewrite (run-once:rewrite-legacy-blogs)' comment header (currently about lines 49-168)"
+            ]
+        },
+        {
+            "path": ".env.example",
+            "remove": [
+                "# Legacy blog rewrite (php artisan run-once:rewrite-legacy-blogs {id}); smaller models fail its style/link checks",
+                "BLOG_REWRITE_MODEL=gpt-4.1"
+            ]
+        },
+        {
+            "path": ".env (local and live server)",
+            "remove": [
+                "BLOG_REWRITE_MODEL and any other BLOG_REWRITE_* variables, if set"
+            ]
+        },
+        {
+            "path": ".cursor/skills/suave-admin/SKILL.md",
+            "remove": [
+                "Run-once table rows for run-once:rewrite-legacy-blogs and run-once:restore-blog-content",
+                "Every other paragraph that mentions BlogRewriteService, BlogRewriteAgent, blogs_backup, suggestForRewrite or anchor relevance"
+            ]
+        },
+        {
+            "path": ".cursor/rules/suave-admin.mdc",
+            "remove": [
+                "In item 9, the sentence starting 'Legacy posts (`id < 70`) are rewritten only via `run-once:rewrite-legacy-blogs` ...' through '... undo with `run-once:restore-blog-content`).'"
+            ]
+        },
+        {
+            "path": ".cursor/SKILL-REGISTRY.md",
+            "remove": [
+                "Ownership row: | Legacy blog rewrite (`run-once:rewrite-legacy-blogs`) | `suave-admin` ... | Separate rewrite skill |"
+            ]
+        }
+    ],
+    "database": [
+        {
+            "table": "blogs_backup",
+            "what": "Original content + faqs of each rewritten post (blog_id, slug, content, faqs, backed_up_at). Created automatically by the rewrite command, not by a migration.",
+            "remove": "Only after the rewrites are approved: DROP TABLE blogs_backup; (run on local and live). Export it first if you want a permanent copy."
+        }
+    ],
+    "storage": [
+        {
+            "path": "storage/app/blog-rewrites/",
+            "what": "Dry-run HTML previews",
+            "remove": "Delete the folder"
+        }
+    ],
+    "after_removal_checks": [
+        "vendor/bin/pint --dirty",
+        "php artisan test",
+        "php artisan list run-once (the two rewrite commands should be gone)",
+        "rg -n \"BlogRewrite|suggestForRewrite|blogs\\.rewrite|blogs_backup|anchor_words\" app config tests .cursor (should return nothing)"
+    ],
+    "do_not_remove": {
+        "note": "Made in the same period but permanent; they are not part of the rewrite tooling.",
+        "items": [
+            "app/DataTables/Admin/BlogDataTable.php: title opens the edit page, 'View live' in the row dropdown",
+            "public/css/admin.css: styles for that listing change",
+            "tests/Feature/AdminBlogListingTest.php",
+            "resources/views/layouts/frontend.blade.php: Google tags load only in production",
+            "tests/Feature/FrontendAnalyticsTagsTest.php",
+            ".cursor/skills/suave-frontend/SKILL.md: note about production-only Google tags",
+            "app/Services/BlogSeoMetaGenerationService.php: saving SEO meta no longer changes updated_at"
+        ]
+    }
+}

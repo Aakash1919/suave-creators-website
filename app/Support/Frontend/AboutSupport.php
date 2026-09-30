@@ -12,10 +12,8 @@ class AboutSupport
         return [
             'stats' => self::stats(),
             'shoreSlides' => self::shoreSlides(),
-            'smartModules' => self::smartModules(),
             'coreValues' => self::coreValues(),
             'growthFeatures' => self::growthFeatures(),
-            'techStack' => self::techStack(),
             'partnerMarqueeItems' => HomeSupport::partnerMarqueeItems(),
         ];
     }
@@ -80,21 +78,6 @@ class AboutSupport
                 'tags' => ['SEO', 'Mobile', 'First Performance'],
                 'alt' => 'Software engineers delivering optimised custom development projects on time',
             ],
-        ];
-    }
-
-    /**
-     * @return array<int, array{label: string, icon: string}>
-     */
-    public static function smartModules(): array
-    {
-        return [
-            ['label' => 'Holidays', 'icon' => 'fa-solid fa-calendar-days'],
-            ['label' => 'Projects', 'icon' => 'fa-solid fa-file-circle-plus'],
-            ['label' => 'Logistics', 'icon' => 'fa-solid fa-cube'],
-            ['label' => 'AI Chat', 'icon' => 'fa-solid fa-comment-dots'],
-            ['label' => 'Tasks', 'icon' => 'fa-solid fa-list-check'],
-            ['label' => 'Outreach', 'icon' => 'fa-solid fa-chart-column'],
         ];
     }
 

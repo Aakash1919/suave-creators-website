@@ -264,12 +264,15 @@ body.admin-body {
 }
 
 .admin-nav-label {
-  margin: 0.85rem 0.75rem 0.5rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--admin-text);
+  margin: 1.15rem 0.85rem 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--admin-muted);
+}
+
+.admin-sidebar__nav > .admin-nav-label:first-child {
+  margin-top: 0.15rem;
 }
 
 .admin-nav-link {
@@ -1329,7 +1332,6 @@ body:has(.admin-messenger) {
   color: var(--admin-primary);
   text-decoration: underline;
 }
-
 .admin-table__meta {
   margin-top: 0.15rem;
   font-size: 0.78rem;

@@ -17,7 +17,7 @@
   </div>
 
   <nav class="admin-sidebar__nav" aria-label="Admin">
-    <p class="admin-nav-label">Main</p>
+    <p class="admin-nav-label">Main menu</p>
     <a href="{{ route('admin.dashboard') }}"
       class="admin-nav-link {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}"
       title="Dashboard">
@@ -25,32 +25,46 @@
       <span>Dashboard</span>
     </a>
 
-    <p class="admin-nav-label">Content</p>
-    @if ($user->hasPermission('blogs.view'))
-      <a href="{{ route('admin.blogs.index') }}"
-        class="admin-nav-link {{ request()->routeIs('admin.blogs.*') ? 'is-active' : '' }}"
-        title="Blogs">
-        <i class="fa-solid fa-newspaper" aria-hidden="true"></i>
-        <span>Blogs</span>
-      </a>
+    @if ($user->hasPermission('blogs.view') || $user->hasPermission('blog-categories.view'))
+      <p class="admin-nav-label">Blog</p>
+      @if ($user->hasPermission('blog-categories.view'))
+        <a href="{{ route('admin.blog-categories.index') }}"
+          class="admin-nav-link {{ request()->routeIs('admin.blog-categories.*') ? 'is-active' : '' }}"
+          title="Categories">
+          <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+          <span>Categories</span>
+        </a>
+      @endif
+      @if ($user->hasPermission('blogs.view'))
+        <a href="{{ route('admin.blogs.index') }}"
+          class="admin-nav-link {{ request()->routeIs('admin.blogs.*') ? 'is-active' : '' }}"
+          title="Posts">
+          <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+          <span>Posts</span>
+        </a>
+      @endif
     @endif
-    @if ($user->hasPermission('conversations.view'))
-      <a href="{{ route('admin.conversations.index') }}"
-        class="admin-nav-link {{ request()->routeIs('admin.conversations.*') ? 'is-active' : '' }}"
-        title="AI Conversations">
-        <i class="fa-solid fa-comments" aria-hidden="true"></i>
-        <span>AI Conversations</span>
-      </a>
-    @endif
-    @if ($user->hasPermission('contacts.view'))
-      <a href="{{ route('admin.contacts.index') }}"
-        class="admin-nav-link {{ request()->routeIs('admin.contacts.*') ? 'is-active' : '' }}"
-        title="Contact requests">
-        <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
-        <span>Contacts</span>
-      </a>
+    @if ($user->hasPermission('conversations.view') || $user->hasPermission('contacts.view'))
+      <p class="admin-nav-label">Inbox</p>
+      @if ($user->hasPermission('conversations.view'))
+        <a href="{{ route('admin.conversations.index') }}"
+          class="admin-nav-link {{ request()->routeIs('admin.conversations.*') ? 'is-active' : '' }}"
+          title="AI conversations">
+          <i class="fa-solid fa-comments" aria-hidden="true"></i>
+          <span>AI</span>
+        </a>
+      @endif
+      @if ($user->hasPermission('contacts.view'))
+        <a href="{{ route('admin.contacts.index') }}"
+          class="admin-nav-link {{ request()->routeIs('admin.contacts.*') ? 'is-active' : '' }}"
+          title="Contact requests">
+          <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+          <span>Contact requests</span>
+        </a>
+      @endif
     @endif
     @if ($user->hasPermission('testimonials.view'))
+      <p class="admin-nav-label">General</p>
       <a href="{{ route('admin.testimonials.index') }}"
         class="admin-nav-link {{ request()->routeIs('admin.testimonials.*') ? 'is-active' : '' }}"
         title="Testimonials">
@@ -59,6 +73,7 @@
       </a>
     @endif
 
+    @if ($user->hasPermission('users.view') || $user->hasPermission('roles.view'))
     <p class="admin-nav-label">System</p>
     @if ($user->hasPermission('users.view'))
       <a href="{{ route('admin.users.index') }}"
@@ -75,6 +90,7 @@
         <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
         <span>Roles</span>
       </a>
+    @endif
     @endif
   </nav>
 

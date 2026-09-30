@@ -290,6 +290,11 @@
                                         {{ $category->name }}</option>
                                 @endforeach
                             </select>
+                            @if (auth()->user()?->hasPermission('blog-categories.view'))
+                                <p class="admin-help">
+                                    <a href="{{ route('admin.blog-categories.index') }}">Add or edit categories</a>
+                                </p>
+                            @endif
                         </div>
                         <div>
                             <label class="admin-label" for="blog-slug">Slug</label>

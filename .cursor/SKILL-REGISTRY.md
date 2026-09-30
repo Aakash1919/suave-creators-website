@@ -48,4 +48,5 @@ Do not add `INDEX.md`, nested `modules/` trees, or a duplicate `.agents/skills/`
 | Filament / Spatie Permission / Breeze | — | Never add |
 | Vue / Inertia | — | Not this stack |
 | Broken image / URL / section checks | `frontend-audit` | One-off undocumented scripts |
+| Legacy blog rewrite (`run-once:rewrite-legacy-blogs`) | `suave-admin` (run-once table + `BlogRewriteService`) | Separate rewrite skill |
 | Asset path runtime map | `scripts/asset-path-map.json` via `MapsDesignAssets` | Delete the map |

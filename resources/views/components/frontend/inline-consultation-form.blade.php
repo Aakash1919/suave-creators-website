@@ -5,6 +5,8 @@
     'secondaryHref' => '',
     'secondaryLabel' => '',
     'formId' => null,
+    'showField' => false,
+    'align' => 'center',
 ])
 
 @php
@@ -13,6 +15,21 @@
 @endphp
 
 <div class="consultation-inline-wrapper">
+  @unless ($showField)
+    <div class="consultation-inline-actions{{ $align === 'center' ? ' consultation-inline-actions--center' : '' }}">
+      <button type="button" class="{{ \App\Support\Frontend\UiHelper::btnPrimary() }}" data-consultation-open-agent>
+        {{ $buttonText }}
+        <x-frontend.cta-arrow />
+      </button>
+      @if ($secondaryLabel !== '' && $secondaryHref !== '')
+        <a href="{{ $secondaryHref }}"
+          class="consultation-inline-actions__secondary consultation-inline-actions__secondary--{{ $theme }} group">
+          <span>{{ $secondaryLabel }}</span>
+          <x-frontend.cta-arrow />
+        </a>
+      @endif
+    </div>
+  @else
   <form id="{{ $resolvedFormId }}" action="{{ route('consultation.store') }}" method="POST"
     class="consultation-inline-form consultation-inline-form--{{ $theme }}"
     data-consultation-form
@@ -52,8 +69,26 @@
       </a>
     </div>
   @endif
+  @endunless
 </div>
 
+@unless ($showField)
+@once
+@push('scripts')
+<script>
+  document.querySelectorAll('[data-consultation-open-agent]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (window.SuaveAgent && typeof window.SuaveAgent.open === 'function') {
+        window.SuaveAgent.open();
+      }
+    });
+  });
+</script>
+@endpush
+@endonce
+@endunless
+
+@if ($showField)
 @once
 @push('scripts')
 <script>
@@ -370,3 +405,4 @@
 </script>
 @endpush
 @endonce
+@endif

@@ -111,6 +111,10 @@
             containerClass: 'suave-phone-field__iti',
         };
 
+        if (root.getAttribute('data-dropdown-body') === '1') {
+            options.dropdownParent = document.body;
+        }
+
         if (initialCountry) {
             options.initialCountry = initialCountry;
         } else {

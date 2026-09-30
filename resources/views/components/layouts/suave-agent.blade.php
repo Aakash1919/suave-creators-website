@@ -53,14 +53,32 @@
     </header>
 
     <div class="suave-agent__body" data-suave-agent-body>
-      <form class="suave-agent__lead" data-suave-agent-lead>
-        <p class="suave-agent__intro">Hi! Welcome to Suave Creators. Share your name and email to chat about your project.</p>
-        <label class="suave-agent__label" for="suave-agent-name">Name</label>
-        <input id="suave-agent-name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Your name">
-        <label class="suave-agent__label" for="suave-agent-email">Email</label>
-        <input id="suave-agent-email" name="email" type="email" autocomplete="email" required maxlength="255" placeholder="you@company.com">
-        <button type="submit" class="suave-agent__primary">Start chat</button>
+      <form class="suave-agent__lead" data-suave-agent-lead novalidate>
+        <div class="suave-agent__fields">
+          <p class="suave-agent__intro">Hi! Welcome to Suave Creators. Share your name and phone to chat about your project.</p>
+          <div class="suave-agent__field">
+            <label class="suave-agent__label" for="suave-agent-name">Name</label>
+            <input id="suave-agent-name" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" aria-describedby="suave-agent-name-error">
+            <p class="suave-agent__field-error" id="suave-agent-name-error" data-error-for="name" hidden></p>
+          </div>
+          <div class="suave-agent__field">
+            <label class="suave-agent__label" for="suave-agent-phone">Phone</label>
+            <x-frontend.phone-field
+              id="suave-agent-phone"
+              name="phone"
+              placeholder="98765 43210"
+              :show-label="false"
+              dropdown-on-body
+            />
+          </div>
+          <div class="suave-agent__field">
+            <label class="suave-agent__label" for="suave-agent-email">Email</label>
+            <input id="suave-agent-email" name="email" type="text" inputmode="email" autocomplete="email" maxlength="255" placeholder="you@company.com" aria-describedby="suave-agent-email-error">
+            <p class="suave-agent__field-error" id="suave-agent-email-error" data-error-for="email" hidden></p>
+          </div>
+        </div>
         <p class="suave-agent__error" data-suave-agent-lead-error hidden></p>
+        <button type="submit" class="suave-agent__primary">Start chat</button>
       </form>
 
       <div class="suave-agent__chat" data-suave-agent-chat hidden>
@@ -186,6 +204,9 @@
           panel.hidden = !open;
           root.classList.toggle('is-open', open);
           toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          if (open) {
+            ensurePhoneField();
+          }
         }
 
         function setStatus(text) {
@@ -301,10 +322,139 @@
           setOpen(false);
         });
 
+        function clearFieldError(field) {
+          var input = leadForm.querySelector('[name="' + field + '"]');
+          var error = leadForm.querySelector('[data-error-for="' + field + '"]');
+          if (input) {
+            input.classList.remove('is-invalid');
+            input.removeAttribute('aria-invalid');
+          }
+          if (field === 'phone' && window.SuavePhoneField) {
+            window.SuavePhoneField.setInvalid(leadForm, false);
+          }
+          if (error) {
+            error.hidden = true;
+            error.textContent = '';
+          }
+        }
+
+        function setFieldError(field, message) {
+          var input = leadForm.querySelector('[name="' + field + '"]');
+          var error = leadForm.querySelector('[data-error-for="' + field + '"]');
+          if (input) {
+            input.classList.add('is-invalid');
+            input.setAttribute('aria-invalid', 'true');
+          }
+          if (field === 'phone' && window.SuavePhoneField) {
+            window.SuavePhoneField.setInvalid(leadForm, true);
+          }
+          if (error) {
+            error.hidden = false;
+            error.textContent = message;
+          }
+        }
+
+        function clearFieldErrors() {
+          ['name', 'phone', 'email'].forEach(clearFieldError);
+          leadError.hidden = true;
+          leadError.textContent = '';
+        }
+
+        function ensurePhoneField() {
+          if (window.SuavePhoneField) {
+            window.SuavePhoneField.initAll(leadForm);
+          }
+        }
+
+        function fieldValue(field) {
+          if (field === 'phone' && window.SuavePhoneField) {
+            return window.SuavePhoneField.phoneValue(leadForm);
+          }
+          var input = leadForm.querySelector('[name="' + field + '"]');
+          return input ? input.value.trim() : '';
+        }
+
+        function phoneLooksValid(value) {
+          var phoneRoot = leadForm.querySelector('[data-phone-field]');
+          var iti = phoneRoot && phoneRoot._suaveIti;
+          if (iti && typeof iti.isValidNumber === 'function') {
+            return iti.isValidNumber();
+          }
+          return /^[+]?[\d\s().\-\/]{7,40}$/.test(value);
+        }
+
+        function leadFieldErrors() {
+          var errors = {};
+          var name = fieldValue('name');
+          var phone = fieldValue('phone');
+          var email = fieldValue('email');
+
+          if (!name) {
+            errors.name = 'Please enter your name.';
+          }
+          if (!phone) {
+            errors.phone = 'Please enter your phone number.';
+          } else if (!phoneLooksValid(phone)) {
+            errors.phone = 'Please enter a valid phone number.';
+          }
+          if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errors.email = 'Please enter a valid email address.';
+          }
+
+          return errors;
+        }
+
+        function showFieldErrors(errors) {
+          var firstField = '';
+          ['name', 'phone', 'email'].forEach(function (field) {
+            var message = errors[field];
+            if (Array.isArray(message)) {
+              message = message[0] || '';
+            }
+            if (!message) {
+              clearFieldError(field);
+              return;
+            }
+            setFieldError(field, message);
+            if (!firstField) {
+              firstField = field;
+            }
+          });
+
+          if (firstField) {
+            var firstInput = firstField === 'phone'
+              ? leadForm.querySelector('[data-phone-field-input]')
+              : leadForm.querySelector('[name="' + firstField + '"]');
+            if (firstInput) {
+              firstInput.focus();
+            }
+          }
+        }
+
+        ['name', 'email'].forEach(function (field) {
+          var input = leadForm.querySelector('[name="' + field + '"]');
+          if (!input) return;
+          input.addEventListener('input', function () {
+            clearFieldError(field);
+          });
+        });
+        var phoneVisible = leadForm.querySelector('[data-phone-field-input]');
+        if (phoneVisible) {
+          phoneVisible.addEventListener('input', function () {
+            clearFieldError('phone');
+          });
+        }
+
         leadForm.addEventListener('submit', async function (event) {
           event.preventDefault();
-          leadError.hidden = true;
-          var formData = new FormData(leadForm);
+          clearFieldErrors();
+
+          var errors = leadFieldErrors();
+          if (Object.keys(errors).length) {
+            showFieldErrors(errors);
+            return;
+          }
+
           var submitBtn = leadForm.querySelector('button[type="submit"]');
           submitBtn.disabled = true;
           setStatus('');
@@ -320,14 +470,18 @@
               },
               credentials: 'same-origin',
               body: JSON.stringify({
-                name: formData.get('name'),
-                email: formData.get('email')
+                name: fieldValue('name'),
+                phone: fieldValue('phone'),
+                email: fieldValue('email')
               })
             });
             var data = await res.json();
+            if (res.status === 422 && data.errors) {
+              showFieldErrors(data.errors);
+              return;
+            }
             if (!res.ok) {
-              var message = (data.message || (data.errors && Object.values(data.errors)[0][0]) || 'Unable to start chat.');
-              throw new Error(message);
+              throw new Error('Unable to start chat.');
             }
             if (!data.conversation_id) {
               throw new Error('Unable to start chat session.');

@@ -15,7 +15,7 @@ class CtaButton extends Component
     public string $btnClass;
 
     /**
-     * @param  'default'|'compact'  $variant
+     * @param  'default'|'compact'|'secondary'|'secondary-light'  $variant
      */
     public function __construct(
         public string $href = '',
