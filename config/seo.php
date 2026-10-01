@@ -100,6 +100,11 @@ return [
         ],
         'organization' => [
             'legal_name' => 'Suave Creators',
+            'alternate_name' => ['SuaveCreators', 'Suave Creators Software'],
+            'description' => 'Suave Creators is a custom software development company that builds CRM, ERP, web applications and AI automation for US mid-market companies, and provides dedicated developers. Clients own 100% of the code.',
+            'slogan' => 'Custom software you own.',
+            'founding_date' => '2021',
+            'homepage_area_served' => ['United States', 'United Kingdom', 'Australia'],
             'email' => 'info@suavecreators.com',
             'telephone' => '+1 (307) 435-9605',
             'telephone_href' => 'tel:+13074359605',
@@ -174,6 +179,50 @@ return [
                 'Laravel',
                 'React',
                 'Node.js',
+            ],
+            'engineering_center' => [
+                'name' => 'Suave Creators – India Engineering Center',
+                'price_range' => '$$',
+                'opening_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                'opens' => '10:00',
+                'closes' => '19:00',
+            ],
+            'offer_catalog' => [
+                [
+                    'name' => 'Custom CRM development',
+                    'route' => 'service.show',
+                    'parameters' => ['slug' => 'custom-crm-development'],
+                ],
+                [
+                    'name' => 'Custom ERP and enterprise software development',
+                    'route' => 'service.show',
+                    'parameters' => ['slug' => 'enterprise-software-solutions'],
+                ],
+                [
+                    'name' => 'Web application development',
+                    'route' => 'service.show',
+                    'parameters' => ['slug' => 'web-development-services'],
+                ],
+                [
+                    'name' => 'AI integration and workflow automation',
+                    'route' => 'service.show',
+                    'parameters' => ['slug' => 'ai-solutions'],
+                ],
+                [
+                    'name' => 'E-commerce platform development',
+                    'route' => 'service.show',
+                    'parameters' => ['slug' => 'e-commerce-development'],
+                ],
+                [
+                    'name' => 'UI/UX product design',
+                    'route' => 'service.show',
+                    'parameters' => ['slug' => 'ui-ux-design-services'],
+                ],
+                [
+                    'name' => 'Dedicated software developers and staff augmentation',
+                    'service_type' => 'Staff augmentation',
+                    'route' => 'hire-dedicated-developers',
+                ],
             ],
             'aggregateRating' => [
                 'ratingValue' => '5.0',

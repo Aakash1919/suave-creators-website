@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class SeoGenerateService
@@ -176,6 +177,10 @@ class SeoGenerateService
         ?string $webPageAboutId = null,
         ?string $breadcrumbName = null,
     ): array {
+        if ($routeName === 'home') {
+            return $this->buildHomeJsonLd($site, $title, $description, $canonical, $imageUrl, $faqs);
+        }
+
         $org = (array) ($site['organization'] ?? []);
         $baseUrl = rtrim((string) config('app.url', url('/')), '/');
         $logoUrl = $this->resolveAssetUrl($site['logo'] ?? null) ?? $imageUrl;
@@ -260,19 +265,7 @@ class SeoGenerateService
             $graph[] = [
                 '@type' => 'FAQPage',
                 '@id' => $faqPageUrl,
-                'mainEntity' => array_values(array_map(static function (array $faq): array {
-                    $question = (string) ($faq['question'] ?? $faq['name'] ?? '');
-                    $answer = (string) ($faq['answer'] ?? $faq['text'] ?? '');
-
-                    return [
-                        '@type' => 'Question',
-                        'name' => $question,
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => $answer,
-                        ],
-                    ];
-                }, $faqs)),
+                'mainEntity' => $this->faqMainEntity($faqs),
             ];
         }
 
@@ -296,6 +289,292 @@ class SeoGenerateService
             '@context' => 'https://schema.org',
             '@graph' => $graph,
         ];
+    }
+
+    /**
+     * Homepage graph: Organization, India engineering center, offer catalog,
+     * WebSite, WebPage, and FAQPage. Other routes keep the shared graph.
+     *
+     * @param  array<string, mixed>  $site
+     * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>|null  $faqs
+     * @return array<string, mixed>
+     */
+    protected function buildHomeJsonLd(
+        array $site,
+        string $title,
+        string $description,
+        string $canonical,
+        ?string $imageUrl,
+        ?array $faqs,
+    ): array {
+        $org = (array) ($site['organization'] ?? []);
+        $baseUrl = rtrim((string) config('app.url', url('/')), '/');
+        $organizationId = $baseUrl.'/#organization';
+        $webpageId = $baseUrl.'/#webpage';
+        $logoUrl = $this->resolveAssetUrl($site['logo'] ?? null);
+        $email = strtolower((string) ($org['email'] ?? ''));
+        $telephone = (string) ($org['telephone_schema'] ?? $org['telephone'] ?? '');
+        $siteName = (string) ($site['name'] ?? 'Suave Creators');
+
+        $logo = $logoUrl === null ? null : array_filter([
+            '@type' => 'ImageObject',
+            '@id' => $baseUrl.'/#logo',
+            'url' => $logoUrl,
+            'width' => is_numeric($site['logo_width'] ?? null) ? (int) $site['logo_width'] : null,
+            'height' => is_numeric($site['logo_height'] ?? null) ? (int) $site['logo_height'] : null,
+        ], static fn (mixed $value): bool => $value !== null && $value !== '');
+
+        $primaryAddress = (array) ($org['address'] ?? []);
+        $address = $primaryAddress === [] ? null : array_merge(['@type' => 'PostalAddress'], $primaryAddress);
+
+        $organization = [
+            '@type' => 'Organization',
+            '@id' => $organizationId,
+            'name' => $siteName,
+            'legalName' => (string) ($org['legal_name'] ?? $siteName),
+            'alternateName' => array_values(array_filter(
+                (array) ($org['alternate_name'] ?? []),
+                static fn (mixed $value): bool => is_string($value) && $value !== ''
+            )),
+            'url' => $baseUrl.'/',
+            'logo' => $logo === [] ? null : $logo,
+            'image' => $logo === [] ? $imageUrl : ['@id' => $baseUrl.'/#logo'],
+            'description' => (string) ($org['description'] ?? ''),
+            'slogan' => (string) ($org['slogan'] ?? ''),
+            'foundingDate' => (string) ($org['founding_date'] ?? ''),
+            'email' => $email !== '' ? $email : null,
+            'telephone' => $telephone !== '' ? $telephone : null,
+            'address' => $address,
+            'areaServed' => array_values(array_map(
+                static fn (string $country): array => ['@type' => 'Country', 'name' => $country],
+                array_values(array_filter(
+                    (array) ($org['homepage_area_served'] ?? []),
+                    static fn (mixed $value): bool => is_string($value) && $value !== ''
+                ))
+            )),
+            'knowsAbout' => array_values(array_filter(
+                (array) ($org['knowsAbout'] ?? []),
+                static fn (mixed $value): bool => is_string($value) && $value !== ''
+            )),
+            'contactPoint' => $this->homeContactPoints($org, $email, $telephone),
+            'department' => ['@id' => $baseUrl.'/#india-engineering-center'],
+            'hasOfferCatalog' => ['@id' => $baseUrl.'/#services'],
+            'sameAs' => array_values(array_filter(
+                (array) ($org['sameAs'] ?? []),
+                static fn (mixed $value): bool => is_string($value) && $value !== '' && ! str_contains($value, '[')
+            )),
+        ];
+
+        $graph = [
+            $this->withoutEmpty($organization),
+            $this->homeEngineeringCenter($org, $baseUrl, $organizationId, $email),
+            $this->homeOfferCatalog($org, $baseUrl, $organizationId),
+            [
+                '@type' => 'WebSite',
+                '@id' => $baseUrl.'/#website',
+                'url' => $baseUrl.'/',
+                'name' => $siteName,
+                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
+                'publisher' => ['@id' => $organizationId],
+            ],
+            $this->withoutEmpty([
+                '@type' => 'WebPage',
+                '@id' => $webpageId,
+                'url' => $canonical,
+                'name' => $title,
+                'description' => $description,
+                'isPartOf' => ['@id' => $baseUrl.'/#website'],
+                'about' => ['@id' => $organizationId],
+                'primaryImageOfPage' => $imageUrl === null ? null : [
+                    '@type' => 'ImageObject',
+                    'url' => $imageUrl,
+                ],
+                'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
+                'potentialAction' => [
+                    '@type' => 'CommunicateAction',
+                    'name' => 'Get a Scoped Estimate',
+                    'target' => route('contact-us'),
+                ],
+            ]),
+        ];
+
+        if (is_array($faqs) && $faqs !== []) {
+            $graph[] = [
+                '@type' => 'FAQPage',
+                '@id' => $baseUrl.'/#faq',
+                'isPartOf' => ['@id' => $webpageId],
+                'mainEntity' => $this->faqMainEntity($faqs),
+            ];
+        }
+
+        return [
+            '@context' => 'https://schema.org',
+            '@graph' => $graph,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<int, array<string, mixed>>
+     */
+    protected function homeContactPoints(array $org, string $email, string $fallbackTelephone): array
+    {
+        $offices = array_values(array_filter(
+            (array) ($org['offices'] ?? []),
+            static fn (mixed $office): bool => is_array($office)
+        ));
+
+        $sales = null;
+        $engineering = null;
+
+        foreach ($offices as $office) {
+            $country = (string) ($office['country'] ?? '');
+            if ($country === 'US') {
+                $sales = $office;
+            }
+            if ($country === 'IN') {
+                $engineering = $office;
+            }
+        }
+
+        $salesPhone = (string) ($sales['phone_schema'] ?? $fallbackTelephone);
+        $engineeringPhone = (string) ($engineering['phone_schema'] ?? '');
+
+        return array_values(array_filter([
+            $this->withoutEmpty([
+                '@type' => 'ContactPoint',
+                'contactType' => 'sales',
+                'telephone' => $salesPhone !== '' ? $salesPhone : null,
+                'email' => $email !== '' ? $email : null,
+                'areaServed' => 'US',
+                'availableLanguage' => ['English'],
+            ]),
+            $this->withoutEmpty([
+                '@type' => 'ContactPoint',
+                'contactType' => 'technical support',
+                'telephone' => $engineeringPhone !== '' ? $engineeringPhone : null,
+                'email' => $email !== '' ? $email : null,
+                'availableLanguage' => ['English', 'Hindi'],
+            ]),
+        ], static fn (array $point): bool => isset($point['telephone']) || isset($point['email'])));
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<string, mixed>
+     */
+    protected function homeEngineeringCenter(array $org, string $baseUrl, string $organizationId, string $email): array
+    {
+        $center = (array) ($org['engineering_center'] ?? []);
+        $address = (array) ($org['address_secondary'] ?? []);
+        $phone = '';
+
+        foreach ((array) ($org['offices'] ?? []) as $office) {
+            if (is_array($office) && ($office['country'] ?? '') === 'IN') {
+                $phone = (string) ($office['phone_schema'] ?? $office['phone'] ?? '');
+                break;
+            }
+        }
+
+        $days = array_values(array_filter(
+            (array) ($center['opening_days'] ?? []),
+            static fn (mixed $value): bool => is_string($value) && $value !== ''
+        ));
+
+        return $this->withoutEmpty([
+            '@type' => 'ProfessionalService',
+            '@id' => $baseUrl.'/#india-engineering-center',
+            'name' => (string) ($center['name'] ?? 'Suave Creators – India Engineering Center'),
+            'parentOrganization' => ['@id' => $organizationId],
+            'url' => $baseUrl.'/',
+            'telephone' => $phone !== '' ? $phone : null,
+            'email' => $email !== '' ? $email : null,
+            'priceRange' => (string) ($center['price_range'] ?? ''),
+            'address' => $address === [] ? null : array_merge(['@type' => 'PostalAddress'], $address),
+            'openingHoursSpecification' => $days === [] ? null : [[
+                '@type' => 'OpeningHoursSpecification',
+                'dayOfWeek' => $days,
+                'opens' => (string) ($center['opens'] ?? ''),
+                'closes' => (string) ($center['closes'] ?? ''),
+            ]],
+        ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<string, mixed>
+     */
+    protected function homeOfferCatalog(array $org, string $baseUrl, string $organizationId): array
+    {
+        $items = [];
+
+        foreach ((array) ($org['offer_catalog'] ?? []) as $offer) {
+            if (! is_array($offer)) {
+                continue;
+            }
+
+            $routeName = (string) ($offer['route'] ?? '');
+            $name = (string) ($offer['name'] ?? '');
+
+            if ($routeName === '' || $name === '' || ! Route::has($routeName)) {
+                continue;
+            }
+
+            $parameters = is_array($offer['parameters'] ?? null) ? $offer['parameters'] : [];
+            $service = [
+                '@type' => 'Service',
+                'name' => $name,
+                'url' => route($routeName, $parameters),
+                'provider' => ['@id' => $organizationId],
+            ];
+
+            $serviceType = (string) ($offer['service_type'] ?? '');
+            if ($serviceType !== '') {
+                $service['serviceType'] = $serviceType;
+            }
+
+            $items[] = [
+                '@type' => 'Offer',
+                'itemOffered' => $service,
+            ];
+        }
+
+        return [
+            '@type' => 'OfferCatalog',
+            '@id' => $baseUrl.'/#services',
+            'name' => 'Custom software development services',
+            'itemListElement' => $items,
+        ];
+    }
+
+    /**
+     * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>  $faqs
+     * @return array<int, array<string, mixed>>
+     */
+    protected function faqMainEntity(array $faqs): array
+    {
+        return array_values(array_map(static function (array $faq): array {
+            return [
+                '@type' => 'Question',
+                'name' => (string) ($faq['question'] ?? $faq['name'] ?? ''),
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => (string) ($faq['answer'] ?? $faq['text'] ?? ''),
+                ],
+            ];
+        }, $faqs));
+    }
+
+    /**
+     * @param  array<string, mixed>  $node
+     * @return array<string, mixed>
+     */
+    protected function withoutEmpty(array $node): array
+    {
+        return array_filter(
+            $node,
+            static fn (mixed $value): bool => $value !== null && $value !== '' && $value !== []
+        );
     }
 
     /**
