@@ -146,6 +146,7 @@ Classic circular chat brand mark (brand gradient disc, white mark SVG). The `src
 Keep contact details consistent across SEO, footer, contact page, privacy, and SuaveAgent:
 
 - Source of truth: `config/seo.php` organization + `ContactSupport::offices()` / phones
+- Homepage JSON-LD (`home` only, `SeoGenerateService::buildHomeJsonLd()`): Organization with the US address, slogan, founding date, and US/UK/Australia `areaServed`; ProfessionalService for the Palampur center; OfferCatalog of live named service routes; WebSite without `SearchAction`; WebPage `#webpage` with `CommunicateAction` to `contact-us`; FAQPage `isPartOf` that webpage. No BreadcrumbList, AggregateRating, or Review nodes. Omit unresolved placeholders (founder, headcount, geo, a hire route that is not registered, image files that are not in `public/assets`). Other routes keep the shared graph.
 - Offices: United States Headquarters (Sheridan, WY) and India Engineering Center (Palampur, HP)
 - Phones: `+1 (307) 435-9605`, `+91 88949 00142`, `+91 18944 55019`
 - Email: `info@suavecreators.com`

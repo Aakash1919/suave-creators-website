@@ -115,4 +115,79 @@ class SeoSitelinksCleanupTest extends TestCase
         $response->assertSee(parse_url(route('service.show', ['slug' => 'enterprise-software-solutions']), PHP_URL_PATH), false);
         $response->assertDontSee('>Our Product<', false);
     }
+
+    public function test_homepage_json_ld_uses_the_homepage_graph(): void
+    {
+        config(['app.url' => 'https://suavecreators.com']);
+
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $graph = $this->jsonLdGraph($response->getContent());
+        $types = array_map(static fn (array $node): string => (string) ($node['@type'] ?? ''), $graph);
+
+        $this->assertSame([
+            'Organization',
+            'ProfessionalService',
+            'OfferCatalog',
+            'WebSite',
+            'WebPage',
+            'FAQPage',
+        ], $types);
+
+        $organization = $graph[0];
+        $this->assertSame('https://suavecreators.com/#organization', $organization['@id']);
+        $this->assertSame('Custom software you own.', $organization['slogan']);
+        $this->assertSame('2021', $organization['foundingDate']);
+        $this->assertSame('US', $organization['address']['addressCountry']);
+        $this->assertArrayNotHasKey('aggregateRating', $organization);
+        $this->assertArrayNotHasKey('founder', $organization);
+        $this->assertSame('sales', $organization['contactPoint'][0]['contactType']);
+        $this->assertSame(['English'], $organization['contactPoint'][0]['availableLanguage']);
+        $this->assertSame('technical support', $organization['contactPoint'][1]['contactType']);
+        $this->assertSame(['English', 'Hindi'], $organization['contactPoint'][1]['availableLanguage']);
+        $this->assertSame('https://suavecreators.com/#india-engineering-center', $organization['department']['@id']);
+
+        $this->assertSame('IN', $graph[1]['address']['addressCountry']);
+        $this->assertArrayNotHasKey('geo', $graph[1]);
+        $this->assertSame('https://suavecreators.com/#organization', $graph[1]['parentOrganization']['@id']);
+
+        $this->assertCount(6, $graph[2]['itemListElement']);
+        $offerUrls = array_map(
+            static fn (array $offer): string => (string) ($offer['itemOffered']['url'] ?? ''),
+            $graph[2]['itemListElement']
+        );
+        $this->assertContains(route('service.show', ['slug' => 'custom-crm-development']), $offerUrls);
+        $this->assertNotContains('https://suavecreators.com/hire-dedicated-developers', $offerUrls);
+
+        $this->assertArrayNotHasKey('potentialAction', $graph[3]);
+        $this->assertSame('https://suavecreators.com/#webpage', $graph[4]['@id']);
+        $this->assertSame('Get a Scoped Estimate', $graph[4]['potentialAction']['name']);
+        $this->assertSame(route('contact-us'), $graph[4]['potentialAction']['target']);
+        $this->assertSame('https://suavecreators.com/#webpage', $graph[5]['isPartOf']['@id']);
+        $this->assertCount(8, $graph[5]['mainEntity']);
+        $this->assertSame('How much does custom software development cost?', $graph[5]['mainEntity'][0]['name']);
+        $this->assertStringNotContainsString('[', (string) $graph[5]['mainEntity'][0]['acceptedAnswer']['text']);
+
+        $encoded = $response->getContent();
+        $this->assertStringNotContainsString('"@type":"BreadcrumbList"', $encoded);
+        $this->assertStringNotContainsString('"@type":"SearchAction"', $encoded);
+        $this->assertStringNotContainsString('AggregateRating', $encoded);
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    private function jsonLdGraph(string $html): array
+    {
+        $this->assertSame(1, preg_match('/<script type="application\/ld\+json">(.*?)<\/script>/s', $html, $matches));
+
+        $decoded = json_decode(html_entity_decode($matches[1], ENT_QUOTES | ENT_HTML5), true);
+        $this->assertIsArray($decoded);
+
+        $graph = $decoded['@graph'] ?? null;
+        $this->assertIsArray($graph);
+
+        return array_values($graph);
+    }
 }
