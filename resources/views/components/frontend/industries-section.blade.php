@@ -79,9 +79,9 @@
 
     @if ($footerLabel !== '')
       <div class="industries-served__project">
-        <a href="{{ $footerHref }}"
-          @if (str_starts_with($footerHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
-          class="border-b border-white/70 text-sm font-semibold text-white">{{ $footerLabel }}</a>
+        <x-frontend.cta-button :href="$footerHref" variant="secondary-dark">
+          {{ $footerLabel }}
+        </x-frontend.cta-button>
       </div>
     @endif
 

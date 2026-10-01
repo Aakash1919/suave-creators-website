@@ -170,9 +170,13 @@
       @endforeach
     </div>
 
-    <div class="web-services__footer">
-      <a href="{{ $demoHref }}">Discuss Your Requirements</a>
-      <a class="group inline-flex items-center gap-1.5" href="{{ route('product') }}">Explore Suave Outreach CRM<x-frontend.cta-arrow /></a>
+    <div class="web-services__footer flex flex-wrap items-center justify-end gap-3 sm:gap-4">
+      <x-frontend.cta-button :href="$demoHref">
+        Discuss Your Requirements
+      </x-frontend.cta-button>
+      <x-frontend.cta-button :href="route('product')" variant="secondary-blue">
+        Explore Suave Outreach CRM
+      </x-frontend.cta-button>
     </div>
   </div>
 </section>
