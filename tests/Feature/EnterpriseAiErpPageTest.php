@@ -185,14 +185,10 @@ class EnterpriseAiErpPageTest extends TestCase
         $this->assertStringContainsString('enterprise ai and erp solutions uae', $html);
     }
 
-    public function test_legacy_enterprise_ai_erp_path_redirects_to_the_uae_canonical(): void
+    public function test_unpublished_enterprise_ai_erp_paths_are_not_redirected(): void
     {
-        $this->get('/enterprise-ai-erp-uae')
-            ->assertStatus(301)
-            ->assertRedirect(route('enterprise-ai-erp-uae'));
+        $this->get('/enterprise-ai-erp-uae')->assertNotFound();
 
-        $this->get('/services/uae/enterprise-ai-erp-solutions')
-            ->assertStatus(301)
-            ->assertRedirect(route('enterprise-ai-erp-uae'));
+        $this->get('/services/uae/enterprise-ai-erp-solutions')->assertNotFound();
     }
 }
