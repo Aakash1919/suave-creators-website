@@ -63,7 +63,11 @@
               <span class="industry-card__step" aria-hidden="true">{{ $card['step'] }}</span>
             @endif
           @endif
-          <h3>{{ $card['title'] }}</h3>
+          @if ($cardTitleTag === 'p')
+            <p class="industry-card__title">{{ $card['title'] }}</p>
+          @else
+            <h3>{{ $card['title'] }}</h3>
+          @endif
           <p>{{ $card['text'] }}</p>
           @if (! $hasStep)
             <span class="industry-card__arrow" aria-hidden="true">
@@ -90,7 +94,8 @@
         <div class="industries-support__copy">
           <p>{{ $supportText }}</p>
           <a href="{{ $supportHref }}"
-            @if (str_starts_with($supportHref, 'http')) target="_blank" rel="noopener noreferrer" @endif>
+            @if (str_starts_with($supportHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
+            @if ($supportService !== '') data-service="{{ $supportService }}" @endif>
             {{ $supportLabel }}
             <x-frontend.cta-arrow />
           </a>

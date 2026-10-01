@@ -31,6 +31,8 @@ class IndustriesSection extends Component
         public string $supportLabel = 'Schedule an Industry-Specific Consultation',
         public string $supportImage = 'assets/brand/chat-widget-icon.png',
         public string $supportImageAlt = 'Chat support widget for Suave Creators software development services',
+        public string $cardTitleTag = 'h3',
+        public string $supportService = '',
     ) {
         $this->backgroundImage = $this->normalizeAssetPath($this->backgroundImage);
         $this->supportImage = $this->normalizeAssetPath($this->supportImage);

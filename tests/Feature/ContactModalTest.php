@@ -56,8 +56,12 @@ class ContactModalTest extends TestCase
         $response = $this->get(route('home'));
 
         $response->assertOk();
-        $response->assertSee('Schedule a Call');
+        $response->assertSee('Get a Scoped Estimate');
+        $response->assertSee('Send My Request', false);
+        $response->assertSee('production platforms delivered since 2021', false);
+        $response->assertSee('name="twitter:description" content="Custom CRM, ERP and web apps by senior developers. 100% code ownership, 2-week sprints."', false);
         $response->assertSee('data-open-contact-modal', false);
+        $response->assertSee('data-service="custom-software"', false);
         $response->assertDontSee('Claim Free Architecture Scoping Session', false);
         $response->assertDontSee('Book Direct via Google Calendar →', false);
     }
@@ -67,11 +71,10 @@ class ContactModalTest extends TestCase
         $response = $this->get(route('home'));
 
         $response->assertOk();
-        $response->assertSee('Get Started');
-        // Ensure Get Started button has data-open-contact-modal and links to #contact-modal
+        $response->assertSee('Get a Scoped Estimate');
         $content = $response->getContent();
         $this->assertMatchesRegularExpression(
-            '/<a[^>]*href=["\']#contact-modal["\'][^>]*data-open-contact-modal[^>]*>[\s\S]*?Get Started[\s\S]*?<\/a>/i',
+            '/<a[^>]*href=["\']#contact-modal["\'][^>]*data-open-contact-modal[^>]*>[\s\S]*?Get a Scoped Estimate[\s\S]*?<\/a>/i',
             $content
         );
     }
@@ -228,5 +231,41 @@ class ContactModalTest extends TestCase
         $response = $this->post(route('contact-us.store'), $payload);
 
         $response->assertRedirect(route('contact-us').'#contact-id');
+    }
+
+    public function test_homepage_request_form_accepts_budget_without_a_phone(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'Jordan Lee',
+            'email' => 'jordan@example.com',
+            'company' => 'Northwind',
+            'service' => 'hire-developers',
+            'budget' => 'Monthly team',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('success', true);
+
+        $stored = ContactRequest::query()->where('email', 'jordan@example.com')->first();
+        $this->assertNotNull($stored);
+        $this->assertSame('hire-developers', $stored->service);
+        $this->assertNull($stored->phone);
+        $this->assertStringContainsString('Budget: Monthly team', (string) $stored->message);
+        $this->assertStringContainsString('Need: Hire developers', (string) $stored->message);
+    }
+
+    public function test_contact_form_still_requires_a_phone_without_a_budget(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'Jordan Lee',
+            'email' => 'jordan@example.com',
+            'service' => 'custom-software',
+            'message' => 'Need a scoped estimate for a customer portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('phone');
     }
 }

@@ -6,6 +6,8 @@
     'secondaryLabel' => '',
     'secondaryAsButton' => false,
     'secondaryClass' => '',
+    'secondaryService' => '',
+    'primaryService' => '',
     'formId' => null,
     'showField' => false,
     'align' => 'center',
@@ -13,7 +15,6 @@
 
 @php
     $resolvedFormId = $formId ?? ('consultation-inline-form-'.\Illuminate\Support\Str::random(6));
-    $isDark = $theme === 'dark';
 @endphp
 
 <div class="consultation-inline-wrapper">
@@ -53,35 +54,35 @@
     {{-- Divider --}}
     <span class="consultation-inline-form__divider" aria-hidden="true"></span>
 
-    {{-- Button --}}
-    <button type="submit" class="consultation-inline-form__btn">
-      <span data-button-label>{{ $buttonText }}</span>
-      <x-frontend.cta-arrow />
-    </button>
-  </form>
-
-  <div class="consultation-inline-status mt-2 text-xs font-medium px-1 text-left" hidden></div>
-
-  @if ($secondaryLabel !== '' && $secondaryHref !== '')
-    @php
-      $hasTextArrow = str_contains($secondaryLabel, '→') || str_contains($secondaryLabel, '&rarr;');
-      $defaultSecondaryClass = $secondaryAsButton
-          ? ($isDark
-              ? 'group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20'
-              : 'u-btn-cta group inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-5 py-2 text-sm font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110')
-          : 'group inline-flex items-center gap-1.5 no-underline '.($isDark ? 'border-white/70 text-white/80 hover:text-white' : 'border-[#00003F] text-[#2A4DFB] hover:text-[#2A4DFB]').' text-[13px] sm:text-sm font-semibold transition';
-      $appliedSecondaryClass = $secondaryClass !== '' ? $secondaryClass : $defaultSecondaryClass;
-    @endphp
-    <div class="{{ $secondaryAsButton ? 'mt-4 flex items-center justify-center' : 'mt-3 flex items-center' }}">
+    @if ($secondaryLabel !== '' && $secondaryHref !== '')
+      @php
+        $hasTextArrow = str_contains($secondaryLabel, '→') || str_contains($secondaryLabel, '&rarr;');
+      @endphp
       <a href="{{ $secondaryHref }}"
-        class="{{ $appliedSecondaryClass }}">
+        @if ($secondaryService !== '') data-open-contact-modal data-service="{{ $secondaryService }}" @endif
+        class="consultation-inline-form__btn consultation-inline-form__btn--secondary">
         <span>{{ $secondaryLabel }}</span>
         @if (! $hasTextArrow)
           <x-frontend.cta-arrow class="shrink-0" />
         @endif
       </a>
-    </div>
-  @endif
+    @endif
+
+    {{-- Button --}}
+    @if ($primaryService !== '')
+      <button type="button" class="consultation-inline-form__btn" data-open-contact-modal data-service="{{ $primaryService }}">
+        <span data-button-label>{{ $buttonText }}</span>
+        <x-frontend.cta-arrow />
+      </button>
+    @else
+      <button type="submit" class="consultation-inline-form__btn">
+        <span data-button-label>{{ $buttonText }}</span>
+        <x-frontend.cta-arrow />
+      </button>
+    @endif
+  </form>
+
+  <div class="consultation-inline-status mt-2 text-xs font-medium px-1 text-left" hidden></div>
   @endunless
 </div>
 

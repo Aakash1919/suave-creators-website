@@ -15,9 +15,18 @@ class ConsultationCtaLabelTest extends TestCase
         $response = $this->get(route('home', absolute: false));
 
         $response->assertOk();
-        $response->assertSee('Get Architectural Consultation', false);
-        $response->assertSee('placeholder="Enter your business email or phone number"', false);
+        $response->assertSee('Get a Scoped Estimate', false);
+        $response->assertSee('placeholder="Your work email"', false);
         $response->assertSee('name="contact"', false);
+        $content = $response->getContent();
+        $fieldPos = strpos($content, 'placeholder="Your work email"');
+        $hirePos = strpos($content, 'Hire Developers');
+        $estimatePos = strpos($content, 'Get a Scoped Estimate');
+        $this->assertNotFalse($fieldPos);
+        $this->assertNotFalse($hirePos);
+        $this->assertNotFalse($estimatePos);
+        $this->assertGreaterThan($fieldPos, $hirePos);
+        $this->assertGreaterThan($hirePos, $estimatePos);
         $response->assertDontSee('consultation-inline-actions', false);
         $response->assertDontSee('Start your Project', false);
     }

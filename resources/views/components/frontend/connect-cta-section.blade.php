@@ -6,9 +6,16 @@
           <span>{{ $eyebrow }}</span>
         </div>
       @endif
-      <h2 id="{{ $titleId }}">{{ $title }}</h2>
+      @if ($titleTag === 'p')
+        <p id="{{ $titleId }}" class="smart-together-cta__title">{{ $title }}</p>
+      @else
+        <h2 id="{{ $titleId }}" class="smart-together-cta__title">{{ $title }}</h2>
+      @endif
       @if (filled($description))
         <p>{{ $description }}</p>
+      @endif
+      @if (filled($note))
+        <p class="smart-together-cta__note">{{ $note }}</p>
       @endif
     </div>
 

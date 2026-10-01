@@ -32,6 +32,22 @@ class ContactStoreRequest extends FormRequest
             $suffix = $serviceLabel !== '' ? ' [Service: '.$serviceLabel.']' : ' [Consultation request]';
             $this->merge(['message' => $message.$suffix]);
         }
+
+        $budget = trim((string) $this->input('budget', ''));
+        if ($budget !== '') {
+            $service = (string) $this->input('service', '');
+            $needLabels = [
+                'custom-software' => 'New custom software',
+                'custom-crm' => 'CRM or ERP',
+                'hire-developers' => 'Hire developers',
+                'enterprise-software' => 'Modernize an existing system',
+            ];
+            $need = $needLabels[$service] ?? (ContactSupport::formServices()[$service] ?? $service);
+            $current = trim((string) $this->input('message', ''));
+            if (! str_contains($current, 'Budget: '.$budget)) {
+                $this->merge(['message' => trim($current.' Need: '.$need.'. Budget: '.$budget.'.')]);
+            }
+        }
     }
 
     /**
@@ -57,8 +73,20 @@ class ContactStoreRequest extends FormRequest
             'draft_token' => ['nullable', 'uuid'],
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:255'],
-            'phone' => ['required', 'string', 'max:60', 'regex:/^\+?[0-9\s\-().]+$/'],
+            'phone' => [
+                $this->filled('budget') ? 'nullable' : 'required',
+                'string',
+                'max:60',
+                'regex:/^\+?[0-9\s\-().]+$/',
+            ],
             'company' => ['nullable', 'string', 'max:120'],
+            'budget' => ['nullable', 'string', Rule::in([
+                'Under $25k',
+                '$25–75k',
+                '$75–150k',
+                '$150k+',
+                'Monthly team',
+            ])],
             'service' => ['required', 'string', Rule::in(array_keys(ContactSupport::formServices()))],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
             '_redirect' => ['nullable', 'string', 'max:255'],
