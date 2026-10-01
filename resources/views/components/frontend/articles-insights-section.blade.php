@@ -3,7 +3,7 @@
 <section
   {{ $attributes->merge(['class' => "full-bleed articles-insights bg-cover bg-top bg-no-repeat relative overflow-hidden {$sectionClass}"]) }}
   style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}');"
-  aria-labelledby="{{ $headingId }}">
+  @if ($showTitle) aria-labelledby="{{ $headingId }}" @else aria-label="{{ $eyebrow }}" @endif>
   <div class="articles-insights__inner section-inner">
     <div class="articles-insights__content">
       <header class="portfolio-showcase__header">
@@ -11,10 +11,12 @@
           class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
           {{ $eyebrow }}
         </p>
-        <h2 id="{{ $headingId }}"
-          class="mt-4 home-type-h2 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
-          {{ $title }}
-        </h2>
+        @if ($showTitle)
+          <h2 id="{{ $headingId }}"
+            class="mt-4 home-type-h2 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
+            {{ $title }}
+          </h2>
+        @endif
         @if (filled($subtitle))
           <p
             class="portfolio-showcase__intro mx-auto mt-2 max-w-[690px] text-[14px] leading-5 text-[#4D4D4D] sm:text-[14px]">

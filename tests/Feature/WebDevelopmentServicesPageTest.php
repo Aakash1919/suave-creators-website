@@ -148,6 +148,10 @@ class WebDevelopmentServicesPageTest extends TestCase
         $response->assertStatus(301);
         $response->assertRedirect(route('service.show', ['slug' => 'custom-crm-development']));
 
+        $usDuplicate = $this->get('/us/services/custom-crm-builder');
+        $usDuplicate->assertStatus(301);
+        $usDuplicate->assertRedirect(route('service.show', ['slug' => 'custom-crm-development']));
+
         $responseBlog = $this->get('/blog');
         $responseBlog->assertStatus(301);
         $responseBlog->assertRedirect(route('blogs'));

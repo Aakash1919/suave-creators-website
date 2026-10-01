@@ -12,6 +12,12 @@
             'color' => '#2563EB',
         ],
         [
+            'value' => 'hire-developers',
+            'label' => 'Hire Dedicated Developers',
+            'icon' => 'fa-solid fa-user-group',
+            'color' => '#1D4ED8',
+        ],
+        [
             'value' => 'custom-crm',
             'label' => 'Custom CRM Development',
             'icon' => 'fa-solid fa-terminal',

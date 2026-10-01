@@ -63,27 +63,23 @@ class Footer extends Component
 
         $columns ??= [
             'Services' => [
-                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development'],
                 ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'Custom CRM'],
-                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software'],
-                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Software'],
+                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise software and ERP'],
+                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web development'],
+                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions'],
             ],
             'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare-software-development'], 'label' => 'Healthcare'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'IT Solutions'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Banking'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'E-commerce'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'Startups and SaaS'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Finance and banking'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'Retail and e-commerce'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'logistics-supply-chain-apps'], 'label' => 'Logistics'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'education-elearning-platforms'], 'label' => 'Education'],
             ],
-            'Site Links' => [
-                ['route' => 'home', 'label' => 'Home'],
+            'Company' => [
                 ['route' => 'about-us', 'label' => 'About Us'],
-                ['route' => 'services', 'label' => 'Services'],
-                ['route' => 'industries', 'label' => 'Industries'],
-                ['route' => 'product', 'label' => 'AI Outreach CRM'],
                 ['route' => 'case-studies', 'label' => 'Case Studies'],
                 ['route' => 'blogs', 'label' => 'Blog'],
                 ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact Us'],

@@ -220,6 +220,7 @@ class ContactSupport
     {
         return [
             'custom-software' => 'Custom Software Development',
+            'hire-developers' => 'Hire Dedicated Developers',
             'custom-crm' => 'Custom CRM Development',
             'ai-solutions' => 'AI Solutions & Development',
             'web-development' => 'Web Development',
