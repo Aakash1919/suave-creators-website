@@ -280,7 +280,7 @@ return [
             'keywords' => 'enterprise ai and erp solutions uae, custom ERP development dubai, enterprise AI solutions UAE, bespoke ERP software UAE, AI automation company dubai, custom ERP software abu dhabi',
             'og_title' => 'Enterprise AI & Custom ERP Solutions UAE | Suave Creators',
             'og_description' => 'Custom ERP software and enterprise AI agent solutions for UAE businesses. VAT-compliant, single-tenant, bilingual (AR/EN) architecture with 100% IP ownership.',
-            'og_image' => 'assets/media/erp-banner-bg.webp',
+            'og_image' => 'assets/media/enterprise-ai-erp-og-banner.webp',
             'og_image_width' => 1200,
             'og_image_height' => 630,
             'og_image_alt' => 'Enterprise AI and custom ERP dashboard for UAE businesses',

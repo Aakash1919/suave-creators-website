@@ -38,7 +38,8 @@ Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'
 Route::get('/thank-you', [PageController::class, 'thankYou'])->name('thank-you');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
-Route::get('/services/uae/enterprise-ai-erp-solutions', [EnterpriseAiErpController::class, 'index'])->name('enterprise-ai-erp-uae');
+Route::get('/uae/services/enterprise-ai-erp-solutions', [EnterpriseAiErpController::class, 'index'])->name('enterprise-ai-erp-uae');
+Route::get('/services/uae/enterprise-ai-erp-solutions', fn () => redirect()->route('enterprise-ai-erp-uae', status: 301))->name('enterprise-ai-erp-uae.legacy');
 Route::get('/services/custom-crm-builder', fn () => redirect()->route('service.show', ['slug' => 'custom-crm-development'], 301))->name('services.custom-crm-builder.legacy');
 Route::get('/service/{slug}', fn (string $slug) => redirect()->route('service.show', ['slug' => $slug], 301))->name('service.show.legacy');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');

@@ -11,6 +11,7 @@ class EnterpriseAiErpPageTest extends TestCase
         $response = $this->get(route('enterprise-ai-erp-uae', absolute: false));
 
         $response->assertOk();
+        $this->assertSame('/uae/services/enterprise-ai-erp-solutions', route('enterprise-ai-erp-uae', absolute: false));
         $response->assertSee('Enterprise AI &amp;', false);
         $response->assertSee('Custom ERP Solutions', false);
         $response->assertSee('in the UAE', false);
@@ -87,7 +88,7 @@ class EnterpriseAiErpPageTest extends TestCase
         $response->assertSee('MySQL', false);
         $response->assertSee('MongoDB', false);
         $response->assertSee('AWS', false);
-        $this->assertSame(3, substr_count($response->getContent(), 'enterprise-ai-erp-stack__icon-placeholder'));
+        $response->assertDontSee('enterprise-ai-erp-stack__icon-placeholder', false);
         $response->assertSee('Why UAE Conglomerates Choose Our Cross-Border Model', false);
         $response->assertSee('The Strategic Delivery Advantage', false);
         $response->assertSee('1.5-Hour Working Hours Overlap (GMT+4 vs. GMT+5:30)', false);
@@ -106,6 +107,8 @@ class EnterpriseAiErpPageTest extends TestCase
         $response->assertDontSee('enterprise-ai-erp-modules__grid', false);
         $response->assertSee('Cloud platform hologram for custom enterprise ERP software', false);
         $response->assertSee('assets/media/erp-banner-bg.webp', false);
+        $response->assertSee('property="og:image" content="'.rtrim((string) config('app.url'), '/').'/assets/media/enterprise-ai-erp-og-banner.webp"', false);
+        $response->assertDontSee('og:image" content="'.rtrim((string) config('app.url'), '/').'/assets/media/erp-banner-bg.webp"', false);
         $response->assertSee('enterprise-ai-erp-circuit-pattern.webp', false);
         $response->assertSee('enterprise-ai-erp-hero__visual', false);
         $response->assertSee('Bilingual Arabic-English', false);
@@ -185,6 +188,10 @@ class EnterpriseAiErpPageTest extends TestCase
     public function test_legacy_enterprise_ai_erp_path_redirects_to_the_uae_canonical(): void
     {
         $this->get('/enterprise-ai-erp-uae')
+            ->assertStatus(301)
+            ->assertRedirect(route('enterprise-ai-erp-uae'));
+
+        $this->get('/services/uae/enterprise-ai-erp-solutions')
             ->assertStatus(301)
             ->assertRedirect(route('enterprise-ai-erp-uae'));
     }

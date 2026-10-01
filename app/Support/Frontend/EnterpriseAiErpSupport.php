@@ -529,7 +529,7 @@ class EnterpriseAiErpSupport
                             'copy' => 'for relational enterprise data',
                         ],
                         [
-                            'icon' => 'assets/media/Mongodb.webp',
+                            'icon' => 'assets/media/Mongo-db.webp',
                             'iconAlt' => 'MongoDB logo for flexible enterprise document storage',
                             'name' => 'MongoDB',
                             'copy' => 'for flexible document storage',
