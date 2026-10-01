@@ -54,6 +54,7 @@
             'about-us',
             'product',
             'custom-crm-builder',
+            'enterprise-ai-erp-uae',
             'blogs',
             'blogs.category',
             'blog.show',
@@ -351,7 +352,15 @@
         @endif
 
         <div class="relative z-10">
-            <x-layouts.topbar />
+            @if (request()->routeIs('enterprise-ai-erp-uae'))
+                <x-layouts.topbar
+                    title="Enterprise AI in Action:"
+                    subtitle="See how autonomous multi-agent pipelines eliminate manual back-office tasks."
+                    cta-label="Explore The Suave App"
+                />
+            @else
+                <x-layouts.topbar />
+            @endif
             <x-layouts.header />
 
             <main class="{{ $mainClass }}">

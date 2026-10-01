@@ -68,6 +68,9 @@ class SeoGenerateService
                 'json_ld_description' => $page['json_ld_description'] ?? null,
                 'json_ld_breadcrumb_name' => $page['json_ld_breadcrumb_name'] ?? null,
                 'faqs' => $page['faqs'] ?? null,
+                'hreflang' => $page['hreflang'] ?? null,
+                'og_locale' => $page['og_locale'] ?? null,
+                'og_locale_alternate' => $page['og_locale_alternate'] ?? null,
             ], static fn (mixed $value): bool => $value !== null && $value !== ''),
             $this->overrides,
             array_filter(
@@ -85,8 +88,11 @@ class SeoGenerateService
         $siteName = (string) ($site['name'] ?? 'Suave Creators');
         $imageAlt = (string) ($merged['og_image_alt'] ?? $siteName);
 
+        $hreflangLocales = is_array($merged['hreflang'] ?? null) && $merged['hreflang'] !== []
+            ? $merged['hreflang']
+            : (array) ($site['hreflang'] ?? []);
         $hreflang = [];
-        foreach ((array) ($site['hreflang'] ?? []) as $locale) {
+        foreach ($hreflangLocales as $locale) {
             $hreflang[(string) $locale] = $canonical;
         }
 
@@ -121,9 +127,9 @@ class SeoGenerateService
                 'image_height' => (int) ($merged['og_image_height'] ?? 630),
                 'image_alt' => $imageAlt,
                 'site_name' => $siteName,
-                'locale' => (string) ($site['og_locale'] ?? 'en_US'),
+                'locale' => (string) ($merged['og_locale'] ?? $site['og_locale'] ?? 'en_US'),
                 'locale_alternate' => array_values(array_filter(
-                    (array) ($site['og_locale_alternate'] ?? []),
+                    (array) ($merged['og_locale_alternate'] ?? $site['og_locale_alternate'] ?? []),
                     static fn (mixed $value): bool => is_string($value) && $value !== ''
                 )),
             ],
