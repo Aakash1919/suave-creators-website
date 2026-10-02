@@ -75,7 +75,7 @@ class ContactStoreRequest extends FormRequest
 
         return [
             'draft_token' => ['nullable', 'uuid'],
-            'name' => ['required', 'string', 'max:120'],
+            'name' => ['required', 'string', 'max:120', Rule::when($this->filled('inquiry'), ['min:2'])],
             'email' => ['required', 'email', 'max:255'],
             'phone' => [
                 $this->filled('budget') || $this->filled('inquiry') ? 'nullable' : 'required',
@@ -83,7 +83,12 @@ class ContactStoreRequest extends FormRequest
                 'max:60',
                 'regex:/^\+?[0-9\s\-().]+$/',
             ],
-            'company' => ['nullable', 'string', 'max:120'],
+            'company' => [
+                $this->filled('inquiry') ? 'required' : 'nullable',
+                'string',
+                'max:120',
+                Rule::when($this->filled('company') || $this->filled('inquiry'), ['min:2']),
+            ],
             'inquiry' => ['nullable', 'string', Rule::in(['project-estimate', 'hire-developers'])],
             'expertise' => [
                 $this->input('inquiry') === 'hire-developers' ? 'required' : 'nullable',
@@ -97,8 +102,17 @@ class ContactStoreRequest extends FormRequest
                 'max:120',
                 Rule::in(ContactSupport::hireSupportOptions()),
             ],
-            'start_when' => ['nullable', 'string', 'max:120', Rule::in(ContactSupport::hireStartOptions())],
-            'budget' => ['nullable', 'string', Rule::in(ContactSupport::projectBudgets())],
+            'start_when' => [
+                $this->input('inquiry') === 'hire-developers' ? 'required' : 'nullable',
+                'string',
+                'max:120',
+                Rule::in(ContactSupport::hireStartOptions()),
+            ],
+            'budget' => [
+                $this->input('inquiry') === 'project-estimate' ? 'required' : 'nullable',
+                'string',
+                Rule::in(ContactSupport::projectBudgets()),
+            ],
             'service' => ['required', 'string', Rule::in($this->allowedServices())],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
             '_redirect' => ['nullable', 'string', 'max:255'],
@@ -112,7 +126,11 @@ class ContactStoreRequest extends FormRequest
     {
         return [
             'name.required' => 'Please enter your full name.',
+            'name.min' => 'Please enter your full name.',
             'name.max' => 'Full name may not be longer than 120 characters.',
+            'company.required' => 'Please enter your company name.',
+            'company.min' => 'Please enter your company name.',
+            'company.max' => 'Company name may not be longer than 120 characters.',
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
             'email.max' => 'Email may not be longer than 255 characters.',
@@ -126,7 +144,9 @@ class ContactStoreRequest extends FormRequest
             'expertise.in' => 'Please select a valid expertise.',
             'support_type.required' => 'Please select the kind of support you need.',
             'support_type.in' => 'Please select a valid support type.',
+            'start_when.required' => 'Please select when you need to start.',
             'start_when.in' => 'Please select a valid start time.',
+            'budget.required' => 'Please select a budget range.',
             'budget.in' => 'Please select a valid budget range.',
             'message.required' => 'Please tell us what you are trying to fix.',
             'message.min' => 'Please write at least 10 characters about your request.',
