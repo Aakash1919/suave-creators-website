@@ -787,7 +787,7 @@
           </div>
           <div>
             <h3 id="home-estimate-title">Get a Project Estimate</h3>
-            <p>Tell us what you're planning to build. Share a few details about your project and our specialist team will review your requirements and get back to you with an initial scope, timeline and estimated cost.</p>
+            <p>Share a few project details for an initial scope, timeline, and cost.</p>
           </div>
         </div>
         <form id="home-estimate-form" class="home-final__form" action="{{ route('contact-us.store') }}" method="POST" data-home-request-form data-draft-url="{{ route('contact-us.draft') }}" novalidate>
@@ -869,7 +869,7 @@
           </div>
           <div>
             <h3 id="home-hire-title">Hire the Right Developers</h3>
-            <p>Need additional development capacity or a specific technical skill? Tell us what you need, and our team will review your requirements and get back to you with suitable developer options.</p>
+            <p>Tell us the skills you need and we'll suggest developer options.</p>
           </div>
         </div>
         <form id="home-hire-form" class="home-final__form" action="{{ route('contact-us.store') }}" method="POST" data-home-request-form data-draft-url="{{ route('contact-us.draft') }}" novalidate>
