@@ -31,9 +31,9 @@
         <div class="site-footer__columns">
           @foreach ($columns as $title => $links)
             <div class="site-footer__column min-w-0">
-              <h2 class="text-[11px] font-bold uppercase tracking-wide text-white sm:text-xs">
+              <p class="text-[11px] font-bold uppercase tracking-wide text-white sm:text-xs">
                 {{ $title }}
-              </h2>
+              </p>
 
               <ul class="mt-3 space-y-1.5 sm:mt-5 sm:space-y-3">
                 @foreach ($links as $link)
@@ -51,7 +51,7 @@
               @if ($title === 'AI Outreach CRM')
                 <a href="{{ route('product') }}"
                   class="mt-2 inline-flex !min-h-0 items-center text-[12px] font-semibold text-white underline underline-offset-4 sm:mt-4 sm:text-[13px]">
-                  Explore AI Outreach CRM
+                  Explore the Suave App
                 </a>
               @endif
             </div>
@@ -61,11 +61,11 @@
     </div>
 
     <div class="site-footer__offices">
-      <h2 class="site-footer__offices-title">Corporate Office Information</h2>
+      <p class="site-footer__offices-title">Corporate Office Information</p>
       <div class="site-footer__offices-grid">
         @foreach ($offices as $office)
           <div class="site-footer__office">
-            <h3 class="site-footer__office-name">{{ $office['label'] }}</h3>
+            <p class="site-footer__office-name">{{ $office['label'] }}</p>
             <ul class="site-footer__office-list">
               <li>
                 <span class="site-footer__office-label">Address:</span>

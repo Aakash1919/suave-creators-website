@@ -60,7 +60,16 @@ class ContactRequestService
         $data = $request->validated();
         $token = $this->nullableString($data['draft_token'] ?? null);
         $company = $this->nullableString($data['company'] ?? null);
-        unset($data['draft_token'], $data['company'], $data['_redirect'], $data['budget']);
+        unset(
+            $data['draft_token'],
+            $data['company'],
+            $data['_redirect'],
+            $data['budget'],
+            $data['inquiry'],
+            $data['expertise'],
+            $data['support_type'],
+            $data['start_when'],
+        );
 
         if ($company !== null) {
             $msg = (string) ($data['message'] ?? '');

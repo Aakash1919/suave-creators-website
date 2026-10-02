@@ -25,6 +25,14 @@ class ContactDraftRequest extends FormRequest
         if ($emptyToNull !== []) {
             $this->merge($emptyToNull);
         }
+
+        $composed = ContactSupport::composeInquiryMessage(
+            trim((string) $this->input('message', '')),
+            $this->all(),
+        );
+        if ($composed !== trim((string) $this->input('message', ''))) {
+            $this->merge(['message' => $composed !== '' ? $composed : null]);
+        }
     }
 
     /**
