@@ -20,7 +20,10 @@ class HomeSupport
             'offerings' => self::offerings(),
             'coreValues' => self::coreValues(),
             'digitalMarketingServices' => self::digitalMarketingServices(),
-            'portfolioShowcaseProjects' => self::portfolioShowcaseProjects(),
+            'portfolioShowcaseProjects' => array_values(array_filter(
+                self::portfolioShowcaseProjects(),
+                static fn (array $project): bool => ($project['home'] ?? true) === true,
+            )),
             'testimonials' => self::testimonials(),
             'servicesMarqueeItems' => self::servicesMarqueeItems(),
             'partnerMarqueeItems' => self::partnerMarqueeItems(),
@@ -99,13 +102,13 @@ class HomeSupport
                 'title' => '3. Build in 2-week sprints',
                 'description' => 'A working demo every sprint, with direct access to your lead engineer.',
                 'image' => 'assets/media/developers-collaborating-code-review.webp',
-                'alt' => 'Developers reviewing code during a software sprint',
+                'alt' => 'Developers reviewing code during a sprint',
             ],
             [
                 'title' => '4. Data migration and launch',
                 'description' => 'We move records from your current tools, train your team and launch in stages.',
                 'image' => 'assets/media/marketing-analytics-team-presentation.webp',
-                'alt' => 'Team launching a new custom software platform',
+                'alt' => 'Team launching a new software platform',
             ],
             [
                 'title' => '5. Support, SLAs and iteration',
@@ -162,7 +165,7 @@ class HomeSupport
             [
                 'icon' => 'assets/icons/seo-icon.svg',
                 'title' => 'Laravel and PHP developers',
-                'headline' => 'Hire Laravel developers',
+                'headline' => 'Hire Laravel developers →',
                 'description' => 'APIs, admin panels and complex business logic.',
                 'image' => 'assets/media/developers-collaborating-code-review.webp',
                 'alt' => 'Laravel and PHP developers reviewing API code for a custom software project',
@@ -171,7 +174,7 @@ class HomeSupport
             [
                 'icon' => 'assets/icons/ppc-advertising-icon.svg',
                 'title' => 'React and Next.js developers',
-                'headline' => 'Hire React developers',
+                'headline' => 'Hire React developers →',
                 'description' => 'Fast web front ends and dashboards.',
                 'image' => 'assets/media/financial-dashboard-laptop-collaboration.webp',
                 'alt' => 'React developers building a web dashboard for a custom software product',
@@ -180,7 +183,7 @@ class HomeSupport
             [
                 'icon' => 'assets/icons/social-media-marketing-icon.svg',
                 'title' => 'Node.js developers',
-                'headline' => 'Hire Node.js developers',
+                'headline' => 'Hire Node.js developers →',
                 'description' => 'Real-time features, integrations and microservices.',
                 'image' => 'assets/media/seo-infographic-on-imac.webp',
                 'alt' => 'Node.js developers planning real-time software integrations',
@@ -189,7 +192,7 @@ class HomeSupport
             [
                 'icon' => 'assets/icons/content-strategy-icon.svg',
                 'title' => 'Full-stack developers',
-                'headline' => 'Hire full-stack developers',
+                'headline' => 'Hire full-stack developers →',
                 'description' => 'One engineer across front end, back end and database.',
                 'image' => 'assets/media/content-strategy-team-planning.webp',
                 'alt' => 'Full-stack developers planning a custom software build',
@@ -198,7 +201,7 @@ class HomeSupport
             [
                 'icon' => 'assets/icons/online-reputation-icon.svg',
                 'title' => 'AI and LLM engineers',
-                'headline' => 'Hire AI engineers',
+                'headline' => 'Hire AI engineers →',
                 'description' => 'AI agents, RAG search and workflow automation.',
                 'image' => 'assets/media/big-project-sticky-notes-planning.webp',
                 'alt' => 'AI engineers planning agents and workflow automation',
@@ -207,7 +210,7 @@ class HomeSupport
             [
                 'icon' => 'assets/icons/answer-engine-optimization-icon.svg',
                 'title' => 'UI/UX designers',
-                'headline' => 'Hire UI/UX designers',
+                'headline' => 'Hire UI/UX designers →',
                 'description' => 'Research, prototypes and design systems.',
                 'image' => 'assets/media/summary-report-team-meeting.webp',
                 'alt' => 'UI UX designers reviewing prototypes for a software product',
@@ -216,7 +219,7 @@ class HomeSupport
             [
                 'icon' => 'assets/icons/generative-engine-optimization-icon.svg',
                 'title' => 'QA and DevOps engineers',
-                'headline' => 'Hire QA and DevOps engineers',
+                'headline' => 'Hire QA and DevOps engineers →',
                 'description' => 'Automated testing, CI/CD and AWS.',
                 'image' => 'assets/media/diverse-team-data-meeting.webp',
                 'alt' => 'QA and DevOps engineers reviewing a software release pipeline',
@@ -226,7 +229,7 @@ class HomeSupport
     }
 
     /**
-     * @return array<int, array{category: string, title: string, description: string, image: string, alt: string, url: string, external: bool}>
+     * @return array<int, array{category: string, title: string, description: string, image: string, alt: string, url: string, external: bool, link: string}>
      */
     public static function portfolioShowcaseProjects(): array
     {
@@ -234,7 +237,8 @@ class HomeSupport
             [
                 'category' => 'Custom CRM',
                 'title' => 'B2B outreach CRM with AI lead scoring',
-                'description' => 'Cut lead prospecting time by 65% with two-way email tracking and AI qualification.',
+                'description' => 'B2B SaaS. Cut lead prospecting time by 65% with two-way email tracking and AI qualification.',
+                'link' => 'Read the outreach CRM case study',
                 'image' => 'assets/portfolio/suave-outreach-crm-laptop.webp',
                 'alt' => 'Suave Creators outreach CRM platform on a laptop display',
                 'url' => CaseStudySupport::urlForSlug('suave-crm-outreach-case-study'),
@@ -244,6 +248,7 @@ class HomeSupport
                 'category' => 'Logistics',
                 'title' => 'Fleet telematics and dispatch portal',
                 'description' => 'Turbo Trans Corp. 3.4× faster dispatch response and 42% more qualified dispatch leads.',
+                'link' => 'Read the logistics case study',
                 'image' => 'assets/case-studies/turbo-trans/ttc_caseStudy.webp',
                 'alt' => 'Turbo Trans fleet telematics and dispatch portal by Suave Creators',
                 'url' => CaseStudySupport::urlForSlug('turbo-trans-corporation-case-study'),
@@ -252,7 +257,8 @@ class HomeSupport
             [
                 'category' => 'AI integration',
                 'title' => 'AI catalog matching for high-SKU inventory',
-                'description' => '70% less look-alike research time at 99.2% matching accuracy.',
+                'description' => 'Nonprofit procurement. 70% less look-alike research time at 99.2% matching accuracy.',
+                'link' => 'Read the AI product matching case study',
                 'image' => 'assets/case-studies/ai-product-matching/ai-product-matching-logo.webp',
                 'alt' => 'Automated AI catalog matching engine by Suave Creators',
                 'url' => CaseStudySupport::urlForSlug('AI-product-matching'),
@@ -261,7 +267,8 @@ class HomeSupport
             [
                 'category' => 'AI sales coach',
                 'title' => 'AI sales coach',
-                'description' => '55% faster ramp to quota and 60% less manager review time.',
+                'description' => 'Sales enablement. 55% faster ramp to quota and 60% less manager review time.',
+                'link' => 'Read the AI sales coaching case study',
                 'image' => 'assets/case-studies/ai-sales-coaching/ai-sales-coach.webp',
                 'alt' => 'AI sales coaching platform case study by Suave Creators',
                 'url' => CaseStudySupport::urlForSlug('ai-sales-coaching-platform-case-study'),
@@ -271,6 +278,8 @@ class HomeSupport
                 'category' => 'Web Development',
                 'title' => 'MAVAN Growth Agency Website',
                 'description' => 'A conversion-focused site for a growth agency that embeds elite talent to solve complex scaling problems.',
+                'link' => '',
+                'home' => false,
                 'image' => 'assets/portfolio/mavan-growth-agency-website.webp',
                 'alt' => 'MAVAN growth agency website built by Suave Creators',
                 'url' => 'https://www.mavan.com/',
@@ -280,6 +289,8 @@ class HomeSupport
                 'category' => 'Web Design',
                 'title' => 'HubOps Software Company Website',
                 'description' => 'A high-impact marketing site for a custom software company focused on SaaS, APIs, and industry solutions.',
+                'link' => '',
+                'home' => false,
                 'image' => 'assets/portfolio/hubops-software-company-website.webp',
                 'alt' => 'HubOps custom software company website by Suave Creators',
                 'url' => 'https://thehubops.com/',
@@ -289,6 +300,8 @@ class HomeSupport
                 'category' => 'Web Design',
                 'title' => 'Swastik Culture Hub Website',
                 'description' => 'A digital hub for Indian history, art, and culture with curated libraries and original series.',
+                'link' => '',
+                'home' => false,
                 'image' => 'assets/portfolio/swastik-culture-hub-website.webp',
                 'alt' => 'Swastik culture hub website for history art and culture content',
                 'url' => 'https://swastikstories.com/',
@@ -298,6 +311,8 @@ class HomeSupport
                 'category' => 'AI Product',
                 'title' => 'Ematrics AI Sales Website',
                 'description' => 'A product site for an AI sales catalyst that trains reps, assists live calls, and delivers post-call analytics.',
+                'link' => '',
+                'home' => false,
                 'image' => 'assets/portfolio/ematrics-ai-sales-website.webp',
                 'alt' => 'Ematrics AI sales catalyst website built by Suave Creators',
                 'url' => 'https://www.ematrics.com/',

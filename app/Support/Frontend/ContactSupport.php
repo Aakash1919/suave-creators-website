@@ -236,6 +236,153 @@ class ContactSupport
     }
 
     /**
+     * Project types offered in the homepage estimate dialog.
+     *
+     * @return array<string, string>
+     */
+    public static function projectEstimateServices(): array
+    {
+        return [
+            'custom-software' => 'Custom Software',
+            'custom-crm' => 'CRM',
+            'enterprise-software' => 'ERP',
+            'web-development' => 'Web Application',
+            'mobile-app' => 'Mobile Application',
+            'ecommerce' => 'E-Commerce Platform',
+            'ai-solutions' => 'AI Solution',
+            'ui-ux-design' => 'UI/UX Design',
+            'other' => 'Other',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function projectEstimateBudgets(): array
+    {
+        return [
+            'Under $10K',
+            '10K–25K',
+            '25K–50K',
+            '50K–100K',
+            '$100K+',
+            'Not sure yet',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function projectBudgets(): array
+    {
+        return [
+            ...self::projectEstimateBudgets(),
+            'Under $25k',
+            '$25–75k',
+            '$75–150k',
+            '$150k+',
+            'Monthly team',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function hireExpertiseOptions(): array
+    {
+        return [
+            'Laravel / PHP',
+            'React',
+            'React Native',
+            'Node.js',
+            'Angular',
+            'Vue.js',
+            'Python',
+            'AI / ML',
+            'DevOps / Cloud',
+            'UI/UX',
+            'Other',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function hireSupportOptions(): array
+    {
+        return [
+            'Dedicated Developer',
+            'Development Team',
+            'Project-Based Development',
+            'Additional Development Capacity',
+            'Specific Technical Expertise',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function hireStartOptions(): array
+    {
+        return [
+            'Immediately',
+            'Within 1–2 weeks',
+            'Within 1 month',
+            '1–3 months',
+            'Not decided yet',
+        ];
+    }
+
+    /**
+     * Fold homepage dialog details into the stored message.
+     *
+     * @param  array<string, mixed>  $input
+     */
+    public static function composeInquiryMessage(string $message, array $input): string
+    {
+        $message = trim($message);
+        $parts = [];
+
+        foreach ([
+            'expertise' => 'Expertise',
+            'support_type' => 'Support',
+            'start_when' => 'Start',
+        ] as $key => $label) {
+            $value = trim((string) ($input[$key] ?? ''));
+            if ($value !== '') {
+                $parts[] = $label.': '.$value;
+            }
+        }
+
+        $budget = trim((string) ($input['budget'] ?? ''));
+        if ($budget !== '') {
+            $service = (string) ($input['service'] ?? '');
+            $needLabels = [
+                'custom-software' => 'New custom software',
+                'custom-crm' => 'CRM or ERP',
+                'hire-developers' => 'Hire developers',
+                'enterprise-software' => 'Modernize an existing system',
+            ];
+            $need = $needLabels[$service] ?? (self::formServices()[$service] ?? $service);
+            if ($need !== '') {
+                $parts[] = 'Need: '.$need;
+            }
+            $parts[] = 'Budget: '.$budget;
+        }
+
+        if ($parts === []) {
+            return $message;
+        }
+
+        $suffix = implode('. ', $parts).'.';
+        if ($message !== '' && str_contains($message, $suffix)) {
+            return $message;
+        }
+
+        return trim($message.' '.$suffix);
+    }
+
+    /**
      * @return array<int, array<string, mixed>>
      */
     public static function contactCards(): array
