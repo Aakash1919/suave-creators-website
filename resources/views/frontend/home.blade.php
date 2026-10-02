@@ -787,7 +787,7 @@
           </div>
           <div>
             <h3 id="home-estimate-title">Get a Project Estimate</h3>
-            <p>Tell us what you're planning to build. Share a few details about your project and our specialist team will review your requirements and get back to you with an initial scope, timeline and estimated cost.</p>
+            <p>Share a few project details for an initial scope, timeline, and cost.</p>
           </div>
         </div>
         <form id="home-estimate-form" class="home-final__form" action="{{ route('contact-us.store') }}" method="POST" data-home-request-form data-draft-url="{{ route('contact-us.draft') }}" novalidate>
@@ -812,8 +812,8 @@
           </div>
           <div class="home-final__row">
             <label class="home-final__field">
-              <span>Company</span>
-              <input type="text" name="company" autocomplete="organization" maxlength="120" placeholder="Company name">
+              <span>Company <abbr title="required">*</abbr></span>
+              <input type="text" name="company" autocomplete="organization" maxlength="120" placeholder="Company name" required>
               <small data-error-for="company" hidden></small>
             </label>
             <label class="home-final__field">
@@ -833,8 +833,8 @@
             <small data-error-for="message" hidden></small>
           </label>
           <label class="home-final__field">
-            <span>Estimated Budget</span>
-            <select name="budget">
+            <span>Estimated Budget <abbr title="required">*</abbr></span>
+            <select name="budget" required>
               <option value="">Select budget range</option>
               @foreach ($homeEstimateBudgets as $budget)
                 <option value="{{ $budget }}">{{ $budget }}</option>
@@ -869,7 +869,7 @@
           </div>
           <div>
             <h3 id="home-hire-title">Hire the Right Developers</h3>
-            <p>Need additional development capacity or a specific technical skill? Tell us what you need, and our team will review your requirements and get back to you with suitable developer options.</p>
+            <p>Tell us the skills you need and we'll suggest developer options.</p>
           </div>
         </div>
         <form id="home-hire-form" class="home-final__form" action="{{ route('contact-us.store') }}" method="POST" data-home-request-form data-draft-url="{{ route('contact-us.draft') }}" novalidate>
@@ -895,8 +895,8 @@
           </div>
           <div class="home-final__row">
             <label class="home-final__field">
-              <span>Company</span>
-              <input type="text" name="company" autocomplete="organization" maxlength="120" placeholder="Company name">
+              <span>Company <abbr title="required">*</abbr></span>
+              <input type="text" name="company" autocomplete="organization" maxlength="120" placeholder="Company name" required>
               <small data-error-for="company" hidden></small>
             </label>
             <label class="home-final__field">
@@ -922,8 +922,8 @@
               <small data-error-for="support_type" hidden></small>
             </label>
             <label class="home-final__field">
-              <span>When do you need to start?</span>
-              <select name="start_when">
+              <span>When do you need to start? <abbr title="required">*</abbr></span>
+              <select name="start_when" required>
                 <option value="">Select an option</option>
                 @foreach ($homeHireStart as $start)
                   <option value="{{ $start }}">{{ $start }}</option>
@@ -1339,6 +1339,7 @@ a.digital-marketing-card {
 
 .home-compare__intro {
   max-width: none;
+  min-width: 0;
   width: 100%;
 }
 
@@ -1436,6 +1437,49 @@ a.digital-marketing-card {
 
 .home-compare__links a:hover {
   color: #2a4dfb;
+}
+
+@media (max-width: 767px) {
+  .home-compare__intro,
+  .home-compare__intro h2,
+  .home-compare__intro p {
+    overflow-wrap: break-word;
+  }
+
+  .home-compare .section-inner,
+  .home-compare__scroll,
+  .home-compare__links {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .home-compare__scroll,
+  .home-compare__links {
+    overflow-x: visible;
+  }
+
+  .home-compare__table {
+    min-width: 0;
+  }
+
+  .home-compare__table th,
+  .home-compare__table td {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+    padding: 10px 8px;
+  }
+
+  .home-compare__links {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    padding: 12px 14px;
+  }
+
+  .home-compare__links a {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+  }
 }
 
 .home-pricing__note {
@@ -2043,8 +2087,15 @@ a.digital-marketing-card {
   box-shadow: 0 0 0 4px rgba(122, 95, 248, 0.14);
 }
 
-.home-final__field .is-invalid {
+.home-final__field .is-invalid,
+.home-final__field input.is-invalid:focus,
+.home-final__field select.is-invalid:focus,
+.home-final__field textarea.is-invalid:focus,
+.home-final__dialog--hire .home-final__field input.is-invalid:focus,
+.home-final__dialog--hire .home-final__field select.is-invalid:focus,
+.home-final__dialog--hire .home-final__field textarea.is-invalid:focus {
   border-color: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
 }
 
 .home-final__field small {
@@ -2875,8 +2926,11 @@ a.digital-marketing-card {
       email: 'Please enter your work email.',
       service: 'Please select an option.',
       message: 'Please tell us about your request.',
+      company: 'Please enter your company name.',
       expertise: 'Please select the expertise you need.',
-      support_type: 'Please select the kind of support you need.'
+      support_type: 'Please select the kind of support you need.',
+      budget: 'Please select a budget range.',
+      start_when: 'Please select when you need to start.'
     };
 
     function focusable(dialog) {
@@ -2973,34 +3027,80 @@ a.digital-marketing-card {
       });
       form.querySelectorAll('.is-invalid').forEach(function (field) {
         field.classList.remove('is-invalid');
+        field.removeAttribute('aria-invalid');
       });
     }
 
     function showFieldError(form, name, message) {
       var field = form.elements[name];
       var slot = form.querySelector('[data-error-for="' + name + '"]');
-      if (field && field.classList) field.classList.add('is-invalid');
+      if (field && field.classList) {
+        field.classList.add('is-invalid');
+        field.setAttribute('aria-invalid', 'true');
+      }
       if (slot) {
         slot.hidden = false;
         slot.textContent = message;
       }
     }
 
+    function clearFieldError(form, name) {
+      var field = form.elements[name];
+      var slot = form.querySelector('[data-error-for="' + name + '"]');
+      if (field && field.classList) {
+        field.classList.remove('is-invalid');
+        field.removeAttribute('aria-invalid');
+      }
+      if (slot) {
+        slot.hidden = true;
+        slot.textContent = '';
+      }
+    }
+
+    function optionAllowed(field, value) {
+      return Array.prototype.some.call(field.options, function (option) {
+        return option.value === value;
+      });
+    }
+
+    function fieldMessage(field) {
+      if (!field || !field.name || field.type === 'hidden' || field.closest('.home-final__honeypot')) return '';
+      var value = String(field.value || '').trim();
+      var max = field.maxLength > 0 ? field.maxLength : 0;
+      if ((field.required || field.tagName === 'SELECT') && value === '') {
+        return requiredMessages[field.name] || 'Please complete this field.';
+      }
+      if (value === '') return '';
+      if (max && value.length > max) {
+        return 'Please use ' + max + ' characters or fewer.';
+      }
+      if (field.name === 'name' && value.length < 2) {
+        return 'Please enter your full name.';
+      }
+      if (field.name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        return 'Please enter a valid email address.';
+      }
+      if (field.name === 'company' && value.length < 2) {
+        return 'Please enter your company name.';
+      }
+      if (field.name === 'message' && value.length < 10) {
+        return 'Please write at least 10 characters about your request.';
+      }
+      if (field.tagName === 'SELECT' && !optionAllowed(field, value)) {
+        if (field.name === 'budget') return 'Please select a valid budget range.';
+        if (field.name === 'start_when') return 'Please select a valid start time.';
+        if (field.name === 'expertise') return 'Please select a valid expertise.';
+        if (field.name === 'support_type') return 'Please select a valid support type.';
+        return 'Please select a valid option.';
+      }
+      return '';
+    }
+
     function clientErrors(form) {
       var errors = {};
-      Array.prototype.forEach.call(form.elements, function (field) {
-        if (!field.name || field.type === 'hidden' || !field.required) return;
-        var value = String(field.value || '').trim();
-        if (value === '') {
-          errors[field.name] = [requiredMessages[field.name] || 'Please complete this field.'];
-          return;
-        }
-        if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          errors[field.name] = ['Please enter a valid email address.'];
-        }
-        if (field.name === 'message' && value.length < 10) {
-          errors[field.name] = ['Please write at least 10 characters about your request.'];
-        }
+      form.querySelectorAll('.home-final__field input, .home-final__field select, .home-final__field textarea').forEach(function (field) {
+        var message = fieldMessage(field);
+        if (message) errors[field.name] = [message];
       });
       return errors;
     }
@@ -3060,18 +3160,22 @@ a.digital-marketing-card {
         }).catch(function () {});
       }
 
-      ['name', 'email', 'company', 'service', 'message', 'expertise', 'support_type', 'start_when', 'budget'].forEach(function (fieldName) {
-        var input = form.elements[fieldName];
-        if (!input) return;
-        input.addEventListener('change', scheduleDraft);
-        input.addEventListener('blur', scheduleDraft);
+      form.querySelectorAll('.home-final__field input, .home-final__field select, .home-final__field textarea').forEach(function (input) {
+        function showCurrentError() {
+          var message = fieldMessage(input);
+          if (message) showFieldError(form, input.name, message);
+          else clearFieldError(form, input.name);
+        }
+        input.addEventListener('change', function () {
+          showCurrentError();
+          scheduleDraft();
+        });
+        input.addEventListener('blur', function () {
+          showCurrentError();
+          scheduleDraft();
+        });
         input.addEventListener('input', function () {
-          input.classList.remove('is-invalid');
-          var slot = form.querySelector('[data-error-for="' + fieldName + '"]');
-          if (slot) {
-            slot.hidden = true;
-            slot.textContent = '';
-          }
+          if (input.classList.contains('is-invalid')) showCurrentError();
         });
       });
 

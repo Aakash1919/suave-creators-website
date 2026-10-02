@@ -300,6 +300,7 @@ class ContactModalTest extends TestCase
             'email' => 'avery@example.com',
             'company' => 'Northwind',
             'service' => 'custom-crm',
+            'budget' => 'Not sure yet',
             'message' => 'We need a CRM that replaces our spreadsheet pipeline.',
             'inquiry' => 'project-estimate',
             'form_started_at' => time() - 10,
@@ -355,5 +356,52 @@ class ContactModalTest extends TestCase
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['expertise', 'support_type']);
+    }
+
+    public function test_homepage_dialogs_reject_a_too_short_name_and_company(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'S',
+            'email' => 'sam@example.com',
+            'company' => 'L',
+            'service' => 'hire-developers',
+            'inquiry' => 'hire-developers',
+            'expertise' => 'Laravel / PHP',
+            'support_type' => 'Dedicated Developer',
+            'message' => 'We need a senior Laravel developer for our billing portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['name', 'company']);
+    }
+
+    public function test_homepage_dialogs_require_company_and_a_selected_dropdown(): void
+    {
+        $estimate = $this->postJson(route('contact-us.store'), [
+            'name' => 'Avery Chen',
+            'email' => 'avery@example.com',
+            'service' => 'custom-crm',
+            'message' => 'We need a CRM that replaces our spreadsheet pipeline.',
+            'inquiry' => 'project-estimate',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $estimate->assertStatus(422);
+        $estimate->assertJsonValidationErrors(['company', 'budget']);
+
+        $hire = $this->postJson(route('contact-us.store'), [
+            'name' => 'Sam Patel',
+            'email' => 'sam@example.com',
+            'service' => 'hire-developers',
+            'inquiry' => 'hire-developers',
+            'expertise' => 'Laravel / PHP',
+            'support_type' => 'Dedicated Developer',
+            'message' => 'We need a senior Laravel developer for our billing portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $hire->assertStatus(422);
+        $hire->assertJsonValidationErrors(['company', 'start_when']);
     }
 }
