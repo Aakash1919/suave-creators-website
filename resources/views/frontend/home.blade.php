@@ -693,11 +693,6 @@
 
 @php
   $homeOffice = \App\Support\Frontend\ContactSupport::offices()[0] ?? [];
-  $homeEstimateServices = \App\Support\Frontend\ContactSupport::projectEstimateServices();
-  $homeEstimateBudgets = \App\Support\Frontend\ContactSupport::projectEstimateBudgets();
-  $homeHireExpertise = \App\Support\Frontend\ContactSupport::hireExpertiseOptions();
-  $homeHireSupport = \App\Support\Frontend\ContactSupport::hireSupportOptions();
-  $homeHireStart = \App\Support\Frontend\ContactSupport::hireStartOptions();
 @endphp
 <section id="home-final" class="home-final full-bleed bg-cover bg-top bg-no-repeat" aria-labelledby="home-final-title" style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}');">
   <div class="section-inner site-container">
@@ -719,7 +714,7 @@
             <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Get initial scope, timeline and estimated cost</li>
             <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>No obligation, just expert guidance</li>
           </ul>
-          <button type="button" class="home-final__cta" data-home-dialog-open="home-estimate-dialog" aria-haspopup="dialog" aria-controls="home-estimate-dialog">
+          <button type="button" class="home-final__cta" data-inquiry-dialog-open="project-estimate-dialog" aria-haspopup="dialog" aria-controls="project-estimate-dialog">
             Get an Estimate
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -735,7 +730,7 @@
             <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Get suitable developer options</li>
             <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Flexible engagement models</li>
           </ul>
-          <button type="button" class="home-final__cta" data-home-dialog-open="home-hire-dialog" aria-haspopup="dialog" aria-controls="home-hire-dialog">
+          <button type="button" class="home-final__cta" data-inquiry-dialog-open="hire-developers-dialog" aria-haspopup="dialog" aria-controls="hire-developers-dialog">
             Hire Developers
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -772,182 +767,9 @@
   </div>
 </section>
 
-{{-- Body-level so the footer cannot paint over the scrolling dialog. --}}
-@push('fixed-widgets')
-<div id="home-estimate-dialog" class="home-final__dialog" role="dialog" aria-modal="true" aria-labelledby="home-estimate-title" hidden data-home-dialog>
-    <button type="button" class="home-final__backdrop" data-home-dialog-close aria-label="Close project estimate dialog"></button>
-    <div class="home-final__dialog-card">
-      <button type="button" class="home-final__dialog-close" data-home-dialog-close aria-label="Close">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-      <div class="home-final__dialog-body">
-        <div class="home-final__dialog-head">
-          <div class="home-final__icon" aria-hidden="true">
-            <img src="{{ asset('assets/product/document.png') }}" alt="Project estimate document icon for custom software quotes at Suave Creators" title="Project estimate document icon for custom software quotes at Suave Creators" width="31" height="28" decoding="async" loading="lazy">
-          </div>
-          <div>
-            <h3 id="home-estimate-title">Get a Project Estimate</h3>
-            <p>Share a few project details for an initial scope, timeline, and cost.</p>
-          </div>
-        </div>
-        <form id="home-estimate-form" class="home-final__form" action="{{ route('contact-us.store') }}" method="POST" data-home-request-form data-draft-url="{{ route('contact-us.draft') }}" novalidate>
-          @csrf
-          <input type="hidden" name="draft_token" value="" data-home-draft-token>
-          <input type="hidden" name="form_started_at" value="{{ time() }}">
-          <input type="hidden" name="inquiry" value="project-estimate">
-          <div class="home-final__honeypot" aria-hidden="true">
-            <input type="text" name="website" tabindex="-1" autocomplete="off">
-          </div>
-          <div class="home-final__row">
-            <label class="home-final__field">
-              <span>Name <abbr title="required">*</abbr></span>
-              <input type="text" name="name" autocomplete="name" maxlength="120" placeholder="Enter your name" required>
-              <small data-error-for="name" hidden></small>
-            </label>
-            <label class="home-final__field">
-              <span>Work Email <abbr title="required">*</abbr></span>
-              <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
-              <small data-error-for="email" hidden></small>
-            </label>
-          </div>
-          <div class="home-final__row">
-            <label class="home-final__field">
-              <span>Company <abbr title="required">*</abbr></span>
-              <input type="text" name="company" autocomplete="organization" maxlength="120" placeholder="Company name" required>
-              <small data-error-for="company" hidden></small>
-            </label>
-            <label class="home-final__field">
-              <span>What do you need an estimate for? <abbr title="required">*</abbr></span>
-              <select name="service" required>
-                <option value="">Select an option</option>
-                @foreach ($homeEstimateServices as $value => $label)
-                  <option value="{{ $value }}">{{ $label }}</option>
-                @endforeach
-              </select>
-              <small data-error-for="service" hidden></small>
-            </label>
-          </div>
-          <label class="home-final__field">
-            <span>Tell us about your project <abbr title="required">*</abbr></span>
-            <textarea name="message" rows="4" maxlength="5000" required placeholder="Briefly describe what you want to build, the problem you're solving, or the key features you need."></textarea>
-            <small data-error-for="message" hidden></small>
-          </label>
-          <label class="home-final__field">
-            <span>Estimated Budget <abbr title="required">*</abbr></span>
-            <select name="budget" required>
-              <option value="">Select budget range</option>
-              @foreach ($homeEstimateBudgets as $budget)
-                <option value="{{ $budget }}">{{ $budget }}</option>
-              @endforeach
-            </select>
-            <small data-error-for="budget" hidden></small>
-          </label>
-          <p class="home-final__status" data-home-request-status hidden></p>
-          <button type="submit" class="home-final__submit">
-            Get My Estimate
-            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <p class="home-final__fine">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="11" width="12" height="8.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 11V8.6a3.5 3.5 0 0 1 7 0V11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            Your information is confidential. NDA available on request.
-          </p>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="home-hire-dialog" class="home-final__dialog home-final__dialog--hire" role="dialog" aria-modal="true" aria-labelledby="home-hire-title" hidden data-home-dialog>
-    <button type="button" class="home-final__backdrop" data-home-dialog-close aria-label="Close hire developers dialog"></button>
-    <div class="home-final__dialog-card">
-      <button type="button" class="home-final__dialog-close" data-home-dialog-close aria-label="Close">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-      <div class="home-final__dialog-body">
-        <div class="home-final__dialog-head">
-          <div class="home-final__icon" aria-hidden="true">
-            <img src="{{ asset('assets/team/teamwork-icon.svg') }}" alt="Teamwork icon for hiring dedicated software developers at Suave Creators" title="Teamwork icon for hiring dedicated software developers at Suave Creators" width="25" height="20" decoding="async" loading="lazy">
-          </div>
-          <div>
-            <h3 id="home-hire-title">Hire the Right Developers</h3>
-            <p>Tell us the skills you need and we'll suggest developer options.</p>
-          </div>
-        </div>
-        <form id="home-hire-form" class="home-final__form" action="{{ route('contact-us.store') }}" method="POST" data-home-request-form data-draft-url="{{ route('contact-us.draft') }}" novalidate>
-          @csrf
-          <input type="hidden" name="draft_token" value="" data-home-draft-token>
-          <input type="hidden" name="form_started_at" value="{{ time() }}">
-          <input type="hidden" name="inquiry" value="hire-developers">
-          <input type="hidden" name="service" value="hire-developers">
-          <div class="home-final__honeypot" aria-hidden="true">
-            <input type="text" name="website" tabindex="-1" autocomplete="off">
-          </div>
-          <div class="home-final__row">
-            <label class="home-final__field">
-              <span>Name <abbr title="required">*</abbr></span>
-              <input type="text" name="name" autocomplete="name" maxlength="120" placeholder="Enter your name" required>
-              <small data-error-for="name" hidden></small>
-            </label>
-            <label class="home-final__field">
-              <span>Work Email <abbr title="required">*</abbr></span>
-              <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
-              <small data-error-for="email" hidden></small>
-            </label>
-          </div>
-          <div class="home-final__row">
-            <label class="home-final__field">
-              <span>Company <abbr title="required">*</abbr></span>
-              <input type="text" name="company" autocomplete="organization" maxlength="120" placeholder="Company name" required>
-              <small data-error-for="company" hidden></small>
-            </label>
-            <label class="home-final__field">
-              <span>What expertise do you need? <abbr title="required">*</abbr></span>
-              <select name="expertise" required>
-                <option value="">Select skills</option>
-                @foreach ($homeHireExpertise as $expertise)
-                  <option value="{{ $expertise }}">{{ $expertise }}</option>
-                @endforeach
-              </select>
-              <small data-error-for="expertise" hidden></small>
-            </label>
-          </div>
-          <div class="home-final__row">
-            <label class="home-final__field">
-              <span>What kind of support do you need? <abbr title="required">*</abbr></span>
-              <select name="support_type" required>
-                <option value="">Select an option</option>
-                @foreach ($homeHireSupport as $support)
-                  <option value="{{ $support }}">{{ $support }}</option>
-                @endforeach
-              </select>
-              <small data-error-for="support_type" hidden></small>
-            </label>
-            <label class="home-final__field">
-              <span>When do you need to start? <abbr title="required">*</abbr></span>
-              <select name="start_when" required>
-                <option value="">Select an option</option>
-                @foreach ($homeHireStart as $start)
-                  <option value="{{ $start }}">{{ $start }}</option>
-                @endforeach
-              </select>
-              <small data-error-for="start_when" hidden></small>
-            </label>
-          </div>
-          <label class="home-final__field">
-            <span>Tell us about your requirement <abbr title="required">*</abbr></span>
-            <textarea name="message" rows="4" maxlength="5000" required placeholder="Tell us about the project, required skills, responsibilities, or technical requirements."></textarea>
-            <small data-error-for="message" hidden></small>
-          </label>
-          <p class="home-final__status" data-home-request-status hidden></p>
-          <button type="submit" class="home-final__submit">
-            Request Developer Options
-            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <p class="home-final__fine">NDA available on request · Flexible engagement models · Response within 1 business day.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-@endpush
+{{-- Body-level inquiry dialogs (estimate + hire). --}}
+<x-frontend.modal.project-estimate-modal />
+<x-frontend.modal.hire-developers-modal />
 
 <!-- Partnerships Section Start -->
 <x-frontend.partnerships-section eyebrow="Trusted by teams at" :items="$partnerMarqueeItems" />
@@ -1706,14 +1528,12 @@ a.digital-marketing-card {
   height: 28px;
 }
 
-.home-final__offer--estimate .home-final__icon,
-.home-final__dialog:not(.home-final__dialog--hire) .home-final__icon {
+.home-final__offer--estimate .home-final__icon {
   background: #eaf0ff;
   color: #2f62ff;
 }
 
-.home-final__offer--hire .home-final__icon,
-.home-final__dialog--hire .home-final__icon {
+.home-final__offer--hire .home-final__icon {
   background: #f3edff;
   color: #7c4dff;
 }
@@ -1774,8 +1594,7 @@ a.digital-marketing-card {
   color: #7c4dff;
 }
 
-.home-final__cta,
-.home-final__submit {
+.home-final__cta {
   align-items: center;
   border: 0;
   border-radius: 12px;
@@ -1791,7 +1610,6 @@ a.digital-marketing-card {
 }
 
 .home-final__cta svg,
-.home-final__submit svg,
 .home-final__direct a svg {
   height: 16px;
   width: 16px;
@@ -1802,25 +1620,21 @@ a.digital-marketing-card {
   width: 100%;
 }
 
-.home-final__offer--estimate .home-final__cta,
-.home-final__dialog:not(.home-final__dialog--hire) .home-final__submit {
+.home-final__offer--estimate .home-final__cta {
   background: #2f62ff;
   box-shadow: 0 8px 18px rgba(47, 98, 255, 0.22);
 }
 
-.home-final__offer--hire .home-final__cta,
-.home-final__dialog--hire .home-final__submit {
+.home-final__offer--hire .home-final__cta {
   background: #7c4dff;
   box-shadow: 0 8px 18px rgba(124, 77, 255, 0.22);
 }
 
-.home-final__offer--estimate .home-final__cta:hover,
-.home-final__dialog:not(.home-final__dialog--hire) .home-final__submit:hover {
+.home-final__offer--estimate .home-final__cta:hover {
   background: #2454f0;
 }
 
-.home-final__offer--hire .home-final__cta:hover,
-.home-final__dialog--hire .home-final__submit:hover {
+.home-final__offer--hire .home-final__cta:hover {
   background: #6b3cf0;
 }
 
@@ -1898,263 +1712,9 @@ a.digital-marketing-card {
   width: 16px;
 }
 
-.home-final__dialog {
-  align-items: center;
-  display: flex;
-  inset: 0;
-  justify-content: center;
-  overscroll-behavior: none;
-  padding: 16px;
-  position: fixed;
-  z-index: 13000;
-}
-
-.home-final__dialog[hidden] {
-  display: none !important;
-}
-
-.home-final__backdrop {
-  background: rgba(8, 12, 40, 0.48);
-  border: 0;
-  cursor: pointer;
-  inset: 0;
-  position: absolute;
-}
-
-.home-final__dialog-card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.24);
-  max-height: min(92vh, 860px);
-  max-width: 560px;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  z-index: 1;
-}
-
-.home-final__dialog-close {
-  align-items: center;
-  background: transparent;
-  border: 0;
-  color: #94a3b8;
-  cursor: pointer;
-  display: grid;
-  height: 36px;
-  place-items: center;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  width: 36px;
-  z-index: 2;
-}
-
-.home-final__dialog-close svg {
-  height: 16px;
-  width: 16px;
-}
-
-.home-final__dialog-close:hover {
-  color: #334155;
-}
-
-.home-final__dialog-body {
-  background: #fff;
-  max-height: min(92vh, 860px);
-  overflow: auto;
-  overscroll-behavior: contain;
-  padding: 24px 20px 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.home-final__dialog-head {
-  display: flex;
-  gap: 12px;
-  padding-right: 28px;
-}
-
-.home-final__dialog-head .home-final__icon {
-  flex-shrink: 0;
-  height: 44px;
-  width: 44px;
-}
-
-.home-final__dialog--hire .home-final__dialog-head .home-final__icon img {
-  height: 18px;
-}
-
-.home-final__dialog:not(.home-final__dialog--hire) .home-final__dialog-head .home-final__icon img {
-  height: 26px;
-}
-
-.home-final__dialog-head h3 {
-  color: #0b1036;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.home-final__dialog-head p {
-  color: #64748b;
-  font-size: 13px;
-  line-height: 1.55;
-  margin: 6px 0 0;
-}
-
-.home-final__form {
-  display: grid;
-  gap: 14px;
-  margin-top: 18px;
-  position: relative;
-}
-
-.home-final__row {
-  display: grid;
-  gap: 14px;
-  grid-template-columns: 1fr;
-  min-width: 0;
-}
-
-.home-final__honeypot {
-  left: -9999px;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-}
-
-.home-final__field {
-  display: grid;
-  gap: 6px;
-  min-width: 0;
-}
-
-.home-final__field span {
-  color: #1e293b;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.home-final__field abbr {
-  color: #ef4444;
-  text-decoration: none;
-}
-
-.home-final__field input,
-.home-final__field select,
-.home-final__field textarea {
-  background-color: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  color: #0f172a;
-  font: inherit;
-  font-size: 14px;
-  padding: 11px 14px;
-  width: 100%;
-}
-
-.home-final__field textarea {
-  min-height: 104px;
-  resize: vertical;
-}
-
-.home-final__field select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2364748B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-position: right 14px center;
-  background-repeat: no-repeat;
-  padding-right: 36px;
-}
-
-.home-final__field input::placeholder,
-.home-final__field textarea::placeholder {
-  color: #94a3b8;
-}
-
-.home-final__field input:focus,
-.home-final__field select:focus,
-.home-final__field textarea:focus {
-  border-color: #2a4dfb;
-  box-shadow: 0 0 0 4px rgba(42, 77, 251, 0.12);
-  outline: none;
-}
-
-.home-final__dialog--hire .home-final__field input:focus,
-.home-final__dialog--hire .home-final__field select:focus,
-.home-final__dialog--hire .home-final__field textarea:focus {
-  border-color: #7a5ff8;
-  box-shadow: 0 0 0 4px rgba(122, 95, 248, 0.14);
-}
-
-.home-final__field .is-invalid,
-.home-final__field input.is-invalid:focus,
-.home-final__field select.is-invalid:focus,
-.home-final__field textarea.is-invalid:focus,
-.home-final__dialog--hire .home-final__field input.is-invalid:focus,
-.home-final__dialog--hire .home-final__field select.is-invalid:focus,
-.home-final__dialog--hire .home-final__field textarea.is-invalid:focus {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
-}
-
-.home-final__field small {
-  color: #dc2626;
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.home-final__submit {
-  width: 100%;
-}
-
-.home-final__submit:disabled {
-  cursor: not-allowed;
-  opacity: 0.75;
-}
-
-.home-final__fine,
-.home-final__status {
-  color: #64748b;
-  font-size: 12px;
-  line-height: 1.45;
-  margin: 0;
-  text-align: center;
-}
-
-.home-final__fine {
-  align-items: center;
-  display: flex;
-  gap: 6px;
-  justify-content: center;
-}
-
-.home-final__fine svg {
-  flex-shrink: 0;
-  height: 14px;
-  width: 14px;
-}
-
-.home-final__status:not([hidden]) {
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.home-final__status.is-error {
-  color: #dc2626;
-}
-
 @media (min-width: 640px) {
   .home-final__panel {
     padding: 56px 40px 36px;
-  }
-
-  .home-final__row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .home-final__dialog-body {
-    padding: 28px 28px 22px;
   }
 }
 
@@ -2912,324 +2472,5 @@ a.digital-marketing-card {
       }
     });
   });
-</script>
-<script>
-  (function () {
-    var dialogs = document.querySelectorAll('[data-home-dialog]');
-    if (!dialogs.length) return;
-
-    var csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-    var openDialog = null;
-    var lastTrigger = null;
-    var requiredMessages = {
-      name: 'Please enter your name.',
-      email: 'Please enter your work email.',
-      service: 'Please select an option.',
-      message: 'Please tell us about your request.',
-      company: 'Please enter your company name.',
-      expertise: 'Please select the expertise you need.',
-      support_type: 'Please select the kind of support you need.',
-      budget: 'Please select a budget range.',
-      start_when: 'Please select when you need to start.'
-    };
-
-    function focusable(dialog) {
-      return Array.prototype.filter.call(dialog.querySelectorAll('button, a[href], input, select, textarea'), function (el) {
-        return !el.disabled && el.tabIndex !== -1 && !el.closest('.home-final__honeypot');
-      });
-    }
-
-    function openHomeDialog(id, trigger) {
-      var dialog = document.getElementById(id);
-      if (!dialog) return;
-      if (openDialog && openDialog !== dialog) {
-        openDialog.hidden = true;
-      }
-      dialog.hidden = false;
-      document.body.style.overflow = 'hidden';
-      openDialog = dialog;
-      lastTrigger = trigger || null;
-      var field = dialog.querySelector('input[name="name"]');
-      if (field) field.focus();
-    }
-
-    function closeHomeDialog(dialog) {
-      if (!dialog) return;
-      dialog.hidden = true;
-      if (openDialog === dialog) {
-        openDialog = null;
-        document.body.style.overflow = '';
-      }
-      if (lastTrigger) {
-        lastTrigger.focus();
-        lastTrigger = null;
-      }
-    }
-
-    document.querySelectorAll('[data-home-dialog-open]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        openHomeDialog(button.getAttribute('data-home-dialog-open'), button);
-      });
-    });
-
-    document.addEventListener('click', function (event) {
-      var trigger = event.target.closest('[data-open-contact-modal], a[href="#contact-modal"]');
-      if (!trigger || trigger.closest('[data-home-dialog]')) return;
-      var service = trigger.getAttribute('data-service') || 'custom-software';
-      var hire = service === 'hire-developers';
-      event.preventDefault();
-      event.stopPropagation();
-      openHomeDialog(hire ? 'home-hire-dialog' : 'home-estimate-dialog', trigger);
-      if (!hire) {
-        var select = document.querySelector('#home-estimate-form [name="service"]');
-        if (select) {
-          var matched = Array.prototype.some.call(select.options, function (option) {
-            return option.value === service;
-          });
-          select.value = matched ? service : '';
-        }
-      }
-    }, true);
-
-    dialogs.forEach(function (dialog) {
-      dialog.querySelectorAll('[data-home-dialog-close]').forEach(function (button) {
-        button.addEventListener('click', function () {
-          closeHomeDialog(dialog);
-        });
-      });
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (!openDialog) return;
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeHomeDialog(openDialog);
-        return;
-      }
-      if (event.key !== 'Tab') return;
-      var items = focusable(openDialog);
-      if (!items.length) return;
-      var first = items[0];
-      var last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    });
-
-    function clearErrors(form) {
-      form.querySelectorAll('[data-error-for]').forEach(function (slot) {
-        slot.hidden = true;
-        slot.textContent = '';
-      });
-      form.querySelectorAll('.is-invalid').forEach(function (field) {
-        field.classList.remove('is-invalid');
-        field.removeAttribute('aria-invalid');
-      });
-    }
-
-    function showFieldError(form, name, message) {
-      var field = form.elements[name];
-      var slot = form.querySelector('[data-error-for="' + name + '"]');
-      if (field && field.classList) {
-        field.classList.add('is-invalid');
-        field.setAttribute('aria-invalid', 'true');
-      }
-      if (slot) {
-        slot.hidden = false;
-        slot.textContent = message;
-      }
-    }
-
-    function clearFieldError(form, name) {
-      var field = form.elements[name];
-      var slot = form.querySelector('[data-error-for="' + name + '"]');
-      if (field && field.classList) {
-        field.classList.remove('is-invalid');
-        field.removeAttribute('aria-invalid');
-      }
-      if (slot) {
-        slot.hidden = true;
-        slot.textContent = '';
-      }
-    }
-
-    function optionAllowed(field, value) {
-      return Array.prototype.some.call(field.options, function (option) {
-        return option.value === value;
-      });
-    }
-
-    function fieldMessage(field) {
-      if (!field || !field.name || field.type === 'hidden' || field.closest('.home-final__honeypot')) return '';
-      var value = String(field.value || '').trim();
-      var max = field.maxLength > 0 ? field.maxLength : 0;
-      if ((field.required || field.tagName === 'SELECT') && value === '') {
-        return requiredMessages[field.name] || 'Please complete this field.';
-      }
-      if (value === '') return '';
-      if (max && value.length > max) {
-        return 'Please use ' + max + ' characters or fewer.';
-      }
-      if (field.name === 'name' && value.length < 2) {
-        return 'Please enter your full name.';
-      }
-      if (field.name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        return 'Please enter a valid email address.';
-      }
-      if (field.name === 'company' && value.length < 2) {
-        return 'Please enter your company name.';
-      }
-      if (field.name === 'message' && value.length < 10) {
-        return 'Please write at least 10 characters about your request.';
-      }
-      if (field.tagName === 'SELECT' && !optionAllowed(field, value)) {
-        if (field.name === 'budget') return 'Please select a valid budget range.';
-        if (field.name === 'start_when') return 'Please select a valid start time.';
-        if (field.name === 'expertise') return 'Please select a valid expertise.';
-        if (field.name === 'support_type') return 'Please select a valid support type.';
-        return 'Please select a valid option.';
-      }
-      return '';
-    }
-
-    function clientErrors(form) {
-      var errors = {};
-      form.querySelectorAll('.home-final__field input, .home-final__field select, .home-final__field textarea').forEach(function (field) {
-        var message = fieldMessage(field);
-        if (message) errors[field.name] = [message];
-      });
-      return errors;
-    }
-
-    function applyErrors(form, errors) {
-      clearErrors(form);
-      var statusEl = form.querySelector('[data-home-request-status]');
-      var unmatched = [];
-      Object.keys(errors).forEach(function (name) {
-        var message = errors[name][0];
-        if (form.querySelector('[data-error-for="' + name + '"]')) {
-          showFieldError(form, name, message);
-        } else {
-          unmatched.push(message);
-        }
-      });
-      if (statusEl) {
-        statusEl.classList.toggle('is-error', unmatched.length > 0);
-        statusEl.hidden = unmatched.length === 0;
-        statusEl.textContent = unmatched[0] || '';
-      }
-      var firstInvalid = form.querySelector('.is-invalid');
-      if (firstInvalid) firstInvalid.focus();
-    }
-
-    document.querySelectorAll('[data-home-request-form]').forEach(function (form) {
-      var tokenInput = form.querySelector('[data-home-draft-token]');
-      var statusEl = form.querySelector('[data-home-request-status]');
-      var draftTimer = null;
-
-      function scheduleDraft() {
-        window.clearTimeout(draftTimer);
-        draftTimer = window.setTimeout(saveDraft, 900);
-      }
-
-      function saveDraft() {
-        var body = new FormData(form);
-        var name = String(body.get('name') || '').trim();
-        var email = String(body.get('email') || '').trim();
-        if (name === '' && email === '') return;
-
-        fetch(form.getAttribute('data-draft-url'), {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-TOKEN': csrf
-          },
-          body: body,
-          credentials: 'same-origin'
-        }).then(function (response) {
-          return response.json();
-        }).then(function (data) {
-          if (data && data.draft_token && tokenInput) {
-            tokenInput.value = data.draft_token;
-          }
-        }).catch(function () {});
-      }
-
-      form.querySelectorAll('.home-final__field input, .home-final__field select, .home-final__field textarea').forEach(function (input) {
-        function showCurrentError() {
-          var message = fieldMessage(input);
-          if (message) showFieldError(form, input.name, message);
-          else clearFieldError(form, input.name);
-        }
-        input.addEventListener('change', function () {
-          showCurrentError();
-          scheduleDraft();
-        });
-        input.addEventListener('blur', function () {
-          showCurrentError();
-          scheduleDraft();
-        });
-        input.addEventListener('input', function () {
-          if (input.classList.contains('is-invalid')) showCurrentError();
-        });
-      });
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var errors = clientErrors(form);
-        if (Object.keys(errors).length) {
-          applyErrors(form, errors);
-          return;
-        }
-        clearErrors(form);
-        var submitBtn = form.querySelector('[type="submit"]');
-        if (submitBtn) submitBtn.disabled = true;
-
-        fetch(form.action, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-TOKEN': csrf
-          },
-          body: new FormData(form),
-          credentials: 'same-origin'
-        }).then(async function (response) {
-          var data = await response.json().catch(function () { return {}; });
-          if (submitBtn) submitBtn.disabled = false;
-          if (response.status === 422) {
-            applyErrors(form, data.errors || {});
-            if (statusEl && !form.querySelector('.is-invalid')) {
-              statusEl.hidden = false;
-              statusEl.classList.add('is-error');
-              statusEl.textContent = data.message || 'Please check the form and try again.';
-            }
-            return;
-          }
-          if (!statusEl) return;
-          statusEl.hidden = false;
-          statusEl.classList.toggle('is-error', !response.ok || data.success === false);
-          if (!response.ok || data.success === false) {
-            statusEl.textContent = data.message || 'Unable to submit request. Please try again.';
-            return;
-          }
-          statusEl.textContent = data.message || 'The request has been sent successfully.';
-          form.reset();
-          if (tokenInput) tokenInput.value = '';
-        }).catch(function () {
-          if (submitBtn) submitBtn.disabled = false;
-          if (!statusEl) return;
-          statusEl.hidden = false;
-          statusEl.classList.add('is-error');
-          statusEl.textContent = 'Unable to submit request. Please try again.';
-        });
-      });
-    });
-  })();
 </script>
 @endpush

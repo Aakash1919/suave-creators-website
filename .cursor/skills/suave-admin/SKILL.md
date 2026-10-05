@@ -10,7 +10,7 @@ description: >-
   route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
   Permission. Read before any admin change.
 metadata:
-  last-updated: "2026-09-30"
+  last-updated: "2026-10-05"
 ---
 
 # Suave Admin
@@ -145,6 +145,7 @@ Keep controllers thin: HTTP + `adminSuccess`/`adminError` only. Shared RBAC help
 - **Admin forms are full width by default** — do not add `max-width` / narrow card constraints on create/edit forms unless the user explicitly asks for a constrained layout
 - **Page vs modal (required before building UI):** When adding or changing create / edit / other mutation UX, **ask the user** whether they want a **full page** or a **modal** (unless they already specified). Do not assume. Testimonials and blog categories use modal create/edit on the index page (`admin/testimonials/partials/form-modal.blade.php`, `admin/blog-categories/partials/form-modal.blade.php` + `.admin-modal*` in `admin.css` + `SuaveAdmin.openAdminModal` / `closeAdminModal`). Page forms stay under `admin/{feature}/form.blade.php`.
 - **List pages:** use `<x-admin.datatable>` (`App\View\Components\Admin\Datatable`) for the table shell — page head + Tailwind toolbar (search + always-visible `filters` slot / `<details>` sort & column menus) + table + rows-per-page footer. Slots: `actions`, `filters`. Pass `:columns`, optional `:sort-options`
+- **Password inputs:** use `<x-admin.password-field />` (`App\View\Components\Admin\PasswordField`) on login, profile change-password, and user create/edit — eye toggle shows/hides the value (`admin-password-field` in `admin.css`)
 - Row kebab menus: `App\Support\Admin\DataTableActions::menu([...])` — native `<details>` + `.admin-table__action-menu*` in `admin.css` (no Tailwind-in-PHP strings; no dropdown JS). Open menus lift scroll overflow via `:has(.admin-table__action-menu[open])`; last row flips the panel upward
 - `SuaveAdmin.initDataTable` only wires search/sort/column visibility to Yajra; open/close is CSS/native
 - Gate sidebar links with `$user->hasPermission(...)`

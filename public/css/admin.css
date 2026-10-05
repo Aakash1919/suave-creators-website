@@ -1149,6 +1149,46 @@ body:has(.admin-messenger) {
   box-shadow: 0 0 0 3px rgba(var(--admin-primary-rgb), 0.15);
 }
 
+.admin-password-field {
+  display: block;
+  width: 100%;
+}
+
+.admin-password-field__control {
+  position: relative;
+}
+
+.admin-password-field__input {
+  padding-right: 2.65rem;
+}
+
+.admin-password-field__toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  height: 2.15rem;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: 0.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.15rem;
+}
+
+.admin-password-field__toggle:hover,
+.admin-password-field__toggle:focus-visible {
+  color: var(--admin-text);
+  outline: none;
+}
+
+.admin-password-field__toggle i {
+  font-size: 0.9rem;
+}
+
 .admin-check {
   display: inline-flex;
   align-items: center;

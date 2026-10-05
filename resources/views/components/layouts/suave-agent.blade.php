@@ -109,6 +109,7 @@
         }
 
         var STORAGE_KEY = 'suave_agent_session_v1';
+        var AUTO_OPEN_KEY = 'suave_agent_auto_open_v1';
         var MARKED_SRC = 'https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js';
         var markedLoading = null;
         var toggle = root.querySelector('[data-suave-agent-toggle]');
@@ -304,9 +305,28 @@
 
         var autoOpenDismissed = false;
 
+        function hasAutoOpenedThisSession() {
+          try {
+            return sessionStorage.getItem(AUTO_OPEN_KEY) === '1';
+          } catch (e) {
+            return false;
+          }
+        }
+
+        function markAutoOpenDone() {
+          autoOpenDismissed = true;
+          try {
+            sessionStorage.setItem(AUTO_OPEN_KEY, '1');
+          } catch (e) {}
+        }
+
+        if (hasAutoOpenedThisSession()) {
+          autoOpenDismissed = true;
+        }
+
         toggle.addEventListener('click', function () {
           var open = panel.hidden;
-          if (!open) autoOpenDismissed = true;
+          markAutoOpenDone();
           setOpen(open);
           if (open) {
             ensureMarked();
@@ -322,7 +342,7 @@
         }
 
         closeBtn.addEventListener('click', function () {
-          autoOpenDismissed = true;
+          markAutoOpenDone();
           setOpen(false);
         });
 
@@ -649,6 +669,7 @@
             conversation_id: data.conversation_id
           };
           saveSession();
+          markAutoOpenDone();
           setOpen(true);
           showChat();
           messagesEl.innerHTML = '';
@@ -664,15 +685,18 @@
 
         window.SuaveAgent = {
           open: function () {
+            markAutoOpenDone();
             setOpen(true);
             ensureMarked();
             resumeIfPossible(false);
           },
           close: function () {
+            markAutoOpenDone();
             setOpen(false);
           },
           startWithSession: startWithSession,
           startWithContact: async function (contact, name) {
+            markAutoOpenDone();
             setOpen(true);
             showChat();
             messagesEl.innerHTML = '';
@@ -707,9 +731,13 @@
         };
 
         function scheduleAutoOpen() {
+          if (hasAutoOpenedThisSession() || autoOpenDismissed) return;
           window.setTimeout(function () {
-            if (autoOpenDismissed || !panel.hidden) return;
-            window.SuaveAgent.open();
+            if (autoOpenDismissed || !panel.hidden || hasAutoOpenedThisSession()) return;
+            markAutoOpenDone();
+            setOpen(true);
+            ensureMarked();
+            resumeIfPossible(false);
           }, 5000);
         }
 

@@ -48,18 +48,27 @@
         </div>
       </div>
       <div class="admin-card__body space-y-4">
-        <div>
-          <label class="admin-label">Current password</label>
-          <input type="password" name="current_password" required class="admin-input" autocomplete="current-password">
-        </div>
-        <div>
-          <label class="admin-label">New password</label>
-          <input type="password" name="password" required class="admin-input" autocomplete="new-password">
-        </div>
-        <div>
-          <label class="admin-label">Confirm password</label>
-          <input type="password" name="password_confirmation" required class="admin-input" autocomplete="new-password">
-        </div>
+        <x-admin.password-field
+          name="current_password"
+          id="current_password"
+          label="Current password"
+          required
+          autocomplete="current-password"
+        />
+        <x-admin.password-field
+          name="password"
+          id="new_password"
+          label="New password"
+          required
+          autocomplete="new-password"
+        />
+        <x-admin.password-field
+          name="password_confirmation"
+          id="password_confirmation"
+          label="Confirm password"
+          required
+          autocomplete="new-password"
+        />
         <div class="admin-form-actions">
           <button type="submit" class="admin-btn admin-btn--primary">
             <i class="fa-solid fa-key" aria-hidden="true"></i>

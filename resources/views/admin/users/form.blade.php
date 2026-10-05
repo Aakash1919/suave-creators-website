@@ -42,10 +42,12 @@
         <label class="admin-label">Email</label>
         <input type="email" name="email" value="{{ old('email', $user->email) }}" required class="admin-input">
       </div>
-      <div>
-        <label class="admin-label">Password {{ $user->exists ? '(leave blank to keep)' : '' }}</label>
-        <input type="password" name="password" @required(! $user->exists) class="admin-input" autocomplete="new-password">
-      </div>
+      <x-admin.password-field
+        name="password"
+        :label="$user->exists ? 'Password (leave blank to keep)' : 'Password'"
+        :required="! $user->exists"
+        autocomplete="new-password"
+      />
       <div>
         <label class="admin-label" for="user-role">Role</label>
         <select id="user-role" name="role" class="admin-select">
