@@ -28,7 +28,7 @@ return [
 
     'retired_hosts' => array_values(array_filter(array_map(
         'trim',
-        explode(',', (string) env('SEO_RETIRED_HOSTS', 'turbo.suavecreators.com'))
+        explode(',', (string) env('SEO_RETIRED_HOSTS', 'turbo.suavecreators.com,backend.suavecreators.com'))
     ))),
 
     /*
