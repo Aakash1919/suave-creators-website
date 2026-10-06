@@ -56,8 +56,12 @@ class ContactModalTest extends TestCase
         $response = $this->get(route('home'));
 
         $response->assertOk();
-        $response->assertSee('Schedule a Call');
+        $response->assertSee('Get a Scoped Estimate');
+        $response->assertDontSee('Send My Request', false);
+        $response->assertSee('production platforms delivered since 2021', false);
+        $response->assertSee('name="twitter:description" content="Custom CRM, ERP and web apps by senior developers. 100% code ownership, 2-week sprints."', false);
         $response->assertSee('data-open-contact-modal', false);
+        $response->assertSee('data-service="custom-software"', false);
         $response->assertDontSee('Claim Free Architecture Scoping Session', false);
         $response->assertDontSee('Book Direct via Google Calendar →', false);
     }
@@ -67,11 +71,10 @@ class ContactModalTest extends TestCase
         $response = $this->get(route('home'));
 
         $response->assertOk();
-        $response->assertSee('Get Started');
-        // Ensure Get Started button has data-open-contact-modal and links to #contact-modal
+        $response->assertSee('Get a Scoped Estimate');
         $content = $response->getContent();
         $this->assertMatchesRegularExpression(
-            '/<a[^>]*href=["\']#contact-modal["\'][^>]*data-open-contact-modal[^>]*>[\s\S]*?Get Started[\s\S]*?<\/a>/i',
+            '/<a[^>]*href=["\']#contact-modal["\'][^>]*data-open-contact-modal[^>]*>[\s\S]*?Get a Scoped Estimate[\s\S]*?<\/a>/i',
             $content
         );
     }
@@ -228,5 +231,177 @@ class ContactModalTest extends TestCase
         $response = $this->post(route('contact-us.store'), $payload);
 
         $response->assertRedirect(route('contact-us').'#contact-id');
+    }
+
+    public function test_homepage_request_form_accepts_budget_without_a_phone(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'Jordan Lee',
+            'email' => 'jordan@example.com',
+            'company' => 'Northwind',
+            'service' => 'hire-developers',
+            'budget' => 'Monthly team',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('success', true);
+
+        $stored = ContactRequest::query()->where('email', 'jordan@example.com')->first();
+        $this->assertNotNull($stored);
+        $this->assertSame('hire-developers', $stored->service);
+        $this->assertNull($stored->phone);
+        $this->assertStringContainsString('Budget: Monthly team', (string) $stored->message);
+        $this->assertStringContainsString('Need: Hire developers', (string) $stored->message);
+    }
+
+    public function test_contact_form_still_requires_a_phone_without_a_budget(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'Jordan Lee',
+            'email' => 'jordan@example.com',
+            'service' => 'custom-software',
+            'message' => 'Need a scoped estimate for a customer portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('phone');
+    }
+
+    public function test_homepage_final_section_offers_estimate_and_hire_dialogs(): void
+    {
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('Ready to Build or Scale', false);
+        $response->assertSee('Your Product?', false);
+        $response->assertSee('id="project-estimate-dialog"', false);
+        $response->assertSee('id="hire-developers-dialog"', false);
+        $html = $response->getContent();
+        $footerAt = strpos($html, 'site-footer');
+        $estimateAt = strpos($html, 'id="project-estimate-dialog"');
+        $hireAt = strpos($html, 'id="hire-developers-dialog"');
+        $this->assertNotFalse($footerAt);
+        $this->assertGreaterThan($footerAt, $estimateAt);
+        $this->assertGreaterThan($estimateAt, $hireAt);
+        $response->assertSee('data-inquiry-dialog-open="project-estimate-dialog"', false);
+        $response->assertSee('data-inquiry-dialog-open="hire-developers-dialog"', false);
+        $response->assertSee('Get an Estimate', false);
+        $response->assertSee('Get My Estimate', false);
+        $response->assertSee('Hire the Right Developers', false);
+        $response->assertSee('Request Developer Options', false);
+    }
+
+    public function test_project_estimate_dialog_accepts_a_request_without_a_phone(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'Avery Chen',
+            'email' => 'avery@example.com',
+            'company' => 'Northwind',
+            'service' => 'custom-crm',
+            'budget' => 'Not sure yet',
+            'message' => 'We need a CRM that replaces our spreadsheet pipeline.',
+            'inquiry' => 'project-estimate',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('success', true);
+
+        $stored = ContactRequest::query()->where('email', 'avery@example.com')->first();
+        $this->assertNotNull($stored);
+        $this->assertSame('custom-crm', $stored->service);
+        $this->assertNull($stored->phone);
+        $this->assertStringContainsString('spreadsheet pipeline', (string) $stored->message);
+    }
+
+    public function test_hire_dialog_accepts_a_request_without_a_phone_or_budget(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'Sam Patel',
+            'email' => 'sam@example.com',
+            'company' => 'Lumen',
+            'service' => 'hire-developers',
+            'inquiry' => 'hire-developers',
+            'expertise' => 'Laravel / PHP',
+            'support_type' => 'Dedicated Developer',
+            'start_when' => 'Within 1–2 weeks',
+            'message' => 'We need a senior Laravel developer for our billing portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('success', true);
+
+        $stored = ContactRequest::query()->where('email', 'sam@example.com')->first();
+        $this->assertNotNull($stored);
+        $this->assertSame('hire-developers', $stored->service);
+        $this->assertNull($stored->phone);
+        $this->assertStringContainsString('Expertise: Laravel / PHP', (string) $stored->message);
+        $this->assertStringContainsString('Support: Dedicated Developer', (string) $stored->message);
+        $this->assertStringContainsString('Start: Within 1–2 weeks', (string) $stored->message);
+    }
+
+    public function test_hire_dialog_requires_expertise_and_support_type(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'Sam Patel',
+            'email' => 'sam@example.com',
+            'service' => 'hire-developers',
+            'inquiry' => 'hire-developers',
+            'message' => 'We need a senior Laravel developer for our billing portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['expertise', 'support_type']);
+    }
+
+    public function test_homepage_dialogs_reject_a_too_short_name_and_company(): void
+    {
+        $response = $this->postJson(route('contact-us.store'), [
+            'name' => 'S',
+            'email' => 'sam@example.com',
+            'company' => 'L',
+            'service' => 'hire-developers',
+            'inquiry' => 'hire-developers',
+            'expertise' => 'Laravel / PHP',
+            'support_type' => 'Dedicated Developer',
+            'message' => 'We need a senior Laravel developer for our billing portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['name', 'company']);
+    }
+
+    public function test_homepage_dialogs_require_company_and_a_selected_dropdown(): void
+    {
+        $estimate = $this->postJson(route('contact-us.store'), [
+            'name' => 'Avery Chen',
+            'email' => 'avery@example.com',
+            'service' => 'custom-crm',
+            'message' => 'We need a CRM that replaces our spreadsheet pipeline.',
+            'inquiry' => 'project-estimate',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $estimate->assertStatus(422);
+        $estimate->assertJsonValidationErrors(['company', 'budget']);
+
+        $hire = $this->postJson(route('contact-us.store'), [
+            'name' => 'Sam Patel',
+            'email' => 'sam@example.com',
+            'service' => 'hire-developers',
+            'inquiry' => 'hire-developers',
+            'expertise' => 'Laravel / PHP',
+            'support_type' => 'Dedicated Developer',
+            'message' => 'We need a senior Laravel developer for our billing portal.',
+            'form_started_at' => time() - 10,
+        ]);
+
+        $hire->assertStatus(422);
+        $hire->assertJsonValidationErrors(['company', 'start_when']);
     }
 }

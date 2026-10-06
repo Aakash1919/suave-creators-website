@@ -5,6 +5,7 @@
   <div class="site-container !px-5 sm:!px-6 lg:!px-8">
     <div class="site-footer__cta flex flex-col items-start gap-3 pb-5 pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5 sm:pb-8 sm:pt-8">
       <p class="text-[15px] font-semibold leading-snug sm:text-lg">{{ $ctaText }}</p>
+      <a href="#contact-modal" data-open-contact-modal data-service="custom-software" class="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#00003F] no-underline">Get a Scoped Estimate</a>
       <div class="site-footer__social flex flex-wrap items-center gap-3 text-base text-white sm:gap-8 sm:text-lg lg:gap-14">
         @foreach ($socialLinks as $social)
           <a href="{{ $social['href'] }}" target="_blank" rel="noopener noreferrer" class="site-footer__social-link !min-h-9 !min-w-9 transition hover:opacity-80 sm:!min-h-11 sm:!min-w-11" aria-label="{{ $social['label'] }}"><i class="{{ $social['icon'] }}"></i></a>
@@ -22,7 +23,7 @@
           <x-layouts.logo variant="footer" />
         </a>
         <p class="mt-3 text-[13px] font-medium leading-5 text-[#E4E9F8] sm:mt-5 sm:text-base sm:leading-6">
-          Suave Creators — Custom Software, CRM &amp; AI Engineering
+          Suave Creators — custom software development company building CRM, ERP, web applications and AI automation.
         </p>
       </div>
 
@@ -30,9 +31,9 @@
         <div class="site-footer__columns">
           @foreach ($columns as $title => $links)
             <div class="site-footer__column min-w-0">
-              <h2 class="text-[11px] font-bold uppercase tracking-wide text-white sm:text-xs">
+              <p class="text-[11px] font-bold uppercase tracking-wide text-white sm:text-xs">
                 {{ $title }}
-              </h2>
+              </p>
 
               <ul class="mt-3 space-y-1.5 sm:mt-5 sm:space-y-3">
                 @foreach ($links as $link)
@@ -50,7 +51,7 @@
               @if ($title === 'AI Outreach CRM')
                 <a href="{{ route('product') }}"
                   class="mt-2 inline-flex !min-h-0 items-center text-[12px] font-semibold text-white underline underline-offset-4 sm:mt-4 sm:text-[13px]">
-                  Explore AI Outreach CRM
+                  Explore the Suave App
                 </a>
               @endif
             </div>
@@ -60,11 +61,11 @@
     </div>
 
     <div class="site-footer__offices">
-      <h2 class="site-footer__offices-title">Corporate Office Information</h2>
+      <p class="site-footer__offices-title">Corporate Office Information</p>
       <div class="site-footer__offices-grid">
         @foreach ($offices as $office)
           <div class="site-footer__office">
-            <h3 class="site-footer__office-name">{{ $office['label'] }}</h3>
+            <p class="site-footer__office-name">{{ $office['label'] }}</p>
             <ul class="site-footer__office-list">
               <li>
                 <span class="site-footer__office-label">Address:</span>

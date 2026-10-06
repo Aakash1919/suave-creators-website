@@ -8,31 +8,38 @@
     <div class="relative z-0 flex max-w-2xl min-w-0 flex-col text-left lg:max-w-[800px]">
       <p
         class="inline-block mb-2 bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent text-sm font-bold uppercase tracking-wide pragati-narrow-regular">
-        CUSTOM SOFTWARE • BESPOKE CRM • ENTERPRISE AI SOLUTIONS
+        Custom Software · CRM &amp; ERP · Dedicated Developers
 
       </p>
       <h1
         class="mb-2 mt-2 min-w-0 text-[36px] font-semibold leading-[1.1] text-white min-[375px]:text-[42px] sm:text-5xl lg:text-[56px]">
-        Custom Software, Bespoke CRM & Enterprise
+        Custom Software Development Company
         <span
           class="bg-[linear-gradient(180deg,_#2F69FB_15%,_#C56BFF_100%)] bg-clip-text text-transparent font-extrabold block">
-          Web App Development
+          for Growing US Teams
         </span>
       </h1>
       <p class="mb-2 mt-2 text-[12px] leading-5 md:text-sm md:leading-6 text-[#B1B9DF]">
-        Suave Creators engineers custom software, bespoke CRM/ERP platforms, and intelligent AI automation engines for growing enterprises. We replace rigid, expensive SaaS subscriptions with scalable, high-performance web systems tailored to your exact business operations and revenue workflows.
+        Suave Creators is a custom software development company that builds CRM, ERP and web applications around how your team actually sells and operates. Replace stacked per-seat SaaS subscriptions with one platform you own outright, built by senior engineers in 2-week sprints.
       </p>
       <div class="mt-8">
         <x-frontend.inline-consultation-form
           theme="dark"
-          placeholder="Enter your business email or phone number"
-          button-text="Get Architectural Consultation"
-          :secondary-href="$demoHref"
-          secondary-label=""
+          placeholder="Your work email"
+          button-text="Get a Scoped Estimate"
+          primary-service="custom-software"
+          secondary-href="#contact-modal"
+          secondary-label="Hire Developers"
+          secondary-service="hire-developers"
+          :secondary-as-button="true"
           show-field />
-        <p class="home-hero__trust-line mt-3 text-[11px] leading-4 text-[#F9F6EE] sm:text-xs sm:leading-5">
-          100% Codebase &amp; IP Ownership • Direct Senior Architect Access • Transparent 2-Week Sprints
+        <p class="home-hero__reply mt-5 -ml-2 text-left text-[11px] leading-4 text-[#B1B9DF] sm:text-xs sm:leading-5">
+          A solution architect replies within 1 business day with next steps and a call slot.
         </p>
+        <p class="home-hero__trust-line mt-2 text-[11px] leading-4 text-[#F9F6EE] sm:text-xs sm:leading-5">
+          100% code and IP ownership · NDA before the first call · Fixed-scope discovery · US contracts
+        </p>
+        <a class="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-white no-underline hover:text-white/80" href="{{ route('case-studies') }}">See our case studies →</a>
       </div>
     </div>
 
@@ -47,6 +54,7 @@
 <section
   class="who-we-are full-bleed bg-white bg-cover bg-top bg-no-repeat py-10 md:py-14 lg:py-20" style="--who-we-are-bg: url('{{ asset('assets/background/about-section-bg.png') }}'); background-image: var(--who-we-are-bg);">
   <div class="section-inner site-container ">
+    <h2 class="sr-only">Results from recent builds</h2>
     <div class="about-stats" data-about-counters>
       @foreach ($stats as $stat)
         <article class="about-stat"
@@ -59,7 +67,7 @@
             <strong class="about-stat__value">
               <span data-counter-end="{{ (int) $stat['end'] }}" style="min-width: {{ strlen((string) $stat['end']) }}ch">0</span>{{ $stat['suffix'] }}
             </strong>
-            <h2 class="about-stat__label">{{ $stat['label'] }}</h2>
+            <p class="about-stat__label">{{ $stat['label'] }}</p>
             <p class="about-stat__description">{{ $stat['description'] }}</p>
           </div>
         </article>
@@ -73,21 +81,19 @@
 
             <span
               class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-              ABOUT SUAVE CREATORS
+              About Suave Creators
             </span>
           </div>
           <h2 class="mt-4 text-[clamp(2.2rem,5vw,3rem)] font-bold leading-[110%] text-[#171717] lg:text-[48px]">
-            We Build Resilient Digital Experiences That
-            <span
-              class="inline-block bg-[linear-gradient(180deg,_#2F69FB_49.52%,_#D078FE_100%)] bg-clip-text text-transparent">
-              Drive Measurable Enterprise Growth
-            </span>
+            What does
+            <span class="inline-block bg-[linear-gradient(180deg,_#2F69FB_49.52%,_#D078FE_100%)] bg-clip-text text-transparent">Suave Creators do?</span>
           </h2>
-          <p class="mt-5 text-[clamp(1.125rem,3vw,1.5rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
-            Custom web, mobile, and software solutions designed to streamline complex business workflows and maximize user engagement.
-           </p>
+          <p class="mt-5 text-[clamp(1rem,2vw,1.125rem)] font-semibold leading-[1.4] text-[#171717] max-w-[580px]">
+            Suave Creators designs and builds custom CRM systems, ERP platforms and web applications for US companies with 20–500 employees. We replace off-the-shelf tools like Salesforce, HubSpot or NetSuite when per-seat costs, rigid workflows or disconnected data start slowing growth. You own all source code, data and IP from day one.
+          </p>
+          <h3 class="mt-4 text-[18px] font-semibold leading-[1.3] text-[#171717]">Custom software that replaces per-seat SaaS</h3>
           <p class="mt-4 text-[14px] leading-5 text-[#4D4D4D] max-w-[520px]">
-            Headquartered in the United States with an engineering center in India, Suave Creators builds mission-critical software for funded startups and scaling organizations. We bridge the gap between business strategy and deep engineering - delivering secure, scalable platforms that lower operational costs and unlock compounding growth.
+            Most growing teams pay for five to ten tools that don't talk to each other. We consolidate them into one system built on your data model, with the integrations, automations and AI features your team uses every day. Founded in 2021, we're a US-registered company with our engineering center in Palampur, India.
           </p>
         <div class="about-values mt-8">
           <div class="about-values__item">
@@ -96,8 +102,8 @@
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
-              <strong class="text-sm font-semibold text-[#171717]">Architecture First</strong>
-              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">We construct modular, clean-code foundations built to scale securely without accumulating technical debt.</p>
+              <p class="text-sm font-semibold text-[#171717]">Built on your data model</p>
+              <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">One system instead of five disconnected tools.</p>
             </div>
           </div>
 
@@ -107,9 +113,9 @@
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
-              <strong class="text-sm font-semibold text-[#171717]">Business-Driven Outcomes</strong>
+              <p class="text-sm font-semibold text-[#171717]">Measured by business results</p>
               <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
-                Every sprint deliverable is measured against operational throughput, conversion rates, and total cost of ownership.
+                Every sprint tracked against time saved, conversion and cost.
               </p>
             </div>
           </div>
@@ -120,9 +126,9 @@
             </span>
 
             <div class="flex min-w-0 flex-col gap-1">
-              <strong class="text-sm font-semibold text-[#171717]">AI &amp; Future Ready</strong>
+              <p class="text-sm font-semibold text-[#171717]">AI where it pays off</p>
               <p class="text-[13px] leading-[18px] font-medium text-[#4D4D4D]">
-                We natively embed predictive models, LLM processing, and automated webhook pipelines directly into your operational stack.
+                Lead scoring, document processing and AI agents inside your workflows.
               </p>
             </div>
           </div>
@@ -176,10 +182,10 @@
 
       <div class="mt-0 flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:items-center md:gap-5">
         <x-frontend.cta-button :href="route('about-us')" class="max-w-full">
-          Learn More About Our Team 
+          About our team
         </x-frontend.cta-button>
         <x-frontend.cta-button :href="route('case-studies')" variant="secondary">
-          Explore Client Case Studies
+          Explore client case studies
         </x-frontend.cta-button>
       </div>
     </div>
@@ -194,14 +200,14 @@
     <div class="mx-auto max-w-[660px] text-center">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-        PRODUCT LIFECYCLE
+        How we work
       </p>
       <h2
         class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
-        From Architecture to Scale: Our End-to-End Product Engineering Lifecycle
+        How we build: a 5-step process with fixed checkpoints
       </h2>
       <p class="mx-auto mt-4 max-w-[605px] text-[13px] leading-[18px] sm:leading-5 text-[#4D4D4D] sm:text-[14px]">
-        We do not merely build apps; we engineer digital operating assets. We combine technical innovation, user acquisition strategy, and workflow optimization to build software that scales.
+        Every project follows the same five checkpoints, so you know the scope, cost and next deliverable at every stage.
       </p>
     </div>
 
@@ -240,15 +246,26 @@
         </button>
       </div>
       <nav class="offerings-pagination flex md:hidden" aria-label="Offerings pagination"></nav>
-      <x-frontend.cta-button :href="$demoHref" variant="secondary-blue">
-        Schedule a Technical Scoping Call
+      <x-frontend.cta-button href="#contact-modal" variant="secondary-blue" service="custom-software">
+        Get a Scoped Estimate
       </x-frontend.cta-button>
     </div>
   </div>
 </section>
 <!-- Offerings Showcase Section End -->
 
-<x-frontend.connect-cta-section />
+<x-frontend.connect-cta-section
+  eyebrow=""
+  title="Have a project in mind, or need senior developers now?"
+  description="Get a fixed scope and cost range within 48 hours, or interview vetted developers this week."
+  note="No commitment · NDA on request · Reply within 1 business day."
+  primary-label="Get a Scoped Estimate"
+  primary-service="custom-software"
+  secondary-label="Hire Developers"
+  :secondary-modal="true"
+  secondary-service="hire-developers"
+  title-tag="p"
+/>
 
 <!-- Web Development Services Section Start -->
 <x-frontend.three-card-section class="web-services--home" />
@@ -282,13 +299,11 @@
         <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
         <span
           class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
-          OUR PRINCIPLES
+          Our principles
         </span>
       </div>
       <div class="core-values__heading">
-        <h2 class="home-type-h2">The Core Values That Guide Every Engineering Milestone</h2>
-        <p>We believe in transparent partnerships, robust code quality, and building software that directly serves your long-term business goals.
-        </p>
+        <h2 class="home-type-h2">Why teams choose Suave Creators</h2>
       </div>
     </header>
 
@@ -329,22 +344,24 @@
         <span class="inline-block w-[2px] h-[16px] bg-gradient-to-b from-[#2A4DFB] to-[#7A5FF8] rounded-full"></span>
         <span
           class="text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block">
-          SEARCH & AI DISCOVERY
+          Hire developers
         </span>
       </div>
       <div class="digital-marketing-services__intro">
-        <h2 id="digital-marketing-title" class="home-type-h2 font-semibold text-[24px] text-[#171717] leading-[100%] mb-4">Transform Organic Discoverability into Qualified Inbound Leads
+        <h2 id="digital-marketing-title" class="home-type-h2 font-semibold text-[24px] text-[#171717] leading-[100%] mb-4">Hire dedicated software developers and web development experts
         </h2>
-        <p class="text-[14px] text-[#4D4D4D] leading-5">We optimize your digital presence across Google Search, Answer Engines (AEO), and Generative AI platforms (GEO) to capture high-intent enterprise buyers.
+        <p class="text-[14px] text-[#4D4D4D] leading-5">You can hire senior software developers from Suave Creators as a dedicated team, as engineers who join your existing team, or as a fixed-price project team. Every developer is a full-time Suave Creators employee, overlaps with US business hours, and signs your NDA before starting. You interview them first and keep full ownership of all code.
         </p>
       </div>
     </header>
+
+    <h3 class="home-subhead">Senior developers by skill</h3>
 
     <div class="digitalMarketingSwiper swiper">
       <div class="swiper-wrapper py-4">
         @foreach ($digitalMarketingServices as $index => $service)
           <div class="swiper-slide">
-            <article class="digital-marketing-card">
+            <a href="#contact-modal" class="digital-marketing-card" data-open-contact-modal data-service="hire-developers">
               <div class="digital-marketing-card__topline">
                 <img src="{{ asset($service['icon']) }}" alt="{{ $service['iconAlt'] }}" title="{{ $service['iconAlt'] }}"
                   class="digital-marketing-card__icon" decoding="async" loading="lazy">
@@ -357,37 +374,79 @@
                   height="420" loading="lazy" decoding="async">
               </figure>
               <div class="digital-marketing-card__content">
-                <h3>{{ $service['headline'] }}</h3>
+                <p class="digital-marketing-card__headline">{{ $service['headline'] }}</p>
                 <p>{{ $service['description'] }}</p>
               </div>
               <span class="digital-marketing-card__arrow" aria-hidden="true">
                 <img src="{{ asset('assets/media/soft-blue-right-arrow.png') }}"
-                  alt="Soft blue right arrow for Suave Creators digital marketing services"
-                  title="Soft blue right arrow for Suave Creators digital marketing services"
+                  alt="Soft blue right arrow for hiring Suave Creators developers"
+                  title="Soft blue right arrow for hiring Suave Creators developers"
                   width="18" height="5" decoding="async" loading="lazy">
               </span>
-            </article>
+            </a>
           </div>
         @endforeach
       </div>
     </div>
 
     <div class="digital-marketing-services__footer">
-      <div class="digital-marketing-services__controls hidden gap-2 md:flex">
+      <div class="digital-marketing-services__controls hidden w-full justify-between md:flex">
         <button class="digital-marketing-prev digital-marketing-control" type="button"
-          aria-label="Previous digital marketing service">
+          aria-label="Previous developer skill">
           <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
         </button>
         <button class="digital-marketing-next digital-marketing-control" type="button"
-          aria-label="Next digital marketing service">
+          aria-label="Next developer skill">
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
         </button>
       </div>
-      <nav class="digital-marketing-pagination flex md:hidden" aria-label="Digital marketing pagination"></nav>
-      <p class="digital-marketing-services__more">
-        <span class="digital-marketing-services__more-text">Need a specialized growth or search strategy for your platform?</span>
-        <a class="group inline-flex items-center gap-1.5" href="{{ route('services') }}">See All Marketing Services<x-frontend.cta-arrow /></a>
-      </p>
+      <nav class="digital-marketing-pagination flex md:hidden" aria-label="Developer skills pagination"></nav>
+    </div>
+
+    <h3 class="home-subhead">Three ways to work with us</h3>
+    <div class="home-engage" data-engage-counters>
+      <article class="home-engage__card">
+        <p class="home-engage__model">Dedicated team</p>
+        <p class="home-engage__price"><span data-counter-end="2000" data-counter-prefix="$" aria-label="$2,000" style="min-width: 6ch">$2,000</span> <span>per developer/month</span></p>
+        <p class="home-engage__meta"><strong>Best for</strong> Ongoing product development</p>
+        <p class="home-engage__meta"><strong>Commitment</strong> Monthly, 3-month minimum</p>
+      </article>
+      <article class="home-engage__card">
+        <p class="home-engage__model">Staff augmentation</p>
+        <p class="home-engage__price"><span data-counter-end="25" data-counter-prefix="$" aria-label="$25" style="min-width: 3ch">$25</span> <span>per hour</span></p>
+        <p class="home-engage__meta"><strong>Best for</strong> Filling a skill gap in your team</p>
+        <p class="home-engage__meta"><strong>Commitment</strong> Monthly, 1-month minimum</p>
+      </article>
+      <article class="home-engage__card">
+        <p class="home-engage__model">Fixed-price project</p>
+        <p class="home-engage__price"><span data-counter-end="15000" data-counter-prefix="$" aria-label="$15,000" style="min-width: 7ch">$15,000</span> <span>per project</span></p>
+        <p class="home-engage__meta"><strong>Best for</strong> A clearly scoped build</p>
+        <p class="home-engage__meta"><strong>Commitment</strong> Per project</p>
+      </article>
+    </div>
+
+    <h3 class="home-subhead">Start in 5–10 business days</h3>
+    <ol class="home-start">
+      <li>
+        <span class="home-start__index" aria-hidden="true">1</span>
+        <p><strong>Share your requirements.</strong> Skills, seniority, time zone and team size.</p>
+      </li>
+      <li>
+        <span class="home-start__index" aria-hidden="true">2</span>
+        <p><strong>Interview a shortlist.</strong> We send 2–3 matched developer profiles within 48 hours.</p>
+      </li>
+      <li>
+        <span class="home-start__index" aria-hidden="true">3</span>
+        <p><strong>Start with low risk.</strong> If a developer isn't the right fit, we replace them at no cost.</p>
+      </li>
+      <li>
+        <span class="home-start__index" aria-hidden="true">4</span>
+        <p><strong>Ship in sprints.</strong> Your developers join your tools, standups and 2-week sprint cycle.</p>
+      </li>
+    </ol>
+    <div class="mt-6 flex w-full flex-col items-end gap-3 sm:flex-row sm:items-center sm:justify-end">
+      <x-frontend.cta-button href="#contact-modal" service="hire-developers">Hire Developers</x-frontend.cta-button>
+      <a class="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#2A4DFB] no-underline" href="{{ route('contact-us') }}#contact-id">Talk to a Solution Architect<x-frontend.cta-arrow /></a>
     </div>
   </div>
 </section>
@@ -400,7 +459,7 @@
   position="full"
   :speed="60"
   :items="$servicesMarqueeItems"
-  aria-label="Web Development, Promotion Marketing, Advertising, and CRM Development"
+  aria-label="Custom software development services"
 />
 <!-- Digital Services Marquee Section End -->
 
@@ -413,16 +472,16 @@
     <header class="portfolio-showcase__header">
       <p
         class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">
-        OUR WORK
+        Our work
 
       </p>
       <h2 id="portfolio-showcase-title"
         class="home-type-h2 mt-1 sm:mt-4 text-[20px] font-semibold leading-[28px] sm:leading-[36px] tracking-[-0.025em] text-[#171717] sm:text-[18px] lg:text-[24px]">
-        Proven Software Projects That Define Our Engineering Standards
+        Case studies: custom software in production
       </h2>
       <p
         class="portfolio-showcase__intro mx-auto mt-1 sm:mt-4 max-w-[605px] text-[13px] leading-[18px] sm:text-[14px] sm:leading-5 text-[#4D4D4D]">
-        Explore verified case studies showcasing how we design, build, and deploy custom software across complex industries.</p>
+        Real platforms, real numbers. Each project below is live and used daily by the client's team.</p>
     </header>
 
     <div class="swiper portfolioShowcaseSwiper">
@@ -441,6 +500,9 @@
                   </p>
                   <h3 class="text-[14px] font-semibold text-[#171717] max-w-[300px] leading-[18px] mb-2">{{ $project['title'] }}</h3>
                   <p class=" text-[14px] leading-5 text-[#4D4D4D] max-w-[360px] ">{{ $project['description'] }}</p>
+                  @if (! empty($project['link']))
+                    <span class="mt-3 inline-flex items-center gap-1 text-[13px] font-semibold text-[#2A4DFB]">{{ $project['link'] }} →</span>
+                  @endif
                 </div>
               </a>
             </article>
@@ -460,54 +522,257 @@
           <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
         </button>
       </div>
-      <p class="digital-marketing-services__more">
-        <span>Ready to review requirements for your custom application?
-        </span>
-        <a class="group inline-flex items-center gap-1.5" href="{{ $demoHref }}">Schedule an Architectural Discovery Call<x-frontend.cta-arrow /></a>
-      </p>
+    </div>
+    <div class="home-results-cta">
+      <div class="home-results-cta__copy">
+        <p class="home-results-cta__title">Want results like these for your team?</p>
+        <p>Tell us what's slowing your team down. In a 30-minute call, a solution architect will outline how a similar build would work for you, with a timeline and cost range.</p>
+      </div>
+      <div class="home-results-cta__actions">
+        <x-frontend.cta-button href="#contact-modal" service="custom-software">Get a Scoped Estimate</x-frontend.cta-button>
+        <x-frontend.cta-button :href="route('case-studies')" variant="secondary-light">See all case studies</x-frontend.cta-button>
+      </div>
     </div>
   </div>
 </section>
 <!-- Portfolio Showcase Section End -->
 
 <x-frontend.industries-section
-  footer-label="Discuss your Project"
+  eyebrow="Sector expertise"
+  title="Industries we build for"
+  description="We build secure, compliant software for industries with specific workflows and regulations."
+  card-title-tag="p"
   :show-support-aside="true"
+  support-text="Not sure where to start? Get a scoped estimate for your industry."
+  support-href="#contact-modal"
+  support-label="Get a Scoped Estimate"
+  support-service="custom-software"
+  :cards="[
+    ['icon' => 'fa-solid fa-heart-pulse', 'title' => 'Healthcare software development', 'text' => 'HIPAA-ready patient portals, telehealth integrations and appointment automation.', 'href' => route('industry.show', ['slug' => 'healthcare-software-development'])],
+    ['icon' => 'fa-solid fa-gears', 'title' => 'Software for startups and SaaS', 'text' => 'MVPs, scalable cloud back ends and multi-tenant platforms.', 'href' => route('industry.show', ['slug' => 'it-software-solutions-for-startups'])],
+    ['icon' => 'fa-solid fa-landmark', 'title' => 'Finance and banking software', 'text' => 'Billing ledgers, payment integrations and compliance audit tools.', 'href' => route('industry.show', ['slug' => 'finance-banking-software-development'])],
+    ['icon' => 'fa-solid fa-cart-shopping', 'title' => 'Retail and e-commerce solutions', 'text' => 'Inventory management, pricing engines and headless commerce.', 'href' => route('industry.show', ['slug' => 'retail-ecommerce-solutions'])],
+    ['icon' => 'fa-solid fa-truck-fast', 'title' => 'Logistics and supply chain software', 'text' => 'Fleet tracking, carrier dispatch and warehouse sync.', 'href' => route('industry.show', ['slug' => 'logistics-supply-chain-apps'])],
+    ['icon' => 'fa-solid fa-laptop-file', 'title' => 'Education and e-learning platforms', 'text' => 'LMS platforms, testing portals and certification management.', 'href' => route('industry.show', ['slug' => 'education-elearning-platforms'])],
+  ]"
 />
+
+<section id="saas-comparison" class="home-compare full-bleed bg-repeat py-12 lg:py-20" style="background-image: url('{{ asset('assets/background/what-we-do-section-pattern-bg.png') }}');" aria-labelledby="saas-comparison-title">
+  <div class="section-inner">
+    <div class="home-compare__intro">
+      <p class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">Custom vs SaaS</p>
+      <h2 id="saas-comparison-title" class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] text-[#171717] sm:text-[18px] lg:text-[24px]">Custom software vs SaaS subscriptions: when does building pay off?</h2>
+      <p>Custom software usually pays off by year two or three for teams with 25+ users or workflows that SaaS tools can't handle. SaaS tools charge per seat every year and add paid tiers for automation and AI. Custom software is a one-time build plus predictable hosting and support. The table below uses CRM as the example.</p>
+    </div>
+    <div class="home-compare__scroll">
+      <table class="home-compare__table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Custom CRM (Suave Creators)</th>
+            <th>Salesforce / HubSpot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Pricing model</th>
+            <td>One-time build + fixed monthly support</td>
+            <td>Per user, per month, rising by tier</td>
+          </tr>
+          <tr>
+            <th scope="row">Cost as the team grows</th>
+            <td>Nearly flat</td>
+            <td>Grows with every new seat</td>
+          </tr>
+          <tr>
+            <th scope="row">Code and data ownership</th>
+            <td>100% yours</td>
+            <td>Vendor-hosted, licence-based</td>
+          </tr>
+          <tr>
+            <th scope="row">Workflow fit</th>
+            <td>Built to your process</td>
+            <td>You adapt to the platform</td>
+          </tr>
+          <tr>
+            <th scope="row">AI features</th>
+            <td>Built in, using your own models or APIs</td>
+            <td>Usually paid add-ons</td>
+          </tr>
+          <tr>
+            <th scope="row">Time to launch</th>
+            <td>8–16 weeks for most builds</td>
+            <td>Days to set up, months to customise</td>
+          </tr>
+          <tr>
+            <th scope="row">Best for</th>
+            <td>Teams with unique workflows or 25+ seats</td>
+            <td>Small teams with standard sales processes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="home-compare__links">
+      <a href="{{ route('service.show', ['slug' => 'custom-crm-development']) }}">Custom CRM vs Salesforce: 3-year TCO →</a>
+      <a href="{{ route('service.show', ['slug' => 'enterprise-software-solutions']) }}">Custom ERP vs NetSuite: 3-year TCO →</a>
+      <a href="{{ route('service.show', ['slug' => 'e-commerce-development']) }}">Custom e-commerce vs Shopify Plus →</a>
+    </p>
+  </div>
+</section>
+
+<section id="pricing" class="home-pricing full-bleed bg-cover bg-top bg-no-repeat py-12 lg:py-20" style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');" aria-labelledby="pricing-title">
+  <div class="section-inner">
+    <div class="home-pricing__intro">
+      <p class="offerings-eyebrow text-[14px] font-bold bg-gradient-to-r from-[#2A4DFB] to-[#7A5FF8] bg-clip-text text-transparent inline-block leading-[100%]">Pricing</p>
+      <h2 id="pricing-title" class="home-type-h2 mt-4 text-[20px] font-semibold leading-[28px] text-[#171717] sm:text-[18px] lg:text-[24px]">How much does custom software development cost?</h2>
+      <p>Custom software development at Suave Creators typically costs $15,000–$50,000 for an MVP or single-workflow tool and $50,000–$150,000 for a multi-team platform, with enterprise systems above that. Dedicated developers start at $2,000 per developer per month. Every fixed-price project starts with a paid discovery phase that sets the final scope and price.</p>
+    </div>
+    <div class="home-pricing__grid">
+      <article class="home-pricing__card">
+        <h3>Fixed-price projects</h3>
+        <p class="home-pricing__price">from $15,000 · 6–16 weeks</p>
+        <p>For clearly defined builds: MVPs, internal tools, customer portals and integrations.</p>
+      </article>
+      <article class="home-pricing__card">
+        <h3>Dedicated development team</h3>
+        <p class="home-pricing__price">from $2,000 per developer/month</p>
+        <p>For ongoing product work; scale the team up or down each month.</p>
+      </article>
+      <article class="home-pricing__card">
+        <h3>Support and maintenance retainers</h3>
+        <p class="home-pricing__price">from $500/month</p>
+        <p>Monitoring, security patches, bug fixes and small features under a written SLA.</p>
+      </article>
+    </div>
+    <div class="home-pricing__note">
+      <p class="home-pricing__note-copy">
+        <a href="{{ route('service.show', ['slug' => 'custom-crm-development']) }}">Looking for CRM pricing specifically? See custom CRM development costs →</a>
+      </p>
+      <div class="home-pricing__actions">
+        <x-frontend.cta-button href="#contact-modal" service="custom-software">Get a Scoped Estimate</x-frontend.cta-button>
+        <x-frontend.cta-button href="#contact-modal" variant="secondary-light" service="hire-developers">Hire Developers</x-frontend.cta-button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Technology Section Start -->
 <x-frontend.four-card-section background-image="assets/background/technology-section-bg.png" />
 <!-- Technology Section End -->
 
 
 <x-frontend.faq-section
+  class="home-faq"
   :qa="$faqs"
   :media="$faqMedia"
   :media-type="$faqMediaType"
   :media-alt="$faqMediaAlt"
   :cta-href="$faqCtaHref"
   :cta-label="$faqCtaLabel"
-  eyebrow="Have questions about our Web Services?"
+  eyebrow="FAQ"
+  title="Frequently asked questions about hiring a software development company"
+  description=""
 />
 
 
-<x-frontend.testimonials-section :items="$testimonials" />
+<x-frontend.testimonials-section
+  eyebrow="Client feedback"
+  title="What our clients say"
+  :items="$testimonials"
+/>
 
 <x-frontend.articles-insights-section
-  eyebrow="BLOGS & INSIGHTS"
-  title="Latest Engineering, CRM & AI Insights from Our Technical Team"
-  subtitle="Actionable guides, architecture teardowns, and industry analysis authored by our senior developers and digital strategists."
+  eyebrow="From the engineering blog"
+  title=""
+  subtitle=""
+  :show-title="false"
   heading-id="articles-insights-title"
   more-href="{{ route('blogs') }}"
-  more-label="View All Engineering & Search Articles"
+  more-label="All engineering articles"
 />
 
-<x-frontend.consultation-section
-  title="Ready to Engineer Your Custom Platform or Modernize Your Software?"
-  cta-label="Schedule a Call"
-/>
+@php
+  $homeOffice = \App\Support\Frontend\ContactSupport::offices()[0] ?? [];
+@endphp
+<section id="home-final" class="home-final full-bleed bg-cover bg-top bg-no-repeat" aria-labelledby="home-final-title" style="background-image: url('{{ asset('assets/background/blog-section-bg.webp') }}');">
+  <div class="section-inner site-container">
+    <div class="home-final__panel">
+      <div class="home-final__intro">
+        <p class="home-final__eyebrow">Let's build together</p>
+        <h2 id="home-final-title" class="home-final__title">Ready to Build or Scale <span>Your Product?</span></h2>
+        <p>Tell us what you're building, what you need, or the skills you're looking for. Our team will review your requirements and get back to you with the right next steps.</p>
+      </div>
+      <div class="home-final__cards">
+        <article class="home-final__offer home-final__offer--estimate">
+          <div class="home-final__icon" aria-hidden="true">
+            <img src="{{ asset('assets/product/document.png') }}" alt="Project estimate document icon for custom software quotes at Suave Creators" title="Project estimate document icon for custom software quotes at Suave Creators" width="31" height="28" decoding="async" loading="lazy">
+          </div>
+          <h3>Get a Project Estimate</h3>
+          <p>For a new product, CRM, ERP, portal or software application.</p>
+          <ul>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Share your vision and requirements</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Get initial scope, timeline and estimated cost</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>No obligation, just expert guidance</li>
+          </ul>
+          <button type="button" class="home-final__cta" data-inquiry-dialog-open="project-estimate-dialog" aria-haspopup="dialog" aria-controls="project-estimate-dialog">
+            Get an Estimate
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </article>
+        <article class="home-final__offer home-final__offer--hire">
+          <div class="home-final__icon" aria-hidden="true">
+            <img src="{{ asset('assets/team/teamwork-icon.svg') }}" alt="Teamwork icon for hiring dedicated software developers at Suave Creators" title="Teamwork icon for hiring dedicated software developers at Suave Creators" width="25" height="20" decoding="async" loading="lazy">
+          </div>
+          <h3>Hire Developers</h3>
+          <p>Need additional capacity or specific expertise?</p>
+          <ul>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Tell us your technical requirements</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Get suitable developer options</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.8 10.2 8.5 12.9 14.2 7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Flexible engagement models</li>
+          </ul>
+          <button type="button" class="home-final__cta" data-inquiry-dialog-open="hire-developers-dialog" aria-haspopup="dialog" aria-controls="hire-developers-dialog">
+            Hire Developers
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </article>
+      </div>
+      <div class="home-final__direct">
+        <span class="home-final__headset" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4.8 12.2a7.2 7.2 0 0 1 14.4 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4.8 12.2v3.2a1.6 1.6 0 0 0 1.6 1.6h1.2v-6.2H6.4a1.6 1.6 0 0 0-1.6 1.4zM19.2 12.2v3.2a1.6 1.6 0 0 1-1.6 1.6h-1.2v-6.2h1.2a1.6 1.6 0 0 1 1.6 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 20.2h2.2a2 2 0 0 0 2-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <p>
+          <strong>Prefer to talk directly?</strong>
+          <a href="mailto:{{ $homeOffice['email'] ?? 'info@suavecreators.com' }}">{{ $homeOffice['email'] ?? 'info@suavecreators.com' }}</a>
+          <span aria-hidden="true">·</span>
+          <a href="{{ $homeOffice['phone_href'] ?? 'tel:+13074359605' }}">{{ $homeOffice['phone'] ?? '+1 (307) 435-9605' }}</a>
+          <span aria-hidden="true">·</span>
+          <a href="{{ route('contact-us') }}#contact-id">Contact Us <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </p>
+      </div>
+      <ul class="home-final__trust">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4 5.2 6.2v5.3c0 4.2 2.8 7.2 6.8 8.9 4-1.7 6.8-4.7 6.8-8.9V6.2L12 3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          NDA available on request
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 8.2 4 12l4.2 3.8M15.8 8.2 20 12l-4.2 3.8M13.2 5.5l-2.4 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          100% code ownership
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8.4V12l2.4 1.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Reply within 1 business day
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{{-- Body-level inquiry dialogs (estimate + hire). --}}
+<x-frontend.modal.project-estimate-modal />
+<x-frontend.modal.hire-developers-modal />
 
 <!-- Partnerships Section Start -->
-<x-frontend.partnerships-section :items="$partnerMarqueeItems" />
+<x-frontend.partnerships-section eyebrow="Trusted by teams at" :items="$partnerMarqueeItems" />
 <!-- Partnerships Section End -->
 
 
@@ -704,6 +969,780 @@
   overflow: hidden;
 }
 
+a.digital-marketing-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-subhead {
+  background: linear-gradient(to right, #2A4DFB, #7A5FF8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-top: 36px;
+  margin-inline: auto;
+  text-align: center;
+  width: fit-content;
+}
+
+.home-engage,
+.home-pricing__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+  margin-top: 16px;
+}
+
+.home-engage__card,
+.home-pricing__card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  box-shadow: 3px 6px 14px 0 #00003f0f;
+  padding: 20px;
+}
+
+.home-engage__model,
+.home-pricing__card h3 {
+  color: #171717;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.home-engage__price,
+.home-pricing__price {
+  color: #2a4dfb;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-top: 8px;
+}
+
+.home-engage__price [data-counter-end] {
+  background-image: linear-gradient(#2f69fb 49.52%, #d078fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-engage__price span:last-child {
+  -webkit-text-fill-color: #4d4d4d;
+  color: #4d4d4d;
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-top: 2px;
+}
+
+.home-engage__meta,
+.home-pricing__card p:last-child,
+.home-compare__intro > p:not(.offerings-eyebrow),
+.home-pricing__intro > p:not(.offerings-eyebrow) {
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 1.45;
+  margin-top: 10px;
+}
+
+.home-engage__meta strong {
+  color: #171717;
+  font-weight: 600;
+}
+
+.home-start {
+  background: #19182f;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  margin-top: 16px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.home-start li {
+  align-items: flex-start;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px 22px;
+  position: relative;
+}
+
+.home-start li + li::before {
+  background: rgba(255, 255, 255, 0.12);
+  content: "";
+  height: 1px;
+  left: 22px;
+  position: absolute;
+  right: 22px;
+  top: 0;
+}
+
+.home-start p {
+  align-self: stretch;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 10px 0 0;
+}
+
+.home-start strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.home-start__index {
+  align-items: center;
+  background: linear-gradient(180deg, #2a4dfb 0%, #7a5ff8 100%);
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 700;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+@media (max-width: 767px) {
+  .home-start {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-start li {
+    padding: 14px 12px;
+  }
+
+  .home-start li:nth-child(2n) {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .home-start li:nth-child(n + 3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .home-start li + li::before {
+    display: none;
+  }
+
+  .home-start p {
+    font-size: 12px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .home-start__index {
+    font-size: 12px;
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.home-compare__intro {
+  max-width: none;
+  min-width: 0;
+  width: 100%;
+}
+
+.home-pricing__intro {
+  max-width: 760px;
+}
+
+.home-compare__scroll {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  box-shadow: 3px 6px 14px 0 #00003f0f;
+  margin-top: 28px;
+  overflow-x: auto;
+}
+
+.home-compare__table {
+  border-collapse: collapse;
+  min-width: 680px;
+  width: 100%;
+}
+
+.home-compare__table th,
+.home-compare__table td {
+  border-bottom: 1px solid #ececec;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.home-compare__table thead th {
+  background: #eef2ff;
+  color: #00003f;
+  font-weight: 600;
+}
+
+.home-compare__table thead th:nth-child(2) {
+  background: #e0e7ff;
+  color: #2a4dfb;
+}
+
+.home-compare__table tbody th {
+  background: #f4f6ff;
+  color: #171717;
+  font-weight: 600;
+  width: 28%;
+}
+
+.home-compare__table td:nth-child(2) {
+  background: #eef2ff;
+  color: #171717;
+  font-weight: 600;
+}
+
+.home-compare__table td:nth-child(3) {
+  color: #4d4d4d;
+}
+
+.home-compare__table tr:last-child th,
+.home-compare__table tr:last-child td {
+  border-bottom: 0;
+}
+
+.home-compare__links {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-left: 3px solid #2a4dfb;
+  border-radius: 12px;
+  box-shadow: 3px 6px 14px 0 #00003f0f;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 48px;
+  justify-content: space-between;
+  margin-top: 16px;
+  overflow-x: auto;
+  padding: 14px 22px;
+}
+
+.home-pricing__actions {
+  justify-content: flex-end;
+}
+
+.home-compare__links a {
+  color: #171717;
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-compare__links a:hover {
+  color: #2a4dfb;
+}
+
+@media (max-width: 767px) {
+  .home-compare__intro,
+  .home-compare__intro h2,
+  .home-compare__intro p {
+    overflow-wrap: break-word;
+  }
+
+  .home-compare .section-inner,
+  .home-compare__scroll,
+  .home-compare__links {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .home-compare__scroll,
+  .home-compare__links {
+    overflow-x: visible;
+  }
+
+  .home-compare__table {
+    min-width: 0;
+  }
+
+  .home-compare__table th,
+  .home-compare__table td {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+    padding: 10px 8px;
+  }
+
+  .home-compare__links {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    padding: 12px 14px;
+  }
+
+  .home-compare__links a {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+}
+
+.home-pricing__note {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-left: 3px solid #2a4dfb;
+  border-radius: 12px;
+  box-shadow: 3px 6px 14px 0 #00003f0f;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 14px 18px;
+}
+
+.home-pricing__note-copy {
+  flex: 1 1 240px;
+  margin: 0;
+}
+
+.home-pricing__note-copy a {
+  color: #171717;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.home-pricing__note-copy a:hover {
+  color: #2a4dfb;
+}
+
+.home-pricing__note .home-pricing__actions {
+  margin-top: 0;
+}
+
+.faq-section.home-faq {
+  padding-top: 48px;
+}
+
+.faq-section.home-faq .faq-section__cta {
+  margin-top: 32px;
+}
+
+@media (min-width: 1024px) {
+  .faq-section.home-faq {
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 767px) {
+  .faq-section.home-faq {
+    padding-top: 40px;
+  }
+}
+
+.home-pricing__grid {
+  margin-top: 28px;
+}
+
+.home-pricing__card {
+  min-height: 168px;
+  position: relative;
+}
+
+.home-pricing__card::before {
+  /* background: linear-gradient(90deg, #2a4dfb 0%, #7a5ff8 100%); */
+  border-radius: 12px 12px 0 0;
+  content: "";
+  height: 3px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.home-pricing__actions,
+.home-results-cta__actions {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.home-results-cta {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  box-shadow: 3px 6px 14px 0 #00003f0f;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.home-results-cta__title {
+  color: #171717;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.home-results-cta__copy p:last-child {
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 1.45;
+  margin-top: 6px;
+}
+
+.home-final {
+  background-color: #e8eefb;
+  padding: 28px 0 40px;
+}
+
+.home-final__panel {
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 32px;
+  box-shadow: 0 20px 50px rgba(28, 43, 99, 0.06);
+  padding: 40px 18px 28px;
+}
+
+.home-final__intro {
+  margin-inline: auto;
+  max-width: 720px;
+  text-align: center;
+}
+
+.home-final__eyebrow {
+  color: #3d63f5;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+.home-final__title {
+  color: #101433;
+  font-size: clamp(28px, 3.1vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.home-final__title span {
+  background: linear-gradient(90deg, #2f62ff 0%, #6d4dff 46%, #9b4dff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.home-final__intro > p {
+  color: #6d7586;
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 16px auto 0;
+  max-width: 640px;
+}
+
+.home-final__cards {
+  display: grid;
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.home-final__offer {
+  background: #fff;
+  border: 1px solid #eef1f7;
+  border-radius: 22px;
+  box-shadow: 0 10px 28px rgba(16, 24, 64, 0.05);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  padding: 28px 26px 24px;
+  position: relative;
+}
+
+.home-final__offer::after {
+  border-radius: 50%;
+  content: "";
+  height: 150px;
+  pointer-events: none;
+  position: absolute;
+  right: -48px;
+  top: -56px;
+  width: 150px;
+}
+
+.home-final__offer--estimate::after {
+  background: radial-gradient(circle, rgba(47, 98, 255, 0.1) 0%, rgba(47, 98, 255, 0) 70%);
+}
+
+.home-final__offer--hire::after {
+  background: radial-gradient(circle, rgba(138, 92, 246, 0.18) 0%, rgba(138, 92, 246, 0) 72%);
+}
+
+.home-final__icon {
+  align-items: center;
+  border-radius: 50%;
+  display: grid;
+  height: 56px;
+  place-items: center;
+  position: relative;
+  width: 56px;
+  z-index: 1;
+}
+
+.home-final__icon img {
+  display: block;
+  height: 22px;
+  width: auto;
+}
+
+.home-final__offer--estimate .home-final__icon img {
+  height: 28px;
+}
+
+.home-final__offer--estimate .home-final__icon {
+  background: #eaf0ff;
+  color: #2f62ff;
+}
+
+.home-final__offer--hire .home-final__icon {
+  background: #f3edff;
+  color: #7c4dff;
+}
+
+.home-final__offer h3,
+.home-final__offer > p,
+.home-final__offer ul,
+.home-final__cta {
+  position: relative;
+  z-index: 1;
+}
+
+.home-final__offer h3 {
+  color: #12163a;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 18px 0 0;
+}
+
+.home-final__offer > p {
+  color: #6d7586;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+
+.home-final__offer ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 18px 0 22px;
+  padding: 0;
+}
+
+.home-final__offer li {
+  align-items: flex-start;
+  color: #3c4458;
+  display: flex;
+  font-size: 15px;
+  font-weight: 500;
+  gap: 10px;
+  line-height: 1.4;
+}
+
+.home-final__offer li svg {
+  flex-shrink: 0;
+  height: 20px;
+  margin-top: 1px;
+  width: 20px;
+}
+
+.home-final__offer--estimate li svg {
+  color: #2f62ff;
+}
+
+.home-final__offer--hire li svg {
+  color: #7c4dff;
+}
+
+.home-final__cta {
+  align-items: center;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 700;
+  gap: 8px;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 18px;
+}
+
+.home-final__cta svg,
+.home-final__direct a svg {
+  height: 16px;
+  width: 16px;
+}
+
+.home-final__cta {
+  margin-top: auto;
+  width: 100%;
+}
+
+.home-final__offer--estimate .home-final__cta {
+  background: #2f62ff;
+  box-shadow: 0 8px 18px rgba(47, 98, 255, 0.22);
+}
+
+.home-final__offer--hire .home-final__cta {
+  background: #7c4dff;
+  box-shadow: 0 8px 18px rgba(124, 77, 255, 0.22);
+}
+
+.home-final__offer--estimate .home-final__cta:hover {
+  background: #2454f0;
+}
+
+.home-final__offer--hire .home-final__cta:hover {
+  background: #6b3cf0;
+}
+
+.home-final__direct {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.home-final__headset {
+  align-items: center;
+  background: #f3f6fb;
+  border: 0;
+  border-radius: 50%;
+  color: #64748b;
+  display: grid;
+  flex-shrink: 0;
+  height: 42px;
+  place-items: center;
+  width: 42px;
+}
+
+.home-final__direct p {
+  color: #0b1036;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.home-final__direct strong {
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.home-final__direct a {
+  color: #2f62ff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-final__direct a svg {
+  display: inline-block;
+  vertical-align: -2px;
+}
+
+.home-final__direct span[aria-hidden] {
+  color: #94a3b8;
+  margin-inline: 4px;
+}
+
+.home-final__trust {
+  align-items: center;
+  color: #7b8494;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 10px 36px;
+  justify-content: center;
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+
+.home-final__trust li {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.home-final__trust svg {
+  height: 16px;
+  width: 16px;
+}
+
+@media (min-width: 640px) {
+  .home-final__panel {
+    padding: 56px 40px 36px;
+  }
+}
+
+@media (min-width: 900px) {
+  .home-final__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .home-engage,
+  .home-pricing__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .home-results-cta {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 24px 28px;
+  }
+
+  .home-results-cta__actions {
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+
+}
+
 .digital-marketing-card {
   --digital-card-accent: #2a4dfb;
   background: #fff;
@@ -804,7 +1843,8 @@
   padding-top: 14px;
 }
 
-.digital-marketing-card__content h3 {
+.digital-marketing-card__content h3,
+.digital-marketing-card__headline {
   color: #171717;
   font-size: 14px;
   font-weight: 600;
@@ -838,7 +1878,8 @@
 
 .digital-marketing-services__controls {
   display: flex;
-  gap: 7px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .digital-marketing-control {
@@ -884,6 +1925,25 @@
 }
 
 @media (min-width: 1024px) {
+  .home-start {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .home-start li {
+    flex: 1 1 0;
+    padding: 28px 24px;
+  }
+
+  .home-start li + li::before {
+    bottom: 28px;
+    height: auto;
+    left: 0;
+    right: auto;
+    top: 28px;
+    width: 1px;
+  }
+
   .about-values {
     flex-direction: row;
     flex-wrap: nowrap;
@@ -1113,7 +2173,8 @@
     font-size: 15px;
   }
 
-  .digital-marketing-card__content h3 {
+  .digital-marketing-card__content h3,
+.digital-marketing-card__headline {
     font-size: 14px;
   }
 
@@ -1289,6 +2350,59 @@
         counterObserver.observe(counterRoot);
       } else {
         animateCounters();
+      }
+    }
+
+    var engageRoot = document.querySelector('[data-engage-counters]');
+
+    if (engageRoot) {
+      var engagePrices = engageRoot.querySelectorAll('.home-engage__price [data-counter-end]');
+      var engageStarted = false;
+
+      function formatEngagePrice(value, prefix) {
+        return prefix + Math.round(value).toLocaleString('en-US');
+      }
+
+      function animateEngagePrices() {
+        if (engageStarted) return;
+        engageStarted = true;
+
+        engagePrices.forEach(function (el) {
+          var end = parseInt(el.getAttribute('data-counter-end'), 10) || 0;
+          var prefix = el.getAttribute('data-counter-prefix') || '';
+
+          if (reduceMotion) {
+            el.textContent = formatEngagePrice(end, prefix);
+            return;
+          }
+
+          el.textContent = formatEngagePrice(0, prefix);
+
+          var duration = 1500;
+          var startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = formatEngagePrice(progress === 1 ? end : end * eased, prefix);
+            if (progress < 1) requestAnimationFrame(step);
+          }
+
+          requestAnimationFrame(step);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var engageObserver = new IntersectionObserver(function (entries) {
+          if (entries.some(function (entry) { return entry.isIntersecting; })) {
+            animateEngagePrices();
+            engageObserver.disconnect();
+          }
+        }, { threshold: 0.35 });
+        engageObserver.observe(engageRoot);
+      } else {
+        animateEngagePrices();
       }
     }
   });

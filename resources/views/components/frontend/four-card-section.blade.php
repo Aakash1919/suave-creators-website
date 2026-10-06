@@ -33,7 +33,7 @@
                         style="background: radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--technology-color) 12%, transparent), transparent 58%);"></span>
                     <i class="fa-brands {{ $item['icon'] }} relative text-[30px]" style="color: {{ $item['color'] }}"
                         aria-hidden="true"></i>
-                    <h3 class="relative mt-3 text-base font-bold text-[#171717]">{{ $item['title'] }}</h3>
+                    <p class="relative mt-3 text-base font-bold text-[#171717]">{{ $item['title'] }}</p>
                     <p class="relative mt-2 pr-5 text-sm leading-5 text-[#4D4D4D]">{{ $item['description'] }}</p>
                     <img src="{{ asset('assets/media/soft-blue-right-arrow.png') }}"
                         alt="Soft blue right arrow for Suave Creators technology solutions"

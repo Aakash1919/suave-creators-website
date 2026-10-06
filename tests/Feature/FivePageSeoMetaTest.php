@@ -13,8 +13,8 @@ class FivePageSeoMetaTest extends TestCase
         $enterprise = ServiceSupport::service('enterprise-software-solutions');
         $crm = ServiceSupport::service('custom-crm-development');
 
-        $this->assertSame('Web & Software Development Company | Suave Creators', $pages['home']['title']);
-        $this->assertSame('Suave Creators builds custom web applications, software, CRM, ERP, AI and digital solutions that help businesses improve efficiency, scale faster and grow.', $pages['home']['description']);
+        $this->assertSame('Custom Software Development Company | Suave Creators', $pages['home']['title']);
+        $this->assertSame('Hire a custom software development company that builds CRM, ERP and web apps you own. Senior developers, 2-week sprints, US contracts. Get a scoped estimate.', $pages['home']['description']);
 
         $this->assertSame('Custom Software, CRM & AI Development Services | Suave Creators', $pages['services']['title']);
         $this->assertSame('Enterprise B2B software development services: custom CRM builder, scalable web apps, enterprise software, UI/UX, and AI solutions with 100% code ownership.', $pages['services']['description']);

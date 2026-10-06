@@ -18,7 +18,7 @@ class TestimonialSeeder extends Seeder
 
         $items = [
             [
-                'quote' => 'Aakash and his team were fantastic to work with. They understood the project requirements clearly, communicated well throughout the process, and delivered high-quality work on time. I would definitely recommend them for any custom software project.',
+                'quote' => 'Aakash and his team was fantastic to work with. They understood the project requirements clearly, communicated well throughout the process, and delivered high-quality work on time. I would definitely recommend them for any web development project.',
                 'name' => 'Amit Rana',
                 'role' => 'Founder, Turbo Trans Corp',
                 'sort_order' => 1,

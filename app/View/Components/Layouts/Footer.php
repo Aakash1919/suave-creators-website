@@ -41,7 +41,7 @@ class Footer extends Component
      * @param  array<int, array{href: string, label: string, icon: string}>|null  $socialLinks
      */
     public function __construct(
-        public string $ctaText = "Got a project? Let's talk",
+        public string $ctaText = "Got a project? Let's talk.",
         public string $backgroundImage = 'assets/background/footer-bg.png',
         ?string $phone = null,
         ?string $phoneHref = null,
@@ -63,30 +63,26 @@ class Footer extends Component
 
         $columns ??= [
             'Services' => [
-                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web Development'],
                 ['route' => 'service.show', 'params' => ['slug' => 'custom-crm-development'], 'label' => 'Custom CRM'],
-                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise Software'],
-                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce Software'],
-                ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design'],
-                ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions'],
+                ['route' => 'service.show', 'params' => ['slug' => 'enterprise-software-solutions'], 'label' => 'Enterprise software and ERP'],
+                ['route' => 'service.show', 'params' => ['slug' => 'web-development-services'], 'label' => 'Web development'],
+                ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce'],
+                ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX design'],
+                ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI solutions'],
             ],
             'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare-software-development'], 'label' => 'Healthcare'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'IT Solutions'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Banking'],
-                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'E-commerce'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'it-software-solutions-for-startups'], 'label' => 'Startups and SaaS'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'finance-banking-software-development'], 'label' => 'Finance and banking'],
+                ['route' => 'industry.show', 'params' => ['slug' => 'retail-ecommerce-solutions'], 'label' => 'Retail and e-commerce'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'logistics-supply-chain-apps'], 'label' => 'Logistics'],
                 ['route' => 'industry.show', 'params' => ['slug' => 'education-elearning-platforms'], 'label' => 'Education'],
             ],
-            'Site Links' => [
-                ['route' => 'home', 'label' => 'Home'],
-                ['route' => 'about-us', 'label' => 'About Us'],
-                ['route' => 'services', 'label' => 'Services'],
-                ['route' => 'industries', 'label' => 'Industries'],
-                ['route' => 'product', 'label' => 'AI Outreach CRM'],
-                ['route' => 'case-studies', 'label' => 'Case Studies'],
+            'Company' => [
+                ['route' => 'about-us', 'label' => 'About us'],
+                ['route' => 'case-studies', 'label' => 'Case studies'],
                 ['route' => 'blogs', 'label' => 'Blog'],
-                ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact Us'],
+                ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact us'],
             ],
             'AI Outreach CRM' => [
                 ['route' => 'product', 'fragment' => 'how-it-works', 'label' => 'How it Works'],

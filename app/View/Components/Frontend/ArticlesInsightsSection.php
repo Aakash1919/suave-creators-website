@@ -28,6 +28,7 @@ class ArticlesInsightsSection extends Component
         public string $moreLabel = 'View all blog articles',
         public string $sectionClass = 'py-6 lg:py-18',
         public bool $initSwiper = true,
+        public bool $showTitle = true,
     ) {
         $categorySlug = filled($this->category) ? $this->category : null;
 

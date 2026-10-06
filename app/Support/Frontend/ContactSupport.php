@@ -220,6 +220,7 @@ class ContactSupport
     {
         return [
             'custom-software' => 'Custom Software Development',
+            'hire-developers' => 'Hire Dedicated Developers',
             'custom-crm' => 'Custom CRM Development',
             'ai-solutions' => 'AI Solutions & Development',
             'web-development' => 'Web Development',
@@ -232,6 +233,331 @@ class ContactSupport
             'seo-aeo-geo' => 'SEO (AEO & GEO)',
             'other' => 'Other',
         ];
+    }
+
+    /**
+     * Icon + color chrome for contact / estimate service keys.
+     *
+     * @return array{icon: string, color: string}
+     */
+    public static function serviceOptionMeta(string $value): array
+    {
+        return match ($value) {
+            'custom-software' => ['icon' => 'fa-solid fa-desktop', 'color' => '#2563EB'],
+            'hire-developers' => ['icon' => 'fa-solid fa-user-group', 'color' => '#1D4ED8'],
+            'custom-crm' => ['icon' => 'fa-solid fa-terminal', 'color' => '#059669'],
+            'ai-solutions' => ['icon' => 'fa-solid fa-brain', 'color' => '#16A34A'],
+            'web-development' => ['icon' => 'fa-solid fa-laptop-code', 'color' => '#7C3AED'],
+            'ecommerce' => ['icon' => 'fa-solid fa-cart-shopping', 'color' => '#EA580C'],
+            'enterprise-software' => ['icon' => 'fa-solid fa-layer-group', 'color' => '#0D9488'],
+            'ui-ux-design' => ['icon' => 'fa-solid fa-pen-ruler', 'color' => '#C026D3'],
+            'mobile-app' => ['icon' => 'fa-solid fa-mobile-screen-button', 'color' => '#D97706'],
+            'cloud-devops' => ['icon' => 'fa-solid fa-cloud', 'color' => '#0284C7'],
+            'digital-marketing' => ['icon' => 'fa-solid fa-bullhorn', 'color' => '#4F46E5'],
+            'seo-aeo-geo' => ['icon' => 'fa-solid fa-magnifying-glass-chart', 'color' => '#E11D48'],
+            default => ['icon' => 'fa-solid fa-shapes', 'color' => '#2A4DFB'],
+        };
+    }
+
+    /**
+     * Contact-modal service listbox options (label + icon chrome).
+     *
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    public static function formServiceOptions(): array
+    {
+        return self::labeledSelectOptions(self::formServices());
+    }
+
+    /**
+     * Project-estimate service listbox options.
+     *
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    public static function projectEstimateServiceOptions(): array
+    {
+        return self::labeledSelectOptions(self::projectEstimateServices());
+    }
+
+    /**
+     * Project-estimate budget listbox options.
+     *
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    public static function projectEstimateBudgetOptions(): array
+    {
+        return self::valueSelectOptions(
+            self::projectEstimateBudgets(),
+            'fa-solid fa-building',
+            '#2A4DFB',
+        );
+    }
+
+    /**
+     * Hire-dialog expertise listbox options.
+     *
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    public static function hireExpertiseSelectOptions(): array
+    {
+        $icons = [
+            'Laravel / PHP' => ['icon' => 'fa-brands fa-laravel', 'color' => '#FF2D20'],
+            'React' => ['icon' => 'fa-brands fa-react', 'color' => '#61DAFB'],
+            'React Native' => ['icon' => 'fa-solid fa-mobile-screen-button', 'color' => '#61DAFB'],
+            'Node.js' => ['icon' => 'fa-brands fa-node-js', 'color' => '#339933'],
+            'Angular' => ['icon' => 'fa-brands fa-angular', 'color' => '#DD0031'],
+            'Vue.js' => ['icon' => 'fa-brands fa-vuejs', 'color' => '#42B883'],
+            'Python' => ['icon' => 'fa-solid fa-code', 'color' => '#3776AB'],
+            'AI / ML' => ['icon' => 'fa-solid fa-brain', 'color' => '#16A34A'],
+            'DevOps / Cloud' => ['icon' => 'fa-solid fa-cloud', 'color' => '#0284C7'],
+            'UI/UX' => ['icon' => 'fa-solid fa-pen-ruler', 'color' => '#C026D3'],
+            'Other' => ['icon' => 'fa-solid fa-shapes', 'color' => '#7A5FF8'],
+        ];
+
+        return self::valueSelectOptions(
+            self::hireExpertiseOptions(),
+            'fa-solid fa-shapes',
+            '#7A5FF8',
+            $icons,
+        );
+    }
+
+    /**
+     * Hire-dialog support-type listbox options.
+     *
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    public static function hireSupportSelectOptions(): array
+    {
+        $icons = [
+            'Dedicated Developer' => ['icon' => 'fa-solid fa-user', 'color' => '#7A5FF8'],
+            'Development Team' => ['icon' => 'fa-solid fa-user-group', 'color' => '#7A5FF8'],
+            'Project-Based Development' => ['icon' => 'fa-solid fa-cube', 'color' => '#7A5FF8'],
+            'Additional Development Capacity' => ['icon' => 'fa-solid fa-plus', 'color' => '#7A5FF8'],
+            'Specific Technical Expertise' => ['icon' => 'fa-solid fa-gears', 'color' => '#7A5FF8'],
+        ];
+
+        return self::valueSelectOptions(
+            self::hireSupportOptions(),
+            'fa-solid fa-user-group',
+            '#7A5FF8',
+            $icons,
+        );
+    }
+
+    /**
+     * Hire-dialog start-when listbox options.
+     *
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    public static function hireStartSelectOptions(): array
+    {
+        $icons = [
+            'Immediately' => ['icon' => 'fa-solid fa-bolt', 'color' => '#7A5FF8'],
+            'Within 1–2 weeks' => ['icon' => 'fa-solid fa-clock', 'color' => '#7A5FF8'],
+            'Within 1 month' => ['icon' => 'fa-solid fa-clock', 'color' => '#7A5FF8'],
+            '1–3 months' => ['icon' => 'fa-solid fa-clock', 'color' => '#7A5FF8'],
+            'Not decided yet' => ['icon' => 'fa-solid fa-shapes', 'color' => '#7A5FF8'],
+        ];
+
+        return self::valueSelectOptions(
+            self::hireStartOptions(),
+            'fa-solid fa-clock',
+            '#7A5FF8',
+            $icons,
+        );
+    }
+
+    /**
+     * @param  array<string, string>  $labels
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    protected static function labeledSelectOptions(array $labels): array
+    {
+        $options = [];
+        foreach ($labels as $value => $label) {
+            $meta = self::serviceOptionMeta((string) $value);
+            $options[] = [
+                'value' => (string) $value,
+                'label' => (string) $label,
+                'icon' => $meta['icon'],
+                'color' => $meta['color'],
+            ];
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param  list<string>  $values
+     * @param  array<string, array{icon: string, color: string}>  $icons
+     * @return list<array{value: string, label: string, icon: string, color: string}>
+     */
+    protected static function valueSelectOptions(
+        array $values,
+        string $fallbackIcon,
+        string $fallbackColor,
+        array $icons = [],
+    ): array {
+        $options = [];
+        foreach ($values as $value) {
+            $meta = $icons[$value] ?? ['icon' => $fallbackIcon, 'color' => $fallbackColor];
+            $options[] = [
+                'value' => (string) $value,
+                'label' => (string) $value,
+                'icon' => $meta['icon'],
+                'color' => $meta['color'],
+            ];
+        }
+
+        return $options;
+    }
+
+    /**
+     * Project types offered in the homepage estimate dialog.
+     *
+     * @return array<string, string>
+     */
+    public static function projectEstimateServices(): array
+    {
+        return [
+            'custom-software' => 'Custom Software',
+            'custom-crm' => 'CRM',
+            'enterprise-software' => 'ERP',
+            'web-development' => 'Web Application',
+            'mobile-app' => 'Mobile Application',
+            'ecommerce' => 'E-Commerce Platform',
+            'ai-solutions' => 'AI Solution',
+            'ui-ux-design' => 'UI/UX Design',
+            'other' => 'Other',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function projectEstimateBudgets(): array
+    {
+        return [
+            'Under $10K',
+            '10K–25K',
+            '25K–50K',
+            '50K–100K',
+            '$100K+',
+            'Not sure yet',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function projectBudgets(): array
+    {
+        return [
+            ...self::projectEstimateBudgets(),
+            'Under $25k',
+            '$25–75k',
+            '$75–150k',
+            '$150k+',
+            'Monthly team',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function hireExpertiseOptions(): array
+    {
+        return [
+            'Laravel / PHP',
+            'React',
+            'React Native',
+            'Node.js',
+            'Angular',
+            'Vue.js',
+            'Python',
+            'AI / ML',
+            'DevOps / Cloud',
+            'UI/UX',
+            'Other',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function hireSupportOptions(): array
+    {
+        return [
+            'Dedicated Developer',
+            'Development Team',
+            'Project-Based Development',
+            'Additional Development Capacity',
+            'Specific Technical Expertise',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function hireStartOptions(): array
+    {
+        return [
+            'Immediately',
+            'Within 1–2 weeks',
+            'Within 1 month',
+            '1–3 months',
+            'Not decided yet',
+        ];
+    }
+
+    /**
+     * Fold homepage dialog details into the stored message.
+     *
+     * @param  array<string, mixed>  $input
+     */
+    public static function composeInquiryMessage(string $message, array $input): string
+    {
+        $message = trim($message);
+        $parts = [];
+
+        foreach ([
+            'expertise' => 'Expertise',
+            'support_type' => 'Support',
+            'start_when' => 'Start',
+        ] as $key => $label) {
+            $value = trim((string) ($input[$key] ?? ''));
+            if ($value !== '') {
+                $parts[] = $label.': '.$value;
+            }
+        }
+
+        $budget = trim((string) ($input['budget'] ?? ''));
+        if ($budget !== '') {
+            $service = (string) ($input['service'] ?? '');
+            $needLabels = [
+                'custom-software' => 'New custom software',
+                'custom-crm' => 'CRM or ERP',
+                'hire-developers' => 'Hire developers',
+                'enterprise-software' => 'Modernize an existing system',
+            ];
+            $need = $needLabels[$service] ?? (self::formServices()[$service] ?? $service);
+            if ($need !== '') {
+                $parts[] = 'Need: '.$need;
+            }
+            $parts[] = 'Budget: '.$budget;
+        }
+
+        if ($parts === []) {
+            return $message;
+        }
+
+        $suffix = implode('. ', $parts).'.';
+        if ($message !== '' && str_contains($message, $suffix)) {
+            return $message;
+        }
+
+        return trim($message.' '.$suffix);
     }
 
     /**

@@ -30,6 +30,8 @@ class ConnectCtaSection extends Component
         public string $primaryService = '',
         public bool $secondaryModal = false,
         public string $secondaryService = '',
+        public string $titleTag = 'h2',
+        public string $note = '',
     ) {
         if ($this->primaryModal) {
             $this->primaryHref = '#contact-modal';

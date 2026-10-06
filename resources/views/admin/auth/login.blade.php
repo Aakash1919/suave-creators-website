@@ -29,11 +29,12 @@
           <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
             class="admin-input" placeholder="you@company.com" autocomplete="username">
         </div>
-        <div>
-          <label for="password" class="admin-label">Password</label>
-          <input id="password" type="password" name="password" required
-            class="admin-input" placeholder="••••••••" autocomplete="current-password">
-        </div>
+        <x-admin.password-field
+          name="password"
+          label="Password"
+          required
+          autocomplete="current-password"
+        />
         <label class="admin-check">
           <input type="checkbox" name="remember" value="1">
           Remember me on this device

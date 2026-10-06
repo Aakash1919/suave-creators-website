@@ -32,6 +32,26 @@ class ContactStoreRequest extends FormRequest
             $suffix = $serviceLabel !== '' ? ' [Service: '.$serviceLabel.']' : ' [Consultation request]';
             $this->merge(['message' => $message.$suffix]);
         }
+
+        $composed = ContactSupport::composeInquiryMessage(
+            trim((string) $this->input('message', '')),
+            $this->all(),
+        );
+        if ($composed !== trim((string) $this->input('message', ''))) {
+            $this->merge(['message' => $composed]);
+        }
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function allowedServices(): array
+    {
+        return match ((string) $this->input('inquiry')) {
+            'project-estimate' => array_keys(ContactSupport::projectEstimateServices()),
+            'hire-developers' => ['hire-developers'],
+            default => array_keys(ContactSupport::formServices()),
+        };
     }
 
     /**
@@ -55,11 +75,45 @@ class ContactStoreRequest extends FormRequest
 
         return [
             'draft_token' => ['nullable', 'uuid'],
-            'name' => ['required', 'string', 'max:120'],
+            'name' => ['required', 'string', 'max:120', Rule::when($this->filled('inquiry'), ['min:2'])],
             'email' => ['required', 'email', 'max:255'],
-            'phone' => ['required', 'string', 'max:60', 'regex:/^\+?[0-9\s\-().]+$/'],
-            'company' => ['nullable', 'string', 'max:120'],
-            'service' => ['required', 'string', Rule::in(array_keys(ContactSupport::formServices()))],
+            'phone' => [
+                $this->filled('budget') || $this->filled('inquiry') ? 'nullable' : 'required',
+                'string',
+                'max:60',
+                'regex:/^\+?[0-9\s\-().]+$/',
+            ],
+            'company' => [
+                $this->filled('inquiry') ? 'required' : 'nullable',
+                'string',
+                'max:120',
+                Rule::when($this->filled('company') || $this->filled('inquiry'), ['min:2']),
+            ],
+            'inquiry' => ['nullable', 'string', Rule::in(['project-estimate', 'hire-developers'])],
+            'expertise' => [
+                $this->input('inquiry') === 'hire-developers' ? 'required' : 'nullable',
+                'string',
+                'max:120',
+                Rule::in(ContactSupport::hireExpertiseOptions()),
+            ],
+            'support_type' => [
+                $this->input('inquiry') === 'hire-developers' ? 'required' : 'nullable',
+                'string',
+                'max:120',
+                Rule::in(ContactSupport::hireSupportOptions()),
+            ],
+            'start_when' => [
+                $this->input('inquiry') === 'hire-developers' ? 'required' : 'nullable',
+                'string',
+                'max:120',
+                Rule::in(ContactSupport::hireStartOptions()),
+            ],
+            'budget' => [
+                $this->input('inquiry') === 'project-estimate' ? 'required' : 'nullable',
+                'string',
+                Rule::in(ContactSupport::projectBudgets()),
+            ],
+            'service' => ['required', 'string', Rule::in($this->allowedServices())],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
             '_redirect' => ['nullable', 'string', 'max:255'],
         ];
@@ -72,7 +126,11 @@ class ContactStoreRequest extends FormRequest
     {
         return [
             'name.required' => 'Please enter your full name.',
+            'name.min' => 'Please enter your full name.',
             'name.max' => 'Full name may not be longer than 120 characters.',
+            'company.required' => 'Please enter your company name.',
+            'company.min' => 'Please enter your company name.',
+            'company.max' => 'Company name may not be longer than 120 characters.',
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
             'email.max' => 'Email may not be longer than 255 characters.',
@@ -81,6 +139,15 @@ class ContactStoreRequest extends FormRequest
             'phone.regex' => 'Phone number may only contain digits and dialing symbols.',
             'service.required' => 'Please select a service.',
             'service.in' => 'Please select a valid service.',
+            'inquiry.in' => 'Please choose a valid request type.',
+            'expertise.required' => 'Please select the expertise you need.',
+            'expertise.in' => 'Please select a valid expertise.',
+            'support_type.required' => 'Please select the kind of support you need.',
+            'support_type.in' => 'Please select a valid support type.',
+            'start_when.required' => 'Please select when you need to start.',
+            'start_when.in' => 'Please select a valid start time.',
+            'budget.required' => 'Please select a budget range.',
+            'budget.in' => 'Please select a valid budget range.',
             'message.required' => 'Please tell us what you are trying to fix.',
             'message.min' => 'Please write at least 10 characters about your request.',
             'message.max' => 'Message may not be longer than 5000 characters.',
