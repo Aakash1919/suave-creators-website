@@ -105,6 +105,14 @@ return [
             'description' => 'Suave Creators is a custom software development company that builds CRM, ERP, web applications and AI automation for US mid-market companies, and provides dedicated developers. Clients own 100% of the code.',
             'slogan' => 'Custom software you own.',
             'founding_date' => '2021',
+            'number_of_employees_min' => 10,
+            'founder' => [
+                'name' => 'Aakash Choudhary',
+                'job_title' => 'Founder & Solution Architect',
+                'sameAs' => [
+                    'https://www.linkedin.com/in/aakash-choudhary-b821b3191/',
+                ],
+            ],
             'homepage_area_served' => ['United States', 'United Kingdom', 'Australia'],
             'email' => 'info@suavecreators.com',
             'telephone' => '+1 (307) 435-9605',
@@ -165,8 +173,9 @@ return [
             ],
             'sameAs' => [
                 'https://www.linkedin.com/company/suave-creators/',
-                'https://www.facebook.com/share/1Zt4fotyAa/',
-                'https://www.instagram.com/suavecreators',
+                'https://www.instagram.com/suavecreators/',
+                'https://www.facebook.com/suavecreators/',
+                'https://www.crunchbase.com/organization/suave-creators',
             ],
             'knowsAbout' => [
                 'Custom software development',
@@ -184,6 +193,8 @@ return [
             'engineering_center' => [
                 'name' => 'Suave Creators – India Engineering Center',
                 'price_range' => '$$',
+                'latitude' => 32.0841192,
+                'longitude' => 76.5132446,
                 'opening_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
                 'opens' => '10:00',
                 'closes' => '19:00',
@@ -263,7 +274,7 @@ return [
             ],
             [
                 'question' => 'Do you provide support after launch?',
-                'answer' => 'Yes. Every project can move onto a monthly support plan covering uptime monitoring, security patches, bug fixes and new features. Response times are set in a written SLA.',
+                'answer' => 'Yes. Every project can move onto a monthly support plan covering uptime monitoring, security patches, bug fixes and new features. Response times are set in a written SLA, starting at 4 business hours for critical issues.',
             ],
         ],
     ],
@@ -291,6 +302,8 @@ return [
             'og_image_width' => 1200,
             'og_image_height' => 630,
             'og_image_alt' => 'Suave Creators custom software development team and product dashboard',
+            'date_published' => '2021-01-01',
+            'date_modified' => '2026-10-07',
             'json_ld_name' => 'Custom Software Development Company | Suave Creators',
             'json_ld_description' => 'Hire a custom software development company that builds CRM, ERP and web apps you own. Senior developers, 2-week sprints, US contracts. Get a scoped estimate.',
         ],

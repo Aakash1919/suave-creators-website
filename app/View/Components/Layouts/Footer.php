@@ -110,7 +110,7 @@ class Footer extends Component
             ->all();
 
         $this->socialLinks ??= [
-            ['href' => 'https://www.facebook.com/share/1Zt4fotyAa/', 'label' => 'Facebook', 'icon' => 'fa-brands fa-facebook-f'],
+            ['href' => 'https://www.facebook.com/suavecreators/', 'label' => 'Facebook', 'icon' => 'fa-brands fa-facebook-f'],
             ['href' => 'https://www.linkedin.com/company/suave-creators/', 'label' => 'LinkedIn', 'icon' => 'fa-brands fa-linkedin-in'],
             ['href' => 'https://www.instagram.com/suavecreators/?igsh=MWRscWJoZXJrNG10cw%3D%3D#', 'label' => 'Instagram', 'icon' => 'fa-brands fa-instagram'],
         ];

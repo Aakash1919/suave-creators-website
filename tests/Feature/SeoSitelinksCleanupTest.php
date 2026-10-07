@@ -118,7 +118,10 @@ class SeoSitelinksCleanupTest extends TestCase
 
     public function test_homepage_json_ld_uses_the_homepage_graph(): void
     {
-        config(['app.url' => 'https://suavecreators.com']);
+        config([
+            'app.url' => 'https://suavecreators.com',
+            'seo.noindex' => false,
+        ]);
 
         $response = $this->get(route('home'));
 
@@ -160,7 +163,16 @@ class SeoSitelinksCleanupTest extends TestCase
         $this->assertSame('2021', $organization['foundingDate']);
         $this->assertSame('US', $organization['address']['addressCountry']);
         $this->assertArrayNotHasKey('aggregateRating', $organization);
-        $this->assertArrayNotHasKey('founder', $organization);
+        $this->assertSame('QuantitativeValue', $organization['numberOfEmployees']['@type']);
+        $this->assertSame(10, $organization['numberOfEmployees']['minValue']);
+        $this->assertSame('Person', $organization['founder']['@type']);
+        $this->assertSame('https://suavecreators.com/#founder', $organization['founder']['@id']);
+        $this->assertSame('Aakash Choudhary', $organization['founder']['name']);
+        $this->assertSame('Founder & Solution Architect', $organization['founder']['jobTitle']);
+        $this->assertSame(
+            ['https://www.linkedin.com/in/aakash-choudhary-b821b3191/'],
+            $organization['founder']['sameAs']
+        );
         $this->assertSame('sales', $organization['contactPoint'][0]['contactType']);
         $this->assertSame(['English'], $organization['contactPoint'][0]['availableLanguage']);
         $this->assertSame('technical support', $organization['contactPoint'][1]['contactType']);
@@ -168,7 +180,9 @@ class SeoSitelinksCleanupTest extends TestCase
         $this->assertSame('https://suavecreators.com/#india-engineering-center', $organization['department']['@id']);
 
         $this->assertSame('IN', $graph[1]['address']['addressCountry']);
-        $this->assertArrayNotHasKey('geo', $graph[1]);
+        $this->assertSame('GeoCoordinates', $graph[1]['geo']['@type']);
+        $this->assertSame(32.0841192, $graph[1]['geo']['latitude']);
+        $this->assertSame(76.5132446, $graph[1]['geo']['longitude']);
         $this->assertSame('https://suavecreators.com/#organization', $graph[1]['parentOrganization']['@id']);
 
         $this->assertCount(6, $graph[2]['itemListElement']);
@@ -180,13 +194,32 @@ class SeoSitelinksCleanupTest extends TestCase
         $this->assertNotContains('https://suavecreators.com/hire-dedicated-developers', $offerUrls);
 
         $this->assertArrayNotHasKey('potentialAction', $graph[3]);
+        $this->assertSame(
+            [
+                'https://www.linkedin.com/company/suave-creators/',
+                'https://www.instagram.com/suavecreators/',
+                'https://www.facebook.com/suavecreators/',
+                'https://www.crunchbase.com/organization/suave-creators',
+            ],
+            $organization['sameAs']
+        );
         $this->assertSame('https://suavecreators.com/#webpage', $graph[4]['@id']);
+        $this->assertSame('2021-01-01', $graph[4]['datePublished']);
+        $this->assertSame('2026-10-07', $graph[4]['dateModified']);
         $this->assertSame('Get a Scoped Estimate', $graph[4]['potentialAction']['name']);
         $this->assertSame(route('contact-us'), $graph[4]['potentialAction']['target']);
         $this->assertSame('https://suavecreators.com/#webpage', $graph[5]['isPartOf']['@id']);
         $this->assertCount(8, $graph[5]['mainEntity']);
         $this->assertSame('How much does custom software development cost?', $graph[5]['mainEntity'][0]['name']);
         $this->assertStringNotContainsString('[', (string) $graph[5]['mainEntity'][0]['acceptedAnswer']['text']);
+        $this->assertSame(
+            'Do you provide support after launch?',
+            $graph[5]['mainEntity'][7]['name']
+        );
+        $this->assertStringContainsString(
+            '4 business hours for critical issues',
+            (string) $graph[5]['mainEntity'][7]['acceptedAnswer']['text']
+        );
 
         $encoded = $response->getContent();
         $this->assertStringNotContainsString('"@type":"BreadcrumbList"', $encoded);
