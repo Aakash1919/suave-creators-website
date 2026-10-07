@@ -1,7 +1,8 @@
 @extends('layouts.frontend')
 
+@section('theme-color', '#0F172A')
+
 @push('custom-css')
-<meta name="theme-color" content="#0F172A">
 <link rel="preload" as="image" href="{{ asset($bannerBackgroundImage) }}" type="image/webp">
 @if (filled($heroVisualImage))
 <link rel="preload" as="image" href="{{ asset($heroVisualImage) }}" type="image/webp">

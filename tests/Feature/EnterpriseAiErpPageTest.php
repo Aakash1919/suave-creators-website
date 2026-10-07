@@ -11,6 +11,8 @@ class EnterpriseAiErpPageTest extends TestCase
         $response = $this->get(route('enterprise-ai-erp-uae', absolute: false));
 
         $response->assertOk();
+        $response->assertSee('<meta name="theme-color" content="#0F172A">', false);
+        $this->assertSame(1, substr_count($response->getContent(), 'name="theme-color"'));
         $this->assertSame('/uae/services/enterprise-ai-erp-solutions', route('enterprise-ai-erp-uae', absolute: false));
         $response->assertSee('Enterprise AI &amp;', false);
         $response->assertSee('Custom ERP Solutions', false);
