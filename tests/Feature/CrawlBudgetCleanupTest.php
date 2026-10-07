@@ -22,6 +22,19 @@ class CrawlBudgetCleanupTest extends TestCase
         $response->assertHeader('X-Robots-Tag', 'noindex, nofollow');
     }
 
+    public function test_retired_www_backend_host_returns_gone(): void
+    {
+        config([
+            'app.url' => 'https://suavecreators.com',
+            'seo.retired_hosts' => ['backend.suavecreators.com', 'turbo.suavecreators.com'],
+        ]);
+
+        $response = $this->get('https://www.backend.suavecreators.com/about-us');
+
+        $response->assertStatus(410);
+        $response->assertHeader('X-Robots-Tag', 'noindex, nofollow');
+    }
+
     public function test_spam_query_params_permanently_redirect_to_clean_path(): void
     {
         config(['app.url' => 'https://suavecreators.com']);

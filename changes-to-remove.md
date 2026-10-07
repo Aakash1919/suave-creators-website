@@ -8,6 +8,7 @@ This file is **not** a `design/` restore guide. The legacy `design/` static prot
 **Live status when documented:** code deployed, production `.env` has `SEO_RETIRED_HOSTS`, Hostinger DNS/parked domain/SSL for `turbo` active. Verified:
 
 - `https://turbo.suavecreators.com/?i=123` → **410 Gone** + `X-Robots-Tag: noindex, nofollow`
+- `https://backend.suavecreators.com/...` and `https://www.backend.suavecreators.com/...` → **410 Gone** (www variants match automatically)
 - `https://suavecreators.com/?i=123` → **301** → `https://suavecreators.com`
 
 Source context: Google sheet `suavecreators_crawl_stats_dev_fix_plan` (dead subdomain `turbo`, spam query URLs).
