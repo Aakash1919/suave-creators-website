@@ -23,6 +23,7 @@ return [
     | Point these DNS records at the same server as production, then every
     | path on those Host headers returns 410 so Google drops them faster
     | than NXDOMAIN / DNS errors (which burn crawl budget indefinitely).
+    | www. prefixes are treated as the same retired host automatically.
     |
     */
 
