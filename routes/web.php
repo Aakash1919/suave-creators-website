@@ -56,7 +56,8 @@ Route::get('/main/public/{path}', function (string $path) {
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
-Route::get('/ai-powered-outreach-crm', [ProductController::class, 'index'])->name('product');
+Route::get('/free-all-in-one-crm', [ProductController::class, 'index'])->name('product');
+Route::get('/ai-powered-outreach-crm', fn () => redirect()->route('product', status: 301))->name('product.legacy');
 Route::get('/custom-crm-builder', [CustomCrmBuilderController::class, 'index'])->name('custom-crm-builder');
 
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');

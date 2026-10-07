@@ -106,7 +106,7 @@ class SeoSitelinksCleanupTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('>About<', false);
-        $response->assertSee('>AI Outreach CRM<', false);
+        $response->assertSee('>AI CRM<', false);
         $response->assertSee('>Services<', false);
         $response->assertSee('>Industries<', false);
         $response->assertSee('>Case Studies<', false);

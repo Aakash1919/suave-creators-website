@@ -359,6 +359,13 @@
                     subtitle="See how autonomous multi-agent pipelines eliminate manual back-office tasks."
                     cta-label="Explore The Suave App"
                 />
+            @elseif (request()->routeIs('product*'))
+                <x-layouts.topbar
+                    title="Free CRM for agencies and startups:"
+                    subtitle="sales, projects, HR and invoicing in one app."
+                    cta-label="Sign up free"
+                    :href-route="route('contact-us')"
+                />
             @else
                 <x-layouts.topbar />
             @endif

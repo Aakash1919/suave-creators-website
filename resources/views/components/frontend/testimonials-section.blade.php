@@ -18,6 +18,9 @@
             {{ $subtitle }}
           </p>
         @endif
+        @if ($slot->isNotEmpty())
+          <div class="mt-6">{{ $slot }}</div>
+        @endif
       </div>
     </div>
 

@@ -84,12 +84,12 @@ class Footer extends Component
                 ['route' => 'blogs', 'label' => 'Blog'],
                 ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact us'],
             ],
-            'AI Outreach CRM' => [
+            'AI CRM' => [
                 ['route' => 'product', 'fragment' => 'how-it-works', 'label' => 'How it Works'],
-                ['route' => 'product', 'fragment' => 'add-ons', 'label' => 'Add Ons'],
-                ['route' => 'product', 'fragment' => 'business-works', 'label' => 'The-Suave AI'],
+                ['route' => 'product', 'fragment' => 'add-ons', 'label' => 'What You Save'],
+                ['route' => 'product', 'fragment' => 'business-works', 'label' => 'Ask Suave AI'],
                 ['route' => 'product', 'fragment' => 'data-privacy', 'label' => 'Data & Privacy'],
-                ['route' => 'product', 'fragment' => 'case-study', 'label' => 'Case Study'],
+                ['route' => 'product', 'fragment' => 'testimonial', 'label' => 'Client Results'],
             ],
         ];
 
