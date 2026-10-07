@@ -308,6 +308,15 @@ return [
             'og_description' => 'Enterprise B2B software development services: custom CRM builder, scalable web apps, enterprise software, UI/UX, and AI solutions with 100% code ownership.',
             'json_ld_breadcrumb_name' => 'Services',
         ],
+        'technologies' => [
+            'title' => 'Technologies & Development Stack for Web, Mobile and E-commerce | Suave Creators',
+            'description' => 'Suave Creators builds web, mobile, and e-commerce applications on Laravel, Node.js, React, Angular, Vue.js, WordPress, Shopify Plus, and Magento.',
+            'og_title' => 'Technologies & Development Stack for Web, Mobile and E-commerce | Suave Creators',
+            'og_description' => 'Suave Creators builds web, mobile, and e-commerce applications on Laravel, Node.js, React, Angular, Vue.js, WordPress, Shopify Plus, and Magento.',
+            'json_ld_name' => 'Technologies & Development Stack | Suave Creators',
+            'json_ld_description' => 'Suave Creators builds web, mobile, and e-commerce applications on Laravel, Node.js, React, Angular, Vue.js, WordPress, Shopify Plus, and Magento.',
+            'json_ld_breadcrumb_name' => 'Technologies',
+        ],
         'industries' => [
             'title' => 'Industry-Specific Software Development Solutions | Suave Creators',
             'description' => 'Explore custom software development solutions for healthcare, startups, finance, e-commerce, logistics, and education, built by Suave Creators.',
