@@ -23,12 +23,13 @@ return [
     | Point these DNS records at the same server as production, then every
     | path on those Host headers returns 410 so Google drops them faster
     | than NXDOMAIN / DNS errors (which burn crawl budget indefinitely).
+    | www. prefixes are treated as the same retired host automatically.
     |
     */
 
     'retired_hosts' => array_values(array_filter(array_map(
         'trim',
-        explode(',', (string) env('SEO_RETIRED_HOSTS', 'turbo.suavecreators.com'))
+        explode(',', (string) env('SEO_RETIRED_HOSTS', 'turbo.suavecreators.com,backend.suavecreators.com'))
     ))),
 
     /*
@@ -88,7 +89,8 @@ return [
         'og_locale_alternate' => ['en_IN'],
         'twitter_site' => '@suavecreators',
         'twitter_creator' => '@suavecreators',
-        'robots' => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        'robots' => 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+        'theme_color' => '#0B3D91',
         'google_site_verification' => '8gnHTv-hWNxTIE6HmJwKSMZH5v_ryZuDVQRbAinOpAQ',
         'google_analytics_id' => 'G-5HX7B8X9QP',
         'google_tag_manager_id' => 'GTM-THXXRSV6',
@@ -104,6 +106,14 @@ return [
             'description' => 'Suave Creators is a custom software development company that builds CRM, ERP, web applications and AI automation for US mid-market companies, and provides dedicated developers. Clients own 100% of the code.',
             'slogan' => 'Custom software you own.',
             'founding_date' => '2021',
+            'number_of_employees_min' => 10,
+            'founder' => [
+                'name' => 'Aakash Choudhary',
+                'job_title' => 'Founder & Solution Architect',
+                'sameAs' => [
+                    'https://www.linkedin.com/in/aakash-choudhary-b821b3191/',
+                ],
+            ],
             'homepage_area_served' => ['United States', 'United Kingdom', 'Australia'],
             'email' => 'info@suavecreators.com',
             'telephone' => '+1 (307) 435-9605',
@@ -164,8 +174,9 @@ return [
             ],
             'sameAs' => [
                 'https://www.linkedin.com/company/suave-creators/',
-                'https://www.facebook.com/share/1Zt4fotyAa/',
-                'https://www.instagram.com/suavecreators',
+                'https://www.instagram.com/suavecreators/',
+                'https://www.facebook.com/suavecreators/',
+                'https://www.crunchbase.com/organization/suave-creators',
             ],
             'knowsAbout' => [
                 'Custom software development',
@@ -183,6 +194,8 @@ return [
             'engineering_center' => [
                 'name' => 'Suave Creators – India Engineering Center',
                 'price_range' => '$$',
+                'latitude' => 32.0841192,
+                'longitude' => 76.5132446,
                 'opening_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
                 'opens' => '10:00',
                 'closes' => '19:00',
@@ -262,7 +275,7 @@ return [
             ],
             [
                 'question' => 'Do you provide support after launch?',
-                'answer' => 'Yes. Every project can move onto a monthly support plan covering uptime monitoring, security patches, bug fixes and new features. Response times are set in a written SLA.',
+                'answer' => 'Yes. Every project can move onto a monthly support plan covering uptime monitoring, security patches, bug fixes and new features. Response times are set in a written SLA, starting at 4 business hours for critical issues.',
             ],
         ],
     ],
@@ -286,6 +299,12 @@ return [
             'og_title' => 'Custom Software Development Company | Software You Own',
             'og_description' => 'Custom CRM, ERP and web applications built by senior developers in 2-week sprints. 100% code ownership. Hire a team or get a scoped estimate.',
             'twitter_description' => 'Custom CRM, ERP and web apps by senior developers. 100% code ownership, 2-week sprints.',
+            'og_image' => 'assets/brand/og-default.png',
+            'og_image_width' => 1200,
+            'og_image_height' => 630,
+            'og_image_alt' => 'Suave Creators custom software development team and product dashboard',
+            'date_published' => '2021-01-01',
+            'date_modified' => '2026-10-07',
             'json_ld_name' => 'Custom Software Development Company | Suave Creators',
             'json_ld_description' => 'Hire a custom software development company that builds CRM, ERP and web apps you own. Senior developers, 2-week sprints, US contracts. Get a scoped estimate.',
         ],

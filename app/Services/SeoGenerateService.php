@@ -369,6 +369,8 @@ class SeoGenerateService
             'description' => (string) ($org['description'] ?? ''),
             'slogan' => (string) ($org['slogan'] ?? ''),
             'foundingDate' => (string) ($org['founding_date'] ?? ''),
+            'founder' => $this->homeFounder($org, $baseUrl),
+            'numberOfEmployees' => $this->homeNumberOfEmployees($org),
             'email' => $email !== '' ? $email : null,
             'telephone' => $telephone !== '' ? $telephone : null,
             'address' => $address,
@@ -417,6 +419,8 @@ class SeoGenerateService
                     'url' => $imageUrl,
                 ],
                 'inLanguage' => (string) ($site['in_language'] ?? 'en-US'),
+                'datePublished' => $this->homePageDate('date_published', $org),
+                'dateModified' => $this->homePageDate('date_modified', $org),
                 'potentialAction' => [
                     '@type' => 'CommunicateAction',
                     'name' => 'Get a Scoped Estimate',
@@ -438,6 +442,74 @@ class SeoGenerateService
             '@context' => 'https://schema.org',
             '@graph' => $graph,
         ];
+    }
+
+    /**
+     * Prefer pages.home date fields; fall back to founding year-01-01 for published.
+     *
+     * @param  array<string, mixed>  $org
+     */
+    protected function homePageDate(string $key, array $org): ?string
+    {
+        $configured = (string) config("seo.pages.home.{$key}", '');
+
+        if ($configured !== '' && ! str_contains($configured, '[') && preg_match('/^\d{4}-\d{2}-\d{2}$/', $configured) === 1) {
+            return $configured;
+        }
+
+        if ($key === 'date_published') {
+            $year = (string) ($org['founding_date'] ?? '');
+            if (preg_match('/^\d{4}$/', $year) === 1) {
+                return $year.'-01-01';
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<string, mixed>|null
+     */
+    protected function homeNumberOfEmployees(array $org): ?array
+    {
+        $min = $org['number_of_employees_min'] ?? null;
+
+        if (! is_numeric($min) || (int) $min < 1) {
+            return null;
+        }
+
+        return [
+            '@type' => 'QuantitativeValue',
+            'minValue' => (int) $min,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $org
+     * @return array<string, mixed>|null
+     */
+    protected function homeFounder(array $org, string $baseUrl): ?array
+    {
+        $founder = (array) ($org['founder'] ?? []);
+        $name = trim((string) ($founder['name'] ?? ''));
+
+        if ($name === '' || str_contains($name, '[')) {
+            return null;
+        }
+
+        $sameAs = array_values(array_filter(
+            (array) ($founder['sameAs'] ?? []),
+            static fn (mixed $value): bool => is_string($value) && $value !== '' && ! str_contains($value, '[')
+        ));
+
+        return $this->withoutEmpty([
+            '@type' => 'Person',
+            '@id' => $baseUrl.'/#founder',
+            'name' => $name,
+            'jobTitle' => (string) ($founder['job_title'] ?? ''),
+            'sameAs' => $sameAs,
+        ]);
     }
 
     /**
@@ -508,6 +580,16 @@ class SeoGenerateService
             static fn (mixed $value): bool => is_string($value) && $value !== ''
         ));
 
+        $latitude = $center['latitude'] ?? null;
+        $longitude = $center['longitude'] ?? null;
+        $geo = is_numeric($latitude) && is_numeric($longitude)
+            ? [
+                '@type' => 'GeoCoordinates',
+                'latitude' => (float) $latitude,
+                'longitude' => (float) $longitude,
+            ]
+            : null;
+
         return $this->withoutEmpty([
             '@type' => 'ProfessionalService',
             '@id' => $baseUrl.'/#india-engineering-center',
@@ -518,6 +600,7 @@ class SeoGenerateService
             'email' => $email !== '' ? $email : null,
             'priceRange' => (string) ($center['price_range'] ?? ''),
             'address' => $address === [] ? null : array_merge(['@type' => 'PostalAddress'], $address),
+            'geo' => $geo,
             'openingHoursSpecification' => $days === [] ? null : [[
                 '@type' => 'OpeningHoursSpecification',
                 'dayOfWeek' => $days,
