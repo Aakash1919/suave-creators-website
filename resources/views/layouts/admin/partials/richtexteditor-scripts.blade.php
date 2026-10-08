@@ -23,15 +23,26 @@
       ["Thumbnail Image", "border: 1px solid #ddd; border-radius: 4px; padding: 5px;width:150px"]
     ];
 
+    // H1–H6, then P (Normal) so a heading can be turned back into a paragraph.
+    window.RTE_DefaultConfig.paragraphItems = 'H1,H2,H3,H4,H5,H6,Normal';
+    window.RTE_DefaultConfig.text_h1 = 'Heading 1';
+    window.RTE_DefaultConfig.text_h2 = 'Heading 2';
+    window.RTE_DefaultConfig.text_h3 = 'Heading 3';
+    window.RTE_DefaultConfig.text_h4 = 'Heading 4';
+    window.RTE_DefaultConfig.text_h5 = 'Heading 5';
+    window.RTE_DefaultConfig.text_h6 = 'Heading 6';
+    window.RTE_DefaultConfig.text_normal = 'P';
+
     // Lean toolbar for blog writing — formatting plus public-page visual blocks.
     window.RTE_DefaultConfig.toolbar_blog =
-      '{undo,redo}|{bold,italic,underline,strike}|{forecolor}|{justifyleft,justifycenter,justifyright}' +
+      '{undo,redo}|{paragraphs:dropdown}|{bold,italic,underline,strike}|{forecolor}|{justifyleft,justifycenter,justifyright}' +
       '|{insertorderedlist,insertunorderedlist,indent,outdent}|{insertblockquote}' +
-      ' #{paragraphs:toggle,fontsize:toggle}' +
+      ' #{fontsize:toggle}' +
       ' / {insertfeaturedimage,inserttakeaways,insertresults,insertchecklist,insertstats,insertchart,insertinsight,insertblogtable}' +
-      '|{removeformat}|{insertlink,unlink,insertimage,insertvideo,inserthorizontalrule}|{code}' +
+      '|{removeformat}|{insertlink,linkprojectestimate,linkhiredevelopers,unlink,insertimage,insertvideo,inserthorizontalrule}|{code}' +
       '#{fullscreenenter,fullscreenexit}';
 
+    window.RTE_DefaultConfig.controltoolbar_A = '{linkstyle,insertlink,linkprojectestimate,linkhiredevelopers,unlink}';
     window.RTE_DefaultConfig.toolbar = 'blog';
   }
 </script>

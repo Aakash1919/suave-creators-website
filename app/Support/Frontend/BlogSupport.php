@@ -4,6 +4,7 @@ namespace App\Support\Frontend;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Services\BlogSeoService;
 use App\Support\Blogs\BlogHtmlSupport;
 use DOMDocument;
 use DOMElement;
@@ -42,7 +43,7 @@ class BlogSupport
     public static function post(string $slug): ?array
     {
         $query = Blog::query()
-            ->with(self::listingRelations())
+            ->with([...self::listingRelations(), 'seoDetail'])
             ->where('slug', $slug)
             ->when(
                 auth()->check(),
@@ -192,6 +193,8 @@ class BlogSupport
             );
         }
 
+        $articleSeo = is_array($post['article_seo'] ?? null) ? $post['article_seo'] : [];
+
         return [
             'post' => $post,
             'posts' => $listingPosts->all(),
@@ -215,6 +218,13 @@ class BlogSupport
             'seoOgTitle' => trim((string) ($post['og_title'] ?? '')) ?: null,
             'seoOgDescription' => trim((string) ($post['og_description'] ?? '')) ?: null,
             'seoRobots' => ! empty($post['is_draft']) ? 'noindex, nofollow' : null,
+            'seoAuthor' => trim((string) ($articleSeo['author_name'] ?? '')) ?: null,
+            'seoImage' => trim((string) ($articleSeo['image'] ?? '')) ?: null,
+            'seoOgImageAlt' => trim((string) ($articleSeo['image_alt'] ?? '')) ?: null,
+            'seoType' => 'article',
+            'seoFaqs' => ! empty($post['faqs']) && is_array($post['faqs']) ? $post['faqs'] : null,
+            'seoBreadcrumbName' => trim((string) ($post['title'] ?? '')) ?: null,
+            'seoArticle' => is_array($articleSeo['article'] ?? null) ? $articleSeo['article'] : null,
             'isDraft' => ! empty($post['is_draft']),
         ];
     }
@@ -414,6 +424,9 @@ class BlogSupport
             'meta_description' => (string) ($blog->meta_description ?? ''),
             'og_title' => (string) ($blog->og_title ?? ''),
             'og_description' => (string) ($blog->og_description ?? ''),
+            'article_seo' => $blog->relationLoaded('seoDetail')
+                ? app(BlogSeoService::class)->payload($blog)
+                : null,
             'route' => 'blog.show',
             'url' => $slug !== '' ? route('blog.show', ['slug' => $slug]) : '',
         ];

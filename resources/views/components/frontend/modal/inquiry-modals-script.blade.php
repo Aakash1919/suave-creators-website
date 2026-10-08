@@ -210,6 +210,18 @@
       });
 
       document.addEventListener('click', function (event) {
+        var modalLink = event.target.closest('a[href="#project-estimate-dialog"], a[href="#hire-developers-dialog"]');
+        if (modalLink && !modalLink.closest('[data-inquiry-dialog]')) {
+          var dialogId = (modalLink.getAttribute('href') || '').slice(1);
+          var linkedDialog = document.getElementById(dialogId);
+          if (linkedDialog && linkedDialog.hasAttribute('data-inquiry-dialog')) {
+            event.preventDefault();
+            event.stopPropagation();
+            openInquiryDialog(linkedDialog, modalLink);
+            return;
+          }
+        }
+
         var trigger = event.target.closest('[data-open-contact-modal], a[href="#contact-modal"]');
         if (!trigger || trigger.closest('[data-inquiry-dialog]')) return;
         if (!estimateDialog && !hireDialog) return;
