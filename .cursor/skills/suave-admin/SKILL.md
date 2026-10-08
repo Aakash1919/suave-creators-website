@@ -10,7 +10,7 @@ description: >-
   route() URLs, Services + Form Requests — not Filament, Breeze, or Spatie
   Permission. Read before any admin change.
 metadata:
-  last-updated: "2026-10-05"
+  last-updated: "2026-10-08"
 ---
 
 # Suave Admin
@@ -61,6 +61,7 @@ Follow [`system-coding-standards`](../system-coding-standards/SKILL.md) and Pint
 | `BlogCategoryService` | Blog category create/update, unique slug from name when the slug field is empty, next `sort_order`. No delete |
 | `BlogDraftGenerationService` | AI trend draft generation via `BlogWriterAgent` → saves `status=draft` |
 | `BlogSeoMetaGenerationService` | AI SEO/OG field suggestions via `SeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
+| `BlogSeoService` | One-to-one `blog_seo_details` (tags, keywords, about, mentions). Headline, image, author name, section, and breadcrumb stay derived from the post, featured image, user, and category. Author job title is hardcoded; `article:author` is the company LinkedIn URL |
 | `BlogRewriteService` | Legacy post rewrite via `BlogRewriteAgent` (run-once only): length target = average of published posts with `id >= blogs.rewrite.below_id` ± tolerance, human-written exemplars, `[[IMG_n]]` image tokenize/restore (images byte-for-byte), legacy link normalization, validation + retries, saves `content` + `faqs` only; `backupBlog()` / `restoreFromBackup()` on the single `blogs_backup` table (`blog_id` primary key; first backup per post is never overwritten, so it keeps the pre-rewrite original) |
 | `CaseStudyService` | Case study CRUD, slug, hero image, per-section left/right visual images, metrics/sections normalization, service/industry placement slug lists. **No AI drafts** — content is editor-filled only |
 | `CaseStudySeoMetaGenerationService` | AI SEO/OG field suggestions via `CaseStudySeoMetaAgent` → returns values only (edit form fills inputs; editor saves manually) |
@@ -276,7 +277,7 @@ SuaveAdmin.createFlashMessage('success', 'Blog has been created successfully.');
 - Do **not** load the editor globally — include styles/scripts only on pages that need it:
   - `@include('layouts.admin.partials.richtexteditor-styles')` in `@push('styles')`
   - `@include('layouts.admin.partials.richtexteditor-scripts')` in `@push('scripts')`
-- Blog toolbar preset `toolbar_blog` (set in the scripts partial): **undo/redo first**, then formatting, headings/size, lists, quote, **public-page blocks** (featured image, takeaways, results, checklist, stats, completion bars, insight, comparison table), link, image/video, HR, HTML source, fullscreen
+- Blog toolbar preset `toolbar_blog` (set in the scripts partial): **undo/redo first**, then the headings dropdown (`paragraphs:dropdown`: H1 Heading 1 through H6 Heading 6, then **P** which applies a `<p>` and clears the heading; menu labels stay one normal text size), formatting, font size, lists, quote, **public-page blocks** (featured image, takeaways, results, checklist, stats, completion bars, insight, comparison table), link, **Estimate modal** (`#project-estimate-dialog`) and **Hire modal** (`#hire-developers-dialog`) on the toolbar and the link float bar, image/video, HR, HTML source, fullscreen
 - Block insert commands live in `public/js/admin/blog-blocks-plugin.js` (`plugin_blogblocks`) — labeled **Undo / Redo / Remove block** plus insert buttons above Content (`data-blog-block-toolbar`: Featured image, Takeaways, Results, Checklist, Stat boxes, Completion bars, Insight, Comparison table), matching toolbar icons, and `/` slash menu under **Blog layout**. Completion-bar fills are edited in the article (label + percent), not in the publish sidebar.
 - Explicitly **omitted**: template, delete, insert comment, save/new/print, cut/copy/paste, find, spellcheck, AI, emoji, gallery, document, revision history, TOC, page break, help, togglemore
 - Init via `SuaveAdmin.initRichTextEditor('#blog-content', { height: 640, toolbar: 'blog', wordCountGoal: 2000 })`
@@ -412,7 +413,7 @@ Generation reads existing posts (titles, category frequency, 2–3 rich style ex
 
 ## Edit-form SEO meta (manual save)
 
-On **Edit blog**, “Generate SEO meta” (`POST admin/blogs/{blog}/generate-seo`, permission `blogs.update`) calls `BlogSeoMetaGenerationService` + `SeoMetaAgent` with the current form title / short description / content. It returns `meta_title`, `meta_description`, `og_title`, `og_description` as JSON and the client fills only those inputs — **no DB write** until the editor clicks Save.
+On **Edit blog**, “Generate SEO meta” (`POST admin/blogs/{blog}/generate-seo`, permission `blogs.update`) calls `BlogSeoMetaGenerationService` + `SeoMetaAgent` with the current form title / short description / content. It returns `meta_title`, `meta_description`, `og_title`, `og_description` as JSON and the client fills only those inputs — **no DB write** until the editor clicks Save. The same SEO card also edits `blog_seo_details` via `BlogSeoService`: comma- or line-separated tags and keywords, plus About and Mentions repeaters. Those save with the post. They do not duplicate title, image, author, or category. **Preview schema** (`GET admin.blogs.preview-schema`, permission `blogs.update`) opens an admin modal with the article meta tags and JSON-LD from the saved post via `BlogSeoService::preview()`. Unsaved form text is not sent.
 
 Config: `config/blogs.php` → `seo_meta.model` (`BLOG_SEO_META_MODEL`).
 

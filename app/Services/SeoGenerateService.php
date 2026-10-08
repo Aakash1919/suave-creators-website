@@ -29,10 +29,10 @@ class SeoGenerateService
      * @param  array<string, mixed>|null  $overrides
      * @return array<string, mixed>
      */
-    public function generate(?array $overrides = null): array
+    public function generate(?array $overrides = null, ?string $routeName = null): array
     {
         $site = config('seo.site', []);
-        $routeName = optional(request()->route())->getName();
+        $routeName ??= optional(request()->route())->getName();
         $page = is_string($routeName)
             ? (array) config("seo.pages.{$routeName}", [])
             : [];
@@ -100,6 +100,7 @@ class SeoGenerateService
         }
 
         $faqs = is_array($merged['faqs'] ?? null) ? $merged['faqs'] : null;
+        $article = is_array($merged['article'] ?? null) ? $merged['article'] : null;
         $robots = (string) ($merged['robots'] ?? 'index, follow');
 
         if (config('seo.noindex')) {
@@ -145,6 +146,7 @@ class SeoGenerateService
                 'image' => $imageUrl,
                 'image_alt' => $imageAlt,
             ],
+            'article' => $article,
             'jsonLd' => $this->buildJsonLd(
                 $site,
                 (string) ($merged['json_ld_name'] ?? $title),
@@ -158,6 +160,7 @@ class SeoGenerateService
                 is_string($merged['json_ld_breadcrumb_name'] ?? null) ? $merged['json_ld_breadcrumb_name'] : null,
                 is_array($merged['json_ld_about'] ?? null) ? $merged['json_ld_about'] : null,
                 is_string($merged['json_ld_main_entity'] ?? null) ? $merged['json_ld_main_entity'] : null,
+                $article,
             ),
         ];
     }
@@ -167,6 +170,7 @@ class SeoGenerateService
      * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>|null  $faqs
      * @param  array<int, array<string, mixed>>|null  $extraGraph
      * @param  array<int, array<string, mixed>>|null  $webPageAbout
+     * @param  array<string, mixed>|null  $article
      * @return array<string, mixed>
      */
     protected function buildJsonLd(
@@ -182,6 +186,7 @@ class SeoGenerateService
         ?string $breadcrumbName = null,
         ?array $webPageAbout = null,
         ?string $mainEntityId = null,
+        ?array $article = null,
     ): array {
         if ($routeName === 'home') {
             return $this->buildHomeJsonLd($site, $title, $description, $canonical, $imageUrl, $faqs);
@@ -310,6 +315,11 @@ class SeoGenerateService
             foreach ($extraGraph as $node) {
                 $graph[] = $node;
             }
+        }
+
+        $blogPosting = $this->blogPostingNode($article, $description, $imageUrl, $pageUrl, $webPageId, $organizationId, (string) ($site['in_language'] ?? 'en-US'));
+        if ($blogPosting !== null) {
+            $graph[] = $blogPosting;
         }
 
         return [
@@ -676,6 +686,98 @@ class SeoGenerateService
     }
 
     /**
+     * BlogPosting node for a single article. Null when the page has no article payload.
+     *
+     * @param  array<string, mixed>|null  $article
+     * @return array<string, mixed>|null
+     */
+    protected function blogPostingNode(
+        ?array $article,
+        string $description,
+        ?string $imageUrl,
+        string $pageUrl,
+        string $webPageId,
+        string $organizationId,
+        string $inLanguage,
+    ): ?array {
+        if ($article === null || trim((string) ($article['headline'] ?? '')) === '') {
+            return null;
+        }
+
+        $authorName = trim((string) ($article['author_name'] ?? ''));
+        $authorSlug = trim((string) ($article['author_slug'] ?? ''));
+        $linkedin = trim((string) ($article['author'] ?? ''));
+        $profileUrl = trim((string) ($article['author_profile_url'] ?? ''));
+        $jobTitle = trim((string) ($article['author_job_title'] ?? ''));
+
+        $author = $authorName === '' ? null : $this->withoutEmpty([
+            '@type' => 'Person',
+            '@id' => $authorSlug !== '' ? rtrim((string) config('app.url', url('/')), '/').'/#author-'.$authorSlug : null,
+            'name' => $authorName,
+            'jobTitle' => $jobTitle !== '' ? $jobTitle : null,
+            'url' => $profileUrl !== '' ? $profileUrl : null,
+            'sameAs' => $linkedin !== '' ? [$linkedin] : null,
+            'worksFor' => ['@id' => $organizationId],
+        ]);
+
+        $keywords = array_values(array_filter(
+            (array) ($article['keywords'] ?? []),
+            static fn (mixed $keyword): bool => is_string($keyword) && $keyword !== ''
+        ));
+
+        $about = [];
+        foreach ((array) ($article['about'] ?? []) as $item) {
+            if (! is_array($item) || trim((string) ($item['name'] ?? '')) === '') {
+                continue;
+            }
+
+            $about[] = $this->withoutEmpty([
+                '@type' => 'Thing',
+                'name' => trim((string) $item['name']),
+                'sameAs' => trim((string) ($item['same_as'] ?? '')) ?: null,
+            ]);
+        }
+
+        $mentions = [];
+        foreach ((array) ($article['mentions'] ?? []) as $item) {
+            if (! is_array($item) || trim((string) ($item['name'] ?? '')) === '') {
+                continue;
+            }
+
+            $type = (string) ($item['type'] ?? 'Organization');
+            if (! in_array($type, ['Organization', 'Service'], true)) {
+                $type = 'Organization';
+            }
+
+            $mentions[] = $this->withoutEmpty([
+                '@type' => $type,
+                'name' => trim((string) $item['name']),
+                'url' => trim((string) ($item['url'] ?? '')) ?: null,
+                'sameAs' => trim((string) ($item['same_as'] ?? '')) ?: null,
+                'provider' => $type === 'Service' ? ['@id' => $organizationId] : null,
+            ]);
+        }
+
+        return $this->withoutEmpty([
+            '@type' => 'BlogPosting',
+            '@id' => $pageUrl.'/#article',
+            'headline' => trim((string) $article['headline']),
+            'description' => $description,
+            'image' => $imageUrl,
+            'datePublished' => trim((string) ($article['published_time'] ?? '')) ?: null,
+            'dateModified' => trim((string) ($article['modified_time'] ?? '')) ?: null,
+            'author' => $author,
+            'publisher' => ['@id' => $organizationId],
+            'mainEntityOfPage' => ['@id' => $webPageId],
+            'articleSection' => trim((string) ($article['section'] ?? '')) ?: null,
+            'keywords' => $keywords !== [] ? $keywords : null,
+            'inLanguage' => $inLanguage,
+            'about' => $about !== [] ? $about : null,
+            'mentions' => $mentions !== [] ? $mentions : null,
+        ]);
+    }
+
+    /**
      * @param  array<string, mixed>  $node
      * @return array<string, mixed>
      */
@@ -714,7 +816,16 @@ class SeoGenerateService
             }
         }
 
-        if (in_array($routeName, ['service.show', 'industry.show', 'blog.show'])) {
+        if ($routeName === 'blog.show') {
+            $breadcrumb[] = [
+                '@type' => 'ListItem',
+                'position' => ++$position,
+                'name' => 'Blog',
+                'item' => route('blogs'),
+            ];
+        }
+
+        if (in_array($routeName, ['service.show', 'industry.show'], true)) {
             $parentUrl = Str::beforeLast($canonical, '/');
             $parentSlug = Str::afterLast($parentUrl, '/');
             $pageTitle = config("seo.pages.$parentSlug.json_ld_breadcrumb_name") ?? config("seo.pages.$parentSlug.title") ?? ucfirst(str_replace('-', ' ', $parentSlug));

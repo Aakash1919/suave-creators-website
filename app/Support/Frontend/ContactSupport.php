@@ -33,6 +33,7 @@ class ContactSupport
             'contactCards' => self::contactCards(),
             'offices' => self::offices(),
             'formServices' => self::formServices(),
+            'formServiceOptions' => self::formServiceOptions(),
             'techStack' => AboutSupport::techStack(),
             'faqs' => self::faqs(),
             'faqMedia' => 'assets/media/diverse-team-data-meeting.webp',

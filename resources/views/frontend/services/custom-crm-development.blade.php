@@ -21,11 +21,13 @@
   :link-href="$service['introLinkUrl']"
   :link-label="$service['introLinkText']"
   :stats="$introStats">
+  {{-- Activate later: live Suave Outreach CRM
   <p class="mt-4">
     <a href="{{ route('product') }}" class="inline-flex items-end border-b border-[#2A4DFB]/70 pb-0.5 text-sm font-semibold text-[#2A4DFB]">
       Explore our live Suave Outreach CRM
     </a>
   </p>
+  --}}
 </x-frontend.service-intro-section>
 
 <x-frontend.connect-cta-section

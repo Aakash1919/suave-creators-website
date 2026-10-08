@@ -10,8 +10,9 @@ use App\Http\Requests\Admin\BlogStoreRequest;
 use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Services\BlogDraftGenerationService;
-use App\Services\BlogService;
 use App\Services\BlogSeoMetaGenerationService;
+use App\Services\BlogSeoService;
+use App\Services\BlogService;
 use App\Support\Admin\BlogCompleteness;
 use App\Support\Frontend\BlogSupport;
 use Illuminate\Http\JsonResponse;
@@ -28,6 +29,7 @@ class BlogController extends Controller
     public function __construct(
         private readonly BlogService $blogs,
         private readonly BlogSeoMetaGenerationService $seoMeta,
+        private readonly BlogSeoService $blogSeo,
     ) {}
 
     /**
@@ -186,5 +188,16 @@ class BlogController extends Controller
         }
 
         return back()->with('status', $message)->withInput(array_merge($request->all(), $seo));
+    }
+
+    /**
+     * Preview article meta tags and JSON-LD from the saved post.
+     */
+    public function previewSchema(Blog $blog): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            ...$this->blogSeo->preview($blog),
+        ]);
     }
 }
