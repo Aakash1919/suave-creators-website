@@ -39,8 +39,8 @@
         </p>
 
         <div class="product-hero__actions">
-          <a href="{{ $contactHref }}" class="product-btn product-btn--primary">
-            Start Free Trial <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          <a href="https://the-suave.app/" class="product-btn product-btn--primary">
+            Sign up <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
           <a href="{{ $demoHref }}" class="product-btn product-btn--secondary product-btn--ghost">
             Book Your Demo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
