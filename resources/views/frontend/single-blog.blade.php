@@ -118,6 +118,9 @@
 
 <x-frontend.consultation-section />
 
+<x-frontend.modal.project-estimate-modal />
+<x-frontend.modal.hire-developers-modal />
+
 @endsection
 
 @push('fixed-widgets')

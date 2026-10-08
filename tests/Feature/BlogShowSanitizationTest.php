@@ -159,4 +159,36 @@ class BlogShowSanitizationTest extends TestCase
         $response->assertHeader('Content-Security-Policy-Report-Only');
         $this->assertFalse($response->headers->has('Strict-Transport-Security'));
     }
+
+    public function test_single_blog_includes_inquiry_modals_and_keeps_modal_links(): void
+    {
+        $author = User::factory()->create();
+
+        $category = BlogCategory::query()->create([
+            'name' => 'Artificial Intelligence',
+            'slug' => 'artificial-intelligence',
+            'sort_order' => 1,
+        ]);
+
+        Blog::query()->create([
+            'blog_category_id' => $category->id,
+            'created_by_id' => $author->id,
+            'slug' => 'open-an-inquiry-from-the-article',
+            'title' => 'Open An Inquiry From The Article',
+            'short_description' => 'Article links can open the estimate and hire dialogs.',
+            'content' => '<p><a href="#project-estimate-dialog">Get an estimate</a> and <a href="#hire-developers-dialog">hire developers</a>.</p>',
+            'status' => Blog::STATUS_PUBLISHED,
+            'published_at' => now()->subDay(),
+        ]);
+
+        $response = $this->get(route('blog.show', [
+            'slug' => 'open-an-inquiry-from-the-article',
+        ]));
+
+        $response->assertOk();
+        $response->assertSee('href="#project-estimate-dialog"', false);
+        $response->assertSee('href="#hire-developers-dialog"', false);
+        $response->assertSee('id="project-estimate-dialog"', false);
+        $response->assertSee('id="hire-developers-dialog"', false);
+    }
 }

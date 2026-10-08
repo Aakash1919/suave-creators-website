@@ -20,6 +20,13 @@ trait ValidatesBlogFields
             };
         };
 
+        $optionalUrl = static function (string $attribute, mixed $value, \Closure $fail): void {
+            $url = trim((string) $value);
+            if ($url !== '' && filter_var($url, FILTER_VALIDATE_URL) === false) {
+                $fail('Enter a valid URL.');
+            }
+        };
+
         return [
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:160', Rule::unique('blogs', 'slug')->ignore($blog?->id)],
@@ -36,6 +43,16 @@ trait ValidatesBlogFields
             'faqs' => ['nullable', 'array'],
             'faqs.*.question' => ['required', 'string', 'max:500', $requiredText('Each FAQ needs a question.')],
             'faqs.*.answer' => ['required', 'string', 'max:5000', $requiredText('Each FAQ needs an answer.')],
+            'tags' => ['nullable', 'string', 'max:500'],
+            'keywords' => ['nullable', 'string', 'max:2000'],
+            'about' => ['nullable', 'array'],
+            'about.*.name' => ['required', 'string', 'max:255', $requiredText('Each about entry needs a name.')],
+            'about.*.same_as' => ['nullable', 'string', 'max:500', $optionalUrl],
+            'mentions' => ['nullable', 'array'],
+            'mentions.*.type' => ['required', Rule::in(['Organization', 'Service'])],
+            'mentions.*.name' => ['required', 'string', 'max:255', $requiredText('Each mention needs a name.')],
+            'mentions.*.url' => ['nullable', 'string', 'max:500', $optionalUrl],
+            'mentions.*.same_as' => ['nullable', 'string', 'max:500', $optionalUrl],
         ];
     }
 
@@ -47,6 +64,9 @@ trait ValidatesBlogFields
         return [
             'faqs.*.question.required' => 'Each FAQ needs a question.',
             'faqs.*.answer.required' => 'Each FAQ needs an answer.',
+            'about.*.name.required' => 'Each about entry needs a name.',
+            'mentions.*.name.required' => 'Each mention needs a name.',
+            'mentions.*.type.required' => 'Each mention needs a type.',
         ];
     }
 }

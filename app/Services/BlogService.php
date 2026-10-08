@@ -17,6 +17,7 @@ class BlogService
 {
     public function __construct(
         protected ImageVariantService $images,
+        protected BlogSeoService $blogSeo,
     ) {}
 
     /**
@@ -56,7 +57,10 @@ class BlogService
             $this->applyFeaturedImageVariants($data, $request, $data['slug']);
         }
 
-        return Blog::query()->create($data);
+        $blog = Blog::query()->create($data);
+        $this->blogSeo->sync($blog, $validated);
+
+        return $blog;
     }
 
     /**
@@ -110,6 +114,7 @@ class BlogService
         }
 
         $blog->update($data);
+        $this->blogSeo->sync($blog, $validated);
 
         return $blog->refresh();
     }
@@ -136,7 +141,7 @@ class BlogService
     {
         $data['faqs'] = $this->normalizeFaqItems($data['faqs'] ?? null);
         $data['featured_image_position'] = $data['featured_image_position'] ?? ($blog?->featured_image_position ?? 'after_first_p');
-        unset($data['featured_image'], $data['published_at']);
+        unset($data['featured_image'], $data['published_at'], $data['tags'], $data['keywords'], $data['about'], $data['mentions']);
 
         if (isset($data['content']) && is_string($data['content'])) {
             $data['content'] = $this->sanitizeHtmlContent(
