@@ -296,3 +296,15 @@ parameters must exclude enquiry fields containing personal information and reven
 Run `node tests/Browser/enquiry-tracking.mjs` against a local Laravel server on
 127.0.0.1:8017 (Chrome installed); responses and Analytics are intercepted. Actual
 GA4 delivery needs an approved production test with consent and DebugView.
+
+All public lead-entry forms use distinct `generate_lead` form names:
+`contact_us`, `contact_popup`, `project_estimate`, `hire_developers`,
+`inline_consultation_form`, and `suave_agent_start`. Estimate/hiring forms share
+`inquiry-modals-script`; inline consultation requires explicit success/tracking
+flags. Suave Agent's start endpoint instead confirms persistence with the
+`conversation_id`, `lead_uuid`, and `session_token` response contract; never send
+those identifiers to Analytics. Keep its existing `chat_lead` event alongside
+the single `generate_lead`. Restored sessions, inline-to-chat handoffs, and
+ongoing chat messages must not emit an additional generate_lead. Search/filter
+and admin forms are excluded. All lead handlers need initialization and pending
+guards; the chat handler also ignores submissions for an existing session.

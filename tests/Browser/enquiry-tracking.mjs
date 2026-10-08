@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 const base = process.env.TRACKING_TEST_URL || 'http://127.0.0.1:8017';
 const browser = await chromium.launch({ headless: true, channel: 'chrome' });
 try {
-  for (const [selector, expectedName] of [['[data-contact-form]', 'contact_us'], ['[data-contact-modal-form]', 'contact_popup']]) {
+  for (const [selector, expectedName] of [['[data-contact-form]', 'contact_us'], ['[data-contact-modal-form]', 'contact_popup'], ['[data-inquiry-kind="project-estimate"] form', 'project_estimate'], ['[data-inquiry-kind="hire-developers"] form', 'hire_developers'], ['[data-consultation-form]', 'inline_consultation_form'], ['[data-suave-agent-lead]', 'suave_agent_start']]) {
     for (const scenario of ['success', 'validation', 'server', 'network', 'malformed', 'rejected', 'bot', 'client', 'timeout']) {
       const page = await browser.newPage();
       let posts = 0;
@@ -24,20 +24,24 @@ try {
         const request = route.request();
         if (!request.url().startsWith(base)) return route.abort();
         if (request.method() !== 'POST') return route.continue();
-        if (request.url().includes('draft')) return route.fulfill({ json: { success: true } });
+        if (request.url().includes('draft')) return route.fulfill({ json: { ...(expectedName === 'inline_consultation_form' ? { chat_session: { conversation_id: 'inline-conversation', lead_uuid: 'inline-lead', session_token: 'inline-token' } } : {}), ...(expectedName === 'suave_agent_start' && !['bot', 'rejected'].includes(scenario) ? { conversation_id: 'test-conversation', lead_uuid: 'test-lead', session_token: 'test-token' } : {}), success: true } });
         posts++;
         await new Promise(resolve => setTimeout(resolve, 100));
         if (scenario === 'network') return route.abort();
         if (scenario === 'malformed') return route.fulfill({ body: '<html>not JSON</html>' });
         return route.fulfill({ status: scenario === 'validation' ? 422 : scenario === 'server' ? 500 : 200,
-          json: { success: scenario !== 'rejected', lead_tracked: scenario !== 'bot', errors: { email: ['Invalid email'] }, redirect: `${base}/thank-you` } });
+          json: { ...(expectedName === 'inline_consultation_form' ? { chat_session: { conversation_id: 'inline-conversation', lead_uuid: 'inline-lead', session_token: 'inline-token' } } : {}), ...(expectedName === 'suave_agent_start' && !['bot', 'rejected'].includes(scenario) ? { conversation_id: 'test-conversation', lead_uuid: 'test-lead', session_token: 'test-token' } : {}), success: scenario !== 'rejected', lead_tracked: scenario !== 'bot', errors: { email: ['Invalid email'] }, redirect: `${base}/thank-you` } });
       });
-      await page.goto(`${base}/contact-us`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`${base}${['inline_consultation_form', 'project_estimate', 'hire_developers'].includes(expectedName) ? '/' : '/contact-us'}`, { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(100);
       // Simulate scripts being evaluated again: handlers must remain single-bound.
       await page.evaluate(() => {
         for (const script of [...document.scripts]) {
           if (script.textContent.includes("const form = document.querySelector('[data-contact-form]')") ||
-              script.textContent.includes("var modalRoot = document.querySelector('[data-contact-modal-root]')")) {
+              script.textContent.includes("var modalRoot = document.querySelector('[data-contact-modal-root]')") ||
+              script.textContent.includes("var dialogs = document.querySelectorAll('[data-inquiry-dialog]')") ||
+              script.textContent.includes("function initConsultationForm(form)") ||
+              script.textContent.includes("var root = document.querySelector('[data-suave-agent]')")) {
             (0, eval)(script.textContent);
           }
         }
@@ -48,9 +52,18 @@ try {
         const form = document.querySelector(selector);
         if (scenario !== 'client') {
           for (const [name, value] of Object.entries({ name: 'Tracking Test', email: 'tracking@example.com', phone: '+919876543210', service: 'custom-software', message: 'Local tracking regression test.' })) {
-            form.querySelector(`[name="${name}"]`).value = value;
+            const input = form.querySelector(`[name="${name}"]`);
+            if (input) input.value = value;
           }
-          form.querySelector('[data-phone-field-input]').value = '+919876543210';
+          const phone = form.querySelector('[data-phone-field-input]');
+          if (phone) phone.value = '+919876543210';
+          const contact = form.querySelector('[name="contact"]');
+          if (contact) contact.value = 'tracking@example.com';
+          const company = form.querySelector('[name="company"]');
+          if (company) company.value = 'Tracking Test Company';
+          form.querySelectorAll('[data-inquiry-select]').forEach(root => {
+            root.querySelector('[data-inquiry-select-value]').value = root.querySelector('[data-inquiry-select-option]').dataset.value;
+          });
         }
         // Bypass disabled buttons to exercise repeated submit events as well.
         form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
