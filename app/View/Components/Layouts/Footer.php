@@ -69,6 +69,7 @@ class Footer extends Component
                 ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX design'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI solutions'],
+                ['route' => 'service.show', 'params' => ['slug' => 'digital-marketing-services'], 'label' => 'Digital marketing'],
             ],
             'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare-software-development'], 'label' => 'Healthcare'],

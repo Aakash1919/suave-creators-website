@@ -232,6 +232,11 @@ return [
                     'parameters' => ['slug' => 'ui-ux-design-services'],
                 ],
                 [
+                    'name' => 'B2B digital marketing services',
+                    'route' => 'service.show',
+                    'parameters' => ['slug' => 'digital-marketing-services'],
+                ],
+                [
                     'name' => 'Dedicated software developers and staff augmentation',
                     'service_type' => 'Staff augmentation',
                     'route' => 'hire-dedicated-developers',

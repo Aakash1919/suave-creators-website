@@ -16,6 +16,7 @@ class ServiceSupport
         'e-commerce-development',
         'ui-ux-design-services',
         'ai-solutions',
+        'digital-marketing-services',
     ];
 
     /**
@@ -204,6 +205,17 @@ class ServiceSupport
                 'description' => 'We move beyond basic chatbot wrappers. Our engineers integrate deterministic state machines, automated voice call coaching, and multi-agent document validation directly into your software with zero third-party token markups.',
                 'cta' => 'Explore AI Services',
                 'href' => route('service.show', ['slug' => 'ai-solutions']),
+                'color' => 'blue',
+                'flagship' => false,
+            ],
+            [
+                'icon' => 'assets/icons/service-icon-3.svg',
+                'number' => '07',
+                'title' => 'Digital Marketing Services',
+                'tags' => ['SEO & Content', 'PPC Demand Capture', 'B2B Pipeline'],
+                'description' => 'Full-funnel SEO, PPC, content, and social for B2B buyers—backed by our engineering team for technical SEO, landing pages, and CRM-ready attribution.',
+                'cta' => 'Explore Digital Marketing',
+                'href' => route('service.show', ['slug' => 'digital-marketing-services']),
                 'color' => 'blue',
                 'flagship' => false,
             ],
@@ -548,6 +560,8 @@ class ServiceSupport
 
         $ogImage = trim((string) ($service['ogImage'] ?? $service['seoImage'] ?? ''), '/');
 
+        $isDigitalMarketing = $slug === 'digital-marketing-services';
+
         return [
             'service' => $service,
             'seoTitle' => (string) ($service['pageTitle'] ?? 'Service | Suave Creators'),
@@ -555,7 +569,14 @@ class ServiceSupport
             'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
             'seoImage' => $ogImage !== '' ? $ogImage : null,
-            'mainClass' => 'site-main site-main--service-detail',
+            'mainClass' => $isDigitalMarketing
+                ? 'site-main site-main--digital-marketing'
+                : 'site-main site-main--service-detail',
+            'useHeroBackground' => ! $isDigitalMarketing,
+            'heroShellClass' => $isDigitalMarketing ? 'site-shell--digital-marketing' : null,
+            'bodyClass' => $isDigitalMarketing
+                ? 'min-h-screen site-shell--digital-marketing font-sans text-slate-900'
+                : null,
             'seoFaqs' => array_values(array_filter(
                 array_map(static function (array $faq): array {
                     $answer = (string) ($faq['schemaAnswer'] ?? $faq['answer'] ?? '');

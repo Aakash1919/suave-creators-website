@@ -89,6 +89,7 @@
         html{overflow-x:clip}
         body{margin:0;overflow-x:clip;background:#fff;color:#0f172a;font-family:var(--site-font)}
         .bg-\[\#00003f\]{background-color:var(--color-navy)}
+        .site-shell--digital-marketing{background-color:#05070a}
         .relative{position:relative}
         .w-full{width:100%}
         .overflow-hidden{overflow:hidden}

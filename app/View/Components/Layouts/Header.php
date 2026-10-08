@@ -37,6 +37,7 @@ class Header extends Component
                 ['route' => 'service.show', 'params' => ['slug' => 'e-commerce-development'], 'label' => 'E-commerce', 'icon' => 'fa-solid fa-cart-shopping'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ui-ux-design-services'], 'label' => 'UI/UX Design', 'icon' => 'fa-solid fa-pen-ruler'],
                 ['route' => 'service.show', 'params' => ['slug' => 'ai-solutions'], 'label' => 'AI Solutions', 'icon' => 'fa-solid fa-robot'],
+                ['route' => 'service.show', 'params' => ['slug' => 'digital-marketing-services'], 'label' => 'Digital Marketing', 'icon' => 'fa-solid fa-bullhorn'],
             ],
             'Industries' => [
                 ['route' => 'industry.show', 'params' => ['slug' => 'healthcare-software-development'], 'label' => 'Healthcare', 'icon' => 'fa-solid fa-heart-pulse'],
