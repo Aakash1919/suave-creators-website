@@ -60,6 +60,7 @@ class SeoGenerateService
                 'author' => $page['author'] ?? null,
                 'og_title' => $page['og_title'] ?? null,
                 'og_description' => $page['og_description'] ?? null,
+                'twitter_title' => $page['twitter_title'] ?? null,
                 'twitter_description' => $page['twitter_description'] ?? null,
                 'image' => $page['og_image'] ?? null,
                 'og_image_width' => $page['og_image_width'] ?? null,
@@ -139,7 +140,7 @@ class SeoGenerateService
                 'card' => 'summary_large_image',
                 'site' => $twitterSite,
                 'creator' => $twitterCreator,
-                'title' => $ogTitle,
+                'title' => (string) ($merged['twitter_title'] ?? $ogTitle),
                 'description' => (string) ($merged['twitter_description'] ?? $ogDescription),
                 'image' => $imageUrl,
                 'image_alt' => $imageAlt,
@@ -155,6 +156,8 @@ class SeoGenerateService
                 is_array($merged['json_ld_graph'] ?? null) ? $merged['json_ld_graph'] : null,
                 is_string($merged['json_ld_webpage_about'] ?? null) ? $merged['json_ld_webpage_about'] : null,
                 is_string($merged['json_ld_breadcrumb_name'] ?? null) ? $merged['json_ld_breadcrumb_name'] : null,
+                is_array($merged['json_ld_about'] ?? null) ? $merged['json_ld_about'] : null,
+                is_string($merged['json_ld_main_entity'] ?? null) ? $merged['json_ld_main_entity'] : null,
             ),
         ];
     }
@@ -163,6 +166,7 @@ class SeoGenerateService
      * @param  array<string, mixed>  $site
      * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>|null  $faqs
      * @param  array<int, array<string, mixed>>|null  $extraGraph
+     * @param  array<int, array<string, mixed>>|null  $webPageAbout
      * @return array<string, mixed>
      */
     protected function buildJsonLd(
@@ -176,6 +180,8 @@ class SeoGenerateService
         ?array $extraGraph = null,
         ?string $webPageAboutId = null,
         ?string $breadcrumbName = null,
+        ?array $webPageAbout = null,
+        ?string $mainEntityId = null,
     ): array {
         if ($routeName === 'home') {
             return $this->buildHomeJsonLd($site, $title, $description, $canonical, $imageUrl, $faqs);
@@ -265,6 +271,9 @@ class SeoGenerateService
             $graph[] = [
                 '@type' => 'FAQPage',
                 '@id' => $faqPageUrl,
+                'isPartOf' => [
+                    '@id' => $webPageId,
+                ],
                 'mainEntity' => $this->faqMainEntity($faqs),
             ];
         }
@@ -274,6 +283,24 @@ class SeoGenerateService
                 if (($node['@type'] ?? '') === 'WebPage') {
                     $graph[$index]['about'] = ['@id' => $webPageAboutId];
                     $graph[$index]['mainEntity'] = ['@id' => $webPageAboutId];
+                    break;
+                }
+            }
+        }
+
+        if (is_array($webPageAbout) && $webPageAbout !== []) {
+            foreach ($graph as $index => $node) {
+                if (($node['@type'] ?? '') === 'WebPage') {
+                    $graph[$index]['about'] = $webPageAbout;
+                    break;
+                }
+            }
+        }
+
+        if (is_string($mainEntityId) && $mainEntityId !== '') {
+            foreach ($graph as $index => $node) {
+                if (($node['@type'] ?? '') === 'WebPage') {
+                    $graph[$index]['mainEntity'] = ['@id' => $mainEntityId];
                     break;
                 }
             }

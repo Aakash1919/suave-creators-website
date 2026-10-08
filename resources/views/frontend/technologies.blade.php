@@ -1,13 +1,23 @@
 @extends('layouts.frontend')
 
+@push('custom-css')
+<link rel="preload" as="image" href="{{ asset($bannerBackgroundImage) }}?v={{ filemtime(public_path($bannerBackgroundImage)) }}" type="image/webp">
+@if (filled($heroVisualImage))
+<link rel="preload" as="image" href="{{ asset($heroVisualImage) }}" type="image/webp">
+@endif
+@endpush
+
 @section('content')
 
-<section class="full-bleed technologies-hero" aria-labelledby="technologies-heading">
+<section
+  class="full-bleed technologies-hero"
+  style="background-image: url('{{ asset($bannerBackgroundImage) }}?v={{ filemtime(public_path($bannerBackgroundImage)) }}');"
+  aria-labelledby="technologies-heading">
   <div class="section-inner technologies-hero__inner">
     <nav class="technologies-hero__breadcrumb" aria-label="Breadcrumb">
       <a href="{{ route('home') }}">Home</a>
       <span aria-hidden="true">›</span>
-      <span aria-current="page">TECHNOLOGIES</span>
+      <span aria-current="page">Technologies</span>
     </nav>
 
     <div class="technologies-hero__layout">
@@ -19,9 +29,9 @@
           <span class="technologies-hero__title-blue">{{ $heroBlueLine }}</span>
           <span class="technologies-hero__title-purple">{{ $heroPurple }}</span>
         </h1>
-        <p class="technologies-hero__desc">{{ $heroDescription }}</p>
+        <p class="technologies-hero__desc">{{ $heroDescriptionBefore }}@foreach ($heroDescriptionNames as $item)<strong>{{ $item['name'] }}</strong>{{ $item['separator'] }}@endforeach{{ $heroDescriptionAfter }}</p>
         <div class="technologies-hero__cta">
-          <x-frontend.cta-button :href="$demoHref">{{ $primaryCta }}</x-frontend.cta-button>
+          <x-frontend.cta-button href="#contact-modal">{{ $primaryCta }}</x-frontend.cta-button>
           <button type="button" class="technologies-hero__hire group" data-inquiry-dialog-open="hire-developers">
             {{ $secondaryCta }}
             <x-frontend.cta-arrow />
@@ -31,22 +41,13 @@
           @foreach ($trust as $item)
             <li class="technologies-hero__trust-item">
               <span class="technologies-hero__trust-icon" aria-hidden="true">
-                @if ($item['key'] === 'ownership')
-                  <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                    <path d="M12 3.5 5.5 6.2v5.1c0 3.7 2.6 6.6 6.5 8.2 3.9-1.6 6.5-4.5 6.5-8.2V6.2L12 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                    <path d="m9.2 12 1.9 1.9 3.8-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                @elseif ($item['key'] === 'architect')
-                  <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                    <circle cx="12" cy="8" r="2.6" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="M6.8 18.2c.7-2.6 2.7-3.9 5.2-3.9s4.5 1.3 5.2 3.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  </svg>
-                @else
-                  <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                    <circle cx="12" cy="12" r="7.2" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="M12 8.2V12l2.6 1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                @endif
+                <img
+                  src="{{ asset($item['icon']) }}"
+                  alt="{{ $item['iconAlt'] }}"
+                  title="{{ $item['iconAlt'] }}"
+                  width="99"
+                  height="104"
+                  decoding="async">
               </span>
               <span class="technologies-hero__trust-label">
                 @foreach ($item['lines'] as $line)
@@ -58,47 +59,20 @@
         </ul>
       </div>
 
-      <div class="technologies-hero__visual" aria-label="Technology logos and application previews">
-        <ul class="technologies-hero__logos">
-          @foreach ($logos as $logo)
-            <li class="technologies-hero__logo">
-              <img
-                src="{{ asset($logo['src']) }}"
-                alt="{{ $logo['alt'] }}"
-                title="{{ $logo['alt'] }}"
-                width="40"
-                height="40"
-                decoding="async"
-                @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
-              <span>{{ $logo['label'] }}</span>
-            </li>
-          @endforeach
-        </ul>
-
-        <div class="technologies-hero__stage">
-          <svg class="technologies-hero__connectors" viewBox="0 0 520 220" fill="none" aria-hidden="true">
-            <path d="M78 8c0 70-18 78-8 128 8 38 18 52 42 68" stroke="#C5D0EA" stroke-width="1.5" stroke-dasharray="5 6" stroke-linecap="round"/>
-            <path d="M442 8c0 64 16 74 8 124-8 40-22 54-48 70" stroke="#C5D0EA" stroke-width="1.5" stroke-dasharray="5 6" stroke-linecap="round"/>
-          </svg>
-
-          <div class="technologies-hero__devices">
-            @foreach ($devices as $device)
-              <div class="technologies-hero__device technologies-hero__device--{{ $device['slot'] }}" role="img" aria-label="{{ $device['label'] }}">
-                @if (filled($device['image']))
-                  <img
-                    class="technologies-hero__device-image"
-                    src="{{ asset($device['image']) }}"
-                    alt="{{ $device['label'] }}"
-                    title="{{ $device['label'] }}"
-                    decoding="async"
-                    loading="lazy">
-                @else
-                  <span class="technologies-hero__device-placeholder">Image placeholder</span>
-                @endif
-              </div>
-            @endforeach
-          </div>
-        </div>
+      <div class="technologies-hero__visual">
+        @if (filled($heroVisualImage))
+          <img
+            class="technologies-hero__image"
+            src="{{ asset($heroVisualImage) }}"
+            alt="{{ $heroVisualLabel }}"
+            title="{{ $heroVisualLabel }}"
+            width="1024"
+            height="706"
+            decoding="async"
+            fetchpriority="high">
+        @else
+          <span class="technologies-hero__image-placeholder" role="img" aria-label="{{ $heroVisualLabel }}"></span>
+        @endif
       </div>
     </div>
   </div>
@@ -109,7 +83,7 @@
     <div class="technologies-stack__intro">
       <p class="technologies-stack__eyebrow">{{ $stack['eyebrow'] }}</p>
       <div class="technologies-stack__intro-copy">
-        <h2 id="technologies-stack-heading" class="technologies-stack__title">{{ $stack['title'] }}</h2>
+        <h2 id="technologies-stack-heading" class="technologies-stack__title"><span class="technologies-stack__title-our">{{ $stack['titleOur'] }}</span> <span class="technologies-stack__title-accent">{{ $stack['titleAccent'] }}</span></h2>
         <p class="technologies-stack__desc">{{ $stack['description'] }}</p>
       </div>
     </div>
@@ -124,22 +98,27 @@
                 src="{{ asset($item['logo']) }}"
                 alt="{{ $item['logoAlt'] }}"
                 title="{{ $item['logoAlt'] }}"
-                width="40"
-                height="40"
+                width="48"
+                height="48"
                 decoding="async"
                 loading="lazy">
             @else
               <span class="technologies-stack__logo-placeholder" role="img" aria-label="{{ $item['logoAlt'] }}"></span>
             @endif
-            <h3 class="technologies-stack__name">{{ $item['name'] }}</h3>
-            <span class="technologies-stack__role">{{ $item['role'] }}</span>
+            <div class="technologies-stack__title-row">
+              <h3 class="technologies-stack__name"><a href="#{{ $item['anchor'] }}">{{ $item['name'] }}</a></h3>
+              <span class="technologies-stack__role">{{ $item['role'] }}</span>
+            </div>
+            <p class="technologies-stack__usage"><strong>Typical use:</strong> {{ $item['usage'] }}</p>
           </div>
-          <p class="technologies-stack__usage"><strong>Typical use:</strong> {{ $item['usage'] }}</p>
-          <a class="technologies-stack__service" href="{{ route($item['serviceRoute'], $item['serviceParams']) }}">
-            <span>Related Service:</span> {{ $item['serviceLabel'] }}
-            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-              <path d="M3 8h9M9 4.5 12.5 8 9 11.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <a class="technologies-stack__service group" href="{{ route($item['serviceRoute'], $item['serviceParams']) }}">
+            <svg class="technologies-stack__service-mark" viewBox="0 0 24 14" width="18" height="11" aria-hidden="true" focusable="false">
+              <path fill="#2A4DFB" d="M0 .2h3.4L8.35 7 3.4 13.8H0L4.85 7 0 .2Z"/>
+              <path fill="#2A4DFB" d="M10 1h14v5H10V1Zm0 7h14v5H10V8Z"/>
             </svg>
+            <span class="technologies-stack__service-label">Related Service:</span>
+            <span class="technologies-stack__service-name">{{ $item['serviceLabel'] }}</span>
+            <x-frontend.cta-arrow class="technologies-stack__service-arrow" />
           </a>
         </li>
       @endforeach
@@ -147,7 +126,12 @@
   </div>
 </section>
 
-<section class="full-bleed technologies-backend" aria-labelledby="technologies-backend-heading">
+<section
+  class="full-bleed technologies-backend"
+  @if (filled($backend['backgroundImage']))
+    style="background-image: url('{{ asset($backend['backgroundImage']) }}?v={{ filemtime(public_path($backend['backgroundImage'])) }}');"
+  @endif
+  aria-labelledby="technologies-backend-heading">
   <div class="section-inner technologies-backend__inner">
     <div class="technologies-backend__intro">
       <p class="technologies-backend__eyebrow">{{ $backend['eyebrow'] }}</p>
@@ -164,7 +148,7 @@
 
     <div class="technologies-backend__columns">
       @foreach ($backend['columns'] as $column)
-        <article class="technologies-backend__card technologies-backend__card--{{ $column['key'] }}">
+        <article id="{{ $column['id'] }}" class="technologies-backend__card technologies-backend__card--{{ $column['key'] }}">
           <div class="technologies-backend__summary">
             @if (filled($column['logo']))
               <img
@@ -181,42 +165,57 @@
             @endif
             <div>
               <h3 class="technologies-backend__name">{{ $column['name'] }}</h3>
-              <p>{{ $column['summary'] }}</p>
+              <p @class(['technologies-backend__summary-copy' => in_array($column['key'], ['laravel', 'node'], true)])>{{ $column['summary'] }}</p>
             </div>
           </div>
 
-          <h4 class="technologies-backend__label">
-            <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="#22c55e"/><path d="m4.8 8.1 2 2 4.4-4.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            What we build
-          </h4>
-          <ul class="technologies-backend__builds">
-            @foreach ($column['builds'] as $build)
-              <li>{{ $build }}</li>
-            @endforeach
-          </ul>
+          @if ($column['builds'] !== [])
+            <h4 class="technologies-backend__label">What we build</h4>
+            <ul class="technologies-backend__builds">
+              @foreach ($column['builds'] as $build)
+                <li>{{ $build }}</li>
+              @endforeach
+            </ul>
+          @endif
 
-          <h4 class="technologies-backend__label">
-            <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M3.5 13.5V7.2L8 4.2l4.5 3V13.5M6.4 13.5v-3h3.2v3" fill="none" stroke="#8eb6ff" stroke-width="1.3" stroke-linejoin="round"/></svg>
-            Why businesses choose it
-          </h4>
-          <p class="technologies-backend__copy">{{ $column['why'] }}</p>
+          @if (filled($column['why']))
+            <h4 class="technologies-backend__label">
+              <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M3.5 13.5V7.2L8 4.2l4.5 3V13.5M6.4 13.5v-3h3.2v3" fill="none" stroke="#8eb6ff" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              Why businesses choose it
+            </h4>
+            <p class="technologies-backend__copy">{{ $column['why'] }}</p>
+          @endif
 
-          <h4 class="technologies-backend__label">
-            <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
-            Consider a different fit when
-          </h4>
-          <p class="technologies-backend__copy">{{ $column['consider'] }}</p>
+          @if (filled($column['consider']))
+            <h4 class="technologies-backend__label">
+              <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
+              {{ $column['considerLabel'] }}
+            </h4>
+            <p class="technologies-backend__copy">{{ $column['consider'] }}</p>
+          @endif
 
-          <h4 class="technologies-backend__label">
-            <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#7eb6ff" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Works with
-          </h4>
-          <p class="technologies-backend__copy">{{ $column['works'] }}</p>
+          @if (filled($column['works']))
+            <h4 class="technologies-backend__label">
+              <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#7eb6ff" stroke-width="1.3" stroke-linecap="round"/></svg>
+              {{ $column['worksLabel'] }}
+            </h4>
+            <p class="technologies-backend__copy">{{ $column['works'] }}</p>
+          @endif
+
+          @if ($column['related'] !== [])
+            <p class="technologies-related">
+              <span class="technologies-related__label">Related:</span>
+              @foreach ($column['related'] as $link)
+                <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
+              @endforeach
+            </p>
+          @endif
         </article>
       @endforeach
     </div>
 
     <div class="technologies-backend__chooser">
+      <h3 class="technologies-backend__chooser-title">{{ $backend['chooser']['title'] }}</h3>
       <div class="technologies-backend__chooser-head">
         <p>{{ $backend['chooser']['situationHeading'] }}</p>
         <p>{{ $backend['chooser']['choiceHeading'] }}</p>
@@ -283,7 +282,7 @@
 
     <div class="technologies-frontend__columns">
       @foreach ($frontend['columns'] as $column)
-        <article class="technologies-frontend__card technologies-frontend__card--{{ $column['key'] }}">
+        <article id="{{ $column['id'] }}" class="technologies-frontend__card technologies-frontend__card--{{ $column['key'] }}">
           <div class="technologies-frontend__summary">
             @if (filled($column['logo']))
               <img
@@ -304,33 +303,49 @@
             </div>
           </div>
 
-          <h4 class="technologies-frontend__label">
-            <svg class="technologies-frontend__mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="#22c55e"/><path d="m4.8 8.1 2 2 4.4-4.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            What we build
-          </h4>
-          <ul class="technologies-frontend__builds">
-            @foreach ($column['builds'] as $build)
-              <li>{{ $build }}</li>
-            @endforeach
-          </ul>
+          <div class="technologies-frontend__body">
+          @if ($column['builds'] !== [])
+            <h4 class="technologies-frontend__label">What we build</h4>
+            <ul class="technologies-frontend__builds" style="--technologies-build-mark: url('{{ asset('assets/icons/green-circle-check-icon.png') }}?v={{ filemtime(public_path('assets/icons/green-circle-check-icon.png')) }}')">
+              @foreach ($column['builds'] as $build)
+                <li>{{ $build }}</li>
+              @endforeach
+            </ul>
+          @endif
 
-          <h4 class="technologies-frontend__label">
-            <svg class="technologies-frontend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4.5h10v7.2H3V4.5Z" fill="none" stroke="#3b82f6" stroke-width="1.3"/><path d="M6 13.2h4M8 11.7V13.2" stroke="#3b82f6" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Why businesses choose it
-          </h4>
-          <p class="technologies-frontend__copy">{{ $column['why'] }}</p>
+          @if (filled($column['why']))
+            <h4 class="technologies-frontend__label">
+              <svg class="technologies-frontend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4.5h10v7.2H3V4.5Z" fill="none" stroke="#3b82f6" stroke-width="1.3"/><path d="M6 13.2h4M8 11.7V13.2" stroke="#3b82f6" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Why businesses choose it
+            </h4>
+            <p class="technologies-frontend__copy">{{ $column['why'] }}</p>
+          @endif
 
-          <h4 class="technologies-frontend__label">
-            <svg class="technologies-frontend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
-            Consider a different fit when
-          </h4>
-          <p class="technologies-frontend__copy">{{ $column['consider'] }}</p>
+          @if (filled($column['consider']))
+            <h4 class="technologies-frontend__label">
+              <svg class="technologies-frontend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
+              {{ $column['considerLabel'] }}
+            </h4>
+            <p class="technologies-frontend__copy">{{ $column['consider'] }}</p>
+          @endif
 
-          <h4 class="technologies-frontend__label">
-            <svg class="technologies-frontend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#3b82f6" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Works with
-          </h4>
-          <p class="technologies-frontend__copy">{{ $column['works'] }}</p>
+          @if (filled($column['works']))
+            <h4 class="technologies-frontend__label">
+              <svg class="technologies-frontend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#3b82f6" stroke-width="1.3" stroke-linecap="round"/></svg>
+              {{ $column['worksLabel'] }}
+            </h4>
+            <p class="technologies-frontend__copy">{{ $column['works'] }}</p>
+          @endif
+
+          @if ($column['related'] !== [])
+            <p class="technologies-related">
+              <span class="technologies-related__label">Related:</span>
+              @foreach ($column['related'] as $link)
+                <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
+              @endforeach
+            </p>
+          @endif
+          </div>
         </article>
       @endforeach
     </div>
@@ -349,8 +364,11 @@
           @foreach ($frontend['compare']['rows'] as $row)
             <tr>
               <th scope="row">{{ $row['label'] }}</th>
-              @foreach ($row['cells'] as $cell)
-                <td>{{ $cell }}</td>
+              @foreach ($row['cells'] as $index => $cell)
+                <td>
+                  <span class="technologies-table-label">{{ $frontend['compare']['headers'][$index] }}</span>
+                  {{ $cell }}
+                </td>
               @endforeach
             </tr>
           @endforeach
@@ -360,11 +378,16 @@
   </div>
 </section>
 
-<section class="full-bleed technologies-mobile" aria-labelledby="technologies-mobile-heading">
+<section
+  class="full-bleed technologies-mobile"
+  @if (filled($mobile['backgroundImage']))
+    style="background-image: url('{{ asset($mobile['backgroundImage']) }}?v={{ filemtime(public_path($mobile['backgroundImage'])) }}');"
+  @endif
+  aria-labelledby="react-native">
   <div class="section-inner technologies-mobile__inner">
     <div class="technologies-mobile__intro">
       <p class="technologies-mobile__eyebrow">{{ $mobile['eyebrow'] }}</p>
-      <h2 id="technologies-mobile-heading" class="technologies-mobile__title">
+      <h2 id="react-native" class="technologies-mobile__title">
         {{ $mobile['titleLead'] }}
         <span>{{ $mobile['titleAccent'] }}</span>
       </h2>
@@ -392,7 +415,7 @@
           </div>
         </div>
         <p class="technologies-mobile__practice">{{ $mobile['practice'] }}</p>
-        <ul class="technologies-mobile__points">
+        <ul class="technologies-mobile__points" style="--technologies-build-mark: url('{{ asset('assets/icons/green-circle-check-icon.png') }}?v={{ filemtime(public_path('assets/icons/green-circle-check-icon.png')) }}')">
           @foreach ($mobile['points'] as $point)
             <li>{{ $point }}</li>
           @endforeach
@@ -401,20 +424,37 @@
           <h3>{{ $mobile['whyTitle'] }}</h3>
           <p>{{ $mobile['why'] }}</p>
         </div>
+        @if (filled($mobile['consider']))
+          <div class="technologies-mobile__why">
+            <h3>Consider a different fit when</h3>
+            <p>{{ $mobile['consider'] }}</p>
+          </div>
+        @endif
+        @if ($mobile['related'] !== [])
+          <p class="technologies-related">
+            <span class="technologies-related__label">Related:</span>
+            @foreach ($mobile['related'] as $link)
+              <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
+            @endforeach
+          </p>
+        @endif
       </div>
 
       <ul class="technologies-mobile__features">
         @foreach ($mobile['features'] as $feature)
           <li class="technologies-mobile__feature technologies-mobile__feature--{{ $feature['key'] }}">
-            <span class="technologies-mobile__feature-icon" aria-hidden="true">
-              @if ($feature['key'] === 'platforms')
-                <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 18.5h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-              @elseif ($feature['key'] === 'shared')
-                <svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="17" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m9 11 6-3M9 13l6 3" stroke="currentColor" stroke-width="1.6"/></svg>
-              @elseif ($feature['key'] === 'native')
-                <svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="technologies-mobile__feature-icon">
+              @if (filled($feature['icon']))
+                <img
+                  src="{{ asset($feature['icon']) }}"
+                  alt="{{ $feature['iconAlt'] }}"
+                  title="{{ $feature['iconAlt'] }}"
+                  width="40"
+                  height="40"
+                  decoding="async"
+                  loading="lazy">
               @else
-                <svg viewBox="0 0 24 24"><path d="M8 9H4.5A1.5 1.5 0 0 0 3 10.5v3A1.5 1.5 0 0 0 4.5 15H8l2 2.5V6.5L8 9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 9.5a3.5 3.5 0 0 1 0 5M16.5 7.5a6.5 6.5 0 0 1 0 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <span class="technologies-mobile__feature-icon-placeholder" role="img" aria-label="{{ $feature['iconAlt'] }}"></span>
               @endif
             </span>
             <h3>{{ $feature['title'] }}</h3>
@@ -426,7 +466,12 @@
   </div>
 </section>
 
-<section class="full-bleed technologies-cms" aria-labelledby="technologies-cms-heading">
+<section
+  class="full-bleed technologies-cms"
+  @if (filled($cms['backgroundImage']))
+    style="background-image: url('{{ asset($cms['backgroundImage']) }}?v={{ filemtime(public_path($cms['backgroundImage'])) }}');"
+  @endif
+  aria-labelledby="technologies-cms-heading">
   <div class="section-inner technologies-cms__inner">
     <div class="technologies-cms__intro">
       <p class="technologies-cms__eyebrow">{{ $cms['eyebrow'] }}</p>
@@ -437,13 +482,15 @@
           {{ $cms['titleJoin'] }}
           <span class="technologies-cms__title-headless">{{ $cms['titleHeadless'] }}</span>
         </h2>
-        <p class="technologies-cms__desc">{{ $cms['description'] }}</p>
+        @if (filled($cms['description']))
+          <p class="technologies-cms__desc">{{ $cms['description'] }}</p>
+        @endif
       </div>
     </div>
 
     <div class="technologies-cms__columns">
       @foreach ($cms['columns'] as $column)
-        <article class="technologies-cms__card technologies-cms__card--{{ $column['key'] }}">
+        <article id="{{ $column['id'] }}" class="technologies-cms__card technologies-cms__card--{{ $column['key'] }}">
           <div class="technologies-cms__summary">
             @if (filled($column['logo']))
               <img
@@ -464,33 +511,47 @@
             </div>
           </div>
 
-          <h4 class="technologies-cms__label">
-            <svg class="technologies-cms__mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="#22c55e"/><path d="m4.8 8.1 2 2 4.4-4.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            What we build
-          </h4>
-          <ul class="technologies-cms__builds">
-            @foreach ($column['builds'] as $build)
-              <li>{{ $build }}</li>
-            @endforeach
-          </ul>
+          @if ($column['builds'] !== [])
+            <h4 class="technologies-cms__label">What we build</h4>
+            <ul class="technologies-cms__builds">
+              @foreach ($column['builds'] as $build)
+                <li>{{ $build }}</li>
+              @endforeach
+            </ul>
+          @endif
 
-          <h4 class="technologies-cms__label">
-            <svg class="technologies-cms__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3.2h7.2l2.8 2.8V13H3V3.2Z" fill="none" stroke="#8eb6ff" stroke-width="1.3" stroke-linejoin="round"/><path d="M10 3.4V6h2.6" fill="none" stroke="#8eb6ff" stroke-width="1.3"/></svg>
-            Why businesses choose it
-          </h4>
-          <p class="technologies-cms__copy">{{ $column['why'] }}</p>
+          @if (filled($column['why']))
+            <h4 class="technologies-cms__label">
+              <svg class="technologies-cms__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3.2h7.2l2.8 2.8V13H3V3.2Z" fill="none" stroke="#8eb6ff" stroke-width="1.3" stroke-linejoin="round"/><path d="M10 3.4V6h2.6" fill="none" stroke="#8eb6ff" stroke-width="1.3"/></svg>
+              Why businesses choose it
+            </h4>
+            <p class="technologies-cms__copy">{{ $column['why'] }}</p>
+          @endif
 
-          <h4 class="technologies-cms__label technologies-cms__label--alert">
-            <svg class="technologies-cms__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
-            Consider a different fit when
-          </h4>
-          <p class="technologies-cms__copy">{{ $column['consider'] }}</p>
+          @if (filled($column['consider']))
+            <h4 class="technologies-cms__label technologies-cms__label--alert">
+              <svg class="technologies-cms__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
+              {{ $column['considerLabel'] }}
+            </h4>
+            <p class="technologies-cms__copy">{{ $column['consider'] }}</p>
+          @endif
 
-          <h4 class="technologies-cms__label">
-            <svg class="technologies-cms__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#7eb6ff" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Works with
-          </h4>
-          <p class="technologies-cms__copy">{{ $column['works'] }}</p>
+          @if (filled($column['works']))
+            <h4 class="technologies-cms__label">
+              <svg class="technologies-cms__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#7eb6ff" stroke-width="1.3" stroke-linecap="round"/></svg>
+              {{ $column['worksLabel'] }}
+            </h4>
+            <p class="technologies-cms__copy">{{ $column['works'] }}</p>
+          @endif
+
+          @if ($column['related'] !== [])
+            <p class="technologies-related">
+              <span class="technologies-related__label">Related:</span>
+              @foreach ($column['related'] as $link)
+                <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
+              @endforeach
+            </p>
+          @endif
         </article>
       @endforeach
     </div>
@@ -508,13 +569,15 @@
           {{ $commerce['titleJoin'] }}
           <span class="technologies-commerce__title-magento">{{ $commerce['titleMagento'] }}</span>
         </h2>
-        <p class="technologies-commerce__desc">{{ $commerce['description'] }}</p>
+        @if (filled($commerce['description']))
+          <p class="technologies-commerce__desc">{{ $commerce['description'] }}</p>
+        @endif
       </div>
     </div>
 
     <div class="technologies-commerce__columns">
       @foreach ($commerce['columns'] as $column)
-        <article class="technologies-commerce__card technologies-commerce__card--{{ $column['key'] }}">
+        <article id="{{ $column['id'] }}" class="technologies-commerce__card technologies-commerce__card--{{ $column['key'] }}">
           <div class="technologies-commerce__summary">
             @if (filled($column['logo']))
               <img
@@ -535,37 +598,51 @@
             </div>
           </div>
 
-          <h4 class="technologies-commerce__label">
-            <svg class="technologies-commerce__mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="#22c55e"/><path d="m4.8 8.1 2 2 4.4-4.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            What we build
-          </h4>
-          <ul class="technologies-commerce__builds">
-            @foreach ($column['builds'] as $build)
-              <li>{{ $build }}</li>
-            @endforeach
-          </ul>
+          <div class="technologies-commerce__body">
+          @if ($column['builds'] !== [])
+            <h4 class="technologies-commerce__label">What we build</h4>
+            <ul class="technologies-commerce__builds" style="--technologies-build-mark: url('{{ asset('assets/icons/green-circle-check-icon.png') }}?v={{ filemtime(public_path('assets/icons/green-circle-check-icon.png')) }}')">
+              @foreach ($column['builds'] as $build)
+                <li>{{ $build }}</li>
+              @endforeach
+            </ul>
+          @endif
 
-          <h4 class="technologies-commerce__label">
-            <svg class="technologies-commerce__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4.5h10v7.2H3V4.5Z" fill="none" stroke="#3b82f6" stroke-width="1.3"/><path d="M6 13.2h4M8 11.7V13.2" stroke="#3b82f6" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Why businesses choose it
-          </h4>
-          <p class="technologies-commerce__copy">{{ $column['why'] }}</p>
+          @if (filled($column['why']))
+            <h4 class="technologies-commerce__label">
+              <svg class="technologies-commerce__mark technologies-commerce__mark--why" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4.5h10v7.2H3V4.5Z" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M6 13.2h4M8 11.7V13.2" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Why businesses choose it
+            </h4>
+            <p class="technologies-commerce__copy">{{ $column['why'] }}</p>
+          @endif
 
-          <h4 class="technologies-commerce__label">
-            <svg class="technologies-commerce__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
-            Consider a different fit when
-          </h4>
-          <p class="technologies-commerce__copy">{{ $column['consider'] }}</p>
+          @if (filled($column['consider']))
+            <h4 class="technologies-commerce__label">
+              <svg class="technologies-commerce__mark technologies-commerce__mark--consider" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#fff"/></svg>
+              {{ $column['considerLabel'] }}
+            </h4>
+            <p class="technologies-commerce__copy">{{ $column['consider'] }}</p>
+          @endif
 
-          <h4 class="technologies-commerce__label">
-            <svg class="technologies-commerce__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#3b82f6" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Works with
-          </h4>
-          <p class="technologies-commerce__copy">{{ $column['works'] }}</p>
+          @if (filled($column['works']))
+            <h4 class="technologies-commerce__label">
+              <svg class="technologies-commerce__mark technologies-commerce__mark--works" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>
+              {{ $column['worksLabel'] }}
+            </h4>
+            <p class="technologies-commerce__copy">{{ $column['works'] }}</p>
+          @endif
+          </div>
         </article>
       @endforeach
     </div>
 
+    <p class="technologies-related">
+      <span class="technologies-related__label">Related:</span>
+      @foreach ($commerce['related'] as $link)
+        <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
+      @endforeach
+    </p>
+    <h3 class="technologies-compare-caption">{{ $commerce['compareTitle'] }}</h3>
     <div class="technologies-commerce__table-wrap">
       <table class="technologies-commerce__table">
         <thead>
@@ -580,8 +657,11 @@
           @foreach ($commerce['compare']['rows'] as $row)
             <tr>
               <th scope="row">{{ $row['label'] }}</th>
-              @foreach ($row['cells'] as $cell)
-                <td>{{ $cell }}</td>
+              @foreach ($row['cells'] as $index => $cell)
+                <td>
+                  <span class="technologies-table-label">{{ $commerce['compare']['headers'][$index] }}</span>
+                  {{ $cell }}
+                </td>
               @endforeach
             </tr>
           @endforeach
@@ -614,22 +694,50 @@
           @foreach ($combinations['rows'] as $row)
             <tr>
               <th scope="row">
+                <span class="technologies-table-label">Business need</span>
                 <span class="technologies-combinations__need">
-                  <span class="technologies-combinations__icon technologies-combinations__icon--{{ $row['icon'] }}" aria-hidden="true"></span>
-                  <span>
+                  <span class="technologies-combinations__icon technologies-combinations__icon--{{ $row['icon'] }}" aria-hidden="true">
+                    @switch($row['icon'])
+                      @case('portal')
+                        <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M6.1 6.1l1.6 1.6M16.3 16.3l1.6 1.6M17.9 6.1l-1.6 1.6M7.7 16.3l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                        @break
+                      @case('live')
+                        <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 19.2c1.2-3 3.5-4.5 6.5-4.5s5.3 1.5 6.5 4.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                        @break
+                      @case('marketing')
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 10v4h3l8 4V6L7 10H4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M15 9.5a3.5 3.5 0 0 1 0 5M8 14.2v2.3a2 2 0 0 0 2 1.8h.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                        @break
+                      @case('content')
+                        <svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="4" width="7" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="4" width="7" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="13" width="7" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="13" width="7" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+                        @break
+                      @case('store')
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M6.5 8h11l-.8 11.2a1.5 1.5 0 0 1-1.5 1.3H8.8a1.5 1.5 0 0 1-1.5-1.3L6.5 8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8V6.8A3 3 0 0 1 12 3.8 3 3 0 0 1 15 6.8V8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                        @break
+                      @case('catalog')
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 10.5 12 4l8 6.5M6.5 10v9h11v-9M10 19v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        @break
+                      @case('ai')
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3.5 13.4 8.6 18.5 10 13.4 11.4 12 16.5 10.6 11.4 5.5 10 10.6 8.6 12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M18 15.5 18.6 17.4 20.5 18 18.6 18.6 18 20.5 17.4 18.6 15.5 18 17.4 17.4 18 15.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                        @break
+                      @default
+                        <svg viewBox="0 0 24 24" width="18" height="18"><ellipse cx="12" cy="6.5" rx="6.5" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 6.5v5c0 1.5 2.9 2.6 6.5 2.6s6.5-1.1 6.5-2.6v-5M5.5 11.5v5c0 1.5 2.9 2.6 6.5 2.6s6.5-1.1 6.5-2.6v-5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+                    @endswitch
+                  </span>
+                  <span class="technologies-combinations__need-copy">
                     <span class="technologies-combinations__need-title">{{ $row['title'] }}</span>
-                    <span class="technologies-combinations__need-text">{{ $row['text'] }}</span>
+                    <span class="technologies-combinations__need-text">{{ $row['description'] }}</span>
                   </span>
                 </span>
               </th>
               <td>
+                <span class="technologies-table-label">Typical stack</span>
                 <span class="technologies-combinations__pills">
                   @foreach ($row['pills'] as $pill)
-                    @if (! $loop->first)
-                      <span class="technologies-combinations__plus" aria-hidden="true">+</span>
+                    @if ($pill['join'] !== '')
+                      <span class="technologies-combinations__plus">{{ $pill['join'] }}</span>
                     @endif
                     <span class="technologies-combinations__pill technologies-combinations__pill--{{ $pill['key'] }}">
-                      @if (filled($pill['logo']))
+                      @if ($pill['logo'] !== '')
                         <img
                           class="technologies-combinations__logo"
                           src="{{ asset($pill['logo']) }}"
@@ -638,16 +746,17 @@
                           width="16"
                           height="16"
                           decoding="async"
-                          loading="lazy">
+                        >
                       @else
                         <span class="technologies-combinations__logo-placeholder" role="img" aria-label="{{ $pill['logoAlt'] }}"></span>
                       @endif
-                      {{ $pill['name'] }}
+                      {{ $pill['label'] }}
                     </span>
                   @endforeach
                 </span>
               </td>
               <td>
+                <span class="technologies-table-label">Related page</span>
                 <a class="technologies-combinations__link" href="{{ route($row['serviceRoute'], $row['serviceParams']) }}">
                   {{ $row['serviceLabel'] }}
                   <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h9M9 4.5 12.5 8 9 11.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -677,7 +786,7 @@
     <div class="technologies-selection__flow">
       <article class="technologies-selection__panel">
         <h3>{{ $selection['discoveryTitle'] }}</h3>
-        <ul>
+        <ul class="technologies-selection__checks" style="--technologies-build-mark: url('{{ asset('assets/icons/green-circle-check-icon.png') }}?v={{ filemtime(public_path('assets/icons/green-circle-check-icon.png')) }}')">
           @foreach ($selection['discovery'] as $item)
             <li>{{ $item }}</li>
           @endforeach
@@ -696,8 +805,8 @@
                   src="{{ asset($mark['logo']) }}"
                   alt="{{ $mark['logoAlt'] }}"
                   title="{{ $mark['logoAlt'] }}"
-                  width="28"
-                  height="28"
+                  width="36"
+                  height="36"
                   decoding="async"
                   loading="lazy">
               @else
@@ -714,14 +823,46 @@
         <span class="technologies-selection__result-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2a4dfb"/><path d="m7.5 12.2 3 3 6-6.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <p><strong>{{ $selection['resultLead'] }}</strong> {{ $selection['resultText'] }}</p>
+        <p>
+          <strong>{{ $selection['resultLead'] }}</strong>
+          <span>{{ $selection['resultText'] }}</span>
+        </p>
+        <span class="technologies-selection__result-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
       </article>
     </div>
 
     <ul class="technologies-selection__factors">
       @foreach ($selection['factors'] as $factor)
         <li class="technologies-selection__factor technologies-selection__factor--{{ $factor['tone'] }}">
-          <span class="technologies-selection__number">{{ $factor['number'] }}</span>
+          <div class="technologies-selection__factor-head">
+            <span class="technologies-selection__number">{{ $factor['number'] }}</span>
+            <span class="technologies-selection__factor-icon" aria-hidden="true">
+              @switch($factor['icon'])
+                @case('database')
+                  <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="7" ry="3" stroke="currentColor" stroke-width="1.7"/><path d="M5 6v4.5c0 1.66 3.13 3 7 3s7-1.34 7-3V6M5 10.5V15c0 1.66 3.13 3 7 3s7-1.34 7-3v-4.5" stroke="currentColor" stroke-width="1.7"/></svg>
+                  @break
+                @case('bolt')
+                  <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="m13.2 6.8-5 6.2h3.3l-0.7 4.2 5-6.2h-3.3z" fill="currentColor"/></svg>
+                  @break
+                @case('pencil')
+                  <svg viewBox="0 0 24 24" fill="none"><path d="m15.2 5.4 3.4 3.4-9.8 9.8H5.4v-3.4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m13.8 6.8 3.4 3.4" stroke="currentColor" stroke-width="1.7"/></svg>
+                  @break
+                @case('puzzle')
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M9.5 4.5h3.2a1.8 1.8 0 0 1 1.8 1.8v1.1a1.5 1.5 0 1 0 3 0v-.5h1.2A1.8 1.8 0 0 1 20.5 8.7v3.2a1.8 1.8 0 0 1-1.8 1.8h-1.1a1.5 1.5 0 1 0 0 3h.5v1.2a1.8 1.8 0 0 1-1.8 1.8h-3.2a1.8 1.8 0 0 1-1.8-1.8v-1.1a1.5 1.5 0 1 0-3 0v.5H5.3A1.8 1.8 0 0 1 3.5 15.3v-3.2A1.8 1.8 0 0 1 5.3 10.3h1.1a1.5 1.5 0 1 0 0-3h-.5V5.8A1.3 1.3 0 0 1 7.2 4.5h2.3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                  @break
+                @case('users')
+                  <svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8.2" r="2.4" stroke="currentColor" stroke-width="1.7"/><circle cx="16.2" cy="9" r="2" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 17.5c.7-2.4 2.4-3.6 4.5-3.6s3.8 1.2 4.5 3.6M13.8 14.2c1.3-.4 2.7-.2 3.9.8.9.8 1.4 1.8 1.6 2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                  @break
+                @case('coins')
+                  <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="16.2" rx="6.2" ry="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M5.8 16.2V18c0 1.3 2.8 2.4 6.2 2.4s6.2-1.1 6.2-2.4v-1.8" stroke="currentColor" stroke-width="1.7"/><ellipse cx="12" cy="8.4" rx="5.4" ry="2.2" stroke="currentColor" stroke-width="1.7"/><path d="M6.6 8.4v2.8c0 1.2 2.4 2.2 5.4 2.2s5.4-1 5.4-2.2V8.4M12 6.8v3.2M10.4 8.1h3.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                  @break
+              @endswitch
+            </span>
+          </div>
           <h3>{{ $factor['title'] }}</h3>
           <p>{{ $factor['text'] }}</p>
         </li>
@@ -737,20 +878,19 @@
     <ul class="technologies-why__grid">
       @foreach ($why['items'] as $item)
         <li class="technologies-why__card">
-          <span class="technologies-why__icon" aria-hidden="true">
-            @switch($item['icon'])
-              @case('ownership')
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 18.5c.8-2.6 2.8-4 5.5-4s4.7 1.4 5.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16.2 10.2h3.2v2.4h-1.1V16h-2.1v-3.4h-1.1z" fill="currentColor"/></svg>
-                @break
-              @case('sprints')
-                <svg viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 9.5h16M8 4.5v3M16 4.5v3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                @break
-              @case('decisions')
-                <svg viewBox="0 0 24 24"><path d="M7 4.5h7.5L19 9v10.5a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14 4.8V9h4.2M8.5 13h7M8.5 16h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                @break
-              @default
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4.5v2.2M12 17.3V19.5M4.5 12h2.2M17.3 12H19.5M6.7 6.7l1.6 1.6M15.7 15.7l1.6 1.6M17.3 6.7l-1.6 1.6M8.3 15.7l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            @endswitch
+          <span class="technologies-why__icon">
+            @if (filled($item['icon']))
+              <img
+                src="{{ asset($item['icon']) }}"
+                alt="{{ $item['iconAlt'] }}"
+                title="{{ $item['iconAlt'] }}"
+                width="40"
+                height="40"
+                decoding="async"
+                loading="lazy">
+            @else
+              <span class="technologies-why__icon-placeholder" role="img" aria-label="{{ $item['iconAlt'] }}"></span>
+            @endif
           </span>
           <h3>{{ $item['title'] }}</h3>
           <p>{{ $item['text'] }}</p>
