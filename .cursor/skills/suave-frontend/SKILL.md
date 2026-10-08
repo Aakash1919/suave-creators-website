@@ -284,3 +284,15 @@ Layout chrome (`Topbar`, `Header`, `Footer`, `Logo`, `Seo`, `SuaveAgent`, `TheSu
 ## Skill maintenance
 
 Domain skill for marketing frontend. Shared coding lives in `system-coding-standards`; integrity checks in `frontend-audit`. When frontend conventions change, update this skill and `reference.md` in the same change set, then run `orchestration-maintenance`. Do not recreate split skills for CSS/sections/assets.
+
+## Enquiry Analytics
+
+The contact page and CTA popup emit `generate_lead` only for JSON responses with
+`success === true` and `lead_tracked === true`. Names are `contact_us` and
+`contact_popup`. Keep initialization and pending-submit guards. The popup waits
+for the existing Google event callback before redirecting (2s fallback for blocked
+tags); never add a thank-you-page lead event or another tag/GTM trigger. Lead
+parameters must exclude enquiry fields containing personal information and revenue.
+Run `node tests/Browser/enquiry-tracking.mjs` against a local Laravel server on
+127.0.0.1:8017 (Chrome installed); responses and Analytics are intercepted. Actual
+GA4 delivery needs an approved production test with consent and DebugView.

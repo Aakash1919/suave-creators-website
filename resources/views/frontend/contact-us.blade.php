@@ -414,9 +414,10 @@
 
         (function() {
             const form = document.querySelector('[data-contact-form]');
-            if (!form) {
+            if (!form || form.dataset.enquiryInitialized) {
                 return;
             }
+            form.dataset.enquiryInitialized = 'true';
 
             const successEl = document.querySelector('[data-contact-success]');
             const submitBtn = form.querySelector('[data-contact-submit]');
@@ -779,6 +780,7 @@
 
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
+                if (form.dataset.enquiryPending === 'true') return;
 
                 if (successEl) {
                     successEl.hidden = true;
@@ -795,6 +797,7 @@
                 }
 
                 formSubmitted = true;
+                form.dataset.enquiryPending = 'true';
                 if (draftInputTimer) {
                     window.clearTimeout(draftInputTimer);
                     draftInputTimer = null;
@@ -831,7 +834,7 @@
                             return;
                         }
 
-                        if (!response.ok || data.success === false) {
+                        if (!response.ok || data.success !== true) {
                             formSubmitted = false;
                             showError('message', data.message ||
                                 'Unable to send your request. Please try again.');
@@ -839,7 +842,7 @@
                         }
 
                         const selectedService = field('service')?.value || '';
-                        if (data.lead_tracked !== false && typeof window.suaveTrackEvent === 'function') {
+                        if (data.lead_tracked === true && typeof window.suaveTrackEvent === 'function') {
                             window.suaveTrackEvent('generate_lead', {
                                 lead_type: 'contact_form',
                                 service: selectedService,
@@ -854,6 +857,7 @@
                         showError('message', 'Unable to send your request. Please try again.');
                     })
                     .finally(function() {
+                        form.dataset.enquiryPending = 'false';
                         setSubmitting(false);
                     });
             });
