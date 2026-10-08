@@ -20,10 +20,12 @@ class MarketingChannelDetailSection extends Component
         public string $introHighlight = 'SEO service',
         public string $coversHeading = 'What our SEO service covers',
         public array $covers = [],
+        public string $bridge = '',
         public string $calloutLabel = 'When SEO is the right investment',
         public string $calloutBody = '',
         public array $relatedLinks = [],
         public string $headingId = 'marketing-channel-detail-heading',
+        public string $sectionId = '',
         public string $icon = 'search',
     ) {}
 

@@ -440,6 +440,83 @@ class ServiceSupport
     {
         $baseUrl = rtrim((string) config('app.url', url('/')), '/');
 
+        if ($slug === 'digital-marketing-services') {
+            $pageUrl = rtrim(route('service.show', ['slug' => 'digital-marketing-services']), '/');
+            $serviceId = $pageUrl.'#service';
+            $provider = ['@id' => $baseUrl.'/#organization'];
+
+            return [
+                'seoJsonLdGraph' => [[
+                    '@type' => 'Service',
+                    '@id' => $serviceId,
+                    'name' => 'B2B digital marketing services',
+                    'serviceType' => 'Digital marketing',
+                    'description' => 'SEO, pay-per-click advertising on Google and LinkedIn, technical content marketing and LinkedIn-focused social media marketing for B2B companies.',
+                    'url' => $pageUrl,
+                    'provider' => $provider,
+                    'audience' => [
+                        '@type' => 'BusinessAudience',
+                        'audienceType' => 'B2B companies selling to enterprise buyers',
+                    ],
+                    'hasOfferCatalog' => [
+                        '@type' => 'OfferCatalog',
+                        'name' => 'Digital marketing services',
+                        'itemListElement' => [
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#seo-service',
+                                    'name' => 'Search engine optimization (SEO)',
+                                    'serviceType' => 'Search engine optimization',
+                                    'url' => $pageUrl.'#seo',
+                                    'description' => 'Technical crawlability audits, Core Web Vitals optimization, search-intent mapping and topical cluster authority for B2B websites.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#ppc-service',
+                                    'name' => 'Pay-per-click advertising (PPC)',
+                                    'serviceType' => 'Pay-per-click advertising',
+                                    'url' => $pageUrl.'#ppc',
+                                    'description' => 'Google Ads and LinkedIn Ads campaigns for high-intent B2B searches and audiences, with conversion landing pages and tracking.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#content-marketing-service',
+                                    'name' => 'Content marketing',
+                                    'serviceType' => 'Content marketing',
+                                    'url' => $pageUrl.'#content-marketing',
+                                    'description' => 'Technical whitepapers, architecture tear-downs and TCO breakdowns organized into topic clusters for B2B decision-makers.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#social-media-marketing-service',
+                                    'name' => 'Social media marketing',
+                                    'serviceType' => 'Social media marketing',
+                                    'url' => $pageUrl.'#social-media-marketing',
+                                    'description' => 'B2B brand positioning and technical thought leadership on LinkedIn and industry channels.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                        ],
+                    ],
+                ]],
+                'seoJsonLdWebpageAbout' => $serviceId,
+            ];
+        }
+
         if ($slug === 'enterprise-software-solutions') {
             $pageUrl = rtrim(route('service.show', ['slug' => 'enterprise-software-solutions']), '/');
             $serviceId = $pageUrl.'/#service';
@@ -559,6 +636,9 @@ class ServiceSupport
         }
 
         $ogImage = trim((string) ($service['ogImage'] ?? $service['seoImage'] ?? ''), '/');
+        $ogImageAlt = trim((string) ($service['ogImageAlt'] ?? ''));
+        $twitterTitle = trim((string) ($service['twitterTitle'] ?? ''));
+        $twitterDescription = trim((string) ($service['twitterDescription'] ?? ''));
 
         $isDigitalMarketing = $slug === 'digital-marketing-services';
 
@@ -568,7 +648,10 @@ class ServiceSupport
             'seoDescription' => (string) ($service['pageDescription'] ?? 'Suave Creators service details.'),
             'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
+            'seoTwitterTitle' => $twitterTitle !== '' ? $twitterTitle : null,
+            'seoTwitterDescription' => $twitterDescription !== '' ? $twitterDescription : null,
             'seoImage' => $ogImage !== '' ? $ogImage : null,
+            'seoImageAlt' => $ogImageAlt !== '' ? $ogImageAlt : null,
             'mainClass' => $isDigitalMarketing
                 ? 'site-main site-main--digital-marketing'
                 : 'site-main site-main--service-detail',

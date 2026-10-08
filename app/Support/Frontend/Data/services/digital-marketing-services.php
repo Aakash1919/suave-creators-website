@@ -2,10 +2,14 @@
 
 return [
     'slug' => 'digital-marketing-services',
-    'pageTitle' => 'Digital Marketing Services for B2B | Suave Creators',
-    'pageDescription' => 'B2B digital marketing services from Suave Creators: SEO, PPC, content, and social—engineered with our development team for qualified pipeline.',
-    'ogTitle' => 'Digital Marketing Services for B2B | Suave Creators',
-    'ogDescription' => 'B2B digital marketing services from Suave Creators: SEO, PPC, content, and social—engineered with our development team for qualified pipeline.',
+    'pageTitle' => 'Digital Marketing Services for B2B Companies | Suave Creators',
+    'pageDescription' => 'SEO, Google and LinkedIn PPC, technical content marketing and LinkedIn thought leadership for B2B companies. One strategy built to generate qualified leads.',
+    'ogTitle' => 'B2B Digital Marketing Services: SEO, PPC, Content & Social',
+    'ogDescription' => 'Four connected services for B2B companies: SEO, Google and LinkedIn PPC, technical content marketing and LinkedIn thought leadership.',
+    'twitterTitle' => 'B2B Digital Marketing: SEO, PPC, Content & Social',
+    'twitterDescription' => 'SEO, Google and LinkedIn PPC, technical content and LinkedIn thought leadership, built for qualified B2B leads.',
+    'ogImage' => 'assets/media/digital-marketing-hero.webp',
+    'ogImageAlt' => 'Suave Creators B2B digital marketing services: SEO, PPC, content and social media',
     'breadcrumbName' => 'Digital Marketing Services',
     'eyebrow' => 'Digital growth, engineered',
     'heroTitle' => [
@@ -13,22 +17,62 @@ return [
         'accent' => 'B2B',
         'soft' => 'Companies',
     ],
-    'heroDescription' => 'Full-funnel SEO, PPC, content, and social programs built for enterprise buyers—paired with the technical fixes and landing pages your engineering roadmap already needs.',
+    'heroDescription' => 'Suave Creators provides SEO, PPC, content marketing and social media marketing for B2B companies that sell to enterprise buyers. Every channel is tied to one outcome: qualified inbound leads from decision-makers who are actively researching a solution.',
     'heroPrimaryCta' => 'Get a Scoped Estimate',
-    'heroSecondaryCta' => 'Explore our services',
+    'heroSecondaryCta' => '',
     'heroBackgroundImage' => 'assets/background/marketing-radar-hero-bg.webp',
     'radarVisualImage' => 'assets/media/digital-marketing-hero.webp',
     'radarVisualAlt' => 'Digital marketing radar showing qualified leads, SEO, PPC, social channels, and pipeline influenced for Suave Creators',
     'radarProofPoints' => [
         'Search, paid, content and social under one strategy',
         'Technical fixes built by our own engineering team',
-        'Content shaped with senior developers',
+        'Content written with input from senior developers',
+    ],
+    'overview' => [
+        'title' => [
+            'before' => 'Digital Marketing Services That ',
+            'accent' => 'Drive Business Growth',
+            'after' => '',
+        ],
+        'description' => 'Digital marketing reaches buyers through search engines, paid ads, content and social platforms while they research. Suave Creators offers four connected services: search engine optimization (SEO) for organic visibility, pay-per-click advertising (PPC) for paid acquisition, content marketing for authority, and social media marketing for brand positioning and trust.',
+        'columns' => ['Service', 'What it does', 'Best for', 'How it\'s measured'],
+        'rows' => [
+            [
+                'service' => 'SEO',
+                'anchor' => 'seo',
+                'does' => 'Earns organic visibility for high-intent searches',
+                'bestFor' => 'A durable, compounding source of leads',
+                'measured' => 'Rankings for target queries, organic sessions, organic leads',
+            ],
+            [
+                'service' => 'PPC',
+                'anchor' => 'ppc',
+                'does' => 'Buys visibility for high-intent searches and audiences now',
+                'bestFor' => 'Immediate demand capture and message testing',
+                'measured' => 'Cost per lead, conversion rate, pipeline from paid',
+            ],
+            [
+                'service' => 'Content marketing',
+                'anchor' => 'content-marketing',
+                'does' => 'Answers buyers\' technical and financial questions',
+                'bestFor' => 'Authority and consideration-stage education',
+                'measured' => 'Engaged visits, content-assisted leads, links earned',
+            ],
+            [
+                'service' => 'Social media marketing',
+                'anchor' => 'social-media-marketing',
+                'does' => 'Puts your expertise in front of decision-makers on LinkedIn',
+                'bestFor' => 'Trust and brand recognition before a need arises',
+                'measured' => 'Reach among target roles, profile visits, inbound conversations',
+            ],
+        ],
     ],
     'seoChannel' => [
+        'sectionId' => 'seo',
         'index' => '01',
         'total' => '04',
         'title' => 'Search Engine Optimization (SEO)',
-        'intro' => 'Search engine optimization improves a website so search engines can crawl, understand and rank it for the queries your buyers use. Our SEO service is built for high-intent organic discovery: technical crawlability audits, Core Web Vitals optimization and topical authority that turns searches into sales conversations.',
+        'intro' => 'Search engine optimization (SEO) is improving a website so search engines can crawl, understand and rank it for the queries your buyers use. Our SEO service is built for high-intent organic discovery: technical crawlability audits, Core Web Vitals optimization and topical cluster authority that turn searches into sales conversations.',
         'introHighlight' => 'SEO service',
         'coversHeading' => 'What our SEO service covers',
         'covers' => [
@@ -38,7 +82,7 @@ return [
             ],
             [
                 'title' => 'Core Web Vitals',
-                'description' => 'Loading (LCP), responsiveness (INP) and layout stability (CLS). Our engineers implement fixes instead of handing over a list.',
+                'description' => 'Loading (LCP), responsiveness (INP) and layout stability (CLS). Because Suave Creators also builds web applications, fixes can be implemented by our engineers instead of handed over as a list.',
             ],
             [
                 'title' => 'Keyword research and search intent',
@@ -50,15 +94,15 @@ return [
             ],
             [
                 'title' => 'Topical authority and internal linking',
-                'description' => 'Topic clusters connect service pages, guides and case studies, so search engines see depth rather than isolated pages.',
+                'description' => 'Topic clusters that connect service pages, guides and case studies, so search engines see depth rather than isolated pages.',
             ],
             [
                 'title' => 'B2B focus',
-                'description' => 'Priority goes to commercial queries evaluators use — cost, comparison and alternative searches — not only high-volume informational terms.',
+                'description' => 'Priority goes to the commercial queries evaluators use, such as cost, comparison and alternative searches, not only high-volume informational terms.',
             ],
         ],
         'calloutLabel' => 'When SEO is the right investment',
-        'calloutBody' => 'SEO suits companies whose buyers research online and whose sales cycle is long enough for organic visibility to compound. It takes months rather than weeks, so it works best alongside a channel that produces leads sooner, such as PPC.',
+        'calloutBody' => 'SEO suits companies whose buyers research online and whose sales cycle is long enough for organic visibility to compound. It takes months rather than weeks to show results, so it works best alongside a channel that produces leads sooner, such as PPC.',
         'relatedLinks' => [
             [
                 'label' => 'Web application development',
@@ -67,34 +111,350 @@ return [
             ],
             [
                 'label' => 'How SEO impacts e-commerce conversions',
-                'route' => 'blogs',
+                'route' => 'blog.show',
+                'params' => ['slug' => 'how-does-seo-impact-e-commerce-conversions'],
             ],
         ],
     ],
-    'faqs' => [
-        [
-            'question' => 'What digital marketing services do you offer for B2B companies?',
-            'answer' => 'We offer SEO (including technical and content SEO), PPC and paid social, content and thought leadership, social media programs, conversion-focused landing pages, and analytics/attribution wired to your CRM.',
+    'ppcChannel' => [
+        'sectionId' => 'ppc',
+        'index' => '02',
+        'total' => '04',
+        'title' => 'Pay-Per-Click Advertising (PPC)',
+        'intro' => 'Pay-per-click (PPC) advertising places your ads in search results or social feeds and charges only when someone clicks. Our PPC service runs focused Google Ads and LinkedIn Ads campaigns for B2B companies, capturing high-intent enterprise searches and sending that traffic to landing pages built to convert.',
+        'introHighlight' => 'PPC service',
+        'coversHeading' => 'What our PPC service covers',
+        'covers' => [
+            [
+                'title' => 'Google Ads search campaigns',
+                'description' => 'Built around commercial and comparison queries, with negative keywords that filter out job seekers, students and research-only traffic.',
+            ],
+            [
+                'title' => 'LinkedIn Ads',
+                'description' => 'Reach decision-makers by job title, seniority, company size and industry, including people who are not searching yet.',
+            ],
+            [
+                'title' => 'Conversion landing pages',
+                'description' => 'One page per campaign intent, fast and focused on a single action, designed and built by our own UI/UX design and development team.',
+            ],
+            [
+                'title' => 'Conversion tracking',
+                'description' => 'In GA4 and the ad platforms, tied to form submissions and booked calls, so budget moves toward what produces leads.',
+            ],
+            [
+                'title' => 'Ongoing testing',
+                'description' => 'Of ad copy, offers and landing page variants.',
+            ],
         ],
-        [
-            'question' => 'How is Suave Creators different from a typical marketing agency?',
-            'answer' => 'We pair marketers with in-house software engineers. That means technical SEO fixes, landing pages, and tracking can ship with the campaign—not wait on a separate vendor backlog.',
+        'calloutLabel' => 'PPC and SEO: different jobs',
+        'calloutBody' => 'PPC buys visibility immediately and stops when spending stops. SEO builds visibility that persists but takes longer. A practical B2B approach uses PPC to capture demand now and to learn which keywords actually convert, then directs SEO and content effort toward those proven terms.',
+        'relatedLinks' => [],
+    ],
+    'contentChannel' => [
+        'sectionId' => 'content-marketing',
+        'index' => '03',
+        'total' => '04',
+        'title' => 'Content Marketing',
+        'intro' => 'Content marketing is creating and distributing content that answers buyers\' questions and builds trust before they talk to sales. For B2B technology buyers, we focus on technical content strategy: whitepapers, architecture tear-downs and total cost of ownership (TCO) breakdowns, organized into topic clusters that build authority with decision-makers.',
+        'introHighlight' => 'technical content strategy',
+        'coversHeading' => 'Content we produce',
+        'covers' => [
+            [
+                'title' => 'TCO and cost breakdowns',
+                'description' => 'that compare building, buying and switching platforms over several years',
+            ],
+            [
+                'title' => 'Architecture tear-downs and technical guides',
+                'description' => 'that show how a system works, not only what it does',
+            ],
+            [
+                'title' => 'Whitepapers',
+                'description' => 'for decision-makers who need to justify a purchase internally',
+            ],
+            [
+                'title' => 'Case-study-driven content',
+                'description' => 'that turns delivered projects into evidence',
+            ],
+            [
+                'title' => 'Answer-first comparison and FAQ pages',
+                'description' => 'written for search and answer engines',
+            ],
         ],
-        [
-            'question' => 'How long before we see results from digital marketing?',
-            'answer' => 'Paid demand capture can produce leads within weeks once landing pages and tracking are live. SEO and content typically compound over 3–6 months depending on competition and site health.',
-        ],
-        [
-            'question' => 'Do you only run ads, or do you also build pages and tracking?',
-            'answer' => 'We scope full-funnel work: messaging, creatives, landing experiences, CRM handoff, and measurement—so media spend is not wasted on broken conversion paths.',
-        ],
-        [
-            'question' => 'Can you work with our existing CRM and sales process?',
-            'answer' => 'Yes. We align forms, UTMs, and lead stages with your CRM so marketing and sales share definitions of MQL, SQL, and influenced pipeline.',
-        ],
-        [
-            'question' => 'What does a scoped estimate include?',
-            'answer' => 'A scoped estimate outlines recommended channels, monthly investment ranges, technical prerequisites, deliverables, and success metrics tailored to your ICP and current site or product.',
+        'bridge' => 'You can see the format on our own blog, for example Custom CRM vs Salesforce: 3-year TCO and Custom ERP vs NetSuite: 3-year TCO.',
+        'calloutLabel' => 'How we plan content',
+        'calloutBody' => 'Every piece is mapped to a search intent and a buying stage before it is written. Pieces are grouped into topic clusters around a pillar page, linked to each other and to the relevant service page. Technical accuracy comes from our senior developers; structure and search alignment come from our digital strategists.',
+        'relatedLinks' => [
+            [
+                'label' => 'Custom CRM vs Salesforce: 3-year TCO',
+                'route' => 'blog.show',
+                'params' => ['slug' => 'custom-crm-vs-salesforce-tco-analysis-2026'],
+            ],
+            [
+                'label' => 'Custom ERP vs NetSuite: 3-year TCO',
+                'route' => 'blog.show',
+                'params' => ['slug' => 'custom-erp-vs-netsuite-tco-analysis-2026'],
+            ],
         ],
     ],
+    'socialChannel' => [
+        'sectionId' => 'social-media-marketing',
+        'index' => '04',
+        'total' => '04',
+        'title' => 'Social Media Marketing',
+        'intro' => 'Social media marketing uses platforms such as LinkedIn to build awareness and trust with a defined audience. Our B2B social media service focuses on brand positioning and technical thought leadership across LinkedIn and relevant industry channels, so decision-makers recognize your company before they need you.',
+        'introHighlight' => 'B2B social media service',
+        'coversHeading' => 'What our social media service covers',
+        'covers' => [
+            [
+                'title' => 'LinkedIn company page strategy',
+                'description' => 'Positioning, posting plan and consistent messaging.',
+            ],
+            [
+                'title' => 'Founder and expert thought leadership',
+                'description' => 'Helping leaders publish the technical insight buyers trust more than brand posts.',
+            ],
+            [
+                'title' => 'Content distribution',
+                'description' => 'Turning whitepapers, TCO breakdowns and case studies into posts and short formats.',
+            ],
+            [
+                'title' => 'Engagement with target accounts',
+                'description' => 'Meaningful conversations with the people and companies you want to reach.',
+            ],
+            [
+                'title' => 'Consistent brand positioning',
+                'description' => 'The same company description across social profiles, directories and your website.',
+            ],
+        ],
+        'calloutLabel' => 'Why LinkedIn comes first for B2B',
+        'calloutBody' => 'LinkedIn is where B2B buyers are identifiable by job title, seniority and company. Organic posts build familiarity, and LinkedIn Ads can then reach or retarget the same audience with a specific offer, so organic and paid social reinforce each other.',
+        'relatedLinks' => [],
+    ],
+    'funnelMatrix' => [
+        'sectionId' => 'integrated',
+        'eyebrow' => 'Full-funnel thinking',
+        'title' => [
+            'before' => 'How Our ',
+            'accent' => 'Digital Marketing Services',
+            'after' => ' Work Together',
+        ],
+        'description' => 'No single channel is best for every business. Each one does a different job at a different stage of the buying journey, and results improve when they share data and content.',
+        'columns' => ['Buying stage', 'SEO', 'PPC', 'Content', 'Social'],
+        'rows' => [
+            [
+                'index' => '01',
+                'stage' => 'Awareness',
+                'subtitle' => 'Notices a problem',
+                'seo' => 'Ranks for problem-level questions',
+                'ppc' => 'LinkedIn Ads to target roles',
+                'content' => 'Guides and thought leadership',
+                'social' => 'Expert posts',
+            ],
+            [
+                'index' => '02',
+                'stage' => 'Consideration',
+                'subtitle' => 'Compares approaches and vendors',
+                'seo' => 'Ranks for cost and comparison queries',
+                'ppc' => 'Search ads on comparison terms',
+                'content' => 'TCO breakdowns, whitepapers',
+                'social' => 'Distributes the same material',
+            ],
+            [
+                'index' => '03',
+                'stage' => 'Decision',
+                'subtitle' => 'Shortlists and makes contact',
+                'seo' => 'Service and case-study pages rank for service and brand queries',
+                'ppc' => 'Brand and high-intent search ads, retargeting',
+                'content' => 'Case studies, FAQs',
+                'social' => 'Proof and founder credibility',
+            ],
+        ],
+        'examples' => [
+            [
+                'index' => '01',
+                'body' => 'A LinkedIn post shares a TCO breakdown. A reader later searches for the company name, finds the service page through SEO and books a call.',
+            ],
+            [
+                'index' => '02',
+                'body' => 'PPC data shows which keywords produce leads. SEO and content then prioritize those keywords, lowering the cost of the same demand over time.',
+            ],
+        ],
+        'aiVisibility' => [
+            'icon' => '',
+            'iconAlt' => 'AI circuit icon for search and AI-driven discovery visibility',
+            'title' => 'Visibility across search and AI-driven discovery',
+            'body' => "Buyers now also ask AI tools, such as Google's AI Overviews, ChatGPT and Perplexity, to recommend vendors. The same foundations that support SEO support this visibility: crawlable pages, answer-first passages, FAQ and Organization structured data, first-party information such as original cost analyses, and a company description that stays consistent across your website, directories and social profiles. We build these into the SEO and content work. No one can guarantee inclusion in AI-generated answers; this work improves the conditions for it.",
+        ],
+    ],
+    'howWeWork' => [
+        'eyebrow' => 'A clear operating rhythm',
+        'title' => 'How We Work',
+        'items' => [
+            [
+                'title' => 'Audit',
+                'description' => 'Review your site\'s technical health, current rankings, paid accounts, content and social presence.',
+                'image' => '',
+                'imageAlt' => 'Digital marketing audit dashboard review for B2B SEO and PPC',
+                'icon' => '',
+                'iconAlt' => 'Audit document icon for digital marketing discovery',
+            ],
+            [
+                'title' => 'Strategy',
+                'description' => 'Define audiences, priority keywords and channel roles, with goals tied to qualified leads.',
+                'image' => '',
+                'imageAlt' => 'Marketing strategy workshop defining B2B audiences and channels',
+                'icon' => '',
+                'iconAlt' => 'Strategy target icon for digital marketing planning',
+            ],
+            [
+                'title' => 'Execution in sprints',
+                'description' => 'Technical fixes, content, campaigns and posts delivered in planned cycles.',
+                'image' => '',
+                'imageAlt' => 'Sprint execution board for digital marketing campaigns and content',
+                'icon' => '',
+                'iconAlt' => 'Execution gear icon for marketing sprint delivery',
+            ],
+            [
+                'title' => 'Measurement',
+                'description' => 'Track leads and pipeline by channel, then move effort toward what works.',
+                'image' => '',
+                'imageAlt' => 'Pipeline measurement dashboard for digital marketing performance',
+                'icon' => '',
+                'iconAlt' => 'Measurement people icon for marketing pipeline tracking',
+            ],
+        ],
+    ],
+    'whySuave' => [
+        'eyebrow' => 'Why Suave Creators',
+        'title' => 'Why Suave Creators for B2B Digital Marketing',
+        'description' => '',
+        'ctaLabel' => 'Get a Scoped Estimate',
+        'items' => [
+            [
+                'title' => 'Marketing and engineering under one roof',
+                'description' => 'Technical SEO, Core Web Vitals and landing pages are built by our developers, not queued with a third party. See our technology stack.',
+                'icon' => '',
+                'iconAlt' => 'Megaphone icon for marketing and engineering under one roof',
+            ],
+            [
+                'title' => 'Technical content from practitioners',
+                'description' => 'Our articles are authored by senior developers and digital strategists, so content holds up with technical buyers.',
+                'icon' => '',
+                'iconAlt' => 'Gear icon for technical content from practitioners',
+            ],
+            [
+                'title' => 'Built for search and AI discovery',
+                'description' => 'Structured data, entity consistency and answer-first content are part of the standard work.',
+                'icon' => '',
+                'iconAlt' => 'Chat icon for search and AI discovery visibility',
+            ],
+            [
+                'title' => 'Measured on qualified leads, not traffic alone',
+                'description' => 'Reporting ties spend and content to qualified inquiries and pipeline — not vanity traffic metrics.',
+                'icon' => '',
+                'iconAlt' => 'Power icon for qualified lead measurement',
+            ],
+        ],
+    ],
+    'faqEyebrow' => 'Frequently Asked Questions',
+    'faqTitle' => 'Digital Marketing FAQs',
+    'faqDescription' => 'Answers to common questions about B2B digital marketing services, SEO, PPC, content and LinkedIn.',
+    'faqBackgroundImage' => 'assets/background/custom-crm-builder-faq-bg.webp',
+    'faqs' => [
+        [
+            'question' => 'What is digital marketing?',
+            'answer' => 'Digital marketing is promoting a business through online channels such as search engines, paid ads, content, social media and email, reaching people where they research and buy. For B2B companies it usually centers on SEO, PPC, content marketing and LinkedIn, because buyers research online long before they contact a vendor.',
+        ],
+        [
+            'question' => 'What digital marketing services does Suave Creators offer?',
+            'answer' => 'Suave Creators offers four digital marketing services: search engine optimization (SEO), pay-per-click advertising (PPC) on Google and LinkedIn, content marketing built on technical guides, whitepapers and TCO breakdowns, and social media marketing focused on LinkedIn thought leadership and brand positioning.',
+        ],
+        [
+            'question' => 'What is SEO?',
+            'answer' => 'SEO (search engine optimization) is improving a website so search engines can crawl, index and rank it for relevant searches. It covers technical health, page content and structure, and authority signals such as internal and external links.',
+        ],
+        [
+            'question' => 'How does SEO help businesses generate leads?',
+            'answer' => 'SEO puts your pages in front of people actively searching for what you sell. When pages rank for commercial queries, such as service, cost and comparison searches, and answer them clearly with a visible next step, organic visitors become inquiries without a cost per click.',
+        ],
+        [
+            'question' => 'What is PPC advertising?',
+            'answer' => 'Pay-per-click (PPC) advertising is a model in which you pay each time someone clicks your ad. Google Ads shows ads in search results for chosen keywords, and LinkedIn Ads shows ads to audiences defined by job title, company size and industry.',
+        ],
+        [
+            'question' => 'How does PPC differ from SEO?',
+            'answer' => 'PPC buys visibility immediately and stops when spending stops; SEO earns visibility that builds over months and continues without per-click costs. PPC suits capturing demand now and testing messages, while SEO suits building a durable, lower-cost source of leads. Many B2B companies use both.',
+        ],
+        [
+            'question' => 'What is content marketing?',
+            'answer' => 'Content marketing is creating useful content, such as guides, whitepapers, comparisons and case studies, that answers your audience\'s questions and builds trust, so buyers see you as an authority before they talk to sales.',
+        ],
+        [
+            'question' => 'Why is content marketing important for B2B companies?',
+            'answer' => 'B2B purchases involve several stakeholders, larger budgets and longer evaluations. Detailed content such as TCO breakdowns and technical guides helps each stakeholder justify the decision, and it gives SEO and social media something substantial to rank and share.',
+        ],
+        [
+            'question' => 'What is social media marketing?',
+            'answer' => 'Social media marketing uses platforms such as LinkedIn to build awareness, engagement and trust with a target audience through organic posts, expert profiles, community interaction and paid social ads.',
+        ],
+        [
+            'question' => 'How does LinkedIn marketing support B2B growth?',
+            'answer' => 'LinkedIn lets companies reach people by job title, seniority, company and industry. Consistent thought leadership from company and founder profiles builds recognition among decision-makers, and LinkedIn Ads can reach or retarget the same audience with a specific offer.',
+        ],
+        [
+            'question' => 'How do SEO, PPC, content marketing and social media work together?',
+            'answer' => 'Content provides the substance, SEO makes it discoverable in search, social media distributes it to the people you want to reach, and PPC accelerates visibility for the highest-intent searches and audiences. Data from each channel, such as which PPC keywords convert, informs the others.',
+        ],
+        [
+            'question' => 'How should a business choose the right digital marketing strategy?',
+            'answer' => 'Start with the buyer and the sales cycle: who decides, what they search for, how long they evaluate and what budget is available. Then match channels to goals, such as PPC for near-term leads, SEO and content for durable visibility and LinkedIn for trust with specific roles, and measure qualified leads, not traffic alone.',
+        ],
+    ],
+    'consultation' => [
+        'eyebrow' => 'Ready when you are',
+        'title' => 'Plan Your B2B Digital Marketing Strategy',
+        'description' => "Tell us who you sell to and where your leads come from today. We'll review your current search, paid, content and social presence and recommend where to focus first.",
+        'ctaLabel' => 'Get a Scoped Estimate',
+        'secondaryCtaLabel' => 'Contact us',
+        'cardPosition' => 'top',
+        'people' => [
+            [
+                'src' => 'assets/media/analyst-headset-custom-crm-dashboard.webp',
+                'alt' => 'Analyst reviewing digital marketing analytics dashboard during a strategy consultation',
+                'tone' => 'pink',
+                'column' => 'left',
+            ],
+            [
+                'src' => 'assets/media/executive-tablet-crm-hologram.webp',
+                'alt' => 'Executive reviewing a marketing pipeline hologram on a tablet for B2B growth planning',
+                'tone' => 'orange',
+                'column' => 'left',
+            ],
+            [
+                'src' => 'assets/media/floating-analytics-dashboard-laptop.webp',
+                'alt' => 'Laptop with floating analytics dashboard for digital marketing consultation',
+                'tone' => 'yellow',
+                'column' => 'center',
+            ],
+            [
+                'src' => 'assets/media/analyst-performance-metrics-laptop.webp',
+                'alt' => 'Analyst reviewing performance metrics for B2B digital marketing strategy',
+                'tone' => 'blue',
+                'column' => 'center',
+            ],
+            [
+                'src' => 'assets/media/crm-contact-hologram-keyboard.webp',
+                'alt' => 'Lead contact hologram above a keyboard for digital marketing pipeline planning',
+                'tone' => 'coral',
+                'column' => 'right',
+            ],
+            [
+                'src' => 'assets/media/consultant-crm-team-tablet.webp',
+                'alt' => 'Consultant reviewing a marketing team interface on a tablet',
+                'tone' => 'cyan',
+                'column' => 'right',
+            ],
+        ],
+    ],
+    'partnersHeading' => 'Our Partnerships & Growth Stack',
 ];

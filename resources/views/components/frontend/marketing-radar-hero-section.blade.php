@@ -30,7 +30,7 @@
           <span class="marketing-radar-hero__eyebrow-text">{{ $eyebrow }}</span>
         </p>
 
-        <h1 id="{{ $headingId }}" class="page-hero-title marketing-radar-hero__title">
+        <h1 id="{{ $headingId }}" class="marketing-radar-hero__title">
           <span class="marketing-radar-hero__title-lead">{{ $title['lead'] }}</span>
           <span class="marketing-radar-hero__title-line">
             <span class="marketing-radar-hero__title-accent">{{ $title['accent'] }}</span>
@@ -49,18 +49,20 @@
             {{ $primaryLabel }}
             <span class="marketing-radar-hero__cta-primary-arrow" aria-hidden="true">→</span>
           </a>
-          <a href="{{ route('services') }}" class="marketing-radar-hero__cta-secondary">
-            {{ $secondaryLabel }}
-            <span class="marketing-radar-hero__cta-play" aria-hidden="true">
-              <img
-                src="{{ asset('assets/icons/arrow-down-circle-icon.svg') }}"
-                alt="Down arrow circle icon for digital marketing services CTA"
-                title="Down arrow circle icon for digital marketing services CTA"
-                width="28"
-                height="28"
-                decoding="async">
-            </span>
-          </a>
+          @if ($secondaryLabel !== '')
+            <a href="{{ route('services') }}" class="marketing-radar-hero__cta-secondary">
+              {{ $secondaryLabel }}
+              <span class="marketing-radar-hero__cta-play" aria-hidden="true">
+                <img
+                  src="{{ asset('assets/icons/arrow-down-circle-icon.svg') }}"
+                  alt="Down arrow circle icon for digital marketing services CTA"
+                  title="Down arrow circle icon for digital marketing services CTA"
+                  width="28"
+                  height="28"
+                  decoding="async">
+              </span>
+            </a>
+          @endif
         </div>
       </div>
 

@@ -139,7 +139,7 @@ class SeoGenerateService
                 'card' => 'summary_large_image',
                 'site' => $twitterSite,
                 'creator' => $twitterCreator,
-                'title' => $ogTitle,
+                'title' => (string) ($merged['twitter_title'] ?? $ogTitle),
                 'description' => (string) ($merged['twitter_description'] ?? $ogDescription),
                 'image' => $imageUrl,
                 'image_alt' => $imageAlt,
@@ -265,8 +265,23 @@ class SeoGenerateService
             $graph[] = [
                 '@type' => 'FAQPage',
                 '@id' => $faqPageUrl,
+                'isPartOf' => ['@id' => $webPageId],
                 'mainEntity' => $this->faqMainEntity($faqs),
             ];
+        }
+
+        if ($imageUrl !== null && $imageUrl !== '') {
+            foreach ($graph as $index => $node) {
+                if (($node['@type'] ?? '') === 'WebPage') {
+                    $graph[$index]['primaryImageOfPage'] = [
+                        '@type' => 'ImageObject',
+                        'url' => $imageUrl,
+                        'width' => 1200,
+                        'height' => 630,
+                    ];
+                    break;
+                }
+            }
         }
 
         if ($webPageAboutId !== null && $webPageAboutId !== '') {
@@ -274,6 +289,7 @@ class SeoGenerateService
                 if (($node['@type'] ?? '') === 'WebPage') {
                     $graph[$index]['about'] = ['@id' => $webPageAboutId];
                     $graph[$index]['mainEntity'] = ['@id' => $webPageAboutId];
+                    $graph[$index]['publisher'] = ['@id' => $organizationId];
                     break;
                 }
             }

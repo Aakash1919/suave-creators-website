@@ -24,7 +24,7 @@ class MarketingRadarHeroSection extends Component
         public string $eyebrow = 'Digital growth, engineered',
         public string $breadcrumbCurrent = 'Digital Marketing Services',
         public string $primaryLabel = 'Get a Scoped Estimate',
-        public string $secondaryLabel = 'Explore our services',
+        public string $secondaryLabel = '',
         public string $primaryService = 'digital-marketing',
         public string $headingId = 'digital-marketing-hero-heading',
         public string $backgroundImage = 'assets/background/marketing-radar-hero-bg.webp',
@@ -40,7 +40,7 @@ class MarketingRadarHeroSection extends Component
             $this->proofPoints = [
                 'Search, paid, content and social under one strategy',
                 'Technical fixes built by our own engineering team',
-                'Content shaped with senior developers',
+                'Content written with input from senior developers',
             ];
         }
     }
