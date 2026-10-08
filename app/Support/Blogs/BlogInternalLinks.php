@@ -515,7 +515,7 @@ class BlogInternalLinks
             $items[] = $entry;
         }
 
-        $items[] = self::entry('product', 'The Suave App: AI-Powered Outreach CRM', self::relativePath(route('product')), 'Our AI outreach CRM product for B2B sales teams: prospecting, cold email automation, pipeline.');
+        // Activate later: $items[] = self::entry('product', 'The Suave App: AI-Powered Outreach CRM', self::relativePath(route('product')), 'Our AI outreach CRM product for B2B sales teams: prospecting, cold email automation, pipeline.');
         $items[] = self::entry('hub', 'Client case studies', self::relativePath(route('case-studies')), 'Real delivery stories and measured outcomes.');
         $items[] = self::entry('hub', 'About Suave Creators', self::relativePath(route('about-us')), 'Who we are and how we work with clients.');
         $items[] = self::entry('contact', 'Contact Suave Creators', self::relativePath(route('contact-us')), 'Book a consultation.');

@@ -106,7 +106,7 @@ class SeoSitelinksCleanupTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('>About<', false);
-        $response->assertSee('>AI Outreach CRM<', false);
+        $response->assertDontSee('>AI Outreach CRM<', false);
         $response->assertSee('>Services<', false);
         $response->assertSee('>Industries<', false);
         $response->assertSee('>Case Studies<', false);
@@ -114,6 +114,11 @@ class SeoSitelinksCleanupTest extends TestCase
         $response->assertSee('>Contact Us<', false);
         $response->assertSee(parse_url(route('service.show', ['slug' => 'enterprise-software-solutions']), PHP_URL_PATH), false);
         $response->assertDontSee('>Our Product<', false);
+    }
+
+    public function test_outreach_crm_page_stays_unpublished(): void
+    {
+        $this->get('/ai-powered-outreach-crm')->assertNotFound();
     }
 
     public function test_homepage_json_ld_uses_the_homepage_graph(): void

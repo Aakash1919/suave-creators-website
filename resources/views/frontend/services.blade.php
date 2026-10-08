@@ -174,9 +174,11 @@
       <x-frontend.cta-button :href="$demoHref">
         Discuss Your Requirements
       </x-frontend.cta-button>
+      {{-- Activate later: Explore Suave Outreach CRM
       <x-frontend.cta-button :href="route('product')" variant="secondary-blue">
         Explore Suave Outreach CRM
       </x-frontend.cta-button>
+      --}}
     </div>
   </div>
 </section>
