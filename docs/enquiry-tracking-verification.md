@@ -76,3 +76,38 @@ Google Ads conversion import and bidding changes are separate follow-up work.
   These uploads are outside the tracking change and were not replaced.
 - Convention PowerShell script could not run: neither powershell nor pwsh is
   installed. Run this required gate on an environment with PowerShell before release.
+
+## Coverage extension: all public lead forms
+
+| Form | generate_lead form_name | Success contract |
+| --- | --- | --- |
+| Contact page | contact_us | success=true, lead_tracked=true |
+| Contact popup | contact_popup | success=true, lead_tracked=true |
+| Project estimate | project_estimate | success=true, lead_tracked=true |
+| Hire developers | hire_developers | success=true, lead_tracked=true |
+| Inline consultation | inline_consultation_form | success=true, lead_tracked=true |
+| Suave Agent initial contact | suave_agent_start | HTTP success plus complete conversation/lead/session response |
+
+Project estimate and hiring previously emitted no Analytics event. Repeated
+initialization and double submission reproduced four POSTs from the estimate
+form before the fix. Inline consultation had permissive success checks and no
+in-flight guard. Suave Agent previously emitted chat_lead only; it now also
+emits one generate_lead, preserving chat_lead for existing reporting.
+
+For production verification, repeat the DebugView/Network success, invalid-input,
+double-submit and refresh checks for each row above. Estimate, hiring and inline
+forms are on the homepage. The chat lead form is sitewide. Restoring a chat,
+handing off an inline consultation to chat, and sending further messages must
+produce no additional generate_lead. Blog filters, admin forms, and the chat
+message composer do not represent new enquiries and are excluded.
+
+Expanded scoped Laravel checks: 35 tests, 211 assertions passed. Full suite
+remains 169/172 with the same three known failures listed above. Frontend audit
+again reports the same 36 missing local blog-upload assets; PowerShell remains
+unavailable. No production deployment or production test performed.
+
+Expanded browser suite: all 54 scenarios passed (nine cases per lead-entry form),
+including repeated initialization/submission, no lead on popup opening, success,
+client/server validation, network/HTTP errors, malformed/unconfirmed responses,
+callback timeout and refresh. The inline response includes the real chat-session
+handoff contract, verifying that handoff does not emit an additional lead.

@@ -3,7 +3,8 @@
   <script>
     (function () {
       var dialogs = document.querySelectorAll('[data-inquiry-dialog]');
-      if (!dialogs.length) return;
+      if (!dialogs.length || dialogs[0].dataset.enquiryInitialized) return;
+      dialogs[0].dataset.enquiryInitialized = 'true';
 
       var csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
       var openDialog = null;
@@ -385,6 +386,7 @@
         var tokenInput = form.querySelector('[data-inquiry-draft-token]');
         var statusEl = form.querySelector('[data-inquiry-status]');
         var draftTimer = null;
+        var isSubmitting = false;
 
         function scheduleDraft() {
           window.clearTimeout(draftTimer);
@@ -438,12 +440,14 @@
 
         form.addEventListener('submit', function (event) {
           event.preventDefault();
+          if (isSubmitting) return;
           var errors = clientErrors(form);
           if (Object.keys(errors).length) {
             applyErrors(form, errors);
             return;
           }
           clearErrors(form);
+          isSubmitting = true;
           var submitBtn = form.querySelector('[type="submit"]');
           if (submitBtn) submitBtn.disabled = true;
 
@@ -470,10 +474,18 @@
             }
             if (!statusEl) return;
             statusEl.hidden = false;
-            statusEl.classList.toggle('is-error', !response.ok || data.success === false);
-            if (!response.ok || data.success === false) {
+            statusEl.classList.toggle('is-error', !response.ok || data.success !== true);
+            if (!response.ok || data.success !== true) {
               statusEl.textContent = data.message || 'Unable to submit request. Please try again.';
               return;
+            }
+            if (data.lead_tracked === true && typeof window.suaveTrackEvent === 'function') {
+              var formName = form.closest('[data-inquiry-kind]').dataset.inquiryKind === 'hire-developers'
+                ? 'hire_developers' : 'project_estimate';
+              window.suaveTrackEvent('generate_lead', {
+                lead_type: 'enquiry_form',
+                form_name: formName,
+              });
             }
             statusEl.textContent = data.message || 'The request has been sent successfully.';
             form.reset();
@@ -485,6 +497,9 @@
             statusEl.hidden = false;
             statusEl.classList.add('is-error');
             statusEl.textContent = 'Unable to submit request. Please try again.';
+          }).finally(function () {
+            isSubmitting = false;
+            if (submitBtn) submitBtn.disabled = false;
           });
         });
       });
