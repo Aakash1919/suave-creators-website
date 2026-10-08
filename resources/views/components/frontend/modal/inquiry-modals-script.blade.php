@@ -519,6 +519,7 @@
       window.SuaveInquiryModals = {
         open: openInquiryDialog,
         close: closeInquiryDialog,
+        resetSelects: resetInquirySelects,
         setSelect: function (formOrDialog, name, value) {
           var form = formOrDialog.matches && formOrDialog.matches('[data-inquiry-form]')
             ? formOrDialog
