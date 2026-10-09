@@ -36,7 +36,7 @@ class TechnologySupport
             'primaryCta' => 'Get a Scoped Estimate',
             'secondaryCta' => 'Hire Developers',
             'bannerBackgroundImage' => 'assets/background/technologies-hero-bg.webp',
-            'heroVisualImage' => 'assets/media/technology-hero.webp',
+            'heroVisualImage' => 'assets/media/hero-technology.webp',
             'heroVisualLabel' => 'Laravel React and ecommerce technology logos with web software development previews',
             'trust' => self::trust(),
             'stack' => self::stack(),

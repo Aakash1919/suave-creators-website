@@ -27,7 +27,7 @@ class TechnologyPageTest extends TestCase
         $response->assertSee('assets/icons/tech/shopify-technology-icon.png', false);
         $response->assertSee('assets/icons/tech/magento.svg', false);
         $response->assertSee('assets/background/technologies-hero-bg.webp', false);
-        $response->assertSee('assets/media/technology-hero.webp', false);
+        $response->assertSee('assets/media/hero-technology.webp', false);
         $response->assertSee('technologies-hero__image', false);
         $response->assertSee('assets/icons/ownership-logo.webp', false);
         $response->assertSee('assets/icons/admin-logo.webp', false);
