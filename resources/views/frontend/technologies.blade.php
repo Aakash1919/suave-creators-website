@@ -98,8 +98,8 @@
                 src="{{ asset($item['logo']) }}"
                 alt="{{ $item['logoAlt'] }}"
                 title="{{ $item['logoAlt'] }}"
-                width="48"
-                height="48"
+                width="36"
+                height="36"
                 decoding="async"
                 loading="lazy">
             @else
@@ -111,15 +111,6 @@
             </div>
             <p class="technologies-stack__usage"><strong>Typical use:</strong> {{ $item['usage'] }}</p>
           </div>
-          <a class="technologies-stack__service group" href="{{ route($item['serviceRoute'], $item['serviceParams']) }}">
-            <svg class="technologies-stack__service-mark" viewBox="0 0 24 14" width="18" height="11" aria-hidden="true" focusable="false">
-              <path fill="#2A4DFB" d="M0 .2h3.4L8.35 7 3.4 13.8H0L4.85 7 0 .2Z"/>
-              <path fill="#2A4DFB" d="M10 1h14v5H10V1Zm0 7h14v5H10V8Z"/>
-            </svg>
-            <span class="technologies-stack__service-label">Related Service:</span>
-            <span class="technologies-stack__service-name">{{ $item['serviceLabel'] }}</span>
-            <x-frontend.cta-arrow class="technologies-stack__service-arrow" />
-          </a>
         </li>
       @endforeach
     </ul>
@@ -169,47 +160,48 @@
             </div>
           </div>
 
-          @if ($column['builds'] !== [])
-            <h4 class="technologies-backend__label">What we build</h4>
-            <ul class="technologies-backend__builds">
-              @foreach ($column['builds'] as $build)
-                <li>{{ $build }}</li>
-              @endforeach
-            </ul>
-          @endif
+          <div class="technologies-backend__body">
+            @if ($column['builds'] !== [])
+              <h4 class="technologies-backend__label">What we build</h4>
+              <ul class="technologies-backend__builds">
+                @foreach ($column['builds'] as $build)
+                  <li>{{ $build }}</li>
+                @endforeach
+              </ul>
+            @endif
 
-          @if (filled($column['why']))
-            <h4 class="technologies-backend__label">
-              <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M3.5 13.5V7.2L8 4.2l4.5 3V13.5M6.4 13.5v-3h3.2v3" fill="none" stroke="#8eb6ff" stroke-width="1.3" stroke-linejoin="round"/></svg>
-              Why businesses choose it
-            </h4>
-            <p class="technologies-backend__copy">{{ $column['why'] }}</p>
-          @endif
+            @if (filled($column['why']))
+              <h4 class="technologies-backend__label">
+                <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M3.5 13.5V7.2L8 4.2l4.5 3V13.5M6.4 13.5v-3h3.2v3" fill="none" stroke="#8eb6ff" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                Why businesses choose it
+              </h4>
+              <p class="technologies-backend__copy">{{ $column['why'] }}</p>
+            @endif
 
-          @if (filled($column['consider']))
-            <h4 class="technologies-backend__label">
-              <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
-              {{ $column['considerLabel'] }}
-            </h4>
-            <p class="technologies-backend__copy">{{ $column['consider'] }}</p>
-          @endif
+            @if (filled($column['consider']))
+              <h4 class="technologies-backend__label">
+                <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2.2 6 10.6H2L8 2.2Z" fill="none" stroke="#f5b942" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.2v3.1" stroke="#f5b942" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="#f5b942"/></svg>
+                {{ $column['considerLabel'] }}
+              </h4>
+              <p class="technologies-backend__copy">{{ $column['consider'] }}</p>
+            @endif
 
-          @if (filled($column['works']))
-            <h4 class="technologies-backend__label">
-              <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#7eb6ff" stroke-width="1.3" stroke-linecap="round"/></svg>
-              {{ $column['worksLabel'] }}
-            </h4>
-            <p class="technologies-backend__copy">{{ $column['works'] }}</p>
-          @endif
+            @if (filled($column['works']))
+              <h4 class="technologies-backend__label">
+                <svg class="technologies-backend__mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 9.2 4.6 10.8a2.2 2.2 0 0 1-3.1-3.1L3.1 6.1a2.2 2.2 0 0 1 3.1 0M9.8 6.8l1.6-1.6a2.2 2.2 0 0 1 3.1 3.1L13 9.9a2.2 2.2 0 0 1-3.1 0M6.4 9.6l3.2-3.2" fill="none" stroke="#7eb6ff" stroke-width="1.3" stroke-linecap="round"/></svg>
+                {{ $column['worksLabel'] }}
+              </h4>
+              <p class="technologies-backend__copy">{{ $column['works'] }}</p>
+            @endif
+          </div>
 
-          @if ($column['related'] !== [])
-            <p class="technologies-related">
-              <span class="technologies-related__label">Related:</span>
-              @foreach ($column['related'] as $link)
-                <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
-              @endforeach
-            </p>
-          @endif
+          <button
+            type="button"
+            class="technologies-backend__more"
+            aria-expanded="false"
+            data-technologies-backend-more>
+            Read more
+          </button>
         </article>
       @endforeach
     </div>
@@ -244,8 +236,8 @@
                     src="{{ asset($pick['logo']) }}"
                     alt="{{ $pick['logoAlt'] }}"
                     title="{{ $pick['logoAlt'] }}"
-                    width="22"
-                    height="22"
+                    width="18"
+                    height="18"
                     decoding="async"
                     loading="lazy">
                 @else
@@ -336,15 +328,6 @@
             </h4>
             <p class="technologies-frontend__copy">{{ $column['works'] }}</p>
           @endif
-
-          @if ($column['related'] !== [])
-            <p class="technologies-related">
-              <span class="technologies-related__label">Related:</span>
-              @foreach ($column['related'] as $link)
-                <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
-              @endforeach
-            </p>
-          @endif
           </div>
         </article>
       @endforeach
@@ -420,24 +403,6 @@
             <li>{{ $point }}</li>
           @endforeach
         </ul>
-        <div class="technologies-mobile__why">
-          <h3>{{ $mobile['whyTitle'] }}</h3>
-          <p>{{ $mobile['why'] }}</p>
-        </div>
-        @if (filled($mobile['consider']))
-          <div class="technologies-mobile__why">
-            <h3>Consider a different fit when</h3>
-            <p>{{ $mobile['consider'] }}</p>
-          </div>
-        @endif
-        @if ($mobile['related'] !== [])
-          <p class="technologies-related">
-            <span class="technologies-related__label">Related:</span>
-            @foreach ($mobile['related'] as $link)
-              <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
-            @endforeach
-          </p>
-        @endif
       </div>
 
       <ul class="technologies-mobile__features">
@@ -462,6 +427,19 @@
           </li>
         @endforeach
       </ul>
+
+      <div class="technologies-mobile__why-row">
+        <div class="technologies-mobile__why">
+          <h3>{{ $mobile['whyTitle'] }}</h3>
+          <p>{{ $mobile['why'] }}</p>
+        </div>
+        @if (filled($mobile['consider']))
+          <div class="technologies-mobile__why">
+            <h3>Consider a different fit when</h3>
+            <p>{{ $mobile['consider'] }}</p>
+          </div>
+        @endif
+      </div>
     </div>
   </div>
 </section>
@@ -542,15 +520,6 @@
               {{ $column['worksLabel'] }}
             </h4>
             <p class="technologies-cms__copy">{{ $column['works'] }}</p>
-          @endif
-
-          @if ($column['related'] !== [])
-            <p class="technologies-related">
-              <span class="technologies-related__label">Related:</span>
-              @foreach ($column['related'] as $link)
-                <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
-              @endforeach
-            </p>
           @endif
         </article>
       @endforeach
@@ -636,12 +605,6 @@
       @endforeach
     </div>
 
-    <p class="technologies-related">
-      <span class="technologies-related__label">Related:</span>
-      @foreach ($commerce['related'] as $link)
-        <a href="{{ route($link['route'], $link['params']) }}">{{ $link['label'] }}</a>
-      @endforeach
-    </p>
     <h3 class="technologies-compare-caption">{{ $commerce['compareTitle'] }}</h3>
     <div class="technologies-commerce__table-wrap">
       <table class="technologies-commerce__table">
@@ -805,8 +768,8 @@
                   src="{{ asset($mark['logo']) }}"
                   alt="{{ $mark['logoAlt'] }}"
                   title="{{ $mark['logoAlt'] }}"
-                  width="36"
-                  height="36"
+                  width="22"
+                  height="22"
                   decoding="async"
                   loading="lazy">
               @else
@@ -955,5 +918,26 @@
 </section>
 
 <x-frontend.modal.hire-developers-modal />
+
+@once
+  @push('scripts')
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[data-technologies-backend-more]').forEach(function (button) {
+          button.addEventListener('click', function () {
+            var card = button.closest('.technologies-backend__card');
+            if (!card) {
+              return;
+            }
+
+            var open = card.classList.toggle('is-expanded');
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
+            button.textContent = open ? 'Read less' : 'Read more';
+          });
+        });
+      });
+    </script>
+  @endpush
+@endonce
 
 @endsection

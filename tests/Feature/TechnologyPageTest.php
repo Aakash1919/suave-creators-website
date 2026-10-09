@@ -71,6 +71,9 @@ class TechnologyPageTest extends TestCase
         $response->assertSee('assets/background/technologies-mobile-bg.webp', false);
         $response->assertSee('Backend Development', false);
         $response->assertSee('class="technologies-backend__summary-copy"', false);
+        $response->assertSee('technologies-backend__more', false);
+        $response->assertSee('Read more', false);
+        $response->assertSee('data-technologies-backend-more', false);
         $response->assertSee('Laravel is an open-source PHP web framework', false);
         $response->assertSee('Google&#039;s V8 engine', false);
         $response->assertSee('React, Angular and Vue.js', false);
