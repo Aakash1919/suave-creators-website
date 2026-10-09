@@ -514,6 +514,45 @@ class ServiceSupport
                     ],
                 ]],
                 'seoJsonLdWebpageAbout' => $serviceId,
+                'seoJsonLdWebpageAboutTopics' => [
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Digital marketing',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Digital_marketing',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Search engine optimization',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Search_engine_optimization',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Pay-per-click',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Pay-per-click',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Content marketing',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Content_marketing',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Social media marketing',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Social_media_marketing',
+                    ],
+                ],
+                'seoJsonLdWebpageMentions' => [
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Google Ads',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Google_Ads',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'LinkedIn',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/LinkedIn',
+                    ],
+                ],
             ];
         }
 

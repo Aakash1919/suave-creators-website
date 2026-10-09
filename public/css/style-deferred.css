@@ -19317,10 +19317,11 @@ a.web-service-card {
 
 .marketing-services-overview__desc {
   margin: 0;
-  max-width: 28rem;
-  font-size: 15px;
+  max-width: 40rem;
+  font-size: 13px;
   line-height: 1.7;
-  color: #64748b;
+  color: #000;
+  font-weight: 600;
 }
 
 .marketing-services-overview__desc-brand {
@@ -19329,8 +19330,23 @@ a.web-service-card {
 }
 
 .marketing-services-overview__cards {
-  display: grid;
-  gap: 1rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.marketing-services-overview .swiper.marketing-services-overview__cards {
+  overflow: hidden;
+  padding: 0 0 0.25rem;
+}
+
+.marketing-services-overview__cards-track {
+  display: flex;
+}
+
+.marketing-services-overview__slide {
+  box-sizing: border-box;
+  height: auto;
+  min-width: 0;
 }
 
 .marketing-services-overview__card {
@@ -19340,6 +19356,7 @@ a.web-service-card {
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(15, 23, 42, 0.06);
@@ -19348,6 +19365,30 @@ a.web-service-card {
   background: #fff;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
   padding: 1.4rem 1.3rem 1.3rem;
+}
+
+.marketing-services-overview__pagination {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.marketing-services-overview__pagination .swiper-pagination-bullet {
+  background: transparent;
+  border: 1.5px solid #00003f;
+  border-radius: 999px;
+  height: 8px;
+  margin: 0 !important;
+  opacity: 1;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  width: 8px;
+}
+
+.marketing-services-overview__pagination .swiper-pagination-bullet-active {
+  background: #00003f;
+  border-color: #00003f;
 }
 
 .marketing-services-overview__card::before {
@@ -19520,9 +19561,9 @@ a.web-service-card {
   }
 
   .marketing-services-overview__header {
-    grid-template-columns: minmax(0, 1.15fr) auto minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr);
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .marketing-services-overview__stroke {
@@ -19532,20 +19573,50 @@ a.web-service-card {
   }
 
   .marketing-services-overview__desc {
-    font-size: 16px;
-    justify-self: end;
+    max-width: none;
+    font-size: 14px;
+    justify-self: stretch;
+    margin-top: 25px;
   }
 
+  .marketing-services-overview .swiper.marketing-services-overview__cards,
   .marketing-services-overview__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+    padding: 0;
+  }
+
+  /* Beat Swiper's flex/.swiper-slide { width:100% } so desktop stays a grid. */
+  .marketing-services-overview__cards:not(.swiper-initialized) > .swiper-wrapper,
+  .marketing-services-overview__cards:not(.swiper-initialized) .marketing-services-overview__cards-track {
+    display: grid !important;
     gap: 1.15rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    height: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .marketing-services-overview__cards:not(.swiper-initialized) .swiper-slide,
+  .marketing-services-overview__cards:not(.swiper-initialized) .marketing-services-overview__slide {
+    box-sizing: border-box;
+    flex-shrink: 1;
+    height: auto !important;
+    margin: 0 !important;
+    max-width: 100%;
+    min-width: 0;
+    width: auto !important;
+  }
+
+  .marketing-services-overview__pagination {
+    display: none !important;
   }
 }
 
 @media (min-width: 1100px) {
-  .marketing-services-overview__cards {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .marketing-services-overview__cards:not(.swiper-initialized) > .swiper-wrapper,
+  .marketing-services-overview__cards:not(.swiper-initialized) .marketing-services-overview__cards-track {
     gap: 1.25rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .marketing-services-overview__card {
@@ -19710,6 +19781,37 @@ a.web-service-card {
   color: #475569;
 }
 
+.marketing-channel-detail__bridge a,
+.marketing-channel-detail__related-link {
+  color: #2a4dfb;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.marketing-channel-detail__bridge a:hover,
+.marketing-channel-detail__related-link:hover {
+  color: #1e3fd4;
+}
+
+.marketing-channel-detail__related {
+  margin: 1rem 0 0;
+  max-width: 880px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.marketing-channel-detail__related-label {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.marketing-channel-detail__related-sep {
+  margin: 0 0.35rem;
+  color: #94a3b8;
+}
+
 .marketing-channel-detail__callout {
   margin-top: 1.25rem;
   border-left: 4px solid #2a4dfb;
@@ -19800,44 +19902,49 @@ a.web-service-card {
 /* ===== MARKETING CHANNEL DETAIL END ===== */
 
 /* ===== MARKETING FUNNEL MATRIX START ===== */
+.full-bleed.marketing-funnel-matrix {
+  min-height: 180px;
+}
+
 .marketing-funnel-matrix {
-  background:
-    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(42, 77, 251, 0.12), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 90% 100%, rgba(122, 95, 248, 0.08), transparent 50%),
-    #05070a;
+  background-color: #05070a;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #e2e8f0;
   padding: 2.5rem 0 2.75rem;
 }
 
 .marketing-funnel-matrix__inner {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.75rem;
+  position: relative;
+  z-index: 1;
 }
 
 .marketing-funnel-matrix__header {
-  max-width: 48rem;
+  position: relative;
+  text-align: center;
 }
 
 .marketing-funnel-matrix__eyebrow {
   align-items: center;
   display: inline-flex;
   gap: 8px;
-  margin: 0 0 1rem;
+  margin: 0 0 0.75rem;
 }
 
 .marketing-funnel-matrix__eyebrow-bar {
-  background: linear-gradient(180deg, #2a4dfb 0%, #7a5ff8 100%);
+  background: #2a4dfb;
   border-radius: 999px;
   display: inline-block;
+  flex-shrink: 0;
   height: 16px;
   width: 2px;
 }
 
 .marketing-funnel-matrix__eyebrow-text {
-  background: linear-gradient(90deg, #2a4dfb 0%, #7a5ff8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #2a4dfb;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -19847,23 +19954,37 @@ a.web-service-card {
 
 .marketing-funnel-matrix__title {
   color: #fff;
-  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  margin: 0;
+  font-family: "PP Mori", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0 auto;
+  max-width: 682px;
+  text-align: left;
+  width: 100%;
 }
 
 .marketing-funnel-matrix__title-accent {
-  color: #5b8cff;
+  background: linear-gradient(90deg, #a855f7 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .marketing-funnel-matrix__desc {
-  color: #94a3b8;
-  font-size: 15px;
-  line-height: 1.7;
-  margin: 1rem 0 0;
-  max-width: 44rem;
+  color: #b1b9df;
+  font-family: "PP Mori", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 25px;
+  margin: 1rem auto 0;
+  max-width: 682px;
+  text-align: left;
+  width: 100%;
 }
 
 .marketing-funnel-matrix__cards {
@@ -19912,39 +20033,46 @@ a.web-service-card {
 }
 
 .marketing-funnel-matrix__panel {
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(8, 12, 24, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 1rem;
   display: none;
   min-width: 0;
-  overflow-x: auto;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
 .marketing-funnel-matrix__table {
   border-collapse: collapse;
   border-spacing: 0;
+  max-width: 1280px;
   min-width: 44rem;
   table-layout: fixed;
   width: 100%;
 }
 
+.marketing-funnel-matrix__table tr {
+  -webkit-backdrop-filter: blur(92px);
+  backdrop-filter: blur(92px);
+  background: #031A52;
+  height: 60px;
+  opacity: 1;
+}
+
 .marketing-funnel-matrix__table th,
 .marketing-funnel-matrix__table td {
-  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
-  border-right: 1px solid rgba(148, 163, 184, 0.14);
+  -webkit-backdrop-filter: blur(92px);
+  backdrop-filter: blur(92px);
+  background: #021440CC;
+  border: 1px solid #133587;
   box-sizing: border-box;
-  padding: 1.1rem 1.15rem;
+  height: 60px;
+  padding: 0.65rem 1.2rem;
   text-align: left;
   vertical-align: middle;
 }
 
-.marketing-funnel-matrix__table th:last-child,
-.marketing-funnel-matrix__table td:last-child {
-  border-right: 0;
-}
-
 .marketing-funnel-matrix__table thead th {
-  background: rgba(15, 23, 42, 0.65);
   color: #94a3b8;
   font-size: 11px;
   font-weight: 700;
@@ -19952,18 +20080,42 @@ a.web-service-card {
   text-transform: uppercase;
 }
 
+.marketing-funnel-matrix__col-label {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.45rem;
+}
+
+.marketing-funnel-matrix__col-icon {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 1.1rem;
+  justify-content: center;
+  width: 1.1rem;
+}
+
+.marketing-funnel-matrix__col-icon img {
+  display: block;
+  height: 1rem;
+  object-fit: contain;
+  width: 1rem;
+}
+
+.marketing-funnel-matrix__col-icon-placeholder {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 0.2rem;
+  display: block;
+  height: 0.85rem;
+  width: 0.85rem;
+}
+
 .marketing-funnel-matrix__table tbody th,
 .marketing-funnel-matrix__table tbody td {
-  background: rgba(8, 12, 24, 0.55);
   color: #cbd5e1;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.45;
-}
-
-.marketing-funnel-matrix__table tbody tr:last-child th,
-.marketing-funnel-matrix__table tbody tr:last-child td {
-  border-bottom: 0;
 }
 
 .marketing-funnel-matrix__table th:first-child,
@@ -19972,25 +20124,63 @@ a.web-service-card {
 }
 
 .marketing-funnel-matrix__stage {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
-  gap: 0.7rem;
+  gap: 0.75rem;
 }
 
-.marketing-funnel-matrix__stage-index {
+.marketing-funnel-matrix__stage-icon {
   align-items: center;
-  background: #2a4dfb;
   border-radius: 999px;
-  color: #fff;
   display: inline-flex;
   flex: 0 0 auto;
-  font-size: 11px;
-  font-weight: 700;
-  height: 1.55rem;
+  height: 2.5rem;
   justify-content: center;
-  letter-spacing: 0.02em;
-  min-width: 1.55rem;
-  padding: 0 0.3rem;
+  overflow: hidden;
+  width: 2.5rem;
+}
+
+.marketing-funnel-matrix__stage-icon--purple {
+  background: rgba(168, 85, 247, 0.22);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+}
+
+.marketing-funnel-matrix__stage-icon--blue {
+  background: rgba(59, 130, 246, 0.22);
+  border: 1px solid rgba(59, 130, 246, 0.45);
+}
+
+.marketing-funnel-matrix__stage-icon--green {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+.marketing-funnel-matrix__stage-icon img {
+  display: block;
+  height: 1.25rem;
+  object-fit: contain;
+  width: 1.25rem;
+}
+
+.marketing-funnel-matrix__stage-icon-placeholder {
+  background: currentColor;
+  border-radius: 0.35rem;
+  display: block;
+  height: 1rem;
+  opacity: 0.55;
+  width: 1rem;
+}
+
+.marketing-funnel-matrix__stage-icon--purple .marketing-funnel-matrix__stage-icon-placeholder {
+  color: #c084fc;
+}
+
+.marketing-funnel-matrix__stage-icon--blue .marketing-funnel-matrix__stage-icon-placeholder {
+  color: #60a5fa;
+}
+
+.marketing-funnel-matrix__stage-icon--green .marketing-funnel-matrix__stage-icon-placeholder {
+  color: #34d399;
 }
 
 .marketing-funnel-matrix__stage-copy {
@@ -20014,47 +20204,64 @@ a.web-service-card {
   line-height: 1.4;
 }
 
+.marketing-funnel-matrix__summary {
+  display: grid;
+  gap: 1rem;
+}
+
 .marketing-funnel-matrix__examples {
   display: grid;
   gap: 1rem;
 }
 
-.marketing-funnel-matrix__example {
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.16);
-  border-radius: 0.9rem;
-  display: grid;
-  gap: 0.65rem;
-  padding: 1.15rem 1.2rem;
-}
-
-.marketing-funnel-matrix__example-index {
-  color: #5b8cff;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.marketing-funnel-matrix__example-body {
-  color: #cbd5e1;
-  font-size: 14px;
-  line-height: 1.65;
+.marketing-funnel-matrix__examples-intro {
+  color: rgba(226, 232, 240, 0.92);
+  font-size: 0.95rem;
+  font-weight: 600;
+  grid-column: 1 / -1;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
   margin: 0;
 }
 
+.marketing-funnel-matrix__example,
 .marketing-funnel-matrix__ai {
   align-items: flex-start;
-  border-top: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 0.9rem;
   display: grid;
   gap: 1rem;
   grid-template-columns: auto 1fr;
-  padding-top: 1.75rem;
+  min-height: 180px;
+  padding: 1.25rem 1.35rem;
 }
 
+.marketing-funnel-matrix__example--purple,
+.marketing-funnel-matrix__example--blue {
+  background: #021440cc;
+  border: 1px solid #133587;
+  border-radius: 14px;
+  -webkit-backdrop-filter: blur(106px);
+  backdrop-filter: blur(106px);
+  min-height: 104px;
+  opacity: 1;
+}
+
+.marketing-funnel-matrix__ai {
+  background: #021440cc;
+  border: 0;
+  border-radius: 14px;
+  -webkit-backdrop-filter: blur(106px);
+  backdrop-filter: blur(106px);
+  min-height: 140px;
+  opacity: 1;
+  width: 100%;
+}
+
+.marketing-funnel-matrix__example-icon,
 .marketing-funnel-matrix__ai-icon {
   align-items: center;
-  background: rgba(42, 77, 251, 0.18);
-  border: 1px solid rgba(91, 140, 255, 0.35);
   border-radius: 0.85rem;
   display: inline-flex;
   flex: 0 0 auto;
@@ -20064,6 +20271,22 @@ a.web-service-card {
   width: 3rem;
 }
 
+.marketing-funnel-matrix__example-icon--purple {
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.marketing-funnel-matrix__example-icon--blue {
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.marketing-funnel-matrix__ai-icon {
+  background: rgba(30, 58, 138, 0.45);
+  border: 1px solid rgba(91, 140, 255, 0.35);
+}
+
+.marketing-funnel-matrix__example-icon img,
 .marketing-funnel-matrix__ai-icon img {
   display: block;
   height: 1.65rem;
@@ -20071,8 +20294,9 @@ a.web-service-card {
   width: 1.65rem;
 }
 
+.marketing-funnel-matrix__example-icon-placeholder,
 .marketing-funnel-matrix__ai-icon-placeholder {
-  background: linear-gradient(135deg, #2a4dfb, transparent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), transparent);
   border-radius: 0.35rem;
   display: block;
   height: 1.35rem;
@@ -20080,6 +20304,7 @@ a.web-service-card {
   width: 1.35rem;
 }
 
+.marketing-funnel-matrix__example-title,
 .marketing-funnel-matrix__ai-title {
   color: #fff;
   font-size: 1.05rem;
@@ -20089,17 +20314,35 @@ a.web-service-card {
   margin: 0;
 }
 
+.marketing-funnel-matrix__example-body,
 .marketing-funnel-matrix__ai-body {
   color: #94a3b8;
   font-size: 14px;
   line-height: 1.7;
   margin: 0.55rem 0 0;
-  max-width: 52rem;
 }
 
 @media (min-width: 768px) {
   .marketing-funnel-matrix {
     padding: 3.25rem 0 3.5rem;
+  }
+
+  .marketing-funnel-matrix__header {
+    min-height: 2.75rem;
+  }
+
+  .marketing-funnel-matrix__eyebrow {
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0.35rem;
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  .marketing-funnel-matrix__title,
+  .marketing-funnel-matrix__desc {
+    max-width: min(682px, calc(100% - 11.5rem));
   }
 
   .marketing-funnel-matrix__cards {
@@ -20108,6 +20351,7 @@ a.web-service-card {
 
   .marketing-funnel-matrix__panel {
     display: block;
+    overflow-x: auto;
   }
 
   .marketing-funnel-matrix__examples {
@@ -20115,17 +20359,14 @@ a.web-service-card {
     gap: 1.25rem;
   }
 
-  .marketing-funnel-matrix__desc {
-    font-size: 16px;
-  }
 }
 
 @media (min-width: 1024px) {
   .marketing-funnel-matrix__inner {
-    gap: 1.75rem;
+    gap: 2rem;
   }
 
-  .marketing-funnel-matrix__ai {
+  .marketing-funnel-matrix__summary {
     gap: 1.25rem;
   }
 }
@@ -20135,7 +20376,7 @@ a.web-service-card {
 .marketing-operating-rhythm {
   background: #f7f8fc;
   color: #171717;
-  padding: 2.5rem 0 2.75rem;
+  padding: 5.5rem 0 2.75rem;
 }
 
 .marketing-operating-rhythm__inner {
@@ -20148,22 +20389,32 @@ a.web-service-card {
 }
 
 .marketing-operating-rhythm__eyebrow {
-  color: #2a4dfb;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.3;
+  background: linear-gradient(90deg, #2a4dfb 0%, #7a5ff8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-family: "PP Mori", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
   margin: 0 0 0.75rem;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .marketing-operating-rhythm__title {
-  color: #0f172a;
-  font-size: clamp(1.75rem, 3vw, 2.35rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  color: #171717;
+  font-family: "PP Mori", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
   line-height: 1.2;
   margin: 0;
+  text-align: center;
 }
 
 .marketing-operating-rhythm__grid {
@@ -20208,7 +20459,7 @@ a.web-service-card {
 
 .marketing-operating-rhythm__icon {
   align-items: center;
-  background: #0b1740;
+  background: #F3F3FF;
   border-radius: 999px;
   box-shadow: 0 6px 14px rgba(11, 23, 64, 0.28);
   display: inline-flex;
@@ -20252,9 +20503,67 @@ a.web-service-card {
   margin: 0 0.65rem;
 }
 
+@media (max-width: 767px) {
+  .marketing-operating-rhythm {
+    padding: 4rem 0 2.25rem;
+  }
+
+  .marketing-operating-rhythm__inner {
+    gap: 1.25rem;
+  }
+
+  .marketing-operating-rhythm__eyebrow {
+    font-size: 12px;
+    margin-bottom: 0.55rem;
+  }
+
+  .marketing-operating-rhythm__title {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .marketing-operating-rhythm__grid {
+    gap: 1rem;
+  }
+
+  .marketing-operating-rhythm__card {
+    border-radius: 1rem;
+    padding: 0.5rem 0.5rem 1.15rem;
+  }
+
+  .marketing-operating-rhythm__media {
+    aspect-ratio: 16 / 11;
+    border-radius: 0.75rem;
+  }
+
+  .marketing-operating-rhythm__icon {
+    box-shadow: 0 4px 12px rgba(11, 23, 64, 0.18);
+    height: 2.25rem;
+    margin: -1.125rem 0 0 0.75rem;
+    width: 2.25rem;
+  }
+
+  .marketing-operating-rhythm__icon img {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .marketing-operating-rhythm__card-title {
+    font-size: 1rem;
+    line-height: 1.2;
+    margin: 0.85rem 0.75rem 0.35rem;
+  }
+
+  .marketing-operating-rhythm__card-copy {
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0 0.75rem;
+  }
+}
+
 @media (min-width: 768px) {
   .marketing-operating-rhythm {
-    padding: 3.25rem 0 3.5rem;
+    padding: 6.5rem 0 3.5rem;
   }
 
   .marketing-operating-rhythm__grid {
@@ -20307,14 +20616,17 @@ a.web-service-card {
 }
 
 .marketing-why-panel__title {
-  color: #0f172a;
-  font-size: clamp(1.65rem, 3vw, 2.15rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  color: #171717;
+  font-family: "PP Mori", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
   margin: 0;
-  max-width: 22ch;
+  max-width: 438px;
   overflow-wrap: break-word;
+  width: 100%;
 }
 
 .marketing-why-panel__desc {
@@ -20400,6 +20712,17 @@ a.web-service-card {
   margin: 0;
 }
 
+.marketing-why-panel__item-body a {
+  color: #2a4dfb;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.marketing-why-panel__item-body a:hover {
+  color: #1e3fd4;
+}
+
 @media (min-width: 768px) {
   .marketing-why-panel {
     padding: 1.25rem 0 3.5rem;
@@ -20417,10 +20740,6 @@ a.web-service-card {
     gap: 3rem;
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
     padding: 2.75rem 2.75rem;
-  }
-
-  .marketing-why-panel__title {
-    max-width: 18ch;
   }
 }
 

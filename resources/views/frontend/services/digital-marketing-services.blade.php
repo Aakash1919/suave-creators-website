@@ -57,6 +57,7 @@
   :covers="$seoChannel['covers']"
   :callout-label="$seoChannel['calloutLabel']"
   :callout-body="$seoChannel['calloutBody']"
+  :related="$seoChannel['related'] ?? []"
   :section-id="$seoChannel['sectionId'] ?? 'seo'"
   heading-id="digital-marketing-seo-heading"
   icon="search" />
@@ -84,6 +85,7 @@
   :covers-heading="$contentChannel['coversHeading']"
   :covers="$contentChannel['covers']"
   :bridge="$contentChannel['bridge'] ?? ''"
+  :bridge-html="(bool) ($contentChannel['bridgeHtml'] ?? false)"
   :callout-label="$contentChannel['calloutLabel']"
   :callout-body="$contentChannel['calloutBody']"
   :section-id="$contentChannel['sectionId'] ?? 'content-marketing'"
@@ -110,8 +112,10 @@
   :description="$funnelMatrix['description']"
   :columns="$funnelMatrix['columns']"
   :rows="$funnelMatrix['rows']"
+  :examples-intro="$funnelMatrix['examplesIntro'] ?? ''"
   :examples="$funnelMatrix['examples']"
   :ai-visibility="$funnelMatrix['aiVisibility']"
+  :background-image="$funnelMatrix['backgroundImage'] ?? ''"
   :section-id="$funnelMatrix['sectionId'] ?? 'integrated'"
   heading-id="digital-marketing-funnel-heading" />
 

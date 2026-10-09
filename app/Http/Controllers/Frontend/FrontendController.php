@@ -34,6 +34,8 @@ abstract class FrontendController extends Controller
                 'robots' => $data['seoRobots'] ?? null,
                 'json_ld_graph' => $data['seoJsonLdGraph'] ?? null,
                 'json_ld_webpage_about' => $data['seoJsonLdWebpageAbout'] ?? null,
+                'json_ld_webpage_about_topics' => $data['seoJsonLdWebpageAboutTopics'] ?? null,
+                'json_ld_webpage_mentions' => $data['seoJsonLdWebpageMentions'] ?? null,
                 'json_ld_breadcrumb_name' => $data['seoBreadcrumbName'] ?? null,
             ], static fn (mixed $value): bool => $value !== null && $value !== '');
 

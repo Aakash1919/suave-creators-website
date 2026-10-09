@@ -44,7 +44,15 @@
               </div>
               <div class="marketing-why-panel__item-copy">
                 <h3 class="marketing-why-panel__item-title">{{ $item['title'] }}</h3>
-                <p class="marketing-why-panel__item-body">{{ $item['description'] }}</p>
+                @if (($item['description'] ?? '') !== '')
+                  <p class="marketing-why-panel__item-body">
+                    @if (! empty($item['descriptionHtml']))
+                      {!! $item['description'] !!}
+                    @else
+                      {{ $item['description'] }}
+                    @endif
+                  </p>
+                @endif
               </div>
             </li>
           @endforeach

@@ -155,6 +155,8 @@ class SeoGenerateService
                 is_array($merged['json_ld_graph'] ?? null) ? $merged['json_ld_graph'] : null,
                 is_string($merged['json_ld_webpage_about'] ?? null) ? $merged['json_ld_webpage_about'] : null,
                 is_string($merged['json_ld_breadcrumb_name'] ?? null) ? $merged['json_ld_breadcrumb_name'] : null,
+                is_array($merged['json_ld_webpage_about_topics'] ?? null) ? $merged['json_ld_webpage_about_topics'] : null,
+                is_array($merged['json_ld_webpage_mentions'] ?? null) ? $merged['json_ld_webpage_mentions'] : null,
             ),
         ];
     }
@@ -163,6 +165,8 @@ class SeoGenerateService
      * @param  array<string, mixed>  $site
      * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>|null  $faqs
      * @param  array<int, array<string, mixed>>|null  $extraGraph
+     * @param  array<int, array<string, mixed>>|null  $webPageAboutTopics
+     * @param  array<int, array<string, mixed>>|null  $webPageMentions
      * @return array<string, mixed>
      */
     protected function buildJsonLd(
@@ -176,6 +180,8 @@ class SeoGenerateService
         ?array $extraGraph = null,
         ?string $webPageAboutId = null,
         ?string $breadcrumbName = null,
+        ?array $webPageAboutTopics = null,
+        ?array $webPageMentions = null,
     ): array {
         if ($routeName === 'home') {
             return $this->buildHomeJsonLd($site, $title, $description, $canonical, $imageUrl, $faqs);
@@ -287,9 +293,15 @@ class SeoGenerateService
         if ($webPageAboutId !== null && $webPageAboutId !== '') {
             foreach ($graph as $index => $node) {
                 if (($node['@type'] ?? '') === 'WebPage') {
-                    $graph[$index]['about'] = ['@id' => $webPageAboutId];
+                    $graph[$index]['about'] = is_array($webPageAboutTopics) && $webPageAboutTopics !== []
+                        ? $webPageAboutTopics
+                        : ['@id' => $webPageAboutId];
                     $graph[$index]['mainEntity'] = ['@id' => $webPageAboutId];
                     $graph[$index]['publisher'] = ['@id' => $organizationId];
+
+                    if (is_array($webPageMentions) && $webPageMentions !== []) {
+                        $graph[$index]['mentions'] = $webPageMentions;
+                    }
                     break;
                 }
             }

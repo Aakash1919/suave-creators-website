@@ -30,80 +30,141 @@
     </header>
 
     @if ($rows !== [])
-      <div class="marketing-services-overview__cards">
-        @foreach ($rows as $row)
-          @php
-            $anchor = trim((string) ($row['anchor'] ?? ''));
-            $service = (string) ($row['service'] ?? '');
-            $theme = trim((string) ($row['theme'] ?? 'blue'));
-            $icon = trim((string) ($row['icon'] ?? ''));
-            $rowCta = trim((string) ($row['ctaLabel'] ?? $ctaLabel));
-          @endphp
-          <article class="marketing-services-overview__card marketing-services-overview__card--{{ $theme }}">
-            <span class="marketing-services-overview__card-icon" aria-hidden="true">
-              @if ($icon === 'search')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
-                  <path d="M16.2 16.2 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-              @elseif ($icon === 'dollar')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="8.25" stroke="currentColor" stroke-width="1.8"/>
-                  <path d="M12 7.25v9.5M14.6 9.1c-.55-.7-1.4-1.1-2.6-1.1-1.55 0-2.6.8-2.6 1.95 0 2.7 5.2 1.35 5.2 4.05 0 1.2-1.1 2.05-2.7 2.05-1.25 0-2.2-.45-2.8-1.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              @elseif ($icon === 'document')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 3.75h5.25L17.5 8v12.25H8V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                  <path d="M13.25 3.75V8H17.5M10 12h4.5M10 15.5h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              @elseif ($icon === 'share')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="18" cy="5.5" r="2.25" stroke="currentColor" stroke-width="1.8"/>
-                  <circle cx="6" cy="12" r="2.25" stroke="currentColor" stroke-width="1.8"/>
-                  <circle cx="18" cy="18.5" r="2.25" stroke="currentColor" stroke-width="1.8"/>
-                  <path d="M8.1 11.1 15.9 6.4M8.1 12.9l7.8 4.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-              @else
-                <span class="marketing-services-overview__card-icon-placeholder"></span>
-              @endif
-            </span>
-
-            <h3 class="marketing-services-overview__card-title">{{ $service }}</h3>
-
-            @if (($row['does'] ?? '') !== '')
-              <p class="marketing-services-overview__card-does">{{ $row['does'] }}</p>
-            @endif
-
-            <dl class="marketing-services-overview__card-meta">
-              <div class="marketing-services-overview__card-row">
-                <dt>
-                  <span class="marketing-services-overview__card-meta-icon marketing-services-overview__card-meta-icon--best-for" aria-hidden="true"></span>
-                  Best for
-                </dt>
-                <dd>{{ $row['bestFor'] ?? '' }}</dd>
-              </div>
-              <div class="marketing-services-overview__card-row">
-                <dt>
-                  <span class="marketing-services-overview__card-meta-icon marketing-services-overview__card-meta-icon--measured" aria-hidden="true"></span>
-                  Measured by
-                </dt>
-                <dd>{{ $row['measured'] ?? '' }}</dd>
-              </div>
-            </dl>
-
-            @if ($anchor !== '' && $rowCta !== '')
-              <a href="#{{ $anchor }}" class="marketing-services-overview__card-cta">
-                {{ $rowCta }}
-                <span class="marketing-services-overview__card-cta-arrow" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 6h16M11 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+      <div
+        class="marketing-services-overview__cards swiper"
+        data-mso-cards
+        aria-label="Digital marketing service channels">
+        <div class="swiper-wrapper marketing-services-overview__cards-track">
+          @foreach ($rows as $row)
+            @php
+              $anchor = trim((string) ($row['anchor'] ?? ''));
+              $service = (string) ($row['service'] ?? '');
+              $theme = trim((string) ($row['theme'] ?? 'blue'));
+              $icon = trim((string) ($row['icon'] ?? ''));
+              $rowCta = trim((string) ($row['ctaLabel'] ?? $ctaLabel));
+            @endphp
+            <div class="swiper-slide marketing-services-overview__slide">
+              <article class="marketing-services-overview__card marketing-services-overview__card--{{ $theme }}">
+                <span class="marketing-services-overview__card-icon" aria-hidden="true">
+                  @if ($icon === 'search')
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M16.2 16.2 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  @elseif ($icon === 'dollar')
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="8.25" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M12 7.25v9.5M14.6 9.1c-.55-.7-1.4-1.1-2.6-1.1-1.55 0-2.6.8-2.6 1.95 0 2.7 5.2 1.35 5.2 4.05 0 1.2-1.1 2.05-2.7 2.05-1.25 0-2.2-.45-2.8-1.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  @elseif ($icon === 'document')
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 3.75h5.25L17.5 8v12.25H8V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                      <path d="M13.25 3.75V8H17.5M10 12h4.5M10 15.5h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  @elseif ($icon === 'share')
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="18" cy="5.5" r="2.25" stroke="currentColor" stroke-width="1.8"/>
+                      <circle cx="6" cy="12" r="2.25" stroke="currentColor" stroke-width="1.8"/>
+                      <circle cx="18" cy="18.5" r="2.25" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M8.1 11.1 15.9 6.4M8.1 12.9l7.8 4.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  @else
+                    <span class="marketing-services-overview__card-icon-placeholder"></span>
+                  @endif
                 </span>
-              </a>
-            @endif
-          </article>
-        @endforeach
+
+                <h3 class="marketing-services-overview__card-title">{{ $service }}</h3>
+
+                @if (($row['does'] ?? '') !== '')
+                  <p class="marketing-services-overview__card-does">{{ $row['does'] }}</p>
+                @endif
+
+                <dl class="marketing-services-overview__card-meta">
+                  <div class="marketing-services-overview__card-row">
+                    <dt>
+                      <span class="marketing-services-overview__card-meta-icon marketing-services-overview__card-meta-icon--best-for" aria-hidden="true"></span>
+                      Best for
+                    </dt>
+                    <dd>{{ $row['bestFor'] ?? '' }}</dd>
+                  </div>
+                  <div class="marketing-services-overview__card-row">
+                    <dt>
+                      <span class="marketing-services-overview__card-meta-icon marketing-services-overview__card-meta-icon--measured" aria-hidden="true"></span>
+                      Measured by
+                    </dt>
+                    <dd>{{ $row['measured'] ?? '' }}</dd>
+                  </div>
+                </dl>
+
+                @if ($anchor !== '' && $rowCta !== '')
+                  <a href="#{{ $anchor }}" class="marketing-services-overview__card-cta">
+                    {{ $rowCta }}
+                    <span class="marketing-services-overview__card-cta-arrow" aria-hidden="true">
+                      <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 6h16M11 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </a>
+                @endif
+              </article>
+            </div>
+          @endforeach
+        </div>
+        <nav class="marketing-services-overview__pagination" aria-label="Service channels pagination"></nav>
       </div>
     @endif
   </div>
 </section>
+
+@once
+  @push('scripts')
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var cardsEl = document.querySelector('[data-mso-cards]');
+        if (!cardsEl) return;
+
+        var cardsMq = window.matchMedia('(max-width: 767px)');
+        var cardsSwiper = null;
+
+        window.suaveWhenSwiperReady(function () {
+          function syncMarketingOverviewSwiper() {
+            if (cardsMq.matches) {
+              if (cardsSwiper) return;
+              cardsSwiper = new Swiper(cardsEl, {
+                slidesPerView: 1.15,
+                spaceBetween: 14,
+                slidesPerGroup: 1,
+                grabCursor: true,
+                allowTouchMove: true,
+                simulateTouch: true,
+                watchOverflow: true,
+                touchStartPreventDefault: false,
+                pagination: {
+                  el: cardsEl.querySelector('.marketing-services-overview__pagination'),
+                  clickable: true
+                },
+                a11y: {
+                  enabled: true,
+                  containerMessage: 'Digital marketing service channels'
+                }
+              });
+              return;
+            }
+
+            if (cardsSwiper) {
+              cardsSwiper.destroy(true, true);
+              cardsSwiper = null;
+            }
+          }
+
+          syncMarketingOverviewSwiper();
+          if (typeof cardsMq.addEventListener === 'function') {
+            cardsMq.addEventListener('change', syncMarketingOverviewSwiper);
+          } else if (typeof cardsMq.addListener === 'function') {
+            cardsMq.addListener(syncMarketingOverviewSwiper);
+          }
+        });
+      });
+    </script>
+  @endpush
+@endonce

@@ -31,10 +31,15 @@ class DigitalMarketingServicesPageTest extends TestCase
         $this->assertCount(4, $service['overview']['rows'] ?? []);
         $this->assertSame('blue', $service['overview']['rows'][0]['theme'] ?? '');
         $this->assertSame('search', $service['overview']['rows'][0]['icon'] ?? '');
-        $this->assertSame('Social media', $service['overview']['rows'][3]['service'] ?? '');
+        $this->assertSame('Social media marketing', $service['overview']['rows'][3]['service'] ?? '');
+        $this->assertSame(
+            'Rankings for target queries, organic sessions, organic leads',
+            $service['overview']['rows'][0]['measured'] ?? '',
+        );
         $this->assertSame('Search Engine Optimization (SEO)', $service['seoChannel']['title'] ?? '');
         $this->assertSame('seo', $service['seoChannel']['sectionId'] ?? '');
         $this->assertCount(6, $service['seoChannel']['covers'] ?? []);
+        $this->assertCount(2, $service['seoChannel']['related'] ?? []);
         $this->assertSame('Pay-Per-Click Advertising (PPC)', $service['ppcChannel']['title'] ?? '');
         $this->assertSame('02', $service['ppcChannel']['index'] ?? '');
         $this->assertCount(5, $service['ppcChannel']['covers'] ?? []);
@@ -48,13 +53,30 @@ class DigitalMarketingServicesPageTest extends TestCase
         $this->assertSame('Digital Marketing Services', $service['funnelMatrix']['title']['accent'] ?? '');
         $this->assertCount(3, $service['funnelMatrix']['rows'] ?? []);
         $this->assertCount(2, $service['funnelMatrix']['examples'] ?? []);
-        $this->assertSame('', $service['funnelMatrix']['aiVisibility']['icon'] ?? 'missing');
+        $this->assertStringContainsString(
+            'marketing-funnel-awareness-icon.svg',
+            (string) ($service['funnelMatrix']['rows'][0]['icon'] ?? ''),
+        );
+        $this->assertStringContainsString(
+            'marketing-funnel-summary-ai-icon.svg',
+            (string) ($service['funnelMatrix']['aiVisibility']['icon'] ?? ''),
+        );
         $this->assertSame('How We Work', $service['howWeWork']['title'] ?? '');
         $this->assertCount(4, $service['howWeWork']['items'] ?? []);
-        $this->assertSame('', $service['howWeWork']['items'][0]['image'] ?? 'missing');
+        $this->assertStringContainsString(
+            'marketing-audit-spreadsheet-charts.webp',
+            (string) ($service['howWeWork']['items'][0]['image'] ?? ''),
+        );
+        $this->assertStringContainsString(
+            'marketing-audit-document-icon.svg',
+            (string) ($service['howWeWork']['items'][0]['icon'] ?? ''),
+        );
         $this->assertSame('Why Suave Creators for B2B Digital Marketing', $service['whySuave']['title'] ?? '');
         $this->assertCount(4, $service['whySuave']['items'] ?? []);
-        $this->assertSame('', $service['whySuave']['items'][0]['icon'] ?? 'missing');
+        $this->assertStringContainsString(
+            'marketing-why-megaphone-icon.svg',
+            (string) ($service['whySuave']['items'][0]['icon'] ?? ''),
+        );
         $this->assertSame('Digital Marketing FAQs', $service['faqTitle'] ?? '');
         $this->assertCount(12, $service['faqs'] ?? []);
         $this->assertSame('Plan Your B2B Digital Marketing Strategy', $service['consultation']['title'] ?? '');
@@ -82,13 +104,18 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('Drive Business Growth', false);
         $response->assertSee('id="overview"', false);
         $response->assertSee('Earns organic visibility for high-intent searches', false);
+        $response->assertSee('marketing-services-overview__cards swiper', false);
+        $response->assertSee('data-mso-cards', false);
+        $response->assertSee('marketing-services-overview__pagination', false);
         $response->assertSee('marketing-services-overview__card--blue', false);
         $response->assertSee('marketing-services-overview__card--purple', false);
         $response->assertSee('marketing-services-overview__card--teal', false);
         $response->assertSee('marketing-services-overview__card--pink', false);
         $response->assertSee('Explore service', false);
         $response->assertSee('Measured by', false);
-        $response->assertSee('connects four services into one strategy', false);
+        $response->assertSee('offers four connected services', false);
+        $response->assertSee('Social media marketing', false);
+        $response->assertSee('Rankings for target queries, organic sessions, organic leads', false);
         $response->assertSee('marketing-channel-detail', false);
         $response->assertSee('id="seo"', false);
         $response->assertSee('Search Engine Optimization (SEO)', false);
@@ -97,6 +124,9 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('When SEO is the right investment', false);
         $response->assertSee('high-intent organic discovery', false);
         $response->assertSee('fixes can be implemented by our engineers instead of handed over as a list', false);
+        $response->assertSee('marketing-channel-detail__related', false);
+        $response->assertSee('Web application development', false);
+        $response->assertSee('How SEO impacts e-commerce conversions', false);
         $response->assertSee('id="ppc"', false);
         $response->assertSee('Pay-Per-Click Advertising (PPC)', false);
         $response->assertSee('02/04', false);
@@ -111,6 +141,8 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('Content we produce', false);
         $response->assertSee('How we plan content', false);
         $response->assertSee('Custom CRM vs Salesforce: 3-year TCO', false);
+        $response->assertSee('custom-crm-vs-salesforce-tco-analysis-2026', false);
+        $response->assertSee('custom-erp-vs-netsuite-tco-analysis-2026', false);
         $response->assertSee('marketing-channel-detail__rail-icon--blog', false);
         $response->assertSee('id="social-media-marketing"', false);
         $response->assertSee('Social Media Marketing', false);
@@ -119,6 +151,7 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('Why LinkedIn comes first for B2B', false);
         $response->assertSee('marketing-channel-detail__rail-icon--share', false);
         $response->assertSee('marketing-funnel-matrix', false);
+        $response->assertSee('marketing-funnel-matrix-bg.webp', false);
         $response->assertSee('id="integrated"', false);
         $response->assertSee('How Our', false);
         $response->assertSee('Digital Marketing Services', false);
@@ -128,17 +161,48 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('Consideration', false);
         $response->assertSee('Decision', false);
         $response->assertSee('Ranks for problem-level questions', false);
+        $response->assertSee('Two examples of the channels working together:', false);
+        $response->assertSee('Organic social to SEO to a booked call', false);
+        $response->assertSee('PPC data prioritizes SEO and content', false);
         $response->assertSee('Visibility across search and AI-driven discovery', false);
-        $response->assertSee('marketing-funnel-matrix__ai-icon-placeholder', false);
+        $response->assertSee('marketing-funnel-awareness-icon.svg', false);
+        $response->assertSee('marketing-funnel-consideration-icon.svg', false);
+        $response->assertSee('marketing-funnel-decision-icon.svg', false);
+        $response->assertDontSee('marketing-funnel-matrix__stage-icon-placeholder', false);
+        $response->assertSee('seo-search-funnel-icon.webp', false);
+        $response->assertSee('ppc-target-funnel-icon.webp', false);
+        $response->assertSee('content-marketing-funnel-icon.webp', false);
+        $response->assertSee('social-media-funnel-icon.webp', false);
+        $response->assertDontSee('marketing-funnel-matrix__col-icon-placeholder', false);
+        $response->assertSee('marketing-funnel-summary-target-icon.svg', false);
+        $response->assertSee('marketing-funnel-summary-network-icon.svg', false);
+        $response->assertSee('marketing-funnel-summary-ai-icon.svg', false);
+        $response->assertDontSee('marketing-funnel-matrix__example-icon-placeholder', false);
+        $response->assertDontSee('marketing-funnel-matrix__ai-icon-placeholder', false);
         $response->assertSee('marketing-operating-rhythm', false);
         $response->assertSee('How We Work', false);
         $response->assertSee('A clear operating rhythm', false);
         $response->assertSee('Execution in sprints', false);
-        $response->assertSee('marketing-operating-rhythm__image-placeholder', false);
+        $response->assertSee('marketing-audit-spreadsheet-charts.webp', false);
+        $response->assertSee('marketing-strategy-team-dashboard-review.webp', false);
+        $response->assertSee('marketing-sprint-project-gantt-laptop.webp', false);
+        $response->assertSee('marketing-measurement-ai-hologram-laptop.webp', false);
+        $response->assertDontSee('marketing-operating-rhythm__image-placeholder', false);
+        $response->assertSee('marketing-audit-document-icon.svg', false);
+        $response->assertSee('marketing-strategy-target-icon.svg', false);
+        $response->assertSee('marketing-execution-gear-icon.svg', false);
+        $response->assertSee('teamwork-icon.svg', false);
+        $response->assertDontSee('marketing-operating-rhythm__icon-placeholder', false);
         $response->assertSee('marketing-why-panel', false);
         $response->assertSee('Why Suave Creators for B2B Digital Marketing', false);
         $response->assertSee('Marketing and engineering under one roof', false);
-        $response->assertSee('marketing-why-panel__icon-placeholder', false);
+        $response->assertSee('See our technology stack', false);
+        $response->assertSee('Measured on qualified leads, not traffic alone', false);
+        $response->assertSee('marketing-why-megaphone-icon.svg', false);
+        $response->assertSee('marketing-why-gear-icon.svg', false);
+        $response->assertSee('marketing-why-chat-icon.svg', false);
+        $response->assertSee('marketing-why-power-icon.svg', false);
+        $response->assertDontSee('marketing-why-panel__icon-placeholder', false);
         $response->assertSee('faq-section--crm-builder', false);
         $response->assertSee('digital-marketing-faq-heading', false);
         $response->assertSee('Digital Marketing FAQs', false);
@@ -153,7 +217,6 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertDontSee('consultation-person__placeholder', false);
         $response->assertSee('crm-builder-partners', false);
         $response->assertSee('Our Partnerships &amp; Growth Stack', false);
-        $response->assertDontSee('marketing-channel-detail__related', false);
         $response->assertDontSee('service-scope-heading', false);
         $response->assertDontSee('service-faq-heading', false);
         $response->assertDontSee('marketing-radar-hero__channels', false);
@@ -165,6 +228,9 @@ class DigitalMarketingServicesPageTest extends TestCase
         $this->assertStringContainsString('"hasOfferCatalog"', $html);
         $this->assertStringContainsString('"name":"What is digital marketing?"', $html);
         $this->assertStringContainsString('"@type":"FAQPage"', $html);
+        $this->assertStringContainsString('https://en.wikipedia.org/wiki/Digital_marketing', $html);
+        $this->assertStringContainsString('https://en.wikipedia.org/wiki/Google_Ads', $html);
+        $this->assertStringContainsString('"mentions"', $html);
     }
 
     public function test_header_and_footer_link_digital_marketing(): void
