@@ -21,7 +21,7 @@ class Topbar extends Component
 
     public function href(): string
     {
-        return Str::startsWith($this->hrefRoute, 'http') ? $this->hrefRoute : route($this->hrefRoute ?? 'product');
+        return Str::startsWith($this->hrefRoute, 'http') ? $this->hrefRoute : route($this->hrefRoute ?? 'home');
     }
 
     public function render(): View|Closure|string

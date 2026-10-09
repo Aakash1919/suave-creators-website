@@ -31,9 +31,9 @@
                 </p>
 
                 <div class="mt-8 flex flex-wrap items-center gap-4 sm:gap-7">
-                    <a href="#contact-id"
-                        class="group inline-flex h-[34px] min-h-[34px] items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-auto sm:min-h-11 sm:py-2 sm:text-sm">
-                        Send a Message
+                    <button type="button" data-inquiry-dialog-open="hire-developers-dialog" aria-haspopup="dialog" aria-controls="hire-developers-dialog"
+                        class="group inline-flex h-[34px] min-h-[34px] cursor-pointer items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#2A4DFB] to-[#0026E3] px-4 py-0 text-[13px] font-bold text-white shadow-lg shadow-indigo-950/30 transition hover:brightness-110 sm:h-11 sm:min-h-11 sm:text-sm">
+                        Hire Developers
                         <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"
@@ -41,12 +41,18 @@
                             <path d="M18 8L22 12L18 16"></path>
                             <path d="M2 12H22"></path>
                         </svg>
-                    </a>
-                    <a href="tel:+918894900142"
-                        class="u-btn-secondary u-btn-secondary--dark group inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 hover:border-white/35">
-                        <i class="fa-solid fa-phone text-xs" aria-hidden="true"></i>
-                        +91 88949 00142
-                    </a>
+                    </button>
+                    <button type="button" data-inquiry-dialog-open="project-estimate-dialog" aria-haspopup="dialog" aria-controls="project-estimate-dialog"
+                        class="group inline-flex h-[34px] min-h-[34px] cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-4 py-0 text-[13px] font-semibold text-white backdrop-blur-sm transition hover:border-white/35 hover:bg-white/20 sm:h-11 sm:min-h-11 sm:px-5 sm:text-sm">
+                        Get a Scoped Estimate
+                        <svg xmlns="https://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"
+                            aria-hidden="true">
+                            <path d="M18 8L22 12L18 16"></path>
+                            <path d="M2 12H22"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -189,16 +195,17 @@
                             <div class="contact-form-panel__row">
                                 <x-frontend.phone-field id="contact-phone" name="phone" label="Phone"
                                     placeholder="98765 43210" />
-                                <label for="contact-service">
-                                    <span class="contact-form-panel__label-text">Service</span>
-                                    <select id="contact-service" name="service">
-                                        <option value="" disabled selected>Select a service</option>
-                                        @foreach ($formServices as $value => $label)
-                                            <option value="{{ $value }}">{{ $label }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="contact-form-panel__service">
+                                    <span class="contact-form-panel__label-text" id="contact-service-label">Service</span>
+                                    <x-frontend.modal.inquiry-select
+                                        name="service"
+                                        label-id="contact-service-label"
+                                        placeholder="Select a service"
+                                        :options="$formServiceOptions"
+                                        :required="false"
+                                    />
                                     <span class="contact-form-panel__field-error" data-error-for="service" hidden></span>
-                                </label>
+                                </div>
                             </div>
 
                             <label for="contact-message" class="contact-form-panel__message">
@@ -354,7 +361,10 @@
         style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}');"
         heading-id="contact-faq-heading" eyebrow="Questions before you get started?" title="Frequently Ask Question"
         description="Here are the most asked questions based on feedback from our users." :qa="$faqs"
-        :media="$faqMedia" media-type="image" :media-alt="$faqMediaAlt" :cta-href="$faqCtaHref" :cta-label="$faqCtaLabel" />
+        :media="$faqMedia" media-type="image" :media-alt="$faqMediaAlt"         :cta-href="$faqCtaHref" :cta-label="$faqCtaLabel" />
+
+    <x-frontend.modal.project-estimate-modal />
+    <x-frontend.modal.hire-developers-modal />
 @endsection
 
 @push('scripts')
@@ -414,9 +424,10 @@
 
         (function() {
             const form = document.querySelector('[data-contact-form]');
-            if (!form) {
+            if (!form || form.dataset.enquiryInitialized) {
                 return;
             }
+            form.dataset.enquiryInitialized = 'true';
 
             const successEl = document.querySelector('[data-contact-success]');
             const submitBtn = form.querySelector('[data-contact-submit]');
@@ -583,7 +594,10 @@
             function showError(name, message) {
                 const input = field(name);
                 const error = form.querySelector('[data-error-for="' + name + '"]');
-                if (input) {
+                const selectRoot = form.querySelector('[data-inquiry-select-name="' + name + '"]');
+                if (selectRoot) {
+                    selectRoot.classList.add('is-invalid');
+                } else if (input) {
                     input.classList.add('is-invalid');
                 }
                 if (name === 'phone' && window.SuavePhoneField) {
@@ -695,9 +709,8 @@
 
             function resetForm() {
                 form.reset();
-                const service = field('service');
-                if (service) {
-                    service.selectedIndex = 0;
+                if (window.SuaveInquiryModals && typeof window.SuaveInquiryModals.resetSelects === 'function') {
+                    window.SuaveInquiryModals.resetSelects(form);
                 }
                 if (window.SuavePhoneField) {
                     window.SuavePhoneField.resetAll(form);
@@ -718,6 +731,10 @@
                 }
                 input.addEventListener('input', function() {
                     input.classList.remove('is-invalid');
+                    const selectRoot = input.closest('[data-inquiry-select]');
+                    if (selectRoot) {
+                        selectRoot.classList.remove('is-invalid');
+                    }
                     const error = form.querySelector('[data-error-for="' + name + '"]');
                     if (error) {
                         error.hidden = true;
@@ -779,6 +796,7 @@
 
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
+                if (form.dataset.enquiryPending === 'true') return;
 
                 if (successEl) {
                     successEl.hidden = true;
@@ -795,6 +813,7 @@
                 }
 
                 formSubmitted = true;
+                form.dataset.enquiryPending = 'true';
                 if (draftInputTimer) {
                     window.clearTimeout(draftInputTimer);
                     draftInputTimer = null;
@@ -831,7 +850,7 @@
                             return;
                         }
 
-                        if (!response.ok || data.success === false) {
+                        if (!response.ok || data.success !== true) {
                             formSubmitted = false;
                             showError('message', data.message ||
                                 'Unable to send your request. Please try again.');
@@ -839,7 +858,7 @@
                         }
 
                         const selectedService = field('service')?.value || '';
-                        if (data.lead_tracked !== false && typeof window.suaveTrackEvent === 'function') {
+                        if (data.lead_tracked === true && typeof window.suaveTrackEvent === 'function') {
                             window.suaveTrackEvent('generate_lead', {
                                 lead_type: 'contact_form',
                                 service: selectedService,
@@ -854,6 +873,7 @@
                         showError('message', 'Unable to send your request. Please try again.');
                     })
                     .finally(function() {
+                        form.dataset.enquiryPending = 'false';
                         setSubmitting(false);
                     });
             });

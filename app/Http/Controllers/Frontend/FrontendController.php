@@ -23,21 +23,28 @@ abstract class FrontendController extends Controller
             $overrides = array_filter([
                 'title' => $data['seoTitle'] ?? null,
                 'description' => $data['seoDescription'] ?? null,
+                'author' => $data['seoAuthor'] ?? null,
+                'type' => $data['seoType'] ?? null,
                 'og_title' => $data['seoOgTitle'] ?? null,
                 'og_description' => $data['seoOgDescription'] ?? null,
                 'twitter_title' => $data['seoTwitterTitle'] ?? null,
                 'twitter_description' => $data['seoTwitterDescription'] ?? null,
                 'image' => $data['seoImage'] ?? null,
+<<<<<<< HEAD
                 'og_image_alt' => $data['seoImageAlt'] ?? null,
+=======
+                'og_image_alt' => $data['seoOgImageAlt'] ?? null,
+>>>>>>> 49424aeec5b7907f4ec2f74513b16ffe68f47456
                 'canonical' => $data['seoCanonical'] ?? null,
                 'faqs' => $data['seoFaqs'] ?? null,
                 'robots' => $data['seoRobots'] ?? null,
+                'article' => $data['seoArticle'] ?? null,
                 'json_ld_graph' => $data['seoJsonLdGraph'] ?? null,
                 'json_ld_webpage_about' => $data['seoJsonLdWebpageAbout'] ?? null,
                 'json_ld_webpage_about_topics' => $data['seoJsonLdWebpageAboutTopics'] ?? null,
                 'json_ld_webpage_mentions' => $data['seoJsonLdWebpageMentions'] ?? null,
                 'json_ld_breadcrumb_name' => $data['seoBreadcrumbName'] ?? null,
-            ], static fn (mixed $value): bool => $value !== null && $value !== '');
+            ], static fn (mixed $value): bool => $value !== null && $value !== '' && $value !== []);
 
             $payload['seo'] = app(SeoGenerateService::class)->generate($overrides);
         } else {

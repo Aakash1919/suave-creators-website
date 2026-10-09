@@ -4872,7 +4872,7 @@ body.mobile-nav-open {
 
   .site-footer__columns {
     gap: 2rem 1.5rem;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .site-footer__offices {
@@ -6194,7 +6194,7 @@ body.mobile-nav-open {
   }
 
   .site-footer__columns {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -7201,8 +7201,33 @@ body.mobile-nav-open {
   padding: 6px;
   position: absolute;
   right: 0;
+  scrollbar-color: rgba(100, 116, 139, 0.45) transparent;
+  scrollbar-width: thin;
   top: calc(100% + 6px);
   z-index: 5;
+}
+
+.inquiry-select__menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.inquiry-select__menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.inquiry-select__menu::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.45);
+  border-radius: 999px;
+}
+
+.inquiry-select__menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.75);
+}
+
+.inquiry-select__menu::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
 }
 
 .inquiry-select__menu[hidden] {

@@ -15,6 +15,10 @@ class ContactFormDraftTest extends TestCase
         $response = $this->get(route('contact-us'));
 
         $response->assertOk();
+        $response->assertSee('data-inquiry-dialog-open="hire-developers-dialog"', false);
+        $response->assertSee('data-inquiry-dialog-open="project-estimate-dialog"', false);
+        $response->assertSee('id="hire-developers-dialog"', false);
+        $response->assertSee('id="project-estimate-dialog"', false);
         $response->assertSee('const DRAFT_INPUT_SAVE_DELAY_MS =', false);
         $response->assertSee('function scheduleDraftSave()', false);
         $response->assertSee('input.addEventListener(\'input\', function()', false);

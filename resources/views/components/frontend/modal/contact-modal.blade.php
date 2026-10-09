@@ -607,7 +607,8 @@
         <script>
             (function() {
                 var modalRoot = document.querySelector('[data-contact-modal-root]');
-                if (!modalRoot) return;
+                if (!modalRoot || modalRoot.dataset.enquiryInitialized) return;
+                modalRoot.dataset.enquiryInitialized = 'true';
 
                 var modalBackdrop = modalRoot.querySelector('[data-contact-modal-backdrop]');
                 var modalCard = modalRoot.querySelector('.contact-modal__card');
@@ -962,6 +963,7 @@
                 if (form) {
                     form.addEventListener('submit', function(e) {
                         e.preventDefault();
+                        if (isSubmitting) return;
                         clearAllErrors();
                         if (window.SuavePhoneField) {
                             window.SuavePhoneField.syncAll(form);
@@ -1045,7 +1047,7 @@
                                     return;
                                 }
 
-                                if (!response.ok || data.success === false) {
+                                if (!response.ok || data.success !== true) {
                                     isSubmitting = false;
                                     if (generalError) {
                                         generalError.textContent = data.message ||
@@ -1055,13 +1057,21 @@
                                     return;
                                 }
 
-                                // Lead tracking
-                                if (data.lead_tracked !== false && typeof window.suaveTrackEvent ===
-                                    'function') {
-                                    window.suaveTrackEvent('generate_lead', {
-                                        lead_type: 'consultation_modal',
-                                        service: serviceVal,
-                                        form_name: 'contact_modal',
+                                // Keep navigation from interrupting the queued Google event.
+                                // The fallback also covers blocked tags and denied consent.
+                                if (data.lead_tracked === true && typeof window.suaveTrackEvent === 'function') {
+                                    await new Promise(function(resolve) {
+                                        var timer = window.setTimeout(resolve, 2000);
+                                        window.suaveTrackEvent('generate_lead', {
+                                            lead_type: 'consultation_modal',
+                                            service: serviceVal,
+                                            form_name: 'contact_popup',
+                                            event_callback: function() {
+                                                window.clearTimeout(timer);
+                                                resolve();
+                                            },
+                                            event_timeout: 2000,
+                                        });
                                     });
                                 }
 

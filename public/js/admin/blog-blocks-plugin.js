@@ -38,6 +38,77 @@
     window.RTE_DefaultConfig['svgCode_' + cmd] = icons[cmd];
   });
 
+  var modalLinks = {
+    linkprojectestimate: {
+      label: 'Estimate modal',
+      href: '#project-estimate-dialog',
+      icon: icon('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/>'),
+    },
+    linkhiredevelopers: {
+      label: 'Hire modal',
+      href: '#hire-developers-dialog',
+      icon: icon('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'),
+    },
+  };
+
+  Object.keys(modalLinks).forEach(function (cmd) {
+    window.RTE_DefaultConfig['text_' + cmd] = modalLinks[cmd].label;
+    window.RTE_DefaultConfig['svgCode_' + cmd] = modalLinks[cmd].icon;
+  });
+
+  function selectionAnchor(editor) {
+    try {
+      var sel = typeof editor.getSelection === 'function' ? editor.getSelection() : null;
+      var node = sel && (sel.anchorNode || (sel.rangeCount ? sel.getRangeAt(0).startContainer : null));
+      if (node && node.nodeType === 3) {
+        node = node.parentNode;
+      }
+      while (node && node.nodeType === 1) {
+        if (String(node.tagName).toUpperCase() === 'A') {
+          return node;
+        }
+        node = node.parentNode;
+      }
+    } catch (e) {
+      /* ignore */
+    }
+
+    return null;
+  }
+
+  function applyModalLink(editor, href) {
+    if (!editor || !href) {
+      return false;
+    }
+    if (typeof editor.focus === 'function') {
+      editor.focus();
+    }
+
+    var anchor = selectionAnchor(editor);
+    if (anchor) {
+      anchor.setAttribute('href', href);
+    } else {
+      try {
+        var doc = typeof editor.getDocument === 'function' ? editor.getDocument() : null;
+        if (!doc || !doc.execCommand('createLink', false, href)) {
+          return false;
+        }
+      } catch (e) {
+        return false;
+      }
+    }
+
+    if (typeof editor.fireChange === 'function') {
+      try {
+        editor.fireChange();
+      } catch (e) {
+        /* ignore */
+      }
+    }
+
+    return true;
+  }
+
   function sidebarFeaturedPreviewSrc() {
     try {
       var previewImg = document.querySelector('.admin-blog-form__image-preview');
@@ -531,6 +602,13 @@
         editor.attachEvent('exec_command_' + cmd, function (state) {
           state.returnValue = true;
           insertBlock(editor, cmd);
+        });
+      });
+
+      Object.keys(modalLinks).forEach(function (cmd) {
+        editor.attachEvent('exec_command_' + cmd, function (state) {
+          state.returnValue = true;
+          applyModalLink(editor, modalLinks[cmd].href);
         });
       });
 
