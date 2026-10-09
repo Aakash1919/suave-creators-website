@@ -49,9 +49,9 @@
 @endphp
 
 <x-frontend.marketing-services-overview-section
+  :eyebrow="$overview['eyebrow']"
   :title="$overview['title']"
   :description="$overview['description']"
-  :columns="$overview['columns']"
   :rows="$overview['rows']"
   heading-id="digital-marketing-overview-heading"
   section-id="overview" />

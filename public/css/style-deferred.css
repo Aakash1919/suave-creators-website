@@ -18926,7 +18926,7 @@ a.web-service-card {
 }
 
 .marketing-radar-hero__breadcrumb {
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.85rem;
 }
 
 .marketing-radar-hero__breadcrumb-list {
@@ -18970,7 +18970,7 @@ a.web-service-card {
 }
 
 .marketing-radar-hero__eyebrow {
-  margin: 0 0 1.1rem;
+  margin: 0 0 1.65rem;
 }
 
 .marketing-radar-hero__eyebrow-text {
@@ -18983,7 +18983,8 @@ a.web-service-card {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: #2A4DFB;
+  
 }
 
 .marketing-radar-hero__copy,
@@ -19198,7 +19199,7 @@ a.web-service-card {
   }
 
   .marketing-radar-hero__visual {
-    width: 100%;
+    /* width: 100%; */
   }
 
   .marketing-radar-hero__proof {
@@ -19214,7 +19215,11 @@ a.web-service-card {
 
 /* ===== MARKETING SERVICES OVERVIEW START ===== */
 .marketing-services-overview {
-  background-color: #fff;
+  --mso-blue: #2a4dfb;
+  --mso-purple: #7a5ff8;
+  --mso-teal: #14b8a6;
+  --mso-pink: #ec4899;
+  background-color: #f5f7fb;
   color: #171717;
   padding: 3.5rem 0 4rem;
 }
@@ -19225,12 +19230,36 @@ a.web-service-card {
 }
 
 .marketing-services-overview__header {
-  max-width: 52rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.marketing-services-overview__intro {
+  display: grid;
+  gap: 1rem;
+  max-width: 36rem;
+}
+
+.marketing-services-overview__eyebrow {
+  margin: 0;
+}
+
+.marketing-services-overview__eyebrow-text {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  background: rgba(122, 95, 248, 0.12);
+  color: var(--mso-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .marketing-services-overview__title {
   margin: 0;
-  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-size: clamp(1.75rem, 3vw, 2.45rem);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -19238,82 +19267,23 @@ a.web-service-card {
 }
 
 .marketing-services-overview__title-accent {
-  color: #2a4dfb;
+  background: linear-gradient(90deg, #2a4dfb 0%, #7a5ff8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .marketing-services-overview__desc {
-  margin: 1rem 0 0;
-  max-width: 52rem;
+  margin: 0;
+  max-width: 28rem;
   font-size: 15px;
   line-height: 1.7;
-  color: #475569;
+  color: #64748b;
 }
 
-.marketing-services-overview__panel {
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  min-width: 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-}
-
-.marketing-services-overview__table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  min-width: 40rem;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.marketing-services-overview__table th,
-.marketing-services-overview__table td {
-  border-bottom: 1px solid #e5e7eb;
-  border-right: 1px solid #e5e7eb;
-  box-sizing: border-box;
-  padding: 1rem 1.1rem;
-  text-align: left;
-  vertical-align: top;
-  font-size: 14px;
-  line-height: 1.55;
-  color: #475569;
-}
-
-.marketing-services-overview__table th:last-child,
-.marketing-services-overview__table td:last-child {
-  border-right: 0;
-}
-
-.marketing-services-overview__table thead th {
-  background: #f8fafc;
-  color: #0f172a;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.marketing-services-overview__table tbody tr:last-child th,
-.marketing-services-overview__table tbody tr:last-child td {
-  border-bottom: 0;
-}
-
-.marketing-services-overview__table tbody th {
+.marketing-services-overview__desc-brand {
   color: #0f172a;
   font-weight: 700;
-  width: 18%;
-}
-
-.marketing-services-overview__service-link {
-  color: #2a4dfb;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.marketing-services-overview__service-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 .marketing-services-overview__cards {
@@ -19322,52 +19292,163 @@ a.web-service-card {
 }
 
 .marketing-services-overview__card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --mso-accent: var(--mso-blue);
+  --mso-accent-soft: rgba(42, 77, 251, 0.12);
+  --mso-accent-icon-bg: rgba(42, 77, 251, 0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
-  padding: 1.15rem 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-top: 2.5px solid var(--mso-accent);
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+  padding: 1.4rem 1.3rem 1.3rem;
+}
+
+.marketing-services-overview__card::before {
+  content: "";
+  position: absolute;
+  top: -3.4rem;
+  right: -3.2rem;
+  width: 9.5rem;
+  height: 9.5rem;
+  border-radius: 999px;
+  border: 1.65rem solid var(--mso-accent-soft);
+  box-shadow: inset 0 0 0 1.25rem color-mix(in srgb, var(--mso-accent) 8%, transparent);
+  pointer-events: none;
+}
+
+.marketing-services-overview__card--blue {
+  --mso-accent: var(--mso-blue);
+  --mso-accent-soft: rgba(42, 77, 251, 0.12);
+  --mso-accent-icon-bg: rgba(42, 77, 251, 0.1);
+}
+
+.marketing-services-overview__card--purple {
+  --mso-accent: var(--mso-purple);
+  --mso-accent-soft: rgba(122, 95, 248, 0.12);
+  --mso-accent-icon-bg: rgba(122, 95, 248, 0.1);
+}
+
+.marketing-services-overview__card--teal {
+  --mso-accent: var(--mso-teal);
+  --mso-accent-soft: rgba(20, 184, 166, 0.12);
+  --mso-accent-icon-bg: rgba(20, 184, 166, 0.1);
+}
+
+.marketing-services-overview__card--pink {
+  --mso-accent: var(--mso-pink);
+  --mso-accent-soft: rgba(236, 72, 153, 0.12);
+  --mso-accent-icon-bg: rgba(236, 72, 153, 0.1);
+}
+
+.marketing-services-overview__card-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.85rem;
+  background: var(--mso-accent-icon-bg);
+  color: var(--mso-accent);
+  margin-bottom: 1rem;
+}
+
+.marketing-services-overview__card-icon-placeholder {
+  display: block;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 0.25rem;
+  background: var(--mso-accent-soft);
 }
 
 .marketing-services-overview__card-title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
   color: #0f172a;
-  font-size: 1.05rem;
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.3;
-  margin: 0 0 0.85rem;
+  line-height: 1.2;
 }
 
-.marketing-services-overview__card-list {
+.marketing-services-overview__card-does {
+  position: relative;
+  z-index: 1;
+  margin: 0.5rem 0 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.marketing-services-overview__card-meta {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: 0.75rem;
-  margin: 0;
+  gap: 1.15rem;
+  margin: 1.15rem 0 0;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .marketing-services-overview__card-row {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.3rem;
 }
 
 .marketing-services-overview__card-row dt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
   color: #64748b;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  margin: 0;
   text-transform: uppercase;
 }
 
-.marketing-services-overview__card-row dd {
-  color: #475569;
-  font-size: 14px;
-  line-height: 1.55;
-  margin: 0;
+.marketing-services-overview__card-meta-icon {
+  display: inline-flex;
+  color: var(--mso-accent);
 }
 
-.marketing-services-overview__panel {
-  display: none;
+.marketing-services-overview__card-row dd {
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.marketing-services-overview__card-cta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding-top: 1.35rem;
+  color: var(--mso-accent);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.marketing-services-overview__card-cta-arrow {
+  display: inline-flex;
+}
+
+.marketing-services-overview__card-cta:hover {
+  gap: 0.65rem;
+  text-decoration: none;
 }
 
 @media (min-width: 768px) {
@@ -19375,16 +19456,32 @@ a.web-service-card {
     padding: 4.5rem 0 5rem;
   }
 
+  .marketing-services-overview__header {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: end;
+    gap: 2rem;
+  }
+
   .marketing-services-overview__desc {
     font-size: 16px;
+    justify-self: end;
   }
 
   .marketing-services-overview__cards {
-    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .marketing-services-overview__cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
   }
 
-  .marketing-services-overview__panel {
-    display: block;
+  .marketing-services-overview__card {
+    padding: 1.5rem 1.35rem 1.35rem;
+    min-height: 100%;
   }
 }
 /* ===== MARKETING SERVICES OVERVIEW END ===== */
