@@ -923,6 +923,35 @@
   @push('scripts')
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+        var columns = document.querySelector('.technologies-backend__columns');
+        var summaries = columns
+          ? Array.prototype.slice.call(columns.querySelectorAll('.technologies-backend__summary'))
+          : [];
+
+        function equalizeBackendSummaries() {
+          if (summaries.length < 2 || window.matchMedia('(max-width: 999px)').matches) {
+            summaries.forEach(function (summary) {
+              summary.style.minHeight = '';
+            });
+            return;
+          }
+
+          summaries.forEach(function (summary) {
+            summary.style.minHeight = '';
+          });
+
+          var tallest = summaries.reduce(function (max, summary) {
+            return Math.max(max, summary.offsetHeight);
+          }, 0);
+
+          summaries.forEach(function (summary) {
+            summary.style.minHeight = tallest + 'px';
+          });
+        }
+
+        equalizeBackendSummaries();
+        window.addEventListener('resize', equalizeBackendSummaries);
+
         document.querySelectorAll('[data-technologies-backend-more]').forEach(function (button) {
           button.addEventListener('click', function () {
             var card = button.closest('.technologies-backend__card');

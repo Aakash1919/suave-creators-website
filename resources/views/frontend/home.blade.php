@@ -625,17 +625,17 @@
     <div class="home-pricing__grid">
       <article class="home-pricing__card">
         <h3>Fixed-price projects</h3>
-        <p class="home-pricing__price">from $15,000 · 6–16 weeks</p>
+        <p class="home-pricing__price">From $15,000 · 6–16 weeks</p>
         <p>For clearly defined builds: MVPs, internal tools, customer portals and integrations.</p>
       </article>
       <article class="home-pricing__card">
         <h3>Dedicated development team</h3>
-        <p class="home-pricing__price">from $2,000 per developer/month</p>
+        <p class="home-pricing__price">From $2,000 per developer/month</p>
         <p>For ongoing product work; scale the team up or down each month.</p>
       </article>
       <article class="home-pricing__card">
         <h3>Support and maintenance retainers</h3>
-        <p class="home-pricing__price">from $500/month</p>
+        <p class="home-pricing__price">From $500/month</p>
         <p>Monitoring, security patches, bug fixes and small features under a written SLA.</p>
       </article>
     </div>

@@ -18977,7 +18977,7 @@ body:has(.site-main--technologies) .site-header {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  max-height: min(26rem, 58vh);
+  max-height: min(24rem, 54vh);
   max-width: 100%;
   opacity: 1;
   overflow: hidden;
@@ -18989,7 +18989,7 @@ body:has(.site-main--technologies) .site-header {
 .technologies-backend__card.is-expanded {
   max-height: none;
   overflow: visible;
-  padding-bottom: 1.25rem;
+  padding-bottom: 2.75rem;
 }
 
 .technologies-backend__body {
@@ -19030,9 +19030,11 @@ body:has(.site-main--technologies) .site-header {
 
 .technologies-backend__card.is-expanded .technologies-backend__more {
   background: transparent;
-  margin-top: 0.35rem;
-  padding: 0.85rem 0 0;
-  position: static;
+  bottom: 0.85rem;
+  left: 1.1rem;
+  padding: 0;
+  position: absolute;
+  right: auto;
   width: auto;
 }
 
@@ -19052,6 +19054,8 @@ body:has(.site-main--technologies) .site-header {
 
 .technologies-backend__summary {
   align-items: start;
+  min-height:180px;
+  align-content: start;
   background: var(--panel);
   border-radius: 9px;
   box-sizing: border-box;
@@ -19286,6 +19290,7 @@ body:has(.site-main--technologies) .site-header {
 
 @media (min-width: 1000px) {
   .technologies-backend__columns {
+    align-items: start;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.15rem;
   }
@@ -19300,7 +19305,7 @@ body:has(.site-main--technologies) .site-header {
 
   .technologies-backend__card {
     height: auto;
-    max-height: min(28rem, 56vh);
+    max-height: min(26rem, 52vh);
     max-width: 624px;
     opacity: 1;
     transform: rotate(0deg);
@@ -19530,8 +19535,10 @@ body:has(.site-main--technologies) .site-header {
   backdrop-filter: blur(102px);
   border: 1px solid #2A4DFB1A;
   border-collapse: separate;
+  border-radius: 10px;
   border-spacing: 0;
   min-width: 0;
+  overflow: hidden;
   table-layout: fixed;
   width: 100%;
 }
@@ -19559,7 +19566,6 @@ body:has(.site-main--technologies) .site-header {
 
 .technologies-frontend__table thead th:first-child {
   border-radius: 10px 0 0 0;
-  width: 18%;
 }
 
 .technologies-frontend__table thead th:last-child {
@@ -19585,6 +19591,14 @@ body:has(.site-main--technologies) .site-header {
   border-bottom: 0;
 }
 
+.technologies-frontend__table tbody tr:last-child th:first-child {
+  border-radius: 0 0 0 10px;
+}
+
+.technologies-frontend__table tbody tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
+}
+
 .technologies-frontend__corner {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -19598,6 +19612,34 @@ body:has(.site-main--technologies) .site-header {
 @media (min-width: 768px) {
   .technologies-frontend__intro {
     grid-template-columns: 7.5rem minmax(0, 1fr);
+  }
+
+  /* Equal body-row height: all rows match the tallest content row */
+  .technologies-frontend__table {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 18% minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .technologies-frontend__table thead,
+  .technologies-frontend__table tbody,
+  .technologies-frontend__table tr {
+    display: contents;
+  }
+
+  .technologies-frontend__table th,
+  .technologies-frontend__table td {
+    align-items: center;
+    display: flex;
+    min-width: 0;
+  }
+
+  /* Empty corner th (sr-only label) must still fill the grid cell */
+  .technologies-frontend__table thead th:first-child {
+    align-self: stretch;
+    justify-self: stretch;
+    width: auto;
   }
 }
 
@@ -20339,9 +20381,9 @@ body:has(.site-main--technologies) .site-header {
 .technologies-commerce__table td {
   border: 1px solid rgba(0, 0, 0, 0.12);
   font-size: 12px;
-  line-height: 1.35;
+  line-height: 1.45;
   overflow-wrap: break-word;
-  padding: 0.3rem 0.55rem;
+  padding: 0.75rem 1rem;
   text-align: left;
 }
 
@@ -20352,7 +20394,7 @@ body:has(.site-main--technologies) .site-header {
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 0.3rem 0.55rem;
+  padding: 0.75rem 1rem;
   text-transform: uppercase;
 }
 
@@ -21225,6 +21267,11 @@ body:has(.site-main--technologies) .site-header {
   .technologies-commerce__table tbody tr:last-child th,
   .technologies-commerce__table tbody tr:last-child td {
     border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .technologies-frontend__table tbody tr:last-child th:first-child,
+  .technologies-frontend__table tbody tr:last-child td:last-child {
+    border-radius: 0;
   }
 
   .technologies-frontend__table tr td:last-child,

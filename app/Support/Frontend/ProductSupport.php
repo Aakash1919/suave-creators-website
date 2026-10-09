@@ -376,7 +376,7 @@ class ProductSupport
             [
                 'value' => '42%',
                 'label' => 'More Qualified Leads',
-                'caption' => 'vs. Previous Quarter',
+                'caption' => 'Vs. Previous Quarter',
                 'tone' => 'blue',
                 'icon' => asset('assets/product/leads.png'),
                 'alt' => 'Qualified leads growth icon for Suave AI sales CRM case study metric',
