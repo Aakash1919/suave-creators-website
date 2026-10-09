@@ -39,7 +39,8 @@ class DigitalMarketingServicesPageTest extends TestCase
         $this->assertSame('Search Engine Optimization (SEO)', $service['seoChannel']['title'] ?? '');
         $this->assertSame('seo', $service['seoChannel']['sectionId'] ?? '');
         $this->assertCount(6, $service['seoChannel']['covers'] ?? []);
-        $this->assertCount(2, $service['seoChannel']['related'] ?? []);
+        $this->assertArrayNotHasKey('related', $service['seoChannel'] ?? []);
+        $this->assertArrayNotHasKey('bridge', $service['contentChannel'] ?? []);
         $this->assertSame('Pay-Per-Click Advertising (PPC)', $service['ppcChannel']['title'] ?? '');
         $this->assertSame('02', $service['ppcChannel']['index'] ?? '');
         $this->assertCount(5, $service['ppcChannel']['covers'] ?? []);
@@ -112,7 +113,7 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('marketing-services-overview__card--teal', false);
         $response->assertSee('marketing-services-overview__card--pink', false);
         $response->assertSee('Explore service', false);
-        $response->assertSee('Measured by', false);
+        $response->assertSee("How it's measured", false);
         $response->assertSee('offers four connected services', false);
         $response->assertSee('Social media marketing', false);
         $response->assertSee('Rankings for target queries, organic sessions, organic leads', false);
@@ -124,9 +125,8 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('When SEO is the right investment', false);
         $response->assertSee('high-intent organic discovery', false);
         $response->assertSee('fixes can be implemented by our engineers instead of handed over as a list', false);
-        $response->assertSee('marketing-channel-detail__related', false);
-        $response->assertSee('Web application development', false);
-        $response->assertSee('How SEO impacts e-commerce conversions', false);
+        $response->assertDontSee('marketing-channel-detail__related', false);
+        $response->assertDontSee('marketing-channel-detail__bridge', false);
         $response->assertSee('id="ppc"', false);
         $response->assertSee('Pay-Per-Click Advertising (PPC)', false);
         $response->assertSee('02/04', false);
@@ -140,9 +140,6 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('03/04', false);
         $response->assertSee('Content we produce', false);
         $response->assertSee('How we plan content', false);
-        $response->assertSee('Custom CRM vs Salesforce: 3-year TCO', false);
-        $response->assertSee('custom-crm-vs-salesforce-tco-analysis-2026', false);
-        $response->assertSee('custom-erp-vs-netsuite-tco-analysis-2026', false);
         $response->assertSee('marketing-channel-detail__rail-icon--blog', false);
         $response->assertSee('id="social-media-marketing"', false);
         $response->assertSee('Social Media Marketing', false);
@@ -196,7 +193,7 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('marketing-why-panel', false);
         $response->assertSee('Why Suave Creators for B2B Digital Marketing', false);
         $response->assertSee('Marketing and engineering under one roof', false);
-        $response->assertSee('See our technology stack', false);
+        $response->assertDontSee('See our technology stack', false);
         $response->assertSee('Measured on qualified leads, not traffic alone', false);
         $response->assertSee('marketing-why-megaphone-icon.svg', false);
         $response->assertSee('marketing-why-gear-icon.svg', false);

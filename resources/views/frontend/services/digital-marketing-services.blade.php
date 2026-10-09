@@ -57,7 +57,6 @@
   :covers="$seoChannel['covers']"
   :callout-label="$seoChannel['calloutLabel']"
   :callout-body="$seoChannel['calloutBody']"
-  :related="$seoChannel['related'] ?? []"
   :section-id="$seoChannel['sectionId'] ?? 'seo'"
   heading-id="digital-marketing-seo-heading"
   icon="search" />
@@ -84,8 +83,6 @@
   :intro-highlight="$contentChannel['introHighlight']"
   :covers-heading="$contentChannel['coversHeading']"
   :covers="$contentChannel['covers']"
-  :bridge="$contentChannel['bridge'] ?? ''"
-  :bridge-html="(bool) ($contentChannel['bridgeHtml'] ?? false)"
   :callout-label="$contentChannel['calloutLabel']"
   :callout-body="$contentChannel['calloutBody']"
   :section-id="$contentChannel['sectionId'] ?? 'content-marketing'"

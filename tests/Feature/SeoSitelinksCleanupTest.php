@@ -190,12 +190,13 @@ class SeoSitelinksCleanupTest extends TestCase
         $this->assertSame(76.5132446, $graph[1]['geo']['longitude']);
         $this->assertSame('https://suavecreators.com/#organization', $graph[1]['parentOrganization']['@id']);
 
-        $this->assertCount(6, $graph[2]['itemListElement']);
+        $this->assertCount(7, $graph[2]['itemListElement']);
         $offerUrls = array_map(
             static fn (array $offer): string => (string) ($offer['itemOffered']['url'] ?? ''),
             $graph[2]['itemListElement']
         );
         $this->assertContains(route('service.show', ['slug' => 'custom-crm-development']), $offerUrls);
+        $this->assertContains(route('service.show', ['slug' => 'digital-marketing-services']), $offerUrls);
         $this->assertNotContains('https://suavecreators.com/hire-dedicated-developers', $offerUrls);
 
         $this->assertArrayNotHasKey('potentialAction', $graph[3]);

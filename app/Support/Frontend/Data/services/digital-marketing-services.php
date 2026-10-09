@@ -111,16 +111,6 @@ return [
         ],
         'calloutLabel' => 'When SEO is the right investment',
         'calloutBody' => 'SEO suits companies whose buyers research online and whose sales cycle is long enough for organic visibility to compound. It takes months rather than weeks to show results, so it works best alongside a channel that produces leads sooner, such as PPC.',
-        'related' => [
-            [
-                'label' => 'Web application development',
-                'href' => route('service.show', ['slug' => 'web-development-services']),
-            ],
-            [
-                'label' => 'How SEO impacts e-commerce conversions',
-                'href' => route('blog.show', ['slug' => 'how-does-seo-impact-e-commerce-conversions']),
-            ],
-        ],
     ],
     'ppcChannel' => [
         'sectionId' => 'ppc',
@@ -149,7 +139,7 @@ return [
             ],
             [
                 'title' => 'Ongoing testing',
-                'description' => 'Of ad copy, offers and landing page variants to improve cost per lead over time.',
+                'description' => 'Of ad copy, offers and landing page variants.',
             ],
         ],
         'calloutLabel' => 'PPC and SEO: different jobs',
@@ -185,8 +175,6 @@ return [
                 'description' => 'Written for search and answer engines.',
             ],
         ],
-        'bridge' => 'You can see the format on our own blog, for example <a href="'.e(route('blog.show', ['slug' => 'custom-crm-vs-salesforce-tco-analysis-2026'])).'">Custom CRM vs Salesforce: 3-year TCO</a> and <a href="'.e(route('blog.show', ['slug' => 'custom-erp-vs-netsuite-tco-analysis-2026'])).'">Custom ERP vs NetSuite: 3-year TCO</a>.',
-        'bridgeHtml' => true,
         'calloutLabel' => 'How we plan content',
         'calloutBody' => 'Every piece is mapped to a search intent and a buying stage before it is written. Pieces are grouped into topic clusters around a pillar page, linked to each other and to the relevant service page. Technical accuracy comes from our senior developers; structure and search alignment come from our digital strategists.',
     ],
@@ -201,23 +189,23 @@ return [
         'covers' => [
             [
                 'title' => 'LinkedIn company page strategy',
-                'description' => 'Positioning, posting plan and consistent messaging.',
+                'description' => 'Positioning, posting plan and consistent messaging',
             ],
             [
                 'title' => 'Founder and expert thought leadership',
-                'description' => 'Helping leaders publish the technical insight buyers trust more than brand posts.',
+                'description' => 'Helping leaders publish the technical insight buyers trust more than brand posts',
             ],
             [
                 'title' => 'Content distribution',
-                'description' => 'Turning whitepapers, TCO breakdowns and case studies into posts and short formats.',
+                'description' => 'Turning whitepapers, TCO breakdowns and case studies into posts and short formats',
             ],
             [
                 'title' => 'Engagement with target accounts',
-                'description' => 'Meaningful conversations with the people and companies you want to reach.',
+                'description' => 'Meaningful conversations with the people and companies you want to reach',
             ],
             [
                 'title' => 'Consistent brand positioning',
-                'description' => 'The same company description across social profiles, directories and your website.',
+                'description' => 'The same company description across social profiles, directories and your website',
             ],
         ],
         'calloutLabel' => 'Why LinkedIn comes first for B2B',
@@ -364,8 +352,7 @@ return [
         'items' => [
             [
                 'title' => 'Marketing and engineering under one roof',
-                'description' => 'Technical SEO, Core Web Vitals and landing pages are built by our developers, not queued with a third party. <a href="'.e(route('services')).'#tech-stack-title">See our technology stack</a>.',
-                'descriptionHtml' => true,
+                'description' => 'Technical SEO, Core Web Vitals and landing pages are built by our developers, not queued with a third party.',
                 'icon' => 'assets/icons/marketing-why-megaphone-icon.svg',
                 'iconAlt' => 'Megaphone icon for marketing and engineering under one roof',
             ],

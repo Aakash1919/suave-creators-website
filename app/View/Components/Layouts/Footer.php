@@ -83,7 +83,7 @@ class Footer extends Component
                 ['route' => 'about-us', 'label' => 'About us'],
                 ['route' => 'case-studies', 'label' => 'Case studies'],
                 ['route' => 'blogs', 'label' => 'Blog'],
-                ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact us'],
+                ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact Us'],
             ],
             // Activate later: AI Outreach CRM column.
             // 'AI Outreach CRM' => [

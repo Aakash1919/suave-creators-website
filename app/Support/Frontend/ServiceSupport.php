@@ -691,6 +691,7 @@ class ServiceSupport
             'seoTwitterDescription' => $twitterDescription !== '' ? $twitterDescription : null,
             'seoImage' => $ogImage !== '' ? $ogImage : null,
             'seoImageAlt' => $ogImageAlt !== '' ? $ogImageAlt : null,
+            'seoOgImageAlt' => $ogImageAlt !== '' ? $ogImageAlt : null,
             'mainClass' => $isDigitalMarketing
                 ? 'site-main site-main--digital-marketing'
                 : 'site-main site-main--service-detail',

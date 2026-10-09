@@ -64,16 +64,6 @@
         @endforeach
       </ul>
 
-      @if ($bridge !== '')
-        <p class="marketing-channel-detail__bridge">
-          @if ($bridgeHtml)
-            {!! $bridge !!}
-          @else
-            {{ $bridge }}
-          @endif
-        </p>
-      @endif
-
       @if ($calloutLabel !== '' || $calloutBody !== '')
         <aside class="marketing-channel-detail__callout">
           @if ($calloutLabel !== '')
@@ -83,18 +73,6 @@
             <p class="marketing-channel-detail__callout-body">{{ $calloutBody }}</p>
           @endif
         </aside>
-      @endif
-
-      @if ($related !== [])
-        <p class="marketing-channel-detail__related">
-          <span class="marketing-channel-detail__related-label">Related:</span>
-          @foreach ($related as $index => $link)
-            @if ($index > 0)
-              <span class="marketing-channel-detail__related-sep" aria-hidden="true">·</span>
-            @endif
-            <a href="{{ $link['href'] }}" class="marketing-channel-detail__related-link">{{ $link['label'] }}</a>
-          @endforeach
-        </p>
       @endif
     </div>
   </div>

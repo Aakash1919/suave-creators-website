@@ -10,7 +10,6 @@ class MarketingChannelDetailSection extends Component
 {
     /**
      * @param  list<array{title: string, description: string}>  $covers
-     * @param  list<array{label: string, href: string}>  $related
      */
     public function __construct(
         public string $index = '01',
@@ -20,11 +19,8 @@ class MarketingChannelDetailSection extends Component
         public string $introHighlight = 'SEO service',
         public string $coversHeading = 'What our SEO service covers',
         public array $covers = [],
-        public string $bridge = '',
-        public bool $bridgeHtml = false,
         public string $calloutLabel = 'When SEO is the right investment',
         public string $calloutBody = '',
-        public array $related = [],
         public string $headingId = 'marketing-channel-detail-heading',
         public string $sectionId = '',
         public string $icon = 'search',

@@ -30,11 +30,7 @@ abstract class FrontendController extends Controller
                 'twitter_title' => $data['seoTwitterTitle'] ?? null,
                 'twitter_description' => $data['seoTwitterDescription'] ?? null,
                 'image' => $data['seoImage'] ?? null,
-<<<<<<< HEAD
-                'og_image_alt' => $data['seoImageAlt'] ?? null,
-=======
-                'og_image_alt' => $data['seoOgImageAlt'] ?? null,
->>>>>>> 49424aeec5b7907f4ec2f74513b16ffe68f47456
+                'og_image_alt' => $data['seoOgImageAlt'] ?? $data['seoImageAlt'] ?? null,
                 'canonical' => $data['seoCanonical'] ?? null,
                 'faqs' => $data['seoFaqs'] ?? null,
                 'robots' => $data['seoRobots'] ?? null,

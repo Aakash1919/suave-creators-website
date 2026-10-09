@@ -157,12 +157,9 @@ class SeoGenerateService
                 is_array($merged['json_ld_graph'] ?? null) ? $merged['json_ld_graph'] : null,
                 is_string($merged['json_ld_webpage_about'] ?? null) ? $merged['json_ld_webpage_about'] : null,
                 is_string($merged['json_ld_breadcrumb_name'] ?? null) ? $merged['json_ld_breadcrumb_name'] : null,
-<<<<<<< HEAD
                 is_array($merged['json_ld_webpage_about_topics'] ?? null) ? $merged['json_ld_webpage_about_topics'] : null,
                 is_array($merged['json_ld_webpage_mentions'] ?? null) ? $merged['json_ld_webpage_mentions'] : null,
-=======
                 $article,
->>>>>>> 49424aeec5b7907f4ec2f74513b16ffe68f47456
             ),
         ];
     }
@@ -171,12 +168,9 @@ class SeoGenerateService
      * @param  array<string, mixed>  $site
      * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>|null  $faqs
      * @param  array<int, array<string, mixed>>|null  $extraGraph
-<<<<<<< HEAD
      * @param  array<int, array<string, mixed>>|null  $webPageAboutTopics
      * @param  array<int, array<string, mixed>>|null  $webPageMentions
-=======
      * @param  array<string, mixed>|null  $article
->>>>>>> 49424aeec5b7907f4ec2f74513b16ffe68f47456
      * @return array<string, mixed>
      */
     protected function buildJsonLd(
@@ -190,12 +184,9 @@ class SeoGenerateService
         ?array $extraGraph = null,
         ?string $webPageAboutId = null,
         ?string $breadcrumbName = null,
-<<<<<<< HEAD
         ?array $webPageAboutTopics = null,
         ?array $webPageMentions = null,
-=======
         ?array $article = null,
->>>>>>> 49424aeec5b7907f4ec2f74513b16ffe68f47456
     ): array {
         if ($routeName === 'home') {
             return $this->buildHomeJsonLd($site, $title, $description, $canonical, $imageUrl, $faqs);

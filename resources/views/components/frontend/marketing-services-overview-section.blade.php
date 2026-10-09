@@ -90,7 +90,7 @@
                   <div class="marketing-services-overview__card-row">
                     <dt>
                       <span class="marketing-services-overview__card-meta-icon marketing-services-overview__card-meta-icon--measured" aria-hidden="true"></span>
-                      Measured by
+                      How it's measured
                     </dt>
                     <dd>{{ $row['measured'] ?? '' }}</dd>
                   </div>

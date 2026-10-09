@@ -19800,45 +19800,6 @@ a.web-service-card {
   font-weight: 700;
 }
 
-.marketing-channel-detail__bridge {
-  margin: 1.1rem 0 0;
-  max-width: 880px;
-  font-size: 14px;
-  line-height: 1.65;
-  color: #475569;
-}
-
-.marketing-channel-detail__bridge a,
-.marketing-channel-detail__related-link {
-  color: #2a4dfb;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
-}
-
-.marketing-channel-detail__bridge a:hover,
-.marketing-channel-detail__related-link:hover {
-  color: #1e3fd4;
-}
-
-.marketing-channel-detail__related {
-  margin: 1rem 0 0;
-  max-width: 880px;
-  font-size: 14px;
-  line-height: 1.65;
-  color: #475569;
-}
-
-.marketing-channel-detail__related-label {
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.marketing-channel-detail__related-sep {
-  margin: 0 0.35rem;
-  color: #94a3b8;
-}
-
 .marketing-channel-detail__callout {
   margin-top: 1.25rem;
   border-left: 4px solid #2a4dfb;
