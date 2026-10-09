@@ -128,6 +128,7 @@
       var draftAbort = null;
       var lastDraftPayload = '';
       var submitted = false;
+      var isSubmitting = false;
 
       function showMessage(type, message) {
         if (!statusEl) return;
@@ -309,6 +310,7 @@
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        if (isSubmitting) return;
         clearMessage();
 
         var value = (input ? input.value : '').trim();
@@ -327,6 +329,7 @@
           return;
         }
 
+        isSubmitting = true;
         if (submitBtn) {
           var currentBtnWidth = submitBtn.getBoundingClientRect().width;
           if (currentBtnWidth > 0) {
@@ -364,13 +367,13 @@
               return;
             }
 
-            if (!response.ok || data.success === false) {
+            if (!response.ok || data.success !== true) {
               submitted = false;
               showMessage('error', data.message || 'Unable to submit request. Please try again.');
               return;
             }
 
-            var shouldTrackLead = data.lead_tracked !== false;
+            var shouldTrackLead = data.lead_tracked === true;
 
             if (shouldTrackLead && typeof window.suaveTrackEvent === 'function') {
               window.suaveTrackEvent('generate_lead', {
@@ -405,6 +408,7 @@
             showMessage('error', 'Unable to submit request. Please try again.');
           })
           .finally(function () {
+            isSubmitting = false;
             if (submitBtn) {
               submitBtn.disabled = false;
               submitBtn.style.minWidth = '';

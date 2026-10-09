@@ -612,11 +612,6 @@
         </tbody>
       </table>
     </div>
-    <p class="home-compare__links">
-      <a href="{{ route('service.show', ['slug' => 'custom-crm-development']) }}">Custom CRM vs Salesforce: 3-year TCO →</a>
-      <a href="{{ route('service.show', ['slug' => 'enterprise-software-solutions']) }}">Custom ERP vs NetSuite: 3-year TCO →</a>
-      <a href="{{ route('service.show', ['slug' => 'e-commerce-development']) }}">Custom e-commerce vs Shopify Plus →</a>
-    </p>
   </div>
 </section>
 
@@ -1227,38 +1222,8 @@ a.digital-marketing-card {
   border-bottom: 0;
 }
 
-.home-compare__links {
-  background: #fff;
-  border: 1px solid #ececec;
-  border-left: 3px solid #2a4dfb;
-  border-radius: 12px;
-  box-shadow: 3px 6px 14px 0 #00003f0f;
-  align-items: center;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 48px;
-  justify-content: space-between;
-  margin-top: 16px;
-  overflow-x: auto;
-  padding: 14px 22px;
-}
-
 .home-pricing__actions {
   justify-content: flex-end;
-}
-
-.home-compare__links a {
-  color: #171717;
-  flex: 0 0 auto;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.45;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.home-compare__links a:hover {
-  color: #2a4dfb;
 }
 
 @media (max-width: 767px) {
@@ -1269,14 +1234,12 @@ a.digital-marketing-card {
   }
 
   .home-compare .section-inner,
-  .home-compare__scroll,
-  .home-compare__links {
+  .home-compare__scroll {
     max-width: 100%;
     min-width: 0;
   }
 
-  .home-compare__scroll,
-  .home-compare__links {
+  .home-compare__scroll {
     overflow-x: visible;
   }
 
@@ -1289,18 +1252,6 @@ a.digital-marketing-card {
     font-size: 12px;
     overflow-wrap: anywhere;
     padding: 10px 8px;
-  }
-
-  .home-compare__links {
-    flex-wrap: wrap;
-    gap: 10px 14px;
-    padding: 12px 14px;
-  }
-
-  .home-compare__links a {
-    font-size: 12px;
-    line-height: 1.4;
-    white-space: normal;
   }
 }
 

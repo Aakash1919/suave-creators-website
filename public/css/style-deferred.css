@@ -5456,6 +5456,33 @@ right: max(0px, calc(50% - 580px));
   color: #171717;
 }
 
+.contact-form-panel__service{
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.contact-form-panel__fields .inquiry-select__trigger{
+  border: 1px solid #e6e8f0;
+  border-radius: 12px;
+  height: 50px;
+  min-height: 50px;
+  padding: 4px 12px;
+}
+
+.contact-form-panel__fields .inquiry-select__trigger:hover{
+  border-color: #cfd5e4;
+}
+
+.contact-form-panel__fields .inquiry-select__trigger:focus,
+.contact-form-panel__fields .inquiry-select__trigger[aria-expanded="true"]{
+  border-color: var(--cfp-blue);
+  box-shadow: 0 0 0 4px var(--cfp-blue-soft);
+}
+
 .contact-form-panel__fields input::placeholder,
 .contact-form-panel__fields textarea::placeholder{
   color: #9ca3af;

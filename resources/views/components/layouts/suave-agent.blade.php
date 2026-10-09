@@ -101,7 +101,8 @@
     <script>
       (function () {
         var root = document.querySelector('[data-suave-agent]');
-        if (!root) return;
+        if (!root || root.dataset.enquiryInitialized) return;
+        root.dataset.enquiryInitialized = 'true';
 
         // Escape footer overflow-x:clip / content-visibility so the toggle stays viewport-fixed.
         if (root.parentElement !== document.body) {
@@ -128,6 +129,7 @@
         var historyUrl = root.getAttribute('data-history-url');
         var session = null;
         var streaming = false;
+        var leadSubmitting = false;
         var historyLoaded = false;
 
         function ensureMarked() {
@@ -471,6 +473,7 @@
 
         leadForm.addEventListener('submit', async function (event) {
           event.preventDefault();
+          if (leadSubmitting || session) return;
           clearFieldErrors();
 
           var errors = leadFieldErrors();
@@ -479,6 +482,7 @@
             return;
           }
 
+          leadSubmitting = true;
           var submitBtn = leadForm.querySelector('button[type="submit"]');
           submitBtn.disabled = true;
           setStatus('');
@@ -504,10 +508,10 @@
               showFieldErrors(data.errors);
               return;
             }
-            if (!res.ok) {
+            if (!res.ok || data.success === false) {
               throw new Error('Unable to start chat.');
             }
-            if (!data.conversation_id) {
+            if (!data.conversation_id || !data.lead_uuid || !data.session_token) {
               throw new Error('Unable to start chat session.');
             }
             session = {
@@ -516,6 +520,10 @@
               conversation_id: data.conversation_id
             };
             if (typeof window.suaveTrackEvent === 'function') {
+              window.suaveTrackEvent('generate_lead', {
+                lead_type: 'suave_agent',
+                form_name: 'suave_agent_start'
+              });
               window.suaveTrackEvent('chat_lead', {
                 lead_type: 'suave_agent',
                 form_name: 'suave_agent_start'
@@ -534,6 +542,7 @@
             leadError.hidden = false;
             setStatus('');
           } finally {
+            leadSubmitting = false;
             submitBtn.disabled = false;
           }
         });

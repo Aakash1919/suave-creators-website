@@ -16,6 +16,12 @@
                     <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                     View live
                 </a>
+                <button type="button" id="blog-preview-schema" class="admin-btn admin-btn--secondary"
+                    data-url="{{ route('admin.blogs.preview-schema', $blog) }}"
+                    data-loading-text="Building…">
+                    <i class="fa-solid fa-code" aria-hidden="true"></i>
+                    Preview schema
+                </button>
             @endif
             <a href="{{ route('admin.blogs.index') }}" class="admin-btn admin-btn--secondary">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
@@ -37,10 +43,20 @@
             <div class="admin-blog-form__main">
                 <section class="admin-card admin-blog-form__composer">
                     <div class="admin-card__body space-y-5">
-                        <div>
-                            <label class="admin-label" for="blog-title">Title</label>
-                            <input id="blog-title" type="text" name="title" value="{{ old('title', $blog->title) }}"
-                                required class="admin-input admin-input--lg" placeholder="Give this post a clear headline">
+                        <div class="space-y-3">
+                            <div>
+                                <label class="admin-label" for="blog-title">Title</label>
+                                <input id="blog-title" type="text" name="title" value="{{ old('title', $blog->title) }}"
+                                    required class="admin-input admin-input--lg" placeholder="Give this post a clear headline">
+                            </div>
+                            <div>
+                                <label class="admin-label" for="blog-slug">Slug</label>
+                                <div class="admin-input-group">
+                                    <span class="admin-input-group__prefix">{{ \Illuminate\Support\Str::beforeLast(route('blog.show', ['slug' => 'post']), 'post') }}</span>
+                                    <input id="blog-slug" type="text" name="slug" value="{{ old('slug', $blog->slug) }}"
+                                        class="admin-input" placeholder="Auto from title if empty">
+                                </div>
+                            </div>
                         </div>
 
                         <div>
@@ -236,6 +252,151 @@
                                 </div>
                             </template>
                         </div>
+
+                        @php
+                            $seoDetail = $blog->exists ? $blog->seoDetail : null;
+                            $tagValue = old('tags', implode(', ', is_array($seoDetail?->tags) ? $seoDetail->tags : []));
+                            $keywordValue = old('keywords', implode("\n", is_array($seoDetail?->keywords) ? $seoDetail->keywords : []));
+                            $aboutItems = old('about', is_array($seoDetail?->about) ? $seoDetail->about : []);
+                            $aboutItems = is_array($aboutItems) ? array_values($aboutItems) : [];
+                            $mentionItems = old('mentions', is_array($seoDetail?->mentions) ? $seoDetail->mentions : []);
+                            $mentionItems = is_array($mentionItems) ? array_values($mentionItems) : [];
+                        @endphp
+
+                        <div>
+                            <label class="admin-label" for="blog-seo-tags">Article tags</label>
+                            <input id="blog-seo-tags" type="text" name="tags" value="{{ $tagValue }}" class="admin-input"
+                                placeholder="HubSpot, Custom CRM">
+                            <p class="admin-repeater__hint">Comma-separated. Each value becomes an article:tag.</p>
+                        </div>
+                        <div>
+                            <label class="admin-label" for="blog-seo-keywords">Schema keywords</label>
+                            <textarea id="blog-seo-keywords" name="keywords" rows="3" class="admin-textarea"
+                                placeholder="replace HubSpot with custom CRM">{{ $keywordValue }}</textarea>
+                            <p class="admin-repeater__hint">One keyword or phrase per line, or separate them with commas.</p>
+                        </div>
+
+                        <div class="admin-repeater" data-admin-repeater data-name="about">
+                            <div class="admin-repeater__head">
+                                <div>
+                                    <h3 class="admin-repeater__title">About</h3>
+                                    <p class="admin-repeater__hint">Topics this article is about. Same-as is an optional reference URL.</p>
+                                </div>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-repeater-add>
+                                    <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                                    Add topic
+                                </button>
+                            </div>
+                            <div class="admin-repeater__list" data-repeater-list>
+                                <p class="admin-repeater__empty" data-repeater-empty @if (count($aboutItems) > 0) hidden @endif>No topics yet.</p>
+                                @foreach ($aboutItems as $index => $item)
+                                    <div class="admin-repeater__row" data-repeater-row>
+                                        <div class="admin-repeater__fields admin-repeater__fields--faq">
+                                            <div>
+                                                <label class="admin-label">Name</label>
+                                                <input type="text" name="about[{{ $index }}][name]" value="{{ $item['name'] ?? '' }}" class="admin-input" required>
+                                            </div>
+                                            <div>
+                                                <label class="admin-label">Same as URL</label>
+                                                <input type="url" name="about[{{ $index }}][same_as]" value="{{ $item['same_as'] ?? '' }}" class="admin-input" placeholder="https://">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="admin-repeater__remove" data-repeater-remove aria-label="Remove topic">
+                                            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <template data-repeater-template>
+                                <div class="admin-repeater__row" data-repeater-row>
+                                    <div class="admin-repeater__fields admin-repeater__fields--faq">
+                                        <div>
+                                            <label class="admin-label">Name</label>
+                                            <input type="text" name="about[__INDEX__][name]" value="" class="admin-input" required>
+                                        </div>
+                                        <div>
+                                            <label class="admin-label">Same as URL</label>
+                                            <input type="url" name="about[__INDEX__][same_as]" value="" class="admin-input" placeholder="https://">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="admin-repeater__remove" data-repeater-remove aria-label="Remove topic">
+                                        <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+
+                        <div class="admin-repeater" data-admin-repeater data-name="mentions">
+                            <div class="admin-repeater__head">
+                                <div>
+                                    <h3 class="admin-repeater__title">Mentions</h3>
+                                    <p class="admin-repeater__hint">Organizations or services named in the article.</p>
+                                </div>
+                                <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" data-repeater-add>
+                                    <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                                    Add mention
+                                </button>
+                            </div>
+                            <div class="admin-repeater__list" data-repeater-list>
+                                <p class="admin-repeater__empty" data-repeater-empty @if (count($mentionItems) > 0) hidden @endif>No mentions yet.</p>
+                                @foreach ($mentionItems as $index => $item)
+                                    <div class="admin-repeater__row" data-repeater-row>
+                                        <div class="admin-repeater__fields">
+                                            <div>
+                                                <label class="admin-label">Type</label>
+                                                <select name="mentions[{{ $index }}][type]" class="admin-select" required>
+                                                    <option value="Organization" @selected(($item['type'] ?? '') === 'Organization')>Organization</option>
+                                                    <option value="Service" @selected(($item['type'] ?? '') === 'Service')>Service</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="admin-label">Name</label>
+                                                <input type="text" name="mentions[{{ $index }}][name]" value="{{ $item['name'] ?? '' }}" class="admin-input" required>
+                                            </div>
+                                            <div>
+                                                <label class="admin-label">URL</label>
+                                                <input type="url" name="mentions[{{ $index }}][url]" value="{{ $item['url'] ?? '' }}" class="admin-input" placeholder="https://">
+                                            </div>
+                                            <div>
+                                                <label class="admin-label">Same as URL</label>
+                                                <input type="url" name="mentions[{{ $index }}][same_as]" value="{{ $item['same_as'] ?? '' }}" class="admin-input" placeholder="https://">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="admin-repeater__remove" data-repeater-remove aria-label="Remove mention">
+                                            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <template data-repeater-template>
+                                <div class="admin-repeater__row" data-repeater-row>
+                                    <div class="admin-repeater__fields">
+                                        <div>
+                                            <label class="admin-label">Type</label>
+                                            <select name="mentions[__INDEX__][type]" class="admin-select" required>
+                                                <option value="Organization">Organization</option>
+                                                <option value="Service">Service</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="admin-label">Name</label>
+                                            <input type="text" name="mentions[__INDEX__][name]" value="" class="admin-input" required>
+                                        </div>
+                                        <div>
+                                            <label class="admin-label">URL</label>
+                                            <input type="url" name="mentions[__INDEX__][url]" value="" class="admin-input" placeholder="https://">
+                                        </div>
+                                        <div>
+                                            <label class="admin-label">Same as URL</label>
+                                            <input type="url" name="mentions[__INDEX__][same_as]" value="" class="admin-input" placeholder="https://">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="admin-repeater__remove" data-repeater-remove aria-label="Remove mention">
+                                        <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                 </details>
             </div>
@@ -295,11 +456,6 @@
                                     <a href="{{ route('admin.blog-categories.index') }}">Add or edit categories</a>
                                 </p>
                             @endif
-                        </div>
-                        <div>
-                            <label class="admin-label" for="blog-slug">Slug</label>
-                            <input id="blog-slug" type="text" name="slug" value="{{ old('slug', $blog->slug) }}"
-                                class="admin-input" placeholder="Auto from title if empty">
                         </div>
                     </div>
                 </section>
@@ -362,6 +518,29 @@
             </aside>
         </div>
     </form>
+
+    @if ($blog->exists)
+        <div class="admin-modal" id="blog-schema-preview-modal" hidden>
+            <div class="admin-modal__backdrop" data-admin-modal-close></div>
+            <div class="admin-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="blog-schema-preview-title">
+                <div class="admin-modal__header">
+                    <div>
+                        <h2 id="blog-schema-preview-title" class="admin-modal__title">Schema preview</h2>
+                        <p class="admin-modal__subtitle">Meta tags and JSON-LD from the saved post. Save first to include new edits.</p>
+                    </div>
+                    <button type="button" class="admin-modal__close" data-admin-modal-close aria-label="Close">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="admin-modal__body">
+                    <pre id="blog-schema-preview-html" class="admin-schema-preview"></pre>
+                </div>
+                <div class="admin-modal__footer">
+                    <button type="button" class="admin-btn admin-btn--secondary" data-admin-modal-close>Close</button>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @push('styles')
@@ -462,6 +641,43 @@
                     })
                     .fail(function(xhr) {
                         SuaveAdmin.toast.validation(xhr, 'Unable to generate SEO meta.');
+                    })
+                    .always(function() {
+                        btn.classList.remove('is-loading');
+                        btn.disabled = false;
+                        btn.removeAttribute('aria-busy');
+                        btn.innerHTML = originalHtml;
+                    });
+            });
+
+            const previewSchemaBtn = document.getElementById('blog-preview-schema');
+            previewSchemaBtn?.addEventListener('click', function() {
+                const btn = this;
+                const url = btn.getAttribute('data-url');
+                if (!url || btn.classList.contains('is-loading')) {
+                    return;
+                }
+
+                const originalHtml = btn.innerHTML;
+                const loadingText = btn.getAttribute('data-loading-text') || 'Building…';
+                btn.classList.add('is-loading');
+                btn.disabled = true;
+                btn.setAttribute('aria-busy', 'true');
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> ' + loadingText;
+
+                SuaveAdmin.ajax({
+                        url: url,
+                        method: 'GET',
+                    })
+                    .done(function(response) {
+                        const preview = document.getElementById('blog-schema-preview-html');
+                        if (preview) {
+                            preview.textContent = response?.html || '';
+                        }
+                        SuaveAdmin.openAdminModal('#blog-schema-preview-modal');
+                    })
+                    .fail(function(xhr) {
+                        SuaveAdmin.toast.validation(xhr, 'Unable to preview the schema.');
                     })
                     .always(function() {
                         btn.classList.remove('is-loading');

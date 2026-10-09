@@ -48,6 +48,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::patch('/blogs/{blog}/publish', [BlogController::class, 'publish'])->name('blogs.publish');
         Route::post('/blogs/{blog}/generate-seo', [BlogController::class, 'generateSeoMeta'])
             ->name('blogs.generate-seo');
+        Route::get('/blogs/{blog}/preview-schema', [BlogController::class, 'previewSchema'])
+            ->name('blogs.preview-schema');
     });
 
     Route::middleware('permission:blogs.delete')->group(function () {
