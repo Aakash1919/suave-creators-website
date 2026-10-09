@@ -78,18 +78,8 @@
           @endif
         </aside>
       @endif
-
-      @if ($relatedLinks !== [])
-        <p class="marketing-channel-detail__related">
-          <span class="marketing-channel-detail__related-label">Related:</span>
-          @foreach ($relatedLinks as $i => $link)
-            @if ($i > 0)
-              <span class="marketing-channel-detail__related-sep" aria-hidden="true">·</span>
-            @endif
-            <a href="{{ $link['href'] }}" class="marketing-channel-detail__related-link">{{ $link['label'] }}</a>
-          @endforeach
-        </p>
-      @endif
     </div>
   </div>
+
+  <span class="marketing-channel-detail__stroke" aria-hidden="true"></span>
 </section>

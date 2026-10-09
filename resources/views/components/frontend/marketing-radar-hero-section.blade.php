@@ -31,11 +31,11 @@
         </p>
 
         <h1 id="{{ $headingId }}" class="marketing-radar-hero__title">
-          <span class="marketing-radar-hero__title-lead">{{ $title['lead'] }}</span>
-          <span class="marketing-radar-hero__title-line">
+          <span class="marketing-radar-hero__title-lead">
+            {{ $title['lead'] }}
             <span class="marketing-radar-hero__title-accent">{{ $title['accent'] }}</span>
-            <span class="marketing-radar-hero__title-soft">{{ $title['soft'] }}</span>
           </span>
+          <span class="marketing-radar-hero__title-soft">{{ $title['soft'] }}</span>
         </h1>
 
         <p class="marketing-radar-hero__desc">{{ $description }}</p>
@@ -73,8 +73,8 @@
             src="{{ asset($visualImage) }}"
             alt="{{ $visualAlt }}"
             title="{{ $visualAlt }}"
-            width="920"
-            height="780"
+            width="750"
+            height="680"
             loading="eager"
             decoding="async"
             fetchpriority="high">

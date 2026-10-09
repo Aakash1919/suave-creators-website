@@ -22,6 +22,7 @@
       </div>
 
       @if ($description !== '')
+        <span class="marketing-services-overview__stroke" aria-hidden="true"></span>
         <p class="marketing-services-overview__desc">
           {{ $descriptionParts['before'] }}@if ($descriptionParts['highlight'] !== '')<strong class="marketing-services-overview__desc-brand">{{ $descriptionParts['highlight'] }}</strong>{{ $descriptionParts['after'] }}@endif
         </p>
@@ -76,26 +77,14 @@
             <dl class="marketing-services-overview__card-meta">
               <div class="marketing-services-overview__card-row">
                 <dt>
-                  <span class="marketing-services-overview__card-meta-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-width="1.7"/>
-                      <circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-width="1.7"/>
-                      <circle cx="12" cy="12" r="1" fill="currentColor"/>
-                    </svg>
-                  </span>
+                  <span class="marketing-services-overview__card-meta-icon marketing-services-overview__card-meta-icon--best-for" aria-hidden="true"></span>
                   Best for
                 </dt>
                 <dd>{{ $row['bestFor'] ?? '' }}</dd>
               </div>
               <div class="marketing-services-overview__card-row">
                 <dt>
-                  <span class="marketing-services-overview__card-meta-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 19V12M10 19V8M15 19v-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                      <path d="M13.5 6.5 17 5l1.2 3.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M17 5 10.5 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                    </svg>
-                  </span>
+                  <span class="marketing-services-overview__card-meta-icon marketing-services-overview__card-meta-icon--measured" aria-hidden="true"></span>
                   Measured by
                 </dt>
                 <dd>{{ $row['measured'] ?? '' }}</dd>

@@ -153,9 +153,7 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertDontSee('consultation-person__placeholder', false);
         $response->assertSee('crm-builder-partners', false);
         $response->assertSee('Our Partnerships &amp; Growth Stack', false);
-        $response->assertSee('Web application development', false);
-        $response->assertSee(route('service.show', ['slug' => 'web-development-services'], false), false);
-        $response->assertSee(route('blog.show', ['slug' => 'custom-crm-vs-salesforce-tco-analysis-2026'], false), false);
+        $response->assertDontSee('marketing-channel-detail__related', false);
         $response->assertDontSee('service-scope-heading', false);
         $response->assertDontSee('service-faq-heading', false);
         $response->assertDontSee('marketing-radar-hero__channels', false);

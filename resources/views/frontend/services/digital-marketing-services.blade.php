@@ -23,15 +23,6 @@
   :proof-points="$service['radarProofPoints']" />
 
 @php
-  $mapRelatedLinks = static function (array $links): array {
-      return array_map(static function (array $link): array {
-          return [
-              'label' => $link['label'],
-              'href' => route($link['route'], $link['params'] ?? []),
-          ];
-      }, $links);
-  };
-
   $overview = $service['overview'];
   $seoChannel = $service['seoChannel'];
   $ppcChannel = $service['ppcChannel'];
@@ -66,7 +57,6 @@
   :covers="$seoChannel['covers']"
   :callout-label="$seoChannel['calloutLabel']"
   :callout-body="$seoChannel['calloutBody']"
-  :related-links="$mapRelatedLinks($seoChannel['relatedLinks'] ?? [])"
   :section-id="$seoChannel['sectionId'] ?? 'seo'"
   heading-id="digital-marketing-seo-heading"
   icon="search" />
@@ -81,7 +71,6 @@
   :covers="$ppcChannel['covers']"
   :callout-label="$ppcChannel['calloutLabel']"
   :callout-body="$ppcChannel['calloutBody']"
-  :related-links="$mapRelatedLinks($ppcChannel['relatedLinks'] ?? [])"
   :section-id="$ppcChannel['sectionId'] ?? 'ppc'"
   heading-id="digital-marketing-ppc-heading"
   icon="dollar" />
@@ -97,7 +86,6 @@
   :bridge="$contentChannel['bridge'] ?? ''"
   :callout-label="$contentChannel['calloutLabel']"
   :callout-body="$contentChannel['calloutBody']"
-  :related-links="$mapRelatedLinks($contentChannel['relatedLinks'] ?? [])"
   :section-id="$contentChannel['sectionId'] ?? 'content-marketing'"
   heading-id="digital-marketing-content-heading"
   icon="blog" />
@@ -112,7 +100,6 @@
   :covers="$socialChannel['covers']"
   :callout-label="$socialChannel['calloutLabel']"
   :callout-body="$socialChannel['calloutBody']"
-  :related-links="$mapRelatedLinks($socialChannel['relatedLinks'] ?? [])"
   :section-id="$socialChannel['sectionId'] ?? 'social-media-marketing'"
   heading-id="digital-marketing-social-heading"
   icon="share" />

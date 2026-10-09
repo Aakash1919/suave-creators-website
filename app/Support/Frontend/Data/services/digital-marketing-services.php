@@ -13,8 +13,8 @@ return [
     'breadcrumbName' => 'Digital Marketing Services',
     'eyebrow' => 'Digital growth, engineered',
     'heroTitle' => [
-        'lead' => 'Digital Marketing Services for',
-        'accent' => 'B2B',
+        'lead' => 'Digital Marketing Services',
+        'accent' => 'for B2B',
         'soft' => 'Companies',
     ],
     'heroDescription' => 'Suave Creators provides SEO, PPC, content marketing and social media marketing for B2B companies that sell to enterprise buyers. Every channel is tied to one outcome: qualified inbound leads from decision-makers who are actively researching a solution.',
@@ -111,18 +111,6 @@ return [
         ],
         'calloutLabel' => 'When SEO is the right investment',
         'calloutBody' => 'SEO suits companies whose buyers research online and whose sales cycle is long enough for organic visibility to compound. It takes months rather than weeks to show results, so it works best alongside a channel that produces leads sooner, such as PPC.',
-        'relatedLinks' => [
-            [
-                'label' => 'Web application development',
-                'route' => 'service.show',
-                'params' => ['slug' => 'web-development-services'],
-            ],
-            [
-                'label' => 'How SEO impacts e-commerce conversions',
-                'route' => 'blog.show',
-                'params' => ['slug' => 'how-does-seo-impact-e-commerce-conversions'],
-            ],
-        ],
     ],
     'ppcChannel' => [
         'sectionId' => 'ppc',
@@ -156,7 +144,6 @@ return [
         ],
         'calloutLabel' => 'PPC and SEO: different jobs',
         'calloutBody' => 'PPC buys visibility immediately and stops when spending stops. SEO builds visibility that persists but takes longer. A practical B2B approach uses PPC to capture demand now and to learn which keywords actually convert, then directs SEO and content effort toward those proven terms.',
-        'relatedLinks' => [],
     ],
     'contentChannel' => [
         'sectionId' => 'content-marketing',
@@ -191,18 +178,6 @@ return [
         'bridge' => 'You can see the format on our own blog, for example Custom CRM vs Salesforce: 3-year TCO and Custom ERP vs NetSuite: 3-year TCO.',
         'calloutLabel' => 'How we plan content',
         'calloutBody' => 'Every piece is mapped to a search intent and a buying stage before it is written. Pieces are grouped into topic clusters around a pillar page, linked to each other and to the relevant service page. Technical accuracy comes from our senior developers; structure and search alignment come from our digital strategists.',
-        'relatedLinks' => [
-            [
-                'label' => 'Custom CRM vs Salesforce: 3-year TCO',
-                'route' => 'blog.show',
-                'params' => ['slug' => 'custom-crm-vs-salesforce-tco-analysis-2026'],
-            ],
-            [
-                'label' => 'Custom ERP vs NetSuite: 3-year TCO',
-                'route' => 'blog.show',
-                'params' => ['slug' => 'custom-erp-vs-netsuite-tco-analysis-2026'],
-            ],
-        ],
     ],
     'socialChannel' => [
         'sectionId' => 'social-media-marketing',
@@ -236,7 +211,6 @@ return [
         ],
         'calloutLabel' => 'Why LinkedIn comes first for B2B',
         'calloutBody' => 'LinkedIn is where B2B buyers are identifiable by job title, seniority and company. Organic posts build familiarity, and LinkedIn Ads can then reach or retarget the same audience with a specific offer, so organic and paid social reinforce each other.',
-        'relatedLinks' => [],
     ],
     'funnelMatrix' => [
         'sectionId' => 'integrated',
