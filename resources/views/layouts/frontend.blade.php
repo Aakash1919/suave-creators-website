@@ -66,6 +66,7 @@
             'service.show',
             'industries',
             'industry.show',
+            'technologies',
             'case-studies',
             'case-study.show',
             '*-case-study',
