@@ -244,7 +244,7 @@ return [
                 'iconAlt' => 'People icon for Social digital marketing funnel column',
             ],
         ],
-        'examplesIntro' => 'Two examples of the channels working together:',
+        'examplesIntro' => '',
         'rows' => [
             [
                 'index' => '01',

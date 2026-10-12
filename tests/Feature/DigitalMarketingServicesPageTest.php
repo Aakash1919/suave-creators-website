@@ -158,7 +158,7 @@ class DigitalMarketingServicesPageTest extends TestCase
         $response->assertSee('Consideration', false);
         $response->assertSee('Decision', false);
         $response->assertSee('Ranks for problem-level questions', false);
-        $response->assertSee('Two examples of the channels working together:', false);
+        $response->assertDontSee('Two examples of the channels working together:', false);
         $response->assertSee('Organic social to SEO to a booked call', false);
         $response->assertSee('PPC data prioritizes SEO and content', false);
         $response->assertSee('Visibility across search and AI-driven discovery', false);

@@ -19044,16 +19044,20 @@ a.web-service-card {
 }
 
 .marketing-radar-hero__title-accent {
-  color: #3b82f6;
+  color: #2F69FB;
   white-space: nowrap;
   margin-left: 0.3em;
+  font-weight:850;
 }
 
 .marketing-radar-hero__title-soft {
   display: block;
-  color: #c4b5fd;
+  
+  color: #D078FE;
+
   margin-left: 0;
 }
+
 
 .marketing-radar-hero__desc {
   margin: 1.15rem 0 0;
@@ -19189,8 +19193,8 @@ a.web-service-card {
   height: 1.25rem;
   margin-top: 0.1rem;
   border-radius: 999px;
-  background: rgba(59, 130, 246, 0.18);
-  color: #60a5fa;
+  background: #2A4DFB;
+  color: #F7F8FD;
   font-size: 0.65rem;
 }
 
@@ -19275,10 +19279,10 @@ a.web-service-card {
 
 /* ===== MARKETING SERVICES OVERVIEW START ===== */
 .marketing-services-overview {
-  --mso-blue: #2a4dfb;
-  --mso-purple: #7a5ff8;
-  --mso-teal: #14b8a6;
-  --mso-pink: #ec4899;
+  --mso-blue: #004AFD;
+  --mso-purple: #6018EE;
+   --mso-teal: #00A2AC;
+  --mso-pink: #ED006C;
   background-color: #f5f7fb;
   color: #171717;
   padding: 2.5rem 0 2.75rem;
@@ -19309,7 +19313,9 @@ a.web-service-card {
   align-items: center;
   border-radius: 999px;
   padding: 0.4rem 0.9rem;
-  background: rgba(122, 95, 248, 0.12);
+  /* background:#F3f5ff; */
+  background: linear-gradient(90deg, #F3F5FF 0%, #F7F5FF 100%);
+
   color: var(--mso-blue);
   font-size: 11px;
   font-weight: 700;
@@ -19319,24 +19325,29 @@ a.web-service-card {
 
 .marketing-services-overview__title {
   margin: 0;
-  font-size: clamp(1.75rem, 3vw, 2.45rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.75rem, 3vw, 48px);
+  font-weight: 600;
+  line-height: 63px;
+  letter-spacing: 0%;
   color: #0f172a;
+  width: 600px;
+  font-style: semibold;
 }
 
 .marketing-services-overview__title-accent {
-  background: linear-gradient(90deg, #2a4dfb 0%, #7a5ff8 100%);
+  background: #2A4DFB;
+  font-weight:850;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-style: heavy;
 }
 
 .marketing-services-overview__stroke {
   display: none;
   width: 1px;
   height: 160px;
+  margin-left: 70px;
   opacity: 1;
   transform: rotate(0deg);
   background: linear-gradient(180deg, #ffffff 0%, #e5e9f2 25%, #e5e9f2 50%, #e5e9f2 75%, #ffffff 100%);
@@ -19345,10 +19356,10 @@ a.web-service-card {
 .marketing-services-overview__desc {
   margin: 0;
   max-width: 40rem;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.7;
-  color: #000;
-  font-weight: 600;
+  color: #4D4D4D;
+  font-weight: 500;
 }
 
 .marketing-services-overview__desc-brand {
@@ -19462,8 +19473,8 @@ a.web-service-card {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 64px;
+  height: 64px;
   border-radius: 0.85rem;
   background: var(--mso-accent-icon-bg);
   color: var(--mso-accent);
@@ -19472,8 +19483,8 @@ a.web-service-card {
 
 .marketing-services-overview__card-icon-placeholder {
   display: block;
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 20px;
+  height: 20px;
   border-radius: 0.25rem;
   background: var(--mso-accent-soft);
 }
@@ -19657,7 +19668,7 @@ a.web-service-card {
 .marketing-channel-detail {
   background-color: #fff;
   color: #171717;
-  padding: 2.5rem 0 2.75rem;
+  padding: 2.5rem 0 1.25rem;
 }
 
 .marketing-channel-detail__inner {
@@ -19682,9 +19693,9 @@ a.web-service-card {
   border-radius: 999px;
   /* background: #e8eaed; */
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #64748b;
+  font-weight: 850;
+  letter-spacing: 6%;
+  color: #808080;
 }
 
 .marketing-channel-detail__rail-icon {
@@ -19721,40 +19732,45 @@ a.web-service-card {
 }
 
 .marketing-channel-detail__step {
-  margin: 0 0 0.5rem;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  /* margin: 0 0 0.5rem; */
+  margin-top: 40px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 20%;
+  line-height: 100%;
   color: #2a4dfb;
 }
 
 .marketing-channel-detail__title {
-  margin: 0;
-  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  margin-top: 10px;
+  font-size: clamp(1.75rem, 3vw, 36px);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: #0f172a;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #171717;
 }
 
 .marketing-channel-detail__intro {
   margin: 0.65rem 0 0;
-  max-width: 880px;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #475569;
+  max-width: 886px;
+  font-size: 16px;
+  line-height: 30px;
+  color: #4D4D4D;
+  font-weight: 400;
 }
 
 .marketing-channel-detail__intro-accent {
-  color: #2a4dfb;
-  font-weight: 700;
+  color: #4D4D4D;
+  font-weight: 600;
 }
 
 .marketing-channel-detail__covers-heading {
-  margin: 1.5rem 0 0.75rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #0f172a;
+  /* margin: 1.5rem 0 0.75rem; */
+  font-size: 24px;
+  margin-top: 45px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: #171717;
 }
 
 .marketing-channel-detail__covers {
@@ -19763,7 +19779,6 @@ a.web-service-card {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid #e5e7eb;
 }
 
 .marketing-channel-detail__cover {
@@ -19772,7 +19787,7 @@ a.web-service-card {
   gap: 0.75rem;
   align-items: start;
   padding: 0.8rem 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
 }
 
 .marketing-channel-detail__cover-check {
@@ -19783,25 +19798,27 @@ a.web-service-card {
   height: 1.15rem;
   margin-top: 0.2rem;
   border-radius: 999px;
-  background: #2a4dfb;
-  color: #fff;
+  background: #E2E7FF;
+  color: #2A4DFB;
   font-size: 0.55rem;
 }
 
 .marketing-channel-detail__cover-text {
   margin: 0;
   font-size: 14px;
-  line-height: 1.6;
-  color: #475569;
+  line-height: 26px;
+  color: #4D4D4D;
+  font-size: 400;
 }
 
 .marketing-channel-detail__cover-text strong {
-  color: #0f172a;
-  font-weight: 700;
+  color: #171717;
+  font-weight: 800;
+  
 }
 
 .marketing-channel-detail__callout {
-  margin-top: 1.25rem;
+  margin-top: 30px;
   border-left: 4px solid #2a4dfb;
   /* border-radius: 0 0.75rem 0.75rem 0; */
   background: #F6F7FF;
@@ -19810,18 +19827,20 @@ a.web-service-card {
 
 .marketing-channel-detail__callout-label {
   margin: 0 0 0.35rem;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-  color: #0f172a;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 10%;
+  line-height: 100%;
+  color: #2A4DFB;
+  text-transform: uppercase;
 }
 
 .marketing-channel-detail__callout-body {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.65;
-  color: #334155;
+  margin-top: 10px;
+  font-weight:500;
+  font-size: 12px;
+  line-height: 18px;
+  color: #4d4d4d;
 }
 
 .marketing-channel-detail__stroke {
@@ -19830,7 +19849,8 @@ a.web-service-card {
   width: 100%;
   max-width: 1280px;
   height: 1px;
-  margin: 2.75rem 0 0;
+  margin-top: 40px;
+  /* margin: 2.75rem 0 0; */
   border-radius: 111px;
   background: #e5e9f2;
   opacity: 1;
@@ -19840,9 +19860,17 @@ a.web-service-card {
   display: none;
 }
 
+#social-media-marketing.marketing-channel-detail {
+  padding-bottom: 4.5rem;
+}
+
 @media (min-width: 768px) {
   .marketing-channel-detail {
-    padding: 3.25rem 0 3.5rem;
+    padding: 3.25rem 0 1.5rem;
+  }
+
+  #social-media-marketing.marketing-channel-detail {
+    padding-bottom: 5.5rem;
   }
 
   .marketing-channel-detail__covers {
@@ -19955,10 +19983,10 @@ a.web-service-card {
 }
 
 .marketing-funnel-matrix__title-accent {
-  background: linear-gradient(90deg, #a855f7 0%, #3b82f6 100%);
+  /* background: linear-gradient(90deg, #a855f7 0%, #3b82f6 100%); */
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: #2A4DFB;
 }
 
 .marketing-funnel-matrix__desc {
@@ -20031,12 +20059,13 @@ a.web-service-card {
 }
 
 .marketing-funnel-matrix__table {
-  border-collapse: collapse;
+  border-collapse: separate;
   border-spacing: 0;
   max-width: 1280px;
   min-width: 44rem;
   table-layout: fixed;
   width: 100%;
+  color: #021440CC;
 }
 
 .marketing-funnel-matrix__table tr {
@@ -20052,12 +20081,23 @@ a.web-service-card {
   -webkit-backdrop-filter: blur(92px);
   backdrop-filter: blur(92px);
   background: #021440CC;
-  border: 1px solid #133587;
+  border-top: 1px solid #133587;
+  border-left: 1px solid #133587;
   box-sizing: border-box;
   height: 60px;
   padding: 0.65rem 1.2rem;
   text-align: left;
   vertical-align: middle;
+}
+
+.marketing-funnel-matrix__table tr th:last-child,
+.marketing-funnel-matrix__table tr td:last-child {
+  border-right: 1px solid #133587;
+}
+
+.marketing-funnel-matrix__table tbody tr:last-child th,
+.marketing-funnel-matrix__table tbody tr:last-child td {
+  border-bottom: 1px solid #133587;
 }
 
 .marketing-funnel-matrix__table thead th {
@@ -20295,18 +20335,19 @@ a.web-service-card {
 .marketing-funnel-matrix__example-title,
 .marketing-funnel-matrix__ai-title {
   color: #fff;
-  font-size: 1.05rem;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
+  margin-top: 10px;
+  letter-spacing: 0%;
+  line-height: 100%;
   margin: 0;
 }
 
 .marketing-funnel-matrix__example-body,
 .marketing-funnel-matrix__ai-body {
-  color: #94a3b8;
-  font-size: 14px;
-  line-height: 1.7;
+  color: #B1B9DF;
+  font-size: 13px;
+  line-height: 19px;
   margin: 0.55rem 0 0;
 }
 
@@ -20476,18 +20517,20 @@ a.web-service-card {
 }
 
 .marketing-operating-rhythm__card-title {
-  color: #0f172a;
-  font-size: 1.05rem;
-  font-weight: 700;
+  color: #171717;
+  font-size: 18px;
+  font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1.35;
+  line-height: 100%;
   margin: 1rem 0.65rem 0.45rem;
 }
 
 .marketing-operating-rhythm__card-copy {
-  color: #64748b;
+  color: #4d4d4d;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 19px;
+  font-weight: 500;
+  letter-spacing: 0%;
   margin: 0 0.65rem;
 }
 
@@ -20610,9 +20653,7 @@ a.web-service-card {
   font-style: normal;
   font-weight: 600;
   letter-spacing: 0;
-  line-height: 1;
-  margin: 0;
-  max-width: 438px;
+  line-height:  150%;
   overflow-wrap: break-word;
   width: 100%;
 }
@@ -20685,19 +20726,20 @@ a.web-service-card {
 }
 
 .marketing-why-panel__item-title {
-  color: #0f172a;
-  font-size: 1rem;
+  color: #171717;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
+  letter-spacing: 0%;
+  line-height: 100%;
   margin: 0 0 0.35rem;
 }
 
 .marketing-why-panel__item-body {
-  color: #64748b;
+  color: #4d4d4d;
   font-size: 14px;
-  line-height: 1.6;
-  margin: 0;
+  line-height: 21px;
+  margin: 0%;
+  font-weight: 500;
 }
 
 .marketing-why-panel__item-body a {
