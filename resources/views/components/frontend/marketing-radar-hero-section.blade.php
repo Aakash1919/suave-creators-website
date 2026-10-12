@@ -95,7 +95,7 @@
               <span class="marketing-radar-hero__proof-check" aria-hidden="true">
                 <i class="fa-solid fa-check"></i>
               </span>
-              <span>{{ $point }}</span>
+              <span class="marketing-radar-hero__proof-text">{{ $point }}</span>
             </li>
           @endforeach
         </ul>
