@@ -16,6 +16,7 @@ class ServiceSupport
         'e-commerce-development',
         'ui-ux-design-services',
         'ai-solutions',
+        'digital-marketing-services',
     ];
 
     /**
@@ -204,6 +205,17 @@ class ServiceSupport
                 'description' => 'We move beyond basic chatbot wrappers. Our engineers integrate deterministic state machines, automated voice call coaching, and multi-agent document validation directly into your software with zero third-party token markups.',
                 'cta' => 'Explore AI Services',
                 'href' => route('service.show', ['slug' => 'ai-solutions']),
+                'color' => 'blue',
+                'flagship' => false,
+            ],
+            [
+                'icon' => 'assets/icons/service-icon-3.svg',
+                'number' => '07',
+                'title' => 'Digital Marketing Services',
+                'tags' => ['SEO & Content', 'PPC Demand Capture', 'B2B Pipeline'],
+                'description' => 'Full-funnel SEO, PPC, content, and social for B2B buyers—backed by our engineering team for technical SEO, landing pages, and CRM-ready attribution.',
+                'cta' => 'Explore Digital Marketing',
+                'href' => route('service.show', ['slug' => 'digital-marketing-services']),
                 'color' => 'blue',
                 'flagship' => false,
             ],
@@ -428,6 +440,122 @@ class ServiceSupport
     {
         $baseUrl = rtrim((string) config('app.url', url('/')), '/');
 
+        if ($slug === 'digital-marketing-services') {
+            $pageUrl = rtrim(route('service.show', ['slug' => 'digital-marketing-services']), '/');
+            $serviceId = $pageUrl.'#service';
+            $provider = ['@id' => $baseUrl.'/#organization'];
+
+            return [
+                'seoJsonLdGraph' => [[
+                    '@type' => 'Service',
+                    '@id' => $serviceId,
+                    'name' => 'B2B digital marketing services',
+                    'serviceType' => 'Digital marketing',
+                    'description' => 'SEO, pay-per-click advertising on Google and LinkedIn, technical content marketing and LinkedIn-focused social media marketing for B2B companies.',
+                    'url' => $pageUrl,
+                    'provider' => $provider,
+                    'audience' => [
+                        '@type' => 'BusinessAudience',
+                        'audienceType' => 'B2B companies selling to enterprise buyers',
+                    ],
+                    'hasOfferCatalog' => [
+                        '@type' => 'OfferCatalog',
+                        'name' => 'Digital marketing services',
+                        'itemListElement' => [
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#seo-service',
+                                    'name' => 'Search engine optimization (SEO)',
+                                    'serviceType' => 'Search engine optimization',
+                                    'url' => $pageUrl.'#seo',
+                                    'description' => 'Technical crawlability audits, Core Web Vitals optimization, search-intent mapping and topical cluster authority for B2B websites.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#ppc-service',
+                                    'name' => 'Pay-per-click advertising (PPC)',
+                                    'serviceType' => 'Pay-per-click advertising',
+                                    'url' => $pageUrl.'#ppc',
+                                    'description' => 'Google Ads and LinkedIn Ads campaigns for high-intent B2B searches and audiences, with conversion landing pages and tracking.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#content-marketing-service',
+                                    'name' => 'Content marketing',
+                                    'serviceType' => 'Content marketing',
+                                    'url' => $pageUrl.'#content-marketing',
+                                    'description' => 'Technical whitepapers, architecture tear-downs and TCO breakdowns organized into topic clusters for B2B decision-makers.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                            [
+                                '@type' => 'Offer',
+                                'itemOffered' => [
+                                    '@type' => 'Service',
+                                    '@id' => $pageUrl.'#social-media-marketing-service',
+                                    'name' => 'Social media marketing',
+                                    'serviceType' => 'Social media marketing',
+                                    'url' => $pageUrl.'#social-media-marketing',
+                                    'description' => 'B2B brand positioning and technical thought leadership on LinkedIn and industry channels.',
+                                    'provider' => $provider,
+                                ],
+                            ],
+                        ],
+                    ],
+                ]],
+                'seoJsonLdWebpageAbout' => $serviceId,
+                'seoJsonLdWebpageAboutTopics' => [
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Digital marketing',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Digital_marketing',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Search engine optimization',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Search_engine_optimization',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Pay-per-click',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Pay-per-click',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Content marketing',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Content_marketing',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Social media marketing',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Social_media_marketing',
+                    ],
+                ],
+                'seoJsonLdWebpageMentions' => [
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'Google Ads',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/Google_Ads',
+                    ],
+                    [
+                        '@type' => 'Thing',
+                        'name' => 'LinkedIn',
+                        'sameAs' => 'https://en.wikipedia.org/wiki/LinkedIn',
+                    ],
+                ],
+            ];
+        }
+
         if ($slug === 'enterprise-software-solutions') {
             $pageUrl = rtrim(route('service.show', ['slug' => 'enterprise-software-solutions']), '/');
             $serviceId = $pageUrl.'/#service';
@@ -547,6 +675,11 @@ class ServiceSupport
         }
 
         $ogImage = trim((string) ($service['ogImage'] ?? $service['seoImage'] ?? ''), '/');
+        $ogImageAlt = trim((string) ($service['ogImageAlt'] ?? ''));
+        $twitterTitle = trim((string) ($service['twitterTitle'] ?? ''));
+        $twitterDescription = trim((string) ($service['twitterDescription'] ?? ''));
+
+        $isDigitalMarketing = $slug === 'digital-marketing-services';
 
         return [
             'service' => $service,
@@ -554,8 +687,19 @@ class ServiceSupport
             'seoDescription' => (string) ($service['pageDescription'] ?? 'Suave Creators service details.'),
             'seoOgTitle' => (string) ($service['ogTitle'] ?? $service['pageTitle'] ?? ''),
             'seoOgDescription' => (string) ($service['ogDescription'] ?? $service['pageDescription'] ?? ''),
+            'seoTwitterTitle' => $twitterTitle !== '' ? $twitterTitle : null,
+            'seoTwitterDescription' => $twitterDescription !== '' ? $twitterDescription : null,
             'seoImage' => $ogImage !== '' ? $ogImage : null,
-            'mainClass' => 'site-main site-main--service-detail',
+            'seoImageAlt' => $ogImageAlt !== '' ? $ogImageAlt : null,
+            'seoOgImageAlt' => $ogImageAlt !== '' ? $ogImageAlt : null,
+            'mainClass' => $isDigitalMarketing
+                ? 'site-main site-main--digital-marketing'
+                : 'site-main site-main--service-detail',
+            'useHeroBackground' => ! $isDigitalMarketing,
+            'heroShellClass' => $isDigitalMarketing ? 'site-shell--digital-marketing' : null,
+            'bodyClass' => $isDigitalMarketing
+                ? 'min-h-screen site-shell--digital-marketing font-sans text-slate-900'
+                : null,
             'seoFaqs' => array_values(array_filter(
                 array_map(static function (array $faq): array {
                     $answer = (string) ($faq['schemaAnswer'] ?? $faq['answer'] ?? '');
