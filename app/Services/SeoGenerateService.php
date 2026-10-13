@@ -158,8 +158,13 @@ class SeoGenerateService
                 is_array($merged['json_ld_graph'] ?? null) ? $merged['json_ld_graph'] : null,
                 is_string($merged['json_ld_webpage_about'] ?? null) ? $merged['json_ld_webpage_about'] : null,
                 is_string($merged['json_ld_breadcrumb_name'] ?? null) ? $merged['json_ld_breadcrumb_name'] : null,
+<<<<<<< HEAD
+                is_array($merged['json_ld_webpage_about_topics'] ?? null) ? $merged['json_ld_webpage_about_topics'] : null,
+                is_array($merged['json_ld_webpage_mentions'] ?? null) ? $merged['json_ld_webpage_mentions'] : null,
+=======
                 is_array($merged['json_ld_about'] ?? null) ? $merged['json_ld_about'] : null,
                 is_string($merged['json_ld_main_entity'] ?? null) ? $merged['json_ld_main_entity'] : null,
+>>>>>>> 0d60060cbf6ddc4d43a6f348c1bdaaebf125b478
                 $article,
             ),
         ];
@@ -169,7 +174,12 @@ class SeoGenerateService
      * @param  array<string, mixed>  $site
      * @param  array<int, array{question?: string, answer?: string, name?: string, text?: string}>|null  $faqs
      * @param  array<int, array<string, mixed>>|null  $extraGraph
+<<<<<<< HEAD
+     * @param  array<int, array<string, mixed>>|null  $webPageAboutTopics
+     * @param  array<int, array<string, mixed>>|null  $webPageMentions
+=======
      * @param  array<int, array<string, mixed>>|null  $webPageAbout
+>>>>>>> 0d60060cbf6ddc4d43a6f348c1bdaaebf125b478
      * @param  array<string, mixed>|null  $article
      * @return array<string, mixed>
      */
@@ -184,8 +194,13 @@ class SeoGenerateService
         ?array $extraGraph = null,
         ?string $webPageAboutId = null,
         ?string $breadcrumbName = null,
+<<<<<<< HEAD
+        ?array $webPageAboutTopics = null,
+        ?array $webPageMentions = null,
+=======
         ?array $webPageAbout = null,
         ?string $mainEntityId = null,
+>>>>>>> 0d60060cbf6ddc4d43a6f348c1bdaaebf125b478
         ?array $article = null,
     ): array {
         if ($routeName === 'home') {
@@ -276,18 +291,43 @@ class SeoGenerateService
             $graph[] = [
                 '@type' => 'FAQPage',
                 '@id' => $faqPageUrl,
+<<<<<<< HEAD
+                'isPartOf' => ['@id' => $webPageId],
+=======
                 'isPartOf' => [
                     '@id' => $webPageId,
                 ],
+>>>>>>> 0d60060cbf6ddc4d43a6f348c1bdaaebf125b478
                 'mainEntity' => $this->faqMainEntity($faqs),
             ];
+        }
+
+        if ($imageUrl !== null && $imageUrl !== '') {
+            foreach ($graph as $index => $node) {
+                if (($node['@type'] ?? '') === 'WebPage') {
+                    $graph[$index]['primaryImageOfPage'] = [
+                        '@type' => 'ImageObject',
+                        'url' => $imageUrl,
+                        'width' => 1200,
+                        'height' => 630,
+                    ];
+                    break;
+                }
+            }
         }
 
         if ($webPageAboutId !== null && $webPageAboutId !== '') {
             foreach ($graph as $index => $node) {
                 if (($node['@type'] ?? '') === 'WebPage') {
-                    $graph[$index]['about'] = ['@id' => $webPageAboutId];
+                    $graph[$index]['about'] = is_array($webPageAboutTopics) && $webPageAboutTopics !== []
+                        ? $webPageAboutTopics
+                        : ['@id' => $webPageAboutId];
                     $graph[$index]['mainEntity'] = ['@id' => $webPageAboutId];
+                    $graph[$index]['publisher'] = ['@id' => $organizationId];
+
+                    if (is_array($webPageMentions) && $webPageMentions !== []) {
+                        $graph[$index]['mentions'] = $webPageMentions;
+                    }
                     break;
                 }
             }
