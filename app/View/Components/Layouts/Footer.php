@@ -85,14 +85,13 @@ class Footer extends Component
                 ['route' => 'blogs', 'label' => 'Blog'],
                 ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact Us'],
             ],
-            // Activate later: AI Outreach CRM column.
-            // 'AI Outreach CRM' => [
-            //     ['route' => 'product', 'fragment' => 'how-it-works', 'label' => 'How it Works'],
-            //     ['route' => 'product', 'fragment' => 'add-ons', 'label' => 'Add Ons'],
-            //     ['route' => 'product', 'fragment' => 'business-works', 'label' => 'The-Suave AI'],
-            //     ['route' => 'product', 'fragment' => 'data-privacy', 'label' => 'Data & Privacy'],
-            //     ['route' => 'product', 'fragment' => 'case-study', 'label' => 'Case Study'],
-            // ],
+            'Suave CRM' => [
+                ['route' => 'product', 'fragment' => 'glance', 'label' => 'At a glance'],
+                ['route' => 'product', 'fragment' => 'sales', 'label' => 'Sales CRM'],
+                ['route' => 'product', 'fragment' => 'projects', 'label' => 'Projects'],
+                ['route' => 'product', 'fragment' => 'data-privacy', 'label' => 'Data & Privacy'],
+                ['route' => 'product', 'fragment' => 'faq', 'label' => 'FAQ'],
+            ],
         ];
 
         $this->columns = collect($columns)

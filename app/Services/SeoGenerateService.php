@@ -60,6 +60,7 @@ class SeoGenerateService
                 'author' => $page['author'] ?? null,
                 'og_title' => $page['og_title'] ?? null,
                 'og_description' => $page['og_description'] ?? null,
+                'twitter_title' => $page['twitter_title'] ?? null,
                 'twitter_description' => $page['twitter_description'] ?? null,
                 'image' => $page['og_image'] ?? null,
                 'og_image_width' => $page['og_image_width'] ?? null,

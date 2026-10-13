@@ -182,7 +182,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Names are **singular**.
 | Service details (×4) | `ServiceController@show($slug)` | `service.show` |
 | Industries hub | `IndustryController@index` | `industries` |
 | Industry details (×6) | `IndustryController@show($slug)` | `industry.show` |
-| Product | `ProductController@index` | `product` |
+| Product (Suave CRM) | `ProductController@index` | `product` (`/free-all-in-one-crm`; legacy `/ai-powered-outreach-crm` → 301) |
 | Custom CRM Builder | `CustomCrmBuilderController@index` | `custom-crm-builder` |
 | Enterprise AI & ERP UAE | `EnterpriseAiErpController@index` (`/uae/services/enterprise-ai-erp-solutions`) | `enterprise-ai-erp-uae` |
 | Case study listing | `CaseStudyController@index` | `case-studies` |
