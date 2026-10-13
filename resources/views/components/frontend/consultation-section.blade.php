@@ -28,7 +28,12 @@
             <span>{{ $ctaLabel }}</span>
             <x-frontend.cta-arrow />
           </a>
-          @if ($secondaryCtaLabel !== '' && $secondaryCtaHref !== '')
+          @if ($secondaryCtaLabel !== '' && $secondaryInquiryDialog !== '')
+            <button type="button" class="consultation-secondary-link group" data-inquiry-dialog-open="{{ $secondaryInquiryDialog }}">
+              <span>{{ $secondaryCtaLabel }}</span>
+              <x-frontend.cta-arrow />
+            </button>
+          @elseif ($secondaryCtaLabel !== '' && $secondaryCtaHref !== '')
             <a href="{{ $secondaryCtaHref }}"
               @if (str_starts_with($secondaryCtaHref, 'http')) target="_blank" rel="noopener noreferrer" @endif
               class="consultation-secondary-link group">

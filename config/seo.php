@@ -327,6 +327,18 @@ return [
             'og_description' => 'Enterprise B2B software development services: custom CRM builder, scalable web apps, enterprise software, UI/UX, and AI solutions with 100% code ownership.',
             'json_ld_breadcrumb_name' => 'Services',
         ],
+        'technologies' => [
+            'title' => 'Web & Software Development Technology Stack | Suave Creators',
+            'description' => 'Laravel, Node.js, React, React Native, Angular, Vue.js, WordPress, Shopify Plus and Magento: what we build with each for web, mobile and commerce.',
+            'keywords' => 'technology stack for web development, software development technology stack, web development technologies, enterprise technology stack',
+            'og_title' => 'Our Technology Stack: Laravel, React, Node.js, Shopify Plus & More',
+            'og_description' => 'What Suave Creators builds with Laravel, Node.js, React & React Native, Angular, Vue.js, WordPress & Headless CMS, Shopify Plus and Magento (Adobe Commerce).',
+            'twitter_title' => 'Our Technology Stack: Laravel, React, Node.js & More',
+            'twitter_description' => 'Eight technologies, what each is for, and what we build with them: web, mobile, CMS and e-commerce.',
+            'json_ld_name' => 'Web & Software Development Technology Stack | Suave Creators',
+            'json_ld_description' => 'Laravel, Node.js, React, React Native, Angular, Vue.js, WordPress, Shopify Plus and Magento: what we build with each for web, mobile and commerce.',
+            'json_ld_breadcrumb_name' => 'Technologies',
+        ],
         'industries' => [
             'title' => 'Industry-Specific Software Development Solutions | Suave Creators',
             'description' => 'Explore custom software development solutions for healthcare, startups, finance, e-commerce, logistics, and education, built by Suave Creators.',

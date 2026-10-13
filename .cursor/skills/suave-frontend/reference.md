@@ -185,6 +185,7 @@ Namespace: `App\Http\Controllers\Frontend\`. Names are **singular**.
 | Product | `ProductController@index` | `product` |
 | Custom CRM Builder | `CustomCrmBuilderController@index` | `custom-crm-builder` |
 | Enterprise AI & ERP UAE | `EnterpriseAiErpController@index` (`/uae/services/enterprise-ai-erp-solutions`) | `enterprise-ai-erp-uae` |
+| Technologies | `TechnologyController@index` (`/technologies`) | `technologies` |
 | Case study listing | `CaseStudyController@index` | `case-studies` |
 | Case study details (independent Blade) | `CaseStudyController` dedicated methods | `turbo-trans-case-study`, `outreach-case-study`, `ai-sales-coaching-case-study`, `tasks-case-study`, `teerrath-case-study`, `appointment-insurance-case-study`, `ai-product-matching-case-study` |
 | Legacy case study slug | `CaseStudyController@show` (301) | `case-study.show` |

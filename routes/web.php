@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\Frontend\SitemapController;
 use App\Http\Controllers\Frontend\SuaveAgentController;
+use App\Http\Controllers\Frontend\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap');
@@ -53,6 +54,7 @@ Route::get('/main/public/{path}', function (string $path) {
     return redirect($clean === '' ? route('home') : url('/'.$clean), 301);
 })->where('path', '.*')->name('main-public.legacy');
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
+Route::get('/technologies', [TechnologyController::class, 'index'])->name('technologies');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
 // Activate later: AI Outreach CRM page.
