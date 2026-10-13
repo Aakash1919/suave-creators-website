@@ -18628,6 +18628,7 @@ body:has(.site-main--technologies) .site-header {
   .technologies-hero__image,
   .technologies-hero__image-placeholder {
     height: 100%;
+    margin-top:70px;
     object-fit: contain;
   }
 }
@@ -20371,8 +20372,10 @@ body:has(.site-main--technologies) .site-header {
   backdrop-filter: blur(102px);
   border: 1px solid #2A4DFB1A;
   border-collapse: separate;
+  border-radius: 10px;
   border-spacing: 0;
   min-width: 0;
+  overflow: hidden;
   table-layout: fixed;
   width: 100%;
 }
@@ -20424,6 +20427,14 @@ body:has(.site-main--technologies) .site-header {
 .technologies-commerce__table tbody tr:last-child th,
 .technologies-commerce__table tbody tr:last-child td {
   border-bottom: 0;
+}
+
+.technologies-commerce__table tbody tr:last-child th:first-child {
+  border-radius: 0 0 0 10px;
+}
+
+.technologies-commerce__table tbody tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
 }
 
 .technologies-commerce__corner {
@@ -21270,7 +21281,9 @@ body:has(.site-main--technologies) .site-header {
   }
 
   .technologies-frontend__table tbody tr:last-child th:first-child,
-  .technologies-frontend__table tbody tr:last-child td:last-child {
+  .technologies-frontend__table tbody tr:last-child td:last-child,
+  .technologies-commerce__table tbody tr:last-child th:first-child,
+  .technologies-commerce__table tbody tr:last-child td:last-child {
     border-radius: 0;
   }
 
