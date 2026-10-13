@@ -16,6 +16,11 @@
 
             @foreach ($dropdowns as $dropdown)
                 @php($dropdownActive = $isDropdownActive($dropdown))
+                @if ($dropdown['slug'] === 'industries')
+                    <a href="{{ route('technologies') }}"
+                        class="site-header__nav-link whitespace-nowrap text-[13px] font-medium text-white transition hover:font-semibold hover:text-[#8EB6FF] {{ $isNavActive('technologies') ? 'is-active' : '' }}"
+                        @if ($isNavActive('technologies')) aria-current="page" @endif>Technology</a>
+                @endif
                 <div class="group relative">
                     <a href="{{ route($dropdown['hubRoute']) }}"
                         class="site-header__nav-link inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-medium text-white transition group-hover:font-semibold group-hover:text-[#8EB6FF] {{ $dropdownActive ? 'is-active' : '' }} "
@@ -106,6 +111,11 @@
 
                     @foreach ($dropdowns as $dropdown)
                         @php($dropdownActive = $isDropdownActive($dropdown))
+                        @if ($dropdown['slug'] === 'industries')
+                            <a class="mobile-nav__link {{ $isNavActive('technologies') ? 'is-active' : '' }}"
+                                href="{{ route('technologies') }}"
+                                @if ($isNavActive('technologies')) aria-current="page" @endif>Technology</a>
+                        @endif
                         <div class="mobile-nav__group">
                             <button type="button"
                                 class="mobile-nav__accordion {{ $dropdownActive ? 'is-active' : '' }}"

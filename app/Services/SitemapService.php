@@ -318,7 +318,12 @@ class SitemapService
             ['route' => 'about-us', 'title' => 'About Suave Creators', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['route' => 'services', 'title' => 'Services', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['route' => 'industries', 'title' => 'Industries', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.9'],
+<<<<<<< HEAD
             ['route' => 'product', 'title' => 'Suave CRM', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+=======
+            ['route' => 'technologies', 'title' => 'Technologies', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            // Activate later: ['route' => 'product', 'title' => 'AI Outreach CRM', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
+>>>>>>> 0d60060cbf6ddc4d43a6f348c1bdaaebf125b478
             ['route' => 'custom-crm-builder', 'title' => 'Custom CRM Builder', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['route' => 'enterprise-ai-erp-uae', 'title' => 'Enterprise AI & ERP Solutions UAE', 'group' => 'Primary', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['route' => 'case-studies', 'title' => 'Case Studies', 'group' => 'Primary', 'changefreq' => 'weekly', 'priority' => '0.8'],

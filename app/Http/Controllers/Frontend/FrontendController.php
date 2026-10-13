@@ -37,8 +37,13 @@ abstract class FrontendController extends Controller
                 'article' => $data['seoArticle'] ?? null,
                 'json_ld_graph' => $data['seoJsonLdGraph'] ?? null,
                 'json_ld_webpage_about' => $data['seoJsonLdWebpageAbout'] ?? null,
+<<<<<<< HEAD
                 'json_ld_webpage_about_topics' => $data['seoJsonLdWebpageAboutTopics'] ?? null,
                 'json_ld_webpage_mentions' => $data['seoJsonLdWebpageMentions'] ?? null,
+=======
+                'json_ld_about' => $data['seoJsonLdAbout'] ?? null,
+                'json_ld_main_entity' => $data['seoJsonLdMainEntity'] ?? null,
+>>>>>>> 0d60060cbf6ddc4d43a6f348c1bdaaebf125b478
                 'json_ld_breadcrumb_name' => $data['seoBreadcrumbName'] ?? null,
             ], static fn (mixed $value): bool => $value !== null && $value !== '' && $value !== []);
 

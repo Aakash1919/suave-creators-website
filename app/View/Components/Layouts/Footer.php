@@ -81,6 +81,7 @@ class Footer extends Component
             ],
             'Company' => [
                 ['route' => 'about-us', 'label' => 'About us'],
+                ['route' => 'technologies', 'label' => 'Technologies'],
                 ['route' => 'case-studies', 'label' => 'Case studies'],
                 ['route' => 'blogs', 'label' => 'Blog'],
                 ['route' => 'contact-us', 'fragment' => 'contact-id', 'label' => 'Contact Us'],

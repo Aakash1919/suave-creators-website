@@ -67,7 +67,7 @@
         </div>
         <p class="product-case-study__metric-value">42%</p>
         <p class="product-case-study__metric-label">More Qualified Leads</p>
-        <p class="product-case-study__metric-caption">vs. Previous Quarter</p>
+        <p class="product-case-study__metric-caption">Vs. Previous Quarter</p>
         <x-frontend.case-study-metric-chart tone="blue" />
       </article>
       <article class="product-case-study__metric product-case-study__metric--purple product-case-study__metric--has-chart product-case-study__metric--has-chart-strip">

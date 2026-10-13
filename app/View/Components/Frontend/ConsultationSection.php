@@ -23,6 +23,7 @@ class ConsultationSection extends Component
         public string $ctaHref = '#contact-modal',
         public string $secondaryCtaLabel = '',
         public string $secondaryCtaHref = '',
+        public string $secondaryInquiryDialog = '',
         public string $service = '',
         public string $backgroundImage = 'assets/background/consultation-section-bg.png',
         public string $eyebrow = '',
@@ -42,7 +43,7 @@ class ConsultationSection extends Component
             $this->ctaHref = '#contact-modal';
         }
 
-        if ($this->secondaryCtaHref === '' && $this->secondaryCtaLabel !== '') {
+        if ($this->secondaryInquiryDialog === '' && $this->secondaryCtaHref === '' && $this->secondaryCtaLabel !== '') {
             $this->secondaryCtaHref = ContactSupport::demoHref();
         }
 

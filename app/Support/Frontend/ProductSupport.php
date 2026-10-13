@@ -427,8 +427,19 @@ class ProductSupport
     {
         return [
             [
+<<<<<<< HEAD
                 'question' => 'Is Suave CRM really free?',
                 'answer' => 'Yes. Suave CRM is free for small and mid-size companies. Sign up with your work email and start using it; no payment is needed.',
+=======
+                'value' => '42%',
+                'label' => 'More Qualified Leads',
+                'caption' => 'Vs. Previous Quarter',
+                'tone' => 'blue',
+                'icon' => asset('assets/product/leads.png'),
+                'alt' => 'Qualified leads growth icon for Suave AI sales CRM case study metric',
+                'chart' => asset('assets/product/graph_vector1.png'),
+                'chartVariant' => 'strip',
+>>>>>>> 0d60060cbf6ddc4d43a6f348c1bdaaebf125b478
             ],
             [
                 'question' => "What's included in the free CRM?",
