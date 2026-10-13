@@ -26,7 +26,7 @@ $uris = [
     route('contact-us', absolute: false),
     route('services', absolute: false),
     route('industries', absolute: false),
-    route('product', absolute: false),
+    // Activate later: route('product', absolute: false),
     route('custom-crm-builder', absolute: false),
     route('blogs', absolute: false),
     route('case-studies', absolute: false),

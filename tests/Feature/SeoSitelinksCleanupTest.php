@@ -106,7 +106,7 @@ class SeoSitelinksCleanupTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('>About<', false);
-        $response->assertSee('>Suave CRM<', false);
+        $response->assertDontSee('>AI Outreach CRM<', false);
         $response->assertSee('>Services<', false);
         $response->assertSee('>Industries<', false);
         $response->assertSee('>Case Studies<', false);
@@ -116,10 +116,9 @@ class SeoSitelinksCleanupTest extends TestCase
         $response->assertDontSee('>Our Product<', false);
     }
 
-    public function test_outreach_crm_page_is_published(): void
+    public function test_outreach_crm_page_stays_unpublished(): void
     {
-        $this->get(route('product'))->assertOk();
-        $this->get('/ai-powered-outreach-crm')->assertRedirect(route('product'));
+        $this->get('/ai-powered-outreach-crm')->assertNotFound();
     }
 
     public function test_homepage_json_ld_uses_the_homepage_graph(): void
@@ -191,13 +190,12 @@ class SeoSitelinksCleanupTest extends TestCase
         $this->assertSame(76.5132446, $graph[1]['geo']['longitude']);
         $this->assertSame('https://suavecreators.com/#organization', $graph[1]['parentOrganization']['@id']);
 
-        $this->assertCount(7, $graph[2]['itemListElement']);
+        $this->assertCount(6, $graph[2]['itemListElement']);
         $offerUrls = array_map(
             static fn (array $offer): string => (string) ($offer['itemOffered']['url'] ?? ''),
             $graph[2]['itemListElement']
         );
         $this->assertContains(route('service.show', ['slug' => 'custom-crm-development']), $offerUrls);
-        $this->assertContains(route('service.show', ['slug' => 'digital-marketing-services']), $offerUrls);
         $this->assertNotContains('https://suavecreators.com/hire-dedicated-developers', $offerUrls);
 
         $this->assertArrayNotHasKey('potentialAction', $graph[3]);

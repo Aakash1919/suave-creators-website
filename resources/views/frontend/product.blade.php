@@ -1,68 +1,64 @@
 @extends('layouts.frontend')
 
 @push('custom-css')
-<meta name="application-name" content="Suave CRM">
-<link rel="preload" as="image" href="{{ $heroBanner['src'] }}" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="{{ $heroBackground }}" type="image/webp">
+<link rel="preload" as="image" href="{{ $heroBanner['src'] }}" type="image/gif">
 @endpush
 
 @section('content')
 
-<div class="product-page product-page--free-crm">
+<div class="product-page">
 
   <div
     class="product-top-shell"
     style="background-image: url('{{ $heroBackground }}')"
   >
-    <nav class="product-breadcrumb container" aria-label="Breadcrumb">
-      <ol class="product-breadcrumb__list">
-        <li><a href="{{ route('home') }}">Home</a></li>
-        <li aria-current="page">Suave CRM</li>
-      </ol>
-    </nav>
-
-    <section class="product-hero product-hero--free-crm" id="hero" aria-labelledby="product-hero-heading">
+    <section class="product-hero product-hero--outreach" id="hero" aria-labelledby="product-hero-heading">
       <div class="container product-hero__container">
-        <span class="product-hero__badge">
-          <img src="{{ asset('assets/product/ai.png') }}" alt="Free Suave CRM badge icon for sales projects HR and invoicing" title="Free Suave CRM badge icon for sales projects HR and invoicing" class="product-hero__badge-icon">
-          <span class="product-hero__badge-text">{{ $heroEyebrow }}</span>
-        </span>
+   <span class="product-hero__badge">
+     <img src="{{ asset('assets/product/ai.png') }}" alt="AI powered sales CRM badge icon for Suave outreach platform" title="AI powered sales CRM badge icon for Suave outreach platform" class="product-hero__badge-icon">
+     <span class="product-hero__badge-text">{{ $heroBadge }}</span>
+   </span>
 
-        <h1 id="product-hero-heading" class="product-hero__title product-hero__title--free">
-          {{ $heroTitle }}
-        </h1>
+        <div class="product-hero__headline-wrap">
+          <h1 id="product-hero-heading" class="product-hero__title">
+            <span class="product-hero__title-line">
+              <span class="product-hero__title-accent">AI-Powered Outreach</span>
+            </span>
+            <span class="product-hero__title-line">
+              <span class="product-hero__title-accent">built</span><span class="product-hero__title-soft"> for growing</span>
+            </span>
+            <span class="product-hero__title-line product-hero__title-soft">teams</span>
+          </h1>
+        </div>
 
-        <p class="product-hero__subtitle">{{ $heroSubtitle }}</p>
-
-        <form
-          class="product-signup"
-          action="{{ $signupUrl }}"
-          method="get"
-          data-product-signup
-        >
-          <label class="sr-only" for="product-hero-email">Work email</label>
-          <input
-            id="product-hero-email"
-            class="product-signup__input"
-            type="email"
-            name="email"
-            required
-            autocomplete="email"
-            placeholder="Work email"
-          >
-          <button type="submit" class="product-btn product-btn--primary product-signup__btn">
-            Sign Up Free <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-          </button>
-        </form>
-
-        <p class="product-hero__trust">{{ $heroTrustLine }}</p>
-        <p class="product-hero__demo-link">
-          <a href="{{ $demoHref }}">{{ $heroDemoLinkLabel }}</a>
+        <p class="product-hero__subtitle">
+          Suave CRM helps you discover the right companies, brief them with Suave AI, and send cold
+          email with S-Mail, so every first touch earns a reply. Optional work add-ons are ready when
+          delivery work needs them. Thanks to AI, of course.
         </p>
 
-        <p class="product-hero__proof">
-          <q>{{ $heroProof['quote'] }}</q>
-          <span>— {{ $heroProof['name'] }}, {{ $heroProof['role'] }}, {{ $heroProof['company'] }}</span>
-        </p>
+        <div class="product-hero__actions">
+          <a href="https://the-suave.app/" class="product-btn product-btn--primary">
+            Sign up <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a href="{{ $demoHref }}" class="product-btn product-btn--secondary product-btn--ghost">
+            Book Your Demo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <hr class="product-hero__divider" aria-hidden="true">
+
+        <div class="product-hero__chips">
+          @foreach ($heroChips as $chip)
+            <div class="product-hero__chip">
+              <span class="product-hero__chip-icon">
+                <img src="{{ $chip['icon'] }}" alt="{{ $chip['alt'] }}" title="{{ $chip['alt'] }}" loading="lazy" decoding="async">
+              </span>
+              <span class="product-hero__chip-label">{{ $chip['label'] }}</span>
+            </div>
+          @endforeach
+        </div>
 
         <div class="product-hero__banner">
           <img
@@ -76,156 +72,194 @@
             loading="lazy"
             aria-hidden="true"
           >
-          <div class="product-hero__banner-stage product-hero__banner-stage--simple">
+          <div class="product-hero__banner-stage">
             <img
               src="{{ $heroBanner['src'] }}"
               alt="{{ $heroBanner['alt'] }}"
               title="{{ $heroBanner['alt'] }}"
               class="product-hero__banner-gif"
-              width="996"
-              height="560"
+              width="796"
+              height="448"
               decoding="async"
               fetchpriority="high"
             >
+            @foreach ($heroBannerTiles as $tile)
+              <div class="product-hero__banner-tile product-hero__banner-tile--{{ $tile['position'] }}" aria-hidden="true">
+                @switch($tile['type'])
+                  @case('lead')
+                    <img
+                      src="{{ $tile['src'] }}"
+                      alt="{{ $tile['alt'] }}"
+                      title="{{ $tile['alt'] }}"
+                      class="product-hero__banner-tile-image"
+                      width="240"
+                      height="138"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                    @break
+                  @case('follow-up')
+                    <div class="product-hero__banner-tile-card product-hero__banner-tile-card--follow-up">
+                      <div class="product-hero__banner-tile-head product-hero__banner-tile-head--follow-up">
+                        <span class="product-hero__banner-tile-icon product-hero__banner-tile-icon--square">
+                          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        <span class="product-hero__banner-tile-title product-hero__banner-tile-title--follow-up">{{ $tile['title'] }}</span>
+                      </div>
+                      <p class="product-hero__banner-tile-copy">{{ $tile['description'] }}</p>
+                    </div>
+                    @break
+                  @case('deal-won')
+                    <img
+                      src="{{ $tile['src'] }}"
+                      alt="{{ $tile['alt'] }}"
+                      title="{{ $tile['alt'] }}"
+                      class="product-hero__banner-tile-image"
+                      width="210"
+                      height="230"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                    @break
+                  @case('companies')
+                    <img
+                      src="{{ $tile['src'] }}"
+                      alt="{{ $tile['alt'] }}"
+                      title="{{ $tile['alt'] }}"
+                      class="product-hero__banner-tile-image"
+                      width="340"
+                      height="150"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                    @break
+                @endswitch
+              </div>
+            @endforeach
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-how-it-works" id="how-it-works" aria-labelledby="how-it-works-heading">
+      <div class="container product-how-it-works__container">
+        <div class="product-how-it-works__header">
+          <span class="product-how-it-works__badge">How It Works</span>
+          <h2 id="how-it-works-heading" class="product-how-it-works__title">
+            Simple Steps, <span class="product-how-it-works__title-accent">Powerful Results</span>
+          </h2>
+          <p class="product-how-it-works__subtitle">
+            From lead capture to deal closure, manage every stage with one intelligent AI-powered Sales CRM.
+          </p>
+        </div>
+
+        <div class="product-how-it-works__grid">
+          @foreach ($howItWorksSteps as $step)
+            <article class="product-how-it-works__card">
+              <div class="product-how-it-works__icon">
+                <img src="{{ $step['icon'] }}" alt="{{ $step['alt'] }}" title="{{ $step['alt'] }}" loading="lazy" decoding="async">
+              </div>
+              <h3>{{ $step['title'] }}</h3>
+              <p>{{ $step['description'] }}</p>
+            </article>
+          @endforeach
         </div>
       </div>
     </section>
   </div>
 
-  <section class="product-glance" id="glance" aria-labelledby="glance-heading">
-    <div class="container product-glance__container">
-      <h2 id="glance-heading" class="product-section-title">{{ $glance['title'] }}</h2>
-      <dl class="product-glance__table">
-        @foreach ($glance['rows'] as $row)
-          <div class="product-glance__row">
-            <dt>{{ $row['label'] }}</dt>
-            <dd>{{ $row['value'] }}</dd>
-          </div>
-        @endforeach
-      </dl>
-    </div>
-  </section>
-
-  <section class="product-savings" id="what-you-save" aria-labelledby="savings-heading">
-    <div class="container product-savings__container">
-      <p class="product-section-eyebrow">{{ $savings['eyebrow'] }}</p>
-      <h2 id="savings-heading" class="product-section-title">{{ $savings['title'] }}</h2>
-      <p class="product-section-copy">{{ $savings['body'] }}</p>
-
-      <div class="product-savings__table-wrap" role="region" aria-label="Subscription savings comparison" tabindex="0">
-        <table class="product-savings__table">
-          <thead>
-            <tr>
-              @foreach ($savings['headers'] as $header)
-                <th scope="col">{{ $header }}</th>
-              @endforeach
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($savings['rows'] as $row)
-              <tr>
-                <th scope="row">{{ $row['job'] }}</th>
-                <td>{{ $row['usual'] }}</td>
-                <td>{{ $row['withSuave'] }}</td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
+  <section class="product-add-ons" id="add-ons" aria-labelledby="add-ons-heading">
+    <div class="container product-add-ons__container">
+      <div class="product-add-ons__header">
+        <span class="product-add-ons__badge">Add-Ons</span>
+        <h2 id="add-ons-heading" class="product-add-ons__title">
+          Work Management <span class="product-add-ons__title-accent">Add-Ons when you need them</span>
+        </h2>
+        <p class="product-add-ons__subtitle">
+          Outreach + Suave AI + S-Mail stay at the center. Enable these modules only for the delivery
+          work your team actually runs — no CRM bloat by default.
+        </p>
       </div>
 
-      <div class="product-savings__cta">
-        <a href="{{ $signupUrl }}" class="product-btn product-btn--primary">
-          {{ $savings['button'] }} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      <div class="product-add-ons__grid">
+        @foreach ($addOns as $addon)
+          <article class="product-add-ons__card">
+            <div class="product-add-ons__icon">
+              <img src="{{ $addon['icon'] }}" alt="{{ $addon['alt'] }}" title="{{ $addon['alt'] }}" loading="lazy" decoding="async">
+            </div>
+            <h3>{{ $addon['title'] }}</h3>
+            <p>{{ $addon['description'] }}</p>
+          </article>
+        @endforeach
+      </div>
+
+      <div class="product-add-ons__cta">
+        <a href="{{ $contactHref }}" class="product-add-ons__link">
+          Ask which add-ons fit your team
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </a>
-        <p class="product-savings__microcopy">{{ $savings['microcopy'] }}</p>
       </div>
     </div>
   </section>
 
-  @foreach ([$sales, $projects, $timeBilling, $teamHr] as $module)
-    <section class="product-module" id="{{ $module['id'] }}" aria-labelledby="{{ $module['id'] }}-heading">
-      <div class="container product-module__container">
-        <p class="product-section-eyebrow">{{ $module['eyebrow'] }}</p>
-        <h2 id="{{ $module['id'] }}-heading" class="product-section-title">{{ $module['title'] }}</h2>
-        <p class="product-section-copy">{{ $module['intro'] }}</p>
-        <ul class="product-module__list">
-          @foreach ($module['items'] as $item)
-            <li>
-              <strong>{{ $item['title'] }}:</strong>
-              <span>{{ $item['body'] }}</span>
-            </li>
-          @endforeach
-        </ul>
-        @if (! empty($module['linkLabel']))
-          <p class="product-module__link">
-            <a href="{{ $signupUrl }}">{{ $module['linkLabel'] }}</a>
-          </p>
-        @endif
+  <section class="product-business-works" id="business-works" aria-labelledby="business-works-heading">
+    <div class="container product-business-works__container">
+      <div class="product-business-works__header">
+        <span class="product-business-works__badge">{{ $businessWorks['badge'] }}</span>
+        <h2 id="business-works-heading" class="product-business-works__title">
+          {{ $businessWorks['title'] }}
+          <span class="product-business-works__title-accent">{{ $businessWorks['titleAccent'] }}</span>
+        </h2>
+        <p class="product-business-works__subtitle">{{ $businessWorks['subtitle'] }}</p>
       </div>
-    </section>
-  @endforeach
 
-  <section class="product-ask-suave" id="{{ $askSuave['id'] }}" aria-labelledby="ask-suave-heading">
-    <div class="container product-ask-suave__container">
-      <p class="product-section-eyebrow">{{ $askSuave['eyebrow'] }}</p>
-      <h2 id="ask-suave-heading" class="product-section-title">{{ $askSuave['title'] }}</h2>
-      <ul class="product-module__list">
-        @foreach ($askSuave['items'] as $item)
-          <li>{{ $item }}</li>
-        @endforeach
-      </ul>
-      <a href="{{ $signupUrl }}" class="product-btn product-btn--primary">
-        {{ $askSuave['button'] }} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-      </a>
-    </div>
-  </section>
+      <div class="product-business-works__grid">
+        @foreach ($businessWorks['cards'] as $card)
+          <article class="product-business-works__card">
+            <div class="product-business-works__head">
+              <div class="product-business-works__icon">
+                <img src="{{ $card['icon'] }}" alt="{{ $card['alt'] }}" title="{{ $card['alt'] }}" loading="lazy" decoding="async">
+              </div>
+              <div class="product-business-works__body">
+                <h3>{{ $card['title'] }}</h3>
+                <p>{{ $card['description'] }}</p>
+              </div>
+            </div>
 
-  <section class="product-audiences" id="who-its-for" aria-labelledby="audiences-heading">
-    <div class="container product-audiences__container">
-      <p class="product-section-eyebrow">Who it's for</p>
-      <h2 id="audiences-heading" class="product-section-title">{{ $audiences['title'] }}</h2>
-      <div class="product-audiences__grid">
-        @foreach ($audiences['items'] as $item)
-          <article class="product-audiences__card">
-            <h3>{{ $item['title'] }}</h3>
-            <p>{{ $item['body'] }}</p>
+            @if ($card['footerType'] === 'integrations')
+              <div class="product-business-works__integrations">
+                @foreach ($card['integrations'] as $integration)
+                  <span class="product-business-works__integration-item">
+                    <img
+                      src="{{ $integration['src'] }}"
+                      alt="{{ $integration['alt'] }}"
+                      title="{{ $integration['alt'] }}"
+                      width="22"
+                      height="22"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                  </span>
+                  @foreach ($integration['tags'] ?? [] as $tag)
+                    <span class="product-business-works__tag">{{ $tag }}</span>
+                  @endforeach
+                @endforeach
+              </div>
+            @elseif ($card['footerType'] === 'tags')
+              <div class="product-business-works__tags">
+                @foreach ($card['tags'] as $tag)
+                  <span class="product-business-works__tag">{{ $tag }}</span>
+                @endforeach
+              </div>
+            @endif
           </article>
         @endforeach
       </div>
-    </div>
-  </section>
 
-  <section class="product-getting-started" id="getting-started" aria-labelledby="getting-started-heading">
-    <div class="container product-getting-started__container">
-      <p class="product-section-eyebrow">Getting started</p>
-      <h2 id="getting-started-heading" class="product-section-title">{{ $gettingStarted['title'] }}</h2>
-      <ol class="product-getting-started__steps">
-        @foreach ($gettingStarted['steps'] as $step)
-          <li>{{ $step }}</li>
-        @endforeach
-      </ol>
-      <p class="product-section-copy">
-        {{ $gettingStarted['help'] }}
-        <a href="{{ $demoHref }}">Book a demo</a>
-      </p>
-      <a href="{{ $signupUrl }}" class="product-btn product-btn--primary">
-        {{ $gettingStarted['button'] }} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-      </a>
-    </div>
-  </section>
-
-  <section class="product-why-switch" id="why-switch" aria-labelledby="why-switch-heading">
-    <div class="container product-why-switch__container">
-      <p class="product-section-eyebrow">Why teams switch</p>
-      <h2 id="why-switch-heading" class="product-section-title">{{ $whySwitch['title'] }}</h2>
-      <div class="product-why-switch__grid">
-        @foreach ($whySwitch['items'] as $item)
-          <article class="product-why-switch__card">
-            <h3>{{ $item['title'] }}</h3>
-            <p>{{ $item['body'] }}</p>
-          </article>
-        @endforeach
+      <div class="product-business-works__cta">
+        <a href="{{ $demoHref }}" class="product-btn product-business-works__btn">
+          Book Your Demo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
   </section>
@@ -240,10 +274,23 @@
       <div class="product-data-privacy__grid">
         <div class="product-data-privacy__content">
           <span class="product-data-privacy__badge">{{ $dataPrivacy['badge'] }}</span>
-          <h2 id="data-privacy-heading" class="product-data-privacy__title product-data-privacy__title--single">
-            {{ $dataPrivacy['title'] }}
+          <h2 id="data-privacy-heading" class="product-data-privacy__title">
+            <span class="product-data-privacy__title-line product-data-privacy__title-line--soft">{{ $dataPrivacy['titleLine1'] }}</span>
+            <span class="product-data-privacy__title-line product-data-privacy__title-line--bright">{{ $dataPrivacy['titleLine2'] }}</span>
           </h2>
           <p class="product-data-privacy__description">{{ $dataPrivacy['description'] }}</p>
+
+          <ul class="product-data-privacy__list">
+            @foreach ($dataPrivacy['bullets'] as $bullet)
+              <li>
+                <span class="product-data-privacy__check" aria-hidden="true">
+                  <i class="fa-solid fa-check"></i>
+                </span>
+                <span>{{ $bullet }}</span>
+              </li>
+            @endforeach
+          </ul>
+
           <div class="product-data-privacy__links">
             @foreach ($dataPrivacy['links'] as $link)
               <a
@@ -256,6 +303,7 @@
             @endforeach
           </div>
         </div>
+
         <div class="product-data-privacy__visual">
           <img
             src="{{ $dataPrivacy['graphic']['src'] }}"
@@ -271,129 +319,240 @@
     </div>
   </section>
 
-  <section class="product-testimonial" id="testimonial" aria-labelledby="testimonial-heading">
-    <div class="container product-testimonial__container">
-      <h2 id="testimonial-heading" class="sr-only">Client testimonial</h2>
-      <blockquote class="product-testimonial__quote">
-        <img
-          class="product-testimonial__mark"
-          src="{{ $testimonial['quoteMark']['src'] }}"
-          alt="{{ $testimonial['quoteMark']['alt'] }}"
-          title="{{ $testimonial['quoteMark']['alt'] }}"
-          width="48"
-          height="48"
-          decoding="async"
-          loading="lazy"
-          aria-hidden="true"
-        >
-        <p>{{ $testimonial['quote'] }}</p>
-        <footer>
-          <img
-            class="product-testimonial__avatar"
-            src="{{ $testimonial['avatar']['src'] }}"
-            alt="{{ $testimonial['avatar']['alt'] }}"
-            title="{{ $testimonial['avatar']['alt'] }}"
-            width="48"
-            height="48"
-            decoding="async"
-            loading="lazy"
-          >
-          <cite>
-            <strong>{{ $testimonial['name'] }}</strong>
-            <span>{{ $testimonial['role'] }}, {{ $testimonial['company'] }}</span>
-          </cite>
-        </footer>
-      </blockquote>
-      <p class="product-testimonial__link">
-        <a href="{{ $testimonial['resultsHref'] }}">{{ $testimonial['resultsLabel'] }}</a>
-      </p>
+  <section class="product-case-study" id="case-study" aria-labelledby="case-study-heading">
+    <div class="container product-case-study__container">
+      <header class="product-case-study__header">
+        <span class="product-case-study__badge">{{ $caseStudy['badge'] }}</span>
+        <h2 id="case-study-heading" class="product-case-study__title">
+          {{ $caseStudy['titlePrefix'] }}
+          <span class="product-case-study__title-accent">{{ $caseStudy['titleAccent'] }}</span>
+        </h2>
+        <p class="product-case-study__subtitle">{{ $caseStudy['subtitle'] }}</p>
+      </header>
+
+      <article class="product-case-study__card">
+        <div class="product-case-study__body">
+          <div class="product-case-study__story">
+            <div class="product-case-study__brand">
+              <img
+                src="{{ $caseStudy['logo']['src'] }}"
+                alt="{{ $caseStudy['logo']['alt'] }}"
+                title="{{ $caseStudy['logo']['alt'] }}"
+                width="120"
+                height="40"
+                decoding="async"
+                loading="lazy"
+              >
+              <div class="product-case-study__tags">
+                @foreach ($caseStudy['tags'] as $tag)
+                  <span class="product-case-study__tag">
+                    <i class="fa-solid {{ $tag['icon'] }}" aria-hidden="true"></i>
+                    {{ $tag['label'] }}
+                  </span>
+                @endforeach
+              </div>
+            </div>
+
+            <p class="product-case-study__intro">{{ $caseStudy['intro'] }}</p>
+
+            <div class="product-case-study__block">
+              <h3 class="product-case-study__block-title product-case-study__block-title--challenge">
+                {{ $caseStudy['challenge']['title'] }}
+              </h3>
+              @if (! empty($caseStudy['challenge']['intro']))
+                <p class="product-case-study__block-intro">{{ $caseStudy['challenge']['intro'] }}</p>
+              @endif
+              <ul class="product-case-study__list product-case-study__list--challenge">
+                @foreach ($caseStudy['challenge']['items'] as $item)
+                  <li>{{ $item }}</li>
+                @endforeach
+              </ul>
+            </div>
+
+            <div class="product-case-study__block">
+              <h3 class="product-case-study__block-title product-case-study__block-title--solution">
+                {{ $caseStudy['solution']['title'] }}
+              </h3>
+              <p class="product-case-study__block-intro">{{ $caseStudy['solution']['intro'] }}</p>
+              @if (! empty($caseStudy['solution']['itemsIntro']))
+                <p class="product-case-study__block-intro">{{ $caseStudy['solution']['itemsIntro'] }}</p>
+              @endif
+              <ul class="product-case-study__list product-case-study__list--solution">
+                @foreach ($caseStudy['solution']['items'] as $item)
+                  <li>{{ $item }}</li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+
+          <div class="product-case-study__results">
+            <div class="product-case-study__metrics">
+              @foreach ($caseStudy['metrics'] as $metric)
+                <article @class([
+                  'product-case-study__metric',
+                  'product-case-study__metric--' . $metric['tone'],
+                  'product-case-study__metric--has-chart' => ! empty($metric['chart']),
+                  'product-case-study__metric--has-chart-strip' => ! empty($metric['chart']) && ($metric['chartVariant'] ?? 'strip') === 'strip',
+                  'product-case-study__metric--has-chart-full' => ! empty($metric['chart']) && ($metric['chartVariant'] ?? 'strip') === 'full',
+                ])>
+                  <div class="product-case-study__metric-icon">
+                    <img
+                      src="{{ $metric['icon'] }}"
+                      alt="{{ $metric['alt'] }}"
+                      title="{{ $metric['alt'] }}"
+                      width="20"
+                      height="20"
+                      decoding="async"
+                      loading="lazy"
+                    >
+                  </div>
+                  <x-frontend.case-study-metric-value class="product-case-study__metric-value" tag="p" :value="$metric['value']" />
+                  <p class="product-case-study__metric-label">{{ $metric['label'] }}</p>
+                  <p class="product-case-study__metric-caption">{{ $metric['caption'] }}</p>
+                  <div
+                    @class([
+                      'product-case-study__metric-chart',
+                      'product-case-study__metric-chart--image' => ! empty($metric['chart']),
+                      'product-case-study__metric-chart--strip' => ! empty($metric['chart']) && ($metric['chartVariant'] ?? 'strip') === 'strip',
+                      'product-case-study__metric-chart--full' => ! empty($metric['chart']) && ($metric['chartVariant'] ?? 'strip') === 'full',
+                    ])
+                    aria-hidden="true"
+                    @if (! empty($metric['chart']))
+                      style="background-image: url('{{ $metric['chart'] }}')"
+                    @endif
+                  ></div>
+                </article>
+              @endforeach
+            </div>
+
+            <figure class="product-case-study__testimonial">
+              <blockquote class="product-case-study__quote">
+                <img
+                  class="product-case-study__quote-mark"
+                  src="{{ $caseStudy['quoteMark']['src'] }}"
+                  alt="{{ $caseStudy['quoteMark']['alt'] }}"
+                  title="{{ $caseStudy['quoteMark']['alt'] }}"
+                  width="48"
+                  height="48"
+                  decoding="async"
+                  loading="lazy"
+                  aria-hidden="true"
+                >
+                <p class="product-case-study__quote-text">{{ $caseStudy['testimonial']['quote'] }}</p>
+                <img
+                  class="product-case-study__quote-avatar"
+                  src="{{ $caseStudy['testimonial']['avatar']['src'] }}"
+                  alt="{{ $caseStudy['testimonial']['avatar']['alt'] }}"
+                  title="{{ $caseStudy['testimonial']['avatar']['alt'] }}"
+                  width="48"
+                  height="48"
+                  decoding="async"
+                  loading="lazy"
+                >
+                <footer class="product-case-study__quote-meta">
+                  <strong>{{ $caseStudy['testimonial']['name'] }}</strong>
+                  <span>
+                    {{ $caseStudy['testimonial']['role'] }} |
+                    <span class="product-case-study__quote-company">{{ $caseStudy['testimonial']['company'] }}</span>
+                  </span>
+                </footer>
+              </blockquote>
+            </figure>
+          </div>
+        </div>
+      </article>
+
+      <div class="product-case-study__cta">
+        <div class="product-case-study__cta-copy">
+          <h3>{{ $caseStudy['cta']['title'] }}</h3>
+          <p>{{ $caseStudy['cta']['description'] }}</p>
+        </div>
+        <a href="{{ $demoHref }}" class="product-btn product-btn--primary product-case-study__cta-btn">
+          {{ $caseStudy['cta']['button'] }}
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
   </section>
 
-  <div id="faq">
-    <x-frontend.faq-section
-      :qa="$faqs"
-      eyebrow="FAQ"
-      title="Frequently asked questions about Suave CRM"
-      description=""
-      :show-cta="false"
-      :media="null"
-      heading-id="faq-heading"
-      class="faq-section--crm-builder bg-cover bg-top bg-no-repeat"
-    />
-  </div>
+  <section
+    class="product-sales-cta"
+    id="sales-cta"
+    aria-labelledby="sales-cta-heading"
+    style="background-image: url('{{ $salesCta['background'] }}')"
+  >
+    <div class="container product-sales-cta__container">
+      <div class="product-sales-cta__shell">
+        <aside class="product-sales-cta__float product-sales-cta__float--deal" aria-hidden="true">
+          <div class="product-sales-cta__deal-card">
+            <div class="product-sales-cta__deal-head">
+              <img
+                src="{{ $salesCta['dealCard']['avatar']['src'] }}"
+                alt="{{ $salesCta['dealCard']['avatar']['alt'] }}"
+                title="{{ $salesCta['dealCard']['avatar']['alt'] }}"
+                width="32"
+                height="32"
+                decoding="async"
+                loading="lazy"
+              >
+              <span>{{ $salesCta['dealCard']['title'] }} 🎉</span>
+            </div>
+            <p class="product-sales-cta__deal-company">{{ $salesCta['dealCard']['company'] }}</p>
+            <p class="product-sales-cta__deal-amount">{{ $salesCta['dealCard']['amount'] }}</p>
+            <p class="product-sales-cta__deal-category">{{ $salesCta['dealCard']['category'] }}</p>
+            <div class="product-sales-cta__deal-chart">
+              <img
+                src="{{ $salesCta['dealCard']['chart']['src'] }}"
+                alt="{{ $salesCta['dealCard']['chart']['alt'] }}"
+                title="{{ $salesCta['dealCard']['chart']['alt'] }}"
+                width="224"
+                height="125"
+                decoding="async"
+                loading="lazy"
+              >
+            </div>
+          </div>
+        </aside>
 
-  <section class="product-final-cta" id="final-cta" aria-labelledby="final-cta-heading" data-product-final-cta>
-    <div class="container product-final-cta__container">
-      <h2 id="final-cta-heading" class="product-section-title product-section-title--light">{{ $finalCta['title'] }}</h2>
-      <p class="product-section-copy product-section-copy--light">{{ $finalCta['body'] }}</p>
+        <div class="product-sales-cta__content">
+          <span class="product-sales-cta__badge">{{ $salesCta['badge'] }}</span>
+          <h2 id="sales-cta-heading" class="product-sales-cta__title">
+            <span class="product-sales-cta__title-lead">{{ $salesCta['titleLead'] }}</span><span class="product-sales-cta__title-build">{{ $salesCta['titleBuild'] }}</span>
+            <span class="product-sales-cta__title-accent">{{ $salesCta['titleAccent'] }}</span>
+          </h2>
+          <p class="product-sales-cta__description">{{ $salesCta['description'] }}</p>
+          <a href="{{ $demoHref }}" class="product-btn product-btn--primary product-sales-cta__btn">
+            {{ $salesCta['button'] }}
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+          <p class="product-sales-cta__service-link">
+            Built by Suave Creators &mdash; <a href="{{ route('service.show', 'custom-crm-development') }}">custom CRM development experts</a>
+          </p>
+        </div>
 
-      <form
-        class="product-signup product-signup--on-dark"
-        action="{{ $signupUrl }}"
-        method="get"
-        data-product-signup
-      >
-        <label class="sr-only" for="product-final-email">Work email</label>
-        <input
-          id="product-final-email"
-          class="product-signup__input"
-          type="email"
-          name="email"
-          required
-          autocomplete="email"
-          placeholder="Work email"
-        >
-        <button type="submit" class="product-btn product-btn--primary product-signup__btn">
-          Sign Up Free <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-        </button>
-      </form>
-
-      <p class="product-final-cta__trust">
-        {{ $finalCta['trustLine'] }}
-        · <a href="{{ $demoHref }}">{{ $finalCta['demoLinkLabel'] }}</a>
-      </p>
+        <aside class="product-sales-cta__float product-sales-cta__float--insight" aria-hidden="true">
+          <div class="product-sales-cta__insight-card">
+            <div class="product-sales-cta__insight-head">
+              <span class="product-sales-cta__insight-icon">
+                <img
+                  src="{{ $salesCta['insightCard']['icon']['src'] }}"
+                  alt="{{ $salesCta['insightCard']['icon']['alt'] }}"
+                  title="{{ $salesCta['insightCard']['icon']['alt'] }}"
+                  width="20"
+                  height="20"
+                  decoding="async"
+                  loading="lazy"
+                >
+              </span>
+              <strong>{{ $salesCta['insightCard']['title'] }}</strong>
+            </div>
+            <p>{{ $salesCta['insightCard']['description'] }}</p>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
-
-  <div class="product-sticky-bar" data-product-sticky-bar hidden>
-    <p class="product-sticky-bar__label">{{ $stickyBar['label'] }}</p>
-    <a href="{{ $signupUrl }}" class="product-btn product-btn--primary product-sticky-bar__btn">
-      {{ $stickyBar['button'] }}
-    </a>
-  </div>
 
 </div>
 
 @endsection
-
-@push('scripts')
-<script>
-(function () {
-  var sticky = document.querySelector('[data-product-sticky-bar]');
-  var hero = document.getElementById('hero');
-  var finalCta = document.querySelector('[data-product-final-cta]');
-  if (!sticky || !hero || !finalCta || !window.matchMedia) return;
-
-  var mobile = window.matchMedia('(max-width: 767px)');
-
-  function update() {
-    if (!mobile.matches) {
-      sticky.hidden = true;
-      return;
-    }
-    var heroBottom = hero.getBoundingClientRect().bottom;
-    var finalTop = finalCta.getBoundingClientRect().top;
-    var viewportH = window.innerHeight || document.documentElement.clientHeight;
-    var pastHero = heroBottom < 0;
-    var finalVisible = finalTop < viewportH;
-    sticky.hidden = !(pastHero && !finalVisible);
-  }
-
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  mobile.addEventListener('change', update);
-  update();
-})();
-</script>
-@endpush

@@ -90,7 +90,6 @@
         html{overflow-x:clip}
         body{margin:0;overflow-x:clip;background:#fff;color:#0f172a;font-family:var(--site-font)}
         .bg-\[\#00003f\]{background-color:var(--color-navy)}
-        .site-shell--digital-marketing{background-color:#05070a}
         .relative{position:relative}
         .w-full{width:100%}
         .overflow-hidden{overflow:hidden}
@@ -360,14 +359,6 @@
                     title="Enterprise AI in Action:"
                     subtitle="See how autonomous multi-agent pipelines eliminate manual back-office tasks."
                     cta-label="Explore The Suave App"
-                />
-            @elseif (request()->routeIs('product'))
-                <x-layouts.topbar
-                    href-route="https://the-suave.app/"
-                    title="Free CRM for agencies and startups:"
-                    subtitle="sales, projects, HR and invoicing in one app."
-                    cta-label="Sign up free →"
-                    icon-alt="Free Suave CRM announcement icon for agencies and startups"
                 />
             @else
                 <x-layouts.topbar />

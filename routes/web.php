@@ -9,7 +9,6 @@ use App\Http\Controllers\Frontend\EnterpriseAiErpController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\IndustryController;
 use App\Http\Controllers\Frontend\PageController;
-use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\Frontend\SitemapController;
 use App\Http\Controllers\Frontend\SuaveAgentController;
@@ -58,8 +57,8 @@ Route::get('/industries', [IndustryController::class, 'index'])->name('industrie
 Route::get('/technologies', [TechnologyController::class, 'index'])->name('technologies');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industry.show');
 
-Route::get('/free-all-in-one-crm', [ProductController::class, 'index'])->name('product');
-Route::get('/ai-powered-outreach-crm', fn () => redirect()->route('product', status: 301))->name('product.legacy');
+// Activate later: AI Outreach CRM page.
+// Route::get('/ai-powered-outreach-crm', [\App\Http\Controllers\Frontend\ProductController::class, 'index'])->name('product');
 Route::get('/custom-crm-builder', [CustomCrmBuilderController::class, 'index'])->name('custom-crm-builder');
 
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies');
