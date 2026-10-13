@@ -4,7 +4,6 @@
  * Build a marketing-only Font Awesome 6.7.2 CSS subset.
  * One file replaces fontawesome.min.css + solid + brands + regular CDN sheets.
  */
-
 $root = dirname(__DIR__);
 $out = $root.'/public/css/fontawesome-subset.css';
 
@@ -176,7 +175,10 @@ $minimalCore = <<<'CSS'
 .fa-brands,.fab{font-weight:400}
 CSS;
 
-$iconCss = extractIconVars($core, $iconList).extractIconVars($brands, $iconList).extractIconVars($regular, $iconList);
+$iconCss = extractIconVars($core, $iconList)
+    .extractIconVars($solid, $iconList)
+    .extractIconVars($brands, $iconList)
+    .extractIconVars($regular, $iconList);
 
 $fontsDir = $root.'/public/fonts/fontawesome';
 ensureWebfonts($fontsDir);

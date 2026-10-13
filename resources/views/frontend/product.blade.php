@@ -1,8 +1,8 @@
 @extends('layouts.frontend')
 
 @push('custom-css')
-<link rel="preload" as="image" href="{{ $heroBackground }}" type="image/webp">
-<link rel="preload" as="image" href="{{ $heroBanner['src'] }}" type="image/gif">
+<meta name="application-name" content="Suave CRM">
+<link rel="preload" as="image" href="{{ $heroBanner['src'] }}" type="image/gif" fetchpriority="high">
 @endpush
 
 @section('content')
@@ -13,53 +13,90 @@
     class="product-top-shell"
     style="background-image: url('{{ $heroBackground }}')"
   >
+    <nav class="product-breadcrumb container" aria-label="Breadcrumb">
+      <ol class="product-breadcrumb__list">
+        <li><a href="{{ route('home') }}">Home</a></li>
+        <li aria-current="page">Suave CRM</li>
+      </ol>
+    </nav>
+
     <section class="product-hero product-hero--outreach" id="hero" aria-labelledby="product-hero-heading">
       <div class="container product-hero__container">
-   <span class="product-hero__badge">
-     <img src="{{ asset('assets/product/ai.png') }}" alt="AI powered sales CRM badge icon for Suave outreach platform" title="AI powered sales CRM badge icon for Suave outreach platform" class="product-hero__badge-icon">
-     <span class="product-hero__badge-text">{{ $heroBadge }}</span>
-   </span>
+        <div class="product-hero__copy">
+          <span class="product-hero__badge">
+            <img src="{{ asset('assets/product/ai.png') }}" alt="Free Suave CRM badge icon for sales projects HR and invoicing" title="Free Suave CRM badge icon for sales projects HR and invoicing" class="product-hero__badge-icon">
+            <span class="product-hero__badge-text">{{ $heroBadge }}</span>
+          </span>
 
-        <div class="product-hero__headline-wrap">
-          <h1 id="product-hero-heading" class="product-hero__title">
-            <span class="product-hero__title-line">
-              <span class="product-hero__title-accent">Free CRM for</span> <span class="product-hero__title-soft">Agencies &amp; Startups</span>
-            </span>
-            <span class="product-hero__title-line">
-              <span class="product-hero__title-accent">Sales, Projects, HR &amp; Invoicing</span>
-            </span>
-            <span class="product-hero__title-line product-hero__title-soft">in One App</span>
-          </h1>
-        </div>
+          <div class="product-hero__headline-wrap">
+            @foreach ($heroFloatCards as $floatCard)
+              <aside
+                class="product-hero__float product-hero__float--{{ $floatCard['side'] }}"
+                aria-hidden="true"
+              >
+                <p class="product-hero__float-label">{{ $floatCard['label'] }}</p>
+                <p class="product-hero__float-value">{{ $floatCard['value'] }}</p>
+                <p class="product-hero__float-meta">{{ $floatCard['meta'] }}</p>
+                <p class="product-hero__float-change">{{ $floatCard['change'] }}</p>
+              </aside>
+            @endforeach
 
-        <p class="product-hero__subtitle">
-          Stop paying for five tools. Suave CRM gives small and mid-size teams a free sales pipeline, project management, timesheets, attendance, HR and invoicing, with an AI assistant built in. Sign up and start today, from anywhere in the world.
-        </p>
-
-        <div class="product-hero__actions">
-          <a href="{{ $contactHref }}" class="product-btn product-btn--primary">
-            Sign Up Free <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-          </a>
-          <a href="{{ $demoHref }}" class="product-btn product-btn--secondary product-btn--ghost">
-            Book a Demo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-          </a>
-        </div>
-
-        <p class="text-center text-xs sm:text-sm text-slate-300 -mt-6 sm:-mt-8 mb-8 sm:mb-10">
-          Free for small and mid-size companies &middot; No payment needed &middot; Works in any browser, worldwide
-        </p>
-
-        <hr class="product-hero__divider" aria-hidden="true">
-
-        <div class="product-hero__chips">
-          @foreach ($heroChips as $chip)
-            <div class="product-hero__chip">
-              <span class="product-hero__chip-icon">
-                <img src="{{ $chip['icon'] }}" alt="{{ $chip['alt'] }}" title="{{ $chip['alt'] }}" loading="lazy" decoding="async">
+            <h1 id="product-hero-heading" class="product-hero__title product-hero__title--free-crm">
+              <span class="product-hero__title-line">Free CRM for Agencies and</span>
+              <span class="product-hero__title-line product-hero__title-accent">Startups: Sales, Projects, HR and</span>
+              <span class="product-hero__title-line">
+                <span class="product-hero__title-accent">Invoicing</span>
+                <span class="product-hero__title-soft"> in One App</span>
               </span>
-              <span class="product-hero__chip-label">{{ $chip['label'] }}</span>
-            </div>
-          @endforeach
+            </h1>
+          </div>
+
+          <p class="product-hero__subtitle">
+            Stop paying for five tools.
+            <strong>Suave CRM</strong> gives small and mid-size teams a free
+            <strong>sales pipeline</strong>, project management, timesheets, attendance,
+            <strong>HR</strong> and <strong>invoicing</strong>, with an
+            <strong>AI assistant</strong> built in.
+            <strong>Sign up</strong> and <strong>start today</strong>, from anywhere in the world.
+          </p>
+
+          <form class="product-signup product-signup--hero" action="{{ $signupUrl }}" method="get" data-product-signup>
+            <label class="sr-only" for="product-hero-email">Work email</label>
+            <input
+              id="product-hero-email"
+              class="product-signup__input"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="Work email"
+            >
+            <button type="submit" class="product-btn product-btn--primary product-signup__btn">
+              Sign Up Free <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </form>
+
+          <ul class="product-hero__trust">
+            @foreach ($heroTrustItems as $trustItem)
+              <li class="product-hero__trust-item">
+                <img
+                  src="{{ asset('assets/icons/green-circle-check-icon.png') }}"
+                  alt="Included benefit check mark for Suave CRM free plan"
+                  title="Included benefit check mark for Suave CRM free plan"
+                  class="product-hero__trust-icon"
+                  width="18"
+                  height="18"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <span>{{ $trustItem }}</span>
+              </li>
+            @endforeach
+          </ul>
+
+          <p class="product-hero__demo-link">
+            <a href="{{ $demoHref }}">{{ $heroDemoLinkLabel }}</a>
+          </p>
         </div>
 
         <div class="product-hero__banner">
@@ -140,69 +177,57 @@
             @endforeach
           </div>
         </div>
+
+        <p class="product-hero__proof">
+          <q>{{ $heroProof['quote'] }}</q>
+          <span class="product-hero__proof-author">
+            <span class="product-hero__proof-avatar" aria-hidden="true">{{ $heroProof['initials'] }}</span>
+            <span class="product-hero__proof-meta">
+              <strong>{{ $heroProof['name'] }}</strong>
+              <span>{{ $heroProof['role'] }}, {{ $heroProof['company'] }}</span>
+            </span>
+          </span>
+        </p>
       </div>
     </section>
 
     <section class="product-glance" id="at-a-glance" aria-labelledby="glance-heading">
       <div class="container product-glance__container">
         <div class="product-glance__header">
-          <span class="product-glance__badge">At a Glance</span>
+          <span class="product-glance__badge">— At a Glance</span>
           <h2 id="glance-heading" class="product-glance__title">
-            Suave CRM <span class="product-glance__title-accent">at a glance</span>
+            Suave CRM <span class="product-glance__title-accent">at a Glance</span>
           </h2>
+          <p class="product-glance__subtitle">{{ $glanceSubtitle }}</p>
         </div>
 
-        <table class="product-glance__table">
-          <caption class="sr-only">Suave CRM key facts</caption>
-          <tbody>
-            @foreach ($glance as $row)
-              <tr>
-                <th scope="row">{{ $row['label'] }}</th>
-                <td>{{ $row['value'] }}</td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="product-how-it-works" id="how-it-works" aria-labelledby="how-it-works-heading">
-      <div class="container product-how-it-works__container">
-        <div class="product-how-it-works__header">
-          <span class="product-how-it-works__badge">Free Sales CRM</span>
-          <h2 id="how-it-works-heading" class="product-how-it-works__title">
-            Free Sales CRM <span class="product-how-it-works__title-accent">with AI Lead Scoring</span>
-          </h2>
-          <p class="product-how-it-works__subtitle">
-            Win more clients without a sales-ops team. Every lead lands in one place, AI tells you which ones to call first, and your pipeline updates itself as deals move.
-          </p>
-        </div>
-
-        <div class="product-how-it-works__grid">
-          @foreach ($howItWorksSteps as $step)
-            <article class="product-how-it-works__card">
-              <div class="product-how-it-works__icon">
-                <img src="{{ $step['icon'] }}" alt="{{ $step['alt'] }}" title="{{ $step['alt'] }}" loading="lazy" decoding="async">
-              </div>
-              <h3>{{ $step['title'] }}</h3>
-              <p>{{ $step['description'] }}</p>
-            </article>
+        <ul class="product-glance__grid" role="list">
+          @foreach ($glance as $row)
+            <li class="product-glance__card">
+              <span class="product-glance__icon product-glance__icon--{{ $row['tone'] }}" aria-hidden="true">
+                <i class="fa-solid {{ $row['icon'] }}"></i>
+              </span>
+              <h3 class="product-glance__card-title">{{ $row['label'] }}</h3>
+              <p class="product-glance__card-text">{{ $row['value'] }}</p>
+            </li>
           @endforeach
-        </div>
+        </ul>
       </div>
     </section>
+
   </div>
 
   <section class="product-add-ons" id="add-ons" aria-labelledby="add-ons-heading">
     <div class="container product-add-ons__container">
       <div class="product-add-ons__header">
-        <span class="product-add-ons__badge">Included Free</span>
+        <div class="product-add-ons__eyebrow">
+          <span class="product-add-ons__eyebrow-bar" aria-hidden="true"></span>
+          <span class="product-add-ons__badge">{{ $savings['badge'] }}</span>
+        </div>
         <h2 id="add-ons-heading" class="product-add-ons__title">
-          One Free CRM <span class="product-add-ons__title-accent">Instead of Five Subscriptions</span>
+          {{ $savings['title'] }} <span class="product-add-ons__title-accent">{{ $savings['titleAccent'] }}</span>
         </h2>
-        <p class="product-add-ons__subtitle">
-          Most growing teams pay separately for a CRM, a project tool, time tracking, an HR or attendance app and invoicing software, and many of those charge per user. When teams outgrow free plans, the bill climbs fast: HubSpot's Sales Hub Professional, for example, lists at USD 90 per seat per month billed annually, so 15 seats is USD 1,350 a month for the CRM alone. Suave CRM puts all five jobs in one app, free for small and mid-size companies.
-        </p>
+        <p class="product-add-ons__subtitle">{!! $savings['subtitleHtml'] !!}</p>
       </div>
 
       <div class="product-compare">
@@ -216,9 +241,16 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($savings as $row)
+            @foreach ($savings['rows'] as $row)
               <tr>
-                <th scope="row">{{ $row['job'] }}</th>
+                <th scope="row">
+                  <span class="product-compare__job">
+                    <span class="product-compare__job-icon" aria-hidden="true">
+                      <i class="fa-solid {{ $row['icon'] }}"></i>
+                    </span>
+                    <span class="product-compare__job-label">{{ $row['job'] }}</span>
+                  </span>
+                </th>
                 <td>{{ $row['usual'] }}</td>
                 <td>
                   <span class="product-compare__included">
@@ -233,57 +265,350 @@
       </div>
 
       <div class="product-add-ons__cta">
-        <x-frontend.cta-button :href="$contactHref">
-          Set up your workspace in minutes &mdash; Sign Up Free
-        </x-frontend.cta-button>
+        <x-frontend.cta-button :href="$signupUrl">{{ $savings['ctaLabel'] }}</x-frontend.cta-button>
       </div>
     </div>
   </section>
 
   @foreach ($featureSections as $section)
     @php($listTag = ($section['numbered'] ?? false) ? 'ol' : 'ul')
+    @php($visual = $section['visual'] ?? null)
+    @php($layout = $section['layout'] ?? '')
+    @php($isShowcase = $layout === 'showcase')
+    @php($isCards = $layout === 'cards')
+    @php($isAi = $layout === 'ai')
+    @php($isAudience = $layout === 'audience')
+    @php($isSteps = $layout === 'steps')
+    @php($isDarkModule = ($section['theme'] ?? '') === 'dark')
+    @php($cardCount = count($section['items'] ?? []))
+    @php($help = $section['help'] ?? null)
     <section
-      @class(['product-module', 'product-module--tint' => $loop->even])
+      @class([
+        'product-module',
+        'product-module--tint' => $loop->even && ! $isDarkModule && ! $isAi && ! $isAudience,
+        'product-module--showcase' => $isShowcase,
+        'product-module--cards' => $isCards,
+        'product-module--ai' => $isAi,
+        'product-module--audience' => $isAudience,
+        'product-module--steps' => $isSteps,
+        'product-module--dark' => $isDarkModule,
+        'product-module--cols-3' => $isCards && $cardCount === 3,
+      ])
       id="{{ $section['id'] }}"
       aria-labelledby="{{ $section['id'] }}-heading"
+      @if (filled($section['backgroundImage'] ?? null))
+        style="background-image: url('{{ $section['backgroundImage'] }}')"
+      @endif
     >
       <div class="container">
-        <header class="product-module__header">
-          <span class="product-module__badge">{{ $section['badge'] }}</span>
-          <h2 id="{{ $section['id'] }}-heading" class="product-module__title">
-            {{ $section['title'] }}
-            <span class="product-module__title-accent">{{ $section['titleAccent'] }}</span>
-          </h2>
-          @if (filled($section['subtitle']))
-            <p class="product-module__subtitle">{{ $section['subtitle'] }}</p>
-          @endif
-        </header>
+        @unless ($isSteps)
+          <header class="product-module__header">
+            <span class="product-module__badge">{{ $section['badge'] }}</span>
+            <h2 id="{{ $section['id'] }}-heading" class="product-module__title">
+              {{ $section['title'] }}
+              <span class="product-module__title-accent">{{ $section['titleAccent'] }}</span>
+            </h2>
+            @if (filled($section['subtitle']))
+              <p class="product-module__subtitle">{{ $section['subtitle'] }}</p>
+            @endif
+          </header>
+        @endunless
 
-        <{{ $listTag }} class="product-module__grid product-module__grid--{{ $section['columns'] }}">
-          @foreach ($section['items'] as $item)
-            <li class="product-module__card">
-              <span class="product-module__icon" aria-hidden="true">
-                @if ($section['numbered'] ?? false)
-                  {{ $loop->iteration }}
-                @else
+        @if ($isSteps)
+          <div class="product-module__body product-module__body--steps">
+            <div class="product-module__steps-intro">
+              <span class="product-module__badge">{{ $section['badge'] }}</span>
+              <h2 id="{{ $section['id'] }}-heading" class="product-module__title">
+                {{ $section['title'] }}
+                <span class="product-module__title-accent">{{ $section['titleAccent'] }}</span>
+              </h2>
+              @if (filled($section['subtitle']))
+                <p class="product-module__subtitle">{{ $section['subtitle'] }}</p>
+              @endif
+              @if (filled($section['cta'] ?? null))
+                <div class="product-module__cta product-module__cta--steps">
+                  <x-frontend.cta-button :href="$signupUrl">{{ $section['cta'] }}</x-frontend.cta-button>
+                </div>
+              @endif
+            </div>
+
+            <div class="product-module__steps-panel">
+              <ol class="product-module__steps-list">
+                @foreach ($section['items'] as $item)
+                  <li class="product-module__step">
+                    <span class="product-module__step-num" aria-hidden="true">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                    <div class="product-module__step-copy">
+                      <h3>{{ $item['title'] }}</h3>
+                      <p>{{ $item['description'] }}</p>
+                    </div>
+                    <span class="product-module__step-icon" aria-hidden="true">
+                      <i class="fa-solid {{ $item['icon'] }}"></i>
+                    </span>
+                  </li>
+                @endforeach
+              </ol>
+
+              @if (filled($help))
+                <div class="product-module__help">
+                  <span class="product-module__help-icon" aria-hidden="true">
+                    <i class="fa-solid fa-message"></i>
+                  </span>
+                  <div class="product-module__help-copy">
+                    <strong>{{ $help['title'] }}</strong>
+                    <p>{{ $help['body'] }}</p>
+                  </div>
+                  <a class="product-module__help-link" href="{{ $demoHref }}">{{ $help['linkLabel'] }}</a>
+                </div>
+              @endif
+            </div>
+          </div>
+        @elseif ($isAudience)
+          <ul class="product-module__list product-module__list--audience">
+            @foreach ($section['items'] as $item)
+              @php($itemImage = $item['image'] ?? '')
+              @php($itemImageAlt = $item['imageAlt'] ?? $item['title'])
+              <li class="product-module__audience-card">
+                <div class="product-module__audience-media">
+                  @if (filled($itemImage))
+                    <img
+                      src="{{ asset($itemImage) }}"
+                      alt="{{ $itemImageAlt }}"
+                      title="{{ $itemImageAlt }}"
+                      class="product-module__audience-image"
+                      width="220"
+                      height="180"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  @else
+                    <div class="product-module__audience-image-placeholder" aria-hidden="true"></div>
+                  @endif
+                </div>
+                <div class="product-module__audience-copy">
+                  <h3>{{ $item['title'] }}</h3>
+                  <p>{{ $item['description'] }}</p>
+                  <a class="product-module__audience-link" href="{{ $signupUrl }}">
+                    {{ $section['linkLabel'] ?? 'Explore solution →' }}
+                  </a>
+                </div>
+              </li>
+            @endforeach
+          </ul>
+        @elseif ($isAi)
+          <div class="product-module__body product-module__body--ai">
+            <div class="product-module__features">
+              <ul class="product-module__list product-module__list--ai">
+                @foreach ($section['items'] as $item)
+                  <li class="product-module__ai-item">
+                    <span class="product-module__icon product-module__icon--ai" aria-hidden="true">
+                      <i class="fa-solid {{ $item['icon'] }}"></i>
+                    </span>
+                    <div class="product-module__card-copy">
+                      <h3>{{ $item['title'] }}</h3>
+                      <p>{{ $item['description'] }}</p>
+                    </div>
+                  </li>
+                @endforeach
+              </ul>
+
+              @if (filled($section['cta'] ?? null))
+                <div class="product-module__cta product-module__cta--ai">
+                  <x-frontend.cta-button :href="$signupUrl">{{ $section['cta'] }}</x-frontend.cta-button>
+                </div>
+              @endif
+            </div>
+
+            @if (filled($visual) && ($visual['type'] ?? '') === 'ask-suave')
+              <div class="product-module__visual" aria-hidden="true">
+                <div class="product-ask-suave">
+                  <div class="product-ask-suave__head">
+                    <span class="product-ask-suave__avatar">
+                      <i class="fa-solid fa-robot"></i>
+                    </span>
+                    <div class="product-ask-suave__prompt-wrap">
+                      <p class="product-ask-suave__label">{{ $visual['label'] }}</p>
+                      <p class="product-ask-suave__prompt">{{ $visual['prompt'] }}</p>
+                    </div>
+                  </div>
+
+                  <div class="product-ask-suave__brief">
+                    <p class="product-ask-suave__brief-label">
+                      <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                      {{ $visual['briefLabel'] }}
+                    </p>
+                    <p class="product-ask-suave__brief-title">{{ $visual['briefTitle'] }}</p>
+                    <ul class="product-ask-suave__priorities">
+                      @foreach ($visual['priorities'] as $priority)
+                        <li>{{ $priority }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+
+                  <div class="product-ask-suave__input">
+                    <span>{{ $visual['inputPlaceholder'] }}</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            @endif
+          </div>
+        @elseif ($isCards)
+          <ul class="product-module__list product-module__list--cards">
+            @foreach ($section['items'] as $item)
+              <li @class(['product-module__card', 'product-module__card--stack', 'product-module__card--tone-'.($item['tone'] ?? 'blue')])>
+                <span class="product-module__icon" aria-hidden="true">
                   <i class="fa-solid {{ $item['icon'] }}"></i>
+                </span>
+                <div class="product-module__card-copy">
+                  <h3>{{ $item['title'] }}</h3>
+                  <p>{{ $item['description'] }}</p>
+                </div>
+              </li>
+            @endforeach
+          </ul>
+        @elseif ($isShowcase)
+          <div class="product-module__body product-module__body--showcase">
+            <ul class="product-module__list product-module__list--showcase">
+              @foreach ($section['items'] as $item)
+                @php($itemImage = $item['image'] ?? '')
+                @php($itemImageAlt = $item['imageAlt'] ?? $item['title'])
+                <li class="product-module__showcase-card">
+                  <div class="product-module__showcase-media">
+                    @if (filled($itemImage))
+                      <img
+                        src="{{ asset($itemImage) }}"
+                        alt="{{ $itemImageAlt }}"
+                        title="{{ $itemImageAlt }}"
+                        class="product-module__showcase-image"
+                        width="280"
+                        height="168"
+                        loading="lazy"
+                        decoding="async"
+                      >
+                    @else
+                      <div class="product-module__showcase-image-placeholder" aria-hidden="true"></div>
+                    @endif
+                    <span class="product-module__showcase-icon" aria-hidden="true">
+                      <i class="fa-solid {{ $item['icon'] }}"></i>
+                    </span>
+                  </div>
+                  <div class="product-module__showcase-copy">
+                    <h3>{{ $item['title'] }}</h3>
+                    <p>{{ $item['description'] }}</p>
+                  </div>
+                </li>
+              @endforeach
+            </ul>
+          </div>
+        @else
+          <div @class(['product-module__body', 'product-module__body--split' => filled($visual)])>
+            <div class="product-module__features">
+              <{{ $listTag }} class="product-module__list">
+                @foreach ($section['items'] as $item)
+                  <li class="product-module__card">
+                    <span class="product-module__icon" aria-hidden="true">
+                      @if ($section['numbered'] ?? false)
+                        {{ $loop->iteration }}
+                      @else
+                        <i class="fa-solid {{ $item['icon'] }}"></i>
+                      @endif
+                    </span>
+                    <div class="product-module__card-copy">
+                      <h3>{{ $item['title'] }}</h3>
+                      <p>{{ $item['description'] }}</p>
+                    </div>
+                  </li>
+                @endforeach
+              </{{ $listTag }}>
+
+              @if (filled($section['note'] ?? null))
+                <p class="product-module__note">{{ $section['note'] }}</p>
+              @endif
+
+              @if (filled($section['cta'] ?? null) || filled($section['noteLink'] ?? null))
+                <div class="product-module__cta">
+                  @if (filled($section['cta'] ?? null))
+                    <a class="product-module__cta-link" href="{{ $signupUrl }}">{{ $section['cta'] }}</a>
+                  @endif
+                  @if (filled($section['noteLink'] ?? null))
+                    <a class="product-module__cta-link product-module__cta-link--secondary" href="{{ $demoHref }}">{{ $section['noteLink'] }}</a>
+                  @endif
+                </div>
+              @endif
+            </div>
+
+            @if (filled($visual))
+              <div class="product-module__visual" aria-hidden="true">
+                @if (($visual['type'] ?? '') === 'pipeline')
+                  <div class="product-module-pipeline">
+                    <div class="product-module-pipeline__top">
+                      <div>
+                        <p class="product-module-pipeline__eyebrow">{{ $visual['eyebrow'] }}</p>
+                        <p class="product-module-pipeline__title">{{ $visual['title'] }}</p>
+                      </div>
+                      <span class="product-module-pipeline__action">{{ $visual['action'] }}</span>
+                    </div>
+
+                    <div class="product-module-pipeline__metrics">
+                      @foreach ($visual['metrics'] as $metric)
+                        <div class="product-module-pipeline__metric">
+                          <span class="product-module-pipeline__metric-icon">
+                            <i class="fa-solid {{ $metric['icon'] }}"></i>
+                          </span>
+                          <div>
+                            <span class="product-module-pipeline__metric-label">{{ $metric['label'] }}</span>
+                            <strong class="product-module-pipeline__metric-value">{{ $metric['value'] }}</strong>
+                          </div>
+                        </div>
+                      @endforeach
+                    </div>
+
+                    <div class="product-module-pipeline__stages">
+                      @foreach ($visual['stages'] as $stage)
+                        <div class="product-module-pipeline__stage">
+                          <div class="product-module-pipeline__stage-head">
+                            <span>{{ $stage['label'] }}</span>
+                            <span class="product-module-pipeline__count">{{ str_pad((string) $stage['count'], 2, '0', STR_PAD_LEFT) }}</span>
+                          </div>
+                          @foreach ($stage['leads'] as $lead)
+                            <div class="product-module-pipeline__lead">
+                              <span class="product-module-pipeline__avatar">{{ $lead['initials'] }}</span>
+                              <div class="product-module-pipeline__lead-copy">
+                                <strong>{{ $lead['company'] }}</strong>
+                                <span>{{ $lead['project'] }}</span>
+                              </div>
+                              <div class="product-module-pipeline__lead-meta">
+                                <strong>{{ $lead['amount'] }}</strong>
+                                <span class="product-module-pipeline__fit">↗ {{ $lead['fit'] }} fit</span>
+                              </div>
+                            </div>
+                          @endforeach
+                        </div>
+                      @endforeach
+                    </div>
+                  </div>
+                @else
+                  <div class="product-module-panel">
+                    <div class="product-module-panel__top">
+                      <p class="product-module-panel__eyebrow">{{ $visual['eyebrow'] }}</p>
+                      <p class="product-module-panel__title">{{ $visual['title'] }}</p>
+                    </div>
+                    <div class="product-module-panel__metrics">
+                      @foreach ($visual['metrics'] as $metric)
+                        <div class="product-module-panel__metric">
+                          <span>{{ $metric['label'] }}</span>
+                          <strong>{{ $metric['value'] }}</strong>
+                        </div>
+                      @endforeach
+                    </div>
+                    <ul class="product-module-panel__rows">
+                      @foreach ($visual['rows'] as $row)
+                        <li>{{ $row }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
                 @endif
-              </span>
-              <h3>{{ $item['title'] }}</h3>
-              <p>{{ $item['description'] }}</p>
-            </li>
-          @endforeach
-        </{{ $listTag }}>
-
-        @if (filled($section['note'] ?? null))
-          <p class="product-module__note">{{ $section['note'] }}</p>
-        @endif
-
-        @if (filled($section['cta'] ?? null))
-          <div class="product-module__cta">
-            <x-frontend.cta-button :href="$contactHref">{{ $section['cta'] }}</x-frontend.cta-button>
-            @if (filled($section['noteLink'] ?? null))
-              <x-frontend.cta-button :href="$demoHref" variant="secondary-light">{{ $section['noteLink'] }}</x-frontend.cta-button>
+              </div>
             @endif
           </div>
         @endif
@@ -338,28 +663,24 @@
     id="testimonial"
     :items="$testimonials"
     heading-id="product-testimonials-title"
-    eyebrow="Client feedback"
-    title="What our clients say"
-    subtitle="Read how teams use Suave CRM and work with Suave Creators."
+    eyebrow="Testimonial"
+    title="What clients say about Suave CRM"
+    subtitle=""
   >
-    <x-frontend.cta-button :href="route('case-studies')" variant="secondary-dark">See more client results</x-frontend.cta-button>
+    <x-frontend.cta-button :href="route('case-studies')" variant="secondary-dark">See more client results →</x-frontend.cta-button>
   </x-frontend.testimonials-section>
 
   <x-frontend.faq-section
     id="faq"
     heading-id="product-faq-heading"
-    eyebrow="Have questions about our CRM?"
-    title="Frequently Asked Questions: Free CRM, Pricing & Data Safety"
-    description="Here are answers to the most common questions regarding Suave CRM features, free plans, and data security."
+    eyebrow=""
+    title="FAQ"
+    description=""
     :qa="$faqs"
-    :media="'assets/media/diverse-team-data-meeting.webp'"
-    media-alt="Business team collaborating on Suave CRM workflows"
-    :show-cta="true"
-    cta-label="Get Free Consultation"
-    :cta-href="$contactHref"
+    :media="null"
+    :show-cta="false"
     question-heading="h3"
-    class="faq-section--align bg-cover bg-top bg-no-repeat"
-    style="background-image: url('{{ asset('assets/background/technology-section-bg.png') }}')"
+    class="faq-section--crm-builder"
   />
 
   <section
@@ -408,15 +729,25 @@
             <span class="product-sales-cta__title-accent">{{ $salesCta['titleAccent'] }}</span>
           </h2>
           <p class="product-sales-cta__description">{{ $salesCta['description'] }}</p>
-          <div class="product-sales-cta__actions">
-            <x-frontend.cta-button :href="$contactHref">{{ $salesCta['button'] }}</x-frontend.cta-button>
-            <x-frontend.cta-button :href="$demoHref" variant="secondary-dark">Book a Demo</x-frontend.cta-button>
-          </div>
-          <p class="product-sales-cta__note">No payment needed &middot; Available worldwide</p>
-          <div class="product-sales-cta__service-link">
-            <span>Built by Suave Creators</span>
-            <x-frontend.cta-button :href="route('service.show', 'custom-crm-development')" variant="secondary-dark">Custom CRM development experts</x-frontend.cta-button>
-          </div>
+          <form class="product-signup product-signup--on-dark" action="{{ $signupUrl }}" method="get" data-product-signup>
+            <label class="sr-only" for="product-final-email">Work email</label>
+            <input
+              id="product-final-email"
+              class="product-signup__input"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="Work email"
+            >
+            <button type="submit" class="product-btn product-btn--primary product-signup__btn">
+              {{ $salesCta['button'] }} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </form>
+          <p class="product-sales-cta__note">
+            No payment needed &middot; Available worldwide
+            &middot; <a href="{{ $demoHref }}">Prefer a walkthrough? Book a demo →</a>
+          </p>
         </div>
 
         <aside class="product-sales-cta__float product-sales-cta__float--insight" aria-hidden="true">
@@ -447,7 +778,7 @@
 @push('fixed-widgets')
 <div class="product-sticky-cta" data-product-sticky-cta>
   <p class="product-sticky-cta__text">Free CRM for your team</p>
-  <x-frontend.cta-button :href="$contactHref" variant="compact">Sign Up Free</x-frontend.cta-button>
+  <x-frontend.cta-button :href="$signupUrl" variant="compact">Sign Up Free</x-frontend.cta-button>
 </div>
 @endpush
 

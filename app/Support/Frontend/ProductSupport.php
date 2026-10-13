@@ -22,20 +22,24 @@ class ProductSupport
             'heroBadge' => 'Free CRM · Sales + Projects + HR + Invoicing',
             'heroTitle' => 'Free CRM for Agencies and Startups: Sales, Projects, HR and Invoicing in One App',
             'heroSubtitle' => 'Stop paying for five tools. Suave CRM gives small and mid-size teams a free sales pipeline, project management, timesheets, attendance, HR and invoicing, with an AI assistant built in. Sign up and start today, from anywhere in the world.',
-            'heroTrustLine' => 'Free for small and mid-size companies · No payment needed · Works in any browser, worldwide',
+            'heroTrustItems' => [
+                'Free for growing teams',
+                'No payment needed',
+                'Works worldwide',
+            ],
             'heroDemoLinkLabel' => 'Prefer a walkthrough first? Book a demo →',
             'heroProof' => self::heroProof(),
+            'heroFloatCards' => self::heroFloatCards(),
             'heroBackground' => asset('assets/product/product-top-sections-bg.webp'),
             'heroBannerTiles' => self::heroBannerTiles(),
-            'heroChips' => self::heroChips(),
             'heroBanner' => [
-                'src' => asset('assets/product/hero_banner.webp'),
+                'src' => asset('assets/product/hero_banner.gif'),
                 'backSrc' => asset('assets/product/hero_banner_back.webp'),
-                'alt' => 'Suave CRM demo dashboard with sales pipeline, today tasks, punch-in timer and attendance calendar',
+                'alt' => 'Animated flowing line motion graphic for Suave CRM free all-in-one CRM hero',
                 'backAlt' => 'Soft blue screen blend glow layer behind Suave CRM free all-in-one CRM hero banner',
             ],
             'glance' => self::glance(),
-            'howItWorksSteps' => self::howItWorksSteps(),
+            'glanceSubtitle' => 'The essentials your team needs to sell, deliver, track time and get paid—without stitching together five different subscriptions.',
             'savings' => self::savings(),
             'featureSections' => self::featureSections(),
             'dataPrivacy' => self::dataPrivacy(),
@@ -50,7 +54,7 @@ class ProductSupport
     }
 
     /**
-     * @return array{quote: string, name: string, role: string, company: string}
+     * @return array{quote: string, name: string, role: string, company: string, initials: string}
      */
     protected static function heroProof(): array
     {
@@ -59,6 +63,32 @@ class ProductSupport
             'name' => 'Amit Rana',
             'role' => 'Managing Director',
             'company' => 'Turbo Trans Corporation',
+            'initials' => 'AR',
+        ];
+    }
+
+    /**
+     * Floating metric cards flanking `.product-hero__headline-wrap`.
+     *
+     * @return array<int, array{side: string, label: string, value: string, meta: string, change: string}>
+     */
+    protected static function heroFloatCards(): array
+    {
+        return [
+            [
+                'side' => 'left',
+                'label' => 'Suave AI analyses',
+                'value' => '186',
+                'meta' => 'Website briefings',
+                'change' => '+41% SPIN prompts',
+            ],
+            [
+                'side' => 'right',
+                'label' => 'Cold emails sent',
+                'value' => '94',
+                'meta' => 'Via S-Mail',
+                'change' => '+38% Opens tracked',
+            ],
         ];
     }
 
@@ -96,62 +126,47 @@ class ProductSupport
     }
 
     /**
-     * @return array<int, array{icon: string, label: string, alt: string}>
-     */
-    protected static function heroChips(): array
-    {
-        return [
-            [
-                'icon' => asset('assets/product/ai_assistant.png'),
-                'label' => 'AI Assistant',
-                'alt' => 'AI assistant icon for Suave CRM',
-            ],
-            [
-                'icon' => asset('assets/product/smart_automation.png'),
-                'label' => 'Sales & Pipeline',
-                'alt' => 'Sales and pipeline management icon for Suave CRM',
-            ],
-            [
-                'icon' => asset('assets/product/real_time_analysis.png'),
-                'label' => 'Projects & HR',
-                'alt' => 'Projects, attendance, and HR icon for Suave CRM',
-            ],
-            [
-                'icon' => asset('assets/product/hero-chip-secure-reliable.png'),
-                'label' => 'Secure & Reliable',
-                'alt' => 'Security and reliability icon for Suave CRM',
-            ],
-        ];
-    }
-
-    /**
-     * @return array<int, array{label: string, value: string}>
+     * @return array<int, array{label: string, value: string, icon: string, tone: string}>
      */
     protected static function glance(): array
     {
         return [
-            ['label' => 'Price', 'value' => 'Free for small and mid-size companies'],
-            ['label' => "What's included", 'value' => 'Sales pipeline, AI lead scoring, projects and tasks, timesheets, attendance and HR, invoicing, team messaging, documents and an AI assistant'],
-            ['label' => 'Best for', 'value' => 'IT agencies, software development companies, web and digital agencies, startups and growing teams'],
-            ['label' => 'Platform', 'value' => 'Web app; works in any modern browser'],
-            ['label' => 'Availability', 'value' => 'Worldwide'],
-            ['label' => 'Email', 'value' => 'Send from your own Gmail account (optional connection)'],
-            ['label' => 'Getting started', 'value' => 'Sign up with your work email and start; demo available on request'],
-            ['label' => 'Made by', 'value' => 'Suave Creators, a US-registered software company with an engineering center in India'],
+            ['label' => 'Price', 'value' => 'Free for small and mid-size companies', 'icon' => 'fa-building', 'tone' => 'blue'],
+            ['label' => "What's included", 'value' => 'Sales pipeline, AI lead scoring, projects and tasks, timesheets, attendance and HR, invoicing, team messaging, documents and an AI assistant', 'icon' => 'fa-brain', 'tone' => 'purple'],
+            ['label' => 'Best for', 'value' => 'IT agencies, software development companies, web and digital agencies, startups and growing teams', 'icon' => 'fa-trophy', 'tone' => 'teal'],
+            ['label' => 'Platform', 'value' => 'Web app; works in any modern browser', 'icon' => 'fa-desktop', 'tone' => 'indigo'],
+            ['label' => 'Availability', 'value' => 'Worldwide', 'icon' => 'fa-globe', 'tone' => 'violet'],
+            ['label' => 'Email', 'value' => 'Send from your own Gmail account (optional connection)', 'icon' => 'fa-envelope', 'tone' => 'orange'],
+            ['label' => 'Getting started', 'value' => 'Sign up with your work email and start; demo available on request', 'icon' => 'fa-bolt', 'tone' => 'rose'],
+            ['label' => 'Made by', 'value' => 'Suave Creators, a US-registered software company with an engineering center in India', 'icon' => 'fa-code', 'tone' => 'magenta'],
         ];
     }
 
     /**
-     * @return array<int, array{job: string, usual: string}>
+     * @return array{
+     *     badge: string,
+     *     title: string,
+     *     titleAccent: string,
+     *     subtitleHtml: string,
+     *     ctaLabel: string,
+     *     rows: array<int, array{job: string, usual: string, icon: string}>
+     * }
      */
     protected static function savings(): array
     {
         return [
-            ['job' => 'Sales pipeline', 'usual' => 'A per-seat CRM'],
-            ['job' => 'Projects and tasks', 'usual' => 'A project management subscription'],
-            ['job' => 'Time tracking', 'usual' => 'A time-tracking app'],
-            ['job' => 'Attendance and HR', 'usual' => 'An HR or attendance tool'],
-            ['job' => 'Invoicing', 'usual' => 'An invoicing tool'],
+            'badge' => 'Included free',
+            'title' => 'One Free CRM',
+            'titleAccent' => 'Instead of Five Subscriptions',
+            'subtitleHtml' => 'Most growing teams pay separately for a <strong>CRM</strong>, a <strong>project tool</strong>, <strong>time tracking</strong>, an <strong>HR or attendance app</strong> and <strong>invoicing software</strong>, and many of those charge per user. When teams outgrow free plans, the bill climbs fast: <strong>HubSpot\'s Sales Hub Professional</strong>, for example, lists at <strong>USD 90</strong> per seat per month billed annually, so <strong>15 seats is USD 1,350 a month</strong> for the CRM alone. Suave CRM puts all five jobs in one app, free for small and mid-size companies.',
+            'ctaLabel' => 'Set up your workspace in minutes - Sign up Free',
+            'rows' => [
+                ['job' => 'Sales pipeline', 'usual' => 'A per-seat CRM', 'icon' => 'fa-chart-simple'],
+                ['job' => 'Projects and tasks', 'usual' => 'A project management subscription', 'icon' => 'fa-list-check'],
+                ['job' => 'Time tracking', 'usual' => 'A time-tracking app', 'icon' => 'fa-clock'],
+                ['job' => 'Attendance and HR', 'usual' => 'An HR or attendance tool', 'icon' => 'fa-calendar-check'],
+                ['job' => 'Invoicing', 'usual' => 'An invoicing tool', 'icon' => 'fa-file-invoice'],
+            ],
         ];
     }
 
@@ -167,9 +182,8 @@ class ProductSupport
                 'id' => 'how-it-works',
                 'badge' => 'Sales',
                 'title' => 'Free sales CRM with',
-                'titleAccent' => 'AI lead scoring',
+                'titleAccent' => 'AI Lead Scoring',
                 'subtitle' => 'Win more clients without a sales-ops team. Every lead lands in one place, AI tells you which ones to call first, and your pipeline updates itself as deals move.',
-                'columns' => 5,
                 'items' => [
                     ['icon' => 'fa-robot', 'title' => 'AI lead qualification', 'description' => 'Leads from forms, ads, your website, calls and email are scored automatically.'],
                     ['icon' => 'fa-layer-group', 'title' => 'Visual pipeline', 'description' => 'Every deal, conversation and next step on one board.'],
@@ -177,7 +191,8 @@ class ProductSupport
                     ['icon' => 'fa-bolt', 'title' => 'Suave AI briefings', 'description' => 'A short brief on each prospect before you reach out.'],
                     ['icon' => 'fa-envelope', 'title' => 'Email from your own Gmail', 'description' => 'Write, send and follow up from your real address with S-Mail, with AI drafts and open tracking.'],
                 ],
-                'cta' => 'Start with the free sales CRM → Sign Up Free',
+                'cta' => 'Start with the free Sales CRM →',
+                'visual' => self::salesPipelineVisual(),
             ],
             [
                 'id' => 'projects',
@@ -185,84 +200,137 @@ class ProductSupport
                 'title' => 'Free project management',
                 'titleAccent' => 'for client work',
                 'subtitle' => 'When a deal closes, the work starts in the same app. No hand-off, no copy-paste into another tool.',
-                'columns' => 4,
+                'layout' => 'showcase',
                 'items' => [
-                    ['icon' => 'fa-layer-group', 'title' => 'Projects & Tasks', 'description' => 'Kanban and list views, owners, due dates and an AI assistant for overdue and assigned work.'],
-                    ['icon' => 'fa-clock', 'title' => 'My tasks every morning', 'description' => "Each person sees what's due today, filtered by status, the moment they log in."],
-                    ['icon' => 'fa-laptop-file', 'title' => 'Documents', 'description' => 'Proposals, contracts and files stay on the client record.'],
-                    ['icon' => 'fa-message', 'title' => 'Messenger', 'description' => 'Discuss a deal or project in context, not in a separate chat app.'],
+                    [
+                        'icon' => 'fa-list-check',
+                        'title' => 'Projects & Tasks',
+                        'description' => 'Kanban and list views, owners, due dates and an AI assistant for overdue and assigned work.',
+                        'image' => '',
+                        'imageAlt' => 'Suave CRM projects and tasks board for client work management',
+                    ],
+                    [
+                        'icon' => 'fa-clock',
+                        'title' => 'My tasks every morning',
+                        'description' => "Each person sees what's due today, filtered by status, the moment they log in.",
+                        'image' => '',
+                        'imageAlt' => 'Suave CRM my tasks morning view for assigned project work',
+                    ],
+                    [
+                        'icon' => 'fa-laptop-file',
+                        'title' => 'Documents',
+                        'description' => 'Proposals, contracts and files stay on the client record.',
+                        'image' => '',
+                        'imageAlt' => 'Suave CRM documents attached to client project records',
+                    ],
+                    [
+                        'icon' => 'fa-message',
+                        'title' => 'Messenger',
+                        'description' => 'Discuss a deal or project in context, not in a separate chat app.',
+                        'image' => '',
+                        'imageAlt' => 'Suave CRM messenger for deal and project team discussion',
+                    ],
                 ],
             ],
             [
                 'id' => 'time-billing',
+                'layout' => 'cards',
+                'theme' => 'dark',
+                'backgroundImage' => asset('assets/background/technologies-backend-bg.webp'),
                 'badge' => 'Time and Billing',
                 'title' => 'Free timesheet',
                 'titleAccent' => 'and invoicing software',
                 'subtitle' => 'Track every billable hour and turn it into an invoice without exporting a spreadsheet.',
-                'columns' => 3,
                 'items' => [
-                    ['icon' => 'fa-clock-four', 'title' => 'Timesheets', 'description' => 'Log hours against projects and clients.'],
-                    ['icon' => 'fa-paper-plane', 'title' => 'Invoicing', 'description' => 'Create and send invoices from won deals and logged time.'],
-                    ['icon' => 'fa-magnifying-glass-chart', 'title' => 'Targets and analytics', 'description' => 'Sales goals, team progress and project dashboards, live.'],
+                    ['icon' => 'fa-calendar-check', 'title' => 'Timesheets', 'description' => 'Log hours against projects and clients.', 'tone' => 'blue'],
+                    ['icon' => 'fa-file-invoice', 'title' => 'Invoicing', 'description' => 'Create and send invoices from won deals and logged time.', 'tone' => 'blue'],
+                    ['icon' => 'fa-chart-simple', 'title' => 'Targets and analytics', 'description' => 'Sales goals, team progress and project dashboards, live.', 'tone' => 'blue'],
                 ],
             ],
             [
                 'id' => 'team-hr',
+                'layout' => 'cards',
                 'badge' => 'Team and HR',
                 'title' => 'Free attendance and HR software,',
                 'titleAccent' => 'built in',
                 'subtitle' => "Know who's working, how the month is going and where time goes, without a separate HR system.",
-                'columns' => 4,
                 'items' => [
-                    ['icon' => 'fa-clock', 'title' => 'Punch in and out', 'description' => "Punch in and out from the dashboard, with a live timer and each person's shift timing."],
-                    ['icon' => 'fa-user-group', 'title' => 'Attendance calendar', 'description' => 'Attendance calendar showing present days, leave and holidays.'],
-                    ['icon' => 'fa-magnifying-glass-chart', 'title' => 'Monthly insights', 'description' => 'Working vs. worked hours, attendance percentage and efficiency per person.'],
-                    ['icon' => 'fa-users', 'title' => 'HR profiles', 'description' => 'Department, designation, shift and joining date for the whole team.'],
+                    ['icon' => 'fa-clock', 'title' => 'Punch in and out', 'description' => "Punch in and out from the dashboard, with a live timer and each person's shift timing.", 'tone' => 'blue'],
+                    ['icon' => 'fa-calendar-check', 'title' => 'Attendance calendar', 'description' => 'Attendance calendar showing present days, leave and holidays.', 'tone' => 'purple'],
+                    ['icon' => 'fa-chart-simple', 'title' => 'Monthly insights', 'description' => 'Working vs. worked hours, attendance percentage and efficiency per person.', 'tone' => 'green'],
+                    ['icon' => 'fa-users', 'title' => 'HR profiles', 'description' => 'Department, designation, shift and joining date for the whole team.', 'tone' => 'violet'],
                 ],
             ],
             [
                 'id' => 'business-works',
-                'badge' => 'AI',
+                'layout' => 'ai',
+                'badge' => 'AI across your workspace',
                 'title' => 'Ask Suave: the AI assistant',
                 'titleAccent' => 'that runs through your CRM',
-                'subtitle' => '',
-                'columns' => 3,
+                'subtitle' => 'Ask Suave from any screen for answers about your leads, projects and tasks.',
                 'items' => [
-                    ['icon' => 'fa-message', 'title' => 'Ask from any screen', 'description' => 'Ask Suave from any screen for answers about your leads, projects and tasks.'],
-                    ['icon' => 'fa-bolt', 'title' => 'A daily brief', 'description' => 'A daily brief on every dashboard, so each person knows where to start.'],
-                    ['icon' => 'fa-robot', 'title' => 'AI everywhere it saves time', 'description' => 'Lead scoring, prospect briefings, follow-up drafts and task help, at no extra cost.'],
+                    ['icon' => 'fa-message', 'title' => 'A daily brief for everyone', 'description' => 'Know where to start the moment you log in.'],
+                    ['icon' => 'fa-bolt', 'title' => 'AI where it saves time', 'description' => 'Lead scores, prospect briefings and follow-up drafts.'],
+                    ['icon' => 'fa-wand-magic-sparkles', 'title' => 'Included at no extra cost', 'description' => 'No separate AI add-on or usage surprise.'],
                 ],
-                'cta' => 'Sign Up Free',
+                'cta' => 'Sign up Free',
+                'visual' => self::askSuaveVisual(),
             ],
             [
                 'id' => 'who-its-for',
+                'layout' => 'audience',
+                'theme' => 'dark',
+                'backgroundImage' => asset('assets/background/technologies-backend-bg.webp'),
                 'badge' => "Who It's For",
-                'title' => 'The free CRM built for how',
-                'titleAccent' => 'agencies and startups actually work',
-                'subtitle' => '',
-                'columns' => 4,
+                'title' => 'Built for how agencies and startups',
+                'titleAccent' => 'actually work',
+                'subtitle' => 'Track every billable hour and turn it into an invoice without exporting a spreadsheet.',
+                'linkLabel' => 'Explore solution →',
                 'items' => [
-                    ['icon' => 'fa-laptop-code', 'title' => 'IT services and software development companies', 'description' => 'Track deals, run client projects, log billable hours and invoice, all against the same client record.'],
-                    ['icon' => 'fa-pen-ruler', 'title' => 'Web, design and digital agencies', 'description' => "Juggle many clients at once: see every project's tasks, hours and invoices without switching tools."],
-                    ['icon' => 'fa-rocket', 'title' => 'Startups', 'description' => 'Get a CRM, project tracker and HR basics on day one, for free, and keep them as the team grows.'],
-                    ['icon' => 'fa-users', 'title' => 'Growing small and mid-size teams', 'description' => 'Replace spreadsheets and scattered apps with one system everyone actually logs into.'],
+                    [
+                        'title' => 'IT services and software development companies',
+                        'description' => 'Track deals, run client projects, log billable hours and invoice, all against the same client record.',
+                        'image' => '',
+                        'imageAlt' => 'IT services team using Suave CRM for client projects and billing',
+                    ],
+                    [
+                        'title' => 'Web, design and digital agencies',
+                        'description' => "Juggle many clients at once: see every project's tasks, hours and invoices without switching tools.",
+                        'image' => '',
+                        'imageAlt' => 'Digital agency designer managing multiple client projects in Suave CRM',
+                    ],
+                    [
+                        'title' => 'Startups',
+                        'description' => 'Get a CRM, project tracker and HR basics on day one, for free, and keep them as the team grows.',
+                        'image' => '',
+                        'imageAlt' => 'Startup team collaborating on sales and projects in Suave CRM',
+                    ],
+                    [
+                        'title' => 'Growing small and mid-size teams',
+                        'description' => 'Replace spreadsheets and scattered apps with one system everyone actually logs into.',
+                        'image' => '',
+                        'imageAlt' => 'Small business team meeting around Suave CRM workspace',
+                    ],
                 ],
             ],
             [
                 'id' => 'getting-started',
+                'layout' => 'steps',
                 'badge' => 'Getting Started',
-                'title' => 'How to start using',
-                'titleAccent' => 'Suave CRM for free',
-                'subtitle' => '',
-                'columns' => 3,
-                'numbered' => true,
+                'title' => 'Start using Suave CRM',
+                'titleAccent' => 'for free',
+                'subtitle' => 'A clean workspace in minutes, not a month-long software implementation.',
                 'items' => [
-                    ['title' => 'Sign up with your work email', 'description' => 'No payment needed.'],
-                    ['title' => 'Invite your team', 'description' => 'Switch on the modules you need: sales, projects, timesheets, HR or invoicing.'],
-                    ['title' => 'Add your first leads and projects', 'description' => 'Let Ask Suave guide the rest.'],
+                    ['icon' => 'fa-envelope', 'title' => 'Sign up with your work email', 'description' => 'No payment needed.'],
+                    ['icon' => 'fa-users', 'title' => 'Invite your team', 'description' => 'Switch on sales, projects, timesheets, HR or invoicing.'],
+                    ['icon' => 'fa-gears', 'title' => 'Add your first leads and projects', 'description' => 'Let Ask Suave guide the rest.'],
                 ],
-                'note' => "Want help setting up? Book a demo and we'll walk your team through it.",
-                'cta' => 'Sign Up Free',
+                'cta' => 'Create your Workspace →',
+                'help' => [
+                    'title' => 'Want help setting up?',
+                    'body' => "Book a demo and we'll walk your team through it.",
+                    'linkLabel' => 'Book a Demo →',
+                ],
             ],
             [
                 'id' => 'why-suave',
@@ -270,7 +338,6 @@ class ProductSupport
                 'title' => 'Why growing teams choose',
                 'titleAccent' => 'Suave CRM',
                 'subtitle' => '',
-                'columns' => 3,
                 'items' => [
                     ['icon' => 'fa-check', 'title' => 'Free for small and mid-size companies', 'description' => 'No per-seat bill that grows with every hire.'],
                     ['icon' => 'fa-layer-group', 'title' => 'One login for the whole company', 'description' => 'Sales, delivery, HR and billing share the same data.'],
@@ -279,7 +346,112 @@ class ProductSupport
                     ['icon' => 'fa-shield-halved', 'title' => 'Your data stays yours', 'description' => 'We never sell it, and Gmail access is optional and revocable.'],
                     ['icon' => 'fa-code', 'title' => 'Built by engineers', 'description' => 'Suave CRM is made by Suave Creators, who also build custom CRMs for companies that need a fully owned system.'],
                 ],
+                'visual' => self::modulePanelVisual(
+                    'Why Suave',
+                    'What you keep',
+                    [
+                        ['label' => 'Price', 'value' => 'Free'],
+                        ['label' => 'AI', 'value' => 'Included'],
+                        ['label' => 'Tools replaced', 'value' => '5'],
+                    ],
+                    ['No per-seat bill', 'One shared login', 'AI included', 'Data stays yours'],
+                ),
             ],
+        ];
+    }
+
+    /**
+     * @return array{
+     *     type: string,
+     *     eyebrow: string,
+     *     title: string,
+     *     action: string,
+     *     metrics: array<int, array{label: string, value: string, icon: string}>,
+     *     stages: array<int, array{label: string, count: int, leads: array<int, array{initials: string, company: string, project: string, amount: string, fit: string}>}>
+     * }
+     */
+    protected static function salesPipelineVisual(): array
+    {
+        return [
+            'type' => 'pipeline',
+            'eyebrow' => 'Sales Pipeline',
+            'title' => 'Opportunities',
+            'action' => '+ Add Lead',
+            'metrics' => [
+                ['label' => 'Pipeline value', 'value' => '$384,200', 'icon' => 'fa-chart-simple'],
+                ['label' => 'Conversion', 'value' => '28.4%', 'icon' => 'fa-chart-simple'],
+                ['label' => 'AI Qualified', 'value' => '64 leads', 'icon' => 'fa-robot'],
+            ],
+            'stages' => [
+                [
+                    'label' => 'New Leads',
+                    'count' => 12,
+                    'leads' => [
+                        ['initials' => 'FL', 'company' => 'Frame Labs', 'project' => 'Website redesign', 'amount' => '$24,500', 'fit' => '94'],
+                        ['initials' => 'NC', 'company' => 'Northstar Co.', 'project' => 'Website redesign', 'amount' => '$18,200', 'fit' => '91'],
+                    ],
+                ],
+                [
+                    'label' => 'Qualified',
+                    'count' => 8,
+                    'leads' => [
+                        ['initials' => 'LS', 'company' => 'Lumen Studio', 'project' => 'Website redesign', 'amount' => '$32,000', 'fit' => '96'],
+                        ['initials' => 'AP', 'company' => 'Apex Partners', 'project' => 'Website redesign', 'amount' => '$21,750', 'fit' => '89'],
+                    ],
+                ],
+                [
+                    'label' => 'Proposal',
+                    'count' => 5,
+                    'leads' => [
+                        ['initials' => 'HV', 'company' => 'Harbor Ventures', 'project' => 'Website redesign', 'amount' => '$41,000', 'fit' => '97'],
+                        ['initials' => 'BK', 'company' => 'Brightline Kit', 'project' => 'Website redesign', 'amount' => '$15,400', 'fit' => '88'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<int, array{label: string, value: string}>  $metrics
+     * @param  array<int, string>  $rows
+     * @return array{type: string, eyebrow: string, title: string, metrics: array<int, array{label: string, value: string}>, rows: array<int, string>}
+     */
+    protected static function modulePanelVisual(string $eyebrow, string $title, array $metrics, array $rows): array
+    {
+        return [
+            'type' => 'panel',
+            'eyebrow' => $eyebrow,
+            'title' => $title,
+            'metrics' => $metrics,
+            'rows' => $rows,
+        ];
+    }
+
+    /**
+     * @return array{
+     *     type: string,
+     *     label: string,
+     *     prompt: string,
+     *     briefLabel: string,
+     *     briefTitle: string,
+     *     priorities: array<int, string>,
+     *     inputPlaceholder: string
+     * }
+     */
+    protected static function askSuaveVisual(): array
+    {
+        return [
+            'type' => 'ask-suave',
+            'label' => 'Ask Suave',
+            'prompt' => 'What needs my attention today?',
+            'briefLabel' => "Here's your daily brief",
+            'briefTitle' => '3 priorities for this morning',
+            'priorities' => [
+                'Call Nova systems - high-intent lead',
+                'Atlas proposal is due today',
+                '2 project tasks need reassignment',
+            ],
+            'inputPlaceholder' => 'Ask about leads, tasks, or projects...',
         ];
     }
 
@@ -384,11 +556,6 @@ class ProductSupport
                 'quote' => $testimonial['quote'],
                 'name' => $testimonial['name'],
                 'role' => $testimonial['role'].', '.$testimonial['company'],
-            ],
-            [
-                'quote' => 'We run our own projects, billing, and team on Suave CRM every day. One workspace replaced the stack of tools we used to juggle.',
-                'name' => 'Suave Creators Team',
-                'role' => 'Product Team, Suave Creators',
             ],
         ];
     }
@@ -643,8 +810,8 @@ class ProductSupport
             'applicationSubCategory' => 'Free CRM with project management, timesheets, HR and invoicing',
             'operatingSystem' => 'Web browser',
             'isAccessibleForFree' => true,
-            'image' => asset('assets/product/product-hero-banner.webp'),
-            'screenshot' => asset('assets/product/product-hero-banner.webp'),
+            'image' => asset('assets/product/product-og-banner.webp'),
+            'screenshot' => asset('assets/product/hero_banner.webp'),
             'publisher' => [
                 '@id' => $baseUrl.'/#organization',
             ],

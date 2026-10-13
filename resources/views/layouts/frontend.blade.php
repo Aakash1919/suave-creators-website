@@ -362,10 +362,11 @@
                 />
             @elseif (request()->routeIs('product*'))
                 <x-layouts.topbar
+                    href-route="https://the-suave.app/"
                     title="Free CRM for agencies and startups:"
                     subtitle="sales, projects, HR and invoicing in one app."
-                    cta-label="Sign up free"
-                    :href-route="route('contact-us')"
+                    cta-label="Sign up free →"
+                    icon-alt="Free Suave CRM announcement icon for agencies and startups"
                 />
             @else
                 <x-layouts.topbar />

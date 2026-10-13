@@ -384,6 +384,7 @@ return [
             'description' => 'Free CRM with sales pipeline, projects, timesheets, HR and invoicing in one app. Built for agencies and startups worldwide. Sign up free, no payment needed.',
             'og_title' => 'One Free CRM Instead of Five Subscriptions | Suave CRM',
             'og_description' => 'Sales pipeline, projects, timesheets, attendance, HR and invoicing with AI built in. Free for small and mid-size companies, worldwide.',
+            'twitter_title' => 'Free All-in-One CRM for Agencies & Startups | Suave CRM',
             'twitter_description' => 'Sales, projects, timesheets, HR and invoicing in one free app. Sign up free, no payment needed.',
             'og_image' => 'assets/product/product-og-banner.webp',
             'og_image_width' => 1200,
