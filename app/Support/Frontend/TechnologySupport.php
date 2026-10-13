@@ -36,7 +36,7 @@ class TechnologySupport
             'primaryCta' => 'Get a Scoped Estimate',
             'secondaryCta' => 'Hire Developers',
             'bannerBackgroundImage' => 'assets/background/technologies-hero-bg.webp',
-            'heroVisualImage' => 'assets/media/technology-hero.webp',
+            'heroVisualImage' => 'assets/media/hero-technology.webp',
             'heroVisualLabel' => 'Laravel React and ecommerce technology logos with web software development previews',
             'trust' => self::trust(),
             'stack' => self::stack(),
@@ -97,15 +97,15 @@ class TechnologySupport
             'titleAccent' => 'Technology Stack',
             'description' => 'Suave Creators uses Laravel and Node.js for back-end development, React, Angular and Vue.js for web front ends, React Native for cross-platform mobile apps, WordPress and headless CMS setups for content platforms, and Shopify Plus and Magento (Adobe Commerce) for e-commerce. Laravel is our primary back-end framework.',
             'items' => [
-                self::stackItem('Laravel (PHP)', 'laravel', 'Back end', 'laravel', 'Secure APIs, CRM and ERP platforms, database-heavy business applications', 'Laravel logo for Suave Creators backend development', 'Web application development', 'web-development-services'),
-                self::stackItem('Node.js', 'nodejs', 'Back end', 'node', 'Real-time features, WebSockets, microservices, streaming APIs', 'Node.js logo for Suave Creators backend development', 'Web application development', 'web-development-services'),
-                self::stackItem('React', 'react', 'Front end', 'react', 'Interactive web interfaces, dashboards, single-page applications', 'React logo for Suave Creators web applications', 'UI/UX design', 'ui-ux-design-services'),
-                self::stackItem('React Native', 'react-native', 'Mobile', 'react-native', 'iOS and Android apps from one codebase', 'React Native logo for Suave Creators mobile app development', 'Web application development', 'web-development-services'),
-                self::stackItem('Angular', 'angular', 'Front end', 'angular', 'Enterprise administration portals, large structured front ends', 'Angular logo for Suave Creators web development', 'Enterprise software', 'enterprise-software-solutions'),
-                self::stackItem('Vue.js', 'vuejs', 'Front end', 'vue', 'Lightweight reactive interfaces, progressive single-page applications', 'Vue.js logo for Suave Creators frontend development', 'Web application development', 'web-development-services'),
-                self::stackItem('WordPress & Headless CMS', 'wordpress', 'Content', 'wordpress', 'Marketing sites, publishing, decoupled content delivery', 'WordPress logo for Suave Creators content platforms', 'Web application development', 'web-development-services'),
-                self::stackItem('Shopify Plus', 'shopify-plus', 'E-commerce', 'shopify', 'High-volume stores, custom themes, headless storefronts', 'Shopify logo for Suave Creators ecommerce development', 'E-commerce development', 'e-commerce-development'),
-                self::stackItem('Magento (Adobe Commerce)', 'magento', 'E-commerce', 'magento', 'B2B commerce, multi-store and multi-currency catalogs', 'Magento logo for Suave Creators ecommerce development', 'E-commerce development', 'e-commerce-development'),
+                self::stackItem('Laravel (PHP)', 'laravel', 'Back end', 'laravel', 'Secure APIs, CRM and ERP platforms, database-heavy business applications', 'Laravel logo for Suave Creators backend development'),
+                self::stackItem('Node.js', 'nodejs', 'Back end', 'node', 'Real-time features, WebSockets, microservices, streaming APIs', 'Node.js logo for Suave Creators backend development'),
+                self::stackItem('React', 'react', 'Front end', 'react', 'Interactive web interfaces, dashboards, single-page applications', 'React logo for Suave Creators web applications'),
+                self::stackItem('React Native', 'react-native', 'Mobile', 'react-native', 'iOS and Android apps from one codebase', 'React Native logo for Suave Creators mobile app development'),
+                self::stackItem('Angular', 'angular', 'Front end', 'angular', 'Enterprise administration portals, large structured front ends', 'Angular logo for Suave Creators web development'),
+                self::stackItem('Vue.js', 'vuejs', 'Front end', 'vue', 'Lightweight reactive interfaces, progressive single-page applications', 'Vue.js logo for Suave Creators frontend development'),
+                self::stackItem('WordPress & Headless CMS', 'wordpress', 'Content', 'wordpress', 'Marketing sites, publishing, decoupled content delivery', 'WordPress logo for Suave Creators content platforms'),
+                self::stackItem('Shopify Plus', 'shopify-plus', 'E-commerce', 'shopify', 'High-volume stores, custom themes, headless storefronts', 'Shopify logo for Suave Creators ecommerce development'),
+                self::stackItem('Magento (Adobe Commerce)', 'magento', 'E-commerce', 'magento', 'B2B commerce, multi-store and multi-currency catalogs', 'Magento logo for Suave Creators ecommerce development'),
             ],
         ];
     }
@@ -120,8 +120,6 @@ class TechnologySupport
         string $tone,
         string $usage,
         string $logoAlt,
-        string $serviceLabel,
-        string $serviceSlug,
     ): array {
         return [
             'name' => $name,
@@ -131,9 +129,6 @@ class TechnologySupport
             'usage' => $usage,
             'logo' => self::logoPath($tone),
             'logoAlt' => $logoAlt,
-            'serviceLabel' => $serviceLabel,
-            'serviceRoute' => 'service.show',
-            'serviceParams' => ['slug' => $serviceSlug],
         ];
     }
 
@@ -165,12 +160,8 @@ class TechnologySupport
                         'Integrations with third-party tools through APIs and webhooks',
                     ],
                     'Laravel suits applications with a lot of business logic and relational data. Its conventions make a codebase predictable for the next developer, migrations keep database changes versioned with the code, and queues move slow work such as imports, emails and AI calls out of the user\'s request. PHP hosting and PHP developers are widely available, which keeps long-term maintenance practical.',
-                    'the core of the product is thousands of long-lived real-time connections, such as live chat or vehicle tracking. A common pattern is a Laravel core with a separate Node.js service for the real-time layer.',
+                    'The core of the product is thousands of long-lived real-time connections, such as live chat or vehicle tracking. A common pattern is a Laravel core with a separate Node.js service for the real-time layer.',
                     'React, Vue.js or Angular front ends · React Native apps through Laravel APIs · Node.js services for real-time features',
-                    [
-                        self::serviceLink('Custom CRM development', 'custom-crm-development'),
-                        self::serviceLink('Enterprise software solutions', 'enterprise-software-solutions'),
-                    ],
                 ),
                 self::detailColumn(
                     'node',
@@ -184,13 +175,9 @@ class TechnologySupport
                         'Lightweight and streaming API back ends, including streamed responses from AI models',
                         'Integration and webhook-processing services',
                     ],
-                    'one language, JavaScript or TypeScript, across front end and back end; efficient handling of high concurrency; and the npm ecosystem, which covers almost every integration.',
-                    'the work is CPU-heavy, such as large report generation or image processing. Long computations block Node\'s event loop, so they belong in worker threads, a queue or a separate service.',
+                    'One language, JavaScript or TypeScript, across front end and back end; efficient handling of high concurrency; and the npm ecosystem, which covers almost every integration.',
+                    'The work is CPU-heavy, such as large report generation or image processing. Long computations block Node\'s event loop, so they belong in worker threads, a queue or a separate service.',
                     'React, Vue.js and Angular front ends · Laravel back ends · React Native apps',
-                    [
-                        self::serviceLink('Web application development', 'web-development-services'),
-                        self::serviceLink('AI solutions', 'ai-solutions'),
-                    ],
                 ),
             ],
             'chooser' => [
@@ -254,12 +241,9 @@ class TechnologySupport
                         'Customer portals',
                         'Front ends for headless CMS and headless commerce builds',
                     ],
-                    'the largest ecosystem and hiring pool of the three; it pairs with any API back end; and its component logic carries over to mobile apps through React Native, part of the same React & React Native practice.',
+                    'The largest ecosystem and hiring pool of the three; it pairs with any API back end; and its component logic carries over to mobile apps through React Native, part of the same React & React Native practice.',
                     '',
                     'Laravel or Node.js APIs · React Native · headless WordPress · Shopify\'s Hydrogen framework, which is built on React',
-                    [
-                        self::serviceLink('UI/UX design services', 'ui-ux-design-services'),
-                    ],
                 ),
                 self::detailColumn(
                     'angular',
@@ -272,12 +256,9 @@ class TechnologySupport
                         'Internal enterprise tools with many forms, roles and workflows',
                         'Long-lived front ends maintained by several teams',
                     ],
-                    'enforced structure and TypeScript typing reduce drift in large codebases, and modular dependency injection keeps parts testable and replaceable.',
-                    'you are building a small interactive site or marketing pages. Angular\'s structure adds overhead there; React or Vue.js is lighter.',
+                    'Enforced structure and TypeScript typing reduce drift in large codebases, and modular dependency injection keeps parts testable and replaceable.',
+                    'You are building a small interactive site or marketing pages. Angular\'s structure adds overhead there; React or Vue.js is lighter.',
                     '',
-                    [
-                        self::serviceLink('Enterprise software solutions', 'enterprise-software-solutions'),
-                    ],
                 ),
                 self::detailColumn(
                     'vue',
@@ -290,12 +271,9 @@ class TechnologySupport
                         'Progressive single-page applications',
                         'Interactive components added to existing server-rendered applications, such as Laravel pages',
                     ],
-                    'a gentle learning curve, reactive data binding and single-file components. Vue.js also has a long-standing pairing with Laravel; Laravel\'s official starter kits include a Vue option.',
+                    'A gentle learning curve, reactive data binding and single-file components. Vue.js also has a long-standing pairing with Laravel; Laravel\'s official starter kits include a Vue option.',
                     '',
                     '',
-                    [
-                        self::serviceLink('Web application development', 'web-development-services'),
-                    ],
                 ),
             ],
             'compare' => [
@@ -333,11 +311,7 @@ class TechnologySupport
             ],
             'whyTitle' => 'Why businesses choose it',
             'why' => 'One codebase for two platforms reduces build and maintenance effort, and native modules can be added when a feature needs direct device access.',
-            'consider' => 'the app is dominated by heavy 3D graphics or deep platform-specific hardware features; fully native development may justify its extra cost there.',
-            'related' => [
-                self::serviceLink('Web application development', 'web-development-services'),
-                self::serviceLink('Custom CRM development', 'custom-crm-development'),
-            ],
+            'consider' => 'The app is dominated by heavy 3D graphics or deep platform-specific hardware features; fully native development may justify its extra cost there.',
             'features' => [
                 [
                     'key' => 'platforms',
@@ -396,10 +370,9 @@ class TechnologySupport
                         'Marketing and corporate websites',
                         'Secure enterprise content setups with editorial roles and hardened configuration',
                     ],
-                    'a familiar editor for non-technical teams, a large plugin ecosystem, and a PHP base that fits alongside Laravel systems.',
-                    'plugin sprawl is the main source of WordPress security and speed problems. Keep plugins few, maintained and updated.',
+                    'A familiar editor for non-technical teams, a large plugin ecosystem, and a PHP base that fits alongside Laravel systems.',
+                    'Plugin sprawl is the main source of WordPress security and speed problems. Keep plugins few, maintained and updated.',
                     '',
-                    [],
                     'Watch-out',
                 ),
                 self::detailColumn(
@@ -410,12 +383,8 @@ class TechnologySupport
                     'A headless CMS stores and manages content but delivers it through an API instead of rendering web pages itself. The front end is a separate application, for example in React or Vue.js. This decoupled architecture lets one content source feed a website, a mobile app and other channels. WordPress can run headless through its REST API, so editors keep the familiar dashboard while the public site is built as a modern front end.',
                     [],
                     '',
-                    'the same content must reach several channels, the front end needs full design and performance freedom, or you want the editing system separated from the public site.',
-                    'it is a straightforward marketing site managed by a small team; classic WordPress is simpler and cheaper to run.',
-                    [
-                        self::serviceLink('Web application development', 'web-development-services'),
-                        self::serviceLink('UI/UX design services', 'ui-ux-design-services'),
-                    ],
+                    'The same content must reach several channels, the front end needs full design and performance freedom, or you want the editing system separated from the public site.',
+                    'It is a straightforward marketing site managed by a small team; classic WordPress is simpler and cheaper to run.',
                     'Go headless when',
                     'Stay traditional when',
                 ),
@@ -447,10 +416,9 @@ class TechnologySupport
                         'Custom app integrations with ERP, CRM and inventory systems (Shopify now calls the older "private apps" custom apps)',
                         'Headless storefronts built on the Storefront API, including React-based front ends',
                     ],
-                    'no infrastructure to manage, enterprise features for checkout customisation and automation, and a fast path to launch.',
-                    'catalog, pricing and B2B rules are unusually complex, or you need full control of hosting and code. Magento (Adobe Commerce) or a custom platform may fit better.',
+                    'No infrastructure to manage, enterprise features for checkout customisation and automation, and a fast path to launch.',
+                    'Catalog, pricing and B2B rules are unusually complex, or you need full control of hosting and code. Magento (Adobe Commerce) or a custom platform may fit better.',
                     '',
-                    [],
                 ),
                 self::detailColumn(
                     'magento',
@@ -464,15 +432,10 @@ class TechnologySupport
                         'Multi-currency global retail platforms',
                         'Integrations with ERP and product data systems',
                     ],
-                    'full code-level customisation, a native multi-store structure and extensive B2B features.',
-                    'you want minimal hosting and maintenance. Magento needs experienced developers and managed infrastructure; Shopify Plus shifts that work to Shopify.',
+                    'Full code-level customisation, a native multi-store structure and extensive B2B features.',
+                    'You want minimal hosting and maintenance. Magento needs experienced developers and managed infrastructure; Shopify Plus shifts that work to Shopify.',
                     '',
-                    [],
                 ),
-            ],
-            'related' => [
-                self::serviceLink('E-commerce development', 'e-commerce-development'),
-                self::industryLink('Retail and e-commerce solutions', 'retail-ecommerce-solutions'),
             ],
             'compareTitle' => 'Shopify Plus vs Magento (Adobe Commerce)',
             'compare' => [
@@ -784,7 +747,6 @@ class TechnologySupport
 
     /**
      * @param  list<string>  $builds
-     * @param  list<array{label: string, route: string, params: array<string, string>}>  $related
      * @return array<string, mixed>
      */
     protected static function detailColumn(
@@ -797,7 +759,6 @@ class TechnologySupport
         string $why,
         string $consider,
         string $works,
-        array $related,
         string $considerLabel = 'Consider a different fit when',
         string $worksLabel = 'Works with',
     ): array {
@@ -814,31 +775,6 @@ class TechnologySupport
             'considerLabel' => $considerLabel,
             'works' => $works,
             'worksLabel' => $worksLabel,
-            'related' => $related,
-        ];
-    }
-
-    /**
-     * @return array{label: string, route: string, params: array<string, string>}
-     */
-    protected static function serviceLink(string $label, string $slug): array
-    {
-        return [
-            'label' => $label,
-            'route' => 'service.show',
-            'params' => ['slug' => $slug],
-        ];
-    }
-
-    /**
-     * @return array{label: string, route: string, params: array<string, string>}
-     */
-    protected static function industryLink(string $label, string $slug): array
-    {
-        return [
-            'label' => $label,
-            'route' => 'industry.show',
-            'params' => ['slug' => $slug],
         ];
     }
 

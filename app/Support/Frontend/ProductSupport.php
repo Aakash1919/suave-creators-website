@@ -4,6 +4,8 @@ namespace App\Support\Frontend;
 
 class ProductSupport
 {
+    public const SIGNUP_URL = 'https://the-suave.app/';
+
     /**
      * @return array<string, mixed>
      */
@@ -14,17 +16,23 @@ class ProductSupport
             'mainClass' => 'site-main product-layout-main',
             'useHeroBackground' => true,
             'heroBackgroundImage' => '',
-            'contactHref' => ContactSupport::demoHref(),
+            'contactHref' => self::SIGNUP_URL,
             'demoHref' => ContactSupport::demoHref(),
+            'signupUrl' => self::SIGNUP_URL,
             'heroBadge' => 'Free CRM · Sales + Projects + HR + Invoicing',
+            'heroTitle' => 'Free CRM for Agencies and Startups: Sales, Projects, HR and Invoicing in One App',
+            'heroSubtitle' => 'Stop paying for five tools. Suave CRM gives small and mid-size teams a free sales pipeline, project management, timesheets, attendance, HR and invoicing, with an AI assistant built in. Sign up and start today, from anywhere in the world.',
+            'heroTrustLine' => 'Free for small and mid-size companies · No payment needed · Works in any browser, worldwide',
+            'heroDemoLinkLabel' => 'Prefer a walkthrough first? Book a demo →',
+            'heroProof' => self::heroProof(),
             'heroBackground' => asset('assets/product/product-top-sections-bg.webp'),
             'heroBannerTiles' => self::heroBannerTiles(),
             'heroChips' => self::heroChips(),
             'heroBanner' => [
-                'src' => asset('assets/product/hero_banner.gif'),
+                'src' => asset('assets/product/hero_banner.webp'),
                 'backSrc' => asset('assets/product/hero_banner_back.webp'),
-                'alt' => 'Professional executive with animated blue digital energy streaks for Suave CRM platform',
-                'backAlt' => 'Soft blue screen blend glow layer behind Suave CRM product hero banner',
+                'alt' => 'Suave CRM demo dashboard with sales pipeline, today tasks, punch-in timer and attendance calendar',
+                'backAlt' => 'Soft blue screen blend glow layer behind Suave CRM free all-in-one CRM hero banner',
             ],
             'glance' => self::glance(),
             'howItWorksSteps' => self::howItWorksSteps(),
@@ -35,6 +43,22 @@ class ProductSupport
             'salesCta' => self::salesCta(),
             'faqs' => self::faqs(),
             'pricing' => self::pricing(),
+            'seoTwitterTitle' => 'Free All-in-One CRM for Agencies & Startups | Suave CRM',
+            'seoTwitterDescription' => 'Sales, projects, timesheets, HR and invoicing in one free app. Sign up free, no payment needed.',
+            'seoOgImageAlt' => 'Suave CRM free CRM dashboard with sales pipeline, project tasks and attendance calendar',
+        ];
+    }
+
+    /**
+     * @return array{quote: string, name: string, role: string, company: string}
+     */
+    protected static function heroProof(): array
+    {
+        return [
+            'quote' => 'Our team responds faster, works smarter, and closes more deals.',
+            'name' => 'Amit Rana',
+            'role' => 'Managing Director',
+            'company' => 'Turbo Trans Corporation',
         ];
     }
 
@@ -140,6 +164,22 @@ class ProductSupport
     {
         return [
             [
+                'id' => 'how-it-works',
+                'badge' => 'Sales',
+                'title' => 'Free sales CRM with',
+                'titleAccent' => 'AI lead scoring',
+                'subtitle' => 'Win more clients without a sales-ops team. Every lead lands in one place, AI tells you which ones to call first, and your pipeline updates itself as deals move.',
+                'columns' => 5,
+                'items' => [
+                    ['icon' => 'fa-robot', 'title' => 'AI lead qualification', 'description' => 'Leads from forms, ads, your website, calls and email are scored automatically.'],
+                    ['icon' => 'fa-layer-group', 'title' => 'Visual pipeline', 'description' => 'Every deal, conversation and next step on one board.'],
+                    ['icon' => 'fa-magnifying-glass-chart', 'title' => 'Company discovery', 'description' => 'Find companies that fit your ideal client profile by map or list.'],
+                    ['icon' => 'fa-bolt', 'title' => 'Suave AI briefings', 'description' => 'A short brief on each prospect before you reach out.'],
+                    ['icon' => 'fa-envelope', 'title' => 'Email from your own Gmail', 'description' => 'Write, send and follow up from your real address with S-Mail, with AI drafts and open tracking.'],
+                ],
+                'cta' => 'Start with the free sales CRM → Sign Up Free',
+            ],
+            [
                 'id' => 'projects',
                 'badge' => 'Projects',
                 'title' => 'Free project management',
@@ -221,8 +261,7 @@ class ProductSupport
                     ['title' => 'Invite your team', 'description' => 'Switch on the modules you need: sales, projects, timesheets, HR or invoicing.'],
                     ['title' => 'Add your first leads and projects', 'description' => 'Let Ask Suave guide the rest.'],
                 ],
-                'note' => 'Want help setting up?',
-                'noteLink' => "Book a demo and we'll walk your team through it.",
+                'note' => "Want help setting up? Book a demo and we'll walk your team through it.",
                 'cta' => 'Sign Up Free',
             ],
             [
@@ -290,7 +329,7 @@ class ProductSupport
     protected static function dataPrivacy(): array
     {
         return [
-            'badge' => 'Data & Privacy',
+            'badge' => 'Privacy',
             'title' => 'Is my data safe in Suave CRM?',
             'description' => 'Connecting Gmail is optional. You sign in with Google OAuth, Google\'s consent screen shows exactly what S-Mail requests, and you can disconnect anytime in Suave CRM or revoke access in your Google Account. We access only the Gmail data you authorize, and we do not sell Google user data, use it for ads, or train generalized AI or ML models on it.',
             'background' => asset('assets/product/data-privacy-section-bg.webp'),

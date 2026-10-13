@@ -27,7 +27,7 @@ class TechnologyPageTest extends TestCase
         $response->assertSee('assets/icons/tech/shopify-technology-icon.png', false);
         $response->assertSee('assets/icons/tech/magento.svg', false);
         $response->assertSee('assets/background/technologies-hero-bg.webp', false);
-        $response->assertSee('assets/media/technology-hero.webp', false);
+        $response->assertSee('assets/media/hero-technology.webp', false);
         $response->assertSee('technologies-hero__image', false);
         $response->assertSee('assets/icons/ownership-logo.webp', false);
         $response->assertSee('assets/icons/admin-logo.webp', false);
@@ -71,6 +71,9 @@ class TechnologyPageTest extends TestCase
         $response->assertSee('assets/background/technologies-mobile-bg.webp', false);
         $response->assertSee('Backend Development', false);
         $response->assertSee('class="technologies-backend__summary-copy"', false);
+        $response->assertSee('technologies-backend__more', false);
+        $response->assertSee('Read more', false);
+        $response->assertSee('data-technologies-backend-more', false);
         $response->assertSee('Laravel is an open-source PHP web framework', false);
         $response->assertSee('Google&#039;s V8 engine', false);
         $response->assertSee('React, Angular and Vue.js', false);
