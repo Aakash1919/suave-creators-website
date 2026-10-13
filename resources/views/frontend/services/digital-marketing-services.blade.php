@@ -13,7 +13,6 @@
   :eyebrow="$service['eyebrow']"
   :title="$service['heroTitle']"
   :description="$service['heroDescription']"
-  :breadcrumb-current="$service['breadcrumbName']"
   :primary-label="$service['heroPrimaryCta']"
   :secondary-label="$service['heroSecondaryCta']"
   primary-service="digital-marketing"

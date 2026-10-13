@@ -5,25 +5,6 @@
   @endif
   aria-labelledby="{{ $headingId }}">
   <div class="section-inner marketing-radar-hero__inner">
-    <nav class="marketing-radar-hero__breadcrumb" aria-label="Breadcrumb">
-      <ol class="marketing-radar-hero__breadcrumb-list">
-        <li>
-          <a href="{{ route('home') }}" class="marketing-radar-hero__breadcrumb-link">
-            <i class="fa-solid fa-house" aria-hidden="true"></i>
-            <span class="sr-only">Home</span>
-          </a>
-        </li>
-        <li aria-hidden="true" class="marketing-radar-hero__breadcrumb-sep">›</li>
-        <li>
-          <a href="{{ route('services') }}" class="marketing-radar-hero__breadcrumb-link">Services</a>
-        </li>
-        <li aria-hidden="true" class="marketing-radar-hero__breadcrumb-sep">›</li>
-        <li>
-          <span class="marketing-radar-hero__breadcrumb-current" aria-current="page">{{ $breadcrumbCurrent }}</span>
-        </li>
-      </ol>
-    </nav>
-
     <div class="marketing-radar-hero__grid">
       <div class="marketing-radar-hero__copy">
         <p class="marketing-radar-hero__eyebrow">

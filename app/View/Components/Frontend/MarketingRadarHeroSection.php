@@ -22,7 +22,6 @@ class MarketingRadarHeroSection extends Component
         public array $title,
         public string $description,
         public string $eyebrow = 'Digital growth, engineered',
-        public string $breadcrumbCurrent = 'Digital Marketing Services',
         public string $primaryLabel = 'Get a Scoped Estimate',
         public string $secondaryLabel = '',
         public string $primaryService = 'digital-marketing',

@@ -106,20 +106,20 @@ class SeoSitelinksCleanupTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('>About<', false);
-        $response->assertSee('>Suave CRM<', false);
+        $response->assertDontSee('>AI Outreach CRM<', false);
         $response->assertSee('>Services<', false);
         $response->assertSee('>Industries<', false);
         $response->assertSee('>Case Studies<', false);
         $response->assertSee('>Contact<', false);
-        $response->assertSee('>Contact Us<', false);
+        $response->assertSee('>Contact us<', false);
         $response->assertSee(parse_url(route('service.show', ['slug' => 'enterprise-software-solutions']), PHP_URL_PATH), false);
         $response->assertDontSee('>Our Product<', false);
     }
 
-    public function test_outreach_crm_page_is_published(): void
+    public function test_outreach_crm_page_stays_unpublished(): void
     {
-        $this->get(route('product'))->assertOk();
-        $this->get('/ai-powered-outreach-crm')->assertRedirect(route('product'));
+        $this->get('/ai-powered-outreach-crm')->assertNotFound();
+        $this->get('/free-all-in-one-crm')->assertNotFound();
     }
 
     public function test_homepage_json_ld_uses_the_homepage_graph(): void
