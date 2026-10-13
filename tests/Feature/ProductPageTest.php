@@ -132,19 +132,25 @@ class ProductPageTest extends TestCase
         $response->assertSee('Sign up with your work email', false);
         $response->assertSee('Want help setting up?', false);
         $response->assertSee('Book a Demo →', false);
-        $response->assertSee('Why growing teams choose', false);
+        $response->assertSee('product-module--reasons', false);
+        $response->assertSee('Everything your team needs.', false);
+        $response->assertSee('Nothing it doesn&#039;t.', false);
         $response->assertSee('AI included, not upsold', false);
+        $response->assertSee('product-module__reason-card', false);
+        $response->assertSee('Built by engineers', false);
 
         // Privacy
-        $response->assertSee('product-data-privacy__badge', false);
+        $response->assertSee('product-data-privacy__card', false);
+        $response->assertSee('Privacy by design', false);
         $response->assertSee('Is my data safe in Suave CRM?', false);
+        $response->assertSee('product-data-privacy__link-check', false);
         $response->assertSee('Google API Services User Data Policy (Limited Use)', false);
+        $response->assertDontSee('data-privacy-security-infographic', false);
 
-        // Testimonial
-        $response->assertSee('id="product-testimonials-title"', false);
-        $response->assertSee('The Suave Sales CRM streamlined our entire sales process.', false);
-        $response->assertSee('Managing Director, Turbo Trans Corporation', false);
-        $response->assertSee('See more client results', false);
+        // Testimonials section removed from the product page
+        $response->assertDontSee('id="product-testimonials-title"', false);
+        $response->assertDontSee('What clients say about Suave CRM', false);
+        $response->assertDontSee('See more client results', false);
         $response->assertDontSee('Suave Creators Team', false);
 
         // Sticky mobile bar
@@ -155,8 +161,11 @@ class ProductPageTest extends TestCase
         $response->assertDontSee('Your data is yours. We just keep it safe.', false);
         $response->assertDontSee('Want Similar Results?', false);
 
-        // FAQ section
+        // FAQ section (dark CRM-builder layout, same shell as technologies)
         $response->assertSee('id="product-faq-heading"', false);
+        $response->assertSee('faq-section--crm-builder', false);
+        $response->assertSee('custom-crm-builder-faq-bg.webp', false);
+        $response->assertSee('Frequently Asked Questions', false);
         $response->assertSee('FAQ', false);
         $response->assertSee('Is Suave CRM really free?', false);
         $response->assertSee('What&#039;s included in the free CRM?', false);

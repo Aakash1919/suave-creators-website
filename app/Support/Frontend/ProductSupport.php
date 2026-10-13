@@ -27,10 +27,10 @@ class ProductSupport
                 'No payment needed',
                 'Works worldwide',
             ],
-            'heroDemoLinkLabel' => 'Prefer a walkthrough first? Book a demo →',
+            'heroDemoLinkLabel' => 'Prefer a walkthrough first ?  Book a demo →',
             'heroProof' => self::heroProof(),
             'heroFloatCards' => self::heroFloatCards(),
-            'heroBackground' => asset('assets/product/product-top-sections-bg.webp'),
+            'heroBackground' => asset('assets/product/ai-crm_background.webp'),
             'heroBannerTiles' => self::heroBannerTiles(),
             'heroBanner' => [
                 'src' => asset('assets/product/hero_banner.gif'),
@@ -43,7 +43,6 @@ class ProductSupport
             'savings' => self::savings(),
             'featureSections' => self::featureSections(),
             'dataPrivacy' => self::dataPrivacy(),
-            'testimonials' => self::testimonials(),
             'salesCta' => self::salesCta(),
             'faqs' => self::faqs(),
             'pricing' => self::pricing(),
@@ -206,28 +205,28 @@ class ProductSupport
                         'icon' => 'fa-list-check',
                         'title' => 'Projects & Tasks',
                         'description' => 'Kanban and list views, owners, due dates and an AI assistant for overdue and assigned work.',
-                        'image' => '',
+                        'image' => 'assets/media/projects_tasks.webp',
                         'imageAlt' => 'Suave CRM projects and tasks board for client work management',
                     ],
                     [
                         'icon' => 'fa-clock',
                         'title' => 'My tasks every morning',
                         'description' => "Each person sees what's due today, filtered by status, the moment they log in.",
-                        'image' => '',
+                        'image' => 'assets/media/tasks.webp',
                         'imageAlt' => 'Suave CRM my tasks morning view for assigned project work',
                     ],
                     [
                         'icon' => 'fa-laptop-file',
                         'title' => 'Documents',
                         'description' => 'Proposals, contracts and files stay on the client record.',
-                        'image' => '',
+                        'image' => 'assets/media/documents.webp',
                         'imageAlt' => 'Suave CRM documents attached to client project records',
                     ],
                     [
                         'icon' => 'fa-message',
                         'title' => 'Messenger',
                         'description' => 'Discuss a deal or project in context, not in a separate chat app.',
-                        'image' => '',
+                        'image' => 'assets/media/CRM_messenger.webp',
                         'imageAlt' => 'Suave CRM messenger for deal and project team discussion',
                     ],
                 ],
@@ -334,28 +333,19 @@ class ProductSupport
             ],
             [
                 'id' => 'why-suave',
+                'layout' => 'reasons',
                 'badge' => 'Why Teams Switch',
-                'title' => 'Why growing teams choose',
-                'titleAccent' => 'Suave CRM',
-                'subtitle' => '',
+                'title' => 'Everything your team needs.',
+                'titleAccent' => "Nothing it doesn't.",
+                'subtitle' => 'One free CRM for sales, projects, HR and billing — without the per-seat stack.',
                 'items' => [
-                    ['icon' => 'fa-check', 'title' => 'Free for small and mid-size companies', 'description' => 'No per-seat bill that grows with every hire.'],
+                    ['icon' => 'fa-list-check', 'title' => 'Free for small and mid-size companies', 'description' => 'No per-seat bill that grows with every hire.'],
                     ['icon' => 'fa-layer-group', 'title' => 'One login for the whole company', 'description' => 'Sales, delivery, HR and billing share the same data.'],
                     ['icon' => 'fa-robot', 'title' => 'AI included, not upsold', 'description' => 'Lead scoring, briefings, follow-ups and task help come with the free CRM.'],
                     ['icon' => 'fa-globe', 'title' => 'Works anywhere', 'description' => 'A web app available worldwide, in any modern browser.'],
                     ['icon' => 'fa-shield-halved', 'title' => 'Your data stays yours', 'description' => 'We never sell it, and Gmail access is optional and revocable.'],
                     ['icon' => 'fa-code', 'title' => 'Built by engineers', 'description' => 'Suave CRM is made by Suave Creators, who also build custom CRMs for companies that need a fully owned system.'],
                 ],
-                'visual' => self::modulePanelVisual(
-                    'Why Suave',
-                    'What you keep',
-                    [
-                        ['label' => 'Price', 'value' => 'Free'],
-                        ['label' => 'AI', 'value' => 'Included'],
-                        ['label' => 'Tools replaced', 'value' => '5'],
-                    ],
-                    ['No per-seat bill', 'One shared login', 'AI included', 'Data stays yours'],
-                ),
             ],
         ];
     }
@@ -493,18 +483,15 @@ class ProductSupport
      *     badge: string,
      *     title: string,
      *     description: string,
-     *     links: array<int, array{label: string, href: string, external: bool}>,
-     *     background: string,
-     *     graphic: array{src: string, alt: string}
+     *     links: array<int, array{label: string, href: string, external: bool}>
      * }
      */
     protected static function dataPrivacy(): array
     {
         return [
-            'badge' => 'Privacy',
+            'badge' => 'Privacy by design',
             'title' => 'Is my data safe in Suave CRM?',
             'description' => 'Connecting Gmail is optional. You sign in with Google OAuth, Google\'s consent screen shows exactly what S-Mail requests, and you can disconnect anytime in Suave CRM or revoke access in your Google Account. We access only the Gmail data you authorize, and we do not sell Google user data, use it for ads, or train generalized AI or ML models on it.',
-            'background' => asset('assets/product/data-privacy-section-bg.webp'),
             'links' => [
                 [
                     'label' => 'Privacy Policy',
@@ -522,10 +509,6 @@ class ProductSupport
                     'external' => true,
                 ],
             ],
-            'graphic' => [
-                'src' => asset('assets/product/data-privacy-security-infographic.webp'),
-                'alt' => 'Suave CRM data privacy security infographic showing CRM modules protected by a central shield',
-            ],
         ];
     }
 
@@ -541,22 +524,6 @@ class ProductSupport
             'name' => 'Amit Rana',
             'role' => 'Managing Director',
             'company' => 'Turbo Trans Corporation',
-        ];
-    }
-
-    /**
-     * @return array<int, array{quote: string, name: string, role: string}>
-     */
-    protected static function testimonials(): array
-    {
-        $testimonial = self::testimonial();
-
-        return [
-            [
-                'quote' => $testimonial['quote'],
-                'name' => $testimonial['name'],
-                'role' => $testimonial['role'].', '.$testimonial['company'],
-            ],
         ];
     }
 
@@ -599,50 +566,62 @@ class ProductSupport
     }
 
     /**
-     * @return array<int, array{question: string, answer: string}>
+     * @return array{
+     *     eyebrow: string,
+     *     title: string,
+     *     description: string,
+     *     backgroundImage: string,
+     *     items: array<int, array{question: string, answer: string}>
+     * }
      */
     public static function faqs(): array
     {
         return [
-            [
-                'question' => 'Is Suave CRM really free?',
-                'answer' => 'Yes. Suave CRM is free for small and mid-size companies. Sign up with your work email and start using it; no payment is needed.',
-            ],
-            [
-                'question' => "What's included in the free CRM?",
-                'answer' => 'The free CRM includes a sales pipeline with AI lead scoring, company discovery and AI briefings, email from your own Gmail, projects and tasks, timesheets, attendance and HR, invoicing, team messaging, documents and the Ask Suave AI assistant.',
-            ],
-            [
-                'question' => 'What is the best free CRM for small agencies?',
-                'answer' => "The best free CRM for a small agency covers more than sales: it should also handle projects, time tracking and invoicing, so client work doesn't live in separate tools. Suave CRM includes all of these free for small and mid-size companies.",
-            ],
-            [
-                'question' => 'Who is Suave CRM for?',
-                'answer' => 'Suave CRM is built for IT agencies, software development companies, web and digital agencies, startups and other small and mid-size teams that sell and deliver client work.',
-            ],
-            [
-                'question' => 'How do I sign up for Suave CRM?',
-                'answer' => 'Sign up with your work email, create your workspace and invite your team. You can add leads, projects and team members right away and switch on only the modules you need.',
-            ],
-            [
-                'question' => 'Can I get a demo before signing up?',
-                'answer' => 'Yes. Book a demo and a member of our team will walk you through Suave CRM and help you choose the modules that fit your company.',
-            ],
-            [
-                'question' => 'Is Suave CRM available in my country?',
-                'answer' => 'Yes. Suave CRM is a web application available worldwide, so teams in any region can sign up and use it in a browser.',
-            ],
-            [
-                'question' => 'Does Suave CRM include project management and timesheets?',
-                'answer' => 'Yes. A won deal becomes a project with tasks, owners and due dates, and your team logs hours against projects and clients, then invoices from that time, all in the same app.',
-            ],
-            [
-                'question' => 'Does Suave CRM include attendance and HR?',
-                'answer' => 'Yes. Team members punch in and out from their dashboard, and Suave CRM tracks attendance, leave, holidays, shift timings, worked hours, attendance percentage and efficiency, alongside HR profiles.',
-            ],
-            [
-                'question' => 'Is my data safe in Suave CRM?',
-                'answer' => 'We never sell your data. Connecting Gmail is optional, we access only the Gmail data you authorize, and you can disconnect or revoke access at any time. We do not use Google user data for ads or to train generalized AI models.',
+            'eyebrow' => 'Frequently Asked Questions',
+            'title' => 'FAQ',
+            'description' => '',
+            'backgroundImage' => 'assets/background/custom-crm-builder-faq-bg.webp',
+            'items' => [
+                [
+                    'question' => 'Is Suave CRM really free?',
+                    'answer' => 'Yes. Suave CRM is free for small and mid-size companies. Sign up with your work email and start using it; no payment is needed.',
+                ],
+                [
+                    'question' => "What's included in the free CRM?",
+                    'answer' => 'The free CRM includes a sales pipeline with AI lead scoring, company discovery and AI briefings, email from your own Gmail, projects and tasks, timesheets, attendance and HR, invoicing, team messaging, documents and the Ask Suave AI assistant.',
+                ],
+                [
+                    'question' => 'What is the best free CRM for small agencies?',
+                    'answer' => "The best free CRM for a small agency covers more than sales: it should also handle projects, time tracking and invoicing, so client work doesn't live in separate tools. Suave CRM includes all of these free for small and mid-size companies.",
+                ],
+                [
+                    'question' => 'Who is Suave CRM for?',
+                    'answer' => 'Suave CRM is built for IT agencies, software development companies, web and digital agencies, startups and other small and mid-size teams that sell and deliver client work.',
+                ],
+                [
+                    'question' => 'How do I sign up for Suave CRM?',
+                    'answer' => 'Sign up with your work email, create your workspace and invite your team. You can add leads, projects and team members right away and switch on only the modules you need.',
+                ],
+                [
+                    'question' => 'Can I get a demo before signing up?',
+                    'answer' => 'Yes. Book a demo and a member of our team will walk you through Suave CRM and help you choose the modules that fit your company.',
+                ],
+                [
+                    'question' => 'Is Suave CRM available in my country?',
+                    'answer' => 'Yes. Suave CRM is a web application available worldwide, so teams in any region can sign up and use it in a browser.',
+                ],
+                [
+                    'question' => 'Does Suave CRM include project management and timesheets?',
+                    'answer' => 'Yes. A won deal becomes a project with tasks, owners and due dates, and your team logs hours against projects and clients, then invoices from that time, all in the same app.',
+                ],
+                [
+                    'question' => 'Does Suave CRM include attendance and HR?',
+                    'answer' => 'Yes. Team members punch in and out from their dashboard, and Suave CRM tracks attendance, leave, holidays, shift timings, worked hours, attendance percentage and efficiency, alongside HR profiles.',
+                ],
+                [
+                    'question' => 'Is my data safe in Suave CRM?',
+                    'answer' => 'We never sell your data. Connecting Gmail is optional, we access only the Gmail data you authorize, and you can disconnect or revoke access at any time. We do not use Google user data for ads or to train generalized AI models.',
+                ],
             ],
         ];
     }
@@ -769,7 +748,7 @@ class ProductSupport
         return [
             'seoJsonLdGraph' => [self::jsonLdSoftwareApplication($pageUrl, $softwareId)],
             'seoJsonLdWebpageAbout' => $softwareId,
-            'seoFaqs' => self::faqs(),
+            'seoFaqs' => self::faqs()['items'],
         ];
     }
 

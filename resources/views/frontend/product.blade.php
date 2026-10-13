@@ -13,12 +13,12 @@
     class="product-top-shell"
     style="background-image: url('{{ $heroBackground }}')"
   >
-    <nav class="product-breadcrumb container" aria-label="Breadcrumb">
+    {{-- <nav class="product-breadcrumb container" aria-label="Breadcrumb">
       <ol class="product-breadcrumb__list">
         <li><a href="{{ route('home') }}">Home</a></li>
         <li aria-current="page">Suave CRM</li>
       </ol>
-    </nav>
+    </nav> --}}
 
     <section class="product-hero product-hero--outreach" id="hero" aria-labelledby="product-hero-heading">
       <div class="container product-hero__container">
@@ -279,18 +279,20 @@
     @php($isAi = $layout === 'ai')
     @php($isAudience = $layout === 'audience')
     @php($isSteps = $layout === 'steps')
+    @php($isReasons = $layout === 'reasons')
     @php($isDarkModule = ($section['theme'] ?? '') === 'dark')
     @php($cardCount = count($section['items'] ?? []))
     @php($help = $section['help'] ?? null)
     <section
       @class([
         'product-module',
-        'product-module--tint' => $loop->even && ! $isDarkModule && ! $isAi && ! $isAudience,
+        'product-module--tint' => ($loop->even && ! $isDarkModule && ! $isAi && ! $isAudience) || $isReasons,
         'product-module--showcase' => $isShowcase,
         'product-module--cards' => $isCards,
         'product-module--ai' => $isAi,
         'product-module--audience' => $isAudience,
         'product-module--steps' => $isSteps,
+        'product-module--reasons' => $isReasons,
         'product-module--dark' => $isDarkModule,
         'product-module--cols-3' => $isCards && $cardCount === 3,
       ])
@@ -304,12 +306,12 @@
         @unless ($isSteps)
           <header class="product-module__header">
             <span class="product-module__badge">{{ $section['badge'] }}</span>
-            <h2 id="{{ $section['id'] }}-heading" class="product-module__title">
+            <h2 id="{{ $section['id'] }}-heading" class="product-module__title1">
               {{ $section['title'] }}
               <span class="product-module__title-accent">{{ $section['titleAccent'] }}</span>
             </h2>
             @if (filled($section['subtitle']))
-              <p class="product-module__subtitle">{{ $section['subtitle'] }}</p>
+              <p class="product-module__subtitle1">{{ $section['subtitle'] }}</p>
             @endif
           </header>
         @endunless
@@ -362,6 +364,18 @@
               @endif
             </div>
           </div>
+        @elseif ($isReasons)
+          <ul class="product-module__list product-module__list--reasons">
+            @foreach ($section['items'] as $item)
+              <li class="product-module__reason-card">
+                <span class="product-module__reason-icon" aria-hidden="true">
+                  <i class="fa-solid {{ $item['icon'] }}"></i>
+                </span>
+                <h3>{{ $item['title'] }}</h3>
+                <p>{{ $item['description'] }}</p>
+              </li>
+            @endforeach
+          </ul>
         @elseif ($isAudience)
           <ul class="product-module__list product-module__list--audience">
             @foreach ($section['items'] as $item)
@@ -396,7 +410,7 @@
           </ul>
         @elseif ($isAi)
           <div class="product-module__body product-module__body--ai">
-            <div class="product-module__features">
+            <div class="product-module__features1">
               <ul class="product-module__list product-module__list--ai">
                 @foreach ($section['items'] as $item)
                   <li class="product-module__ai-item">
@@ -455,7 +469,7 @@
         @elseif ($isCards)
           <ul class="product-module__list product-module__list--cards">
             @foreach ($section['items'] as $item)
-              <li @class(['product-module__card', 'product-module__card--stack', 'product-module__card--tone-'.($item['tone'] ?? 'blue')])>
+              <li @class(['product-module__card1', 'product-module__card--stack', 'product-module__card--tone-'.($item['tone'] ?? 'blue')])>
                 <span class="product-module__icon" aria-hidden="true">
                   <i class="fa-solid {{ $item['icon'] }}"></i>
                 </span>
@@ -616,19 +630,19 @@
     </section>
   @endforeach
 
-  <section
-    class="product-data-privacy"
-    id="data-privacy"
-    aria-labelledby="data-privacy-heading"
-    style="background-image: url('{{ $dataPrivacy['background'] }}')"
-  >
+  <section class="product-data-privacy" id="data-privacy" aria-labelledby="data-privacy-heading">
     <div class="container product-data-privacy__container">
-      <div class="product-data-privacy__grid">
+      <div class="product-data-privacy__card">
+        <div class="product-data-privacy__shield" aria-hidden="true">
+          <span class="product-data-privacy__shield-glow"></span>
+          <span class="product-data-privacy__shield-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </span>
+        </div>
+
         <div class="product-data-privacy__content">
           <span class="product-data-privacy__badge">{{ $dataPrivacy['badge'] }}</span>
-          <h2 id="data-privacy-heading" class="product-data-privacy__title">
-            <span class="product-data-privacy__title-line product-data-privacy__title-line--soft">{{ $dataPrivacy['title'] }}</span>
-          </h2>
+          <h2 id="data-privacy-heading" class="product-data-privacy__title">{{ $dataPrivacy['title'] }}</h2>
           <p class="product-data-privacy__description">{{ $dataPrivacy['description'] }}</p>
 
           <div class="product-data-privacy__links">
@@ -638,49 +652,30 @@
                 class="product-data-privacy__link"
                 @if ($link['external']) target="_blank" rel="noopener noreferrer" @endif
               >
+                <span class="product-data-privacy__link-check" aria-hidden="true">
+                  <i class="fa-solid fa-check"></i>
+                </span>
                 {{ $link['label'] }}
               </a>
             @endforeach
           </div>
         </div>
-
-        <div class="product-data-privacy__visual">
-          <img
-            src="{{ $dataPrivacy['graphic']['src'] }}"
-            alt="{{ $dataPrivacy['graphic']['alt'] }}"
-            title="{{ $dataPrivacy['graphic']['alt'] }}"
-            width="640"
-            height="640"
-            decoding="async"
-            loading="lazy"
-          >
-        </div>
       </div>
     </div>
   </section>
 
-  <x-frontend.testimonials-section
-    id="testimonial"
-    :items="$testimonials"
-    heading-id="product-testimonials-title"
-    eyebrow="Testimonial"
-    title="What clients say about Suave CRM"
-    subtitle=""
-  >
-    <x-frontend.cta-button :href="route('case-studies')" variant="secondary-dark">See more client results →</x-frontend.cta-button>
-  </x-frontend.testimonials-section>
-
   <x-frontend.faq-section
     id="faq"
     heading-id="product-faq-heading"
-    eyebrow=""
-    title="FAQ"
-    description=""
-    :qa="$faqs"
+    :qa="$faqs['items']"
     :media="null"
     :show-cta="false"
+    :eyebrow="$faqs['eyebrow']"
+    :title="$faqs['title']"
+    :description="$faqs['description']"
     question-heading="h3"
-    class="faq-section--crm-builder"
+    class="faq-section--crm-builder bg-cover bg-top bg-no-repeat"
+    style="background-image: url('{{ asset($faqs['backgroundImage']) }}')"
   />
 
   <section

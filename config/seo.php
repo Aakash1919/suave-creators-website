@@ -392,7 +392,7 @@ return [
             'og_image_alt' => 'Suave CRM free CRM dashboard with sales pipeline, project tasks and attendance calendar',
             'json_ld_name' => 'Suave CRM',
             'json_ld_description' => 'Suave CRM is a free all-in-one CRM for agencies, startups and small and mid-size companies, combining a sales pipeline with AI lead scoring, projects and tasks, timesheets, attendance and HR, invoicing and the Ask Suave AI assistant.',
-            'json_ld_breadcrumb_name' => 'Suave CRM',
+            'json_ld_breadcrumb_name' => '',
         ],
         'blogs' => [
             'title' => 'Blog - Software Development Insights | Suave Creators',
