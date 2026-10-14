@@ -21,13 +21,16 @@
   :link-href="$service['introLinkUrl']"
   :link-label="$service['introLinkText']"
   :stats="$introStats">
-  {{-- Activate later: live Suave Outreach CRM
-  <p class="mt-4">
+  <p class="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-5 sm:gap-y-2">
+    {{-- Activate later: live Suave Outreach CRM
     <a href="{{ route('product') }}" class="inline-flex items-end border-b border-[#2A4DFB]/70 pb-0.5 text-sm font-semibold text-[#2A4DFB]">
       Explore our live Suave Outreach CRM
     </a>
+    --}}
+    <a href="{{ route('blog.show', ['slug' => 'replace-hubspot-with-custom-crm-tco']) }}" class="inline-flex items-end border-b border-[#2A4DFB]/70 pb-0.5 text-sm font-semibold text-[#2A4DFB]">
+      HubSpot vs custom CRM: 3-year TCO
+    </a>
   </p>
-  --}}
 </x-frontend.service-intro-section>
 
 <x-frontend.connect-cta-section
